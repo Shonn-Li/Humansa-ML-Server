@@ -1,17 +1,20 @@
 import os
 from typing import List
 
-from llama_index.core import (Document, Settings, StorageContext,
-                              VectorStoreIndex, load_index_from_storage)
+from llama_index.core import Document, Settings
+from llama_index.core.indices.vector_store import VectorStoreIndex
 from llama_index.core.query_engine import RetrieverQueryEngine
 from llama_index.core.retrievers import RouterRetriever
 from llama_index.core.selectors import LLMSingleSelector
 from llama_index.core.text_splitter import SentenceSplitter
 from llama_index.core.tools import RetrieverTool
+from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.llms.openai import OpenAI
 
+from app.utility.postgres import get_part_text
+
 # Global settings config
-Settings.llm = OpenAI(model="gpt-3.5-turbo")  # Optional: configure LLM
+Settings.llm = OpenAI(model="gpt-3.5-turbo")  # Optional:  configure LLM
 Settings.chunk_size = 512
 
 
@@ -33,44 +36,43 @@ def save_note(note_id: int, note: str) -> None:
 
 
 def chat_bot(user_question: str, note_ids: List[int]) -> str:
-    """Answer the question based on the notes of the users"""
+    """Answer the question based on very long notes via in-memory RAG."""
 
-    indexes = []
+    # 1) Load raw texts
+    texts = [get_part_text(i) for i in note_ids]
 
-    for note_id in note_ids:
-        persist_dir = f"./vector_store/{note_id}"
-        if not os.path.exists(persist_dir):
-            raise ValueError(f"Note ID {note_id} has not been saved yet.")
-        storage_context = StorageContext.from_defaults(persist_dir=persist_dir)
-        index = load_index_from_storage(storage_context)
-        indexes.append(index)
+    # 2) Set global settings (replaces ServiceContext)
+    Settings.llm = OpenAI(model="gpt-3.5-turbo")
+    Settings.embed_model = OpenAIEmbedding(model="text-embedding-3-small")
 
-    # Step 1: Create retriever tools with tool names
-    retriever_tools = [
-        RetrieverTool.from_defaults(
-            retriever=r,
-            name=f"note_{i}",  # tool name must be unique
-            description=f"Retriever for note {note_ids[i]}",
+    # 3) Build one tiny vector index per note
+    retriever_tools = []
+    for note_id, text in zip(note_ids, texts):
+        doc = Document(text=text, doc_id=str(note_id))
+
+        index = VectorStoreIndex.from_documents([doc])  # now uses global Settings
+
+        retriever = index.as_retriever(similarity_top_k=3)
+
+        tool = RetrieverTool.from_defaults(
+            retriever=retriever,
+            name=f"note_{note_id}",
+            description=f"Retriever for note {note_id}",
         )
-        for i, r in enumerate([idx.as_retriever() for idx in indexes])
-    ]
+        retriever_tools.append(tool)
 
-    # Step 2: Use default selector
+    # 4) Build router + query engine
     selector = LLMSingleSelector.from_defaults()
-
-    # Step 3: Construct router
     router = RouterRetriever(retriever_tools=retriever_tools, selector=selector)
-
-    # Step 4: Query
     query_engine = RetrieverQueryEngine.from_args(retriever=router)
+
+    # 5) Issue the query
     response = query_engine.query(user_question)
     return str(response)
 
 
 # Example usage
 if __name__ == "__main__":
-    save_note(1, "Japan trip: Book flights to Tokyo. Visit Kyoto. Pack warm clothes.")
-    save_note(2, "Shopping list: apples, bananas, oranges, and oat milk.")
 
-    answer = chat_bot("Where am I planning to travel?", [1, 2])
+    answer = chat_bot("Where am I planning to travel?", [1, 2, 4, 5, 6, 7, 10, 12, 15])
     print("Bot:", answer)

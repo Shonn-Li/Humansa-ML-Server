@@ -1,15 +1,9 @@
 # from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader
 from quart import Quart, jsonify, request
 
+from app.ai_chat_bot.chat_bot import chat_bot
+
 app = Quart(__name__)
-
-
-# Load LlamaIndex model on startup
-# @app.before_serving
-# async def load_model():
-#     global index
-#     documents = SimpleDirectoryReader("data").load_data()
-#     index = GPTVectorStoreIndex.from_documents(documents)
 
 
 # Health check route
@@ -18,17 +12,20 @@ async def ping():
     return jsonify({"message": "Hi from YouWoAI"})
 
 
-# Inference route
-# @app.route("/query", methods=["POST"])
-# async def query():
-#     data = await request.get_json()
-#     question = data.get("question", "")
-#     if not question:
-#         return jsonify({"error": "No question provided"}), 400
+# Chat Bot
+@app.route("/chat_bot", methods=["POST"])
+async def query():
+    data = await request.get_json()
+    question = data.get("question", "")
+    if not question:
+        return jsonify({"error": "No question provided"}), 400
 
-#     query_engine = index.as_query_engine()
-#     response = query_engine.query(question)
-#     return jsonify({"answer": str(response)})
+    note_ids = data.get("note_ids", [])
+    if len(note_ids) == 0:
+        return jsonify({"error": "No note_ids provided"}), 400
+
+    response = chat_bot(user_question=question, note_ids=note_ids)
+    return jsonify({"answer": response})
 
 
 if __name__ == "__main__":
