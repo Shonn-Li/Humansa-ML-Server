@@ -26,23 +26,80 @@ def get_note_text(note_id: int) -> str:
     """Fetch the text representation of a note from Postgres database"""
     with get_db_connection() as conn:
         with conn.cursor() as cursor:
-            sql_command = f"""SELECT "noteTitle", "promptContent", "conversationId", "quizContent", "flashcardContent", "aiNoteContent", "noteContent"
-FROM note_v1 WHERE id = {note_id}"""
-            cursor.execute(sql_command)
+            # Get note and prompt content
+            cursor.execute("""
+                SELECT "promptContent"
+                FROM note_v1 
+                WHERE id = %s
+            """, (note_id,))
             result = cursor.fetchone()
-            (
-                noteTitle,
-                promptContent,
-                conversationId,
-                quizContent,
-                flashcardContent,
-                aiNoteContent,
-                noteContent,
-            ) = result
-            print(type(result))
-            for i in result:
-                print(f"{type(i)}: {i}")
-            return result
+
+            if not result:
+                return "Note not found"
+
+            prompt_content = result[0]
+
+            # Extract current prompt content from JSON
+            current_prompt = ""
+            if prompt_content and isinstance(prompt_content, dict):
+                if 'currentPromptContent' in prompt_content and prompt_content['currentPromptContent']:
+                    current_prompt = prompt_content['currentPromptContent'].get(
+                        'content', '')
+
+            # Get prefix images (not associated with any part)
+            cursor.execute("""
+                SELECT "imageURL", "imageText", "latex"
+                FROM image_v1
+                WHERE "noteId" = %s AND "partId" IS NULL
+                ORDER BY id
+            """, (note_id,))
+            prefix_images = cursor.fetchall()
+
+            # Get parts in order
+            cursor.execute("""
+                SELECT id, "text"
+                FROM part_v1
+                WHERE "noteId" = %s
+                ORDER BY "order"
+            """, (note_id,))
+            parts = cursor.fetchall()
+
+    # Assemble transcript
+    transcript_parts = []
+
+    # Add prefix images
+    for img_url, img_text, is_latex in prefix_images:
+        if img_text:
+            transcript_parts.append(img_text)
+
+    # Process each part and its images
+    for part_id, part_text in parts:
+        # Add part text
+        transcript_parts.append(part_text)
+
+        # Get images for this part
+        with get_db_connection() as conn:
+            with conn.cursor() as cursor:
+                cursor.execute("""
+                    SELECT "imageURL", "imageText", "latex"
+                    FROM image_v1
+                    WHERE "partId" = %s
+                    ORDER BY id
+                """, (part_id,))
+                part_images = cursor.fetchall()
+
+        # Add part's images
+        for img_url, img_text, is_latex in part_images:
+            if img_text:
+                transcript_parts.append(img_text)
+
+    # Combine everything
+    assembled_transcript = "\n\n".join(transcript_parts)
+
+    # Format final output
+    final_text = f"AI Content:\n{current_prompt}\n\nUserContent:\n{assembled_transcript}"
+
+    return final_text
 
 
 def get_part_text(note_id: int) -> str:
