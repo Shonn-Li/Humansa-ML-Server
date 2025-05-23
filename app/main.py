@@ -15,7 +15,7 @@ async def ping():
 
 # Chat Bot
 @app.route("/chat_bot", methods=["POST"])
-async def query():
+async def chat_bot():
     data = await request.get_json()
     question = data.get("question", "")
     if not question:
@@ -31,7 +31,7 @@ async def query():
 
 # Get most related notes
 @app.route("/get_related_notes", methods=["POST"])
-async def query():
+async def get_related_notes():
     data = await request.get_json()
     question = data.get("question", "")
     if not question:
