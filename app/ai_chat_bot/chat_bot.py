@@ -13,10 +13,6 @@ from llama_index.llms.openai import OpenAI
 
 from app.utility.postgres import get_embedding, get_note_text, save_embedding
 
-# Global settings config
-Settings.llm = OpenAI(model="gpt-4o")  # Optional:  configure LLM
-Settings.chunk_size = 512
-
 
 def create_embedding(note_id: int):
     """
@@ -106,7 +102,7 @@ def chat_bot(
     texts = [get_note_text(nid) for nid in top_notes]
 
     # 5) Configure LLM + embedder + chunker
-    Settings.llm = OpenAI(model="gpt-4o")
+    Settings.llm = OpenAI(model="gpt-4.1-mini")
     embed_model = OpenAIEmbedding(model="text-embedding-3-small")
     Settings.embed_model = embed_model
     splitter = SentenceSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
