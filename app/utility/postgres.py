@@ -1,7 +1,9 @@
 import os
+from typing import List, Optional
 
 import psycopg2
 from dotenv import load_dotenv
+from pgvector.psycopg2 import register_vector
 
 # Load .env variables
 load_dotenv()
@@ -27,11 +29,14 @@ def get_note_text(note_id: int) -> str:
     with get_db_connection() as conn:
         with conn.cursor() as cursor:
             # Get note and prompt content
-            cursor.execute("""
+            cursor.execute(
+                """
                 SELECT "promptContent"
                 FROM note_v1 
                 WHERE id = %s
-            """, (note_id,))
+            """,
+                (note_id,),
+            )
             result = cursor.fetchone()
 
             if not result:
@@ -42,26 +47,36 @@ def get_note_text(note_id: int) -> str:
             # Extract current prompt content from JSON
             current_prompt = ""
             if prompt_content and isinstance(prompt_content, dict):
-                if 'currentPromptContent' in prompt_content and prompt_content['currentPromptContent']:
-                    current_prompt = prompt_content['currentPromptContent'].get(
-                        'content', '')
+                if (
+                    "currentPromptContent" in prompt_content
+                    and prompt_content["currentPromptContent"]
+                ):
+                    current_prompt = prompt_content["currentPromptContent"].get(
+                        "content", ""
+                    )
 
             # Get prefix images (not associated with any part)
-            cursor.execute("""
+            cursor.execute(
+                """
                 SELECT "imageURL", "imageText", "latex"
                 FROM image_v1
                 WHERE "noteId" = %s AND "partId" IS NULL
                 ORDER BY id
-            """, (note_id,))
+            """,
+                (note_id,),
+            )
             prefix_images = cursor.fetchall()
 
             # Get parts in order
-            cursor.execute("""
+            cursor.execute(
+                """
                 SELECT id, "text"
                 FROM part_v1
                 WHERE "noteId" = %s
                 ORDER BY "order"
-            """, (note_id,))
+            """,
+                (note_id,),
+            )
             parts = cursor.fetchall()
 
     # Assemble transcript
@@ -80,12 +95,15 @@ def get_note_text(note_id: int) -> str:
         # Get images for this part
         with get_db_connection() as conn:
             with conn.cursor() as cursor:
-                cursor.execute("""
+                cursor.execute(
+                    """
                     SELECT "imageURL", "imageText", "latex"
                     FROM image_v1
                     WHERE "partId" = %s
                     ORDER BY id
-                """, (part_id,))
+                """,
+                    (part_id,),
+                )
                 part_images = cursor.fetchall()
 
         # Add part's images
@@ -97,7 +115,9 @@ def get_note_text(note_id: int) -> str:
     assembled_transcript = "\n\n".join(transcript_parts)
 
     # Format final output
-    final_text = f"AI Content:\n{current_prompt}\n\nUserContent:\n{assembled_transcript}"
+    final_text = (
+        f"AI Content:\n{current_prompt}\n\nUserContent:\n{assembled_transcript}"
+    )
 
     return final_text
 
@@ -118,20 +138,57 @@ ORDER BY "order"
     return "\n".join(lst)
 
 
-# def save_note(note_id: int, content: str) -> None:
-#     """Insert or update a note in the database"""
-#     with get_db_connection() as conn:
-#         with conn.cursor() as cursor:
-#             cursor.execute(
-#                 """
-#                 INSERT INTO notes (note_id, content)
-#                 VALUES (%s, %s)
-#                 ON CONFLICT (note_id)
-#                 DO UPDATE SET content = EXCLUDED.content;
-#             """,
-#                 (note_id, content),
-#             )
-#             conn.commit()
+def save_embedding(note_id: int, embedding: List[float]) -> None:
+    """
+    Upsert a note's embedding into embedding_v1, updating last_updated.
+    """
+    conn = get_db_connection()
+    register_vector(conn)
+    try:
+        with conn:
+            with conn.cursor() as cur:
+                # (Re)create table if you like—optional after first run
+                cur.execute(
+                    """
+                    CREATE TABLE IF NOT EXISTS embedding_v1 (
+                      note_id      INT PRIMARY KEY,
+                      embedding    VECTOR,
+                      last_updated TIMESTAMPTZ NOT NULL DEFAULT NOW()
+                    );
+                """
+                )
+                # Upsert the embedding
+                cur.execute(
+                    """
+                    INSERT INTO embedding_v1 (note_id, embedding, last_updated)
+                    VALUES (%s, %s, NOW())
+                    ON CONFLICT (note_id)
+                      DO UPDATE SET 
+                        embedding = EXCLUDED.embedding,
+                        last_updated = NOW();
+                    """,
+                    (note_id, embedding),
+                )
+    finally:
+        conn.close()
+
+
+def get_embedding(note_id: int) -> Optional[List[float]]:
+    """
+    Retrieve the stored embedding for a note_id, or None if missing.
+    """
+    conn = get_db_connection()
+    register_vector(conn)
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                "SELECT embedding FROM embedding_v1 WHERE note_id = %s",
+                (note_id,),
+            )
+            row = cur.fetchone()
+            return row[0] if row else None
+    finally:
+        conn.close()
 
 
 # Example usage
