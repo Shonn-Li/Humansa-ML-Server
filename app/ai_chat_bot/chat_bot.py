@@ -11,7 +11,7 @@ from llama_index.core.tools import RetrieverTool
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.llms.openai import OpenAI
 
-from app.utility.postgres import get_part_text
+from app.utility.postgres import get_note_text
 
 # Global settings config
 Settings.llm = OpenAI(model="gpt-3.5-turbo")  # Optional:  configure LLM
@@ -39,7 +39,7 @@ def chat_bot(user_question: str, note_ids: List[int]) -> str:
     """Answer the question based on very long notes via in-memory RAG."""
 
     # 1) Load raw texts
-    texts = [get_part_text(i) for i in note_ids]
+    texts = [get_note_text(i) for i in note_ids]
 
     # 2) Set global settings (replaces ServiceContext)
     Settings.llm = OpenAI(model="gpt-3.5-turbo")
