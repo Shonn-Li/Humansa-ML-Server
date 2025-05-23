@@ -48,7 +48,7 @@ async def get_related_notes():
     response = get_most_related_notes(
         user_question=question, note_ids=note_ids, max_notes=max_notes
     )
-    return jsonify({"note_ids": max_notes})
+    return jsonify({"note_ids": response})
 
 
 @app.route("/note_text/<int:note_id>", methods=["GET"])
