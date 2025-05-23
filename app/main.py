@@ -15,7 +15,7 @@ async def ping():
 
 # Chat Bot
 @app.route("/chat_bot", methods=["POST"])
-async def chat_bot():
+async def query():
     data = await request.get_json()
     question = data.get("question", "")
     if not question:
