@@ -25,8 +25,8 @@ async def query():
     if len(note_ids) == 0:
         return jsonify({"error": "No note_ids provided"}), 400
 
-    response = chat_bot(user_question=question, note_ids=note_ids)
-    return jsonify({"answer": response})
+    response, top_notes = chat_bot(user_question=question, note_ids=note_ids)
+    return jsonify({"answer": response, "used_notes": top_notes})
 
 
 # Get most related notes

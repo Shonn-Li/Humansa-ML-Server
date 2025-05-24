@@ -74,12 +74,16 @@ def chat_bot(
     top_k_chunks: int = 2,  # only pull 1 chunk per note
     chunk_size: int = 512,
     chunk_overlap: int = 50,
-) -> str:
+) -> Tuple[str, List[int]]:
     """
     1) Ensure each note has a stored embedding via retrieve_embedding()
     2) Embed the question and rank notes by cosine similarity
     3) Load & chunk only the top notes, build on‐the‐fly vector stores
     4) Retrieve the top chunk per note and query the LLM
+
+    Returns:
+        - str which is the answer
+        - List of int representing the note_id
     """
 
     top_notes = get_most_related_notes(
@@ -115,7 +119,7 @@ def chat_bot(
     query_engine = RetrieverQueryEngine.from_args(retriever=router)
     response = query_engine.query(user_question)
 
-    return str(response)
+    return [str(response), top_notes]
 
 
 # Example usage
