@@ -138,55 +138,47 @@ ORDER BY "order"
     return "\n".join(lst)
 
 
-def save_embedding(note_id: int, embedding: List[float]) -> None:
+def save_embeddings(note_id: int, embeddings: List[List[float]]) -> None:
     """
-    Upsert a note's embedding into embedding_v1, updating last_updated.
+    Upsert a note's embeddings (one per section) into embedding_v1.
     """
     conn = get_db_connection()
     register_vector(conn)
     try:
         with conn:
             with conn.cursor() as cur:
-                # (Re)create table if you like—optional after first run
-                cur.execute(
-                    """
-                    CREATE TABLE IF NOT EXISTS embedding_v1 (
-                      note_id      INT PRIMARY KEY,
-                      embedding    VECTOR,
-                      last_updated TIMESTAMPTZ NOT NULL DEFAULT NOW()
-                    );
-                """
-                )
-                # Upsert the embedding
-                cur.execute(
-                    """
-                    INSERT INTO embedding_v1 (note_id, embedding, last_updated)
-                    VALUES (%s, %s, NOW())
-                    ON CONFLICT (note_id)
-                      DO UPDATE SET 
-                        embedding = EXCLUDED.embedding,
-                        last_updated = NOW();
-                    """,
-                    (note_id, embedding),
-                )
+                for sec_id, vec in enumerate(embeddings):
+                    cur.execute(
+                        """
+                        INSERT INTO embedding_v1 (note_id, section_id, embedding, last_updated)
+                        VALUES (%s, %s, %s, NOW())
+                        ON CONFLICT (note_id, section_id)
+                          DO UPDATE SET
+                            embedding    = EXCLUDED.embedding,
+                            last_updated = NOW();
+                        """,
+                        (note_id, sec_id, vec),
+                    )
     finally:
         conn.close()
 
 
-def get_embedding(note_id: int) -> Optional[List[float]]:
+def get_embeddings(note_id: int) -> Optional[List[List[float]]]:
     """
-    Retrieve the stored embedding for a note_id, or None if missing.
+    Returns list of section embeddings for a note, or None if none stored.
     """
     conn = get_db_connection()
     register_vector(conn)
     try:
         with conn.cursor() as cur:
             cur.execute(
-                "SELECT embedding FROM embedding_v1 WHERE note_id = %s",
+                "SELECT section_id, embedding FROM embedding_v1 WHERE note_id = %s ORDER BY section_id",
                 (note_id,),
             )
-            row = cur.fetchone()
-            return row[0] if row else None
+            rows = cur.fetchall()
+            if not rows:
+                return None
+            return [row[1] for row in rows]
     finally:
         conn.close()
 

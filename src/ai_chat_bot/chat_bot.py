@@ -11,35 +11,34 @@ from llama_index.core.tools import RetrieverTool
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.llms.openai import OpenAI
 
-from app.utility.postgres import get_embedding, get_note_text, save_embedding
+from src.utility.postgres import get_embeddings, get_note_text, save_embeddings
 
 
-def create_embedding(note_id: int):
-    """
-    Create an OpenAI embedding for the note and persist it via save_embedding().
-    """
-    # 1) Fetch the note text
-    note = get_note_text(note_id)
-    if not note:
-        raise ValueError(f"No text found for note {note_id}")
+def create_and_save_embeddings(note_id: int):
+    splitter = SentenceSplitter(chunk_size=7000, chunk_overlap=200)
+    embedder = OpenAIEmbedding(model="text-embedding-3-small")
+    text = get_note_text(note_id)
+    if not text:
+        raise ValueError(f"No text for note {note_id}")
 
-    # 2) Generate embedding
-    embed_model = OpenAIEmbedding(model="text-embedding-3-small")
-    # get_embeddings returns List[List[float]]; we take the first vector
-    vector = embed_model._get_text_embeddings([note])[0]
+    # 1) split into chunks
+    chunks = splitter.split_text(text)
 
-    # 3) Persist via our helper
-    save_embedding(note_id, vector)
-    return vector
+    # 2) embed all chunks at once
+    vectors = embedder._get_text_embeddings(chunks)  # returns List[List[float]]
+
+    # 3) persist
+    save_embeddings(note_id, vectors)
+    return vectors
 
 
 def retrieve_embedding(note_id: int):
-    embedding = get_embedding(note_id=note_id)
+    embedding = get_embeddings(note_id=note_id)
     if embedding is not None:
         return embedding
 
     # do not have the embedding stored, creating one now
-    return create_embedding(note_id=note_id)
+    return create_and_save_embeddings(note_id=note_id)
 
 
 def _cosine_similarity(a: List[float], b: List[float]) -> float:
@@ -50,32 +49,21 @@ def _cosine_similarity(a: List[float], b: List[float]) -> float:
 
 
 def get_most_related_notes(
-    user_question: str,
-    note_ids: List[int],
-    max_notes: int,  # only consider top 3 notes
+    user_question: str, note_ids: List[int], max_notes: int
 ) -> List[int]:
-    """
-    1) Ensure each note has a stored embedding via retrieve_embedding()
-    2) Embed the question and rank notes by cosine similarity
-    3) Load & chunk only the top notes, build on‐the‐fly vector stores
-    4) Retrieve the top chunk per note and query the LLM
-    """
+    embedder = OpenAIEmbedding(model="text-embedding-3-small")
+    query_vec = embedder._get_text_embeddings([user_question])[0]
 
-    # 1) Ensure embeddings exist and collect them
-    note_vecs: List[Tuple[int, List[float]]] = []
+    scores = []
     for nid in note_ids:
-        vec = retrieve_embedding(nid)
-        note_vecs.append((nid, vec))
+        sections = retrieve_embedding(nid)
+        sims = [_cosine_similarity(query_vec, sec) for sec in sections]
+        scores.append((nid, max(sims)))
 
-    # 2) Embed the question
-    embed_model = OpenAIEmbedding(model="text-embedding-3-small")
-    query_vec = embed_model._get_text_embeddings([user_question])[0]
-
-    # 3) Rank notes in Python
-    ranked = sorted(
-        note_vecs, key=lambda t: _cosine_similarity(query_vec, t[1]), reverse=True
-    )
-    top_notes = [nid for nid, _ in ranked[:max_notes]]
+    # 4) pick top notes
+    top_notes = [
+        nid for nid, _ in sorted(scores, key=lambda x: x[1], reverse=True)[:max_notes]
+    ]
     return top_notes
 
 
@@ -83,7 +71,7 @@ def chat_bot(
     user_question: str,
     note_ids: List[int],
     max_notes: int = 3,  # only consider top 3 notes
-    top_k_chunks: int = 1,  # only pull 1 chunk per note
+    top_k_chunks: int = 2,  # only pull 1 chunk per note
     chunk_size: int = 512,
     chunk_overlap: int = 50,
 ) -> str:

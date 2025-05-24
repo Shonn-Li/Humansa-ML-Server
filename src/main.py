@@ -1,8 +1,8 @@
 # from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader
 from quart import Quart, jsonify, request
 
-from app.ai_chat_bot.chat_bot import chat_bot, get_most_related_notes
-from app.utility.postgres import get_note_text
+from src.ai_chat_bot.chat_bot import chat_bot, get_most_related_notes
+from src.utility.postgres import get_note_text
 
 app = Quart(__name__)
 
