@@ -1,7 +1,8 @@
 # from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader
 from quart import Quart, jsonify, request
 
-from src.ai_chat_bot.chat_bot import chat_bot, get_most_related_notes
+from src.ai_chat_bot.chat_bot import (chat_bot, create_and_save_embeddings,
+                                      get_most_related_notes)
 from src.utility.postgres import get_note_text
 
 app = Quart(__name__)
@@ -49,6 +50,21 @@ async def get_related_notes():
         user_question=question, note_ids=note_ids, max_notes=max_notes
     )
     return jsonify({"note_ids": response})
+
+
+@app.route("/save_note_embedding", methods=["POST"])
+async def save_embedding_api():
+    """Temporary API to check the formatted note text for a given note ID"""
+    data = await request.get_json()
+    note_id = data.get("note_id", None)
+    if note_id is None:
+        return jsonify({"error": "No note_id provided"}), 400
+
+    try:
+        create_and_save_embeddings(note_id=note_id)
+        return jsonify({"status": "success"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route("/note_text/<int:note_id>", methods=["GET"])
