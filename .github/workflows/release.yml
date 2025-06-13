@@ -73,18 +73,44 @@ jobs:
           echo "Available hosts:"
           ansible-inventory -i inventory_aws_ec2.yml --graph
 
+      - name: Install Session Manager Plugin
+        run: |
+          curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
+          sudo dpkg -i session-manager-plugin.deb
+
       - name: Run Ansible Playbook
         run: |
-          ansible-playbook -i inventory_aws_ec2.yml ml-playbook.yml --extra-vars "
-            aws_deploy_access_key=${{ secrets.AWS_DEPLOY_ACCESS_KEY }}
-            aws_deploy_secret_access_key=${{ secrets.AWS_DEPLOY_SECRET_ACCESS_KEY }}
-            ansible_ssh_private_key_file=deploy_key.pem 
-            ansible_user=ec2-user 
-            ghcr_username=${{ github.actor }}
-            ghcr_token=${{ secrets.GITHUB_TOKEN }}
-            ghcr_repository=shonn-li/youwoai-ml-server
-            image_tag=${{ env.version }}
-            aws_region=${{ secrets.AWS_REGION }}
-            openai_api_key=${{ secrets.OPENAI_API_KEY }}
-            aws_access_key=${{ secrets.AWS_ACCESS_KEY }}
-            aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}"  || [ $? -eq 2 ]
+          # Use SSM-based playbook if it exists, otherwise fall back to SSH with ProxyCommand
+          if [ -f ml-playbook-ssm.yml ]; then
+            ansible-playbook ml-playbook-ssm.yml --extra-vars "
+              aws_region=${{ secrets.AWS_REGION }}
+              ghcr_username=${{ github.actor }}
+              ghcr_token=${{ secrets.GITHUB_TOKEN }}
+              ghcr_repository=shonn-li/youwoai-ml-server
+              image_tag=${{ env.version }}
+              openai_api_key=${{ secrets.OPENAI_API_KEY }}
+              aws_access_key=${{ secrets.AWS_ACCESS_KEY }}
+              aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+          else
+            # Create SSH config for SSM tunneling
+            mkdir -p ~/.ssh
+            cat > ~/.ssh/config << EOF
+          Host i-*
+            ProxyCommand sh -c "aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p' --region ${{ secrets.AWS_REGION }}"
+            StrictHostKeyChecking no
+            UserKnownHostsFile /dev/null
+          EOF
+            
+            ansible-playbook -i inventory_aws_ec2.yml ml-playbook.yml --extra-vars "
+              aws_deploy_access_key=${{ secrets.AWS_DEPLOY_ACCESS_KEY }}
+              aws_deploy_secret_access_key=${{ secrets.AWS_DEPLOY_SECRET_ACCESS_KEY }}
+              ansible_ssh_private_key_file=deploy_key.pem 
+              ansible_user=ec2-user 
+              ghcr_username=${{ github.actor }}
+              ghcr_token=${{ secrets.GITHUB_TOKEN }}
+              ghcr_repository=shonn-li/youwoai-ml-server
+              image_tag=${{ env.version }}
+              aws_region=${{ secrets.AWS_REGION }}
+              openai_api_key=${{ secrets.OPENAI_API_KEY }}
+              aws_access_key=${{ secrets.AWS_ACCESS_KEY }}
+              aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}"  || [ $? -eq 2 ]

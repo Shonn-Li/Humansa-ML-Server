@@ -70,15 +70,22 @@ jobs:
 
       - name: Wait for instance to be ready
         run: |
-          # Get private IP of the instance (since ML servers are in private subnet)
-          PRIVATE_IP=$(aws ec2 describe-instances --instance-ids ${{ github.event.client_payload.instance_id }} --query 'Reservations[0].Instances[0].PrivateIpAddress' --output text --region ${{ github.event.client_payload.region }})
-          echo "Instance ${{ github.event.client_payload.instance_id }} has private IP: ${PRIVATE_IP}"
+          # Get public IP of the instance
+          PUBLIC_IP=$(aws ec2 describe-instances --instance-ids ${{ github.event.client_payload.instance_id }} --query 'Reservations[0].Instances[0].PublicIpAddress' --output text --region ${{ github.event.client_payload.region }})
+          echo "Waiting for instance ${{ github.event.client_payload.instance_id }} (${PUBLIC_IP}) to be ready for SSH..."
 
           # Replace inventory IP
-          sed -i "s/ansible_host: \"${{ github.event.client_payload.instance_id }}\"/ansible_host: \"${PRIVATE_IP}\"/" target_inventory.yml
+          sed -i "s/ansible_host: \"${{ github.event.client_payload.instance_id }}\"/ansible_host: \"${PUBLIC_IP}\"/" target_inventory.yml
 
-          # Wait for instance to be ready (using AWS Systems Manager)
-          aws ssm wait command-executed --instance-id ${{ github.event.client_payload.instance_id }} --command-id $(aws ssm send-command --instance-ids ${{ github.event.client_payload.instance_id }} --document-name "AWS-RunShellScript" --parameters 'commands=["echo ready"]' --query 'Command.CommandId' --output text) || true
+          # Wait for SSH to be available
+          for i in {1..30}; do
+            if nc -z -w5 ${PUBLIC_IP} 22; then
+              echo "SSH is available!"
+              break
+            fi
+            echo "Waiting for SSH... (attempt $i/30)"
+            sleep 10
+          done
 
       - name: Run Ansible Playbook on specific instance
         run: |
