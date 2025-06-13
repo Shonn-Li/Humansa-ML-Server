@@ -21,10 +21,11 @@
           - python3-pip
         state: present
 
-    - name: Install AWS CLI v1
-      ansible.builtin.pip:
-        name: "awscli<2.0.0"
-        state: present
+    # Skip AWS CLI installation - v2 is pre-installed on Amazon Linux 2023
+    - name: Verify AWS CLI is available
+      ansible.builtin.command: aws --version
+      register: aws_version
+      changed_when: false
 
     - name: Ensure docker engine
       ansible.builtin.yum:
@@ -73,11 +74,16 @@
 
   vars:
     region: "{{ aws_region }}"
-    tg_arn: "{{ ssm_values['/youwoai/prod/ml_tg_arn'] }}"
+    ml_tg_arn_key: "/youwoai/prod/ml_tg_arn"
     image: "ghcr.io/{{ ghcr_repository }}:{{ image_tag }}"
     env_file: /etc/youwoai-ml-server/.env
 
   tasks:
+    # Get ML target group ARN from SSM
+    - name: Get ML target group ARN
+      set_fact:
+        tg_arn: "{{ lookup('amazon.aws.ssm_parameter', ml_tg_arn_key, decrypt=true, region=region) }}"
+
     # Check ALB registration
     - name: Check if instance is registered with TG
       ansible.builtin.shell: |
