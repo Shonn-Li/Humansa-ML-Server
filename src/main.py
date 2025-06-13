@@ -3,6 +3,7 @@ from quart import Quart, jsonify, request
 
 from src.ai_chat_bot.chat_bot import (chat_bot, create_and_save_embeddings,
                                       get_most_related_notes)
+from src.ai_chat_bot.link_analyzer import analyze_link
 from src.utility.postgres import get_note_text
 
 app = Quart(__name__)
@@ -12,6 +13,53 @@ app = Quart(__name__)
 @app.route("/ping", methods=["GET"])
 async def ping():
     return jsonify({"message": "Hi from YouWoAI"})
+
+
+# Link Analysis endpoint
+@app.route("/analyze_link", methods=["POST"])
+async def analyze_link_endpoint():
+    """
+    Analyze content from a provided link (YouTube, Bilibili, or general web).
+
+    Expected payload:
+    {
+        "link": "https://example.com",
+        "platform": "youtube|bilibili|web" (optional, auto-detected if not provided),
+        "options": {
+            "languages": ["en", "zh"] (for YouTube/Bilibili transcript languages)
+        }
+    }
+    """
+    try:
+        data = await request.get_json()
+
+        # Validate required fields
+        link = data.get("link")
+        if not link:
+            return jsonify({
+                "error": "Missing required field: link",
+                "details": "Please provide a valid URL in the 'link' field"
+            }), 400
+
+        # Get optional parameters
+        platform = data.get("platform")
+        options = data.get("options", {})
+
+        # Analyze the link
+        result = analyze_link(link, platform, options)
+
+        return jsonify(result)
+
+    except ValueError as e:
+        return jsonify({
+            "error": "Invalid input",
+            "details": str(e)
+        }), 400
+    except Exception as e:
+        return jsonify({
+            "error": "Internal server error",
+            "details": f"An unexpected error occurred: {str(e)}"
+        }), 500
 
 
 # Chat Bot
@@ -75,4 +123,4 @@ async def get_note_text_api(note_id):
 
 
 if __name__ == "__main__":
-    app.run(port=5001)
+    app.run(port=5003)
