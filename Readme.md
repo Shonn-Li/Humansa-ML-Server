@@ -18,7 +18,7 @@ pip install -r requirements.txt
 
 ### 3. Run the server
 ```bash
-python app/main.py
+python src/main.py
 # By default, the server runs on port 5001.
 ```
 

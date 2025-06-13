@@ -1,4 +1,52 @@
-youwo-ml-venv/
+# Python
 __pycache__/
-*.pyc
-vector_store/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# Local files
+.env
+.env.*
+*.pem
+*.key
+
+# Documentation
+README.md
+docs/
+
+# Scripts
+test-local.sh
+validate-docker.sh
+
+# Old directories
+app/
