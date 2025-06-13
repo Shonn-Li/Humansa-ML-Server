@@ -4,8 +4,21 @@ set -e # Exit on any error
 
 TAG="release-1.4.0"
 BRANCH="main"
-REPO_PATH=$(git config --get remote.origin.url | sed 's/.*github.com[:\/]\(.*\)\.git/\1/')
-REPO_PATH=${REPO_PATH:-"shonn-li/youwoai-ml-server"} # Fallback
+
+# Get the remote URL and determine the repo path
+REMOTE_URL=$(git config --get remote.origin.url)
+if [[ "$REMOTE_URL" == git@github.com:* ]]; then
+    # SSH format
+    REPO_PATH=$(echo "$REMOTE_URL" | sed 's/git@github.com://;s/\.git$//')
+elif [[ "$REMOTE_URL" == https://github.com/* ]]; then
+    # HTTPS format
+    REPO_PATH=$(echo "$REMOTE_URL" | sed 's|https://github.com/||;s|\.git$||')
+else
+    echo "⚠️  Unknown remote URL format: $REMOTE_URL"
+    REPO_PATH="shonn-li/youwoai-ml-server"
+fi
+
+echo "📦 Repository: $REPO_PATH"
 
 # Check for GitHub token
 if [ -z "$GITHUB_TOKEN" ]; then
@@ -31,6 +44,25 @@ else
 fi
 echo
 
+# Check if we can access the remote
+echo "🔍 Checking remote access..."
+if ! git ls-remote origin >/dev/null 2>&1; then
+    echo "❌ Cannot access remote repository!"
+    echo ""
+    echo "If using HTTPS, you need to authenticate. Options:"
+    echo "1. Use a Personal Access Token (recommended):"
+    echo "   git remote set-url origin https://YOUR_GITHUB_USERNAME:YOUR_PAT@github.com/$REPO_PATH.git"
+    echo ""
+    echo "2. Or switch to SSH (if you have SSH keys set up):"
+    echo "   git remote set-url origin git@github.com:$REPO_PATH.git"
+    echo ""
+    echo "3. Or use GitHub CLI for authentication:"
+    echo "   gh auth login"
+    echo ""
+    echo "Current remote: $REMOTE_URL"
+    exit 1
+fi
+
 # Check branch and switch if needed
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 if [ "$CURRENT_BRANCH" != "$BRANCH" ]; then
@@ -40,7 +72,11 @@ fi
 
 # Pull latest changes
 echo "📥 Pulling latest changes from origin/$BRANCH..."
-git pull origin $BRANCH
+if ! git pull origin $BRANCH; then
+    echo "❌ Failed to pull latest changes!"
+    echo "You may need to set up authentication as shown above."
+    exit 1
+fi
 
 # Commit if needed
 if [ -n "$(git status --porcelain)" ]; then
