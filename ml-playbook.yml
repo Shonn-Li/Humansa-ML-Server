@@ -7,10 +7,10 @@
 
   vars:
     env_dir: /etc/youwoai-ml-server
-    private_key_file: '{{ ansible_ssh_private_key_file }}'
+    private_key_file: "{{ ansible_ssh_private_key_file }}"
     env_file: /etc/youwoai-ml-server/.env
-    region: '{{ aws_region }}'
-    ssm_prefix: '/youwoai/prod/'
+    region: "{{ aws_region }}"
+    ssm_prefix: "/youwoai/prod/"
 
   tasks:
     # Basic runtime setup
@@ -23,7 +23,7 @@
 
     - name: Install AWS CLI v1
       ansible.builtin.pip:
-        name: 'awscli<2.0.0'
+        name: "awscli<2.0.0"
         state: present
 
     - name: Ensure docker engine
@@ -44,14 +44,14 @@
 
     - name: Ensure env directory
       ansible.builtin.file:
-        path: '{{ env_dir }}'
+        path: "{{ env_dir }}"
         state: directory
-        mode: '0755'
+        mode: "0755"
 
     - name: Render .env for ML server
       ansible.builtin.copy:
-        dest: '{{ env_file }}'
-        mode: '0600'
+        dest: "{{ env_file }}"
+        mode: "0600"
         content: |
           {% for key, value in ssm_values.items() %}
           {{ key.split('/')[-1].upper() }}={{ value }}
@@ -72,9 +72,9 @@
   ignore_unreachable: yes
 
   vars:
-    region: '{{ aws_region }}'
+    region: "{{ aws_region }}"
     tg_arn: "{{ ssm_values['/youwoai/prod/ml_tg_arn'] }}"
-    image: 'ghcr.io/{{ ghcr_repository }}:{{ image_tag }}'
+    image: "ghcr.io/{{ ghcr_repository }}:{{ image_tag }}"
     env_file: /etc/youwoai-ml-server/.env
 
   tasks:
@@ -163,7 +163,7 @@
     # Health check
     - name: Wait for ML server health check
       uri:
-        url: 'http://localhost:5001/health'
+        url: "http://localhost:5001/health"
         status_code: 200
         timeout: 30
       register: hc

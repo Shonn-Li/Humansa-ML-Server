@@ -3,7 +3,7 @@ name: Deploy ML Server to AWS
 on:
   push:
     tags:
-      - 'release-*'
+      - "release-*"
 
 permissions:
   id-token: write
@@ -15,11 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install Ansible and AWS CLI dependencies
         run: |
@@ -36,6 +36,19 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_DEPLOY_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      - name: Set up AWS credentials for Ansible
+        run: |
+          mkdir -p ~/.aws
+          cat > ~/.aws/credentials << EOF
+          [default]
+          aws_access_key_id = ${{ secrets.AWS_DEPLOY_ACCESS_KEY }}
+          aws_secret_access_key = ${{ secrets.AWS_DEPLOY_SECRET_ACCESS_KEY }}
+          EOF
+          cat > ~/.aws/config << EOF
+          [default]
+          region = ${{ secrets.AWS_REGION }}
+          EOF
+
       - name: Set Up SSH Key
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > deploy_key.pem
@@ -51,6 +64,14 @@ jobs:
             --name /youwoai/prod/ml_server_image_tag \
             --type String --overwrite \
             --value "${{ env.version }}"
+
+      - name: Debug inventory
+        run: |
+          echo "Testing AWS EC2 inventory..."
+          ansible-inventory -i inventory_aws_ec2.yml --list
+          echo ""
+          echo "Available hosts:"
+          ansible-inventory -i inventory_aws_ec2.yml --graph
 
       - name: Run Ansible Playbook
         run: |

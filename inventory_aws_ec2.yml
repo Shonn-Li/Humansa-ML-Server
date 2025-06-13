@@ -2,7 +2,7 @@ plugin: amazon.aws.aws_ec2
 regions:
   - us-west-1
 keyed_groups:
-  - key: tags.aws:autoscaling:groupName
+  - key: tags['aws:autoscaling:groupName']
     prefix: asg
     separator: '_'
 filters:
