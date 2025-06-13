@@ -24,47 +24,47 @@ except ImportError:
 def detect_platform_from_url(url: str) -> Optional[str]:
     """
     Detect platform from URL patterns.
-    
+
     Args:
         url: The URL to analyze
-    
+
     Returns:
         Platform name ('youtube', 'bilibili') or None if not detected
     """
     url_lower = url.lower()
-    
+
     # YouTube patterns
     youtube_patterns = [
         'youtube.com',
         'youtu.be',
         'm.youtube.com'
     ]
-    
+
     # Bilibili patterns
     bilibili_patterns = [
         'bilibili.com',
         'b23.tv',
         'm.bilibili.com'
     ]
-    
+
     for pattern in youtube_patterns:
         if pattern in url_lower:
             return 'youtube'
-    
+
     for pattern in bilibili_patterns:
         if pattern in url_lower:
             return 'bilibili'
-    
+
     return None
 
 
 def validate_youtube_url(url: str) -> bool:
     """
     Validate if the URL is a proper YouTube video URL.
-    
+
     Args:
         url: YouTube URL to validate
-    
+
     Returns:
         True if valid YouTube URL, False otherwise
     """
@@ -75,10 +75,10 @@ def validate_youtube_url(url: str) -> bool:
 def validate_bilibili_url(url: str) -> bool:
     """
     Validate if the URL is a proper Bilibili video URL.
-    
+
     Args:
         url: Bilibili URL to validate
-    
+
     Returns:
         True if valid Bilibili URL, False otherwise
     """
@@ -89,7 +89,7 @@ def validate_bilibili_url(url: str) -> bool:
         r'(?:https?://)?(?:m\.)?bilibili\.com/video/[a-zA-Z0-9]+',
         r'(?:https?://)?b23\.tv/[a-zA-Z0-9]+'
     ]
-    
+
     for pattern in bilibili_patterns:
         if re.match(pattern, url):
             return True
@@ -99,10 +99,10 @@ def validate_bilibili_url(url: str) -> bool:
 def extract_youtube_video_id(url: str) -> Optional[str]:
     """
     Extract video ID from YouTube URL.
-    
+
     Args:
         url: YouTube video URL
-    
+
     Returns:
         Video ID or None if not found
     """
@@ -111,7 +111,7 @@ def extract_youtube_video_id(url: str) -> Optional[str]:
         r'(?:https?://)?(?:www\.)?youtu\.be/([^&\n?#]+)',
         r'(?:https?://)?(?:m\.)?youtube\.com/watch\?v=([^&\n?#]+)'
     ]
-    
+
     for pattern in patterns:
         match = re.search(pattern, url)
         if match:
@@ -122,10 +122,10 @@ def extract_youtube_video_id(url: str) -> Optional[str]:
 def extract_bilibili_video_id(url: str) -> Optional[str]:
     """
     Extract video ID from Bilibili URL.
-    
+
     Args:
         url: Bilibili video URL
-    
+
     Returns:
         Video ID (BV number or av number) or None if not found
     """
@@ -136,7 +136,7 @@ def extract_bilibili_video_id(url: str) -> Optional[str]:
         r'(?:https?://)?(?:m\.)?bilibili\.com/video/(av\d+)',
         r'(?:https?://)?b23\.tv/([A-Za-z0-9]+)'  # Short URL format
     ]
-    
+
     for pattern in patterns:
         match = re.search(pattern, url)
         if match:
@@ -152,17 +152,17 @@ def extract_bilibili_video_id(url: str) -> Optional[str]:
 def format_timestamp(seconds: float) -> str:
     """
     Format seconds to MM:SS or HH:MM:SS format.
-    
+
     Args:
         seconds: Time in seconds
-    
+
     Returns:
         Formatted timestamp string
     """
     hours = int(seconds // 3600)
     minutes = int((seconds % 3600) // 60)
     secs = int(seconds % 60)
-    
+
     if hours > 0:
         return f"{hours:02d}:{minutes:02d}:{secs:02d}"
     else:
@@ -172,70 +172,74 @@ def format_timestamp(seconds: float) -> str:
 def analyze_youtube_content(url: str, languages: Optional[List[str]] = None) -> List[Document]:
     """
     Extract transcript with timestamps from YouTube video using direct API.
-    
+
     Args:
         url: YouTube video URL
         languages: List of language codes to try for transcript (default: ['en'])
-    
+
     Returns:
         List of Document objects containing the transcript with timestamps
     """
     if not validate_youtube_url(url):
         raise ValueError(f"Invalid YouTube URL: {url}")
-    
+
     video_id = extract_youtube_video_id(url)
     if not video_id:
         raise ValueError(f"Could not extract video ID from URL: {url}")
-    
+
     if languages is None:
         languages = ['en']
-    
+
     try:
         # Try to get transcript in preferred languages
         transcript_data = None
         used_language = None
-        
+
         for lang in languages:
             try:
-                transcript_data = YouTubeTranscriptApi.get_transcript(video_id, languages=[lang])
+                transcript_data = YouTubeTranscriptApi.get_transcript(
+                    video_id, languages=[lang])
                 used_language = lang
                 break
             except Exception:
                 continue
-        
+
         # If no specific language worked, try to get any available transcript
         if transcript_data is None:
             try:
-                transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
+                transcript_list = YouTubeTranscriptApi.list_transcripts(
+                    video_id)
                 transcript = transcript_list.find_generated_transcript(['en'])
                 transcript_data = transcript.fetch()
                 used_language = 'en'
             except Exception:
                 try:
                     # Try any available transcript
-                    transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
+                    transcript_list = YouTubeTranscriptApi.list_transcripts(
+                        video_id)
                     transcript = next(iter(transcript_list))
                     transcript_data = transcript.fetch()
                     used_language = transcript.language_code
                 except Exception as e:
-                    raise Exception(f"No transcript available for video {video_id}: {str(e)}")
-        
+                    raise Exception(
+                        f"No transcript available for video {video_id}: {str(e)}")
+
         if not transcript_data:
             raise Exception(f"No transcript data found for video {video_id}")
-        
+
         # Format transcript with timestamps
         formatted_content = []
         for entry in transcript_data:
             start_time = entry.get('start', 0)
             duration = entry.get('duration', 0)
             text = entry.get('text', '').strip()
-            
+
             timestamp = format_timestamp(start_time)
             formatted_content.append(f"[{timestamp}] {text}")
-        
+
         # Join all content
         full_content = '\n'.join(formatted_content)
-        
+
         # Create document with metadata
         document = Document(
             text=full_content,
@@ -248,9 +252,9 @@ def analyze_youtube_content(url: str, languages: Optional[List[str]] = None) -> 
                 'format': 'timestamped_transcript'
             }
         )
-        
+
         return [document]
-        
+
     except Exception as e:
         raise Exception(f"Failed to extract YouTube transcript: {str(e)}")
 
@@ -263,15 +267,19 @@ async def get_bilibili_video_info_async(video_obj, video_id: str, timeout: int =
         info = await asyncio.wait_for(video_obj.get_info(), timeout=timeout)
         return info
     except asyncio.TimeoutError:
-        raise Exception("Timeout while fetching video information from Bilibili")
+        raise Exception(
+            "Timeout while fetching video information from Bilibili")
     except Exception as e:
         error_msg = str(e).lower()
         if "403" in error_msg or "401" in error_msg:
-            raise Exception(f"Access denied. Video may be private, region-locked, or deleted. Video ID: {video_id}")
+            raise Exception(
+                f"Access denied. Video may be private, region-locked, or deleted. Video ID: {video_id}")
         elif "404" in error_msg:
-            raise Exception(f"Video not found. Video may have been deleted or the ID is incorrect. Video ID: {video_id}")
+            raise Exception(
+                f"Video not found. Video may have been deleted or the ID is incorrect. Video ID: {video_id}")
         else:
-            raise Exception(f"Cannot access video information. Error: {str(e)}")
+            raise Exception(
+                f"Cannot access video information. Error: {str(e)}")
 
 
 async def get_bilibili_subtitle_info_async(video_obj, video_id: str, timeout: int = 15):
@@ -282,7 +290,8 @@ async def get_bilibili_subtitle_info_async(video_obj, video_id: str, timeout: in
         subtitle_info = await asyncio.wait_for(video_obj.get_subtitle(page_index=0), timeout=timeout)
         return subtitle_info
     except asyncio.TimeoutError:
-        raise Exception("Timeout while fetching subtitle information from Bilibili")
+        raise Exception(
+            "Timeout while fetching subtitle information from Bilibili")
     except Exception as e:
         raise Exception(f"Failed to get subtitle info: {str(e)}")
 
@@ -290,23 +299,24 @@ async def get_bilibili_subtitle_info_async(video_obj, video_id: str, timeout: in
 def analyze_bilibili_content(url: str) -> List[Document]:
     """
     Extract transcript with timestamps from Bilibili video using bilibili-api module.
-    
+
     Args:
         url: Bilibili video URL
-    
+
     Returns:
         List of Document objects containing the transcript with timestamps
     """
     if not BILIBILI_API_AVAILABLE:
-        raise Exception("bilibili-api-python module is not available. Please install it with: pip install bilibili-api-python")
-    
+        raise Exception(
+            "bilibili-api-python module is not available. Please install it with: pip install bilibili-api-python")
+
     if not validate_bilibili_url(url):
         raise ValueError(f"Invalid Bilibili URL: {url}")
-    
+
     video_id = extract_bilibili_video_id(url)
     if not video_id:
         raise ValueError(f"Could not extract video ID from URL: {url}")
-    
+
     try:
         # Handle both BV and av format video IDs
         if video_id.startswith('av'):
@@ -316,7 +326,7 @@ def analyze_bilibili_content(url: str) -> List[Document]:
         else:
             # BV format
             v = video.Video(bvid=video_id)
-        
+
         # Get video info using async with proper event loop handling
         loop = None
         try:
@@ -327,17 +337,19 @@ def analyze_bilibili_content(url: str) -> List[Document]:
                 import concurrent.futures
                 with concurrent.futures.ThreadPoolExecutor() as executor:
                     future = executor.submit(
-                        lambda: asyncio.run(get_bilibili_video_info_async(v, video_id))
+                        lambda: asyncio.run(
+                            get_bilibili_video_info_async(v, video_id))
                     )
                     info = future.result(timeout=20)
             else:
-                info = loop.run_until_complete(get_bilibili_video_info_async(v, video_id))
+                info = loop.run_until_complete(
+                    get_bilibili_video_info_async(v, video_id))
         except RuntimeError:
             # No event loop, create a new one
             info = asyncio.run(get_bilibili_video_info_async(v, video_id))
-        
+
         title = info.get('title', 'Unknown Title')
-        
+
         # Try to get subtitles/closed captions
         try:
             # Get subtitle info using async
@@ -348,14 +360,17 @@ def analyze_bilibili_content(url: str) -> List[Document]:
                     import concurrent.futures
                     with concurrent.futures.ThreadPoolExecutor() as executor:
                         future = executor.submit(
-                            lambda: asyncio.run(get_bilibili_subtitle_info_async(v, video_id))
+                            lambda: asyncio.run(
+                                get_bilibili_subtitle_info_async(v, video_id))
                         )
                         subtitle_info = future.result(timeout=20)
                 else:
-                    subtitle_info = loop.run_until_complete(get_bilibili_subtitle_info_async(v, video_id))
+                    subtitle_info = loop.run_until_complete(
+                        get_bilibili_subtitle_info_async(v, video_id))
             except RuntimeError:
-                subtitle_info = asyncio.run(get_bilibili_subtitle_info_async(v, video_id))
-            
+                subtitle_info = asyncio.run(
+                    get_bilibili_subtitle_info_async(v, video_id))
+
             if not subtitle_info or not isinstance(subtitle_info, dict) or not subtitle_info.get('subtitles'):
                 # No subtitles available - create document with this info
                 document = Document(
@@ -370,24 +385,24 @@ def analyze_bilibili_content(url: str) -> List[Document]:
                     }
                 )
                 return [document]
-            
+
             # Process available subtitles
             subtitles = subtitle_info.get('subtitles', [])
             if not subtitles:
                 raise Exception("No subtitle data found in response")
-            
+
             # Get the first available subtitle (usually Chinese or English)
             subtitle = subtitles[0]
             subtitle_url = subtitle.get('subtitle_url', '')
             lang = subtitle.get('lan_doc', subtitle.get('lan', 'unknown'))
-            
+
             if not subtitle_url:
                 raise Exception("No subtitle URL found")
-            
+
             # Fix URL format if needed
             if subtitle_url.startswith('//'):
                 subtitle_url = 'https:' + subtitle_url
-            
+
             # Fetch subtitle content with proper headers and timeout
             headers = {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
@@ -395,38 +410,42 @@ def analyze_bilibili_content(url: str) -> List[Document]:
                 'Accept': 'application/json, text/plain, */*',
                 'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7'
             }
-            
-            subtitle_response = requests.get(subtitle_url, headers=headers, timeout=30)
+
+            subtitle_response = requests.get(
+                subtitle_url, headers=headers, timeout=30)
             if subtitle_response.status_code != 200:
-                raise Exception(f"Failed to fetch subtitle content: HTTP {subtitle_response.status_code}")
-            
+                raise Exception(
+                    f"Failed to fetch subtitle content: HTTP {subtitle_response.status_code}")
+
             try:
                 subtitle_data = subtitle_response.json()
             except ValueError as json_error:
-                raise Exception(f"Invalid JSON response from subtitle URL: {str(json_error)}")
-            
+                raise Exception(
+                    f"Invalid JSON response from subtitle URL: {str(json_error)}")
+
             # Format subtitle with timestamps
             formatted_content = []
             body = subtitle_data.get('body', [])
-            
+
             if not body:
                 raise Exception("Subtitle file contains no content")
-            
+
             for entry in body:
                 from_time = entry.get('from', 0)
                 to_time = entry.get('to', 0)
                 content = entry.get('content', '').strip()
-                
+
                 if content:  # Only include non-empty content
                     start_timestamp = format_timestamp(from_time)
                     end_timestamp = format_timestamp(to_time)
-                    formatted_content.append(f"[{start_timestamp} - {end_timestamp}] {content}")
-            
+                    formatted_content.append(
+                        f"[{start_timestamp} - {end_timestamp}] {content}")
+
             if not formatted_content:
                 raise Exception("No valid subtitle content found in file")
-            
+
             full_content = '\n'.join(formatted_content)
-            
+
             # Create document with metadata
             document = Document(
                 text=full_content,
@@ -443,13 +462,13 @@ def analyze_bilibili_content(url: str) -> List[Document]:
                     'view_count': info.get('stat', {}).get('view', 0)
                 }
             )
-            
+
             return [document]
-            
+
         except Exception as subtitle_error:
             # If subtitle extraction fails, provide detailed error info
             error_msg = str(subtitle_error).lower()
-            
+
             if "not found" in error_msg or "empty" in error_msg:
                 # Create document indicating no subtitles
                 document = Document(
@@ -467,12 +486,13 @@ def analyze_bilibili_content(url: str) -> List[Document]:
                 )
                 return [document]
             else:
-                raise Exception(f"Failed to extract Bilibili subtitles: {str(subtitle_error)}")
-                
+                raise Exception(
+                    f"Failed to extract Bilibili subtitles: {str(subtitle_error)}")
+
     except Exception as e:
         # Provide more helpful error messages
         error_msg = str(e).lower()
-        
+
         if "http" in error_msg and ("403" in error_msg or "401" in error_msg):
             raise Exception(
                 f"Access denied when fetching Bilibili content. This could be due to: "
@@ -501,21 +521,22 @@ def analyze_bilibili_content(url: str) -> List[Document]:
 def analyze_web_content(url: str, spider_api_key: Optional[str] = None) -> List[Document]:
     """
     Extract content from general web pages using Spider.
-    
+
     Args:
         url: Web page URL
         spider_api_key: Spider API key (can be None if set in environment)
-    
+
     Returns:
         List of Document objects containing the web content
     """
     # Get API key from environment if not provided
     if spider_api_key is None:
         spider_api_key = os.getenv("SPIDER_API_KEY")
-    
+
     if not spider_api_key:
-        raise ValueError("Spider API key is required. Set SPIDER_API_KEY environment variable or provide api_key parameter")
-    
+        raise ValueError(
+            "Spider API key is required. Set SPIDER_API_KEY environment variable or provide api_key parameter")
+
     try:
         reader = SpiderWebReader(
             api_key=spider_api_key,
@@ -528,20 +549,20 @@ def analyze_web_content(url: str, spider_api_key: Optional[str] = None) -> List[
 
 
 def analyze_link(
-    url: str, 
+    url: str,
     platform: Optional[str] = None,
     options: Optional[Dict[str, Any]] = None
 ) -> Dict[str, Any]:
     """
     Analyze a link and extract content based on platform.
-    
+
     Args:
         url: The URL to analyze
         platform: Platform type ('youtube', 'bilibili', 'web'). If None, will auto-detect
         options: Additional options including:
             - languages: Language codes for YouTube transcript (default: ['en'])
             - spider_api_key: Spider API key for web content extraction
-    
+
     Returns:
         Dictionary containing:
         - success: Boolean indicating success
@@ -552,10 +573,11 @@ def analyze_link(
     """
     if options is None:
         options = {}
-    
+
     languages = options.get("languages", ["en"])
-    spider_api_key = options.get("spider_api_key") or os.getenv("SPIDER_API_KEY")
-    
+    spider_api_key = options.get(
+        "spider_api_key") or os.getenv("SPIDER_API_KEY")
+
     result = {
         "success": False,
         "platform": platform,
@@ -563,7 +585,7 @@ def analyze_link(
         "error": None,
         "suggestions": []
     }
-    
+
     try:
         # Auto-detect platform if not specified
         if platform is None:
@@ -575,7 +597,7 @@ def analyze_link(
                 # Default to web content extraction
                 platform = "web"
                 result["platform"] = platform
-        
+
         # Extract content based on platform
         if platform == "youtube":
             documents = analyze_youtube_content(url, languages)
@@ -592,7 +614,7 @@ def analyze_link(
             documents = analyze_web_content(url, spider_api_key)
         else:
             raise ValueError(f"Unsupported platform: {platform}")
-        
+
         # Convert documents to serializable format
         if documents:
             # Extract content and metadata from first document
@@ -603,19 +625,20 @@ def analyze_link(
                 "url": url,
                 "metadata": doc.metadata
             }
-            
+
             # Add language info for transcripts
             if platform in ["youtube", "bilibili"]:
-                result["data"]["language"] = doc.metadata.get("language", "unknown")
-        
+                result["data"]["language"] = doc.metadata.get(
+                    "language", "unknown")
+
         result["success"] = True
-        
+
     except ValueError as e:
         result["error"] = "invalid_input"
         result["suggestions"] = [str(e)]
     except Exception as e:
         error_msg = str(e).lower()
-        
+
         # Categorize errors and provide helpful suggestions
         if "transcript" in error_msg or "subtitle" in error_msg:
             result["error"] = "extraction_failed"
@@ -649,41 +672,41 @@ def analyze_link(
                 "Check if the URL is accessible",
                 "Verify the content format is supported"
             ]
-    
+
     return result
 
 
 def format_content_for_analysis(documents: List[Document]) -> str:
     """
     Format document content for further analysis or storage.
-    
+
     Args:
         documents: List of Document objects
-    
+
     Returns:
         Formatted text content
     """
     if not documents:
         return ""
-    
+
     content_parts = []
-    
+
     for i, doc in enumerate(documents):
         content_parts.append(f"--- Document {i + 1} ---")
         content_parts.append(doc.text)
-        
+
         # Add metadata if available
         if doc.metadata:
             metadata_str = []
             for key, value in doc.metadata.items():
                 if value:  # Only include non-empty metadata
                     metadata_str.append(f"{key}: {value}")
-            
+
             if metadata_str:
                 content_parts.append(f"Metadata: {', '.join(metadata_str)}")
-        
+
         content_parts.append("")  # Empty line between documents
-    
+
     return "\n".join(content_parts)
 
 
@@ -698,7 +721,7 @@ if __name__ == "__main__":
         print(f"Content: {format_content_for_analysis(result['content'])}")
     else:
         print(f"Error: {result['error']}")
-    
+
     # Test auto-detection
     print("\nTesting auto-detection...")
     result = analyze_link(youtube_url)  # No platform specified
