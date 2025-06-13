@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  ml-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ml-server-local
+    ports:
+      - "5001:5001"
+    environment:
+      DB_HOST: ${DB_HOST:-localhost}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_USERNAME: ${DB_USERNAME:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      DB_ACTIVE_DATABASE: ${DB_ACTIVE_DATABASE:-test}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-test-key}
+      AWS_ACCESS_KEY: ${AWS_ACCESS_KEY:-test-key}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-test-secret}
+      AWS_REGION: ${AWS_REGION:-us-west-1}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
