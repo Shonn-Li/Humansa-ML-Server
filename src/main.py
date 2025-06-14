@@ -3,7 +3,6 @@ from quart import Quart, jsonify, request
 
 from src.ai_chat_bot.chat_bot import (chat_bot, create_and_save_embeddings,
                                       get_most_related_notes)
-from src.ai_chat_bot.link_analyzer import analyze_link
 from src.utility.postgres import get_note_text
 
 app = Quart(__name__)
@@ -15,50 +14,41 @@ async def ping():
     return jsonify({"message": "Hi from YouWoAI"})
 
 
+# Import link analyzer
+try:
+    from src.ai_chat_bot.link_analyzer import analyze_link
+    LINK_ANALYZER_AVAILABLE = True
+except ImportError as e:
+    LINK_ANALYZER_AVAILABLE = False
+    LINK_ANALYZER_ERROR = str(e)
+
+
 # Link Analysis endpoint
 @app.route("/analyze_link", methods=["POST"])
-async def analyze_link_endpoint():
-    """
-    Analyze content from a provided link (YouTube, Bilibili, or general web).
-
-    Expected payload:
-    {
-        "link": "https://example.com",
-        "platform": "youtube|bilibili|web" (optional, auto-detected if not provided),
-        "options": {
-            "languages": ["en", "zh"] (for YouTube/Bilibili transcript languages)
-        }
-    }
-    """
-    try:
-        data = await request.get_json()
-
-        # Validate required fields
-        link = data.get("link")
-        if not link:
-            return jsonify({
-                "error": "Missing required field: link",
-                "details": "Please provide a valid URL in the 'link' field"
-            }), 400
-
-        # Get optional parameters
-        platform = data.get("platform")
-        options = data.get("options", {})
-
-        # Analyze the link
-        result = analyze_link(link, platform, options)
-
-        return jsonify(result)
-
-    except ValueError as e:
+async def analyze_link_api():
+    """API endpoint to analyze YouTube, Bilibili, or web links"""
+    if not LINK_ANALYZER_AVAILABLE:
         return jsonify({
-            "error": "Invalid input",
-            "details": str(e)
-        }), 400
+            "error": "Link analyzer not available",
+            "details": LINK_ANALYZER_ERROR if 'LINK_ANALYZER_ERROR' in globals() else "Import failed"
+        }), 500
+    
+    data = await request.get_json()
+    url = data.get("url", "")
+    if not url:
+        return jsonify({"error": "No URL provided"}), 400
+    
+    platform = data.get("platform")  # Optional, will auto-detect if not provided
+    options = data.get("options", {})  # Optional parameters
+    
+    try:
+        result = analyze_link(url, platform=platform, options=options)
+        return jsonify(result)
     except Exception as e:
         return jsonify({
-            "error": "Internal server error",
-            "details": f"An unexpected error occurred: {str(e)}"
+            "success": False,
+            "error": "analysis_failed",
+            "message": str(e)
         }), 500
 
 

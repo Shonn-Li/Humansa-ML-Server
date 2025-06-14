@@ -57,6 +57,7 @@ llama-index-readers-youtube-transcript==0.3.0
 llama-index-readers-bilibili==0.3.0
 llama-index-readers-web==0.4.1
 youtube-transcript-api
+bilibili-api-python
 spider-client
 pycryptodomex
 PyJWT
