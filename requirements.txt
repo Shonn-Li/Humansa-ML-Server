@@ -53,6 +53,16 @@ llama-index-question-gen-openai==0.3.0
 llama-index-readers-file==0.4.7
 llama-index-readers-llama-parse==0.4.0
 llama-index-vector-stores-postgres==0.5.3
+llama-index-readers-youtube-transcript==0.3.0
+llama-index-readers-bilibili==0.3.0
+llama-index-readers-web==0.4.1
+youtube-transcript-api
+bilibili-api-python
+spider-client
+pycryptodomex
+PyJWT
+brotli
+qrcode
 llama-parse==0.6.22
 MarkupSafe==3.0.2
 marshmallow==3.26.1
