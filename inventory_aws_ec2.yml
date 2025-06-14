@@ -1,0 +1,14 @@
+plugin: amazon.aws.aws_ec2
+regions:
+  - us-west-1
+keyed_groups:
+  - key: tags['aws:autoscaling:groupName']
+    prefix: asg
+    separator: "_"
+filters:
+  tag:Name: youwoai-ml-server
+  instance-state-name: running
+compose:
+  ansible_host: public_ip_address # Changed from private_ip_address
+hostnames:
+  - instance-id

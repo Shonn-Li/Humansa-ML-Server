@@ -1,11 +1,41 @@
 # from llama_index import GPTVectorStoreIndex, SimpleDirectoryReader
-from quart import Quart, jsonify, request
-
+from src.utility.postgres import get_note_text
 from src.ai_chat_bot.chat_bot import (chat_bot, create_and_save_embeddings,
                                       get_most_related_notes)
-from src.utility.postgres import get_note_text
+from quart import Quart, jsonify, request
+import os
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Debug: Print environment variables at startup
+logger.info("=== Environment Variables Debug ===")
+logger.info(f"DB_HOST: {os.getenv('DB_HOST', 'NOT SET')}")
+logger.info(f"DB_PORT: {os.getenv('DB_PORT', 'NOT SET')}")
+logger.info(f"DB_USERNAME: {os.getenv('DB_USERNAME', 'NOT SET')}")
+logger.info(
+    f"DB_ACTIVE_DATABASE: {os.getenv('DB_ACTIVE_DATABASE', 'NOT SET')}")
+logger.info(
+    f"OPENAI_API_KEY: {'SET' if os.getenv('OPENAI_API_KEY') else 'NOT SET'}")
+logger.info(
+    f"EMBEDDING_DEV: {'SET' if os.getenv('EMBEDDING_DEV') else 'NOT SET'}")
+logger.info("================================")
+
 
 app = Quart(__name__)
+
+
+# Health check route for Docker/ALB
+@app.route("/health", methods=["GET"])
+async def health():
+    """Health check endpoint for ALB and Docker"""
+    return jsonify({
+        "status": "healthy",
+        "service": "ml-server",
+        "port": 5001
+    })
 
 
 # Health check route
@@ -32,15 +62,16 @@ async def analyze_link_api():
             "error": "Link analyzer not available",
             "details": LINK_ANALYZER_ERROR if 'LINK_ANALYZER_ERROR' in globals() else "Import failed"
         }), 500
-    
+
     data = await request.get_json()
     url = data.get("url", "")
     if not url:
         return jsonify({"error": "No URL provided"}), 400
-    
-    platform = data.get("platform")  # Optional, will auto-detect if not provided
+
+    # Optional, will auto-detect if not provided
+    platform = data.get("platform")
     options = data.get("options", {})  # Optional parameters
-    
+
     try:
         result = analyze_link(url, platform=platform, options=options)
         return jsonify(result)
@@ -113,4 +144,4 @@ async def get_note_text_api(note_id):
 
 
 if __name__ == "__main__":
-    app.run(port=5003)
+    app.run(host="0.0.0.0", port=5001)

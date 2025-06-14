@@ -1,0 +1,215 @@
+- name: PREPARE ML BOX (once per host)
+  hosts: "asg_youwoai_ml_asg"
+  become: yes
+  gather_facts: no
+  any_errors_fatal: yes
+  ignore_unreachable: yes
+
+  vars:
+    env_dir: /etc/youwoai-ml-server
+    private_key_file: "{{ ansible_ssh_private_key_file }}"
+    env_file: /etc/youwoai-ml-server/.env
+    region: "{{ aws_region }}"
+    ssm_prefix: "/youwoai/prod/"
+
+  tasks:
+    # Basic runtime setup
+    - name: Ensure python3 & pip3
+      ansible.builtin.yum:
+        name:
+          - python3
+          - python3-pip
+        state: present
+
+    - name: Remove AWS CLI v2 if installed
+      ansible.builtin.yum:
+        name: awscli-2
+        state: absent
+
+    - name: Install AWS CLI v1
+      ansible.builtin.pip:
+        name: 'awscli<2.0.0'
+        state: present
+
+    - name: Verify AWS CLI installation
+      ansible.builtin.command: aws --version
+      register: aws_version
+      changed_when: false
+
+    - name: Ensure docker engine
+      ansible.builtin.yum:
+        name: docker
+        state: present
+
+    - name: Enable & start docker
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
+
+    # Build .env file from SSM parameters (following backend server pattern)
+    - name: Lookup parameter tree
+      set_fact:
+        ssm_values: "{{ lookup('amazon.aws.ssm_parameter', ssm_prefix, recursive=true, bypath=true, decrypt=true, region=region) }}"
+
+    - name: Ensure env directory
+      ansible.builtin.file:
+        path: "{{ env_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Render .env for ML server
+      ansible.builtin.copy:
+        dest: "{{ env_file }}"
+        mode: "0600"
+        content: |
+          {% for key, value in ssm_values.items() %}
+          {{ key.split('/')[-1].upper() }}={{ value }}
+          {% endfor %}
+          DB_ACTIVE_DATABASE=active
+          OPENAI_API_KEY={{ openai_api_key }}
+          AWS_ACCESS_KEY={{ aws_access_key }}
+          AWS_SECRET_ACCESS_KEY={{ aws_secret_access_key }}
+          AWS_REGION={{ aws_region }}
+
+# Rolling update - 1 host at a time
+- name: ROLLING UPDATE ML SERVER
+  hosts: "asg_youwoai_ml_asg"
+  serial: 1
+  become: yes
+  gather_facts: yes
+  any_errors_fatal: yes
+  ignore_unreachable: yes
+
+  vars:
+    region: "{{ aws_region }}"
+    tg_arn: "{{ ssm_values['/youwoai/prod/ml_tg_arn'] }}"
+    image: "ghcr.io/{{ ghcr_repository }}:{{ image_tag }}"
+    env_file: /etc/youwoai-ml-server/.env
+
+  tasks:
+    # Check ALB registration
+    - name: Check if instance is registered with TG
+      ansible.builtin.shell: |
+        aws elbv2 describe-target-health \
+          --target-group-arn '{{ tg_arn }}' \
+          --region '{{ region }}' \
+          --output json
+      register: registration_check
+      failed_when: false
+      changed_when: false
+
+    - name: Find this instance in target group
+      set_fact:
+        instance_health: "{{ (data.TargetHealthDescriptions | selectattr('Target.Id', 'equalto', inventory_hostname) | list | first) | default({}) }}"
+      vars:
+        data: '{{ registration_check.stdout | default(''{"TargetHealthDescriptions":[]}'') | from_json }}'
+      when: registration_check.rc == 0 and registration_check.stdout | length > 0
+
+    - name: Determine if this is the first deployment
+      set_fact:
+        is_first_deployment: >-
+          {{ 
+            registration_check.rc != 0 or 
+            (registration_check.stdout | default('{"TargetHealthDescriptions":[]}') | from_json).TargetHealthDescriptions | selectattr('Target.Id', 'equalto', inventory_hostname) | list | length == 0 or
+            (instance_health == {} or 
+            instance_health.get('TargetHealth', {}).get('State') != 'healthy' and 
+            instance_health.get('TargetHealth', {}).get('State') != 'unhealthy')
+          }}
+
+    # Drain from ALB
+    - name: Deregister instance from TG
+      ansible.builtin.shell: |
+        aws elbv2 deregister-targets \
+          --target-group-arn '{{ tg_arn }}' \
+          --targets Id='{{ inventory_hostname }}' \
+          --region '{{ region }}'
+      when: not is_first_deployment | bool
+      changed_when: true
+
+    # Docker operations
+    - name: Docker login ghcr.io
+      ansible.builtin.shell: |
+        echo "{{ ghcr_token }}" | docker login ghcr.io -u "{{ ghcr_username }}" --password-stdin
+      register: login_output
+      failed_when: "'Login Succeeded' not in login_output.stdout"
+
+    - name: Pull image
+      ansible.builtin.command: docker pull {{ image }}
+      changed_when: true
+
+    # Stop old container
+    - name: Check if old container exists
+      ansible.builtin.shell: docker ps -a --filter "name=youwoai-ml-server" --format {% raw %}"{{.ID}}"{% endraw %}
+      register: container_exists
+      changed_when: false
+      ignore_errors: true
+
+    - name: Stop and remove previous container
+      ansible.builtin.shell: |
+        docker stop youwoai-ml-server || true
+        docker rm -f youwoai-ml-server || true
+      when: container_exists.stdout | trim != ""
+      changed_when: true
+
+    - name: Wait for port to be released
+      ansible.builtin.pause:
+        seconds: 5
+
+    # Start new container
+    - name: Start new ML container
+      ansible.builtin.command: >
+        docker run -d --name youwoai-ml-server
+        -p 5001:5001
+        --restart always
+        --env-file {{ env_file }}
+        {{ image }}
+      register: container_start
+      changed_when: true
+      retries: 3
+      delay: 5
+      until: container_start is success
+
+    # Health check
+    - name: Wait for ML server health check
+      uri:
+        url: "http://localhost:5001/health"
+        status_code: 200
+        timeout: 30
+      register: hc
+      retries: 15
+      delay: 4
+
+    # Re-attach to ALB
+    - name: Register back to TG
+      ansible.builtin.shell: |
+        aws elbv2 register-targets \
+          --target-group-arn '{{ tg_arn }}' \
+          --targets Id='{{ inventory_hostname }}' \
+          --region '{{ region }}'
+      changed_when: true
+
+    - name: Wait until ALB healthy
+      ansible.builtin.shell: |
+        aws elbv2 describe-target-health \
+          --target-group-arn '{{ tg_arn }}' \
+          --region '{{ region }}' \
+          --output json
+      register: alb_state
+      until: >
+        alb_state.rc == 0 and 
+        ((alb_state.stdout | from_json).TargetHealthDescriptions | 
+         selectattr('Target.Id', 'equalto', inventory_hostname) | 
+         list | length > 0) and
+        ((alb_state.stdout | from_json).TargetHealthDescriptions | 
+         selectattr('Target.Id', 'equalto', inventory_hostname) | 
+         map(attribute='TargetHealth.State') | 
+         list | first) == 'healthy'
+      retries: 20
+      delay: 6
+      changed_when: false
+
+    - name: Docker prune
+      ansible.builtin.shell: |
+        docker system prune -f --filter "until=24h"
+      changed_when: true
