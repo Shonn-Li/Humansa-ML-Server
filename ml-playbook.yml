@@ -28,7 +28,7 @@
 
     - name: Install AWS CLI v1
       ansible.builtin.pip:
-        name: 'awscli<2.0.0'
+        name: "awscli<2.0.0"
         state: present
 
     - name: Verify AWS CLI installation
@@ -71,6 +71,8 @@
           AWS_ACCESS_KEY={{ aws_access_key }}
           AWS_SECRET_ACCESS_KEY={{ aws_secret_access_key }}
           AWS_REGION={{ aws_region }}
+          WEBSHARE_PROXY_USERNAME={{ webshare_proxy_username }}
+          WEBSHARE_PROXY_PASSWORD={{ webshare_proxy_password }}
 
 # Rolling update - 1 host at a time
 - name: ROLLING UPDATE ML SERVER
