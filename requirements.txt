@@ -56,7 +56,7 @@ llama-index-vector-stores-postgres==0.5.3
 llama-index-readers-youtube-transcript==0.3.0
 llama-index-readers-bilibili==0.3.0
 llama-index-readers-web==0.4.1
-youtube-transcript-api
+youtube-transcript-api==1.1.0
 bilibili-api-python
 spider-client
 pycryptodomex

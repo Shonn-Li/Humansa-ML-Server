@@ -26,6 +26,12 @@ python src/main.py
 # By default, the server runs on port 5001.
 ```
 
+## One liner startup
+
+```bash
+python3 -m venv youwo-ml-venv && source youwo-ml-venv/bin/activate &&python -m src.main
+```
+
 ### 🐳 Running with Docker
 
 ```bash
