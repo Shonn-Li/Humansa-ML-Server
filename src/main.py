@@ -57,7 +57,12 @@ except ImportError as e:
 @app.route("/analyze_link", methods=["POST"])
 async def analyze_link_api():
     """API endpoint to analyze YouTube, Bilibili, or web links"""
+    logger.info("\n" + "="*80)
+    logger.info("NEW REQUEST: /analyze_link")
+    logger.info("="*80)
+
     if not LINK_ANALYZER_AVAILABLE:
+        logger.error("Link analyzer module not available!")
         return jsonify({
             "error": "Link analyzer not available",
             "details": LINK_ANALYZER_ERROR if 'LINK_ANALYZER_ERROR' in globals() else "Import failed"
@@ -65,6 +70,9 @@ async def analyze_link_api():
 
     data = await request.get_json()
     url = data.get("url", "")
+
+    logger.info(f"Requested URL: {url}")
+
     if not url:
         return jsonify({"error": "No URL provided"}), 400
 
@@ -72,10 +80,16 @@ async def analyze_link_api():
     platform = data.get("platform")
     options = data.get("options", {})  # Optional parameters
 
+    logger.info(f"Platform: {platform or 'auto-detect'}")
+    logger.info(f"Options: {options}")
+
     try:
         result = analyze_link(url, platform=platform, options=options)
+
         return jsonify(result)
     except Exception as e:
+        logger.error(
+            f"Unexpected error in analyze_link_api: {str(e)}", exc_info=True)
         return jsonify({
             "success": False,
             "error": "analysis_failed",

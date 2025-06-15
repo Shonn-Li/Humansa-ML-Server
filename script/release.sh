@@ -2,7 +2,7 @@
 
 set -e # Exit on any error
 
-TAG="release-1.4.0"
+TAG="release-1.4.3"
 BRANCH="main"
 
 # Get the remote URL and determine the repo path

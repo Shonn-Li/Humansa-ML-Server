@@ -99,4 +99,6 @@ jobs:
             image_tag=${{ env.image_tag }}
             openai_api_key=${{ secrets.OPENAI_API_KEY }}
             aws_access_key=${{ secrets.AWS_ACCESS_KEY }}
-            aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}"  || [ $? -eq 2 ]
+            aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            webshare_proxy_password=${{ secrets.WEBSHARE_PROXY_PASSWORD }}
+            webshare_proxy_username=${{ secrets.WEBSHARE_PROXY_USERNAME }}"  || [ $? -eq 2 ]

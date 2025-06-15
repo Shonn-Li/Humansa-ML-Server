@@ -151,6 +151,12 @@ Frontend/Backend → ML Server (Port 5001)
                     └── Link Analysis
 ```
 
+## One liner startup
+
+```bash
+python3 -m venv youwo-ml-venv && source youwo-ml-venv/bin/activate &&python -m src.main
+```
+
 ### 🐳 Running with Docker
 
 ```bash
