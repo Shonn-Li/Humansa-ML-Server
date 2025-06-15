@@ -86,18 +86,6 @@ async def analyze_link_api():
     try:
         result = analyze_link(url, platform=platform, options=options)
 
-        # Log summary of result
-        if result.get('success'):
-            logger.info(f"✅ Analysis successful!")
-            logger.info(f"Method used: {result.get('method_used', 'unknown')}")
-            if result.get('proxy_info', {}).get('used'):
-                logger.info(
-                    f"🌐 PROXY WAS USED - Host: {result.get('proxy_info', {}).get('host')}")
-            else:
-                logger.info(f"🔗 DIRECT METHOD WAS USED (no proxy)")
-        else:
-            logger.error(f"❌ Analysis failed: {result.get('error')}")
-
         return jsonify(result)
     except Exception as e:
         logger.error(

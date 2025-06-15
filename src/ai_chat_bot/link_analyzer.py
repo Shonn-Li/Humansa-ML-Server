@@ -12,8 +12,11 @@ import re
 import json
 import asyncio
 import requests
+import logging
 from typing import List, Dict, Any, Optional
 from urllib.parse import urlparse
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Try importing llama-index components
 try:
@@ -37,6 +40,8 @@ except ImportError:
 # Direct API imports
 try:
     from youtube_transcript_api import YouTubeTranscriptApi
+    from youtube_transcript_api.proxies import WebshareProxyConfig
+
     YOUTUBE_API_AVAILABLE = True
 except ImportError:
     YOUTUBE_API_AVAILABLE = False
@@ -46,14 +51,6 @@ try:
     BILIBILI_API_AVAILABLE = True
 except ImportError:
     BILIBILI_API_AVAILABLE = False
-
-import logging
-
-# Get the root logger to ensure logs appear in main output
-logger = logging.getLogger('__main__')
-
-# Set up logging
-logger = logging.getLogger(__name__)
 
 
 def detect_platform_from_url(url: str) -> Optional[str]:
@@ -115,92 +112,6 @@ def format_timestamp(seconds: float) -> str:
         return f"{minutes:02d}:{secs:02d}"
 
 
-def get_youtube_transcript_with_proxy(video_id, language='en'):
-    """
-    Fetch YouTube video transcript using Webshare proxy
-    Using the official WebshareProxyConfig from youtube-transcript-api
-    """
-    # Get Webshare credentials from environment
-    proxy_username = os.getenv('WEBSHARE_PROXY_USERNAME')
-    proxy_password = os.getenv('WEBSHARE_PROXY_PASSWORD')
-    
-    logger.info("=== PROXY METHOD ACTIVATED ===")
-    logger.info(f"Attempting to fetch transcript for video ID: {video_id}")
-    logger.info(f"Language requested: {language}")
-    
-    if not proxy_username or not proxy_password:
-        logger.error("WEBSHARE_PROXY_USERNAME or WEBSHARE_PROXY_PASSWORD not found in environment variables!")
-        logger.error("These are different from the API key - check your Webshare Proxy Settings")
-        raise Exception("Webshare proxy credentials not found in environment variables")
-    
-    logger.info(f"Webshare proxy username found: {proxy_username[:5]}...")
-    logger.info("Using WebshareProxyConfig with rotating residential proxies")
-    
-    try:
-        # Initialize YouTubeTranscriptApi with WebshareProxyConfig
-        ytt_api = YouTubeTranscriptApi(
-            proxy_config=WebshareProxyConfig(
-                proxy_username=proxy_username,
-                proxy_password=proxy_password,
-            )
-        )
-        
-        logger.info("YouTubeTranscriptApi initialized with WebshareProxyConfig")
-        logger.info(f"Fetching transcript for video ID: {video_id}")
-        
-        # Fetch transcript using the proxied API instance
-        transcript_data = ytt_api.get_transcript(
-            video_id,
-            languages=[language]
-        )
-        
-        logger.info(f"✅ PROXY SUCCESS! Retrieved {len(transcript_data)} transcript segments")
-        logger.info(f"First segment preview: {transcript_data[0] if transcript_data else 'No segments'}")
-        
-        return transcript_data, {
-            'language': language,
-            'video_id': video_id,
-            'method': 'webshare_proxy',
-            'proxy_type': 'residential_rotating'
-        }
-        
-    except Exception as e:
-        logger.error(f"❌ WEBSHARE PROXY FAILED: {type(e).__name__}: {str(e)}")
-        
-        # Check if it's a proxy connection error
-        if "proxy" in str(e).lower():
-            logger.error("Proxy connection failed - check your Webshare credentials")
-            logger.error("Make sure you're using Proxy Username/Password from Webshare dashboard")
-            logger.error("NOT the API key!")
-        
-        raise Exception(f"Failed to fetch YouTube transcript via Webshare proxy: {str(e)}")
-
-def get_youtube_transcript(video_id, language='en'):
-    """
-    Fetch YouTube video transcript - direct method for local development
-    """
-    logger.info("=== DIRECT METHOD (NO PROXY) ===")
-    logger.info(f"Attempting direct fetch for video ID: {video_id}")
-    
-    try:
-        # Simple direct fetch without proxy
-        transcript_data = YouTubeTranscriptApi.get_transcript(
-            video_id,
-            languages=[language]
-        )
-        
-        logger.info(f"✅ DIRECT SUCCESS! Retrieved {len(transcript_data)} segments")
-        
-        return transcript_data, {
-            'language': language,
-            'video_id': video_id,
-            'method': 'direct'
-        }
-        
-    except Exception as e:
-        logger.error(f"❌ DIRECT METHOD FAILED: {str(e)}")
-        raise Exception(f"Failed to fetch YouTube transcript: {str(e)}")
-
 def analyze_youtube_content(url: str, languages: Optional[List[str]] = None) -> List[Document]:
     """Extract transcript with timestamps from YouTube video."""
     if not YOUTUBE_API_AVAILABLE:
@@ -213,15 +124,26 @@ def analyze_youtube_content(url: str, languages: Optional[List[str]] = None) -> 
 
     if languages is None:
         languages = ['en']
-
     try:
         # Try to get transcript in preferred languages
         transcript_data = None
         used_language = None
 
+        if os.getenv("PUBLIC_ENV") != "dev":
+            logger.info(
+                "Using WebshareProxyConfig for YouTube Transcript API")
+            ytt_api = YouTubeTranscriptApi(
+                proxy_config=WebshareProxyConfig(
+                    proxy_username=os.getenv("WEBSHARE_PROXY_USERNAME"),
+                    proxy_password=os.getenv("WEBSHARE_PROXY_PASSWORD"),
+                )
+            )
+        else:
+            ytt_api = YouTubeTranscriptApi()
+
         for lang in languages:
             try:
-                transcript_data = YouTubeTranscriptApi.get_transcript(
+                transcript_data = ytt_api.get_transcript(
                     video_id, languages=[lang])
                 used_language = lang
                 break
@@ -231,14 +153,14 @@ def analyze_youtube_content(url: str, languages: Optional[List[str]] = None) -> 
         # If no specific language worked, try any available transcript
         if transcript_data is None:
             try:
-                transcript_list = YouTubeTranscriptApi.list_transcripts(
+                transcript_list = ytt_api.list_transcripts(
                     video_id)
                 transcript = transcript_list.find_generated_transcript(['en'])
                 transcript_data = transcript.fetch()
                 used_language = 'en'
             except Exception:
                 try:
-                    transcript_list = YouTubeTranscriptApi.list_transcripts(
+                    transcript_list = ytt_api.list_transcripts(
                         video_id)
                     transcript = next(iter(transcript_list))
                     transcript_data = transcript.fetch()
@@ -603,70 +525,6 @@ def analyze_link(url: str, platform: Optional[str] = None, options: Optional[Dic
 
         # Process results
         if documents:
-            doc = documents[0]
-            result["data"] = {
-                "title": doc.metadata.get("title", doc.metadata.get("video_id", "Extracted Content")),
-                "content": doc.text,
-                "url": url,
-                "metadata": doc.metadata
-            }
-
-            # Add language info for transcripts
-            if platform in ["youtube", "bilibili"]:
-                result["data"]["language"] = doc.metadata.get(
-                    "language", "unknown")
-
-        result["success"] = True
-
-    except ValueError as e:
-        result["error"] = "invalid_input"
-        result["suggestions"] = [str(e)]
-    except Exception as e:
-        error_msg = str(e).lower()
-
-        if "transcript" in error_msg or "subtitle" in error_msg:
-            result["error"] = "extraction_failed"
-            if platform == "youtube":
-                result["suggestions"] = [
-                    "Check if the video has captions/transcripts available",
-                    "Try a different language option",
-                    "Verify the video ID is correct"
-                ]
-            elif platform == "bilibili":
-                result["suggestions"] = [
-                    "This video may not have auto-generated subtitles",
-                    "Try a different Bilibili video with manual captions"
-                ]
-        elif "dependency" in error_msg or "not available" in error_msg:
-            result["error"] = "missing_dependency"
-            result["suggestions"] = [
-                "Install required dependencies",
-                "Check Python environment setup"
-            ]
-        else:
-            result["error"] = "extraction_failed"
-            result["suggestions"] = [
-                "Check if the URL is accessible",
-                "Verify the content format is supported",
-                f"Original error: {str(e)}"
-            ]
-
-    return result
-
-
-if __name__ == "__main__":
-    # Test with a YouTube video
-    test_url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    print("Testing YouTube analysis...")
-    result = analyze_link(test_url)
-    print(f"Platform: {result['platform']}")
-    print(f"Success: {result['success']}")
-    if result['success']:
-        print(f"Title: {result['data']['title']}")
-        print(f"Content length: {len(result['data']['content'])}")
-    else:
-        print(f"Error: {result['error']}")
-        print(f"Suggestions: {result['suggestions']}")
             doc = documents[0]
             result["data"] = {
                 "title": doc.metadata.get("title", doc.metadata.get("video_id", "Extracted Content")),
