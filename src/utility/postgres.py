@@ -183,6 +183,129 @@ def get_embeddings(note_id: int) -> Optional[List[List[float]]]:
         conn.close()
 
 
+# Web Search Cache Functions
+def create_search_cache_table():
+    """Create the search cache table if it doesn't exist"""
+    with get_db_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                """
+                CREATE TABLE IF NOT EXISTS search_cache (
+                    id SERIAL PRIMARY KEY,
+                    query_hash VARCHAR(64) UNIQUE NOT NULL,
+                    query_text TEXT NOT NULL,
+                    results JSONB NOT NULL,
+                    created_at TIMESTAMP DEFAULT NOW(),
+                    expires_at TIMESTAMP NOT NULL,
+                    access_count INTEGER DEFAULT 1,
+                    last_accessed TIMESTAMP DEFAULT NOW()
+                );
+                
+                CREATE INDEX IF NOT EXISTS idx_search_cache_hash ON search_cache(query_hash);
+                CREATE INDEX IF NOT EXISTS idx_search_cache_expires ON search_cache(expires_at);
+            """
+            )
+            conn.commit()
+
+
+def get_cached_search_results(query_hash: str) -> Optional[dict]:
+    """Get cached search results if not expired"""
+    with get_db_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT results, created_at, access_count
+                FROM search_cache 
+                WHERE query_hash = %s AND expires_at > NOW()
+            """,
+                (query_hash,),
+            )
+
+            result = cursor.fetchone()
+            if result:
+                # Update access count and last accessed time
+                cursor.execute(
+                    """
+                    UPDATE search_cache 
+                    SET access_count = access_count + 1, last_accessed = NOW()
+                    WHERE query_hash = %s
+                """,
+                    (query_hash,),
+                )
+                conn.commit()
+
+                return {
+                    "results": result[0],
+                    "created_at": result[1],
+                    "access_count": result[2] + 1,
+                    "cached": True,
+                }
+            return None
+
+
+def save_search_cache(query_hash: str, query_text: str, results: list, ttl_hours: int = 24):
+    """Save search results to cache with TTL"""
+    import json
+    from datetime import datetime, timedelta
+
+    expires_at = datetime.now() + timedelta(hours=ttl_hours)
+
+    with get_db_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                """
+                INSERT INTO search_cache (query_hash, query_text, results, expires_at)
+                VALUES (%s, %s, %s, %s)
+                ON CONFLICT (query_hash) 
+                DO UPDATE SET 
+                    results = EXCLUDED.results,
+                    expires_at = EXCLUDED.expires_at,
+                    access_count = search_cache.access_count + 1,
+                    last_accessed = NOW()
+            """,
+                (query_hash, query_text, json.dumps(results), expires_at),
+            )
+            conn.commit()
+
+
+def cleanup_expired_search_cache():
+    """Remove expired cache entries"""
+    with get_db_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute("DELETE FROM search_cache WHERE expires_at < NOW()")
+            deleted_count = cursor.rowcount
+            conn.commit()
+            return deleted_count
+
+
+def get_search_cache_stats():
+    """Get cache statistics"""
+    with get_db_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT 
+                    COUNT(*) as total_entries,
+                    COUNT(*) FILTER (WHERE expires_at > NOW()) as active_entries,
+                    COUNT(*) FILTER (WHERE expires_at <= NOW()) as expired_entries,
+                    SUM(access_count) as total_accesses,
+                    AVG(access_count) as avg_accesses_per_entry
+                FROM search_cache
+            """
+            )
+
+            result = cursor.fetchone()
+            if result:
+                return {
+                    "total_entries": result[0],
+                    "active_entries": result[1],
+                    "expired_entries": result[2],
+                    "total_accesses": result[3] or 0,
+                    "avg_accesses_per_entry": float(result[4] or 0),
+                }
+            return {}
+
+
 # Example usage
 if __name__ == "__main__":
     # save_note(1, "Trip to Japan: Tokyo and Kyoto. Visit shrines and temples.")
