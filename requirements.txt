@@ -47,6 +47,9 @@ llama-index-core==0.12.36
 llama-index-embeddings-openai==0.3.1
 llama-index-indices-managed-llama-cloud==0.6.11
 llama-index-llms-openai==0.3.38
+llama-index-llms-gemini==0.4.0
+llama-index-llms-deepseek==0.2.3
+llama-index-llms-openai-like==0.2.0
 llama-index-multi-modal-llms-openai==0.4.3
 llama-index-program-openai==0.3.1
 llama-index-question-gen-openai==0.3.0
@@ -115,3 +118,5 @@ psycopg2-binary==2.9.10
 pgvector==0.4.1
 asyncpg==0.30.0
 scikit-learn==1.7.0
+llama-index-llms-anthropic==0.4.0
+llama-index-llms-groq==0.4.0
