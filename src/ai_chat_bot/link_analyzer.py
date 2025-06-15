@@ -141,29 +141,27 @@ def analyze_youtube_content(url: str, languages: Optional[List[str]] = None) -> 
         else:
             ytt_api = YouTubeTranscriptApi()
 
-        for lang in languages:
+        # Use the new API method (fetch) consistently
+        try:
+            # Try to fetch transcript with preferred languages
+            fetched_transcript = ytt_api.fetch(video_id, languages=languages)
+            transcript_data = fetched_transcript.to_raw_data()
+            used_language = fetched_transcript.language_code
+        except Exception:
+            # If direct fetch fails, try listing available transcripts
             try:
-                transcript_data = ytt_api.get_transcript(
-                    video_id, languages=[lang])
-                used_language = lang
-                break
-            except Exception:
-                continue
-
-        # If no specific language worked, try any available transcript
-        if transcript_data is None:
-            try:
-                transcript_list = ytt_api.list_transcripts(
-                    video_id)
-                transcript = transcript_list.find_generated_transcript(['en'])
-                transcript_data = transcript.fetch()
-                used_language = 'en'
+                transcript_list = ytt_api.list(video_id)
+                transcript = transcript_list.find_transcript(languages)
+                fetched_transcript = transcript.fetch()
+                transcript_data = fetched_transcript.to_raw_data()
+                used_language = transcript.language_code
             except Exception:
                 try:
-                    transcript_list = ytt_api.list_transcripts(
-                        video_id)
+                    # Try to find any available transcript
+                    transcript_list = ytt_api.list(video_id)
                     transcript = next(iter(transcript_list))
-                    transcript_data = transcript.fetch()
+                    fetched_transcript = transcript.fetch()
+                    transcript_data = fetched_transcript.to_raw_data()
                     used_language = transcript.language_code
                 except Exception as e:
                     raise Exception(
