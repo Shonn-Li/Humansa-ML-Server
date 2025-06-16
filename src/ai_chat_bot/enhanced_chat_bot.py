@@ -168,7 +168,11 @@ class ChatCompletionRequest:
     stream: bool = False
 
     # Custom parameters
+    user_id: Optional[int] = None  # Mandatory for RAG
+    folder_ids: Optional[List[int]] = None  # Optional folder filter
+    # Optional specific note IDs to include
     note_ids: Optional[List[int]] = None
+    enable_rag: bool = True  # Option to disable RAG
     enable_web_search: bool = False
     enable_image_analysis: bool = False
     search_query: Optional[str] = None
@@ -672,6 +676,10 @@ class EnhancedChatBot:
     async def chat_completion(self, request: ChatCompletionRequest) -> Union[ChatCompletionResponse, AsyncGenerator]:
         """Main chat completion endpoint"""
 
+        # Validate user ID if RAG is enabled
+        if request.enable_rag and not request.user_id:
+            raise ValueError("user_id is required when RAG is enabled")
+
         # Get provider and LLM
         provider_info = self.provider_manager.get_provider(
             request.provider,
@@ -687,15 +695,23 @@ class EnhancedChatBot:
 
         Settings.llm = llm
 
+        # For streaming, return the async generator directly (not a coroutine)
+        if request.stream:
+            # Return the generator itself, not a coroutine
+            return self._stream_with_progress(request, provider_info)
+
+        # Non-streaming path remains the same
         # Gather context from various sources
         context_documents = []
         used_notes = []
         search_results = []
 
-        # 1. Process note IDs if provided
-        if request.note_ids:
-            note_docs, used_notes = await self._get_note_context(
+        # 1. Process RAG if enabled
+        if request.enable_rag and request.user_id:
+            note_docs, used_notes = await self._get_user_note_context(
                 request.messages,
+                request.user_id,
+                request.folder_ids,
                 request.note_ids
             )
             context_documents.extend(note_docs)
@@ -720,13 +736,292 @@ class EnhancedChatBot:
             query_engine = await self._build_query_engine(context_documents, llm)
 
         # Generate response
-        if request.stream:
-            return self._stream_response(request, query_engine, provider_info, used_notes, search_results)
-        else:
-            return await self._generate_response(request, query_engine, provider_info, used_notes, search_results)
+        return await self._generate_response(request, query_engine, provider_info, used_notes, search_results)
 
-    async def _get_note_context(self, messages: List[ChatMessage], note_ids: List[int]) -> tuple:
-        """Get context from note IDs using embedding-based retrieval"""
+    async def _stream_response(self, request: ChatCompletionRequest, query_engine: Optional[RetrieverQueryEngine],
+                               provider_info: Dict, used_notes: List[int],
+                               search_results: List[Dict]) -> AsyncGenerator:
+        """Generate streaming response"""
+        try:
+            # Yield initial status
+            yield {
+                "id": f"chatcmpl-{os.urandom(8).hex()}",
+                "object": "chat.completion.chunk",
+                "created": int(asyncio.get_event_loop().time()),
+                "model": request.model or "auto",
+                "provider": provider_info["provider"].value,
+                "choices": [{
+                    "index": 0,
+                    "delta": {
+                        "role": "system",
+                        "content": "[Starting search...]"
+                    },
+                    "finish_reason": None
+                }],
+                "progress": {
+                    "stage": "initializing",
+                    "message": "Starting search process"
+                }
+            }
+
+            context_documents = []
+            used_notes = []
+            search_results = []
+
+            # 1. Process RAG if enabled
+            if request.enable_rag and request.user_id:
+                yield {
+                    "id": f"chatcmpl-{os.urandom(8).hex()}",
+                    "object": "chat.completion.chunk",
+                    "created": int(asyncio.get_event_loop().time()),
+                    "model": request.model or "auto",
+                    "provider": provider_info["provider"].value,
+                    "choices": [{
+                        "index": 0,
+                        "delta": {},
+                        "finish_reason": None
+                    }],
+                    "progress": {
+                        "stage": "searching_notes",
+                        "message": "Searching through your notes..."
+                    }
+                }
+
+                note_docs, used_notes = await self._get_user_note_context(
+                    request.messages,
+                    request.user_id,
+                    request.folder_ids,
+                    request.note_ids
+                )
+                context_documents.extend(note_docs)
+
+                yield {
+                    "id": f"chatcmpl-{os.urandom(8).hex()}",
+                    "object": "chat.completion.chunk",
+                    "created": int(asyncio.get_event_loop().time()),
+                    "model": request.model or "auto",
+                    "provider": provider_info["provider"].value,
+                    "choices": [{
+                        "index": 0,
+                        "delta": {},
+                        "finish_reason": None
+                    }],
+                    "progress": {
+                        "stage": "notes_found",
+                        "message": f"Found {len(used_notes)} relevant notes",
+                        "notes_found": len(used_notes),
+                        "note_ids": used_notes
+                    }
+                }
+
+            # 2. Process web search if enabled
+            if request.enable_web_search:
+                yield {
+                    "id": f"chatcmpl-{os.urandom(8).hex()}",
+                    "object": "chat.completion.chunk",
+                    "created": int(asyncio.get_event_loop().time()),
+                    "model": request.model or "auto",
+                    "provider": provider_info["provider"].value,
+                    "choices": [{
+                        "index": 0,
+                        "delta": {},
+                        "finish_reason": None
+                    }],
+                    "progress": {
+                        "stage": "web_search",
+                        "message": "Searching the web..."
+                    }
+                }
+
+                search_query = request.search_query or self._extract_search_query(
+                    request.messages)
+                if search_query:
+                    search_results = await self.web_search.search(search_query)
+                    search_docs = self._create_search_documents(search_results)
+                    context_documents.extend(search_docs)
+
+                    yield {
+                        "id": f"chatcmpl-{os.urandom(8).hex()}",
+                        "object": "chat.completion.chunk",
+                        "created": int(asyncio.get_event_loop().time()),
+                        "model": request.model or "auto",
+                        "provider": provider_info["provider"].value,
+                        "choices": [{
+                            "index": 0,
+                            "delta": {},
+                            "finish_reason": None
+                        }],
+                        "progress": {
+                            "stage": "web_results_found",
+                            "message": f"Found {len(search_results)} web results",
+                            "results_count": len(search_results)
+                        }
+                    }
+
+            # 3. Process file attachments if provided
+            if request.attachments:
+                yield {
+                    "id": f"chatcmpl-{os.urandom(8).hex()}",
+                    "object": "chat.completion.chunk",
+                    "created": int(asyncio.get_event_loop().time()),
+                    "model": request.model or "auto",
+                    "provider": provider_info["provider"].value,
+                    "choices": [{
+                        "index": 0,
+                        "delta": {},
+                        "finish_reason": None
+                    }],
+                    "progress": {
+                        "stage": "processing_attachments",
+                        "message": "Processing attachments..."
+                    }
+                }
+
+                attachment_docs = await self.file_processor.process_attachments(request.attachments)
+                context_documents.extend(attachment_docs)
+
+            # Build query engine if we have context
+            query_engine = None
+            if context_documents:
+                yield {
+                    "id": f"chatcmpl-{os.urandom(8).hex()}",
+                    "object": "chat.completion.chunk",
+                    "created": int(asyncio.get_event_loop().time()),
+                    "model": request.model or "auto",
+                    "provider": provider_info["provider"].value,
+                    "choices": [{
+                        "index": 0,
+                        "delta": {},
+                        "finish_reason": None
+                    }],
+                    "progress": {
+                        "stage": "building_context",
+                        "message": "Building context from documents..."
+                    }
+                }
+
+                query_engine = await self._build_query_engine(context_documents, provider_info["llm"])
+
+            # Now yield the actual response
+            yield {
+                "id": f"chatcmpl-{os.urandom(8).hex()}",
+                "object": "chat.completion.chunk",
+                "created": int(asyncio.get_event_loop().time()),
+                "model": request.model or "auto",
+                "provider": provider_info["provider"].value,
+                "choices": [{
+                    "index": 0,
+                    "delta": {
+                        "role": "assistant",
+                        "content": ""
+                    },
+                    "finish_reason": None
+                }],
+                "progress": {
+                    "stage": "generating_response",
+                    "message": "Generating response..."
+                }
+            }
+
+            # Stream the actual response
+            async for chunk in self._stream_llm_response(request, query_engine, provider_info, used_notes, search_results):
+                yield chunk
+
+        except Exception as e:
+            logger.error(f"Error in streaming: {e}")
+            yield {
+                "id": f"chatcmpl-{os.urandom(8).hex()}",
+                "object": "chat.completion.chunk",
+                "created": int(asyncio.get_event_loop().time()),
+                "model": request.model or "auto",
+                "provider": provider_info["provider"].value,
+                "choices": [{
+                    "index": 0,
+                    "delta": {},
+                    "finish_reason": "error"
+                }],
+                "error": str(e)
+            }
+
+    async def _stream_llm_response(self, request: ChatCompletionRequest, query_engine: Optional[RetrieverQueryEngine],
+                                   provider_info: Dict, used_notes: List[int],
+                                   search_results: List[Dict]) -> AsyncGenerator:
+        """Stream the actual LLM response"""
+        # Convert messages to query
+        query = self._messages_to_query(request.messages)
+
+        llm = provider_info["llm"]
+
+        if query_engine:
+            # Use RAG with context - note: streaming RAG is complex,
+            # for now we'll do direct streaming
+            response_gen = llm.stream_complete(query)
+        else:
+            # Direct LLM streaming
+            response_gen = llm.stream_complete(query)
+
+        # Fix: Handle synchronous generator from LlamaIndex
+        for chunk in response_gen:
+            yield {
+                "id": f"chatcmpl-{os.urandom(8).hex()}",
+                "object": "chat.completion.chunk",
+                "created": int(asyncio.get_event_loop().time()),
+                "model": request.model or "auto",
+                "provider": provider_info["provider"].value,
+                "choices": [{
+                    "index": 0,
+                    "delta": {
+                        "content": str(chunk.delta) if hasattr(chunk, 'delta') else str(chunk)
+                    },
+                    "finish_reason": None
+                }]
+            }
+            # Yield control to event loop
+            await asyncio.sleep(0)
+
+        # Final chunk
+        yield {
+            "id": f"chatcmpl-{os.urandom(8).hex()}",
+            "object": "chat.completion.chunk",
+            "created": int(asyncio.get_event_loop().time()),
+            "model": request.model or "auto",
+            "provider": provider_info["provider"].value,
+            "choices": [{
+                "index": 0,
+                "delta": {},
+                "finish_reason": "stop"
+            }],
+            "metadata": {
+                "used_notes": used_notes if used_notes else None,
+                "search_results": search_results if search_results else None
+            }
+        }
+
+    async def _get_user_note_context(self, messages: List[ChatMessage], user_id: int,
+                                     folder_ids: Optional[List[int]] = None,
+                                     note_ids: Optional[List[int]] = None) -> tuple:
+        """
+        Get context from user's notes based on priority:
+        1. If note_ids provided: use only those specific notes
+        2. If folder_ids provided: use only notes from those folders
+        3. Otherwise: use all notes from the user
+        """
+        from src.utility.postgres import (
+            get_notes_for_rag,
+            validate_user_exists,
+            validate_folders_belong_to_user
+        )
+
+        # Validate user exists
+        if not validate_user_exists(user_id):
+            logger.warning(f"User {user_id} not found")
+            return [], []
+
+        # Validate folders belong to user if provided (and no specific notes)
+        if folder_ids and not note_ids:
+            if not validate_folders_belong_to_user(user_id, folder_ids):
+                logger.warning(f"Some folders do not belong to user {user_id}")
+                return [], []
 
         # Extract the last user message as the query
         user_query = ""
@@ -745,8 +1040,30 @@ class EnhancedChatBot:
         if not user_query:
             return [], []
 
-        # Get most related notes using embedding similarity
-        top_notes = get_most_related_notes(user_query, note_ids, max_notes=5)
+        # Get note IDs based on the priority logic
+        available_note_ids = get_notes_for_rag(user_id, folder_ids, note_ids)
+
+        if not available_note_ids:
+            logger.info(
+                f"No notes found for user {user_id} with given criteria")
+            return [], []
+
+        logger.info(f"Found {len(available_note_ids)} notes for RAG search")
+
+        # If user specified 3 or fewer specific note IDs, use them all without similarity filtering
+        # This ensures that when a user asks about specific notes, we use exactly those notes
+        if note_ids and len(note_ids) <= 3 and len(available_note_ids) <= 3:
+            logger.info(
+                f"Using all {len(available_note_ids)} specified notes without similarity filtering")
+            top_notes = available_note_ids
+        else:
+            # Get most related notes using embedding similarity
+            from src.utility.note_utils import get_most_related_notes
+            # Dynamically adjust max_notes based on available notes
+            max_notes_to_retrieve = min(
+                5, max(3, len(available_note_ids) // 3))
+            top_notes = get_most_related_notes(
+                user_query, available_note_ids, max_notes=max_notes_to_retrieve)
 
         # Create documents from notes
         documents = []
@@ -755,10 +1072,12 @@ class EnhancedChatBot:
             if text:
                 doc = Document(
                     text=text,
-                    metadata={"note_id": note_id, "source": "note"}
+                    metadata={"note_id": note_id,
+                              "source": "note", "user_id": user_id}
                 )
                 documents.append(doc)
 
+        logger.info(f"Retrieved {len(documents)} documents for context")
         return documents, top_notes
 
     def _extract_search_query(self, messages: List[ChatMessage]) -> str:
@@ -855,7 +1174,7 @@ class EnhancedChatBot:
             search_results=search_results if search_results else None
         )
 
-    async def _stream_response(self, request: ChatCompletionRequest, query_engine,
+    async def _stream_response(self, request: ChatCompletionRequest, query_engine: Optional[RetrieverQueryEngine],
                                provider_info: Dict, used_notes: List[int],
                                search_results: List[Dict]) -> AsyncGenerator:
         """Generate streaming response"""
@@ -933,4 +1252,7 @@ class EnhancedChatBot:
 
 
 # Global instance
+enhanced_chat_bot = EnhancedChatBot()
+enhanced_chat_bot = EnhancedChatBot()
+enhanced_chat_bot = EnhancedChatBot()
 enhanced_chat_bot = EnhancedChatBot()

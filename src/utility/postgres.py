@@ -1,9 +1,17 @@
 import os
-from typing import List, Optional
-
+import json
 import psycopg2
+from psycopg2.extras import RealDictCursor
+from typing import List, Dict, Any, Optional, Tuple
+from contextlib import contextmanager
+from datetime import datetime, timedelta
+import logging
+
 from dotenv import load_dotenv
 from pgvector.psycopg2 import register_vector
+
+# Set up logging
+logger = logging.getLogger(__name__)
 
 # Load .env variables
 load_dotenv()
@@ -138,49 +146,176 @@ ORDER BY "order"
     return "\n".join(lst)
 
 
-def save_embeddings(note_id: int, embeddings: List[List[float]]) -> None:
-    """
-    Upsert a note's embeddings (one per section) into embedding_v1.
-    """
-    conn = get_db_connection()
-    register_vector(conn)
+def save_embeddings(note_id: int, embeddings: List[List[float]]):
+    """Save embeddings to embedding_v1 table using pgvector format"""
+    conn = None
     try:
-        with conn:
-            with conn.cursor() as cur:
-                for sec_id, vec in enumerate(embeddings):
-                    cur.execute(
-                        """
-                        INSERT INTO embedding_v1 (note_id, section_id, embedding, last_updated)
-                        VALUES (%s, %s, %s, NOW())
-                        ON CONFLICT (note_id, section_id)
-                          DO UPDATE SET
-                            embedding    = EXCLUDED.embedding,
-                            last_updated = NOW();
-                        """,
-                        (note_id, sec_id, vec),
-                    )
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            # Delete existing embeddings for this note
+            cursor.execute(
+                "DELETE FROM embedding_v1 WHERE note_id = %s", (note_id,))
+
+            # Insert new embeddings with proper vector format
+            for section_id, embedding in enumerate(embeddings):
+                # Convert to pgvector format
+                embedding_str = "[" + ",".join(map(str, embedding)) + "]"
+                cursor.execute(
+                    """
+                    INSERT INTO embedding_v1 (note_id, section_id, embedding, last_updated)
+                    VALUES (%s, %s, %s::vector, NOW())
+                """,
+                    (note_id, section_id, embedding_str),
+                )
+
+            conn.commit()
+            logger.info(
+                f"Saved {len(embeddings)} embeddings for note {note_id}")
+    except Exception as e:
+        logger.error(f"Error saving embeddings: {e}")
+        if conn:
+            conn.rollback()
+        raise
     finally:
-        conn.close()
+        if conn:
+            conn.close()
 
 
 def get_embeddings(note_id: int) -> Optional[List[List[float]]]:
-    """
-    Returns list of section embeddings for a note, or None if none stored.
-    """
-    conn = get_db_connection()
-    register_vector(conn)
+    """Get embeddings from embedding_v1 table"""
+    conn = None
     try:
-        with conn.cursor() as cur:
-            cur.execute(
-                "SELECT section_id, embedding FROM embedding_v1 WHERE note_id = %s ORDER BY section_id",
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT embedding::float[] 
+                FROM embedding_v1 
+                WHERE note_id = %s 
+                ORDER BY section_id
+            """,
                 (note_id,),
             )
-            rows = cur.fetchall()
-            if not rows:
-                return None
-            return [row[1] for row in rows]
+
+            results = cursor.fetchall()
+            if results:
+                return [list(row[0]) for row in results]
+            return None
+
+    except Exception as e:
+        logger.error(f"Error getting embeddings: {e}")
+        return None
     finally:
-        conn.close()
+        if conn:
+            conn.close()
+
+
+def vector_similarity_search(query_embedding: List[float], note_ids: List[int], top_k: int = 5) -> List[Tuple[int, float]]:
+    """
+    Perform similarity search using pgvector's efficient operators
+    Returns list of (note_id, max_similarity) tuples
+    """
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            # Convert query embedding to pgvector format
+            query_embedding_str = '[' + \
+                ','.join(map(str, query_embedding)) + ']'
+
+            # Use pgvector's <=> operator for cosine distance (1 - cosine_similarity)
+            query = """
+                WITH note_similarities AS (
+                    SELECT 
+                        note_id,
+                        section_id,
+                        1 - (embedding <=> %s::vector) as similarity
+                    FROM embedding_v1
+                    WHERE note_id = ANY(%s)
+                ),
+                max_similarities AS (
+                    SELECT 
+                        note_id,
+                        MAX(similarity) as max_similarity
+                    FROM note_similarities
+                    GROUP BY note_id
+                )
+                SELECT note_id, max_similarity
+                FROM max_similarities
+                ORDER BY max_similarity DESC
+                LIMIT %s
+            """
+
+            cursor.execute(query, (query_embedding_str, note_ids, top_k))
+            results = cursor.fetchall()
+
+            logger.info(f"Vector search found {len(results)} similar notes")
+            return results
+
+    except Exception as e:
+        logger.error(f"Error in vector similarity search: {e}")
+        return []
+    finally:
+        if conn:
+            conn.close()
+
+
+def get_notes_with_embeddings(note_ids: List[int]) -> List[int]:
+    """Filter note IDs to only those that have embeddings in embedding_v1"""
+    if not note_ids:
+        return []
+
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            query = """
+                SELECT DISTINCT note_id 
+                FROM embedding_v1 
+                WHERE note_id = ANY(%s)
+            """
+            cursor.execute(query, (note_ids,))
+            return [row[0] for row in cursor.fetchall()]
+
+    except Exception as e:
+        logger.error(f"Error filtering notes with embeddings: {e}")
+        return []
+    finally:
+        if conn:
+            conn.close()
+
+
+def get_embeddings_batch(note_ids: List[int]) -> Dict[int, List[List[float]]]:
+    """Retrieve embeddings for multiple notes in a single query"""
+    if not note_ids:
+        return {}
+
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            query = """
+                SELECT note_id, section_id, embedding::float[]
+                FROM embedding_v1 
+                WHERE note_id = ANY(%s)
+                ORDER BY note_id, section_id
+            """
+            cursor.execute(query, (note_ids,))
+
+            result = {}
+            for note_id, section_id, embedding in cursor.fetchall():
+                if note_id not in result:
+                    result[note_id] = []
+                result[note_id].append(list(embedding))
+
+            return result
+
+    except Exception as e:
+        logger.error(f"Error fetching embeddings batch: {e}")
+        return {}
+    finally:
+        if conn:
+            conn.close()
 
 
 # Web Search Cache Functions
@@ -245,9 +380,6 @@ def get_cached_search_results(query_hash: str) -> Optional[dict]:
 
 def save_search_cache(query_hash: str, query_text: str, results: list, ttl_hours: int = 24):
     """Save search results to cache with TTL"""
-    import json
-    from datetime import datetime, timedelta
-
     expires_at = datetime.now() + timedelta(hours=ttl_hours)
 
     with get_db_connection() as conn:
@@ -306,9 +438,239 @@ def get_search_cache_stats():
             return {}
 
 
+def get_notes_by_user_and_folders(user_id: int, folder_ids: List[int] = None) -> List[int]:
+    """
+    Get note IDs based on user ID and optional folder IDs.
+
+    Args:
+        user_id: The user ID (mandatory)
+        folder_ids: Optional list of folder IDs to filter by
+
+    Returns:
+        List of note IDs
+    """
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            if folder_ids:
+                # Get notes from specific folders belonging to the user
+                query = """
+                    SELECT DISTINCT n.id 
+                    FROM note_v1 n
+                    INNER JOIN folder_v1 f ON n."folderId" = f.id
+                    WHERE f."ownerId" = %s 
+                    AND f.id = ANY(%s)
+                    AND n.completed = true
+                    ORDER BY n.id DESC
+                """
+                cursor.execute(query, (user_id, folder_ids))
+            else:
+                # Get all notes belonging to the user
+                query = """
+                    SELECT DISTINCT id 
+                    FROM note_v1 
+                    WHERE "ownerId" = %s 
+                    AND completed = true
+                    ORDER BY id DESC
+                """
+                cursor.execute(query, (user_id,))
+
+            results = cursor.fetchall()
+            return [row[0] for row in results]
+
+    except Exception as e:
+        logger.error(f"Error fetching notes for user {user_id}: {e}")
+        return []
+    finally:
+        if conn:
+            conn.close()
+
+
+def validate_user_exists(user_id: int) -> bool:
+    """
+    Check if a user exists in the database.
+
+    Args:
+        user_id: The user ID to validate
+
+    Returns:
+        True if user exists, False otherwise
+    """
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            query = 'SELECT EXISTS(SELECT 1 FROM user_v1 WHERE id = %s)'
+            cursor.execute(query, (user_id,))
+            return cursor.fetchone()[0]
+
+    except Exception as e:
+        logger.error(f"Error validating user {user_id}: {e}")
+        return False
+    finally:
+        if conn:
+            conn.close()
+
+
+def validate_folders_belong_to_user(user_id: int, folder_ids: List[int]) -> bool:
+    """
+    Validate that all folder IDs belong to the specified user.
+
+    Args:
+        user_id: The user ID
+        folder_ids: List of folder IDs to validate
+
+    Returns:
+        True if all folders belong to the user, False otherwise
+    """
+    if not folder_ids:
+        return True
+
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            query = """
+                SELECT COUNT(*) 
+                FROM folder_v1 
+                WHERE "ownerId" = %s 
+                AND id = ANY(%s)
+            """
+            cursor.execute(query, (user_id, folder_ids))
+            count = cursor.fetchone()[0]
+            return count == len(folder_ids)
+
+    except Exception as e:
+        logger.error(f"Error validating folders for user {user_id}: {e}")
+        return False
+    finally:
+        if conn:
+            conn.close()
+
+
+def get_notes_for_rag(user_id: int, folder_ids: List[int] = None, note_ids: List[int] = None) -> List[int]:
+    """
+    Get note IDs for RAG search based on the following priority:
+    1. If note_ids provided: return only those notes (after validation)
+    2. If folder_ids provided: return notes from those folders only
+    3. If neither provided: return all notes from user
+
+    Args:
+        user_id: The user ID (mandatory)
+        folder_ids: Optional list of folder IDs
+        note_ids: Optional list of specific note IDs
+
+    Returns:
+        List of note IDs
+    """
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            # Case 1: Specific note IDs provided
+            if note_ids:
+                # Validate that notes belong to the user
+                query = """
+                    SELECT id 
+                    FROM note_v1 
+                    WHERE "ownerId" = %s 
+                    AND id = ANY(%s)
+                    AND completed = true
+                    ORDER BY id DESC
+                """
+                cursor.execute(query, (user_id, note_ids))
+                results = cursor.fetchall()
+                validated_notes = [row[0] for row in results]
+
+                # Log if some notes were invalid
+                if len(validated_notes) < len(note_ids):
+                    invalid_notes = set(note_ids) - set(validated_notes)
+                    logger.warning(
+                        f"Some note IDs do not belong to user {user_id} or are incomplete: {invalid_notes}"
+                    )
+
+                return validated_notes
+
+            # Case 2: Folder IDs provided (but no note IDs)
+            elif folder_ids:
+                # Get notes from specific folders belonging to the user
+                query = """
+                    SELECT DISTINCT n.id 
+                    FROM note_v1 n
+                    INNER JOIN folder_v1 f ON n."folderId" = f.id
+                    WHERE f."ownerId" = %s 
+                    AND f.id = ANY(%s)
+                    AND n.completed = true
+                    ORDER BY n.id DESC
+                """
+                cursor.execute(query, (user_id, folder_ids))
+                results = cursor.fetchall()
+                return [row[0] for row in results]
+
+            # Case 3: No specific notes or folders - get all user notes
+            else:
+                query = """
+                    SELECT id 
+                    FROM note_v1 
+                    WHERE "ownerId" = %s 
+                    AND completed = true
+                    ORDER BY id DESC
+                """
+                cursor.execute(query, (user_id,))
+                results = cursor.fetchall()
+                return [row[0] for row in results]
+
+    except Exception as e:
+        logger.error(f"Error fetching notes for user {user_id}: {e}")
+        return []
+    finally:
+        if conn:
+            conn.close()
+
+
+def create_embedding_job_table():
+    """Create table to track embedding generation jobs"""
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS embedding_jobs (
+                    id SERIAL PRIMARY KEY,
+                    user_id INTEGER NOT NULL,
+                    status VARCHAR(50) NOT NULL,
+                    total_notes INTEGER DEFAULT 0,
+                    processed_notes INTEGER DEFAULT 0,
+                    failed_notes INTEGER DEFAULT 0,
+                    started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    completed_at TIMESTAMP,
+                    error_message TEXT,
+                    metadata JSONB DEFAULT '{}'::jsonb
+                );
+                
+                CREATE INDEX IF NOT EXISTS idx_embedding_jobs_user_id 
+                ON embedding_jobs(user_id);
+                
+                CREATE INDEX IF NOT EXISTS idx_embedding_jobs_status 
+                ON embedding_jobs(status);
+            """)
+            conn.commit()
+            logger.info("Embedding jobs table created successfully")
+    except Exception as e:
+        logger.error(f"Error creating embedding jobs table: {e}")
+        if conn:
+            conn.rollback()
+    finally:
+        if conn:
+            conn.close()
+
+
 # Example usage
 if __name__ == "__main__":
     # save_note(1, "Trip to Japan: Tokyo and Kyoto. Visit shrines and temples.")
     # note_text = get_note_text(5)
+    # print(f"Note 1: {note_text}")
+    print(get_part_text(8))
     # print(f"Note 1: {note_text}")
     print(get_part_text(8))
