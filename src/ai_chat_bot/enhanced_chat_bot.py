@@ -303,50 +303,84 @@ class LLMProviderManager:
             }
 
     def get_provider(self, provider_name: Optional[str] = None, model: Optional[str] = None) -> Dict[str, Any]:
-        """Get LLM provider by name or auto-select best available"""
+        """Get LLM provider by name or auto-select based on model or priority."""
 
         logger.info(
             f"get_provider called with provider_name={provider_name}, model={model}")
-        logger.info(f"Available providers: {list(self.providers.keys())}")
+        # Log available providers and their models for better debugging
+        available_providers_log = {
+            p.value: i["models"] for p, i in self.providers.items()
+        }
+        logger.info(f"Available providers and models: {available_providers_log}")
 
+        provider_priority = [LLMProvider.OPENAI, LLMProvider.ANTHROPIC, LLMProvider.GEMINI,
+                             LLMProvider.DEEPSEEK, LLMProvider.XAI]
+
+        # 1. If provider_name is specified
         if provider_name:
-            provider_enum = LLMProvider(provider_name.lower())
-            logger.info(f"Looking for provider: {provider_enum}")
-            if provider_enum in self.providers:
-                provider_info = self.providers[provider_enum]
-                logger.info(f"Found provider {provider_enum}, using its LLM")
+            try:
+                provider_enum = LLMProvider(provider_name.lower())
+                if provider_enum in self.providers:
+                    provider_info = self.providers[provider_enum]
+                    selected_model_name = provider_info["llm"].model # Default model for the provider
+                    
+                    if model and model in provider_info["models"]:
+                        if hasattr(provider_info["llm"], "model"):
+                            provider_info["llm"].model = model
+                            selected_model_name = model
+                        logger.info(f"Using specified provider {provider_enum.value} with model {selected_model_name}")
+                    elif model:
+                        logger.warning(f"Model {model} not supported by provider {provider_enum.value}. Using default model {selected_model_name} for this provider.")
+                    else:
+                        logger.info(f"Using specified provider {provider_enum.value} with its default model {selected_model_name}")
+                    
+                    return {
+                        "provider": provider_enum,
+                        "llm": provider_info["llm"],
+                        "multimodal": provider_info.get("multimodal"),
+                        "models": provider_info["models"]
+                    }
+                else:
+                    logger.warning(f"Specified provider {provider_name} not available or not initialized. Attempting model-based or default selection.")
+            except ValueError:
+                logger.warning(f"Invalid provider name: {provider_name}. Attempting model-based or default selection.")
 
-                # Update model if specified
-                if model and model in provider_info["models"]:
-                    if hasattr(provider_info["llm"], "model"):
-                        provider_info["llm"].model = model
+        # 2. If model is specified (and provider_name was not, or was invalid/unavailable)
+        if model:
+            logger.info(f"Attempting to find a provider for model: {model}")
+            for provider_enum_candidate in provider_priority:
+                if provider_enum_candidate in self.providers:
+                    candidate_info = self.providers[provider_enum_candidate]
+                    if model in candidate_info["models"]:
+                        if hasattr(candidate_info["llm"], "model"):
+                            candidate_info["llm"].model = model
+                        logger.info(f"Found provider {provider_enum_candidate.value} for model {model}")
+                        return {
+                            "provider": provider_enum_candidate,
+                            "llm": candidate_info["llm"],
+                            "multimodal": candidate_info.get("multimodal"),
+                            "models": candidate_info["models"]
+                        }
+            logger.warning(f"No provider found supporting model {model}. Falling back to default provider selection.")
 
+        # 3. Default auto-selection (if provider_name and model are not specified, or couldn't be resolved)
+        logger.info("Auto-selecting default provider (highest priority available)...")
+        for provider_enum_default in provider_priority:
+            if provider_enum_default in self.providers:
+                default_info = self.providers[provider_enum_default]
+                # Ensure the LLM instance uses one of its supported default models if not already set
+                # This typically would be the first model in its list or a specifically designated default.
+                # For simplicity, we assume the llm.model is already appropriately set by _initialize_providers
+                # or was correctly set if a model was matched above.
+                logger.info(f"Auto-selected provider: {provider_enum_default.value} with model {default_info['llm'].model}")
                 return {
-                    "provider": provider_enum,
-                    "llm": provider_info["llm"],
-                    "multimodal": provider_info.get("multimodal"),
-                    "models": provider_info["models"]
-                }
-            else:
-                logger.warning(
-                    f"Provider {provider_enum} not found in available providers")
-
-        # Auto-select best available provider
-        # Priority: OpenAI > Anthropic > Gemini > DeepSeek > xAI
-        logger.info("Auto-selecting provider...")
-        for provider in [LLMProvider.OPENAI, LLMProvider.ANTHROPIC, LLMProvider.GEMINI,
-                         LLMProvider.DEEPSEEK, LLMProvider.XAI]:
-            if provider in self.providers:
-                provider_info = self.providers[provider]
-                logger.info(f"Auto-selected provider: {provider}")
-                return {
-                    "provider": provider,
-                    "llm": provider_info["llm"],
-                    "multimodal": provider_info.get("multimodal"),
-                    "models": provider_info["models"]
+                    "provider": provider_enum_default,
+                    "llm": default_info["llm"],
+                    "multimodal": default_info.get("multimodal"),
+                    "models": default_info["models"]
                 }
 
-        raise ValueError("No LLM providers available. Please set API keys.")
+        raise ValueError("No LLM providers available or configured. Please check API keys and provider configurations.")
 
     def list_available_providers(self) -> Dict[str, List[str]]:
         """List all available providers and their models"""
