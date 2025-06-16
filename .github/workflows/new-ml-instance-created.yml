@@ -101,4 +101,8 @@ jobs:
             aws_access_key=${{ secrets.AWS_ACCESS_KEY }}
             aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}
             webshare_proxy_password=${{ secrets.WEBSHARE_PROXY_PASSWORD }}
-            webshare_proxy_username=${{ secrets.WEBSHARE_PROXY_USERNAME }}"  || [ $? -eq 2 ]
+            webshare_proxy_username=${{ secrets.WEBSHARE_PROXY_USERNAME }}
+            xai_api_key=${{ secrets.XAI_API_KEY }}
+            google_api_key=${{ secrets.GOOGLE_API_KEY }}
+            anthropic_api_key=${{ secrets.ANTHROPIC_API_KEY }}
+            deepseek_api_key=${{ secrets.DEEPSEEK_API_KEY }}"  || [ $? -eq 2 ]

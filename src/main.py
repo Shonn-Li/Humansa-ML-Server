@@ -132,6 +132,17 @@ async def chat_completions():
     try:
         data = await request.get_json()
 
+        # Validate user_id if enable_rag is not explicitly False
+        enable_rag = data.get("enable_rag", True)
+        if enable_rag and not data.get("user_id"):
+            return jsonify({
+                "error": {
+                    "message": "user_id is required when RAG is enabled",
+                    "type": "invalid_request_error",
+                    "code": "missing_required_parameter"
+                }
+            }), 400
+
         # Convert request to our format
         messages = []
         for msg in data.get("messages", []):
@@ -155,7 +166,10 @@ async def chat_completions():
             presence_penalty=data.get("presence_penalty"),
             stop=data.get("stop"),
             stream=data.get("stream", False),
+            user_id=data.get("user_id"),
+            folder_ids=data.get("folder_ids"),
             note_ids=data.get("note_ids"),
+            enable_rag=enable_rag,
             enable_web_search=data.get("enable_web_search", False),
             enable_image_analysis=data.get("enable_image_analysis", False),
             search_query=data.get("search_query"),
@@ -165,15 +179,24 @@ async def chat_completions():
         # Generate response
         if chat_request.stream:
             async def generate():
+                # Restore await here: chat_completion returns a coroutine that resolves to an async generator
                 async for chunk in await enhanced_chat_bot.chat_completion(chat_request):
                     yield f"data: {json.dumps(chunk)}\n\n"
                 yield "data: [DONE]\n\n"
 
-            return Response(generate(), mimetype="text/plain")
+            return Response(generate(), mimetype="text/event-stream")
         else:
             response = await enhanced_chat_bot.chat_completion(chat_request)
             return jsonify(response.__dict__)
 
+    except ValueError as e:
+        return jsonify({
+            "error": {
+                "message": str(e),
+                "type": "invalid_request_error",
+                "code": "invalid_request"
+            }
+        }), 400
     except Exception as e:
         logger.error(f"Chat completion error: {e}")
         return jsonify({
@@ -241,6 +264,11 @@ async def enhanced_chat():
         if not question:
             return jsonify({"error": "No question provided"}), 400
 
+        # Validate user_id if enable_rag is not explicitly False
+        enable_rag = data.get("enable_rag", True)
+        if enable_rag and not data.get("user_id"):
+            return jsonify({"error": "user_id is required when RAG is enabled"}), 400
+
         # Create messages format
         messages = [ChatMessage(role=MessageRole.USER.value, content=question)]
 
@@ -255,7 +283,10 @@ async def enhanced_chat():
             provider=data.get("provider"),
             temperature=data.get("temperature", 0.7),
             max_tokens=data.get("max_tokens"),
-            note_ids=data.get("note_ids", []),
+            user_id=data.get("user_id"),
+            folder_ids=data.get("folder_ids"),
+            note_ids=data.get("note_ids"),
+            enable_rag=enable_rag,
             enable_web_search=data.get("enable_web_search", False),
             search_query=data.get("search_query"),
             attachments=data.get("attachments"),
@@ -264,6 +295,7 @@ async def enhanced_chat():
 
         if chat_request.stream:
             async def generate():
+                # Restore await here as well
                 async for chunk in await enhanced_chat_bot.chat_completion(chat_request):
                     yield f"data: {json.dumps(chunk)}\n\n"
                 yield "data: [DONE]\n\n"
@@ -282,6 +314,11 @@ async def enhanced_chat():
                 "usage": response.usage.__dict__ if response.usage else None
             })
 
+    except ValueError as e:
+        return jsonify({
+            "error": str(e),
+            "type": "invalid_request_error"
+        }), 400
     except Exception as e:
         logger.error(f"Enhanced chat error: {e}")
         return jsonify({
@@ -373,7 +410,6 @@ async def get_search_cache_stats():
         return jsonify(stats)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001)

@@ -73,6 +73,10 @@
           AWS_REGION={{ aws_region }}
           WEBSHARE_PROXY_USERNAME={{ webshare_proxy_username }}
           WEBSHARE_PROXY_PASSWORD={{ webshare_proxy_password }}
+          XAI_API_KEY={{ xai_api_key }}
+          GOOGLE_API_KEY={{ google_api_key }}
+          ANTHROPIC_API_KEY={{ anthropic_api_key }}
+          DEEPSEEK_API_KEY={{ deepseek_api_key }}
 
 # Rolling update - 1 host at a time
 - name: ROLLING UPDATE ML SERVER
