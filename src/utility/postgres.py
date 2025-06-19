@@ -666,6 +666,162 @@ def create_embedding_job_table():
             conn.close()
 
 
+def get_notes_without_embeddings(note_ids: List[int]) -> List[int]:
+    """
+    Check which notes from the given list don't have embeddings
+    Returns list of note IDs that need embeddings created
+    """
+    if not note_ids:
+        return []
+
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            # Find note IDs that don't have any embeddings
+            cursor.execute(
+                """
+                SELECT unnest(%s::int[]) as note_id
+                EXCEPT
+                SELECT DISTINCT note_id FROM embedding_v1 WHERE note_id = ANY(%s)
+                """,
+                (note_ids, note_ids)
+            )
+
+            results = cursor.fetchall()
+            return [row[0] for row in results]
+
+    except Exception as e:
+        logger.error(f"Error checking notes without embeddings: {e}")
+        return note_ids  # Return all note_ids as a fallback to be safe
+    finally:
+        if conn:
+            conn.close()
+
+
+def get_note_metadata(note_id: int) -> Dict[str, Any]:
+    """Get note metadata including title-like information for citations"""
+    with get_db_connection() as conn:
+        with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+            # Get basic note info
+            cursor.execute(
+                """
+                SELECT id, "createdAt", "updatedAt", "promptContent"
+                FROM note_v1 
+                WHERE id = %s
+            """,
+                (note_id,),
+            )
+            note_result = cursor.fetchone()
+
+            if not note_result:
+                return {"note_id": note_id, "title": f"Note {note_id}", "exists": False}
+
+            # Get first part text for title extraction
+            cursor.execute(
+                """
+                SELECT "text"
+                FROM part_v1
+                WHERE "noteId" = %s
+                ORDER BY "order"
+                LIMIT 1
+            """,
+                (note_id,),
+            )
+            first_part = cursor.fetchone()
+
+            # Extract title from content
+            title = f"Note {note_id}"
+            if first_part and first_part['text']:
+                first_text = first_part['text'].strip()
+                # Take first line or first 50 characters as title
+                lines = first_text.split('\n')
+                if lines and len(lines[0].strip()) > 0:
+                    title_candidate = lines[0].strip()
+                    if len(title_candidate) <= 80:
+                        title = f"Note {note_id}: {title_candidate}"
+                    else:
+                        title = f"Note {note_id}: {title_candidate[:50]}..."
+
+            return {
+                "note_id": note_id,
+                "title": title,
+                "created_at": note_result['createdAt'],
+                "updated_at": note_result['updatedAt'],
+                "exists": True
+            }
+
+
+def get_notes_metadata_batch(note_ids: List[int]) -> Dict[int, Dict[str, Any]]:
+    """Get metadata for multiple notes in a single query"""
+    if not note_ids:
+        return {}
+
+    result = {}
+    with get_db_connection() as conn:
+        with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+            # Get basic note info
+            cursor.execute(
+                """
+                SELECT id, "createdAt", "updatedAt", "promptContent"
+                FROM note_v1 
+                WHERE id = ANY(%s)
+            """,
+                (note_ids,),
+            )
+            notes = cursor.fetchall()
+
+            # Get first part text for each note
+            cursor.execute(
+                """
+                SELECT DISTINCT ON ("noteId") "noteId", "text"
+                FROM part_v1
+                WHERE "noteId" = ANY(%s)
+                ORDER BY "noteId", "order"
+            """,
+                (note_ids,),
+            )
+            parts = cursor.fetchall()
+
+    # Create mapping of note_id to first part text
+    parts_map = {part['noteId']: part['text'] for part in parts}
+
+    # Build metadata for each note
+    for note in notes:
+        note_id = note['id']
+        
+        # Extract title from content
+        title = f"Note {note_id}"
+        if note_id in parts_map and parts_map[note_id]:
+            first_text = parts_map[note_id].strip()
+            lines = first_text.split('\n')
+            if lines and len(lines[0].strip()) > 0:
+                title_candidate = lines[0].strip()
+                if len(title_candidate) <= 80:
+                    title = f"Note {note_id}: {title_candidate}"
+                else:
+                    title = f"Note {note_id}: {title_candidate[:50]}..."
+
+        result[note_id] = {
+            "note_id": note_id,
+            "title": title,
+            "created_at": note['createdAt'],
+            "updated_at": note['updatedAt'],
+            "exists": True
+        }
+
+    # Add entries for missing notes
+    for note_id in note_ids:
+        if note_id not in result:
+            result[note_id] = {
+                "note_id": note_id, 
+                "title": f"Note {note_id}",
+                "exists": False
+            }
+
+    return result
+
+
 # Example usage
 if __name__ == "__main__":
     # save_note(1, "Trip to Japan: Tokyo and Kyoto. Visit shrines and temples.")

@@ -159,7 +159,7 @@ python3 -m venv youwo-ml-venv && source youwo-ml-venv/bin/activate &&python -m s
 
 ### 🐳 Running with Docker
 
-```bash
+```bashz
 # 1. Build the Docker image
 docker build -t youwo-ml-server .
 
