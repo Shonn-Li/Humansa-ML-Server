@@ -178,7 +178,8 @@ class ChatCompletionResponse:
     # Custom fields with citation support
     used_notes: Optional[List[int]] = None
     search_results: Optional[List[Dict[str, Any]]] = None
-    citations: Optional[List[Dict[str, Any]]] = None  # Citation source nodes from LlamaIndex
+    # Citation source nodes from LlamaIndex
+    citations: Optional[List[Dict[str, Any]]] = None
 
 
 class LLMProviderManager:
@@ -1159,7 +1160,7 @@ class EnhancedChatBot:
 
                 # For streaming, we need to use the context-enhanced query
                 # Since LlamaIndex doesn't support streaming RAG well, we'll reconstruct the contextualized prompt
-                
+
                 contextualized_query = await self._build_contextualized_query(query, rag_response)
                 logger.info(
                     f"Contextualized query: {contextualized_query[:1000]}...")
@@ -1425,7 +1426,8 @@ class EnhancedChatBot:
         rag_response = None
         if query_engine:
             # Use CitationQueryEngine with automatic citations
-            logger.info(f"Using CitationQueryEngine with {len(used_notes)} notes")
+            logger.info(
+                f"Using CitationQueryEngine with {len(used_notes)} notes")
             rag_response = query_engine.query(query)
             answer = str(rag_response)
 
@@ -1447,7 +1449,8 @@ class EnhancedChatBot:
             logger.info(f"Direct response: {answer[:500]}...")
 
         # Extract citations from the response
-        citations = self._extract_citations_from_response(rag_response) if rag_response else []
+        citations = self._extract_citations_from_response(
+            rag_response) if rag_response else []
 
         # Get token usage
         token_counter = self.provider_manager.token_counter
@@ -1516,7 +1519,7 @@ class EnhancedChatBot:
                 for i, node in enumerate(rag_response.source_nodes[:5]):
                     source_num = i + 1
                     note_id = node.metadata.get('note_id', 'unknown')
-                    
+
                     context_parts.append(
                         f"=== Source [{source_num}] (Note ID: {note_id}) ===")
                     context_parts.append(node.text.strip())
