@@ -149,9 +149,27 @@ def get_most_related_notes_pgvector(
     """
     Ultra-fast similarity search using pgvector
     This is what big companies use - let the database do the heavy lifting!
+    Automatically creates embeddings for notes that don't have them.
     """
     logger.info(
         f"Starting pgvector similarity search for {len(note_ids)} notes")
+
+    # Check which notes don't have embeddings and create them
+    from src.utility.postgres import get_notes_without_embeddings
+    notes_without_embeddings = get_notes_without_embeddings(note_ids)
+
+    if notes_without_embeddings:
+        logger.info(
+            f"Found {len(notes_without_embeddings)} notes without embeddings, creating them...")
+        for note_id in notes_without_embeddings:
+            try:
+                create_and_save_embeddings(note_id)
+                logger.info(f"Created embeddings for note {note_id}")
+            except Exception as e:
+                logger.error(
+                    f"Failed to create embeddings for note {note_id}: {e}")
+                # Continue with other notes
+                continue
 
     # Generate query embedding
     embedder = OpenAIEmbedding(model="text-embedding-3-small")

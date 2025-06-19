@@ -4,31 +4,8 @@ Enhanced Chat Bot with GPT-level API endpoints and multi-provider support
 This module provides:
 - OpenAI-compatible API endpoints
 - Multiple LLM provider support (OpenAI, Anthropic, Groq, DeepSeek, etc.)
-- Streaming response suppor        # DeepSeek (us        # xAI Grok (using OpenAI-like provider)
-        if OPENAI_LIKE_AVAILABLE and os.getenv("XAI_API_KEY"):
-            self.providers[LLMProvider.XAI] = {
-                "llm": OpenAILike(
-                    model="grok-3-beta",
-                    api_key=os.getenv("XAI_API_KEY"),
-                    api_base="https://api.x.ai/v1",
-                    is_chat_model=True,
-                    is_function_calling_model=False,
-                    context_window=131072,
-                    temperature=0.7,
-                    callback_manager=CallbackManager([self.token_counter])
-                ),
-                "models": ["grok-3-beta", "grok-3-mini-beta", "grok-2-vision-1212", "grok-beta"]
-            }d provider)
-        if DEEPSEEK_AVAILABLE and os.getenv("DEEPSEEK_API_KEY"):
-            self.providers[LLMProvider.DEEPSEEK] = {
-                "llm": DeepSeek(
-                    model="deepseek-chat",
-                    api_key=os.getenv("DEEPSEEK_API_KEY"),
-                    temperature=0.7,
-                    callback_manager=CallbackManager([self.token_counter])
-                ),
-                "models": ["deepseek-chat", "deepseek-coder", "deepseek-reasoner"]
-            }ch integration
+- Streaming response support
+- Rich integration
 - File attachment support (images, PDFs)
 - Node ID context preservation
 """
@@ -48,7 +25,7 @@ import math
 # LlamaIndex imports
 from llama_index.core import Document, Settings, StorageContext
 from llama_index.core.indices.vector_store import VectorStoreIndex
-from llama_index.core.query_engine import RetrieverQueryEngine
+from llama_index.core.query_engine import RetrieverQueryEngine, CitationQueryEngine
 from llama_index.core.retrievers import RouterRetriever
 from llama_index.core.selectors import LLMSingleSelector
 from llama_index.core.text_splitter import SentenceSplitter
@@ -198,9 +175,10 @@ class ChatCompletionResponse:
     choices: List[Dict[str, Any]]
     usage: Optional[Usage] = None
 
-    # Custom fields
+    # Custom fields with citation support
     used_notes: Optional[List[int]] = None
     search_results: Optional[List[Dict[str, Any]]] = None
+    citations: Optional[List[Dict[str, Any]]] = None  # Citation source nodes from LlamaIndex
 
 
 class LLMProviderManager:
@@ -303,84 +281,128 @@ class LLMProviderManager:
             }
 
     def get_provider(self, provider_name: Optional[str] = None, model: Optional[str] = None) -> Dict[str, Any]:
-        """Get LLM provider by name or auto-select based on model or priority."""
+        """Get LLM provider by name or auto-select best available"""
 
         logger.info(
             f"get_provider called with provider_name={provider_name}, model={model}")
-        # Log available providers and their models for better debugging
-        available_providers_log = {
-            p.value: i["models"] for p, i in self.providers.items()
-        }
-        logger.info(f"Available providers and models: {available_providers_log}")
+        logger.info(
+            f"Available providers and models: {self.list_available_providers()}")
 
-        provider_priority = [LLMProvider.OPENAI, LLMProvider.ANTHROPIC, LLMProvider.GEMINI,
-                             LLMProvider.DEEPSEEK, LLMProvider.XAI]
-
-        # 1. If provider_name is specified
         if provider_name:
-            try:
-                provider_enum = LLMProvider(provider_name.lower())
-                if provider_enum in self.providers:
-                    provider_info = self.providers[provider_enum]
-                    selected_model_name = provider_info["llm"].model # Default model for the provider
-                    
-                    if model and model in provider_info["models"]:
-                        if hasattr(provider_info["llm"], "model"):
-                            provider_info["llm"].model = model
-                            selected_model_name = model
-                        logger.info(f"Using specified provider {provider_enum.value} with model {selected_model_name}")
-                    elif model:
-                        logger.warning(f"Model {model} not supported by provider {provider_enum.value}. Using default model {selected_model_name} for this provider.")
-                    else:
-                        logger.info(f"Using specified provider {provider_enum.value} with its default model {selected_model_name}")
-                    
+            provider_enum = LLMProvider(provider_name.lower())
+            logger.info(f"Looking for provider: {provider_enum}")
+            if provider_enum in self.providers:
+                provider_info = self.providers[provider_enum]
+                logger.info(f"Found provider {provider_enum}, using its LLM")
+
+                # Update model if specified
+                if model and model in provider_info["models"]:
+                    if hasattr(provider_info["llm"], "model"):
+                        provider_info["llm"].model = model
+                        logger.info(f"Updated model to: {model}")
+
+                return {
+                    "provider": provider_enum,
+                    "llm": provider_info["llm"],
+                    "multimodal": provider_info.get("multimodal"),
+                    "models": provider_info["models"]
+                }
+            else:
+                logger.warning(
+                    f"Provider {provider_enum} not found in available providers")
+
+        # If model is specified but no provider, try to find the right provider for the model
+        if model and not provider_name:
+            logger.info(f"Attempting to find a provider for model: {model}")
+
+            # First, try exact match
+            for provider_enum, provider_info in self.providers.items():
+                if model in provider_info["models"]:
+                    logger.info(
+                        f"Found provider {provider_enum.value} supporting model {model}")
+                    # Create a copy of the provider info and update the model
+                    if hasattr(provider_info["llm"], "model"):
+                        provider_info["llm"].model = model
+                        logger.info(f"Updated model to: {model}")
+
                     return {
                         "provider": provider_enum,
                         "llm": provider_info["llm"],
                         "multimodal": provider_info.get("multimodal"),
                         "models": provider_info["models"]
                     }
-                else:
-                    logger.warning(f"Specified provider {provider_name} not available or not initialized. Attempting model-based or default selection.")
-            except ValueError:
-                logger.warning(f"Invalid provider name: {provider_name}. Attempting model-based or default selection.")
 
-        # 2. If model is specified (and provider_name was not, or was invalid/unavailable)
-        if model:
-            logger.info(f"Attempting to find a provider for model: {model}")
-            for provider_enum_candidate in provider_priority:
-                if provider_enum_candidate in self.providers:
-                    candidate_info = self.providers[provider_enum_candidate]
-                    if model in candidate_info["models"]:
-                        if hasattr(candidate_info["llm"], "model"):
-                            candidate_info["llm"].model = model
-                        logger.info(f"Found provider {provider_enum_candidate.value} for model {model}")
+            # If no exact match, try fuzzy matching for similar models
+            logger.info(
+                f"No exact match found for model {model}, trying fuzzy matching...")
+            model_lower = model.lower()
+
+            for provider_enum, provider_info in self.providers.items():
+                for available_model in provider_info["models"]:
+                    available_model_lower = available_model.lower()
+
+                    # Check if the requested model name contains key components of available models
+                    if any(keyword in model_lower for keyword in ["claude", "sonnet", "opus", "haiku"]) and \
+                       any(keyword in available_model_lower for keyword in ["claude", "sonnet", "opus", "haiku"]):
+
+                        # For Claude models, match the family
+                        if "claude" in model_lower and "claude" in available_model_lower:
+                            if ("sonnet" in model_lower and "sonnet" in available_model_lower) or \
+                               ("opus" in model_lower and "opus" in available_model_lower) or \
+                               ("haiku" in model_lower and "haiku" in available_model_lower):
+
+                                logger.info(
+                                    f"Found similar model: {available_model} for requested {model} in provider {provider_enum.value}")
+
+                                if hasattr(provider_info["llm"], "model"):
+                                    provider_info["llm"].model = available_model
+                                    logger.info(
+                                        f"Updated model to: {available_model}")
+
+                                return {
+                                    "provider": provider_enum,
+                                    "llm": provider_info["llm"],
+                                    "multimodal": provider_info.get("multimodal"),
+                                    "models": provider_info["models"]
+                                }
+
+                    # For other models, do partial matching
+                    elif model_lower in available_model_lower or available_model_lower in model_lower:
+                        logger.info(
+                            f"Found similar model: {available_model} for requested {model} in provider {provider_enum.value}")
+
+                        if hasattr(provider_info["llm"], "model"):
+                            provider_info["llm"].model = available_model
+                            logger.info(f"Updated model to: {available_model}")
+
                         return {
-                            "provider": provider_enum_candidate,
-                            "llm": candidate_info["llm"],
-                            "multimodal": candidate_info.get("multimodal"),
-                            "models": candidate_info["models"]
+                            "provider": provider_enum,
+                            "llm": provider_info["llm"],
+                            "multimodal": provider_info.get("multimodal"),
+                            "models": provider_info["models"]
                         }
-            logger.warning(f"No provider found supporting model {model}. Falling back to default provider selection.")
 
-        # 3. Default auto-selection (if provider_name and model are not specified, or couldn't be resolved)
-        logger.info("Auto-selecting default provider (highest priority available)...")
-        for provider_enum_default in provider_priority:
-            if provider_enum_default in self.providers:
-                default_info = self.providers[provider_enum_default]
-                # Ensure the LLM instance uses one of its supported default models if not already set
-                # This typically would be the first model in its list or a specifically designated default.
-                # For simplicity, we assume the llm.model is already appropriately set by _initialize_providers
-                # or was correctly set if a model was matched above.
-                logger.info(f"Auto-selected provider: {provider_enum_default.value} with model {default_info['llm'].model}")
+            logger.warning(
+                f"No provider found supporting model {model}. Falling back to default provider selection.")
+
+        # Auto-select best available provider (default priority)
+        # Priority: OpenAI > Anthropic > Gemini > DeepSeek > xAI
+        logger.info(
+            "Auto-selecting default provider (highest priority available)...")
+        for provider in [LLMProvider.OPENAI, LLMProvider.ANTHROPIC, LLMProvider.GEMINI,
+                         LLMProvider.DEEPSEEK, LLMProvider.XAI]:
+            if provider in self.providers:
+                provider_info = self.providers[provider]
+                logger.info(
+                    f"Auto-selected provider: {provider.value} with model {provider_info['llm'].model}")
                 return {
-                    "provider": provider_enum_default,
-                    "llm": default_info["llm"],
-                    "multimodal": default_info.get("multimodal"),
-                    "models": default_info["models"]
+                    "provider": provider,
+                    "llm": provider_info["llm"],
+                    "multimodal": provider_info.get("multimodal"),
+                    "models": provider_info["models"]
                 }
 
-        raise ValueError("No LLM providers available or configured. Please check API keys and provider configurations.")
+        raise ValueError("No LLM providers available. Please set API keys.")
 
     def list_available_providers(self) -> Dict[str, List[str]]:
         """List all available providers and their models"""
@@ -707,12 +729,28 @@ class EnhancedChatBot:
         # Configure global settings
         Settings.embed_model = self.embedder
 
+    def _extract_citations_from_response(self, response) -> List[Dict[str, Any]]:
+        """Extract citation information from LlamaIndex CitationQueryEngine response"""
+        citations = []
+        if hasattr(response, 'source_nodes') and response.source_nodes:
+            for i, source_node in enumerate(response.source_nodes):
+                citation = {
+                    "id": i + 1,  # Citations start from 1
+                    "content": source_node.node.get_text(),
+                    "score": source_node.score if hasattr(source_node, 'score') else None,
+                    "metadata": source_node.node.metadata,
+                    "node_id": source_node.node.node_id
+                }
+                citations.append(citation)
+        return citations
+
     async def chat_completion(self, request: ChatCompletionRequest) -> Union[ChatCompletionResponse, AsyncGenerator]:
         """Main chat completion endpoint"""
 
-        # Validate user ID if RAG is enabled
-        if request.enable_rag and not request.user_id:
-            raise ValueError("user_id is required when RAG is enabled")
+        # Validate user ID - always required for verification purposes
+        if not request.user_id:
+            raise ValueError(
+                "user_id is always required for verification purposes")
 
         # Get provider and LLM
         provider_info = self.provider_manager.get_provider(
@@ -729,10 +767,44 @@ class EnhancedChatBot:
 
         Settings.llm = llm
 
-        # For streaming, return the async generator directly (not a coroutine)
+        # For streaming, gather context first then stream
         if request.stream:
-            # Return the generator itself, not a coroutine
-            return self._stream_with_progress(request, provider_info)
+            # Gather context from various sources
+            context_documents = []
+            used_notes = []
+            search_results = []
+
+            # 1. Process RAG if enabled
+            if request.enable_rag and request.user_id:
+                note_docs, used_notes = await self._get_user_note_context(
+                    request.messages,
+                    request.user_id,
+                    request.folder_ids,
+                    request.note_ids
+                )
+                context_documents.extend(note_docs)
+
+            # 2. Process web search if enabled
+            if request.enable_web_search:
+                search_query = request.search_query or self._extract_search_query(
+                    request.messages)
+                if search_query:
+                    search_results = await self.web_search.search(search_query)
+                    search_docs = self._create_search_documents(search_results)
+                    context_documents.extend(search_docs)
+
+            # 3. Process file attachments if provided
+            if request.attachments:
+                attachment_docs = await self.file_processor.process_attachments(request.attachments)
+                context_documents.extend(attachment_docs)
+
+            # Build query engine if we have context
+            query_engine = None
+            if context_documents:
+                query_engine = await self._build_query_engine(context_documents, llm)
+
+            # Return streaming response
+            return self._stream_response(request, query_engine, provider_info, used_notes, search_results)
 
         # Non-streaming path remains the same
         # Gather context from various sources
@@ -786,10 +858,7 @@ class EnhancedChatBot:
                 "provider": provider_info["provider"].value,
                 "choices": [{
                     "index": 0,
-                    "delta": {
-                        "role": "system",
-                        "content": "[Starting search...]"
-                    },
+                    "delta": {},
                     "finish_reason": None
                 }],
                 "progress": {
@@ -816,8 +885,11 @@ class EnhancedChatBot:
                         "finish_reason": None
                     }],
                     "progress": {
-                        "stage": "searching_notes",
-                        "message": "Searching through your notes..."
+                        "stage": "rag_search_start",
+                        "message": "Starting note search...",
+                        "user_id": request.user_id,
+                        "folder_ids": request.folder_ids,
+                        "note_ids": request.note_ids
                     }
                 }
 
@@ -841,9 +913,10 @@ class EnhancedChatBot:
                         "finish_reason": None
                     }],
                     "progress": {
-                        "stage": "notes_found",
-                        "message": f"Found {len(used_notes)} relevant notes",
-                        "notes_found": len(used_notes),
+                        "stage": "rag_notes_found",
+                        "message": f"Found {len(used_notes)} relevant notes with {len(note_docs)} text chunks",
+                        "notes_count": len(used_notes),
+                        "chunks_count": len(note_docs),
                         "note_ids": used_notes
                     }
                 }
@@ -929,8 +1002,28 @@ class EnhancedChatBot:
                         "finish_reason": None
                     }],
                     "progress": {
-                        "stage": "building_context",
-                        "message": "Building context from documents..."
+                        "stage": "building_index",
+                        "message": f"Building search index from {len(context_documents)} documents...",
+                        "document_count": len(context_documents)
+                    }
+                }
+
+                query_engine = await self._build_query_engine(context_documents, provider_info["llm"])
+
+                yield {
+                    "id": f"chatcmpl-{os.urandom(8).hex()}",
+                    "object": "chat.completion.chunk",
+                    "created": int(asyncio.get_event_loop().time()),
+                    "model": request.model or "auto",
+                    "provider": provider_info["provider"].value,
+                    "choices": [{
+                        "index": 0,
+                        "delta": {},
+                        "finish_reason": None
+                    }],
+                    "progress": {
+                        "stage": "index_ready",
+                        "message": "Search index built successfully, ready to generate response"
                     }
                 }
 
@@ -977,25 +1070,149 @@ class EnhancedChatBot:
                 "error": str(e)
             }
 
-    async def _stream_llm_response(self, request: ChatCompletionRequest, query_engine: Optional[RetrieverQueryEngine],
+    async def _stream_llm_response(self, request: ChatCompletionRequest, query_engine: Optional[CitationQueryEngine],
                                    provider_info: Dict, used_notes: List[int],
                                    search_results: List[Dict]) -> AsyncGenerator:
-        """Stream the actual LLM response"""
+        """Stream the actual LLM response with proper RAG integration"""
+
         # Convert messages to query
         query = self._messages_to_query(request.messages)
 
+        logger.info(f"=== STREAMING RAG DEBUG ===")
+        logger.info(f"Original query: {query}")
+
         llm = provider_info["llm"]
+        rag_response = None  # Initialize at method scope
 
         if query_engine:
-            # Use RAG with context - note: streaming RAG is complex,
-            # for now we'll do direct streaming
-            response_gen = llm.stream_complete(query)
+            logger.info(f"Using streaming RAG with {len(used_notes)} notes")
+
+            # Yield progress: Starting RAG processing
+            yield {
+                "id": f"chatcmpl-{os.urandom(8).hex()}",
+                "object": "chat.completion.chunk",
+                "created": int(asyncio.get_event_loop().time()),
+                "model": request.model or "auto",
+                "provider": provider_info["provider"].value,
+                "choices": [{
+                    "index": 0,
+                    "delta": {},
+                    "finish_reason": None
+                }],
+                "progress": {
+                    "stage": "rag_processing",
+                    "message": f"Processing RAG query with {len(used_notes)} notes",
+                    "note_count": len(used_notes),
+                    "used_notes": used_notes
+                }
+            }
+
+            # First, get the RAG response (this includes context injection)
+            try:
+                rag_response = query_engine.query(query)
+                rag_answer = str(rag_response)
+
+                # Log the RAG processing details
+                if hasattr(rag_response, 'source_nodes'):
+                    source_count = len(rag_response.source_nodes)
+                    logger.info(f"RAG retrieved {source_count} source chunks")
+
+                    # Yield progress: RAG context retrieved
+                    yield {
+                        "id": f"chatcmpl-{os.urandom(8).hex()}",
+                        "object": "chat.completion.chunk",
+                        "created": int(asyncio.get_event_loop().time()),
+                        "model": request.model or "auto",
+                        "provider": provider_info["provider"].value,
+                        "choices": [{
+                            "index": 0,
+                            "delta": {},
+                            "finish_reason": None
+                        }],
+                        "progress": {
+                            "stage": "rag_context_retrieved",
+                            "message": f"Retrieved {source_count} relevant text chunks",
+                            "source_chunks": source_count,
+                            "used_notes": used_notes
+                        }
+                    }
+
+                logger.info(f"RAG complete response: {rag_answer[:500]}...")
+
+                # Yield progress: Starting LLM generation
+                yield {
+                    "id": f"chatcmpl-{os.urandom(8).hex()}",
+                    "object": "chat.completion.chunk",
+                    "created": int(asyncio.get_event_loop().time()),
+                    "model": request.model or "auto",
+                    "provider": provider_info["provider"].value,
+                    "choices": [{
+                        "index": 0,
+                        "delta": {},
+                        "finish_reason": None
+                    }],
+                    "progress": {
+                        "stage": "llm_generation_start",
+                        "message": "Starting AI response generation with context"
+                    }
+                }
+
+                # For streaming, we need to use the context-enhanced query
+                # Since LlamaIndex doesn't support streaming RAG well, we'll reconstruct the contextualized prompt
+                
+                contextualized_query = await self._build_contextualized_query(query, rag_response)
+                logger.info(
+                    f"Contextualized query: {contextualized_query[:1000]}...")
+
+                # Now stream the LLM response with the contextualized query
+                response_gen = llm.stream_complete(contextualized_query)
+
+            except Exception as e:
+                logger.error(f"RAG processing failed: {e}")
+                # Fall back to direct LLM streaming
+                yield {
+                    "id": f"chatcmpl-{os.urandom(8).hex()}",
+                    "object": "chat.completion.chunk",
+                    "created": int(asyncio.get_event_loop().time()),
+                    "model": request.model or "auto",
+                    "provider": provider_info["provider"].value,
+                    "choices": [{
+                        "index": 0,
+                        "delta": {},
+                        "finish_reason": None
+                    }],
+                    "progress": {
+                        "stage": "rag_failed",
+                        "message": f"RAG failed, falling back to direct LLM: {str(e)}"
+                    }
+                }
+                response_gen = llm.stream_complete(query)
+
         else:
-            # Direct LLM streaming
+            logger.info("Using direct LLM streaming (no RAG)")
+            # Yield progress: Direct LLM call
+            yield {
+                "id": f"chatcmpl-{os.urandom(8).hex()}",
+                "object": "chat.completion.chunk",
+                "created": int(asyncio.get_event_loop().time()),
+                "model": request.model or "auto",
+                "provider": provider_info["provider"].value,
+                "choices": [{
+                    "index": 0,
+                    "delta": {},
+                    "finish_reason": None
+                }],
+                "progress": {
+                    "stage": "direct_llm",
+                    "message": "No RAG context available, using direct LLM"
+                }
+            }
             response_gen = llm.stream_complete(query)
 
-        # Fix: Handle synchronous generator from LlamaIndex
+        # Stream the actual LLM response
+        chunk_count = 0
         for chunk in response_gen:
+            chunk_count += 1
             yield {
                 "id": f"chatcmpl-{os.urandom(8).hex()}",
                 "object": "chat.completion.chunk",
@@ -1013,7 +1230,14 @@ class EnhancedChatBot:
             # Yield control to event loop
             await asyncio.sleep(0)
 
-        # Final chunk
+        logger.info(f"Streamed {chunk_count} chunks")
+
+        # Extract citations for final chunk metadata
+        citations = []
+        if rag_response and hasattr(rag_response, 'source_nodes') and rag_response.source_nodes:
+            citations = self._extract_citations_from_response(rag_response)
+
+        # Final chunk with citations metadata
         yield {
             "id": f"chatcmpl-{os.urandom(8).hex()}",
             "object": "chat.completion.chunk",
@@ -1027,7 +1251,8 @@ class EnhancedChatBot:
             }],
             "metadata": {
                 "used_notes": used_notes if used_notes else None,
-                "search_results": search_results if search_results else None
+                "search_results": search_results if search_results else None,
+                "citations": citations if citations else None
             }
         }
 
@@ -1057,22 +1282,38 @@ class EnhancedChatBot:
                 logger.warning(f"Some folders do not belong to user {user_id}")
                 return [], []
 
-        # Extract the last user message as the query
+        # Extract conversation context for better RAG search
+        # Include recent conversation history, not just the last user message
+        conversation_context = []
         user_query = ""
-        for msg in reversed(messages):
-            if msg.role == MessageRole.USER.value:
-                if isinstance(msg.content, str):
-                    user_query = msg.content
-                else:
-                    # Handle multimodal content
-                    for item in msg.content:
-                        if item.get("type") == "text":
-                            user_query = item.get("text", "")
-                            break
-                break
 
-        if not user_query:
+        # Get last 3 messages for context (including system, user, and assistant messages)
+        recent_messages = messages[-3:] if len(messages) > 3 else messages
+
+        for msg in recent_messages:
+            if isinstance(msg.content, str):
+                conversation_context.append(f"{msg.role}: {msg.content}")
+                if msg.role == MessageRole.USER.value:
+                    user_query = msg.content  # Keep updating to get the latest user query
+            else:
+                # Handle multimodal content
+                for item in msg.content:
+                    if item.get("type") == "text":
+                        text_content = item.get("text", "")
+                        conversation_context.append(
+                            f"{msg.role}: {text_content}")
+                        if msg.role == MessageRole.USER.value:
+                            user_query = text_content
+
+        # Use conversation context for search, fallback to user query
+        search_query = " ".join(
+            conversation_context) if conversation_context else user_query
+
+        if not search_query:
             return [], []
+
+        logger.info(
+            f"Using conversation context for RAG: {search_query[:100]}...")
 
         # Get note IDs based on the priority logic
         available_note_ids = get_notes_for_rag(user_id, folder_ids, note_ids)
@@ -1083,6 +1324,7 @@ class EnhancedChatBot:
             return [], []
 
         logger.info(f"Found {len(available_note_ids)} notes for RAG search")
+        # logger.info(f"Available note IDs: {available_note_ids}")
 
         # If user specified 3 or fewer specific note IDs, use them all without similarity filtering
         # This ensures that when a user asks about specific notes, we use exactly those notes
@@ -1092,24 +1334,34 @@ class EnhancedChatBot:
             top_notes = available_note_ids
         else:
             # Get most related notes using embedding similarity
+            logger.info(f"Starting embedding similarity search...")
             from src.utility.note_utils import get_most_related_notes
             # Dynamically adjust max_notes based on available notes
             max_notes_to_retrieve = min(
                 5, max(3, len(available_note_ids) // 3))
+            logger.info(
+                f"Will retrieve top {max_notes_to_retrieve} most similar notes")
             top_notes = get_most_related_notes(
-                user_query, available_note_ids, max_notes=max_notes_to_retrieve)
+                search_query, available_note_ids, max_notes=max_notes_to_retrieve)
+            logger.info(
+                f"Similarity search completed. Selected notes: {top_notes}")
 
         # Create documents from notes
         documents = []
         for note_id in top_notes:
+            logger.info(f"Processing note {note_id} for RAG context...")
             text = get_note_text(note_id)
             if text:
+                logger.info(
+                    f"Note {note_id} text length: {len(text)} characters")
                 doc = Document(
                     text=text,
                     metadata={"note_id": note_id,
                               "source": "note", "user_id": user_id}
                 )
                 documents.append(doc)
+            else:
+                logger.warning(f"Note {note_id} has no text content")
 
         logger.info(f"Retrieved {len(documents)} documents for context")
         return documents, top_notes
@@ -1144,17 +1396,16 @@ class EnhancedChatBot:
             documents.append(doc)
         return documents
 
-    async def _build_query_engine(self, documents: List[Document], llm: LLM) -> RetrieverQueryEngine:
-        """Build query engine from context documents"""
+    async def _build_query_engine(self, documents: List[Document], llm: LLM) -> CitationQueryEngine:
+        """Build CitationQueryEngine from context documents"""
         # Create index
         index = VectorStoreIndex.from_documents(documents)
 
-        # Create retriever
-        retriever = index.as_retriever(similarity_top_k=10)
-
-        # Create query engine
-        query_engine = RetrieverQueryEngine.from_args(
-            retriever=retriever,
+        # Create CitationQueryEngine with proper citation support
+        query_engine = CitationQueryEngine.from_args(
+            index,
+            similarity_top_k=5,  # Get top 5 most relevant chunks
+            citation_chunk_size=512,  # Size of citation chunks
             llm=llm
         )
 
@@ -1163,20 +1414,40 @@ class EnhancedChatBot:
     async def _generate_response(self, request: ChatCompletionRequest, query_engine,
                                  provider_info: Dict, used_notes: List[int],
                                  search_results: List[Dict]) -> ChatCompletionResponse:
-        """Generate non-streaming response"""
+        """Generate non-streaming response with proper citations"""
 
         # Convert messages to query
         query = self._messages_to_query(request.messages)
 
+        logger.info(f"=== RAG QUERY DEBUG ===")
+        logger.info(f"Original query: {query}")
+
+        rag_response = None
         if query_engine:
-            # Use RAG with context
-            response = query_engine.query(query)
-            answer = str(response)
+            # Use CitationQueryEngine with automatic citations
+            logger.info(f"Using CitationQueryEngine with {len(used_notes)} notes")
+            rag_response = query_engine.query(query)
+            answer = str(rag_response)
+
+            # Log the citation information
+            if hasattr(rag_response, 'source_nodes'):
+                logger.info(
+                    f"CitationQueryEngine used {len(rag_response.source_nodes)} source chunks")
+                # Log first 3 chunks
+                for i, node in enumerate(rag_response.source_nodes[:3]):
+                    logger.info(f"Source chunk {i+1}: {node.text[:200]}...")
+
+            logger.info(f"Citation response: {answer[:500]}...")
         else:
             # Direct LLM call
+            logger.info("Using direct LLM call (no citations)")
             llm = provider_info["llm"]
-            response = llm.complete(query)
-            answer = str(response)
+            rag_response = llm.complete(query)
+            answer = str(rag_response)
+            logger.info(f"Direct response: {answer[:500]}...")
+
+        # Extract citations from the response
+        citations = self._extract_citations_from_response(rag_response) if rag_response else []
 
         # Get token usage
         token_counter = self.provider_manager.token_counter
@@ -1205,59 +1476,9 @@ class EnhancedChatBot:
             }],
             usage=usage,
             used_notes=used_notes if used_notes else None,
-            search_results=search_results if search_results else None
+            search_results=search_results if search_results else None,
+            citations=citations if citations else None  # Add citations to response
         )
-
-    async def _stream_response(self, request: ChatCompletionRequest, query_engine: Optional[RetrieverQueryEngine],
-                               provider_info: Dict, used_notes: List[int],
-                               search_results: List[Dict]) -> AsyncGenerator:
-        """Generate streaming response"""
-
-        # Convert messages to query
-        query = self._messages_to_query(request.messages)
-
-        llm = provider_info["llm"]
-
-        if query_engine:
-            # Use RAG with context - note: streaming RAG is complex,
-            # for now we'll do direct streaming
-            response_gen = llm.stream_complete(query)
-        else:
-            # Direct LLM streaming
-            response_gen = llm.stream_complete(query)
-
-        # Yield streaming chunks
-        async for chunk in response_gen:
-            yield {
-                "id": f"chatcmpl-{os.urandom(8).hex()}",
-                "object": "chat.completion.chunk",
-                "created": int(asyncio.get_event_loop().time()),
-                "model": request.model or "auto",
-                "provider": provider_info["provider"].value,
-                "choices": [{
-                    "index": 0,
-                    "delta": {
-                        "content": str(chunk.delta)
-                    },
-                    "finish_reason": None
-                }]
-            }
-
-        # Final chunk
-        yield {
-            "id": f"chatcmpl-{os.urandom(8).hex()}",
-            "object": "chat.completion.chunk",
-            "created": int(asyncio.get_event_loop().time()),
-            "model": request.model or "auto",
-            "provider": provider_info["provider"].value,
-            "choices": [{
-                "index": 0,
-                "delta": {},
-                "finish_reason": "stop"
-            }],
-            "used_notes": used_notes if used_notes else None,
-            "search_results": search_results if search_results else None
-        }
 
     def _messages_to_query(self, messages: List[ChatMessage]) -> str:
         """Convert OpenAI messages format to query string"""
@@ -1280,13 +1501,54 @@ class EnhancedChatBot:
 
         return "\n".join(query_parts)
 
+    async def _build_contextualized_query(self, original_query: str, rag_response) -> str:
+        """Build a contextualized query by extracting context from RAG response"""
+        try:
+            context_parts = []
+
+            # Extract context from source nodes if available
+            if hasattr(rag_response, 'source_nodes') and rag_response.source_nodes:
+                context_parts.append(
+                    "Based on the following information from sources:")
+                context_parts.append("")
+
+                # Use top 5 most relevant and number them for citation
+                for i, node in enumerate(rag_response.source_nodes[:5]):
+                    source_num = i + 1
+                    note_id = node.metadata.get('note_id', 'unknown')
+                    
+                    context_parts.append(
+                        f"=== Source [{source_num}] (Note ID: {note_id}) ===")
+                    context_parts.append(node.text.strip())
+                    context_parts.append("")
+
+                context_parts.append("===")
+                context_parts.append("")
+                context_parts.append(
+                    "Based on the above sources, please answer the following question:")
+                context_parts.append(original_query)
+            else:
+                # No source nodes, use the original query
+                return original_query
+
+            contextualized = "\n".join(context_parts)
+
+            # Log the contextualized query for debugging
+            logger.info(f"=== CONTEXTUALIZED QUERY ===")
+            logger.info(
+                contextualized[:2000] + "..." if len(contextualized) > 2000 else contextualized)
+            logger.info("=== END CONTEXTUALIZED QUERY ===")
+
+            return contextualized
+
+        except Exception as e:
+            logger.error(f"Failed to build contextualized query: {e}")
+            return original_query
+
     def list_providers(self) -> Dict[str, List[str]]:
         """List available providers and models"""
         return self.provider_manager.list_available_providers()
 
 
 # Global instance
-enhanced_chat_bot = EnhancedChatBot()
-enhanced_chat_bot = EnhancedChatBot()
-enhanced_chat_bot = EnhancedChatBot()
 enhanced_chat_bot = EnhancedChatBot()

@@ -131,17 +131,22 @@ async def chat_completions():
 
     try:
         data = await request.get_json()
+        logger.info("request data, with the message truncated: " +
+                    json.dumps(data, indent=2, ensure_ascii=False)[:1000]
+                    )
 
-        # Validate user_id if enable_rag is not explicitly False
-        enable_rag = data.get("enable_rag", True)
-        if enable_rag and not data.get("user_id"):
+        # Validate user_id - it's always required for verification purposes
+        if not data.get("user_id"):
             return jsonify({
                 "error": {
-                    "message": "user_id is required when RAG is enabled",
+                    "message": "user_id is always required for verification purposes",
                     "type": "invalid_request_error",
                     "code": "missing_required_parameter"
                 }
             }), 400
+
+        # Get enable_rag flag
+        enable_rag = data.get("enable_rag", True)
 
         # Convert request to our format
         messages = []
@@ -187,7 +192,12 @@ async def chat_completions():
             return Response(generate(), mimetype="text/event-stream")
         else:
             response = await enhanced_chat_bot.chat_completion(chat_request)
-            return jsonify(response.__dict__)
+            # Convert the response to a proper dict, ensuring citations are serialized
+            response_dict = response.__dict__.copy()
+            if response_dict.get('citations'):
+                # Citations are already dictionaries from _extract_citations_from_response
+                response_dict['citations'] = response_dict['citations']
+            return jsonify(response_dict)
 
     except ValueError as e:
         return jsonify({
@@ -305,12 +315,14 @@ async def enhanced_chat():
             response = await enhanced_chat_bot.chat_completion(chat_request)
 
             # Format response for backward compatibility
+            citations_serialized = response.citations if response.citations else None
             return jsonify({
                 "answer": response.choices[0]["message"]["content"],
                 "provider": response.provider,
                 "model": response.model,
                 "used_notes": response.used_notes,
                 "search_results": response.search_results,
+                "citations": citations_serialized,
                 "usage": response.usage.__dict__ if response.usage else None
             })
 
@@ -411,5 +423,218 @@ async def get_search_cache_stats():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
+@app.route("/admin/embed-user-notes", methods=["POST"])
+async def embed_user_notes():
+    """
+    Admin endpoint to create embeddings for all notes of a user
+    Useful for legacy users who don't have embeddings yet
+    """
+    try:
+        data = await request.get_json()
+        user_id = data.get("user_id")
+
+        if not user_id:
+            return jsonify({
+                "error": "user_id is required"
+            }), 400
+
+        # Get all note IDs for the user
+        from src.utility.postgres import get_notes_for_rag
+        note_ids = get_notes_for_rag(user_id, folder_ids=None, note_ids=None)
+
+        if not note_ids:
+            return jsonify({
+                "message": f"No notes found for user {user_id}",
+                "embedded_notes": 0
+            })
+
+        # Check which notes need embeddings
+        from src.utility.postgres import get_notes_without_embeddings
+        notes_without_embeddings = get_notes_without_embeddings(note_ids)
+
+        if not notes_without_embeddings:
+            return jsonify({
+                "message": f"All {len(note_ids)} notes for user {user_id} already have embeddings",
+                "embedded_notes": 0
+            })
+
+        # Create embeddings for notes that don't have them
+        successfully_embedded = 0
+        failed_notes = []
+
+        for note_id in notes_without_embeddings:
+            try:
+                from src.utility.note_utils import create_and_save_embeddings
+                create_and_save_embeddings(note_id)
+                successfully_embedded += 1
+                logger.info(f"Created embeddings for note {note_id}")
+            except Exception as e:
+                logger.error(
+                    f"Failed to create embeddings for note {note_id}: {e}")
+                failed_notes.append(note_id)
+
+        return jsonify({
+            "message": f"Embedding process completed for user {user_id}",
+            "total_notes": len(note_ids),
+            "notes_needing_embeddings": len(notes_without_embeddings),
+            "successfully_embedded": successfully_embedded,
+            "failed_notes": failed_notes
+        })
+
+    except Exception as e:
+        logger.error(f"Error in embed_user_notes: {e}")
+        return jsonify({
+            "error": f"Failed to embed user notes: {str(e)}"
+        }), 500
+
+
+@app.route("/admin/embed-all-notes", methods=["POST"])
+async def embed_all_notes():
+    """
+    Admin endpoint to create embeddings for all notes in the system
+    Use with caution - this can be expensive and time-consuming
+    """
+    try:
+        data = await request.get_json()
+        # Safety check - require explicit confirmation
+        confirm = data.get("confirm_embed_all", False)
+
+        if not confirm:
+            return jsonify({
+                "error": "This operation can be expensive. Set 'confirm_embed_all': true to proceed"
+            }), 400
+
+        # Get all note IDs in the system
+        from src.utility.postgres import get_db_connection
+
+        with get_db_connection() as conn:
+            with conn.cursor() as cursor:
+                cursor.execute("""
+                    SELECT id FROM note_v1 
+                    WHERE completed = true 
+                    AND "ownerId" IS NOT NULL
+                    ORDER BY id
+                """)
+                all_notes = [row[0] for row in cursor.fetchall()]
+
+        if not all_notes:
+            return jsonify({
+                "message": "No notes found in the system",
+                "embedded_notes": 0
+            })
+
+        # Check which notes need embeddings
+        from src.utility.postgres import get_notes_without_embeddings
+        notes_without_embeddings = get_notes_without_embeddings(all_notes)
+
+        if not notes_without_embeddings:
+            return jsonify({
+                "message": f"All {len(all_notes)} notes in the system already have embeddings",
+                "embedded_notes": 0
+            })
+
+        # Create embeddings in batches to avoid overwhelming the system
+        successfully_embedded = 0
+        failed_notes = []
+        batch_size = 10  # Process 10 notes at a time
+
+        for i in range(0, len(notes_without_embeddings), batch_size):
+            batch = notes_without_embeddings[i:i + batch_size]
+            logger.info(f"Processing batch {i//batch_size + 1}: notes {batch}")
+
+            for note_id in batch:
+                try:
+                    from src.utility.note_utils import create_and_save_embeddings
+                    create_and_save_embeddings(note_id)
+                    successfully_embedded += 1
+                    logger.info(f"Created embeddings for note {note_id}")
+                except Exception as e:
+                    logger.error(
+                        f"Failed to create embeddings for note {note_id}: {e}")
+                    failed_notes.append(note_id)
+
+            # Small delay between batches to avoid rate limiting
+            import asyncio
+            await asyncio.sleep(1)
+
+        return jsonify({
+            "message": "System-wide embedding process completed",
+            "total_notes": len(all_notes),
+            "notes_needing_embeddings": len(notes_without_embeddings),
+            "successfully_embedded": successfully_embedded,
+            "failed_notes": failed_notes
+        })
+
+    except Exception as e:
+        logger.error(f"Error in embed_all_notes: {e}")
+        return jsonify({
+            "error": f"Failed to embed all notes: {str(e)}"
+        }), 500
+
+
+@app.route("/notes/create-embeddings", methods=["POST"])
+async def create_note_embeddings():
+    """
+    Create embeddings for one or more notes
+    This endpoint should be called by the backend when notes are completed
+    """
+    try:
+        data = await request.get_json()
+        note_ids = data.get("note_ids", [])
+
+        # Support both single note_id and note_ids array for flexibility
+        if "note_id" in data and not note_ids:
+            note_ids = [data["note_id"]]
+
+        if not note_ids:
+            return jsonify({
+                "error": "Either 'note_id' or 'note_ids' array is required"
+            }), 400
+
+        results = []
+        for note_id in note_ids:
+            try:
+                from src.utility.postgres import get_note_text
+                note_text = get_note_text(note_id)
+
+                if not note_text:
+                    results.append({
+                        "note_id": note_id,
+                        "status": "error",
+                        "message": "Note not found or has no content"
+                    })
+                    continue
+
+                from src.utility.note_utils import create_and_save_embeddings
+                embeddings = create_and_save_embeddings(note_id)
+
+                results.append({
+                    "note_id": note_id,
+                    "status": "success",
+                    "embedding_sections": len(embeddings)
+                })
+
+            except Exception as e:
+                results.append({
+                    "note_id": note_id,
+                    "status": "error",
+                    "message": str(e)
+                })
+
+        return jsonify({
+            "message": f"Processed {len(note_ids)} notes",
+            "results": results
+        })
+
+    except Exception as e:
+        logger.error(f"Error in create_note_embeddings: {e}")
+        return jsonify({
+            "error": f"Failed to create embeddings: {str(e)}"
+        }), 500
+
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001)
+    logger.info("Starting YouWoAI ML Server...")
+    logger.info("Server will be available at: http://0.0.0.0:5001")
+    app.run(host="0.0.0.0", port=5001, debug=True)

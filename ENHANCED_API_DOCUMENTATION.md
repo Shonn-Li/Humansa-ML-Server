@@ -469,22 +469,41 @@ If no provider is specified, the system will automatically select the best avail
 4. **DeepSeek**
 5. **xAI**
 
-## Node ID Context
+## Note-Based Context System
 
-The system can use YouWoAI's note system for additional context:
+### Current RAG Implementation
 
-```json
-{
-  "messages": [{ "role": "user", "content": "What did I plan for my trip?" }],
-  "note_ids": [1, 2, 3, 4, 5]
-}
-```
+When `note_ids` are provided, the system:
 
-The system will:
+1. **Note Content Retrieval**: For each note ID, fetches content using `get_note_text(note_id)` which returns formatted text:
+   ```
+   AI Content:
+   {current_prompt_content}
+   
+   UserContent:
+   {assembled_transcript_from_all_parts}
+   ```
 
-1. Find the most relevant notes using semantic similarity
-2. Include the content as context
-3. Return which notes were used in the response
+2. **Context Selection**: 
+   - If ≤3 note IDs provided: Uses all notes without similarity filtering
+   - If >3 note IDs provided: Uses semantic similarity search to select most relevant notes
+
+3. **Document Creation**: Each note's formatted content becomes a LlamaIndex Document for RAG retrieval
+
+4. **Query Processing**: User messages are converted to a query string and processed against the note context
+
+### Important Context Behavior
+
+- **No Conversation History Embedding**: The system does NOT embed conversation history for search
+- **Direct Note Reference**: Context comes from pre-specified `note_ids`, not from searching user's current message
+- **Dynamic Injection**: Note content is fetched fresh on each request, not stored in conversation history
+- **Formatted Context**: Notes are formatted with "AI Content:" and "UserContent:" sections, not as plain text
+
+### Context Storage
+
+- **RAG Content**: Stored in database as note content, fetched dynamically
+- **Conversation History**: Stored separately, contains only user/assistant messages
+- **No Persistence**: RAG context is not persisted in conversation, re-fetched each time
 
 ## Error Handling
 
