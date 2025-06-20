@@ -146,8 +146,46 @@ ORDER BY "order"
     return "\n".join(lst)
 
 
+def save_embeddings_with_chunks(note_id: int, embeddings_data: List[tuple]):
+    """
+    Save embeddings with chunk text and source to embedding_v1 table
+    embeddings_data: List of (embedding_vector, chunk_text, source) tuples
+    """
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            # Delete existing embeddings for this note
+            cursor.execute(
+                "DELETE FROM embedding_v1 WHERE note_id = %s", (note_id,))
+
+            # Insert new embeddings with chunk text and source
+            for section_id, (embedding, chunk_text, source) in enumerate(embeddings_data):
+                # Convert to pgvector format
+                embedding_str = "[" + ",".join(map(str, embedding)) + "]"
+                cursor.execute(
+                    """
+                    INSERT INTO embedding_v1 (note_id, section_id, embedding, chunk_text, source, last_updated)
+                    VALUES (%s, %s, %s::vector, %s, %s, NOW())
+                """,
+                    (note_id, section_id, embedding_str, chunk_text, source),
+                )
+
+            conn.commit()
+            logger.info(
+                f"Saved {len(embeddings_data)} embeddings with chunks for note {note_id}")
+    except Exception as e:
+        logger.error(f"Error saving embeddings with chunks: {e}")
+        if conn:
+            conn.rollback()
+        raise
+    finally:
+        if conn:
+            conn.close()
+
+
 def save_embeddings(note_id: int, embeddings: List[List[float]]):
-    """Save embeddings to embedding_v1 table using pgvector format"""
+    """Save embeddings to embedding_v1 table using pgvector format (legacy function)"""
     conn = None
     try:
         conn = get_db_connection()
@@ -254,6 +292,50 @@ def vector_similarity_search(query_embedding: List[float], note_ids: List[int], 
 
     except Exception as e:
         logger.error(f"Error in vector similarity search: {e}")
+        return []
+    finally:
+        if conn:
+            conn.close()
+
+
+def vector_chunk_similarity_search(query_embedding: List[float], note_ids: List[int], top_k: int = 20) -> List[Tuple[int, int, float, str, str]]:
+    """
+    Perform chunk-level similarity search using pgvector
+    Returns list of (note_id, section_id, similarity, chunk_text, source) tuples
+    This gets the most relevant CHUNKS across all notes, not just the top notes
+    """
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            # Convert query embedding to pgvector format
+            query_embedding_str = '[' + \
+                ','.join(map(str, query_embedding)) + ']'
+
+            # Get the top chunks directly with pre-stored chunk text
+            query = """
+                SELECT 
+                    e.note_id,
+                    e.section_id,
+                    1 - (e.embedding <=> %s::vector) as similarity,
+                    COALESCE(e.chunk_text, '') as chunk_text,
+                    COALESCE(e.source, 'unknown') as source
+                FROM embedding_v1 e
+                WHERE e.note_id = ANY(%s)
+                  AND e.chunk_text IS NOT NULL  -- Only get chunks with text
+                ORDER BY similarity DESC
+                LIMIT %s
+            """
+
+            cursor.execute(query, (query_embedding_str, note_ids, top_k))
+            results = cursor.fetchall()
+
+            logger.info(
+                f"Vector chunk search found {len(results)} similar chunks with stored text")
+            return results
+
+    except Exception as e:
+        logger.error(f"Error in vector chunk similarity search: {e}")
         return []
     finally:
         if conn:
@@ -789,7 +871,7 @@ def get_notes_metadata_batch(note_ids: List[int]) -> Dict[int, Dict[str, Any]]:
     # Build metadata for each note
     for note in notes:
         note_id = note['id']
-        
+
         # Extract title from content
         title = f"Note {note_id}"
         if note_id in parts_map and parts_map[note_id]:
@@ -814,12 +896,347 @@ def get_notes_metadata_batch(note_ids: List[int]) -> Dict[int, Dict[str, Any]]:
     for note_id in note_ids:
         if note_id not in result:
             result[note_id] = {
-                "note_id": note_id, 
+                "note_id": note_id,
                 "title": f"Note {note_id}",
                 "exists": False
             }
 
     return result
+
+
+def get_note_content_separate(note_id: int) -> tuple[str, str, str]:
+    """
+    Get note content separated into AI content (summary) and user content
+    Returns: (ai_content, user_content, note_type)
+    """
+    with get_db_connection() as conn:
+        with conn.cursor() as cursor:
+            # Get note basic info and check if it has a noteType field
+            cursor.execute(
+                """
+                SELECT "promptContent", 
+                       CASE 
+                           WHEN EXISTS(SELECT 1 FROM information_schema.columns 
+                                     WHERE table_name = 'note_v1' AND column_name = 'noteType') 
+                           THEN "noteType" 
+                           ELSE 'text'
+                       END as note_type
+                FROM note_v1 
+                WHERE id = %s
+            """,
+                (note_id,),
+            )
+            result = cursor.fetchone()
+
+            if not result:
+                return "", "", "text"
+
+            prompt_content, note_type = result
+
+            # Extract AI content (summary) from prompt content
+            ai_content = ""
+            if prompt_content and isinstance(prompt_content, dict):
+                if (
+                    "currentPromptContent" in prompt_content
+                    and prompt_content["currentPromptContent"]
+                ):
+                    ai_content = prompt_content["currentPromptContent"].get(
+                        "content", ""
+                    )
+
+            # Get user content (parts + images)
+            user_content_parts = []
+
+            # Get prefix images (not associated with any part)
+            cursor.execute(
+                """
+                SELECT "imageURL", "imageText", "latex"
+                FROM image_v1
+                WHERE "noteId" = %s AND "partId" IS NULL
+                ORDER BY id
+            """,
+                (note_id,),
+            )
+            prefix_images = cursor.fetchall()
+
+            # Add prefix images
+            for img_url, img_text, is_latex in prefix_images:
+                if img_text:
+                    user_content_parts.append(img_text)
+
+            # Get parts in order
+            cursor.execute(
+                """
+                SELECT id, "text"
+                FROM part_v1
+                WHERE "noteId" = %s
+                ORDER BY "order"
+            """,
+                (note_id,),
+            )
+            parts = cursor.fetchall()
+
+            # Process each part and its images
+            for part_id, part_text in parts:
+                # Add part text
+                if part_text:
+                    user_content_parts.append(part_text)
+
+                # Get images for this part
+                cursor.execute(
+                    """
+                    SELECT "imageURL", "imageText", "latex"
+                    FROM image_v1
+                    WHERE "partId" = %s
+                    ORDER BY id
+                """,
+                    (part_id,),
+                )
+                part_images = cursor.fetchall()
+
+                # Add part's images
+                for img_url, img_text, is_latex in part_images:
+                    if img_text:
+                        user_content_parts.append(img_text)
+
+            user_content = "\n\n".join(user_content_parts)
+
+            # Determine note type if not available in DB
+            if not note_type or note_type == 'text':
+                # Try to infer from content or use default
+                if 'youtube' in user_content.lower() or 'video' in user_content.lower():
+                    note_type = 'youtube'
+                elif any(ext in user_content.lower() for ext in ['.pdf', 'document', 'doc']):
+                    note_type = 'doc'
+                else:
+                    note_type = 'text'
+
+    return ai_content.strip(), user_content.strip(), note_type
+
+
+def keyword_search(query: str, user_id: int, limit: int = 20) -> List[tuple]:
+    """
+    Perform keyword search on chunk content using PostgreSQL's full-text search
+    with tsvector and GIN index for fast BM25-style search.
+
+    Args:
+        query: Search query string
+        user_id: User ID to filter results
+        limit: Maximum number of results to return
+
+    Returns:
+        List of (note_id, chunk_text, source, rank) tuples ordered by relevance
+    """
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            # Use PostgreSQL's full-text search with ranking
+            cursor.execute(
+                """
+                SELECT 
+                    e.note_id,
+                    e.chunk_text,
+                    e.source,
+                    ts_rank(e.chunk_tsv, to_tsquery('english', %s)) as rank
+                FROM embedding_v1 e
+                JOIN note_v1 n ON e.note_id = n.id
+                WHERE n."ownerId" = %s
+                    AND e.chunk_tsv @@ to_tsquery('english', %s)
+                    AND e.chunk_text IS NOT NULL
+                ORDER BY rank DESC
+                LIMIT %s
+            """,
+                (query, user_id, query, limit),
+            )
+
+            results = cursor.fetchall()
+            return results
+
+    except Exception as e:
+        logger.error(f"Error in keyword search: {e}")
+        return []
+    finally:
+        if conn:
+            conn.close()
+
+
+def advanced_keyword_search(query: str, user_id: int, source_filter: str = None, limit: int = 20) -> List[tuple]:
+    """
+    Advanced keyword search with source filtering and better query processing.
+
+    Args:
+        query: Search query string
+        user_id: User ID to filter results  
+        source_filter: Optional source filter ('summary', 'youtube', 'doc', 'text', etc.)
+        limit: Maximum number of results to return
+
+    Returns:
+        List of (note_id, chunk_text, source, rank, note_title) tuples ordered by relevance
+    """
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            # Process query for better full-text search
+            # Replace spaces with & for AND operations and handle quotes
+            processed_query = query.replace(' ', ' & ')
+
+            # Build the SQL query dynamically based on source filter
+            base_query = """
+                SELECT 
+                    e.note_id,
+                    e.chunk_text,
+                    e.source,
+                    ts_rank_cd(e.chunk_tsv, to_tsquery('english', %s)) as rank,
+                    n."noteTitle" as note_title
+                FROM embedding_v1 e
+                JOIN note_v1 n ON e.note_id = n.id
+                WHERE n."ownerId" = %s
+                    AND e.chunk_tsv @@ to_tsquery('english', %s)
+                    AND e.chunk_text IS NOT NULL
+            """
+
+            params = [processed_query, user_id, processed_query]
+
+            if source_filter:
+                base_query += " AND e.source = %s"
+                params.append(source_filter)
+
+            base_query += " ORDER BY rank DESC LIMIT %s"
+            params.append(limit)
+
+            cursor.execute(base_query, params)
+            results = cursor.fetchall()
+            return results
+
+    except Exception as e:
+        logger.error(f"Error in advanced keyword search: {e}")
+        return []
+    finally:
+        if conn:
+            conn.close()
+
+
+def get_note_title(note_id: int) -> str:
+    """Get just the note title efficiently without loading full content"""
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            # Try to get title from noteTitle field first (if it exists)
+            cursor.execute(
+                """
+                SELECT 
+                    COALESCE("noteTitle", '') as note_title,
+                    EXISTS(SELECT 1 FROM part_v1 WHERE "noteId" = %s LIMIT 1) as has_parts
+                FROM note_v1 
+                WHERE id = %s
+            """,
+                (note_id, note_id),
+            )
+            result = cursor.fetchone()
+            
+            if not result:
+                return f"Note {note_id}"
+            
+            note_title, has_parts = result
+            
+            # If we have a proper title, use it
+            if note_title and note_title.strip():
+                return note_title.strip()
+            
+            # Otherwise, get first line of first part as title (minimal query)
+            if has_parts:
+                cursor.execute(
+                    """
+                    SELECT "text"
+                    FROM part_v1
+                    WHERE "noteId" = %s
+                    ORDER BY "order"
+                    LIMIT 1
+                """,
+                    (note_id,),
+                )
+                first_part = cursor.fetchone()
+                
+                if first_part and first_part[0]:
+                    first_text = first_part[0].strip()
+                    lines = first_text.split('\n')
+                    if lines and len(lines[0].strip()) > 0:
+                        title_candidate = lines[0].strip()[:80]  # Limit to 80 chars
+                        return title_candidate
+            
+            return f"Note {note_id}"
+            
+    except Exception as e:
+        logger.error(f"Error getting note title for note {note_id}: {e}")
+        return f"Note {note_id}"
+    finally:
+        if conn:
+            conn.close()
+
+
+def get_note_titles_batch(note_ids: List[int]) -> Dict[int, str]:
+    """Get titles for multiple notes efficiently"""
+    if not note_ids:
+        return {}
+    
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            # Get note titles
+            cursor.execute(
+                """
+                SELECT id, COALESCE("noteTitle", '') as note_title
+                FROM note_v1 
+                WHERE id = ANY(%s)
+            """,
+                (note_ids,),
+            )
+            notes = cursor.fetchall()
+            
+            # Get first part text for notes without titles (single query)
+            notes_needing_titles = [note_id for note_id, title in notes if not title.strip()]
+            
+            titles_map = {}
+            
+            # Store existing titles
+            for note_id, title in notes:
+                if title and title.strip():
+                    titles_map[note_id] = title.strip()
+                else:
+                    titles_map[note_id] = f"Note {note_id}"  # Default
+            
+            # Get first part text for notes without proper titles
+            if notes_needing_titles:
+                cursor.execute(
+                    """
+                    SELECT DISTINCT ON ("noteId") "noteId", "text"
+                    FROM part_v1
+                    WHERE "noteId" = ANY(%s)
+                    ORDER BY "noteId", "order"
+                """,
+                    (notes_needing_titles,),
+                )
+                parts = cursor.fetchall()
+                
+                # Update titles with first line of content
+                for note_id, text in parts:
+                    if text and text.strip():
+                        first_line = text.strip().split('\n')[0].strip()[:80]
+                        if first_line:
+                            titles_map[note_id] = first_line
+            
+            return titles_map
+            
+    except Exception as e:
+        logger.error(f"Error getting note titles batch: {e}")
+        return {note_id: f"Note {note_id}" for note_id in note_ids}
+    finally:
+        if conn:
+            conn.close()
 
 
 # Example usage

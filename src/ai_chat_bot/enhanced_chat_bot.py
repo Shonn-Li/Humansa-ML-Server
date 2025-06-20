@@ -14,6 +14,7 @@ import os
 import json
 import asyncio
 import logging
+import time
 from typing import List, Dict, Any, Optional, AsyncGenerator, Union
 from dataclasses import dataclass
 from enum import Enum
@@ -91,7 +92,7 @@ except ImportError:
 
 from src.utility.postgres import get_embeddings, get_note_text, save_embeddings
 from src.utility.note_utils import (
-    create_and_save_embeddings,
+    create_and_save_embeddings_separate,
     retrieve_embedding,
     get_most_related_notes
 )
@@ -147,9 +148,9 @@ class ChatCompletionRequest:
     # Custom parameters
     user_id: Optional[int] = None  # Mandatory for RAG
     folder_ids: Optional[List[int]] = None  # Optional folder filter
-    # Optional specific note IDs to include
-    note_ids: Optional[List[int]] = None
+    note_ids: Optional[List[int]] = None  # Optional specific note IDs to include
     enable_rag: bool = True  # Option to disable RAG
+    enable_citations: bool = False  # NEW: Enable deep search with citations (slower)
     enable_web_search: bool = False
     enable_image_analysis: bool = False
     search_query: Optional[str] = None
@@ -746,7 +747,7 @@ class EnhancedChatBot:
         return citations
 
     async def chat_completion(self, request: ChatCompletionRequest) -> Union[ChatCompletionResponse, AsyncGenerator]:
-        """Main chat completion endpoint"""
+        """Main chat completion endpoint with two-tier search system"""
 
         # Validate user ID - always required for verification purposes
         if not request.user_id:
@@ -768,6 +769,16 @@ class EnhancedChatBot:
 
         Settings.llm = llm
 
+        # TWO-TIER SYSTEM DECISION
+        # If RAG is enabled but citations are NOT requested, use fast search
+        if request.enable_rag and not request.enable_citations:
+            logger.info("Using FAST RAG search (no re-embedding)")
+            return await self._fast_rag_search(request, llm)
+
+        # Otherwise, use the full citation engine (slower but with citations)
+        if request.enable_citations:
+            logger.info("Using DEEP search with CitationQueryEngine (with re-embedding)")
+        
         # For streaming, gather context first then stream
         if request.stream:
             # Gather context from various sources
@@ -786,6 +797,7 @@ class EnhancedChatBot:
                 context_documents.extend(note_docs)
 
             # 2. Process web search if enabled
+            # 2. Process web search if enabled
             if request.enable_web_search:
                 search_query = request.search_query or self._extract_search_query(
                     request.messages)
@@ -799,15 +811,15 @@ class EnhancedChatBot:
                 attachment_docs = await self.file_processor.process_attachments(request.attachments)
                 context_documents.extend(attachment_docs)
 
-            # Build query engine if we have context
+            # Build query engine if we have context (only for citation mode)
             query_engine = None
-            if context_documents:
+            if context_documents and request.enable_citations:
                 query_engine = await self._build_query_engine(context_documents, llm)
 
             # Return streaming response
             return self._stream_response(request, query_engine, provider_info, used_notes, search_results)
 
-        # Non-streaming path remains the same
+        # Non-streaming path for citation mode
         # Gather context from various sources
         context_documents = []
         used_notes = []
@@ -1257,160 +1269,212 @@ class EnhancedChatBot:
             }
         }
 
-    async def _get_user_note_context(self, messages: List[ChatMessage], user_id: int,
-                                     folder_ids: Optional[List[int]] = None,
-                                     note_ids: Optional[List[int]] = None) -> tuple:
-        """
-        Get context from user's notes based on priority:
-        1. If note_ids provided: use only those specific notes
-        2. If folder_ids provided: use only notes from those folders
-        3. Otherwise: use all notes from the user
-        """
-        from src.utility.postgres import (
-            get_notes_for_rag,
-            validate_user_exists,
-            validate_folders_belong_to_user
+    async def _fast_rag_search(self, request: ChatCompletionRequest, llm: LLM) -> Union[ChatCompletionResponse, AsyncGenerator]:
+        """Fast RAG search using pre-computed embeddings (no re-embedding)"""
+        
+        # Get query from messages - only use USER messages for search
+        user_messages = [msg.content for msg in request.messages if msg.role == "user"]
+        query = " ".join(user_messages) if user_messages else self._messages_to_query(request.messages)
+        
+        logger.info(f"=== FAST RAG QUERY EXTRACTION ===")
+        logger.info(f"Original conversation: {len(request.messages)} messages")
+        logger.info(f"User messages: {user_messages}")
+        logger.info(f"Search query: {query}")
+        logger.info("==================================")
+        
+        # Get note IDs for RAG
+        from src.utility.postgres import get_notes_for_rag
+        note_ids = get_notes_for_rag(
+            request.user_id,
+            request.folder_ids,
+            request.note_ids
         )
-
-        # Validate user exists
-        if not validate_user_exists(user_id):
-            logger.warning(f"User {user_id} not found")
-            return [], []
-
-        # Validate folders belong to user if provided (and no specific notes)
-        if folder_ids and not note_ids:
-            if not validate_folders_belong_to_user(user_id, folder_ids):
-                logger.warning(f"Some folders do not belong to user {user_id}")
-                return [], []
-
-        # Extract conversation context for better RAG search
-        # Include recent conversation history, not just the last user message
-        conversation_context = []
-        user_query = ""
-
-        # Get last 3 messages for context (including system, user, and assistant messages)
-        recent_messages = messages[-3:] if len(messages) > 3 else messages
-
-        for msg in recent_messages:
-            if isinstance(msg.content, str):
-                conversation_context.append(f"{msg.role}: {msg.content}")
-                if msg.role == MessageRole.USER.value:
-                    user_query = msg.content  # Keep updating to get the latest user query
+        
+        if not note_ids:
+            # No notes available, just use LLM directly
+            messages_text = self._messages_to_query(request.messages)
+            
+            if request.stream:
+                # Return streaming generator for no-context case
+                async def generate_no_context():
+                    response_stream = await llm.astream_complete(messages_text)
+                    async for chunk in response_stream:
+                        yield {
+                            "id": f"chatcmpl-{os.urandom(8).hex()}",
+                            "object": "chat.completion.chunk",
+                            "created": int(time.time()),
+                            "model": request.model or "unknown",
+                            "provider": llm.__class__.__name__.lower(),
+                            "choices": [{
+                                "index": 0,
+                                "delta": {"content": str(chunk.delta)},
+                                "finish_reason": None
+                            }]
+                        }
+                    # Final chunk
+                    yield {
+                        "id": f"chatcmpl-{os.urandom(8).hex()}",
+                        "object": "chat.completion.chunk", 
+                        "created": int(time.time()),
+                        "model": request.model or "unknown",
+                        "provider": llm.__class__.__name__.lower(),
+                        "choices": [{
+                            "index": 0,
+                            "delta": {},
+                            "finish_reason": "stop"
+                        }]
+                    }
+                return generate_no_context()
             else:
-                # Handle multimodal content
-                for item in msg.content:
-                    if item.get("type") == "text":
-                        text_content = item.get("text", "")
-                        conversation_context.append(
-                            f"{msg.role}: {text_content}")
-                        if msg.role == MessageRole.USER.value:
-                            user_query = text_content
-
-        # Use conversation context for search, fallback to user query
-        search_query = " ".join(
-            conversation_context) if conversation_context else user_query
-
-        if not search_query:
-            return [], []
-
-        logger.info(
-            f"Using conversation context for RAG: {search_query[:100]}...")
-
-        # Get note IDs based on the priority logic
-        available_note_ids = get_notes_for_rag(user_id, folder_ids, note_ids)
-
-        if not available_note_ids:
-            logger.info(
-                f"No notes found for user {user_id} with given criteria")
-            return [], []
-
-        logger.info(f"Found {len(available_note_ids)} notes for RAG search")
-        # logger.info(f"Available note IDs: {available_note_ids}")
-
-        # If user specified 3 or fewer specific note IDs, use them all without similarity filtering
-        # This ensures that when a user asks about specific notes, we use exactly those notes
-        if note_ids and len(note_ids) <= 3 and len(available_note_ids) <= 3:
-            logger.info(
-                f"Using all {len(available_note_ids)} specified notes without similarity filtering")
-            top_notes = available_note_ids
-        else:
-            # Get most related notes using embedding similarity
-            logger.info(f"Starting embedding similarity search...")
-            from src.utility.note_utils import get_most_related_notes
-            # Dynamically adjust max_notes based on available notes
-            max_notes_to_retrieve = min(
-                5, max(3, len(available_note_ids) // 3))
-            logger.info(
-                f"Will retrieve top {max_notes_to_retrieve} most similar notes")
-            top_notes = get_most_related_notes(
-                search_query, available_note_ids, max_notes=max_notes_to_retrieve)
-            logger.info(
-                f"Similarity search completed. Selected notes: {top_notes}")
-
-        # Create documents from notes
-        documents = []
-        for note_id in top_notes:
-            logger.info(f"Processing note {note_id} for RAG context...")
-            text = get_note_text(note_id)
-            if text:
-                logger.info(
-                    f"Note {note_id} text length: {len(text)} characters")
-                doc = Document(
-                    text=text,
-                    metadata={"note_id": note_id,
-                              "source": "note", "user_id": user_id}
+                # Non-streaming response
+                response_text = await llm.acomplete(messages_text)
+                return ChatCompletionResponse(
+                    id=f"chatcmpl-{os.urandom(8).hex()}",
+                    object="chat.completion",
+                    created=int(time.time()),
+                    model=request.model or "unknown",
+                    provider=llm.__class__.__name__.lower(),
+                    choices=[{
+                        "index": 0,
+                        "message": {
+                            "role": "assistant",
+                            "content": str(response_text)
+                        },
+                        "finish_reason": "stop"
+                    }],
+                    used_notes=[],
+                    search_results=[],
+                    citations=None
                 )
-                documents.append(doc)
-            else:
-                logger.warning(f"Note {note_id} has no text content")
+        
+        # Use pre-computed embeddings for CHUNK-level similarity search - much faster and more relevant!
+        from src.utility.note_utils import get_most_related_chunks_pgvector
+        top_chunks = get_most_related_chunks_pgvector(query, note_ids, max_chunks=15)  # Get top chunks across all notes
+        
+        logger.info(f"=== FAST RAG CONTEXT DEBUG ===")
+        logger.info(f"Query: {query}")
+        logger.info(f"Found {len(top_chunks)} relevant chunks from {len(note_ids)} notes")
+        
+        # Group chunks by note for better context organization
+        chunks_by_note = {}
+        for note_id, chunk_text, similarity in top_chunks:
+            if note_id not in chunks_by_note:
+                chunks_by_note[note_id] = []
+            chunks_by_note[note_id].append((chunk_text, similarity))
+        
+        logger.info(f"Chunks distributed across {len(chunks_by_note)} notes")
+        
+        # Build context from the most relevant chunks
+        context_texts = []
+        total_context_length = 0
+        max_context_length = 8000  # Keep context reasonable for fast response
+        
+        for note_id, chunk_text, similarity in top_chunks:
+            if total_context_length > max_context_length:
+                break
+                
+            # Add context WITHOUT note reference - cleaner for users
+            context_piece = chunk_text.strip()
+            context_texts.append(context_piece)
+            total_context_length += len(context_piece)
+            
+            logger.info(f"Added chunk from note {note_id} (similarity: {similarity:.3f}, length: {len(chunk_text)})")
+        
+        context_text = "\n\n".join(context_texts)
+        
+        logger.info(f"=== FINAL CONTEXT ===")
+        logger.info(f"Total context length: {len(context_text)} characters")
+        logger.info(f"Context preview: {context_text[:500]}...")
+        
+        # Build the prompt with the context
+        system_prompt = f"""You are an AI assistant helping with information from user notes. 
 
-        logger.info(f"Retrieved {len(documents)} documents for context")
-        return documents, top_notes
+Use the following context to answer the user's question. The context contains relevant excerpts from the user's notes:
 
-    def _extract_search_query(self, messages: List[ChatMessage]) -> str:
-        """Extract search query from messages"""
-        # Simple implementation - use the last user message
-        for msg in reversed(messages):
-            if msg.role == MessageRole.USER.value:
-                if isinstance(msg.content, str):
-                    return msg.content
-                else:
-                    # Handle multimodal content
-                    for item in msg.content:
-                        if item.get("type") == "text":
-                            return item.get("text", "")
-        return ""
+CONTEXT:
+{context_text}
 
-    def _create_search_documents(self, search_results: List[Dict[str, Any]]) -> List[Document]:
-        """Create documents from search results"""
-        documents = []
-        for result in search_results:
-            doc = Document(
-                text=f"Title: {result['title']}\nURL: {result['link']}\nContent: {result['snippet']}",
-                metadata={
-                    "title": result['title'],
-                    "url": result['link'],
-                    "source": "web_search",
-                    "search_source": result.get('source', 'unknown')
+Instructions:
+- Answer based primarily on the provided context
+- Be specific and reference relevant information naturally
+- If the context doesn't fully answer the question, say so honestly
+- Keep your response concise but helpful
+- Do not reference note IDs or technical identifiers"""
+        
+        logger.info(f"=== FINAL PROMPT ===")
+        logger.info(f"System prompt length: {len(system_prompt)} characters")
+        
+        # Build a simple prompt since the LLM message format is complex
+        full_prompt = f"{system_prompt}\n\nUser: {query}\nAssistant:"
+        
+        logger.info(f"=== FINAL PROMPT DEBUG ===")
+        logger.info(f"System prompt length: {len(system_prompt)} characters")
+        logger.info(f"User query: {query}")
+        logger.info("============================")
+
+        # Extract note IDs from the chunks for response metadata
+        used_note_ids = list(set(note_id for note_id, _, _ in top_chunks))
+
+        if request.stream:
+            # Return streaming generator
+            async def generate_with_context():
+                response_stream = await llm.astream_complete(full_prompt)
+                async for chunk in response_stream:
+                    yield {
+                        "id": f"chatcmpl-{os.urandom(8).hex()}",
+                        "object": "chat.completion.chunk",
+                        "created": int(time.time()),
+                        "model": request.model or "unknown",
+                        "provider": llm.__class__.__name__.lower(),
+                        "choices": [{
+                            "index": 0,
+                            "delta": {"content": str(chunk.delta)},
+                            "finish_reason": None
+                        }],
+                        "used_notes": used_note_ids,
+                        "search_results": [],
+                        "citations": None
+                    }
+                # Final chunk
+                yield {
+                    "id": f"chatcmpl-{os.urandom(8).hex()}",
+                    "object": "chat.completion.chunk",
+                    "created": int(time.time()),
+                    "model": request.model or "unknown", 
+                    "provider": llm.__class__.__name__.lower(),
+                    "choices": [{
+                        "index": 0,
+                        "delta": {},
+                        "finish_reason": "stop"
+                    }],
+                    "used_notes": used_note_ids,
+                    "search_results": [],
+                    "citations": None
                 }
+            return generate_with_context()
+        else:
+            # Non-streaming response
+            response = await llm.acomplete(full_prompt)
+            return ChatCompletionResponse(
+                id=f"chatcmpl-{os.urandom(8).hex()}",
+                object="chat.completion", 
+                created=int(time.time()),
+                model=request.model or "unknown",
+                provider=llm.__class__.__name__.lower(),
+                choices=[{
+                    "index": 0,
+                    "message": {
+                        "role": "assistant",
+                        "content": str(response)
+                    },
+                    "finish_reason": "stop"
+                }],
+                used_notes=used_note_ids,
+                search_results=[],
+                citations=None  # No citations in fast mode
             )
-            documents.append(doc)
-        return documents
 
-    async def _build_query_engine(self, documents: List[Document], llm: LLM) -> CitationQueryEngine:
-        """Build CitationQueryEngine from context documents"""
-        # Create index
-        index = VectorStoreIndex.from_documents(documents)
-
-        # Create CitationQueryEngine with proper citation support
-        query_engine = CitationQueryEngine.from_args(
-            index,
-            similarity_top_k=5,  # Get top 5 most relevant chunks
-            citation_chunk_size=512,  # Size of citation chunks
-            llm=llm
-        )
-
-        return query_engine
+    # ...existing code...
 
     async def _generate_response(self, request: ChatCompletionRequest, query_engine,
                                  provider_info: Dict, used_notes: List[int],
