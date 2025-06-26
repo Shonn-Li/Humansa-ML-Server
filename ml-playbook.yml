@@ -77,6 +77,8 @@
           GOOGLE_API_KEY={{ google_api_key }}
           ANTHROPIC_API_KEY={{ anthropic_api_key }}
           DEEPSEEK_API_KEY={{ deepseek_api_key }}
+          AZURE_INFERENCE_ENDPOINT={{ azure_inference_endpoint }}
+          AZURE_INFERENCE_CREDENTIAL={{ azure_inference_credential }}
 
 # Rolling update - 1 host at a time
 - name: ROLLING UPDATE ML SERVER

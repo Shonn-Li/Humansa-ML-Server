@@ -1,42 +1,21 @@
-name: Build and Push ML Server Docker Image
+name: "[DEPRECATED] Build ML Server Docker Image - Use release-* tags instead"
+
+# This workflow is deprecated. Use release-* tags instead of build-* tags.
+# The release workflow now handles both building and deployment.
 
 on:
   push:
     tags:
       - "build-*"
 
-permissions:
-  contents: read
-  packages: write
-
 jobs:
-  build-and-push:
+  deprecated-notice:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2.1.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_PAT || secrets.GITHUB_TOKEN }} # Use PAT if available
-
-      - name: Extract version number
-        id: get_version
-        run: echo "version=$(echo ${{ github.ref }} | sed -e 's|refs/tags/build-||')" >> $GITHUB_ENV
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          platforms: linux/amd64,linux/arm64
-          tags: ghcr.io/shonn-li/youwoai-ml-server:${{ env.version }}
-
-      - name: Pull the Docker image to verify permissions
+      - name: Deprecated workflow notice
         run: |
-          docker pull ghcr.io/shonn-li/youwoai-ml-server:${{ env.version }}
-          docker images
+          echo "⚠️  This build workflow is DEPRECATED!"
+          echo "Please use 'release-*' tags instead of 'build-*' tags."
+          echo "The release workflow now handles both building and deployment sequentially."
+          echo "Example: git tag release-1.0.0 && git push origin release-1.0.0"
+          exit 1
