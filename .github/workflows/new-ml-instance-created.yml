@@ -105,4 +105,6 @@ jobs:
             xai_api_key=${{ secrets.XAI_API_KEY }}
             google_api_key=${{ secrets.GOOGLE_API_KEY }}
             anthropic_api_key=${{ secrets.ANTHROPIC_API_KEY }}
-            deepseek_api_key=${{ secrets.DEEPSEEK_API_KEY }}"  || [ $? -eq 2 ]
+            deepseek_api_key=${{ secrets.DEEPSEEK_API_KEY }}
+            azure_inference_endpoint=${{ secrets.AZURE_INFERENCE_ENDPOINT }}
+            azure_inference_credential=${{ secrets.AZURE_INFERENCE_CREDENTIAL }}"  || [ $? -eq 2 ]

@@ -12,6 +12,12 @@ This is an **enhanced** machine learning inference server built with [Quart](htt
 - **📝 Note Context**: Integration with YouWoAI note system
 - **🔗 Link Analysis**: YouTube, Bilibili, web content analysis
 
+## One liner startup
+
+```bash
+python3 -m venv youwo-ml-venv && source youwo-ml-venv/bin/activate &&python -m src.main
+```
+
 ## 🔧 Setup (Local Development)
 
 ### 1. Create and activate virtual environment
@@ -149,12 +155,6 @@ Frontend/Backend → ML Server (Port 5001)
                     ├── File Processing
                     ├── Note Database
                     └── Link Analysis
-```
-
-## One liner startup
-
-```bash
-python3 -m venv youwo-ml-venv && source youwo-ml-venv/bin/activate &&python -m src.main
 ```
 
 ### 🐳 Running with Docker
