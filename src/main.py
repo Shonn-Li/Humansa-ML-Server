@@ -119,20 +119,16 @@ def create_app():
         logger.error(f"🚨 UNHANDLED EXCEPTION: {error}")
         logger.error(f"Request method: {request.method}")
         logger.error(f"Request URL: {request.url}")
-        try:
-            request_data = await request.get_json() if request.content_type == 'application/json' else None
-            logger.error(f"Request data: {request_data}")
-        except:
-            logger.error("Could not parse request data")
-
+        logger.error(f"Request data: {await request.get_data()}")
         import traceback
-        traceback.print_exc()
+        logger.error(traceback.format_exc())
+        return jsonify({"error": "Internal server error"}), 500
 
-        return jsonify({
-            "error": str(error),
-            "status": "error",
-            "type": "unhandled_exception"
-        }), 500
+    # Simple health endpoint for Docker healthcheck
+    @app.route("/health", methods=["GET"])
+    async def health_check():
+        """Simple health check endpoint for Docker"""
+        return jsonify({"status": "healthy", "service": "youwoai-ml-server"}), 200
 
     # Add debug route
     @app.route("/debug/info", methods=["GET"])
@@ -202,37 +198,19 @@ def register_chat_endpoints(app):
                         # Get the streaming response from handle_chat_request
                         stream_response = await modular_chat_endpoint.handle_chat_request(request_data)
 
-                        # Handle different response types
-                        if hasattr(stream_response, '__aiter__'):
-                            # It's an async generator
-                            async for chunk in stream_response:
-                                chunk_count += 1
-                                if chunk_count <= 3:  # Log first 3 chunks
-                                    truncated_chunk = truncate_dict(
-                                        chunk, max_length=200)
-                                    logger.info(
-                                        f"📦 Stream chunk {chunk_count}: {json.dumps(truncated_chunk)}")
-                                elif chunk_count == 4:
-                                    logger.info(
-                                        f"📦 ... (logging first 3 chunks only, total so far: {chunk_count})")
+                        # The stream_response should be an async generator
+                        async for chunk in stream_response:
+                            chunk_count += 1
+                            if chunk_count <= 3:  # Log first 3 chunks
+                                truncated_chunk = truncate_dict(
+                                    chunk, max_length=200)
+                                logger.info(
+                                    f"📦 Stream chunk {chunk_count}: {json.dumps(truncated_chunk)}")
+                            elif chunk_count == 4:
+                                logger.info(
+                                    f"📦 ... (logging first 3 chunks only, total so far: {chunk_count})")
 
-                                yield f"data: {json.dumps(chunk)}\n\n"
-                        else:
-                            # It's a regular response, convert to streaming format
-                            logger.info("Converting non-streaming response to streaming format")
-                            if isinstance(stream_response, dict) and 'choices' in stream_response:
-                                for i, choice in enumerate(stream_response['choices']):
-                                    chunk = {
-                                        "id": stream_response.get("id", ""),
-                                        "object": "chat.completion.chunk",
-                                        "choices": [{
-                                            "index": i,
-                                            "delta": {"content": choice.get("message", {}).get("content", "")},
-                                            "finish_reason": "stop"
-                                        }]
-                                    }
-                                    chunk_count += 1
-                                    yield f"data: {json.dumps(chunk)}\n\n"
+                            yield f"data: {json.dumps(chunk)}\n\n"
 
                         logger.info(
                             f"✅ Streaming complete: {chunk_count} chunks sent")
@@ -599,9 +577,6 @@ app = create_app()
 
 if __name__ == "__main__":
     logger.info("=== YouWoAI ML Server Starting ===")
-    logger.info("🚀 MODULAR IMPLEMENTATION V1 - NEW ARCHITECTURE")
-    logger.info("📍 This is the NEW modular main.py, NOT the old ai_chat_bot!")
-    logger.info("🔥 If you see ai_chat_bot logs, the wrong version is running!")
     logger.info("Server will be available at: http://0.0.0.0:5001")
     logger.info("")
     logger.info("📋 V1 Endpoint Summary:")
@@ -624,11 +599,6 @@ if __name__ == "__main__":
     logger.info("   - ✅ Link analyzer: Independent module")
     logger.info("   - ✅ Embeddings: New modular architecture")
     logger.info("   - ✅ Citations: Streaming & non-streaming support")
-    logger.info("")
-    logger.info("🐳 Docker Check:")
-    logger.info("   - If running in Docker, ensure Dockerfile uses: python src/main.py")
-    logger.info("   - NOT: python -m src.ai_chat_bot.enhanced_chat_bot")
-    logger.info("   - Container should be rebuilt after code changes")
     logger.info("")
 
     app.run(host="0.0.0.0", port=5001, debug=True)
