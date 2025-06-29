@@ -1,7 +1,7 @@
 """
 New Modular Chat Endpoint - Integration with existing system
 
-This endpoint demonstrates the new modular architecture working alongside
+This endpoint demonstrates the new modular architecture working with
 the existing enhanced_chat_bot.py implementation for comparison and gradual migration.
 """
 
@@ -11,8 +11,9 @@ from chat.embedding.embedding_manager import embedding_manager
 from chat.rag.rag_processor import RAGProcessor
 from chat.provider.llm_provider import LLMProviderSelector
 from chat.citation import CitationEngine, StreamingCitationEngine
-from chat.router.intelligent_router_correct import IntelligentRouter
+from chat.router.intelligent_router import IntelligentRouter
 from chat.title.title_generator import title_generator
+from chat.query.query_transformer import QueryTransformer
 import os
 import json
 import logging
@@ -23,21 +24,6 @@ from typing import Dict, Any, List, Optional
 # Import our new modular system - fix paths
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-
-# Import for chat message handling
-try:
-    from llama_index.core.base.llms.types import ChatMessage, MessageRole
-except ImportError:
-    # Fallback if import fails
-    class MessageRole:
-        SYSTEM = "system"
-        USER = "user"
-        ASSISTANT = "assistant"
-
-    class ChatMessage:
-        def __init__(self, role, content):
-            self.role = role
-            self.content = content
 
 
 logger = logging.getLogger(__name__)
@@ -171,13 +157,15 @@ class ModularChatEndpoint:
         self.rag_processor = RAGProcessor()
         self.citation_engine = CitationEngine()
         self.streaming_citation_engine = StreamingCitationEngine()
-        self.router = None  # Will be initialized when needed for intelligent routing decisions
+        self.router = None  # Will be initialized when needed
+        self.query_transformer = QueryTransformer(
+            self.provider_selector)  # NEW: Query transformer
 
         # Configure Azure logging to reduce verbosity
         configure_azure_logging()
 
         logger.info(
-            "ModularChatEndpoint initialized with citation engines and router retriever support")
+            "ModularChatEndpoint initialized with citation engines, router retriever support, and query transformer")
 
     async def handle_chat_request(self, request_data: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -192,6 +180,7 @@ class ModularChatEndpoint:
             "enable_web_search": true,
             "enable_router_retriever": true,  // NEW: Use intelligent routing (default: true)
             "generate_title": false,  // NEW: Generate conversation title (default: false)
+            "enable_title_generation": false,  // Alternative parameter name for title generation
             "search_query": "optional custom search query",
             "stream": false,
             "note_ids": [1, 2, 3],
@@ -216,8 +205,9 @@ class ModularChatEndpoint:
         enable_web_search = request_data.get("enable_web_search", False)
         enable_router_retriever = request_data.get(
             "enable_router_retriever", True)  # Default True
-        # NEW: Generate conversation title
-        generate_title = request_data.get("generate_title", False)
+        # Support both parameter names for title generation
+        generate_title = request_data.get("generate_title", False) or request_data.get(
+            "enable_title_generation", False)
         # Optional custom search query
         search_query = request_data.get("search_query")
         stream = request_data.get("stream", False)  # Stream parameter
@@ -247,7 +237,7 @@ class ModularChatEndpoint:
         logger.info(
             f"User: {user_id}, RAG: {enable_rag}, Citations: {enable_citations}, WebSearch: {enable_web_search}, Stream: {stream}")
         logger.info(
-            f"Router Enabled: {enable_router_retriever}, Generate Title: {generate_title}")
+            f"Router Retriever: {enable_router_retriever}, Generate Title: {generate_title}")
         logger.info(f"Provider: {provider}, Model: {model}")
         logger.info(f"Attachments: {len(attachments)} files")
 
@@ -272,77 +262,121 @@ class ModularChatEndpoint:
 
             logger.info(f"✅ Selected: {provider_enum.value}")
 
-            # Initialize Intelligent Router (decision-maker only, not a retriever)
-            if enable_router_retriever and not self.router:
-                self.router = IntelligentRouter(
-                    provider_selector=self.provider_selector)
-                logger.info(
-                    "🎯 Intelligent Router initialized for decision-making")
+            # Phase 1.5: Query Transformation - NEW STEP!
+            logger.info("🔄 STARTING QUERY TRANSFORMATION...")
+            original_query = self._extract_last_user_message(messages)
 
-            # Phase 2: Intelligent Routing Decision (DECISION ONLY, NOT RETRIEVAL)
+            try:
+                transformation_result = await self.query_transformer.transform_query(
+                    original_query=original_query,
+                    messages=messages
+                )
+
+                condensed_query = transformation_result["condensed_query"]
+                transformation_success = transformation_result["transformation_success"]
+                context_messages_used = transformation_result["context_messages_used"]
+
+                if transformation_success:
+                    logger.info(
+                        f"✅ Query transformation successful using {context_messages_used} context messages")
+                    logger.info(f"Original: {original_query[:100]}...")
+                    logger.info(f"Condensed: {condensed_query[:100]}...")
+                    query = condensed_query  # Use the enriched query for everything
+                else:
+                    logger.info(
+                        f"⚠️ Query transformation failed, using original query: {transformation_result.get('fallback_reason', 'unknown')}")
+                    query = original_query
+
+            except Exception as e:
+                logger.error(f"❌ Query transformation error: {e}")
+                logger.info("Using original query as fallback")
+                query = original_query
+
+            # Initialize Pure Decision Router - MUST WORK!
+            if enable_router_retriever and not self.router:
+                try:
+                    self.router = IntelligentRouter(
+                        provider_selector=self.provider_selector
+                    )
+                    logger.info(
+                        "🎯 Pure Decision Router initialized successfully")
+                except RuntimeError as e:
+                    logger.error(
+                        f"🚨 CRITICAL: RouterQueryEngine failed to initialize: {e}")
+                    logger.error(
+                        "🔧 Disabling router and using original enable flags...")
+                    enable_router_retriever = False
+                    self.router = None
+
+            # Phase 2: Context Retrieval Strategy
             rag_context = None
             attachment_context = None
             websearch_context = None
             router_decision = None
-            query = self._extract_last_user_message(messages)
 
-            # Step 1: Router Decision - Override enable flags based on query analysis
+            # Determine which sources are enabled
+            available_sources = {
+                "rag": enable_rag,
+                "attachments": bool(attachments),
+                "web_search": enable_web_search
+            }
+
+            # Router-based decision vs parallel processing
             if enable_router_retriever and self.router:
                 logger.info(
-                    "🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING...")
+                    "🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING WITH CONDENSED QUERY...")
 
                 try:
-                    # Prepare client flags for router
-                    client_flags = {
-                        'enable_rag': enable_rag,
-                        'enable_web_search': enable_web_search,
-                        'enable_attachments': bool(attachments),
-                        'enable_citations': enable_citations
-                    }
+                    # Get pure routing decision using CONDENSED QUERY (no retrieval yet)
+                    router_decision = self.router.decide(
+                        query=query,  # Using condensed query for better routing decisions
+                        available_sources=available_sources,
+                        # Last 6 messages for context
+                        previous_messages=messages[-6:] if len(
+                            messages) > 6 else messages,
+                        # Pass ID parameters to force enable RAG when specific content is requested
+                        note_ids=note_ids,
+                        folder_ids=folder_ids,
+                        conversation_ids=conversation_ids
+                    )
 
-                    # Router makes decision on which sources to enable/disable
-                    router_decision = self.router.make_routing_decision(
-                        query, client_flags)
-
-                    # Apply router decision to override client flags (within constraints)
-                    enable_rag = router_decision.final_flags.get(
-                        'enable_rag', enable_rag)
-                    enable_web_search = router_decision.final_flags.get(
-                        'enable_web_search', enable_web_search)
-                    enable_citations = router_decision.final_flags.get(
-                        'enable_citations', enable_citations)
-                    # Attachments cannot be overridden if provided by client
-                    enable_attachments = bool(attachments)
+                    # Override enable flags based on router decision
+                    enable_rag = router_decision.enable_rag
+                    enable_web_search = router_decision.enable_web_search
+                    enable_attachments = router_decision.enable_attachments
 
                     logger.info(
-                        f"🎯 Router Decision: {router_decision.reasoning}")
+                        f"🎯 Router decision: RAG={enable_rag}, Web={enable_web_search}, Attachments={enable_attachments}")
                     logger.info(
-                        f"🔧 Final Flags: RAG={enable_rag}, WebSearch={enable_web_search}, Citations={enable_citations}, Attachments={enable_attachments}")
-                    if router_decision.changes_made:
-                        logger.info(
-                            f"📋 Router Changes: {', '.join(router_decision.changes_made)}")
+                        f"🧠 Router reasoning: {router_decision.reason}")
 
-                except Exception as e:
-                    logger.error(f"❌ Router decision failed: {e}")
-                    logger.info("🔄 Using original client flags...")
-                    # Keep original flags if router fails
+                except RuntimeError as e:
+                    logger.error(
+                        f"🚨 CRITICAL: RouterQueryEngine decision failed: {e}")
+                    logger.error(
+                        "🔧 This must be fixed - RouterQueryEngine is essential!")
+                    logger.error(
+                        "🔄 Disabling router for this request and using original flags...")
+                    enable_router_retriever = False
+                    router_decision = None
 
-            # Step 2: Context Retrieval Based on Final Flags
-            logger.info("⚡ STARTING CONTEXT RETRIEVAL BASED ON FINAL FLAGS...")
+            # Process contexts based on final enable flags (router or original)
+            logger.info("⚡ PROCESSING ENABLED SOURCES...")
 
-            # Create tasks for parallel execution based on final enable flags
+            # Create tasks for parallel execution
             tasks = []
 
-            # RAG Processing Task (if enabled after router decision)
+            # RAG Processing Task (if enabled)
             if enable_rag:
-                logger.info("🔍 STARTING RAG WITH EMBEDDED CHECKS...")
+                logger.info("🔍 STARTING RAG WITH CONDENSED QUERY...")
                 rag_task = self.rag_processor.process_rag_request(
                     messages=messages,
                     user_id=user_id,
                     note_ids=note_ids,
                     folder_ids=folder_ids,
                     conversation_ids=conversation_ids,
-                    top_k=20
+                    top_k=20,
+                    custom_query=query  # Use condensed query for better RAG results
                 )
                 tasks.append(("rag", rag_task))
 
@@ -358,18 +392,19 @@ class ModularChatEndpoint:
                 )
                 tasks.append(("attachments", attachment_task))
 
-            # Web Search Processing Task (if enabled after router decision)
+            # Web Search Processing Task (if enabled)
             if enable_web_search:
-                logger.info("🌐 STARTING WEB SEARCH...")
-                search_query_to_use = search_query or web_search_processor.extract_search_query(
-                    messages)
+                logger.info("🌐 STARTING WEB SEARCH WITH CONDENSED QUERY...")
+                # Use condensed query for better web search results, fallback to custom search_query if provided
+                # Use condensed query instead of extracting from messages
+                search_query_to_use = search_query or query
                 websearch_task = web_search_processor.search_web_content(
                     query=search_query_to_use,
                     num_results=5
                 )
                 tasks.append(("websearch", websearch_task))
 
-            # Execute tasks in parallel (if any)
+            # Execute tasks in parallel
             if tasks:
                 import asyncio
                 task_results = await asyncio.gather(
@@ -401,7 +436,7 @@ class ModularChatEndpoint:
                             f"🌐 WEB SEARCH COMPLETE: {websearch_context.total_results} results found ({cache_status})")
             else:
                 logger.info(
-                    "⚡ No context retrieval needed based on final flags")
+                    "⚡ No RAG, attachment, or web search processing needed")
 
             # Phase 3: Response Generation - Stream vs Non-Stream
             if stream:
@@ -475,6 +510,7 @@ class ModularChatEndpoint:
                 "context_sources": {
                     "rag_chunks": len(rag_context.chunks) if rag_context else 0,
                     "attachment_chunks": len(attachment_context.chunks) if attachment_context else 0,
+                    "attachment_image_chunks": len(attachment_context.image_chunks) if attachment_context else 0,
                     "websearch_chunks": len(websearch_context.results) if websearch_context else 0,
                     "total_citations": len(citation_result.sources)
                 },
@@ -494,6 +530,8 @@ class ModularChatEndpoint:
         context_parts = []
         query = None
 
+        logger.info("🔧 === CONTEXT BUILDING STAGE ===")
+
         # Add RAG context
         if rag_context and rag_context.chunks:
             has_context = True
@@ -501,16 +539,30 @@ class ModularChatEndpoint:
                 rag_context.chunks)
             context_parts.append(f"KNOWLEDGE BASE:\n{rag_context_text}")
             query = rag_context.query_used
+            logger.info(
+                f"📚 RAG CONTEXT ADDED: {len(rag_context.chunks)} chunks")
+            logger.info(f"📚 RAG Context preview: {rag_context_text[:200]}..." if len(
+                rag_context_text) > 200 else f"📚 RAG Context: {rag_context_text}")
 
-        # Add attachment context
-        if attachment_context and attachment_context.chunks:
+        # Add attachment context - PRIORITY: File attachments come first
+        if attachment_context and (attachment_context.chunks or attachment_context.image_chunks):
             has_context = True
             attachment_context_text = file_attachment_manager.chunks_to_context_text(
-                attachment_context.chunks)
-            context_parts.append(
-                f"FILE ATTACHMENTS:\n{attachment_context_text}")
+                attachment_context.chunks, attachment_context.image_chunks)
+            # INSERT AT BEGINNING
+            context_parts.insert(
+                0, f"FILE ATTACHMENTS:\n{attachment_context_text}")
             if not query:  # Use attachment query if no RAG query
                 query = attachment_context.query_used
+
+            logger.info(
+                f"📎 ATTACHMENT CONTEXT ADDED (PRIORITY - INSERTED AT BEGINNING):")
+            logger.info(
+                f"📎 - Text chunks: {len(attachment_context.chunks) if attachment_context.chunks else 0}")
+            logger.info(
+                f"📎 - Image chunks: {len(attachment_context.image_chunks) if attachment_context.image_chunks else 0}")
+            logger.info(f"📎 Attachment context preview: {attachment_context_text[:300]}..." if len(
+                attachment_context_text) > 300 else f"📎 Attachment context: {attachment_context_text}")
 
         # Add web search context
         if websearch_context and websearch_context.results:
@@ -521,12 +573,26 @@ class ModularChatEndpoint:
                 f"WEB SEARCH RESULTS:\n{websearch_context_text}")
             if not query:  # Use web search query if no other query
                 query = websearch_context.query_used
+            logger.info(
+                f"🌐 WEB SEARCH CONTEXT ADDED: {len(websearch_context.results)} results")
+            logger.info(f"🌐 Web search context preview: {websearch_context_text[:200]}..." if len(
+                websearch_context_text) > 200 else f"🌐 Web search context: {websearch_context_text}")
 
         if has_context:
             # With combined context
             combined_context = "\n\n".join(context_parts)
             if not query:
                 query = self._extract_last_user_message(messages)
+
+            logger.info("🎯 === FINAL COMBINED CONTEXT ===")
+            logger.info(
+                f"🎯 Context parts order: {[part.split(':')[0] for part in context_parts]}")
+            logger.info(
+                f"🎯 Total context length: {len(combined_context)} characters")
+            logger.info(f"🎯 Query used: {query}")
+            logger.info("🎯 Combined context preview (first 500 chars):")
+            logger.info(f"🎯 {combined_context[:500]}...")
+            logger.info("🎯 ================================")
 
             prompt = f"""You are an AI assistant. Use the following context to answer the user's question.
 
@@ -542,59 +608,39 @@ INSTRUCTIONS:
 - Keep your response helpful and concise
 
 ANSWER:"""
-
-            try:
-                # Log the completion start with essential info
-                provider_info = getattr(llm, 'model', 'unknown')
-                log_llm_completion_start("azure", provider_info, len(prompt))
-
-                response = await llm.acomplete(prompt)
-            except Exception as e:
-                logger.error(f"LLM completion failed: {e}")
-                return {
-                    "error": f"LLM completion failed: {str(e)}",
-                    "status": "error"
-                }
         else:
-            # Without context - use original messages to preserve system prompts
-            try:
-                # Convert messages to proper format for chat completion
-                chat_messages = []
-                for msg in messages:
-                    role = MessageRole.SYSTEM if msg.get("role") == "system" else MessageRole.USER if msg.get(
-                        "role") == "user" else MessageRole.ASSISTANT
-                    chat_messages.append(ChatMessage(
-                        role=role, content=msg.get("content", "")))
+            # Without context
+            query = self._extract_last_user_message(messages)
+            prompt = f"User: {query}\nAssistant:"
 
-                # Log the completion start with essential info
-                provider_info = getattr(llm, 'model', 'unknown')
-                total_content = sum(len(msg.get("content", ""))
-                                    for msg in messages)
-                log_llm_completion_start("azure", provider_info, total_content)
+        try:
+            # Log the completion start with essential info
+            provider_info = getattr(llm, 'model', 'unknown')
+            log_llm_completion_start("azure", provider_info, len(prompt))
 
-                response = await llm.achat(chat_messages)
-            except Exception as e:
-                logger.error(f"LLM chat completion failed: {e}")
-                return {
-                    "error": f"LLM chat completion failed: {str(e)}",
-                    "status": "error"
-                }
+            response = await llm.acomplete(prompt)
+            content = str(response)
 
-        # Extract content from response
-        content = str(response)
+            # Cleanup Azure sessions after completion
+            cleanup_azure_clients()
 
-        # Cleanup Azure sessions after completion
-        cleanup_azure_clients()
+            return {
+                "content": content,
+                "context_used": has_context,
+                "context_sources": {
+                    "rag_chunks": len(rag_context.chunks) if rag_context else 0,
+                    "attachment_chunks": len(attachment_context.chunks) if attachment_context else 0,
+                    "attachment_image_chunks": len(attachment_context.image_chunks) if attachment_context else 0
+                },
+                "status": "success"
+            }
 
-        return {
-            "content": content,
-            "context_used": has_context,
-            "context_sources": {
-                "rag_chunks": len(rag_context.chunks) if rag_context else 0,
-                "attachment_chunks": len(attachment_context.chunks) if attachment_context else 0
-            },
-            "status": "success"
-        }
+        except Exception as e:
+            logger.error(f"LLM completion failed: {e}")
+            return {
+                "error": f"LLM completion failed: {str(e)}",
+                "status": "error"
+            }
 
     async def _generate_direct_response_with_sources(self, rag_context, attachment_context, websearch_context, llm) -> Dict[str, Any]:
         """Generate response with source tracking (pseudo-citations)"""
@@ -603,6 +649,30 @@ ANSWER:"""
         all_chunks = []
         query = None
 
+        logger.info("🔧 === CONTEXT BUILDING STAGE (WITH SOURCES) ===")
+
+        # Add attachment context and chunks - PRIORITY: File attachments come first
+        if attachment_context and (attachment_context.chunks or attachment_context.image_chunks):
+            attachment_context_text = file_attachment_manager.chunks_to_context_text(
+                attachment_context.chunks, attachment_context.image_chunks)
+            # INSERT AT BEGINNING
+            context_parts.insert(
+                0, f"FILE ATTACHMENTS:\n{attachment_context_text}")
+            all_chunks.extend(attachment_context.chunks)
+            if attachment_context.image_chunks:
+                all_chunks.extend(attachment_context.image_chunks)
+            if not query:  # Use attachment query if no RAG query
+                query = attachment_context.query_used
+
+            logger.info(
+                f"📎 ATTACHMENT CONTEXT ADDED (PRIORITY - SOURCES VERSION):")
+            logger.info(
+                f"📎 - Text chunks: {len(attachment_context.chunks) if attachment_context.chunks else 0}")
+            logger.info(
+                f"📎 - Image chunks: {len(attachment_context.image_chunks) if attachment_context.image_chunks else 0}")
+            logger.info(f"📎 Attachment context preview: {attachment_context_text[:300]}..." if len(
+                attachment_context_text) > 300 else f"📎 Attachment context: {attachment_context_text}")
+
         # Add RAG context and chunks
         if rag_context and rag_context.chunks:
             rag_context_text = self.rag_processor.chunks_to_context_text(
@@ -610,16 +680,14 @@ ANSWER:"""
             context_parts.append(f"KNOWLEDGE BASE:\n{rag_context_text}")
             all_chunks.extend(rag_context.chunks)
             query = rag_context.query_used
+            logger.info(
+                f"📚 RAG CONTEXT ADDED (SOURCES VERSION): {len(rag_context.chunks)} chunks")
+            logger.info(f"📚 RAG Context preview: {rag_context_text[:200]}..." if len(
+                rag_context_text) > 200 else f"📚 RAG Context: {rag_context_text}")
 
-        # Add attachment context and chunks
-        if attachment_context and attachment_context.chunks:
-            attachment_context_text = file_attachment_manager.chunks_to_context_text(
-                attachment_context.chunks)
-            context_parts.append(
-                f"FILE ATTACHMENTS:\n{attachment_context_text}")
-            all_chunks.extend(attachment_context.chunks)
-            if not query:  # Use attachment query if no RAG query
-                query = attachment_context.query_used
+        logger.info(
+            f"🎯 SOURCES VERSION - Context parts order: {[part.split(':')[0] for part in context_parts]}")
+        logger.info(f"🎯 SOURCES VERSION - Total chunks: {len(all_chunks)}")
 
         if not context_parts:
             return {
@@ -673,21 +741,41 @@ ANSWER:"""
                     citations.append(citation)
                     citation_id += 1
 
-            # Add attachment citations
-            if attachment_context and attachment_context.chunks:
-                # Top 10 attachment sources
-                for chunk in attachment_context.chunks[:10]:
-                    citation = {
-                        "id": citation_id,
-                        "type": "file_attachment",
-                        "source_id": chunk.url,
-                        "text": chunk.chunk_text[:200] + "..." if len(chunk.chunk_text) > 200 else chunk.chunk_text,
-                        "similarity": chunk.similarity,
-                        "source_category": "file_attachment",
-                        "url": chunk.url
-                    }
-                    citations.append(citation)
-                    citation_id += 1
+            # Add attachment citations - PRIORITY: Images first, then text
+            if attachment_context and (attachment_context.chunks or attachment_context.image_chunks):
+                # Add image chunk citations first (always included)
+                if attachment_context.image_chunks:
+                    # Top 5 image chunks
+                    for chunk in attachment_context.image_chunks[:5]:
+                        citation = {
+                            "id": citation_id,
+                            "type": "file_attachment_image",
+                            "source_id": chunk.url,
+                            "text": chunk.chunk_text[:200] + "..." if len(chunk.chunk_text) > 200 else chunk.chunk_text,
+                            "similarity": chunk.similarity,
+                            "source_category": "file_attachment",
+                            "url": chunk.url,
+                            "is_image": True
+                        }
+                        citations.append(citation)
+                        citation_id += 1
+
+                # Add text chunk citations (similarity filtered)
+                if attachment_context.chunks:
+                    # Top 10 text chunks
+                    for chunk in attachment_context.chunks[:10]:
+                        citation = {
+                            "id": citation_id,
+                            "type": "file_attachment",
+                            "source_id": chunk.url,
+                            "text": chunk.chunk_text[:200] + "..." if len(chunk.chunk_text) > 200 else chunk.chunk_text,
+                            "similarity": chunk.similarity,
+                            "source_category": "file_attachment",
+                            "url": chunk.url,
+                            "is_image": False
+                        }
+                        citations.append(citation)
+                        citation_id += 1
 
             return {
                 "content": content,
@@ -696,6 +784,7 @@ ANSWER:"""
                 "context_sources": {
                     "rag_chunks": len(rag_context.chunks) if rag_context else 0,
                     "attachment_chunks": len(attachment_context.chunks) if attachment_context else 0,
+                    "attachment_image_chunks": len(attachment_context.image_chunks) if attachment_context else 0,
                     "total_citations": len(citations)
                 },
                 "status": "success"
@@ -744,8 +833,8 @@ ANSWER:"""
                 "rag_enabled": enable_rag,
                 "citations_enabled": enable_citations,
                 "web_search_enabled": enable_web_search,
-                "router_decision_used": router_decision is not None,
-                "router_decision_changes": router_decision.changes_made if router_decision else [],
+                "router_retriever_used": router_decision is not None,
+                "router_selected_sources": [s.value for s in router_decision.selected_sources] if router_decision else [],
                 "router_reasoning": router_decision.reasoning if router_decision else "",
                 "router_confidence": router_decision.confidence if router_decision else 0.0,
                 "used_notes": rag_context.used_note_ids if rag_context else [],
@@ -961,6 +1050,28 @@ ANSWER:"""
             has_context = False
             query = None
 
+            logger.info("🔧 === CONTEXT BUILDING STAGE (STREAMING) ===")
+
+            # Add attachment context - PRIORITY: File attachments come first
+            if attachment_context and (attachment_context.chunks or attachment_context.image_chunks):
+                has_context = True
+                attachment_context_text = file_attachment_manager.chunks_to_context_text(
+                    attachment_context.chunks, attachment_context.image_chunks)
+                context_parts.insert(0,
+                                     # INSERT AT BEGINNING
+                                     f"FILE ATTACHMENTS:\n{attachment_context_text}")
+                if not query:
+                    query = attachment_context.query_used
+
+                logger.info(
+                    f"📎 ATTACHMENT CONTEXT ADDED (PRIORITY - STREAMING VERSION):")
+                logger.info(
+                    f"📎 - Text chunks: {len(attachment_context.chunks) if attachment_context.chunks else 0}")
+                logger.info(
+                    f"📎 - Image chunks: {len(attachment_context.image_chunks) if attachment_context.image_chunks else 0}")
+                logger.info(f"📎 Attachment context preview: {attachment_context_text[:300]}..." if len(
+                    attachment_context_text) > 300 else f"📎 Attachment context: {attachment_context_text}")
+
             # Add RAG context
             if rag_context and rag_context.chunks:
                 has_context = True
@@ -968,16 +1079,10 @@ ANSWER:"""
                     rag_context.chunks)
                 context_parts.append(f"KNOWLEDGE BASE:\n{rag_context_text}")
                 query = rag_context.query_used
-
-            # Add attachment context
-            if attachment_context and attachment_context.chunks:
-                has_context = True
-                attachment_context_text = file_attachment_manager.chunks_to_context_text(
-                    attachment_context.chunks)
-                context_parts.append(
-                    f"FILE ATTACHMENTS:\n{attachment_context_text}")
-                if not query:
-                    query = attachment_context.query_used
+                logger.info(
+                    f"📚 RAG CONTEXT ADDED (STREAMING VERSION): {len(rag_context.chunks)} chunks")
+                logger.info(f"📚 RAG Context preview: {rag_context_text[:200]}..." if len(
+                    rag_context_text) > 200 else f"📚 RAG Context: {rag_context_text}")
 
             # Add web search context
             if websearch_context and websearch_context.results:
@@ -988,13 +1093,27 @@ ANSWER:"""
                     f"WEB SEARCH RESULTS:\n{websearch_context_text}")
                 if not query:
                     query = websearch_context.query_used
+                logger.info(
+                    f"🌐 WEB SEARCH CONTEXT ADDED (STREAMING): {len(websearch_context.results)} results")
+                logger.info(f"🌐 Web search context preview: {websearch_context_text[:200]}..." if len(
+                    websearch_context_text) > 200 else f"🌐 Web search context: {websearch_context_text}")
 
-            # Build the final prompt or use original messages
+            # Build the final prompt
             if has_context:
                 combined_context = "\n\n".join(context_parts)
                 if not query:
                     query = self._extract_last_user_message(
                         request_data.get("messages", []))
+
+                logger.info("🎯 === FINAL COMBINED CONTEXT (STREAMING) ===")
+                logger.info(
+                    f"🎯 Context parts order: {[part.split(':')[0] for part in context_parts]}")
+                logger.info(
+                    f"🎯 Total context length: {len(combined_context)} characters")
+                logger.info(f"🎯 Query used: {query}")
+                logger.info("🎯 Combined context preview (first 500 chars):")
+                logger.info(f"🎯 {combined_context[:500]}...")
+                logger.info("🎯 ================================")
 
                 prompt = f"""You are an AI assistant. Use the following context to answer the user's question.
 
@@ -1010,24 +1129,16 @@ INSTRUCTIONS:
 - Keep your response helpful and concise
 
 ANSWER:"""
-
-                # Use completion for context-based responses
-                stream_response = llm.stream_complete(prompt)
             else:
-                # Without context - use original messages to preserve system prompts
-                messages = request_data.get("messages", [])
-                chat_messages = []
-                for msg in messages:
-                    role = MessageRole.SYSTEM if msg.get("role") == "system" else MessageRole.USER if msg.get(
-                        "role") == "user" else MessageRole.ASSISTANT
-                    chat_messages.append(ChatMessage(
-                        role=role, content=msg.get("content", "")))
+                query = self._extract_last_user_message(
+                    request_data.get("messages", []))
+                prompt = f"User: {query}\nAssistant:"
 
-                # Use chat for preserving message structure
-                stream_response = llm.stream_chat(chat_messages)
-
-            # Use actual LLM streaming
+            # Use actual LLM streaming - use sync stream_complete like the old implementation
             try:
+                # Use synchronous streaming method (like the old enhanced_chat_bot.py)
+                stream_response = llm.stream_complete(prompt)
+
                 chunk_count = 0
                 for chunk in stream_response:
                     chunk_count += 1
@@ -1104,8 +1215,11 @@ ANSWER:"""
             # Final chunk with metadata and title
             final_metadata = {
                 "rag_enabled": bool(rag_context),
-                "router_decision_used": router_decision is not None,
-                "router_decision_changes": router_decision.changes_made if router_decision else [],
+                "web_search_enabled": bool(websearch_context),
+                "attachments_enabled": bool(attachment_context),
+                "router_used": router_decision is not None,
+                "router_reasoning": router_decision.reason if router_decision else None,
+                "router_confidence": router_decision.confidence if router_decision else None,
                 "used_notes": rag_context.used_note_ids if rag_context else [],
                 "used_conversations": rag_context.used_conversation_ids if rag_context else [],
                 "total_chunks": rag_context.total_chunks if rag_context else 0,
@@ -1146,6 +1260,21 @@ ANSWER:"""
                 }],
                 "error": str(e)
             }
+
+    def _create_message_context(self, router_decision, rag_context, attachment_context, websearch_context, note_ids=None, folder_ids=None, conversation_ids=None):
+        """Create context information for message tracking as per Message interface"""
+        return {
+            "noteIds": list(note_ids) if note_ids else (rag_context.used_note_ids if rag_context else []),
+            "folderIds": list(folder_ids) if folder_ids else [],
+            "conversationIds": list(conversation_ids) if conversation_ids else (rag_context.used_conversation_ids if rag_context else []),
+            "enableRAG": bool(rag_context),
+            "enableWebSearch": bool(websearch_context),
+            "enableCitations": True,  # Always enabled in this endpoint
+            # Additional router information
+            "routerUsed": router_decision is not None,
+            "routerReasoning": router_decision.reason if router_decision else None,
+            "routerConfidence": router_decision.confidence if router_decision else None
+        }
 
 
 # Initialize the modular chat endpoint instance

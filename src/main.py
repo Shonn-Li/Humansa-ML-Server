@@ -119,16 +119,20 @@ def create_app():
         logger.error(f"🚨 UNHANDLED EXCEPTION: {error}")
         logger.error(f"Request method: {request.method}")
         logger.error(f"Request URL: {request.url}")
-        logger.error(f"Request data: {await request.get_data()}")
-        import traceback
-        logger.error(traceback.format_exc())
-        return jsonify({"error": "Internal server error"}), 500
+        try:
+            request_data = await request.get_json() if request.content_type == 'application/json' else None
+            logger.error(f"Request data: {request_data}")
+        except:
+            logger.error("Could not parse request data")
 
-    # Simple health endpoint for Docker healthcheck
-    @app.route("/health", methods=["GET"])
-    async def health_check():
-        """Simple health check endpoint for Docker"""
-        return jsonify({"status": "healthy", "service": "youwoai-ml-server"}), 200
+        import traceback
+        traceback.print_exc()
+
+        return jsonify({
+            "error": str(error),
+            "status": "error",
+            "type": "unhandled_exception"
+        }), 500
 
     # Add debug route
     @app.route("/debug/info", methods=["GET"])
@@ -324,6 +328,45 @@ def register_chat_endpoints(app):
                 "error": f"Status check failed: {str(e)}",
                 "status": "error"
             }), 500
+
+    # =============================================
+    # CONVERSATION TITLE GENERATION ENDPOINTS
+    # =============================================
+
+    # Import title endpoints from the dedicated module
+    try:
+        from chat.title.title_endpoints import (
+            generate_conversation_title_endpoint,
+            generate_conversation_titles_batch_endpoint,
+            migrate_conversation_titles_endpoint,
+            title_health_check_endpoint
+        )
+
+        app.add_url_rule("/v1/conversation/generate-title", "generate_conversation_title",
+                         generate_conversation_title_endpoint, methods=["POST"])
+        app.add_url_rule("/v1/conversation/generate-titles-batch", "generate_conversation_titles_batch",
+                         generate_conversation_titles_batch_endpoint, methods=["POST"])
+        app.add_url_rule("/v1/conversation/migrate-titles", "migrate_conversation_titles",
+                         migrate_conversation_titles_endpoint, methods=["POST"])
+        app.add_url_rule("/v1/conversation/title-health", "title_health_check",
+                         title_health_check_endpoint, methods=["GET"])
+
+        logger.info("✅ Conversation title endpoints registered successfully")
+
+    except ImportError as e:
+        logger.error(f"❌ Failed to import conversation title endpoints: {e}")
+        # Fallback endpoints that return error messages
+
+        @app.route("/v1/conversation/generate-title", methods=["POST"])
+        @app.route("/v1/conversation/generate-titles-batch", methods=["POST"])
+        @app.route("/v1/conversation/migrate-titles", methods=["POST"])
+        @app.route("/v1/conversation/title-health", methods=["GET"])
+        async def title_endpoints_unavailable():
+            return jsonify({
+                "error": "Conversation title endpoints not available",
+                "reason": str(e),
+                "status": "error"
+            }), 503
 
 
 def register_preserved_endpoints(app):

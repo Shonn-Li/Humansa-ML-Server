@@ -39,15 +39,6 @@ except ImportError:
     logging.getLogger(__name__).warning(
         "LlamaIndex core schema not available - image processing will be limited")
 
-# Import Azure OpenAI for image processing (confirmed to work with vision models)
-try:
-    from llama_index.llms.azure_openai import AzureOpenAI
-    AZURE_OPENAI_AVAILABLE = True
-except ImportError:
-    AZURE_OPENAI_AVAILABLE = False
-    logging.getLogger(__name__).warning(
-        "Azure OpenAI not available - image processing will use fallback")
-
 # Import LlamaIndex file readers for PDF processing (separate from core schema)
 try:
     from llama_index.readers.file import PDFReader
@@ -537,6 +528,14 @@ class URLEmbeddingOperations:
 
             # Create embeddings using our OpenAI client
             chunks = self._chunk_document_content(file_content, url)
+            logger.info(f"📝 Created {len(chunks)} chunks from content (length: {len(file_content)} chars)")
+            
+            # Log first chunk for debugging
+            if chunks:
+                logger.info(f"🔍 First chunk preview: {chunks[0]['text'][:100]}...")
+            else:
+                logger.warning("⚠️ No chunks were created from content!")
+                logger.info(f"Content preview: {file_content[:200]}...")
 
             embeddings_data = []
             for chunk in chunks:
@@ -709,36 +708,44 @@ class URLEmbeddingOperations:
         return chunks
 
     async def _process_image_with_gpt4o_azure(self, image_path: str, url: str) -> str:
-        """Process image using Azure OpenAI GPT-4o mini via LlamaIndex blocks (proper vision support)"""
+        """
+        Process image using Azure OpenAI GPT-4o mini via LlamaIndex blocks (proper vision support)
+
+        NOTE: This function bypasses the cost-saving override that would normally redirect
+        azure_openai requests to azure_inference, because Azure AI Inference does not
+        support vision capabilities. Only Azure OpenAI has proper image processing support.
+        """
         if not LLAMAINDEX_SCHEMA_AVAILABLE:
             logger.warning(
                 "LlamaIndex ChatMessage/ImageBlock not available - falling back to simple description")
             return self._process_image_with_simple_description(image_path, url)
 
-        # IMPORTANT: Use Azure OpenAI directly - Azure AI Inference does NOT support vision despite accepting ImageBlocks
-        # This was confirmed through testing: Azure AI Inference returns "I can't analyze images" even with vision models
+        # Use Azure OpenAI (has proper vision support) instead of Azure AI Inference
+        # Import the LLM provider to get Azure OpenAI instance
         try:
-            # Check if Azure OpenAI is available
-            if not AZURE_OPENAI_AVAILABLE:
+            from ..provider.llm_provider import LLMProviderSelector
+            provider_selector = LLMProviderSelector()
+
+            # Check if Azure OpenAI is available and get the LLM instance
+            available_providers = provider_selector.get_available_providers()
+            if "azure_openai" not in available_providers:
                 logger.warning(
                     "Azure OpenAI not available - falling back to simple description")
                 return self._process_image_with_simple_description(image_path, url)
 
-            # Create Azure OpenAI LLM instance directly (bypasses the provider selector issue)
-            llm = AzureOpenAI(
-                azure_endpoint="https://youwoai-dev-resource.openai.azure.com/",
-                # Using same credential as inference
-                api_key=os.getenv("AZURE_INFERENCE_CREDENTIAL"),
-                api_version="2024-02-15-preview",
-                model="gpt-4o-mini",
-                engine="gpt-4o-mini",
-                temperature=0.7
-            )
-            logger.info(
-                "✅ Using Azure OpenAI directly for image processing (confirmed vision support)")
+            # FORCE Azure OpenAI for vision - bypass cost-saving override
+            # Use the dedicated vision method to avoid azure_inference override
+            try:
+                provider_enum, llm = provider_selector.force_provider_for_vision(
+                    "azure_openai", "gpt-4o-mini")
+                logger.info(
+                    "Using Azure OpenAI for image processing (proper vision support) - bypassing cost override")
+            except ValueError as e:
+                logger.warning(f"Failed to force Azure OpenAI for vision: {e}")
+                return self._process_image_with_simple_description(image_path, url)
 
         except Exception as e:
-            logger.error(f"Failed to initialize Azure OpenAI LLM: {e}")
+            logger.error(f"Failed to get Azure OpenAI LLM: {e}")
             return self._process_image_with_simple_description(image_path, url)
 
         try:
@@ -768,9 +775,22 @@ class URLEmbeddingOperations:
             extracted_content = response.message.content
             logger.info(
                 f"Received response from Azure OpenAI GPT-4o mini: {extracted_content[:100]}...")
+            
+            # Check if this is actually image content or an error message
+            is_vision_error = any(phrase in extracted_content.lower() for phrase in [
+                "can't view", "cannot view", "can't see", "cannot see", 
+                "can't process images", "cannot process images", "i'm sorry"
+            ]) if extracted_content else False
+            
+            if is_vision_error:
+                logger.error("🚫 Azure AI is returning vision error - image processing failed!")
+                logger.error(f"Error response: {extracted_content}")
+                return self._process_image_with_simple_description(image_path, url)
+                
             if extracted_content and extracted_content.strip():
                 logger.info(
-                    f"Successfully extracted content from image using Azure OpenAI GPT-4o mini: {len(extracted_content)} chars")
+                    f"✅ Successfully extracted content from image using Azure OpenAI GPT-4o mini: {len(extracted_content)} chars")
+                logger.info(f"🖼️ Image content preview: {extracted_content[:200]}...")
                 return extracted_content.strip()
             else:
                 logger.warning(
