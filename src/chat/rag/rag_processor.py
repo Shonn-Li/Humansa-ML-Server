@@ -45,36 +45,59 @@ class IDResolver:
                         folder_ids: Optional[List[int]] = None,
                         conversation_ids: Optional[List[int]] = None) -> ResolvedIDs:
         """
-        Master ID resolution with clear priority logic:
+        Master ID resolution with corrected scoped search logic:
 
-        Notes:
-        1. If note_ids provided: use them (validate ownership)
-        2. If folder_ids provided: get notes from folders  
-        3. If neither: get all user notes
+        CORRECTED LOGIC:
+        1. If ONLY user_id provided (no other IDs) → Full context search (all notes + all conversations)
+        2. If ANY specific IDs provided → ONLY search within those specific IDs, ignore others
+        3. No cross-contamination → Don't auto-include conversations when note_ids specified
 
-        Conversations:
-        1. If conversation_ids is None: get all user conversations with embeddings
-        2. If conversation_ids provided: use them (could be empty list)
+        Examples:
+        - user_id=3 only → All user's notes + all user's conversations
+        - note_ids=[1,2] → Only notes 1,2 + NO conversations (unless conversation_ids explicitly provided)
+        - folder_ids=[5] → Only notes from folder 5 + NO conversations (unless conversation_ids explicitly provided)
+        - conversation_ids=[10,11] → NO notes + only conversations 10,11
+        - note_ids=[1] + conversation_ids=[10] → Only note 1 + only conversation 10
         """
-        logger.info(f"=== ID RESOLUTION ===")
+        logger.info(f"=== ID RESOLUTION WITH CORRECTED SCOPED SEARCH ===")
         logger.info(f"User: {user_id}")
         logger.info(f"Note IDs: {note_ids}")
         logger.info(f"Folder IDs: {folder_ids}")
         logger.info(f"Conversation IDs: {conversation_ids}")
 
-        resolved_notes = self.postgres.resolve_note_ids(
-            user_id, note_ids, folder_ids)
-        resolved_conversations = self.postgres.resolve_conversation_ids(
-            user_id, conversation_ids)
+        # Check if any specific IDs are provided
+        has_specific_ids = note_ids is not None or folder_ids is not None or conversation_ids is not None
+
+        if has_specific_ids:
+            # SCOPED SEARCH: Only search within specified IDs
+            logger.info("🎯 SCOPED SEARCH: Using only specified IDs")
+            
+            # Resolve notes only if note_ids or folder_ids provided
+            if note_ids is not None or folder_ids is not None:
+                resolved_notes = self.postgres.resolve_note_ids(user_id, note_ids, folder_ids)
+            else:
+                resolved_notes = []  # No notes if not specified
+                
+            # Resolve conversations only if conversation_ids explicitly provided
+            if conversation_ids is not None:
+                resolved_conversations = self.postgres.resolve_conversation_ids(user_id, conversation_ids)
+            else:
+                resolved_conversations = []  # No conversations if not specified
+        else:
+            # FULL CONTEXT SEARCH: Get all user content
+            logger.info("🌐 FULL CONTEXT SEARCH: Getting all user content")
+            resolved_notes = self.postgres.resolve_note_ids(user_id, None, None)  # All notes
+            resolved_conversations = self.postgres.resolve_conversation_ids(user_id, None)  # All conversations
 
         resolved = ResolvedIDs(
             notes=resolved_notes,
             conversations=resolved_conversations
         )
 
-        logger.info(f"=== RESOLVED ===")
+        logger.info(f"=== RESOLVED WITH CORRECTED LOGIC ===")
         logger.info(f"Notes: {len(resolved.notes)}")
         logger.info(f"Conversations: {len(resolved.conversations)}")
+        logger.info(f"Search type: {'SCOPED' if has_specific_ids else 'FULL CONTEXT'}")
         logger.info(f"==================")
 
         return resolved
@@ -169,21 +192,32 @@ class RAGProcessor:
                                   note_ids: Optional[List[int]] = None,
                                   folder_ids: Optional[List[int]] = None,
                                   conversation_ids: Optional[List[int]] = None,
-                                  top_k: int = 20) -> RAGContext:
+                                  top_k: int = 20,
+                                  custom_query: Optional[str] = None) -> RAGContext:
         """
         Main RAG processing pipeline with optimized parallel processing:
-        1. Extract query from messages
+        1. Extract query from messages (or use custom_query if provided)
         2. PARALLEL: Generate query embedding + Resolve all IDs 
         3. Check embeddings for resolved IDs AFTER resolution
         4. Perform unified search with embedded query
         5. Return context
+
+        Args:
+            custom_query: If provided, use this query instead of extracting from messages.
+                         This enables using condensed/transformed queries for better RAG results.
         """
         logger.info("=== STARTING RAG REQUEST ===")
 
-        # Step 1: Extract query
-        query = self.searcher.extract_query_from_messages(messages)
+        # Step 1: Extract query (or use custom query)
+        if custom_query:
+            query = custom_query
+            logger.info(f"Using custom query for RAG: {query[:100]}...")
+        else:
+            query = self.searcher.extract_query_from_messages(messages)
+            logger.info(f"Extracted query from messages: {query[:100]}...")
+
         if not query:
-            logger.warning("No query extracted from messages")
+            logger.warning("No query available for RAG processing")
             return RAGContext(
                 chunks=[],
                 used_note_ids=[],

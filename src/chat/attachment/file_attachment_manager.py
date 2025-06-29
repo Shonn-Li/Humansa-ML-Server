@@ -31,17 +31,25 @@ logger = logging.getLogger(__name__)
 class AttachmentChunk:
     """Represents a chunk from a file attachment"""
     chunk_text: str
+    chunk_header: str  # "[ATTACHMENT] filename - description" per consultation
     url: str
     section_id: str
     similarity: float
-    metadata: Dict[str, Any]
+    is_image: bool = False  # NEW: Whether this chunk is from an image file
+    metadata: Dict[str, Any] = None
     source: str = "file_attachment"
+
+    def __post_init__(self):
+        if self.metadata is None:
+            self.metadata = {}
 
 
 @dataclass
 class AttachmentContext:
     """Container for all attachment-related context"""
     chunks: List[AttachmentChunk]
+    # NEW: Separate list for independent image chunks
+    image_chunks: List[AttachmentChunk]
     total_chunks: int
     urls_processed: List[str]
     urls_missing_embeddings: List[str]
@@ -61,7 +69,9 @@ class FileAttachmentManager:
 
     def __init__(self):
         self.max_chunks_per_url = 8  # Limit chunks per URL
-        self.similarity_threshold = 0.7  # Minimum similarity score
+        self.similarity_threshold = 0.7  # Minimum similarity score for additional chunks
+        # Lower threshold for explicit attachments
+        self.explicit_attachment_threshold = 0.5
         logger.info("FileAttachmentManager initialized")
 
     async def process_attachments(
@@ -96,6 +106,7 @@ class FileAttachmentManager:
             logger.info("No attachments provided")
             return AttachmentContext(
                 chunks=[],
+                image_chunks=[],  # NEW: Empty image chunks list
                 total_chunks=0,
                 urls_processed=[],
                 urls_missing_embeddings=[],  # No URLs to embed
@@ -111,6 +122,7 @@ class FileAttachmentManager:
             logger.warning("No valid URLs found in attachments")
             return AttachmentContext(
                 chunks=[],
+                image_chunks=[],  # NEW: Empty image chunks list
                 total_chunks=0,
                 urls_processed=[],
                 urls_missing_embeddings=[],  # No URLs to embed
@@ -157,8 +169,16 @@ class FileAttachmentManager:
         logger.info(
             f"🎯 File attachment processing complete: {len(all_chunks)} total chunks from {len(urls_processed)} URLs")
 
+        # NEW: Separate image chunks from text chunks
+        image_chunks = [chunk for chunk in all_chunks if chunk.is_image]
+        text_chunks = [chunk for chunk in all_chunks if not chunk.is_image]
+
+        logger.info(
+            f"📊 Chunk breakdown: {len(image_chunks)} image chunks, {len(text_chunks)} text chunks")
+
         return AttachmentContext(
-            chunks=all_chunks,
+            chunks=text_chunks,  # Only text chunks go through similarity search
+            image_chunks=image_chunks,  # Image chunks are always included
             total_chunks=len(all_chunks),
             urls_processed=urls_processed,
             # URLs that were newly embedded for this request
@@ -262,10 +282,12 @@ class FileAttachmentManager:
         top_k: int
     ) -> List[AttachmentChunk]:
         """
-        Process a single URL attachment:
+        Process a single URL attachment with special handling for images:
         1. Get all chunks for this URL
-        2. Perform relevance search within URL chunks
-        3. Return top-K most relevant chunks
+        2. Separate image chunks from text chunks
+        3. For text chunks: perform relevance search within URL chunks
+        4. For image chunks: always include (independent from similarity search)
+        5. Return combined chunks with proper priority
         """
         try:
             # Get all chunks for this URL
@@ -279,27 +301,78 @@ class FileAttachmentManager:
             logger.info(
                 f"🔍 Found {len(url_embeddings)} chunks for URL: {url[:50]}...")
 
-            # Perform similarity search within this URL's chunks
-            relevant_chunks = await self._search_within_url_chunks(
-                query, url_embeddings, top_k
-            )
+            # NEW: Separate image chunks from text chunks
+            image_chunks_data = []
+            text_chunks_data = []
 
-            # Convert to AttachmentChunk objects
+            for chunk_data in url_embeddings:
+                if self._is_image_chunk(url, chunk_data):
+                    image_chunks_data.append(chunk_data)
+                else:
+                    text_chunks_data.append(chunk_data)
+
+            logger.info(
+                f"📊 URL {url[:50]}... has {len(image_chunks_data)} image chunks, {len(text_chunks_data)} text chunks")
+
             attachment_chunks = []
-            for chunk_data, similarity in relevant_chunks:
+
+            # NEW: Process image chunks - ALWAYS include (no similarity search)
+            if image_chunks_data:
+                logger.info(
+                    f"📸 Processing {len(image_chunks_data)} image chunks - all will be included")
+
+            for chunk_data in image_chunks_data:
+                chunk_header = self._create_chunk_header(url, chunk_data)
+
                 attachment_chunk = AttachmentChunk(
                     chunk_text=chunk_data['chunk_text'],
+                    chunk_header=chunk_header,
                     url=url,
                     section_id=chunk_data.get('section_id', ''),
-                    similarity=similarity,
+                    # Max similarity for images (always relevant)
+                    similarity=1.0,
+                    is_image=True,  # NEW: Mark as image chunk
                     metadata={
                         'url': url,
                         'source': chunk_data.get('source', 'file_attachment'),
                         'section_id': chunk_data.get('section_id'),
-                        'original_metadata': chunk_data.get('metadata', {})
+                        'original_metadata': chunk_data.get('metadata', {}),
+                        'chunk_type': 'image'
                     }
                 )
                 attachment_chunks.append(attachment_chunk)
+                logger.info(
+                    f"✅ Added image chunk: {len(chunk_data['chunk_text'])} chars")
+
+            # Process text chunks - use similarity search with explicit attachment flag
+            if text_chunks_data:
+                logger.info(
+                    f"📄 Processing {len(text_chunks_data)} text chunks with explicit attachment logic")
+                relevant_text_chunks = await self._search_within_url_chunks(
+                    query, text_chunks_data, top_k, is_explicit_attachment=True
+                )
+
+                for chunk_data, similarity in relevant_text_chunks:
+                    chunk_header = self._create_chunk_header(url, chunk_data)
+
+                    attachment_chunk = AttachmentChunk(
+                        chunk_text=chunk_data['chunk_text'],
+                        chunk_header=chunk_header,
+                        url=url,
+                        section_id=chunk_data.get('section_id', ''),
+                        similarity=similarity,
+                        is_image=False,  # Mark as text chunk
+                        metadata={
+                            'url': url,
+                            'source': chunk_data.get('source', 'file_attachment'),
+                            'section_id': chunk_data.get('section_id'),
+                            'original_metadata': chunk_data.get('metadata', {}),
+                            'chunk_type': 'text'
+                        }
+                    )
+                    attachment_chunks.append(attachment_chunk)
+                    logger.info(
+                        f"✅ Added text chunk: {len(chunk_data['chunk_text'])} chars, similarity: {similarity:.3f}")
 
             return attachment_chunks
 
@@ -311,7 +384,8 @@ class FileAttachmentManager:
         self,
         query: str,
         url_chunks: List[Dict[str, Any]],
-        top_k: int
+        top_k: int,
+        is_explicit_attachment: bool = True
     ) -> List[Tuple[Dict[str, Any], float]]:
         """
         Perform similarity search within a specific URL's chunks
@@ -320,6 +394,7 @@ class FileAttachmentManager:
             query: Search query
             url_chunks: All chunks from a specific URL
             top_k: Number of top chunks to return
+            is_explicit_attachment: True if user explicitly attached this file
 
         Returns:
             List of (chunk_data, similarity_score) tuples
@@ -333,7 +408,7 @@ class FileAttachmentManager:
                 return []
 
             # Calculate similarity for each chunk
-            scored_chunks = []
+            all_scored_chunks = []
             for chunk in url_chunks:
                 chunk_embedding = chunk.get('embedding')
                 if not chunk_embedding:
@@ -342,13 +417,39 @@ class FileAttachmentManager:
                 # Calculate cosine similarity
                 similarity = self._cosine_similarity(
                     query_embedding, chunk_embedding)
+                all_scored_chunks.append((chunk, similarity))
 
-                # Only include chunks above similarity threshold
-                if similarity >= self.similarity_threshold:
-                    scored_chunks.append((chunk, similarity))
+            # Sort by similarity (highest first)
+            all_scored_chunks.sort(key=lambda x: x[1], reverse=True)
 
-            # Sort by similarity (highest first) and return top-K
-            scored_chunks.sort(key=lambda x: x[1], reverse=True)
+            # Apply filtering logic
+            scored_chunks = []
+
+            # For explicit attachments, always include at least the top chunk
+            if is_explicit_attachment and all_scored_chunks:
+                # Always include the highest scoring chunk
+                scored_chunks.append(all_scored_chunks[0])
+                logger.info(
+                    f"📎 Including top chunk for explicit attachment (similarity: {all_scored_chunks[0][1]:.3f})")
+
+                # Add additional chunks that meet the lower threshold for explicit attachments
+                threshold = self.explicit_attachment_threshold
+                for chunk, similarity in all_scored_chunks[1:]:
+                    if similarity >= threshold:
+                        scored_chunks.append((chunk, similarity))
+                        logger.info(
+                            f"📎 Including additional chunk (similarity: {similarity:.3f} >= {threshold})")
+                    if len(scored_chunks) >= top_k:
+                        break
+            else:
+                # Standard filtering: only chunks above regular threshold
+                threshold = self.similarity_threshold
+                for chunk, similarity in all_scored_chunks:
+                    if similarity >= threshold:
+                        scored_chunks.append((chunk, similarity))
+                    if len(scored_chunks) >= top_k:
+                        break
+
             return scored_chunks[:top_k]
 
         except Exception as e:
@@ -372,34 +473,62 @@ class FileAttachmentManager:
             logger.error(f"Error calculating cosine similarity: {e}")
             return 0.0
 
-    def chunks_to_context_text(self, chunks: List[AttachmentChunk], max_length: int = 4000) -> str:
+    def chunks_to_context_text(self, chunks: List[AttachmentChunk], image_chunks: List[AttachmentChunk] = None, max_length: int = 4000) -> str:
         """
-        Convert attachment chunks to context text for LLM
+        Convert attachment chunks to context text for LLM with PRIORITY ORDERING
+
+        CRITICAL: File attachments have priority and images are independent from similarity search
+
+        Per consultation guidance:
+        [ATTACHMENT] filename - description (IMAGE - always included)
+        <image content extracted via OCR/Vision>
+
+        [ATTACHMENT] filename - description (TEXT - similarity filtered)  
+        <first 300-500 tokens of chunk_text>
 
         Args:
-            chunks: List of attachment chunks
+            chunks: List of text attachment chunks (similarity filtered)
+            image_chunks: List of image attachment chunks (always included)
             max_length: Maximum character length for context
 
         Returns:
-            Formatted context text
+            Formatted context text with headers and chunk content, images first (NO PREFIX)
         """
-        if not chunks:
+        if not chunks and not image_chunks:
             return ""
 
-        context_parts = []
+        context_parts = []  # NO "FILE ATTACHMENTS:" prefix - handled by caller
         current_length = 0
 
-        for i, chunk in enumerate(chunks):
-            # Format chunk with source information
-            chunk_text = f"[FILE ATTACHMENT - {chunk.url}]\n{chunk.chunk_text}\n"
+        # PRIORITY 1: Image chunks ALWAYS come first (independent from similarity)
+        if image_chunks:
+            logger.info(
+                f"📸 Adding {len(image_chunks)} image chunks (always included)")
+            for chunk in image_chunks:
+                chunk_text = f"{chunk.chunk_header}\n{chunk.chunk_text[:500]}{'...' if len(chunk.chunk_text) > 500 else ''}\n"
 
-            if current_length + len(chunk_text) > max_length:
-                logger.info(
-                    f"Context truncated at {current_length} chars ({i} chunks)")
-                break
+                if current_length + len(chunk_text) > max_length:
+                    logger.info(
+                        f"📎 Context truncated at {current_length} chars (image chunks)")
+                    break
 
-            context_parts.append(chunk_text)
-            current_length += len(chunk_text)
+                context_parts.append(chunk_text)
+                current_length += len(chunk_text)
+
+        # PRIORITY 2: Text chunks (similarity filtered)
+        if chunks:
+            logger.info(
+                f"📄 Adding {len(chunks)} text chunks (similarity filtered)")
+            for i, chunk in enumerate(chunks):
+                chunk_text = f"{chunk.chunk_header}\n{chunk.chunk_text[:500]}{'...' if len(chunk.chunk_text) > 500 else ''}\n"
+
+                if current_length + len(chunk_text) > max_length:
+                    logger.info(
+                        f"📎 Context truncated at {current_length} chars ({i} text chunks)")
+                    break
+
+                context_parts.append(chunk_text)
+                current_length += len(chunk_text)
 
         return "\n".join(context_parts)
 
@@ -410,6 +539,116 @@ class FileAttachmentManager:
             "similarity_threshold": self.similarity_threshold,
             "status": "operational"
         }
+
+    def _create_chunk_header(self, url: str, chunk_data: Dict[str, Any]) -> str:
+        """
+        Create a lightweight chunk header for attachment chunks
+
+        Per consultation guidance:
+        "[ATTACHMENT] filename - description (≤ 120 chars)"
+
+        Args:
+            url: The file URL
+            chunk_data: Chunk metadata
+
+        Returns:
+            Formatted chunk header string
+        """
+        import os
+        from urllib.parse import urlparse, unquote
+
+        try:
+            # Extract filename from URL
+            parsed_url = urlparse(url)
+            filename = unquote(os.path.basename(parsed_url.path))
+
+            # If no filename in path, use the last part of URL
+            if not filename or filename == '/':
+                filename = url.split('/')[-1] if '/' in url else url
+
+            # Get file type/description
+            file_extension = os.path.splitext(
+                filename)[1].lower() if '.' in filename else ''
+
+            if file_extension in ['.pdf']:
+                description = "PDF document"
+            elif file_extension in ['.png', '.jpg', '.jpeg', '.gif', '.webp']:
+                description = "image (extracted via OCR)" if chunk_data.get(
+                    'source') == 'ocr' else "image"
+            elif file_extension in ['.doc', '.docx']:
+                description = "Word document"
+            elif file_extension in ['.txt']:
+                description = "text file"
+            elif file_extension in ['.md']:
+                description = "markdown file"
+            else:
+                description = "document"
+
+            # Add section info if available
+            section_id = chunk_data.get('section_id', '')
+            if section_id and section_id != '':
+                description = f"{description} - {section_id}"
+
+            # Format header with length limit (≤ 120 chars as per consultation)
+            header = f"[ATTACHMENT] {filename} - {description}"
+            if len(header) > 120:
+                # Truncate filename if too long
+                max_filename_length = 120 - \
+                    len(f"[ATTACHMENT]  - {description}")
+                if max_filename_length > 10:
+                    filename = filename[:max_filename_length-3] + "..."
+                    header = f"[ATTACHMENT] {filename} - {description}"
+                else:
+                    header = header[:117] + "..."
+
+            return header
+
+        except Exception as e:
+            logger.warning(f"Failed to create chunk header for {url}: {e}")
+            return f"[ATTACHMENT] {url[:50]}..." if len(url) > 50 else f"[ATTACHMENT] {url}"
+
+    def _is_image_chunk(self, url: str, chunk_data: Dict[str, Any]) -> bool:
+        """
+        Determine if a chunk is from an image file
+
+        Args:
+            url: The source URL
+            chunk_data: The chunk metadata
+
+        Returns:
+            True if this chunk is from an image file
+        """
+        try:
+            from urllib.parse import urlparse
+            import os
+
+            # Check URL extension
+            parsed_url = urlparse(url)
+            filename = os.path.basename(parsed_url.path)
+            file_extension = os.path.splitext(filename)[1].lower()
+
+            # Check if URL indicates image file
+            if file_extension in ['.png', '.jpg', '.jpeg', '.gif', '.webp']:
+                return True
+
+            # Check chunk metadata for image indicators
+            source = chunk_data.get('source', '')
+            if source == 'ocr' or 'image' in source.lower():
+                return True
+
+            # Check chunk content for image processing indicators
+            chunk_text = chunk_data.get('chunk_text', '')
+            if any(indicator in chunk_text.lower() for indicator in [
+                'image file from', 'extracted content from image',
+                'azure openai gpt-4o mini', 'image processing'
+            ]):
+                return True
+
+            return False
+
+        except Exception as e:
+            logger.warning(f"Error detecting image chunk for {url}: {e}")
+            return False
 
 
 # Global instance

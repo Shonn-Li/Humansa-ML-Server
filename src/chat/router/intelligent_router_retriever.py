@@ -206,42 +206,18 @@ class IntelligentRouterRetriever:
             return await self._heuristic_routing(query, available_sources)
 
     async def _heuristic_routing(self, query: str, available_sources: Dict[str, bool]) -> RouterDecision:
-        """Improved heuristic routing with better conversational detection"""
-        query_lower = query.lower().strip()
+        """Fallback heuristic routing when LlamaIndex router fails"""
+        query_lower = query.lower()
         selected_sources = []
         reasoning_parts = []
 
-        # Simple conversational patterns that DON'T need external sources
-        simple_conversational = [
-            "hello", "hi", "hey", "good morning", "good afternoon", "good evening",
-            "how are you", "what's up", "what are you talking about", "huh", "what",
-            "yes", "no", "ok", "okay", "thanks", "thank you", "please", "sorry",
-            "i don't understand", "that doesn't make sense", "explain", "clarify"
-        ]
-
-        # Check if this is a simple conversational message
-        is_simple_conversation = any(
-            pattern in query_lower for pattern in simple_conversational)
-
-        if is_simple_conversation:
-            # For simple conversations, don't use any external sources
-            reasoning_parts.append(
-                "simple conversational message - no external sources needed")
-            return RouterDecision(
-                selected_sources=[],  # Empty - no external sources
-                reasoning=f"Smart routing: {', '.join(reasoning_parts)}",
-                confidence=0.9
-            )
-
-        # Advanced keyword detection for complex queries
-        personal_keywords = ["my", "i", "me", "our", "we", "us",
-                             "remember", "note", "conversation", "discussed", "talked",
-                             "previous", "earlier", "before", "last time", "history"]
-        file_keywords = ["document", "pdf", "file", "attachment", "image",
-                         "uploaded", "shared", "screenshot", "photo"]
-        web_keywords = ["latest", "recent", "news", "current", "today", "2024", "2025",
-                        "what is", "who is", "when did", "how to", "tell me about",
-                        "information about", "facts about", "search for"]
+        # Heuristic rules for source selection
+        personal_keywords = ["my", "i", "me", "our", "we",
+                             "remember", "note", "conversation", "discussed", "talked"]
+        file_keywords = ["document", "pdf", "file",
+                         "attachment", "image", "uploaded", "shared"]
+        web_keywords = ["latest", "recent", "news", "current",
+                        "what is", "who is", "when did", "how to"]
 
         # Check for personal information needs
         if any(keyword in query_lower for keyword in personal_keywords) and available_sources.get("rag", False):
@@ -253,39 +229,24 @@ class IntelligentRouterRetriever:
             selected_sources.append(ContextSource.ATTACHMENTS)
             reasoning_parts.append("file-related keywords detected")
 
-        # Check for general knowledge needs (be more selective)
+        # Check for general knowledge needs
         if any(keyword in query_lower for keyword in web_keywords) and available_sources.get("web_search", False):
             selected_sources.append(ContextSource.WEB_SEARCH)
             reasoning_parts.append("general knowledge keywords detected")
 
-        # NEW: If no sources selected and query seems like it needs information
+        # Default fallback - use all available sources if no specific match
         if not selected_sources:
-            # Check if query is asking for information (question words, etc.)
-            question_indicators = ["what", "how", "why", "when",
-                                   "where", "who", "which", "tell me", "explain"]
-            needs_info = any(
-                indicator in query_lower for indicator in question_indicators)
+            for source_name, enabled in available_sources.items():
+                if enabled:
+                    selected_sources.append(ContextSource(source_name))
+            reasoning_parts.append("no specific match, using all available")
 
-            # Only for substantial questions
-            if needs_info and len(query.split()) > 3:
-                # For information-seeking queries, prefer personal sources first
-                if available_sources.get("rag", False):
-                    selected_sources.append(ContextSource.RAG)
-                    reasoning_parts.append(
-                        "information query - checking personal sources first")
-                else:
-                    reasoning_parts.append(
-                        "information query - no personal sources available")
-            else:
-                reasoning_parts.append(
-                    "simple statement or short query - no external sources needed")
-
-        reasoning = f"Smart routing: {', '.join(reasoning_parts)}"
+        reasoning = f"Heuristic routing: {', '.join(reasoning_parts)}"
 
         return RouterDecision(
             selected_sources=selected_sources,
             reasoning=reasoning,
-            confidence=0.8  # Higher confidence for improved routing
+            confidence=0.6  # Lower confidence for heuristic routing
         )
 
     async def _manual_routing(self, query: str, available_sources: Dict[str, bool], user_id: int, **context_params) -> Tuple[RouterDecision, Dict[str, Any]]:

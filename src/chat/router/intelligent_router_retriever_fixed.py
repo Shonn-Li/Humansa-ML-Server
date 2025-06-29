@@ -85,10 +85,12 @@ class IntelligentRouterRetriever:
             router_compatible_llm = self.provider_selector.get_router_compatible_llm()
             if router_compatible_llm:
                 router_llm = router_compatible_llm
-                logger.info("🎯 Using router-compatible LLM for PydanticSingleSelector")
+                logger.info(
+                    "🎯 Using router-compatible LLM for PydanticSingleSelector")
             else:
-                logger.warning("⚠️ No router-compatible LLM available, using original LLM")
-        
+                logger.warning(
+                    "⚠️ No router-compatible LLM available, using original LLM")
+
         try:
             # Define context source retrievers with metadata
             retrievers = []
@@ -126,7 +128,7 @@ class IntelligentRouterRetriever:
                 RetrieverTool(
                     retriever=attachment_retriever,
                     metadata=ToolMetadata(
-                        name="attachments", 
+                        name="attachments",
                         description="Search through user-provided file attachments like PDFs, documents, images. Use this when the user specifically mentions files or documents they've shared."
                     )
                 ),
@@ -281,7 +283,8 @@ class IntelligentRouterRetriever:
                         user_id=user_id,
                         folder_ids=context_params.get('folder_ids', []),
                         note_ids=context_params.get('note_ids', []),
-                        conversation_ids=context_params.get('conversation_ids'),
+                        conversation_ids=context_params.get(
+                            'conversation_ids'),
                         **context_params
                     )
                     contexts['rag'] = rag_context
@@ -300,7 +303,8 @@ class IntelligentRouterRetriever:
 
                 elif source == ContextSource.WEB_SEARCH:
                     # Use web search processor
-                    search_query = context_params.get('search_query') or self.web_search_processor.extract_search_query([{"role": "user", "content": query}])
+                    search_query = context_params.get('search_query') or self.web_search_processor.extract_search_query([
+                        {"role": "user", "content": query}])
                     websearch_context = await self.web_search_processor.search_web_content(
                         query=search_query,
                         num_results=context_params.get('num_results', 5)

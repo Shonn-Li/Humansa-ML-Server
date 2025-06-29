@@ -546,6 +546,7 @@ class LLMProviderSelector:
         provider_mapping = {
             "azure_inference": LLMProvider.AZURE_INFERENCE,
             "azure": LLMProvider.AZURE_INFERENCE,  # Alternative name
+            "azure_openai": LLMProvider.AZURE_OPENAI,  # Added missing mapping
             "openai": LLMProvider.OPENAI,
             "anthropic": LLMProvider.ANTHROPIC,
             "gemini": LLMProvider.GEMINI,
@@ -692,23 +693,90 @@ class LLMProviderSelector:
         """
         Get an OpenAI-compatible LLM for router functionality
         Router requires OpenAI-compatible LLMs for PydanticSingleSelector
+        Uses GPT-4.1-nano for fastest and cheapest routing decisions
 
         Returns:
             LLM compatible with router functionality, or None if not available
         """
         # Try Azure OpenAI first (uses same credentials as Azure AI Inference)
         if LLMProvider.AZURE_OPENAI in self.providers:
-            azure_openai_config = self.providers[LLMProvider.AZURE_OPENAI]
-            logger.info("🎯 Using Azure OpenAI LLM for router compatibility")
-            return azure_openai_config.llm_instance
+            try:
+                # Create a dedicated fast router LLM instance
+                router_llm = AzureOpenAI(
+                    azure_endpoint="https://youwoai-dev-resource.openai.azure.com/",
+                    api_key=os.getenv("AZURE_INFERENCE_CREDENTIAL"),
+                    api_version="2024-02-15-preview",
+                    model="gpt-4.1-nano",  # Fastest and cheapest model for routing
+                    engine="gpt-4.1-nano",
+                    temperature=0.2,  # Very low temperature for consistent routing decisions
+                    max_tokens=100,   # Short responses for routing decisions
+                    callback_manager=CallbackManager([self.token_counter])
+                )
+                logger.info(
+                    "🎯 Using dedicated Azure OpenAI GPT-4.1-nano for fastest routing")
+                return router_llm
+            except Exception as e:
+                logger.warning(
+                    f"⚠️ Failed to create dedicated router LLM, using default: {e}")
+                azure_openai_config = self.providers[LLMProvider.AZURE_OPENAI]
+                logger.info(
+                    "🎯 Using Azure OpenAI LLM for router compatibility")
+                return azure_openai_config.llm_instance
 
         # Fall back to regular OpenAI if available
         elif LLMProvider.OPENAI in self.providers:
-            openai_config = self.providers[LLMProvider.OPENAI]
-            logger.info("🎯 Using OpenAI LLM for router compatibility")
-            return openai_config.llm_instance
+            try:
+                # Create a dedicated fast router LLM instance
+                router_llm = OpenAI(
+                    model="gpt-4.1-nano",  # Fastest and cheapest model for routing
+                    temperature=0.2,       # Very low temperature for consistent routing decisions
+                    max_tokens=100,        # Short responses for routing decisions
+                    callback_manager=CallbackManager([self.token_counter])
+                )
+                logger.info(
+                    "🎯 Using dedicated OpenAI GPT-4.1-nano for fastest routing")
+                return router_llm
+            except Exception as e:
+                logger.warning(
+                    f"⚠️ Failed to create dedicated router LLM, using default: {e}")
+                openai_config = self.providers[LLMProvider.OPENAI]
+                logger.info("🎯 Using OpenAI LLM for router compatibility")
+                return openai_config.llm_instance
 
         else:
             logger.warning(
                 "⚠️ No OpenAI-compatible LLM available for router - router will be disabled")
             return None
+
+    def force_provider_for_vision(self, requested_provider: str, requested_model: str) -> Tuple[LLMProvider, LLM]:
+        """
+        Force specific provider without cost-saving overrides for vision tasks.
+
+        This method bypasses the automatic Azure AI Inference override that would
+        normally redirect azure_openai requests, because Azure AI Inference does
+        not support vision capabilities while Azure OpenAI does.
+
+        Args:
+            requested_provider: The provider to force (e.g., "azure_openai")
+            requested_model: The model to use (e.g., "gpt-4o-mini")
+
+        Returns:
+            Tuple of (provider_enum, llm_instance)
+
+        Raises:
+            ValueError: If the requested provider is not available or doesn't support the model
+        """
+        provider_enum = self._get_provider_enum(requested_provider)
+
+        if not provider_enum or provider_enum not in self.providers:
+            raise ValueError(f"Provider {requested_provider} not available")
+
+        config = self.providers[provider_enum]
+        if requested_model not in config.supported_models:
+            raise ValueError(
+                f"Model {requested_model} not supported by {requested_provider}")
+
+        llm = self._create_llm_instance(provider_enum, requested_model)
+        logger.info(
+            f"🎯 Forced provider for vision: {provider_enum.value} with {requested_model}")
+        return provider_enum, llm
