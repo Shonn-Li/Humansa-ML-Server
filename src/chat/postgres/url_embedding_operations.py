@@ -62,6 +62,16 @@ if not LLAMAINDEX_PDF_READER_AVAILABLE:
 else:
     PDF_PROCESSING_AVAILABLE = True  # LlamaIndex PDFReader is available
 
+# Import python-pptx for PowerPoint processing (lightweight alternative)
+try:
+    from pptx import Presentation
+    PYTHON_PPTX_AVAILABLE = True
+    logger.info("✅ python-pptx available for PowerPoint processing")
+except ImportError:
+    PYTHON_PPTX_AVAILABLE = False
+    logger.warning(
+        "python-pptx not available - PowerPoint processing disabled")
+
 # Import PIL for basic image processing if available
 try:
     from PIL import Image
@@ -528,14 +538,6 @@ class URLEmbeddingOperations:
 
             # Create embeddings using our OpenAI client
             chunks = self._chunk_document_content(file_content, url)
-            logger.info(f"📝 Created {len(chunks)} chunks from content (length: {len(file_content)} chars)")
-            
-            # Log first chunk for debugging
-            if chunks:
-                logger.info(f"🔍 First chunk preview: {chunks[0]['text'][:100]}...")
-            else:
-                logger.warning("⚠️ No chunks were created from content!")
-                logger.info(f"Content preview: {file_content[:200]}...")
 
             embeddings_data = []
             for chunk in chunks:
@@ -582,6 +584,10 @@ class URLEmbeddingOperations:
             file_extension = ""
             if 'pdf' in content_type or url.lower().endswith('.pdf'):
                 file_extension = ".pdf"
+            elif any(pptx_type in content_type for pptx_type in ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.ms-powerpoint']):
+                file_extension = ".pptx"
+            elif url.lower().endswith(('.pptx', '.ppt')):
+                file_extension = Path(url.split('?')[0]).suffix.lower()
             elif any(img_type in content_type for img_type in ['image/jpeg', 'image/jpg']):
                 file_extension = ".jpg"
             elif 'image/png' in content_type:
@@ -605,6 +611,13 @@ class URLEmbeddingOperations:
                     if not content:
                         # Fallback: treat as generic document
                         content = f"[PDF Document from {url}] - Content extraction not available"
+
+                elif any(pptx_type in content_type for pptx_type in ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.ms-powerpoint']) or url.lower().endswith(('.pptx', '.ppt')):
+                    # Process PowerPoint with python-pptx if available
+                    content = self._process_pptx_file(temp_path)
+                    if not content:
+                        # Fallback: treat as generic document
+                        content = f"[PowerPoint Document from {url}] - Content extraction not available"
 
                 elif any(img_type in content_type for img_type in ['image/jpeg', 'image/png', 'image/gif', 'image/webp']) or file_extension in ['.jpg', '.jpeg', '.png', '.gif', '.webp']:
                     # For images, use Azure GPT-4o mini for content extraction
@@ -667,6 +680,47 @@ class URLEmbeddingOperations:
 
         logger.warning("No PDF processing libraries available")
         return None
+
+    def _process_pptx_file(self, file_path: str) -> Optional[str]:
+        """Extract text from PowerPoint file using python-pptx (lightweight)"""
+        if not PYTHON_PPTX_AVAILABLE:
+            logger.warning(f"python-pptx not available for: {file_path}")
+            return None
+
+        try:
+            logger.info(f"Using python-pptx for: {file_path}")
+            presentation = Presentation(file_path)
+
+            # Extract text from all slides
+            text_content = []
+
+            for slide_num, slide in enumerate(presentation.slides, 1):
+                slide_text = []
+                slide_text.append(f"=== Slide {slide_num} ===")
+
+                # Extract text from all shapes in the slide
+                for shape in slide.shapes:
+                    if hasattr(shape, "text") and shape.text.strip():
+                        slide_text.append(shape.text.strip())
+
+                # Only add slide if it has content
+                if len(slide_text) > 1:  # More than just the slide header
+                    text_content.extend(slide_text)
+                    text_content.append("")  # Add blank line after each slide
+
+            if not text_content:
+                logger.warning(
+                    f"No text content found in PowerPoint: {file_path}")
+                return None
+
+            full_text = "\n".join(text_content).strip()
+            logger.info(
+                f"✅ PowerPoint extraction successful: {len(full_text)} chars from {len(presentation.slides)} slides")
+            return full_text
+
+        except Exception as e:
+            logger.error(f"❌ PowerPoint extraction failed: {e}")
+            return None
 
     def _chunk_document_content(self, content: str, url: str, max_tokens: int = 1024) -> List[Dict[str, Any]]:
         """Chunk document content for embedding"""
@@ -775,22 +829,9 @@ class URLEmbeddingOperations:
             extracted_content = response.message.content
             logger.info(
                 f"Received response from Azure OpenAI GPT-4o mini: {extracted_content[:100]}...")
-            
-            # Check if this is actually image content or an error message
-            is_vision_error = any(phrase in extracted_content.lower() for phrase in [
-                "can't view", "cannot view", "can't see", "cannot see", 
-                "can't process images", "cannot process images", "i'm sorry"
-            ]) if extracted_content else False
-            
-            if is_vision_error:
-                logger.error("🚫 Azure AI is returning vision error - image processing failed!")
-                logger.error(f"Error response: {extracted_content}")
-                return self._process_image_with_simple_description(image_path, url)
-                
             if extracted_content and extracted_content.strip():
                 logger.info(
-                    f"✅ Successfully extracted content from image using Azure OpenAI GPT-4o mini: {len(extracted_content)} chars")
-                logger.info(f"🖼️ Image content preview: {extracted_content[:200]}...")
+                    f"Successfully extracted content from image using Azure OpenAI GPT-4o mini: {len(extracted_content)} chars")
                 return extracted_content.strip()
             else:
                 logger.warning(

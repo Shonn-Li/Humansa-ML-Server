@@ -549,6 +549,18 @@ def register_embedding_endpoints(app):
     except ImportError as e:
         logger.error(f"❌ Admin embedding endpoints import failed: {e}")
 
+    # File Analyzer Endpoints
+    try:
+        logger.info("🔄 Attempting to import file analyzer endpoints...")
+        from chat.endpoints.file_analyzer_endpoint import file_analyzer_bp
+        logger.info("✅ Successfully imported file analyzer blueprint")
+
+        app.register_blueprint(file_analyzer_bp)
+        logger.info("✅ File analyzer endpoints registered successfully")
+
+    except ImportError as e:
+        logger.error(f"❌ File analyzer endpoints import failed: {e}")
+
     # V1 Conversation Embedding Endpoint (called by backend)
     @app.route("/v1/embeddings/conversation", methods=["POST"])
     async def v1_conversation_embeddings():

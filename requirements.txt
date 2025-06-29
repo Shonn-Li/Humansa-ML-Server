@@ -11,7 +11,6 @@ requests==2.32.3
 
 # LlamaIndex core - explicit submodules (WORKING SOLUTION)
 llama-index==0.12.43
-llama-index-llms-azure-inference==0.4.0
 llama-index-llms-openai==0.4.7
 llama-index-llms-anthropic==0.7.2
 llama-index-llms-deepseek==0.1.2
@@ -39,10 +38,13 @@ numpy>=2.2.0
 scikit-learn>=1.7.0
 beautifulsoup4>=4.13.0
 pypdf>=5.5.0
-PyPDF2>=3.0.0  # Fallback for PDF processing
 pillow>=10.2.0,<11.0.0
 
-# Note: Image text extraction now uses Azure GPT-4o mini via LlamaIndex Azure Inference
+# Lightweight PowerPoint processing (production-friendly)
+python-pptx>=0.6.21
+
+# Note: Using lightweight python-pptx instead of LlamaIndex PptxReader 
+# to avoid downloading 1GB+ ML models in production
 
 # Video/Content analysis
 youtube-transcript-api>=1.1.0
