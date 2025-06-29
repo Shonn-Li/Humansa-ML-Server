@@ -611,7 +611,7 @@ ANSWER:"""
         else:
             # Without context
             query = self._extract_last_user_message(messages)
-            prompt = f"User: {query}\nAssistant:"
+            prompt = f"{query}"
 
         try:
             # Log the completion start with essential info
@@ -1132,7 +1132,7 @@ ANSWER:"""
             else:
                 query = self._extract_last_user_message(
                     request_data.get("messages", []))
-                prompt = f"User: {query}\nAssistant:"
+                prompt = f"Please answer the following question: {query}"
 
             # Use actual LLM streaming - use sync stream_complete like the old implementation
             try:

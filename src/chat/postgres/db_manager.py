@@ -143,7 +143,7 @@ class PostgresManager:
                                  conversation_ids: Optional[List[int]] = None) -> List[int]:
         """
         Resolve conversation IDs:
-        
+
         - If conversation_ids provided: use them (validate ownership)
         - If none provided: get ALL user conversations
         """
@@ -158,15 +158,18 @@ class PostgresManager:
                         AND id = ANY(%s)
                         ORDER BY id DESC
                     """, (user_id, conversation_ids))
-                    
+
                     results = cursor.fetchall()
                     validated_conversations = [row[0] for row in results]
-                    
+
                     if len(validated_conversations) < len(conversation_ids):
-                        invalid_conversations = set(conversation_ids) - set(validated_conversations)
-                        logger.warning(f"Invalid conversation IDs for user {user_id}: {invalid_conversations}")
-                    
-                    logger.info(f"Resolved {len(validated_conversations)} specific conversation IDs")
+                        invalid_conversations = set(
+                            conversation_ids) - set(validated_conversations)
+                        logger.warning(
+                            f"Invalid conversation IDs for user {user_id}: {invalid_conversations}")
+
+                    logger.info(
+                        f"Resolved {len(validated_conversations)} specific conversation IDs")
                     return validated_conversations
 
                 # Case 2: All user conversations
@@ -180,48 +183,55 @@ class PostgresManager:
 
                     results = cursor.fetchall()
                     all_conversations = [row[0] for row in results]
-                    logger.info(f"Resolved {len(all_conversations)} total user conversations")
+                    logger.info(
+                        f"Resolved {len(all_conversations)} total user conversations")
                     return all_conversations
-
 
     def resolve_all_ids(self, user_id: int, note_ids: Optional[List[int]] = None,
                         folder_ids: Optional[List[int]] = None,
                         conversation_ids: Optional[List[int]] = None) -> ResolvedIDs:
         """
         Resolve all IDs with proper targeting logic:
-        
+
         - If NO specific IDs provided: Full context search (all user notes + all user conversations)
         - If ANY specific IDs provided: ONLY search within those specific IDs, ignore others
         - No cross-contamination between different ID types
         """
-        
+
         # Check if ANY specific IDs are provided
         has_specific_ids = bool(note_ids or folder_ids or conversation_ids)
-        
+
         if has_specific_ids:
             # Targeted search: only use the specific IDs provided
-            logger.info("🎯 Targeted search: Using only the specific IDs provided")
-            
+            logger.info(
+                "🎯 Targeted search: Using only the specific IDs provided")
+
             # Resolve notes only if note_ids or folder_ids are provided
             if note_ids or folder_ids:
-                resolved_notes = self.resolve_note_ids(user_id, note_ids, folder_ids)
+                resolved_notes = self.resolve_note_ids(
+                    user_id, note_ids, folder_ids)
             else:
                 resolved_notes = []  # No notes if not specified
-            
+
             # Resolve conversations only if conversation_ids are explicitly provided
             if conversation_ids:
-                resolved_conversations = self.resolve_conversation_ids(user_id, conversation_ids)
+                resolved_conversations = self.resolve_conversation_ids(
+                    user_id, conversation_ids)
             else:
                 resolved_conversations = []  # No conversations if not specified
-                
-            logger.info(f"Targeted search results: {len(resolved_notes)} notes, {len(resolved_conversations)} conversations")
-            
+
+            logger.info(
+                f"Targeted search results: {len(resolved_notes)} notes, {len(resolved_conversations)} conversations")
+
         else:
             # Full context search: get all user's notes and conversations
-            logger.info("🌍 Full context search: Getting all user notes and conversations")
+            logger.info(
+                "🌍 Full context search: Getting all user notes and conversations")
             resolved_notes = self.resolve_note_ids(user_id)  # All user notes
-            resolved_conversations = self.resolve_conversation_ids(user_id, None)  # All user conversations
-            logger.info(f"Full context search results: {len(resolved_notes)} notes, {len(resolved_conversations)} conversations")
+            resolved_conversations = self.resolve_conversation_ids(
+                user_id, None)  # All user conversations
+            logger.info(
+                f"Full context search results: {len(resolved_notes)} notes, {len(resolved_conversations)} conversations")
 
         return ResolvedIDs(
             notes=resolved_notes,

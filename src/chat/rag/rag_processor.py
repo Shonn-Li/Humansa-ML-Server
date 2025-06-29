@@ -71,23 +71,27 @@ class IDResolver:
         if has_specific_ids:
             # SCOPED SEARCH: Only search within specified IDs
             logger.info("🎯 SCOPED SEARCH: Using only specified IDs")
-            
+
             # Resolve notes only if note_ids or folder_ids provided
             if note_ids is not None or folder_ids is not None:
-                resolved_notes = self.postgres.resolve_note_ids(user_id, note_ids, folder_ids)
+                resolved_notes = self.postgres.resolve_note_ids(
+                    user_id, note_ids, folder_ids)
             else:
                 resolved_notes = []  # No notes if not specified
-                
+
             # Resolve conversations only if conversation_ids explicitly provided
             if conversation_ids is not None:
-                resolved_conversations = self.postgres.resolve_conversation_ids(user_id, conversation_ids)
+                resolved_conversations = self.postgres.resolve_conversation_ids(
+                    user_id, conversation_ids)
             else:
                 resolved_conversations = []  # No conversations if not specified
         else:
             # FULL CONTEXT SEARCH: Get all user content
             logger.info("🌐 FULL CONTEXT SEARCH: Getting all user content")
-            resolved_notes = self.postgres.resolve_note_ids(user_id, None, None)  # All notes
-            resolved_conversations = self.postgres.resolve_conversation_ids(user_id, None)  # All conversations
+            resolved_notes = self.postgres.resolve_note_ids(
+                user_id, None, None)  # All notes
+            resolved_conversations = self.postgres.resolve_conversation_ids(
+                user_id, None)  # All conversations
 
         resolved = ResolvedIDs(
             notes=resolved_notes,
@@ -97,7 +101,8 @@ class IDResolver:
         logger.info(f"=== RESOLVED WITH CORRECTED LOGIC ===")
         logger.info(f"Notes: {len(resolved.notes)}")
         logger.info(f"Conversations: {len(resolved.conversations)}")
-        logger.info(f"Search type: {'SCOPED' if has_specific_ids else 'FULL CONTEXT'}")
+        logger.info(
+            f"Search type: {'SCOPED' if has_specific_ids else 'FULL CONTEXT'}")
         logger.info(f"==================")
 
         return resolved
@@ -254,7 +259,13 @@ class RAGProcessor:
 
         # Step 3: EMBEDDING CHECKS - Check embeddings for resolved IDs
         logger.info("=== EMBEDDING CHECKS (AFTER ID RESOLUTION) ===")
-        await self._check_and_ensure_embeddings(resolved_ids)
+
+        # Determine if this is a targeted search based on original parameters
+        is_targeted_search = (note_ids is not None or
+                              folder_ids is not None or
+                              conversation_ids is not None)
+
+        await self._check_and_ensure_embeddings(resolved_ids, is_targeted_search)
 
         # Step 4: Search with embedded query
         logger.info("=== UNIFIED SEARCH ===")
@@ -316,12 +327,27 @@ class RAGProcessor:
             f"✅ ID resolution completed: {len(resolved_ids.notes)} notes, {len(resolved_ids.conversations)} conversations")
         return resolved_ids
 
-    async def _check_and_ensure_embeddings(self, resolved_ids: ResolvedIDs):
+    async def _check_and_ensure_embeddings(self, resolved_ids: ResolvedIDs, is_targeted_search: bool):
         """
-        🎯 KEY EMBEDDING CHECK: Check embeddings for resolved IDs and trigger background embedding
-        This is where we check if the resolved notes/conversations have embeddings!
+        🎯 KEY EMBEDDING CHECK: Check embeddings for resolved IDs and ensure they exist
+
+        UPDATED LOGIC:
+        - If specific IDs were requested (targeted search), WAIT for embeddings to be created
+        - If full context search (no specific IDs), use background embedding (don't wait)
+        - This ensures specifically requested content is always searchable
+
+        Args:
+            resolved_ids: The resolved note and conversation IDs
+            is_targeted_search: True if specific IDs were provided, False for full context search
         """
         logger.info("🔍 CHECKING EMBEDDINGS FOR RESOLVED IDs...")
+
+        if is_targeted_search:
+            logger.info(
+                "🎯 TARGETED SEARCH: Ensuring embeddings exist for specific IDs (will wait if needed)")
+        else:
+            logger.info(
+                "🌐 FULL CONTEXT SEARCH: Using background embedding for missing embeddings")
 
         # Check notes
         missing_note_ids = []
@@ -330,11 +356,21 @@ class RAGProcessor:
             missing_note_ids = await self._check_missing_embeddings_async('note', note_ids)
 
             if missing_note_ids:
-                logger.warning(
-                    f"⚠️  Missing embeddings for {len(missing_note_ids)} notes: {missing_note_ids}")
-                # Trigger background embedding (don't wait)
-                asyncio.create_task(
-                    self._trigger_background_embedding_async('note', missing_note_ids))
+                if is_targeted_search:
+                    logger.warning(
+                        f"⚠️  Missing embeddings for {len(missing_note_ids)} specifically requested notes: {missing_note_ids}")
+                    logger.info(
+                        "⏳ WAITING for embeddings to be created (targeted search)...")
+                    # WAIT for embeddings to be created for targeted search
+                    await self._create_embeddings_sync_async('note', missing_note_ids)
+                    logger.info("✅ Embeddings created for targeted notes")
+                else:
+                    logger.warning(
+                        f"⚠️  Missing embeddings for {len(missing_note_ids)} notes: {missing_note_ids}")
+                    # Trigger background embedding (don't wait) for full context search
+                    asyncio.create_task(
+                        self._trigger_background_embedding_async('note', missing_note_ids))
+                    logger.info("🚀 Background embedding triggered for notes")
             else:
                 logger.info(f"✅ All {len(note_ids)} notes have embeddings")
 
@@ -346,11 +382,23 @@ class RAGProcessor:
             missing_conversation_ids = await self._check_missing_embeddings_async('conversation', conversation_ids)
 
             if missing_conversation_ids:
-                logger.warning(
-                    f"⚠️  Missing embeddings for {len(missing_conversation_ids)} conversations: {missing_conversation_ids}")
-                # Trigger background embedding (don't wait)
-                asyncio.create_task(self._trigger_background_embedding_async(
-                    'conversation', missing_conversation_ids))
+                if is_targeted_search:
+                    logger.warning(
+                        f"⚠️  Missing embeddings for {len(missing_conversation_ids)} specifically requested conversations: {missing_conversation_ids}")
+                    logger.info(
+                        "⏳ WAITING for embeddings to be created (targeted search)...")
+                    # WAIT for embeddings to be created for targeted search
+                    await self._create_embeddings_sync_async('conversation', missing_conversation_ids)
+                    logger.info(
+                        "✅ Embeddings created for targeted conversations")
+                else:
+                    logger.warning(
+                        f"⚠️  Missing embeddings for {len(missing_conversation_ids)} conversations: {missing_conversation_ids}")
+                    # Trigger background embedding (don't wait) for full context search
+                    asyncio.create_task(self._trigger_background_embedding_async(
+                        'conversation', missing_conversation_ids))
+                    logger.info(
+                        "🚀 Background embedding triggered for conversations")
             else:
                 logger.info(
                     f"✅ All {len(conversation_ids)} conversations have embeddings")
@@ -398,6 +446,28 @@ class RAGProcessor:
         )
         logger.info(f"Found {len(chunks)} relevant chunks")
         return chunks
+
+    async def _create_embeddings_sync_async(self, type_name: str, ids: List[int]):
+        """
+        Create embeddings synchronously and WAIT for completion
+        Used for targeted searches where we need embeddings before searching
+        """
+        if not ids:
+            return
+
+        logger.info(
+            f"⏳ Creating embeddings SYNCHRONOUSLY for {len(ids)} {type_name}s (targeted search)...")
+
+        # Import embedding manager here to avoid circular imports
+        from ..embedding.embedding_manager import embedding_manager
+
+        # Create embeddings and WAIT for completion
+        if type_name == 'note':
+            await embedding_manager.embed_notes_async(ids)
+            logger.info(f"✅ Note embeddings created for IDs: {ids}")
+        elif type_name == 'conversation':
+            await embedding_manager.embed_conversations_async(ids)
+            logger.info(f"✅ Conversation embeddings created for IDs: {ids}")
 
     def chunks_to_context_text(self, chunks: List[ChunkResult], max_length: int = 8000) -> str:
         """
