@@ -150,6 +150,27 @@ def create_app():
             }
         })
 
+    # Health check route for Docker/ALB
+    @app.route("/health", methods=["GET"])
+    async def health():
+        """Health check endpoint for ALB and Docker"""
+        return jsonify({
+            "status": "healthy",
+            "service": "ml-server",
+            "port": 5001,
+            "timestamp": str(__import__('datetime').datetime.now())
+        })
+
+    # Ping endpoint for basic connectivity test
+    @app.route("/ping", methods=["GET"])
+    async def ping():
+        """Basic ping endpoint"""
+        return jsonify({
+            "message": "Hi from YouWoAI ML Server",
+            "status": "ok",
+            "timestamp": str(__import__('datetime').datetime.now())
+        })
+
     # Register all routes
     register_chat_endpoints(app)
     register_preserved_endpoints(app)
