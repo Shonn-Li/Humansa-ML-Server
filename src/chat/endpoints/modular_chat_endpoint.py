@@ -14,6 +14,7 @@ from chat.citation import CitationEngine, StreamingCitationEngine
 from chat.router.intelligent_router import IntelligentRouter
 from chat.title.title_generator import title_generator
 from chat.query.query_transformer import QueryTransformer
+from chat.streaming.streaming_response_generator import StreamingResponseGenerator
 import os
 import json
 import logging
@@ -160,14 +161,21 @@ class ModularChatEndpoint:
         self.router = None  # Will be initialized when needed
         self.query_transformer = QueryTransformer(
             self.provider_selector)  # NEW: Query transformer
+        
+        # NEW: Initialize streaming response generator
+        self.streaming_generator = StreamingResponseGenerator(
+            self.rag_processor,
+            file_attachment_manager,
+            web_search_processor
+        )
 
         # Configure Azure logging to reduce verbosity
         configure_azure_logging()
 
         logger.info(
-            "ModularChatEndpoint initialized with citation engines, router retriever support, and query transformer")
+            "ModularChatEndpoint initialized with citation engines, router retriever support, query transformer, and streaming generator")
 
-    async def handle_chat_request(self, request_data: Dict[str, Any]) -> Dict[str, Any]:
+    async def handle_chat_request(self, request_data: Dict[str, Any]):
         """
         Handle chat request using new modular architecture
 
@@ -440,11 +448,19 @@ class ModularChatEndpoint:
 
             # Phase 3: Response Generation - Stream vs Non-Stream
             if stream:
-                # Streaming response - yield chunks
-                logger.info("🌊 STREAMING MODE: Starting streaming response")
-                return self._stream_response(
-                    request_data, rag_context, attachment_context, websearch_context,
-                    llm, provider_enum, model, enable_citations, router_decision, generate_title
+                # Streaming response - return async generator
+                logger.info("🌊 STREAMING MODE: Using modular streaming generator")
+                return self.streaming_generator.generate_streaming_response(
+                    request_data=request_data,
+                    rag_context=rag_context,
+                    attachment_context=attachment_context,
+                    websearch_context=websearch_context,
+                    llm=llm,
+                    provider_enum=provider_enum,
+                    model=model,
+                    enable_citations=enable_citations,
+                    router_decision=router_decision,
+                    generate_title=generate_title
                 )
             else:
                 # Non-streaming response - return complete response
@@ -464,24 +480,24 @@ class ModularChatEndpoint:
                         logger.error(f"Failed to generate title: {e}")
                         generated_title = "New Conversation"
 
-            # Convert to OpenAI format with choices array
-            openai_response = self._format_as_openai_response(
-                response_data,
-                model,
-                llm,
-                provider_enum,
-                enable_rag,
-                enable_citations,
-                enable_web_search,
-                rag_context,
-                attachment_context,
-                websearch_context,
-                len(attachments),
-                router_decision,
-                generated_title
-            )
+                # Convert to OpenAI format with choices array
+                openai_response = self._format_as_openai_response(
+                    response_data,
+                    model,
+                    llm,
+                    provider_enum,
+                    enable_rag,
+                    enable_citations,
+                    enable_web_search,
+                    rag_context,
+                    attachment_context,
+                    websearch_context,
+                    len(attachments),
+                    router_decision,
+                    generated_title
+                )
 
-            return openai_response
+                return openai_response
 
         except Exception as e:
             logger.error(f"❌ Modular chat processing failed: {e}")
@@ -941,325 +957,6 @@ ANSWER:"""
             "status": "operational",
             "version": "modular-v1"
         }
-
-    async def _stream_response(self, request_data, rag_context, attachment_context, websearch_context, llm, provider_enum, model, enable_citations, router_decision=None, generate_title=False):
-        """Generate streaming response - async generator that yields chunks"""
-        import time
-        import asyncio
-
-        chat_id = f"chatcmpl-modular-{os.urandom(4).hex()}"
-        full_content = ""  # Collect full content for title generation
-
-        try:
-            # Yield initialization status
-            yield {
-                "id": chat_id,
-                "object": "chat.completion.chunk",
-                "created": int(time.time()),
-                "model": model or "auto",
-                "provider": provider_enum.value,
-                "choices": [{
-                    "index": 0,
-                    "delta": {},
-                    "finish_reason": None
-                }],
-                "progress": {
-                    "stage": "initializing",
-                    "message": "Starting response generation..."
-                }
-            }
-
-            # Yield context processing status
-            if rag_context:
-                yield {
-                    "id": chat_id,
-                    "object": "chat.completion.chunk",
-                    "created": int(time.time()),
-                    "model": model or "auto",
-                    "provider": provider_enum.value,
-                    "choices": [{
-                        "index": 0,
-                        "delta": {},
-                        "finish_reason": None
-                    }],
-                    "progress": {
-                        "stage": "searching_notes",
-                        "message": f"Found {rag_context.total_chunks} relevant chunks from {len(rag_context.used_note_ids)} notes"
-                    }
-                }
-
-            if attachment_context:
-                yield {
-                    "id": chat_id,
-                    "object": "chat.completion.chunk",
-                    "created": int(time.time()),
-                    "model": model or "auto",
-                    "provider": provider_enum.value,
-                    "choices": [{
-                        "index": 0,
-                        "delta": {},
-                        "finish_reason": None
-                    }],
-                    "progress": {
-                        "stage": "searching_files",
-                        "message": f"Found {attachment_context.total_chunks} relevant chunks from {len(attachment_context.urls_processed)} files"
-                    }
-                }
-
-            if websearch_context:
-                yield {
-                    "id": chat_id,
-                    "object": "chat.completion.chunk",
-                    "created": int(time.time()),
-                    "model": model or "auto",
-                    "provider": provider_enum.value,
-                    "choices": [{
-                        "index": 0,
-                        "delta": {},
-                        "finish_reason": None
-                    }],
-                    "progress": {
-                        "stage": "searching_web",
-                        "message": f"Found {websearch_context.total_results} web search results"
-                    }
-                }
-
-            # Yield response generation start
-            yield {
-                "id": chat_id,
-                "object": "chat.completion.chunk",
-                "created": int(time.time()),
-                "model": model or "auto",
-                "provider": provider_enum.value,
-                "choices": [{
-                    "index": 0,
-                    "delta": {
-                        "role": "assistant",
-                        "content": ""
-                    },
-                    "finish_reason": None
-                }],
-                "progress": {
-                    "stage": "generating_response",
-                    "message": "Generating AI response..."
-                }
-            }
-
-            # Build the prompt for LLM streaming
-            context_parts = []
-            has_context = False
-            query = None
-
-            logger.info("🔧 === CONTEXT BUILDING STAGE (STREAMING) ===")
-
-            # Add attachment context - PRIORITY: File attachments come first
-            if attachment_context and (attachment_context.chunks or attachment_context.image_chunks):
-                has_context = True
-                attachment_context_text = file_attachment_manager.chunks_to_context_text(
-                    attachment_context.chunks, attachment_context.image_chunks)
-                context_parts.insert(0,
-                                     # INSERT AT BEGINNING
-                                     f"FILE ATTACHMENTS:\n{attachment_context_text}")
-                if not query:
-                    query = attachment_context.query_used
-
-                logger.info(
-                    f"📎 ATTACHMENT CONTEXT ADDED (PRIORITY - STREAMING VERSION):")
-                logger.info(
-                    f"📎 - Text chunks: {len(attachment_context.chunks) if attachment_context.chunks else 0}")
-                logger.info(
-                    f"📎 - Image chunks: {len(attachment_context.image_chunks) if attachment_context.image_chunks else 0}")
-                logger.info(f"📎 Attachment context preview: {attachment_context_text[:300]}..." if len(
-                    attachment_context_text) > 300 else f"📎 Attachment context: {attachment_context_text}")
-
-            # Add RAG context
-            if rag_context and rag_context.chunks:
-                has_context = True
-                rag_context_text = self.rag_processor.chunks_to_context_text(
-                    rag_context.chunks)
-                context_parts.append(f"KNOWLEDGE BASE:\n{rag_context_text}")
-                query = rag_context.query_used
-                logger.info(
-                    f"📚 RAG CONTEXT ADDED (STREAMING VERSION): {len(rag_context.chunks)} chunks")
-                logger.info(f"📚 RAG Context preview: {rag_context_text[:200]}..." if len(
-                    rag_context_text) > 200 else f"📚 RAG Context: {rag_context_text}")
-
-            # Add web search context
-            if websearch_context and websearch_context.results:
-                has_context = True
-                websearch_context_text = web_search_processor.results_to_context_text(
-                    websearch_context.results)
-                context_parts.append(
-                    f"WEB SEARCH RESULTS:\n{websearch_context_text}")
-                if not query:
-                    query = websearch_context.query_used
-                logger.info(
-                    f"🌐 WEB SEARCH CONTEXT ADDED (STREAMING): {len(websearch_context.results)} results")
-                logger.info(f"🌐 Web search context preview: {websearch_context_text[:200]}..." if len(
-                    websearch_context_text) > 200 else f"🌐 Web search context: {websearch_context_text}")
-
-            # Build the final prompt
-            if has_context:
-                combined_context = "\n\n".join(context_parts)
-                if not query:
-                    query = self._extract_last_user_message(
-                        request_data.get("messages", []))
-
-                logger.info("🎯 === FINAL COMBINED CONTEXT (STREAMING) ===")
-                logger.info(
-                    f"🎯 Context parts order: {[part.split(':')[0] for part in context_parts]}")
-                logger.info(
-                    f"🎯 Total context length: {len(combined_context)} characters")
-                logger.info(f"🎯 Query used: {query}")
-                logger.info("🎯 Combined context preview (first 500 chars):")
-                logger.info(f"🎯 {combined_context[:500]}...")
-                logger.info("🎯 ================================")
-
-                prompt = f"""You are an AI assistant. Use the following context to answer the user's question.
-
-CONTEXT:
-{combined_context}
-
-QUESTION: {query}
-
-INSTRUCTIONS:
-- Answer based primarily on the provided context
-- Be specific and reference relevant information naturally
-- If the context doesn't fully answer the question, say so honestly
-- Keep your response helpful and concise
-
-ANSWER:"""
-            else:
-                query = self._extract_last_user_message(
-                    request_data.get("messages", []))
-                prompt = f"Please answer the following question: {query}"
-
-            # Use actual LLM streaming - use sync stream_complete like the old implementation
-            try:
-                # Use synchronous streaming method (like the old enhanced_chat_bot.py)
-                stream_response = llm.stream_complete(prompt)
-
-                chunk_count = 0
-                for chunk in stream_response:
-                    chunk_count += 1
-
-                    # Extract content from the chunk (same logic as old implementation)
-                    if hasattr(chunk, 'delta') and chunk.delta:
-                        content = str(chunk.delta)
-                    else:
-                        content = str(chunk)
-
-                    if content:
-                        full_content += content  # Collect for title generation
-
-                        yield {
-                            "id": chat_id,
-                            "object": "chat.completion.chunk",
-                            "created": int(time.time()),
-                            "model": model or "auto",
-                            "provider": provider_enum.value,
-                            "choices": [{
-                                "index": 0,
-                                "delta": {
-                                    "content": content
-                                },
-                                "finish_reason": None
-                            }]
-                        }
-
-                    # Yield control to event loop (important for async generators)
-                    await asyncio.sleep(0)
-
-                logger.info(f"🌊 Streamed {chunk_count} chunks successfully")
-
-            except Exception as stream_error:
-                logger.warning(
-                    f"⚠️ LLM streaming failed, falling back to non-streaming: {stream_error}")
-                # Fallback to non-streaming response
-                response_data = await self._generate_direct_response(rag_context, attachment_context, websearch_context, request_data.get("messages", []), llm)
-                content = response_data.get("content", "")
-                full_content = content  # Store for title generation
-
-                # Yield the complete content in one chunk
-                yield {
-                    "id": chat_id,
-                    "object": "chat.completion.chunk",
-                    "created": int(time.time()),
-                    "model": model or "auto",
-                    "provider": provider_enum.value,
-                    "choices": [{
-                        "index": 0,
-                        "delta": {
-                            "content": content
-                        },
-                        "finish_reason": None
-                    }]
-                }
-
-            # Generate conversation title if requested
-            generated_title = None
-            if generate_title:
-                try:
-                    # Create a temporary message list with the full conversation including new assistant response
-                    messages_with_response = request_data.get(
-                        "messages", []).copy()
-                    messages_with_response.append({
-                        "role": "assistant",
-                        "content": full_content
-                    })
-                    generated_title = await self._generate_conversation_title(messages_with_response, llm)
-                except Exception as e:
-                    logger.error(f"Failed to generate title in streaming: {e}")
-                    generated_title = "New Conversation"
-
-            # Final chunk with metadata and title
-            final_metadata = {
-                "rag_enabled": bool(rag_context),
-                "web_search_enabled": bool(websearch_context),
-                "attachments_enabled": bool(attachment_context),
-                "router_used": router_decision is not None,
-                "router_reasoning": router_decision.reason if router_decision else None,
-                "router_confidence": router_decision.confidence if router_decision else None,
-                "used_notes": rag_context.used_note_ids if rag_context else [],
-                "used_conversations": rag_context.used_conversation_ids if rag_context else [],
-                "total_chunks": rag_context.total_chunks if rag_context else 0,
-                "attachment_chunks": attachment_context.total_chunks if attachment_context else 0,
-                "web_search_results": websearch_context.total_results if websearch_context else 0
-            }
-
-            if generated_title:
-                final_metadata["generated_title"] = generated_title
-
-            # Final chunk
-            yield {
-                "id": chat_id,
-                "object": "chat.completion.chunk",
-                "created": int(time.time()),
-                "model": model or "auto",
-                "provider": provider_enum.value,
-                "choices": [{
-                    "index": 0,
-                    "delta": {},
-                    "finish_reason": "stop"
-                }],
-                "metadata": final_metadata
-            }
-
-        except Exception as e:
-            logger.error(f"❌ Streaming error: {e}")
-            yield {
-                "id": chat_id,
-                "object": "chat.completion.chunk",
-                "created": int(time.time()),
-                "model": model or "auto",
-                "provider": provider_enum.value,
-                "choices": [{
-                    "index": 0,
-                    "delta": {},
-                    "finish_reason": "error"
-                }],
-                "error": str(e)
-            }
 
     def _create_message_context(self, router_decision, rag_context, attachment_context, websearch_context, note_ids=None, folder_ids=None, conversation_ids=None):
         """Create context information for message tracking as per Message interface"""
