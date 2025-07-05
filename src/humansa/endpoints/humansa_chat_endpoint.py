@@ -46,6 +46,8 @@ from datetime import datetime
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 
+# Import OpenAI v1 streaming handler
+from ..streaming.openai_v1_streaming_handler import convert_agent_response_to_v1_stream
 
 # Import humansa-specific agentic modules (now using main module names)
 
@@ -438,10 +440,109 @@ You have access to structured tools with Pydantic schemas. All tools have intell
         return enhanced_messages
 
     async def _generate_streaming_response(self, llm_provider, messages: List, model: str, context: Dict):
-        """Generate streaming response with citations."""
+        """Generate OpenAI v1-compatible streaming response for agent reasoning and tool calls."""
         try:
-            logger.info("🌊 Generating AGENTIC streaming response")
+            logger.info("🌊 Generating OpenAI v1-compatible agentic streaming response")
 
+            # Check if we have agent response data for streaming
+            agent_response_data = {
+                'agent_trace': context.get('agent_trace', ''),
+                'tool_calls_observed': context.get('tool_calls_observed', []),
+                'reasoning': context.get('agent_reasoning', ''),
+                'agent_response': context.get('agent_response', ''),
+                'tool_results': context.get('tool_results', [])
+            }
+
+            # If we have agent data, use OpenAI v1 streaming
+            if (agent_response_data['agent_trace'] or 
+                agent_response_data['tool_calls_observed'] or 
+                agent_response_data['reasoning']):
+                
+                logger.info("🤖 Streaming agent reasoning using OpenAI v1 format")
+                
+                # Stream agent reasoning with OpenAI v1 format
+                async for chunk in convert_agent_response_to_v1_stream(agent_response_data, model):
+                    # Add agentic metadata
+                    chunk['agentic_mode'] = True
+                    if context.get('metadata'):
+                        chunk['agentic_metadata'] = context['metadata']
+                    yield chunk
+                
+                # After agent reasoning, generate final LLM response if needed
+                if messages and any(msg.get('role') == 'user' for msg in messages):
+                    logger.info("🤖 Generating final LLM response after agent reasoning")
+                    
+                    # Stream final response  
+                    async for chunk in self._stream_final_llm_response(llm_provider, messages, model, context):
+                        yield chunk
+                
+            else:
+                # Fallback to regular streaming if no agent data
+                logger.info("🌊 No agent data available, using regular streaming")
+                async for chunk in self._stream_regular_response(llm_provider, messages, model, context):
+                    yield chunk
+
+        except Exception as e:
+            logger.error(f"❌ Agentic streaming failed: {e}")
+            import traceback
+            traceback.print_exc()
+
+            # Stream error response in OpenAI v1 format
+            error_chunk = {
+                "id": f"chatcmpl-error-{int(time.time())}",
+                "object": "chat.completion.chunk", 
+                "created": int(time.time()),
+                "model": model,
+                "choices": [{
+                    "index": 0,
+                    "delta": {"content": f"Error in agentic processing: {str(e)}"},
+                    "finish_reason": None
+                }],
+                "reasoning": "error"
+            }
+            yield error_chunk
+            
+            # Final error chunk
+            final_chunk = {
+                "id": f"chatcmpl-error-{int(time.time())}",
+                "object": "chat.completion.chunk",
+                "created": int(time.time()), 
+                "model": model,
+                "choices": [{
+                    "index": 0,
+                    "delta": {},
+                    "finish_reason": "stop"
+                }]
+            }
+            yield final_chunk
+
+    async def _stream_final_llm_response(self, llm_provider, messages: List, model: str, context: Dict):
+        """Stream final LLM response after agent reasoning in OpenAI v1 format."""
+        try:
+            # Add a final user message to get LLM response
+            enhanced_messages = messages.copy()
+            
+            # Add system context if available
+            if context.get('tool_results'):
+                tool_summary = f"Based on the tool results: {len(context['tool_results'])} tools were executed."
+                enhanced_messages.append({
+                    'role': 'system',
+                    'content': f"{tool_summary} Please provide a final response to the user."
+                })
+            
+            # Generate final response with regular streaming
+            async for chunk in self._stream_regular_response(llm_provider, enhanced_messages, model, context):
+                # Mark as final response
+                if isinstance(chunk, dict) and 'choices' in chunk:
+                    chunk['reasoning'] = 'final_response'
+                yield chunk
+                
+        except Exception as e:
+            logger.error(f"❌ Final LLM response streaming failed: {e}")
+
+    async def _stream_regular_response(self, llm_provider, messages: List, model: str, context: Dict):
+        """Stream regular response using existing streaming generator."""
+        try:
             # Prepare request data for the streaming generator
             request_data = {
                 'messages': messages,
@@ -468,7 +569,7 @@ You have access to structured tools with Pydantic schemas. All tools have intell
             from chat.provider.llm_provider import LLMProvider
             provider_enum = LLMProvider.AZURE_INFERENCE
 
-            # Use the streaming response generator with agentic enhancements
+            # Use the streaming response generator
             async for chunk in self.streaming_generator.generate_streaming_response(
                 request_data=request_data,
                 rag_context=rag_context,
@@ -481,96 +582,7 @@ You have access to structured tools with Pydantic schemas. All tools have intell
                 router_decision=None,
                 generate_title=False
             ):
-                # Add agentic metadata to each chunk
-                if isinstance(chunk, dict):
-                    chunk['agentic_mode'] = True
-                    if context.get('metadata'):
-                        chunk['agentic_metadata'] = context['metadata']
-
-                    # Add tool execution results to progress
-                    if context.get('tool_results') and chunk.get('progress'):
-                        chunk['progress']['agentic_tools'] = {
-                            'tools_executed': len(context['tool_results']),
-                            'successful_tools': len([t for t in context['tool_results'] if t.get('success', False)]),
-                            'callback_events': context['metadata'].get('callback_events', 0)
-                        }
-
                 yield chunk
 
         except Exception as e:
-            logger.error(
-                f"❌ Agentic streaming response generation failed: {e}")
-            import traceback
-            traceback.print_exc()
-
-            # Yield error chunk
-            error_chunk = {
-                'error': str(e),
-                'agentic_mode': True,
-                'timestamp': time.time()
-            }
-            yield error_chunk
-
-    async def _generate_non_streaming_response(self, llm_provider, messages: List, model: str, context: Dict):
-        """Generate non-streaming response."""
-        try:
-            logger.info("📝 Generating AGENTIC non-streaming response")
-
-            # Extract the final user query from messages
-            last_user_message = None
-            for msg in reversed(messages):
-                if msg.get('role') == 'user':
-                    last_user_message = msg.get('content', '')
-                    break
-            
-            if not last_user_message:
-                raise ValueError("No user message found")
-
-            # Build prompt with context and tool results
-            prompt_parts = []
-            
-            # Add system context if available
-            system_message = next((m for m in messages if m.get('role') == 'system'), None)
-            if system_message:
-                prompt_parts.append(system_message.get('content', ''))
-            
-            # Add tool results if available
-            tool_results = context.get('tool_results', [])
-            if tool_results:
-                prompt_parts.append("\n=== TOOL EXECUTION RESULTS ===")
-                for tool_result in tool_results:
-                    if tool_result.get('success', False):
-                        tool_name = tool_result.get('tool')
-                        result_data = tool_result.get('result', '')
-                        prompt_parts.append(f"Tool: {tool_name}")
-                        prompt_parts.append(f"Result: {result_data}")
-                        prompt_parts.append("---")
-            
-            # Add the user query
-            prompt_parts.append(f"\nUser Query: {last_user_message}")
-            prompt_parts.append("\nPlease provide a helpful response based on the above information:")
-            
-            final_prompt = "\n".join(prompt_parts)
-            
-            # Use llm.acomplete for non-streaming like modular endpoint
-            response = await llm_provider.acomplete(final_prompt)
-            content = str(response)
-
-            return {
-                'response': content,
-                'status': 'success',
-                'agentic_mode': True,
-                'metadata': context.get('metadata', {}),
-                'tool_results': context.get('tool_results', []),
-                'timestamp': time.time()
-            }
-
-        except Exception as e:
-            logger.error(
-                f"❌ Agentic non-streaming response generation failed: {e}")
-            return {
-                'error': str(e),
-                'status': 'error',
-                'agentic_mode': True,
-                'timestamp': time.time()
-            }
+            logger.error(f"❌ Regular streaming failed: {e}")
