@@ -30,12 +30,19 @@ except ImportError:
             self.metadata = metadata or {}
     LLAMA_INDEX_AVAILABLE = False
 
-# Try importing web reader
+# Try importing web readers
 try:
     from llama_index.readers.web import SpiderWebReader
     SPIDER_WEB_READER_AVAILABLE = True
 except ImportError:
     SPIDER_WEB_READER_AVAILABLE = False
+
+# Try importing SimpleWebPageReader as fallback
+try:
+    from llama_index.readers.web import SimpleWebPageReader
+    SIMPLE_WEB_READER_AVAILABLE = True
+except ImportError:
+    SIMPLE_WEB_READER_AVAILABLE = False
 
 # Direct API imports
 try:
@@ -124,7 +131,37 @@ def analyze_youtube_content(url: str, languages: Optional[List[str]] = None) -> 
 
     if languages is None:
         languages = ['en']
+
+    # Music video detection variables
+    is_likely_music = False
+    punctuation_ratio = 0.0
+    repetition_ratio = 0.0
+    video_metadata = {}
+
     try:
+        # Try to get basic video info for music detection
+        try:
+            video_info_url = f"https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v={video_id}&format=json"
+            response = requests.get(video_info_url, timeout=10)
+            if response.status_code == 200:
+                video_metadata = response.json()
+                title = video_metadata.get('title', '').lower()
+
+                # Check for music-related keywords in title
+                music_keywords = ['official music video', 'official video', 'lyrics', 'music video',
+                                  'official', 'mv', 'lyric video', 'audio', 'song', 'single', 'album',
+                                  'ft.', 'feat.', 'remix', 'cover', 'acoustic', 'live', 'concert']
+
+                is_likely_music = any(
+                    keyword in title for keyword in music_keywords)
+
+                logger.info(f"Video title: {title}")
+                logger.info(
+                    f"Music detection - likely music: {is_likely_music}")
+
+        except Exception as e:
+            logger.warning(f"Could not fetch video metadata: {str(e)}")
+
         # Try to get transcript in preferred languages
         transcript_data = None
         used_language = None
@@ -170,6 +207,33 @@ def analyze_youtube_content(url: str, languages: Optional[List[str]] = None) -> 
         if not transcript_data:
             raise Exception(f"No transcript data found for video {video_id}")
 
+        # Analyze transcript content for music characteristics
+        all_text = ' '.join([entry.get('text', '')
+                            for entry in transcript_data])
+
+        # Calculate punctuation ratio
+        punctuation_count = len(re.findall(r'[.!?;:,]', all_text))
+        total_chars = len(all_text)
+        punctuation_ratio = punctuation_count / max(total_chars, 1)
+
+        # Calculate repetition ratio (simple line repetition check)
+        lines = [entry.get('text', '').strip().lower()
+                 for entry in transcript_data]
+        unique_lines = set(lines)
+        repetition_ratio = 1.0 - (len(unique_lines) / max(len(lines), 1))
+
+        # Music video detection based on transcript characteristics
+        low_punctuation = punctuation_ratio < 0.02  # Less than 2% punctuation
+        high_repetition = repetition_ratio > 0.3     # More than 30% repetition
+
+        # Update music detection
+        is_likely_music = is_likely_music or (
+            low_punctuation and high_repetition)
+
+        logger.info(
+            f"Transcript analysis - punctuation ratio: {punctuation_ratio:.3f}, repetition ratio: {repetition_ratio:.3f}")
+        logger.info(f"Music detection final result: {is_likely_music}")
+
         # Format transcript with timestamps
         formatted_segments = []
         for entry in transcript_data:
@@ -193,24 +257,43 @@ def analyze_youtube_content(url: str, languages: Optional[List[str]] = None) -> 
 
         full_content = '\n'.join(formatted_content)
 
-        # Create document with metadata
+        # Create document with enhanced metadata
+        metadata = {
+            'video_id': video_id,
+            'platform': 'youtube',
+            'language': used_language,
+            'url': url,
+            'total_segments': len(transcript_data),
+            'format': 'timestamped_transcript',
+            'segments': formatted_segments,
+            'content_analysis': {
+                'is_likely_music': is_likely_music,
+                'punctuation_ratio': punctuation_ratio,
+                'repetition_ratio': repetition_ratio,
+                'transcript_quality': 'high' if punctuation_ratio > 0.05 else 'medium' if punctuation_ratio > 0.02 else 'low'
+            }
+        }
+
+        # Add video metadata if available
+        if video_metadata:
+            metadata['video_info'] = video_metadata
+
         document = Document(
             text=full_content,
-            metadata={
-                'video_id': video_id,
-                'platform': 'youtube',
-                'language': used_language,
-                'url': url,
-                'total_segments': len(transcript_data),
-                'format': 'timestamped_transcript',
-                'segments': formatted_segments
-            }
+            metadata=metadata
         )
 
         return [document]
 
     except Exception as e:
-        raise Exception(f"Failed to extract YouTube transcript: {str(e)}")
+        # Enhanced error handling with music video context
+        error_msg = str(e).lower()
+
+        if is_likely_music and ('transcript' in error_msg or 'subtitle' in error_msg):
+            raise Exception(
+                f"This appears to be a music video. Music videos often have limited or no captions available. Original error: {str(e)}")
+        else:
+            raise Exception(f"Failed to extract YouTube transcript: {str(e)}")
 
 
 async def get_bilibili_subtitle_content(video_obj, video_id: str) -> Dict[str, Any]:
@@ -420,26 +503,77 @@ def analyze_bilibili_content(url: str) -> List[Document]:
         raise Exception(f"Failed to extract Bilibili content: {str(e)}")
 
 
-def analyze_web_content(url: str, spider_api_key: Optional[str] = None) -> List[Document]:
-    """Extract content from general web pages using Spider."""
-    if not SPIDER_WEB_READER_AVAILABLE:
+def analyze_web_content_simple(url: str) -> List[Document]:
+    """Extract content from general web pages using SimpleWebPageReader as fallback."""
+    if not SIMPLE_WEB_READER_AVAILABLE:
         raise Exception(
-            "SpiderWebReader is not available. Please install llama-index-readers-web")
-
-    # Get API key from environment if not provided
-    if spider_api_key is None:
-        spider_api_key = os.getenv("SPIDER_API_KEY")
-
-    if not spider_api_key:
-        raise ValueError(
-            "Spider API key is required. Set SPIDER_API_KEY environment variable")
+            "SimpleWebPageReader is not available. Please install llama-index-readers-web")
 
     try:
-        reader = SpiderWebReader(api_key=spider_api_key, mode="scrape")
-        documents = reader.load_data(url=url)
+        logger.info(f"🔄 Using SimpleWebPageReader fallback for URL: {url}")
+        reader = SimpleWebPageReader(html_to_text=True)
+        documents = reader.load_data(urls=[url])
+
+        # Log detailed information about the extracted content
+        logger.info(
+            f"✅ SimpleWebPageReader extracted {len(documents)} document(s)")
+        for i, doc in enumerate(documents):
+            content_preview = doc.text[:200] + \
+                "..." if len(doc.text) > 200 else doc.text
+            logger.info(
+                f"📄 Document {i+1} content preview: {repr(content_preview)}")
+            logger.info(
+                f"📊 Document {i+1} full length: {len(doc.text)} characters")
+            logger.info(f"🏷️ Document {i+1} metadata: {doc.metadata}")
+
         return documents
     except Exception as e:
-        raise Exception(f"Failed to extract web content: {str(e)}")
+        logger.error(f"❌ SimpleWebPageReader failed for URL {url}: {str(e)}")
+        raise Exception(
+            f"Failed to extract web content with SimpleWebPageReader: {str(e)}")
+
+
+def analyze_web_content(url: str, spider_api_key: Optional[str] = None) -> List[Document]:
+    """Extract content from general web pages using Spider, with SimpleWebPageReader fallback."""
+    # First try SpiderWebReader if available and configured
+    if SPIDER_WEB_READER_AVAILABLE and spider_api_key:
+        try:
+            logger.info(f"🕷️ Attempting SpiderWebReader for URL: {url}")
+            reader = SpiderWebReader(api_key=spider_api_key, mode="scrape")
+            documents = reader.load_data(url=url)
+            logger.info(
+                f"✅ SpiderWebReader successfully extracted {len(documents)} document(s)")
+            return documents
+        except Exception as e:
+            logger.warning(
+                f"🕷️❌ SpiderWebReader failed: {str(e)}, trying SimpleWebPageReader fallback")
+
+    # Fallback to SimpleWebPageReader
+    if SIMPLE_WEB_READER_AVAILABLE:
+        try:
+            logger.info(
+                f"🔄 Falling back to SimpleWebPageReader for URL: {url}")
+            documents = analyze_web_content_simple(url)
+            logger.info(
+                f"✅ SimpleWebPageReader fallback successful for URL: {url}")
+            return documents
+        except Exception as e:
+            logger.error(
+                f"🔄❌ SimpleWebPageReader fallback also failed: {str(e)}")
+            raise Exception(
+                f"All web content extraction methods failed. Last error: {str(e)}")
+
+    # If neither reader is available, provide helpful error message
+    error_parts = []
+    if not SPIDER_WEB_READER_AVAILABLE:
+        error_parts.append("SpiderWebReader is not available")
+    if not SIMPLE_WEB_READER_AVAILABLE:
+        error_parts.append("SimpleWebPageReader is not available")
+    if not spider_api_key and SPIDER_WEB_READER_AVAILABLE:
+        error_parts.append("Spider API key is required for SpiderWebReader")
+
+    raise Exception(
+        f"Web content extraction failed: {'; '.join(error_parts)}. Please install llama-index-readers-web")
 
 
 def analyze_link(url: str, platform: Optional[str] = None, options: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
@@ -502,20 +636,20 @@ def analyze_link(url: str, platform: Optional[str] = None, options: Optional[Dic
             documents = analyze_bilibili_content(url)
 
         elif platform == "web":
-            if not SPIDER_WEB_READER_AVAILABLE:
+            # Check if any web reader is available
+            if not SPIDER_WEB_READER_AVAILABLE and not SIMPLE_WEB_READER_AVAILABLE:
                 result["error"] = "missing_dependency"
                 result["suggestions"] = [
-                    "Web reader is not available",
+                    "No web readers are available",
                     "Install llama-index-readers-web: pip install llama-index-readers-web"
                 ]
                 return result
-            if not spider_api_key:
-                result["error"] = "missing_api_key"
-                result["suggestions"] = [
-                    "Set SPIDER_API_KEY in your environment variables",
-                    "Get an API key from spider.cloud"
-                ]
-                return result
+
+            # Get spider API key if available (for preferred SpiderWebReader)
+            if spider_api_key is None:
+                spider_api_key = os.getenv("SPIDER_API_KEY")
+
+            # Use the improved analyze_web_content with fallback
             documents = analyze_web_content(url, spider_api_key)
 
         else:
@@ -524,6 +658,11 @@ def analyze_link(url: str, platform: Optional[str] = None, options: Optional[Dic
         # Process results
         if documents:
             doc = documents[0]
+            logger.info(
+                f"📋 Processing extracted document for {platform} platform")
+            logger.info(f"📊 Final document length: {len(doc.text)} characters")
+            logger.info(f"🏷️ Final document metadata: {doc.metadata}")
+
             result["data"] = {
                 "title": doc.metadata.get("title", doc.metadata.get("video_id", "Extracted Content")),
                 "content": doc.text,
@@ -535,6 +674,13 @@ def analyze_link(url: str, platform: Optional[str] = None, options: Optional[Dic
             if platform in ["youtube", "bilibili"]:
                 result["data"]["language"] = doc.metadata.get(
                     "language", "unknown")
+
+            # Log final result summary
+            content_preview = doc.text[:200] + \
+                "..." if len(doc.text) > 200 else doc.text
+            logger.info(f"✅ Link analysis complete for {url}")
+            logger.info(f"📄 Final content preview: {repr(content_preview)}")
+            logger.info(f"🏷️ Final title: {result['data']['title']}")
 
         result["success"] = True
 
