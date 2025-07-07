@@ -15,7 +15,7 @@ This is an **enhanced** machine learning inference server built with [Quart](htt
 ## One liner startup
 
 ```bash
-python3 -m venv youwo-ml-venv && source youwo-ml-venv/bin/activate &&python -m src.main
+python3 -m venv youwo-ml-venv && source youwo-ml-venv/bin/activate && python -m src.main
 ```
 
 ## 🔧 Setup (Local Development)

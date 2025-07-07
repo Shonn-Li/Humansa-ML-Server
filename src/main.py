@@ -481,14 +481,18 @@ def register_chat_endpoints(app):
                         # For streaming, the response should be a generator or async iterator
                         if hasattr(response, '__aiter__'):
                             async for event in response:
-                                # Format as Server-Sent Events with event type
-                                if isinstance(event, dict) and 'event' in event:
+                                # Handle new canonical format with 'type' field
+                                if isinstance(event, dict) and 'type' in event:
+                                    # New canonical format - output as JSON data
+                                    yield f"data: {json.dumps(event)}\n\n"
+                                elif isinstance(event, dict) and 'event' in event:
+                                    # Legacy format with event type
                                     event_type = event.get('event', 'message')
                                     event_data = event.get('data', {})
                                     yield f"event: {event_type}\n"
                                     yield f"data: {json.dumps(event_data)}\n\n"
                                 else:
-                                    # Fallback for OpenAI format
+                                    # Fallback for any other format
                                     yield f"data: {json.dumps(event)}\n\n"
                         else:
                             # If it's not a generator, yield the response as a single event
