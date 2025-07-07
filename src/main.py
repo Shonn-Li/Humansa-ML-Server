@@ -385,7 +385,8 @@ def register_chat_endpoints(app):
                         'Content-Type': 'text/event-stream'
                     }
                 )
-                logger.info("🌊 Humansa streaming response created and returning...")
+                logger.info(
+                    "🌊 Humansa streaming response created and returning...")
                 return response
 
             else:
@@ -402,7 +403,8 @@ def register_chat_endpoints(app):
 
                 # Ensure valid response format
                 if not isinstance(response, dict):
-                    logger.error(f"❌ Invalid Humansa response type: {type(response)}")
+                    logger.error(
+                        f"❌ Invalid Humansa response type: {type(response)}")
                     return jsonify({
                         "error": "Invalid response format from Humansa endpoint",
                         "status": "error"
@@ -430,6 +432,138 @@ def register_chat_endpoints(app):
             traceback.print_exc()
             return jsonify({
                 "error": f"Humansa processing failed: {str(e)}",
+                "status": "error",
+                "request_data": request_data
+            }), 500
+
+    @app.route("/humansa/response", methods=["POST"])
+    async def humansa_response():
+        """Humansa AI-Agent response endpoint with custom event streaming format"""
+        # Add comprehensive request logging
+        request_data = None
+        try:
+            request_data = await request.get_json()
+            logger.info(f"=== HUMANSA RESPONSE REQUEST ===")
+            logger.info(f"Method: {request.method}")
+            logger.info(f"URL: {request.url}")
+            logger.info(f"Headers: {dict(request.headers)}")
+
+            # Truncate request data for logging
+            truncated_data = truncate_dict(request_data, max_length=200)
+            logger.info(
+                f"Request Body: {json.dumps(truncated_data, indent=2)}")
+            logger.info(f"==========================")
+
+        except Exception as e:
+            logger.error(f"Failed to parse Humansa response request JSON: {e}")
+            return jsonify({
+                "error": "Invalid JSON in request body",
+                "status": "error"
+            }), 400
+
+        try:
+            # Import the Humansa chat endpoint
+            logger.info("🤖 Attempting to import HumansaChatEndpoint...")
+            from humansa.endpoints.humansa_chat_endpoint import HumansaChatEndpoint
+            logger.info("✅ Successfully imported HumansaChatEndpoint")
+
+            # Create endpoint instance
+            humansa_endpoint = HumansaChatEndpoint()
+
+            if request_data.get('stream', True):  # Default to streaming
+                # Return custom response streaming format
+                logger.info("🌊 Starting Humansa response streaming...")
+
+                async def generate_response_stream():
+                    try:
+                        # The handle_chat_request method returns the appropriate response format
+                        response = await humansa_endpoint.handle_chat_request(request_data)
+                        # For streaming, the response should be a generator or async iterator
+                        if hasattr(response, '__aiter__'):
+                            async for event in response:
+                                # Format as Server-Sent Events with event type
+                                if isinstance(event, dict) and 'event' in event:
+                                    event_type = event.get('event', 'message')
+                                    event_data = event.get('data', {})
+                                    yield f"event: {event_type}\n"
+                                    yield f"data: {json.dumps(event_data)}\n\n"
+                                else:
+                                    # Fallback for OpenAI format
+                                    yield f"data: {json.dumps(event)}\n\n"
+                        else:
+                            # If it's not a generator, yield the response as a single event
+                            yield f"event: response.output_text.delta\n"
+                            yield f"data: {json.dumps({'delta': json.dumps(response)})}\n\n"
+                            yield f"event: response.output_text.done\n"
+                            yield f"data: {{}}\n\n"
+                        yield "data: [DONE]\n\n"
+                    except Exception as e:
+                        logger.error(
+                            f"❌ Humansa response streaming error: {e}")
+                        error_event = {
+                            "error": f"Humansa response streaming failed: {str(e)}",
+                            "status": "error"
+                        }
+                        yield f"event: response.error\n"
+                        yield f"data: {json.dumps(error_event)}\n\n"
+                        yield "data: [DONE]\n\n"
+
+                response = Response(
+                    generate_response_stream(),
+                    headers={
+                        'Cache-Control': 'no-cache',
+                        'Connection': 'keep-alive',
+                        'Content-Type': 'text/event-stream'
+                    }
+                )
+                logger.info(
+                    "🌊 Humansa response streaming created and returning...")
+                return response
+
+            else:
+                # Non-streaming response
+                logger.info(
+                    "📝 Processing Humansa non-streaming response request...")
+                response = await humansa_endpoint.handle_chat_request(request_data)
+
+                logger.info(f"=== HUMANSA RESPONSE ===")
+                # Log response with truncation
+                truncated_response = truncate_dict(response, max_length=200)
+                logger.info(
+                    f"Response (truncated): {json.dumps(truncated_response, indent=2)}")
+                logger.info(f"========================")
+
+                # Ensure valid response format
+                if not isinstance(response, dict):
+                    logger.error(
+                        f"❌ Invalid Humansa response type: {type(response)}")
+                    return jsonify({
+                        "error": "Invalid response format from Humansa endpoint",
+                        "status": "error"
+                    }), 500
+
+                return jsonify(response)
+
+        except ImportError as import_error:
+            logger.error(
+                f"❌ Import error for HumansaChatEndpoint: {import_error}")
+            logger.error(f"Current working directory: {os.getcwd()}")
+            logger.error(f"Python path: {os.sys.path}")
+            return jsonify({
+                "error": f"Humansa response module import failed: {str(import_error)}",
+                "status": "error",
+                "debug_info": {
+                    "cwd": os.getcwd(),
+                    "python_path": os.sys.path[:3]  # First 3 entries
+                }
+            }), 500
+        except Exception as e:
+            logger.error(f"❌ Humansa response endpoint error: {e}")
+            logger.error(f"Request data: {request_data}")
+            import traceback
+            traceback.print_exc()
+            return jsonify({
+                "error": f"Humansa response processing failed: {str(e)}",
                 "status": "error",
                 "request_data": request_data
             }), 500

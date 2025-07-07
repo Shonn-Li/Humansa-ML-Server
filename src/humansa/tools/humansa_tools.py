@@ -30,7 +30,8 @@ logger = logging.getLogger(__name__)
 try:
     import sys
     import os
-    sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+    sys.path.append(os.path.dirname(
+        os.path.dirname(os.path.dirname(__file__))))
     from chat.websearch.web_search_processor import WebSearchProcessor
     WEB_SEARCH_AVAILABLE = True
 except ImportError as e:
@@ -38,7 +39,14 @@ except ImportError as e:
     WEB_SEARCH_AVAILABLE = False
 
 # Import our database utility
-from ..postgres.database import db
+
+# Import streaming web search tool
+try:
+    from .enhanced_web_search import StreamingWebSearchTool
+    STREAMING_WEB_SEARCH_AVAILABLE = True
+except ImportError:
+    logger.warning("StreamingWebSearchTool not available")
+    STREAMING_WEB_SEARCH_AVAILABLE = False
 
 # Database connection
 try:
@@ -88,10 +96,14 @@ class DoctorSearchArgs(BaseModel):
 class DoctorAvailabilityArgs(BaseModel):
     """Arguments for checking doctor availability with flexible date range support."""
     doctor_name: str = Field(..., description="Doctor's actual Chinese family name or personal name (e.g., '张', '王', '李明'). Do NOT include titles like '医生', '主任', 'Dr.', etc. Use only the actual name for searching. Supports fuzzy matching - even partial names will find relevant doctors.")
-    start_date: Optional[str] = Field(None, description="Start date for availability search in ISO format (YYYY-MM-DD). If not provided, defaults to today.")
-    end_date: Optional[str] = Field(None, description="End date for availability search in ISO format (YYYY-MM-DD). If not provided, defaults to 30 days from start_date. Maximum range is 30 days.")
-    specialty: Optional[str] = Field(None, description="Medical specialty filter (optional). Helps narrow down search when doctor name is ambiguous.")
-    days_ahead: Optional[int] = Field(None, description="Alternative to date range: number of days ahead to search (1-30). Use this for requests like 'next week' (7), 'this month' (30), etc.")
+    start_date: Optional[str] = Field(
+        None, description="Start date for availability search in ISO format (YYYY-MM-DD). If not provided, defaults to today.")
+    end_date: Optional[str] = Field(
+        None, description="End date for availability search in ISO format (YYYY-MM-DD). If not provided, defaults to 30 days from start_date. Maximum range is 30 days.")
+    specialty: Optional[str] = Field(
+        None, description="Medical specialty filter (optional). Helps narrow down search when doctor name is ambiguous.")
+    days_ahead: Optional[int] = Field(
+        None, description="Alternative to date range: number of days ahead to search (1-30). Use this for requests like 'next week' (7), 'this month' (30), etc.")
 
     @validator('start_date')
     def validate_start_date(cls, v):
@@ -117,31 +129,40 @@ class DoctorAvailabilityArgs(BaseModel):
     def validate_days_ahead(cls, v):
         if v is not None:
             if not isinstance(v, int) or v < 1 or v > 30:
-                raise ValueError('days_ahead must be an integer between 1 and 30')
+                raise ValueError(
+                    'days_ahead must be an integer between 1 and 30')
         return v
 
 
 class PricingArgs(BaseModel):
     """Arguments for getting service pricing with intelligent fallback."""
     service_type: str = Field(..., description="Type of medical service (e.g., '体检', '心脏检查', 'consultation'). Supports fuzzy matching - even partial terms will find relevant services.")
-    clinic_name: Optional[str] = Field(None, description="Specific clinic name (optional). Supports fuzzy matching. If not found, returns pricing from all available clinics.")
-    specialty: Optional[str] = Field(None, description="Medical specialty filter (optional). Helps narrow down pricing when service type is broad.")
+    clinic_name: Optional[str] = Field(
+        None, description="Specific clinic name (optional). Supports fuzzy matching. If not found, returns pricing from all available clinics.")
+    specialty: Optional[str] = Field(
+        None, description="Medical specialty filter (optional). Helps narrow down pricing when service type is broad.")
     currency: str = Field("CNY", description="Currency for pricing")
 
 
 class ClinicSearchArgs(BaseModel):
     """Arguments for searching available clinics with intelligent matching."""
-    clinic_name: Optional[str] = Field(None, description="Clinic name to search for. Supports fuzzy matching - even partial names will find relevant clinics. If not provided, returns top 5 available clinics.")
-    city: Optional[str] = Field(None, description="City or location filter (optional). Helps narrow down clinics by location.")
-    specialty: Optional[str] = Field(None, description="Medical specialty offered at clinic (optional). Helps find clinics that offer specific services.")
+    clinic_name: Optional[str] = Field(
+        None, description="Clinic name to search for. Supports fuzzy matching - even partial names will find relevant clinics. If not provided, returns top 5 available clinics.")
+    city: Optional[str] = Field(
+        None, description="City or location filter (optional). Helps narrow down clinics by location.")
+    specialty: Optional[str] = Field(
+        None, description="Medical specialty offered at clinic (optional). Helps find clinics that offer specific services.")
     language: str = Field("zh", description="Response language: 'zh' or 'en'")
 
 
 class ServiceSearchArgs(BaseModel):
     """Arguments for searching available medical services with intelligent matching."""
-    service_name: Optional[str] = Field(None, description="Medical service to search for (e.g., '体检', '心脏检查', 'MRI'). Supports fuzzy matching - even partial terms will find relevant services.")
-    specialty: Optional[str] = Field(None, description="Medical specialty filter (optional). Helps narrow down services by department.")
-    clinic_name: Optional[str] = Field(None, description="Specific clinic filter (optional). Shows services available at specific clinic.")
+    service_name: Optional[str] = Field(
+        None, description="Medical service to search for (e.g., '体检', '心脏检查', 'MRI'). Supports fuzzy matching - even partial terms will find relevant services.")
+    specialty: Optional[str] = Field(
+        None, description="Medical specialty filter (optional). Helps narrow down services by department.")
+    clinic_name: Optional[str] = Field(
+        None, description="Specific clinic filter (optional). Shows services available at specific clinic.")
     language: str = Field("zh", description="Response language: 'zh' or 'en'")
 
 
@@ -229,6 +250,7 @@ class ReActTraceHandler(BaseCallbackHandler):
     Captures every 'Thought / Action / Observation' chunk that the ReAct agent
     streams while it plans, so we can replay the full chain-of-thought later.
     """
+
     def __init__(self):
         super().__init__([], [])
         self.trace: List[str] = []
@@ -248,31 +270,35 @@ class ReActTraceHandler(BaseCallbackHandler):
                 txt = txt.content
             else:
                 txt = str(txt)
-            
+
             # Only keep the parts that look like ReAct lines
             if any(t in txt for t in ("Thought:", "Action:", "Observation:", "Answer:")):
                 self.trace.append(txt)
                 logger.info(f"🧠 TRACE CAPTURED: {txt[:100]}...")
-        
+
         elif event_type == CBEventType.FUNCTION_CALL:
             # This captures function calls and their results
             if payload:
-                tool_name = payload.get("function_call", {}).get("name", "unknown_tool")
-                tool_args = payload.get("function_call", {}).get("arguments", {})
+                tool_name = payload.get("function_call", {}).get(
+                    "name", "unknown_tool")
+                tool_args = payload.get(
+                    "function_call", {}).get("arguments", {})
                 tool_result = payload.get("function_call_response", "")
-                
+
                 # Create observation text
                 observation_text = f"Observation: {tool_result}"
                 self.trace.append(observation_text)
-                logger.info(f"🔍 OBSERVATION CAPTURED: {observation_text[:100]}...")
-        
+                logger.info(
+                    f"🔍 OBSERVATION CAPTURED: {observation_text[:100]}...")
+
         elif event_type == CBEventType.AGENT_STEP:
             # This might capture agent steps including observations
             if payload:
                 step_output = payload.get("response", "")
                 if step_output and "Observation:" in str(step_output):
                     self.trace.append(str(step_output))
-                    logger.info(f"🤖 AGENT STEP CAPTURED: {str(step_output)[:100]}...")
+                    logger.info(
+                        f"🤖 AGENT STEP CAPTURED: {str(step_output)[:100]}...")
 
     def get_trace(self) -> str:
         """Get the full reasoning trace."""
@@ -359,6 +385,136 @@ class HumansaCallbackHandler(BaseCallbackHandler):
         pass
 
 
+class StreamingReActHandler(BaseCallbackHandler):
+    """
+    Streaming callback handler that emits thoughts, actions, and observations
+    in real-time as the ReAct agent processes the query.
+    """
+
+    def __init__(self, stream_callback=None):
+        super().__init__([], [])
+        # Function to call with streaming chunks
+        self.stream_callback = stream_callback
+        self.current_step = 0
+
+    def on_event_start(self, event_type: CBEventType, payload: Optional[Dict[str, Any]] = None, **kwargs) -> str:
+        """Capture start events for streaming"""
+        event_id = kwargs.get('event_id', f"stream_event_{self.current_step}")
+
+        if event_type == CBEventType.AGENT_STEP:
+            self.current_step += 1
+            if self.stream_callback:
+                self.stream_callback({
+                    'type': 'agent_step_start',
+                    'step': self.current_step,
+                    'message': f'Starting reasoning step {self.current_step}...',
+                    'timestamp': datetime.now().isoformat()
+                })
+
+        return event_id
+
+    def on_event_end(self, event_type: CBEventType, payload: Optional[Dict[str, Any]] = None, **kwargs) -> None:
+        """Stream thoughts, actions, and observations as they happen"""
+
+        if event_type == CBEventType.LLM and self.stream_callback:
+            # Stream LLM responses (thoughts, actions)
+            txt = payload.get("response", "") if payload else ""
+            if hasattr(txt, 'message') and hasattr(txt.message, 'content'):
+                txt = txt.message.content
+            elif hasattr(txt, 'content'):
+                txt = txt.content
+            else:
+                txt = str(txt)
+
+            logger.info(
+                f"🔍 StreamingReActHandler received LLM response: {txt[:200]}...")
+
+            # Parse and stream different parts of ReAct pattern
+            if "Thought:" in txt:
+                # Extract thought content
+                thought_parts = txt.split("Thought:")
+                # Skip first empty part
+                for i, thought in enumerate(thought_parts[1:], 1):
+                    # Extract content before next "Action:" or end
+                    thought_content = thought.split("Action:")[0].strip()
+                    if thought_content:
+                        logger.info(
+                            f"🧠 Streaming thought #{i}: {thought_content[:100]}...")
+                        self.stream_callback({
+                            'type': 'agent_thought',
+                            'content': thought_content,
+                            'step': self.current_step,
+                            'timestamp': datetime.now().isoformat()
+                        })
+
+            if "Action:" in txt:
+                # Extract action content
+                action_parts = txt.split("Action:")
+                for i, action in enumerate(action_parts[1:], 1):
+                    # Get action name before "Action Input:"
+                    action_content = action.split("Action Input:")[0].strip()
+                    if action_content:
+                        logger.info(
+                            f"⚡ Streaming action #{i}: {action_content}")
+                        self.stream_callback({
+                            'type': 'agent_action',
+                            'content': f"Calling tool: {action_content}",
+                            'step': self.current_step,
+                            'timestamp': datetime.now().isoformat()
+                        })
+
+            if "Answer:" in txt:
+                # Extract final answer
+                answer_parts = txt.split("Answer:")
+                for i, answer in enumerate(answer_parts[1:], 1):
+                    answer_content = answer.strip()
+                    if answer_content:
+                        logger.info(
+                            f"✅ Streaming answer #{i}: {answer_content[:100]}...")
+                        self.stream_callback({
+                            'type': 'agent_answer',
+                            'content': answer_content,
+                            'step': self.current_step,
+                            'timestamp': datetime.now().isoformat()
+                        })
+
+        elif event_type == CBEventType.FUNCTION_CALL and self.stream_callback:
+            # Stream tool execution results
+            if payload:
+                tool_name = payload.get("function_call", {}).get(
+                    "name", "unknown_tool")
+                tool_result = payload.get("function_call_response", "")
+
+                logger.info(
+                    f"👁️ Streaming observation for tool {tool_name}: {str(tool_result)[:100]}...")
+                self.stream_callback({
+                    'type': 'agent_observation',
+                    'content': f"Tool {tool_name} result: {str(tool_result)[:200]}{'...' if len(str(tool_result)) > 200 else ''}",
+                    'tool_name': tool_name,
+                    'step': self.current_step,
+                    'timestamp': datetime.now().isoformat()
+                })
+
+    def start_trace(self, trace_id: Optional[str] = None) -> None:
+        """Start streaming trace"""
+        if self.stream_callback:
+            self.stream_callback({
+                'type': 'trace_start',
+                'message': 'Agent reasoning started...',
+                'timestamp': datetime.now().isoformat()
+            })
+
+    def end_trace(self, trace_id: Optional[str] = None, trace_map: Optional[Dict[str, List[str]]] = None) -> None:
+        """End streaming trace"""
+        if self.stream_callback:
+            self.stream_callback({
+                'type': 'trace_end',
+                'message': f'Agent reasoning completed after {self.current_step} steps',
+                'total_steps': self.current_step,
+                'timestamp': datetime.now().isoformat()
+            })
+
+
 class HumansaAgenticToolManager:
     """
     Fully Agentic Tool Manager for Humansa AI-Agent.
@@ -369,12 +525,13 @@ class HumansaAgenticToolManager:
     """
 
     def __init__(self, db_config: Optional[Dict] = None):
-        """Initialize the agentic tool manager."""
+        """Initialize tool manager with callback handlers for observability."""
         self.db_config = db_config or {}
         self.llm = None
         self.trace_handler = ReActTraceHandler()
         self.callback_handler = HumansaCallbackHandler()
-        self.callback_manager = CallbackManager([self.callback_handler, self.trace_handler])
+        self.callback_manager = CallbackManager(
+            [self.callback_handler, self.trace_handler])
 
         # Initialize database connection
         self._initialize_database()
@@ -385,6 +542,14 @@ class HumansaAgenticToolManager:
         # Set global callback manager
         if LLAMAINDEX_AVAILABLE:
             Settings.callback_manager = self.callback_manager
+
+        # Initialize streaming web search tool
+        self.streaming_web_search = None
+        if STREAMING_WEB_SEARCH_AVAILABLE:
+            self.streaming_web_search = StreamingWebSearchTool()
+            logger.info("✅ StreamingWebSearchTool initialized")
+        else:
+            logger.warning("❌ StreamingWebSearchTool not available")
 
         logger.info(
             "🛠️ HumansaAgenticToolManager initialized with structured schemas")
@@ -465,7 +630,7 @@ class HumansaAgenticToolManager:
             ),
             FunctionTool.from_defaults(
                 fn=self.search_services_structured,
-                name="search_services", 
+                name="search_services",
                 description="Search Humansa medical services by type, specialty, or clinic. Always returns 5 relevant services with pricing. Uses intelligent fuzzy matching - even partial service names find relevant results. If no matches, returns popular available services.",
                 fn_schema=ServiceSearchArgs
             ),
@@ -500,7 +665,7 @@ class HumansaAgenticToolManager:
                 fn_schema=ContentPushArgs
             ),
             FunctionTool.from_defaults(
-                fn=self.search_web_structured,
+                fn=self.search_web_structured_streaming,
                 name="search_web",
                 description="Search external web for news, research, general health information - NOT for Humansa services. Use internal tools (find_doctor_info, find_clinic_info, find_medical_services) for our clinical services.",
                 fn_schema=SearchArgs
@@ -513,7 +678,7 @@ class HumansaAgenticToolManager:
             ),
             FunctionTool.from_defaults(
                 fn=self.search_services_structured,
-                name="search_services", 
+                name="search_services",
                 description="Search Humansa medical services by type, specialty, or clinic. Always returns 5 relevant services with pricing. Uses intelligent fuzzy matching - even partial service names find relevant results. If no matches, returns popular available services.",
                 fn_schema=ServiceSearchArgs
             ),
@@ -541,7 +706,7 @@ class HumansaAgenticToolManager:
                                           city: Optional[str] = None, language: str = "zh") -> Dict[str, Any]:
         """
         Find doctor information with fuzzy search and intelligent fallbacks - REAL DATABASE ONLY.
-        
+
         Returns:
             Dict containing:
             - doctors: List of doctor objects with name, specialty, clinic info, and registration_fee
@@ -554,10 +719,12 @@ class HumansaAgenticToolManager:
 
         try:
             # Use enhanced search with fallback
-            doctors = db.search_doctors_with_fallback(name=name, specialty=specialty, city=city, limit=5)
-            
+            doctors = db.search_doctors_with_fallback(
+                name=name, specialty=specialty, city=city, limit=5)
+
             if doctors:
-                search_type = "exact_match" if len(doctors) == 1 and name else "fuzzy_match_or_fallback"
+                search_type = "exact_match" if len(
+                    doctors) == 1 and name else "fuzzy_match_or_fallback"
                 return {
                     "success": True,
                     "doctors": doctors,
@@ -587,7 +754,7 @@ class HumansaAgenticToolManager:
                                                   days_ahead: Optional[int] = None) -> Dict[str, Any]:
         """
         Check doctor availability with flexible date ranges, fuzzy search and intelligent suggestions - REAL DATABASE ONLY.
-        
+
         Returns:
             Dict containing:
             - doctor_name: Found doctor's name (may be fuzzy matched)
@@ -596,10 +763,10 @@ class HumansaAgenticToolManager:
             - suggested_doctors: Alternative doctors with availability if original not found
             - Each suggested doctor includes pricing and availability information
         """
-        
+
         # Calculate date range
         today = datetime.now().date()
-        
+
         if days_ahead:
             start_date_obj = today
             end_date_obj = today + timedelta(days=min(days_ahead, 30))
@@ -615,11 +782,12 @@ class HumansaAgenticToolManager:
         else:
             start_date_obj = today
             end_date_obj = today + timedelta(days=30)
-        
+
         start_date_str = start_date_obj.strftime('%Y-%m-%d')
         end_date_str = end_date_obj.strftime('%Y-%m-%d')
-        
-        logger.info(f"📅 find_doctor_availability_structured called with: doctor={doctor_name}, range={start_date_str} to {end_date_str}")
+
+        logger.info(
+            f"📅 find_doctor_availability_structured called with: doctor={doctor_name}, range={start_date_str} to {end_date_str}")
 
         try:
             # Validate doctor_name is not empty
@@ -636,7 +804,7 @@ class HumansaAgenticToolManager:
             availability_result = db.find_doctor_availability_range_with_fallback(
                 doctor_name, start_date_str, end_date_str
             )
-            
+
             if availability_result['doctor_found']:
                 return {
                     "success": True,
@@ -680,7 +848,7 @@ class HumansaAgenticToolManager:
             services = db.search_services_with_fallback(
                 service_name=service_type, clinic_name=clinic_name, limit=5
             )
-            
+
             if services:
                 return {
                     "success": True,
@@ -723,7 +891,7 @@ class HumansaAgenticToolManager:
                     "error": "Doctor name is required and cannot be empty",
                     "source": "validation_error"
                 }
-            
+
             if not patient_name or patient_name.strip() == "":
                 return {
                     "success": False,
@@ -842,18 +1010,16 @@ class HumansaAgenticToolManager:
             logger.error(f"❌ push_content_structured failed: {e}")
             return {"error": str(e), "success": False}
 
-
-
     async def search_web_structured(self, query: str, category: Optional[str] = None,
-                              language: str = "zh") -> Dict[str, Any]:
-        """Search external web content for news, research, and general information - NOT for Humansa services."""
+                                    language: str = "zh") -> Dict[str, Any]:
+        """Search external web content with ChatGPT-like streaming - NOT for Humansa services."""
         logger.info(f"🌐 search_web_structured called with: query={query}")
 
         try:
             # Safety check: Prevent searching for internal services
-            internal_terms = ["医生", "诊所", "预约", "挂号", "doctor", "clinic", "appointment", "booking", 
-                            "价格", "pricing", "费用", "医疗服务", "medical service"]
-            
+            internal_terms = ["医生", "诊所", "预约", "挂号", "doctor", "clinic", "appointment", "booking",
+                              "价格", "pricing", "费用", "医疗服务", "medical service"]
+
             query_lower = query.lower()
             if any(term in query_lower for term in internal_terms):
                 return {
@@ -863,6 +1029,13 @@ class HumansaAgenticToolManager:
                     "suggestion": "Try using our internal search tools instead"
                 }
 
+            # ✅ NEW: Use streaming web search if available and callback is set
+            if STREAMING_WEB_SEARCH_AVAILABLE and self.streaming_web_search and self.stream_callback:
+                logger.info(
+                    "🌊 Using streaming web search with ChatGPT-like experience")
+                return await self.streaming_web_search.search_web_structured_streaming(query, category, language)
+
+            # Fallback to regular web search
             if not WEB_SEARCH_AVAILABLE:
                 return {
                     "success": False,
@@ -870,10 +1043,11 @@ class HumansaAgenticToolManager:
                     "query": query
                 }
 
+            logger.info("📚 Using fallback non-streaming web search")
             # Use real web search processor for external information only
             web_search = WebSearchProcessor()
             search_results = await web_search.search_web_content(query, num_results=5)
-            
+
             # Convert to our format
             formatted_results = []
             for result in search_results.results:
@@ -901,7 +1075,55 @@ class HumansaAgenticToolManager:
             logger.error(f"❌ search_web_structured failed: {e}")
             return {"error": str(e), "success": False}
 
+    async def search_web_structured_streaming(self, query: str, category: Optional[str] = None,
+                                              language: str = "zh") -> Dict[str, Any]:
+        """
+        Enhanced web search with streaming capability for ChatGPT-like experience.
 
+        This method uses the StreamingWebSearchTool to provide real-time search results
+        streaming, where each search result is yielded as it's found.
+        """
+        logger.info(
+            f"🌐 search_web_structured_streaming called with: query={query}")
+
+        try:
+            # Import the streaming web search tool
+            from humansa.tools.enhanced_web_search import StreamingWebSearchTool
+
+            # Create streaming web search tool with callback
+            streaming_tool = StreamingWebSearchTool(
+                stream_callback=self._get_stream_callback())
+
+            # Use the streaming version which will automatically stream results
+            return await streaming_tool.search_web_structured_streaming(query, category, language)
+
+        except Exception as e:
+            logger.error(f"❌ search_web_structured_streaming failed: {e}")
+            # Fallback to regular search if streaming fails
+            return await self.search_web_structured(query, category, language)
+
+    def _get_stream_callback(self):
+        """Get the streaming callback from the current context if available"""
+        # This will be used to stream individual search results
+        # The callback should be set by the agent when initializing tools
+        return getattr(self, '_stream_callback', None)
+
+    def set_stream_callback(self, callback):
+        """Set the streaming callback for real-time updates"""
+        self.stream_callback = callback
+        if self.streaming_web_search:
+            self.streaming_web_search.stream_callback = callback
+            logger.info("✅ Stream callback set for web search tool")
+
+        # Add streaming handler to callback manager
+        if not hasattr(self, 'streaming_handler'):
+            self.streaming_handler = StreamingReActHandler(callback)
+            self.callback_manager.add_handler(self.streaming_handler)
+            logger.info("✅ Added StreamingReActHandler to callback manager")
+        else:
+            # Update existing handler's callback
+            self.streaming_handler.stream_callback = callback
+            logger.info("✅ Updated existing StreamingReActHandler callback")
 
     # ====== OBSERVABILITY METHODS ======
 
@@ -917,7 +1139,8 @@ class HumansaAgenticToolManager:
         """Reset the callback handler observations."""
         self.trace_handler = ReActTraceHandler()
         self.callback_handler = HumansaCallbackHandler()
-        self.callback_manager = CallbackManager([self.callback_handler, self.trace_handler])
+        self.callback_manager = CallbackManager(
+            [self.callback_handler, self.trace_handler])
         if LLAMAINDEX_AVAILABLE:
             Settings.callback_manager = self.callback_manager
 
@@ -929,8 +1152,9 @@ class HumansaAgenticToolManager:
 
         try:
             # Use enhanced clinic search with fallback
-            clinic_result = db.search_clinics_with_fallback(clinic_name=name, city=city, limit=5)
-            
+            clinic_result = db.search_clinics_with_fallback(
+                clinic_name=name, city=city, limit=5)
+
             if clinic_result['clinics_found']:
                 return {
                     "success": True,
@@ -953,7 +1177,7 @@ class HumansaAgenticToolManager:
             return {"error": str(e), "success": False}
 
     async def find_medical_services_structured(self, service_name: Optional[str] = None, clinic_name: Optional[str] = None,
-                                             language: str = "zh") -> Dict[str, Any]:
+                                               language: str = "zh") -> Dict[str, Any]:
         """Find medical services with fuzzy search and intelligent fallbacks - REAL DATABASE ONLY."""
         logger.info(
             f"🩺 find_medical_services_structured called with: service={service_name}, clinic={clinic_name}")
@@ -963,7 +1187,7 @@ class HumansaAgenticToolManager:
             services = db.search_services_with_fallback(
                 service_name=service_name, clinic_name=clinic_name, limit=5
             )
-            
+
             if services:
                 search_type = "specific_match" if service_name or clinic_name else "general_listing"
                 return {
@@ -991,16 +1215,17 @@ class HumansaAgenticToolManager:
             return {"error": str(e), "success": False}
 
     async def search_clinics_structured(self, clinic_name: Optional[str] = None, city: Optional[str] = None,
-                                       specialty: Optional[str] = None, language: str = "zh") -> Dict[str, Any]:
+                                        specialty: Optional[str] = None, language: str = "zh") -> Dict[str, Any]:
         """Search available Humansa clinics with intelligent fuzzy matching and fallback - REAL DATABASE ONLY."""
-        logger.info(f"🏥 search_clinics_structured called with: clinic={clinic_name}, city={city}, specialty={specialty}")
-        
+        logger.info(
+            f"🏥 search_clinics_structured called with: clinic={clinic_name}, city={city}, specialty={specialty}")
+
         try:
             # Use enhanced clinic search with fallback
             clinic_result = db.search_clinics_with_fallback(
                 clinic_name=clinic_name, city=city, specialty=specialty, limit=5
             )
-            
+
             if clinic_result['clinics_found']:
                 return {
                     "success": True,
@@ -1019,22 +1244,23 @@ class HumansaAgenticToolManager:
                     "total_found": 0,
                     "source": "database"
                 }
-                
+
         except Exception as e:
             logger.error(f"❌ search_clinics_structured failed: {e}")
             return {"error": str(e), "success": False}
 
     async def search_services_structured(self, service_name: Optional[str] = None, specialty: Optional[str] = None,
-                                       clinic_name: Optional[str] = None, language: str = "zh") -> Dict[str, Any]:
+                                         clinic_name: Optional[str] = None, language: str = "zh") -> Dict[str, Any]:
         """Search available Humansa medical services with intelligent fuzzy matching and fallback - REAL DATABASE ONLY."""
-        logger.info(f"🩺 search_services_structured called with: service={service_name}, specialty={specialty}, clinic={clinic_name}")
-        
+        logger.info(
+            f"🩺 search_services_structured called with: service={service_name}, specialty={specialty}, clinic={clinic_name}")
+
         try:
             # Use enhanced service search with fallback
             service_result = db.search_services_with_fallback(
                 service_name=service_name, specialty=specialty, clinic_name=clinic_name, limit=5
             )
-            
+
             if service_result['services_found']:
                 return {
                     "success": True,
@@ -1053,7 +1279,7 @@ class HumansaAgenticToolManager:
                     "total_found": 0,
                     "source": "database"
                 }
-                
+
         except Exception as e:
             logger.error(f"❌ search_services_structured failed: {e}")
             return {"error": str(e), "success": False}

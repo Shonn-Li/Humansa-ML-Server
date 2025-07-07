@@ -67,9 +67,10 @@ class HumansaDatabase:
                     cursor.execute(exact_query, (doctor_name,))
                     row = cursor.fetchone()
                     if row:
-                        logger.info(f"✅ Found doctor by exact match: {row['name']}")
+                        logger.info(
+                            f"✅ Found doctor by exact match: {row['name']}")
                         return dict(row)
-                    
+
                     # If no exact match, try fuzzy matching with ILIKE
                     fuzzy_query = """
                         SELECT d.doctor_code, d.clinic_code, d.name, d.title, 
@@ -86,9 +87,10 @@ class HumansaDatabase:
                     cursor.execute(fuzzy_query, (fuzzy_pattern,))
                     row = cursor.fetchone()
                     if row:
-                        logger.info(f"✅ Found doctor by fuzzy match: {row['name']} (searched for: {doctor_name})")
+                        logger.info(
+                            f"✅ Found doctor by fuzzy match: {row['name']} (searched for: {doctor_name})")
                         return dict(row)
-                    
+
                     logger.info(f"❌ No doctor found for name: {doctor_name}")
                     return None
         except Exception as e:
@@ -245,9 +247,10 @@ class HumansaDatabase:
                     cursor.execute(exact_query, (clinic_name,))
                     row = cursor.fetchone()
                     if row:
-                        logger.info(f"✅ Found clinic by exact match: {row['name']}")
+                        logger.info(
+                            f"✅ Found clinic by exact match: {row['name']}")
                         return dict(row)
-                    
+
                     # If no exact match, try fuzzy matching with ILIKE
                     fuzzy_query = """
                         SELECT clinic_code, name, address, phone
@@ -260,39 +263,40 @@ class HumansaDatabase:
                     cursor.execute(fuzzy_query, (fuzzy_pattern,))
                     row = cursor.fetchone()
                     if row:
-                        logger.info(f"✅ Found clinic by fuzzy match: {row['name']} (searched for: {clinic_name})")
+                        logger.info(
+                            f"✅ Found clinic by fuzzy match: {row['name']} (searched for: {clinic_name})")
                         return dict(row)
-                    
+
                     logger.info(f"❌ No clinic found for name: {clinic_name}")
                     return None
         except Exception as e:
             logger.error(f"Error finding clinic {clinic_name}: {e}")
             return None
 
-    def search_doctors_with_fallback(self, name: Optional[str] = None, specialty: Optional[str] = None, 
-                                   city: Optional[str] = None, limit: int = 5) -> List[Dict[str, Any]]:
+    def search_doctors_with_fallback(self, name: Optional[str] = None, specialty: Optional[str] = None,
+                                     city: Optional[str] = None, limit: int = 5) -> List[Dict[str, Any]]:
         """Search doctors with fuzzy matching and fallback to general results."""
         try:
             with self.get_connection() as conn:
                 with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                     results = []
-                    
+
                     # Try specific search first
                     conditions = []
                     params = []
-                    
+
                     if name:
                         conditions.append("d.name ILIKE %s")
                         params.append(f"%{name}%")
-                    
+
                     if specialty:
                         conditions.append("d.expertise ILIKE %s")
                         params.append(f"%{specialty}%")
-                    
+
                     if city:
                         conditions.append("c.address ILIKE %s")
                         params.append(f"%{city}%")
-                    
+
                     if conditions:
                         specific_query = f"""
                             SELECT d.doctor_code, d.clinic_code, d.name, d.title, 
@@ -307,7 +311,7 @@ class HumansaDatabase:
                         params.append(limit)
                         cursor.execute(specific_query, params)
                         results = [dict(row) for row in cursor.fetchall()]
-                    
+
                     # If no specific results, get general fallback
                     if not results:
                         fallback_query = """
@@ -321,10 +325,12 @@ class HumansaDatabase:
                         """
                         cursor.execute(fallback_query, (limit,))
                         results = [dict(row) for row in cursor.fetchall()]
-                        logger.info(f"📋 Using fallback: returned {len(results)} general doctors")
+                        logger.info(
+                            f"📋 Using fallback: returned {len(results)} general doctors")
                     else:
-                        logger.info(f"🎯 Found {len(results)} doctors matching search criteria")
-                    
+                        logger.info(
+                            f"🎯 Found {len(results)} doctors matching search criteria")
+
                     return results
         except Exception as e:
             logger.error(f"Error searching doctors: {e}")
@@ -342,13 +348,14 @@ class HumansaDatabase:
                     "availability": availability,
                     "search_method": "exact_name"
                 }
-            
+
             # Try fuzzy search for doctor
             doctor_info = self.find_doctor_by_name(doctor_name)
             if doctor_info:
                 # Found doctor with fuzzy match, try availability again
                 actual_name = doctor_info['name']
-                availability = self.find_doctor_availability(actual_name, date_str)
+                availability = self.find_doctor_availability(
+                    actual_name, date_str)
                 return {
                     "doctor_found": True,
                     "exact_match": False,
@@ -356,9 +363,10 @@ class HumansaDatabase:
                     "availability": availability,
                     "search_method": "fuzzy_name"
                 }
-            
+
             # If no doctor found, suggest similar doctors
-            similar_doctors = self.search_doctors_with_fallback(name=doctor_name, limit=3)
+            similar_doctors = self.search_doctors_with_fallback(
+                name=doctor_name, limit=3)
             return {
                 "doctor_found": False,
                 "exact_match": False,
@@ -367,7 +375,7 @@ class HumansaDatabase:
                 "search_method": "suggestion",
                 "message": f"Doctor '{doctor_name}' not found. Here are similar doctors available."
             }
-            
+
         except Exception as e:
             logger.error(f"Error in availability search with fallback: {e}")
             return {
@@ -383,7 +391,7 @@ class HumansaDatabase:
         try:
             # First try to find the doctor with fuzzy matching
             doctor_info = self.find_doctor_by_name(doctor_name)
-            
+
             if doctor_info:
                 # Doctor found, get availability for date range
                 with self.get_connection() as conn:
@@ -396,25 +404,28 @@ class HumansaDatabase:
                             AND remaining_slots > 0
                             ORDER BY shift_date, start_time
                         """
-                        cursor.execute(query, (doctor_info['doctor_code'], start_date, end_date))
+                        cursor.execute(
+                            query, (doctor_info['doctor_code'], start_date, end_date))
                         slots = cursor.fetchall()
-                        
+
                         # Group by date
                         available_dates = []
                         availability = []
                         current_date = None
-                        
+
                         for slot in slots:
                             slot_dict = dict(slot)
                             availability.append(slot_dict)
-                            
-                            slot_date = slot_dict['shift_date'].strftime('%Y-%m-%d')
+
+                            slot_date = slot_dict['shift_date'].strftime(
+                                '%Y-%m-%d')
                             if slot_date != current_date:
                                 available_dates.append(slot_date)
                                 current_date = slot_date
-                        
-                        logger.info(f"✅ Found {len(availability)} slots across {len(available_dates)} days for {doctor_info['name']} ({start_date} to {end_date})")
-                        
+
+                        logger.info(
+                            f"✅ Found {len(availability)} slots across {len(available_dates)} days for {doctor_info['name']} ({start_date} to {end_date})")
+
                         return {
                             "doctor_found": True,
                             "found_doctor_name": doctor_info['name'],
@@ -423,10 +434,11 @@ class HumansaDatabase:
                             "available_dates": available_dates,
                             "search_method": "exact" if doctor_info['name'].lower() == doctor_name.lower() else "fuzzy"
                         }
-            
+
             # Doctor not found, suggest similar doctors with availability in the date range
-            similar_doctors = self.get_doctors_with_availability_in_range(start_date, end_date, limit=5)
-            
+            similar_doctors = self.get_doctors_with_availability_in_range(
+                start_date, end_date, limit=5)
+
             return {
                 "doctor_found": False,
                 "exact_match": False,
@@ -436,9 +448,10 @@ class HumansaDatabase:
                 "search_method": "suggestion",
                 "message": f"Doctor '{doctor_name}' not found. Here are similar doctors with availability in the requested date range."
             }
-            
+
         except Exception as e:
-            logger.error(f"Error in availability range search with fallback: {e}")
+            logger.error(
+                f"Error in availability range search with fallback: {e}")
             return {
                 "doctor_found": False,
                 "exact_match": False,
@@ -469,11 +482,12 @@ class HumansaDatabase:
                     doctors = cursor.fetchall()
                     return [dict(doc) for doc in doctors]
         except Exception as e:
-            logger.error(f"Error getting doctors with availability in range: {e}")
+            logger.error(
+                f"Error getting doctors with availability in range: {e}")
             return []
 
-    def search_clinics_with_fallback(self, clinic_name: Optional[str] = None, city: Optional[str] = None, 
-                                   specialty: Optional[str] = None, limit: int = 5) -> Dict[str, Any]:
+    def search_clinics_with_fallback(self, clinic_name: Optional[str] = None, city: Optional[str] = None,
+                                     specialty: Optional[str] = None, limit: int = 5) -> Dict[str, Any]:
         """Search clinics with fuzzy matching and intelligent fallback."""
         try:
             with self.get_connection() as conn:
@@ -481,21 +495,22 @@ class HumansaDatabase:
                     # Build dynamic query based on available filters
                     conditions = []
                     params = []
-                    
+
                     if clinic_name:
                         conditions.append("c.name ILIKE %s")
                         params.append(f"%{clinic_name}%")
-                    
+
                     if city:
                         conditions.append("c.address ILIKE %s")
                         params.append(f"%{city}%")
-                    
+
                     if specialty:
                         conditions.append("d.expertise ILIKE %s")
                         params.append(f"%{specialty}%")
-                    
-                    where_clause = " AND ".join(conditions) if conditions else "1=1"
-                    
+
+                    where_clause = " AND ".join(
+                        conditions) if conditions else "1=1"
+
                     query = f"""
                         SELECT DISTINCT c.clinic_code, c.name, c.address, c.phone,
                                COUNT(DISTINCT d.doctor_code) as doctor_count,
@@ -508,10 +523,10 @@ class HumansaDatabase:
                         LIMIT %s
                     """
                     params.append(limit)
-                    
+
                     cursor.execute(query, params)
                     clinics = cursor.fetchall()
-                    
+
                     if clinics:
                         search_method = "filtered" if conditions else "all"
                         return {
@@ -535,7 +550,7 @@ class HumansaDatabase:
                         """
                         cursor.execute(fallback_query, (limit,))
                         all_clinics = cursor.fetchall()
-                        
+
                         return {
                             "clinics_found": True,
                             "clinics": [dict(clinic) for clinic in all_clinics],
@@ -543,7 +558,7 @@ class HumansaDatabase:
                             "search_method": "fallback",
                             "message": "No clinics matched your criteria. Here are our available clinics."
                         }
-                        
+
         except Exception as e:
             logger.error(f"Error searching clinics: {e}")
             return {
@@ -554,7 +569,7 @@ class HumansaDatabase:
             }
 
     def search_services_with_fallback(self, service_name: Optional[str] = None, specialty: Optional[str] = None,
-                                    clinic_name: Optional[str] = None, limit: int = 5) -> Dict[str, Any]:
+                                      clinic_name: Optional[str] = None, limit: int = 5) -> Dict[str, Any]:
         """Search medical services with fuzzy matching and intelligent fallback."""
         try:
             with self.get_connection() as conn:
@@ -562,21 +577,22 @@ class HumansaDatabase:
                     # Build dynamic query based on available filters
                     conditions = []
                     params = []
-                    
+
                     if service_name:
                         conditions.append("ms.item_name ILIKE %s")
                         params.append(f"%{service_name}%")
-                    
+
                     if specialty:
                         conditions.append("ms.summary ILIKE %s")
                         params.append(f"%{specialty}%")
-                    
+
                     if clinic_name:
                         conditions.append("c.name ILIKE %s")
                         params.append(f"%{clinic_name}%")
-                    
-                    where_clause = " AND ".join(conditions) if conditions else "1=1"
-                    
+
+                    where_clause = " AND ".join(
+                        conditions) if conditions else "1=1"
+
                     query = f"""
                         SELECT ms.item_code, ms.item_name, ms.clinic_code, ms.price, 
                                ms.summary, c.name as clinic_name
@@ -587,10 +603,10 @@ class HumansaDatabase:
                         LIMIT %s
                     """
                     params.append(limit)
-                    
+
                     cursor.execute(query, params)
                     services = cursor.fetchall()
-                    
+
                     if services:
                         search_method = "filtered" if conditions else "all"
                         return {
@@ -616,7 +632,7 @@ class HumansaDatabase:
                         """
                         cursor.execute(fallback_query, (limit,))
                         all_services = cursor.fetchall()
-                        
+
                         return {
                             "services_found": True,
                             "services": [dict(service) for service in all_services],
@@ -624,7 +640,7 @@ class HumansaDatabase:
                             "search_method": "fallback",
                             "message": "No services matched your criteria. Here are our available services."
                         }
-                        
+
         except Exception as e:
             logger.error(f"Error searching services: {e}")
             return {
@@ -635,7 +651,7 @@ class HumansaDatabase:
             }
 
     def get_pricing_with_fallback(self, service_type: str, clinic_name: Optional[str] = None,
-                                specialty: Optional[str] = None, limit: int = 5) -> Dict[str, Any]:
+                                  specialty: Optional[str] = None, limit: int = 5) -> Dict[str, Any]:
         """Get pricing information with fuzzy search and intelligent fallback."""
         try:
             with self.get_connection() as conn:
@@ -643,17 +659,17 @@ class HumansaDatabase:
                     # Build dynamic query based on available filters
                     conditions = ["ms.item_name ILIKE %s"]
                     params = [f"%{service_type}%"]
-                    
+
                     if clinic_name:
                         conditions.append("c.name ILIKE %s")
                         params.append(f"%{clinic_name}%")
-                    
+
                     if specialty:
                         conditions.append("ms.summary ILIKE %s")
                         params.append(f"%{specialty}%")
-                    
+
                     where_clause = " AND ".join(conditions)
-                    
+
                     query = f"""
                         SELECT ms.item_code, ms.item_name, ms.clinic_code, ms.price, 
                                ms.summary, c.name as clinic_name, c.address
@@ -664,10 +680,10 @@ class HumansaDatabase:
                         LIMIT %s
                     """
                     params.append(limit)
-                    
+
                     cursor.execute(query, params)
                     services = cursor.fetchall()
-                    
+
                     if services:
                         return {
                             "pricing_found": True,
@@ -691,7 +707,7 @@ class HumansaDatabase:
                         """
                         cursor.execute(fallback_query, (limit,))
                         all_services = cursor.fetchall()
-                        
+
                         return {
                             "pricing_found": True,
                             "services": [dict(service) for service in all_services],
@@ -699,7 +715,7 @@ class HumansaDatabase:
                             "search_method": "fallback",
                             "message": f"No exact matches for '{service_type}'. Here are our available services and pricing."
                         }
-                        
+
         except Exception as e:
             logger.error(f"Error getting pricing: {e}")
             return {

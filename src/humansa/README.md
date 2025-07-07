@@ -35,11 +35,10 @@ humansa/
 The main AI-agent chat completion endpoint that provides enhanced functionality over the standard chat endpoint.
 
 **Request Format:**
+
 ```json
 {
-  "messages": [
-    {"role": "user", "content": "Your question here"}
-  ],
+  "messages": [{ "role": "user", "content": "Your question here" }],
   "model": "gpt-4.1-nano",
   "stream": false,
   "user_id": "user_123",
@@ -58,6 +57,7 @@ The main AI-agent chat completion endpoint that provides enhanced functionality 
 ```
 
 **Response Format:**
+
 ```json
 {
   "choices": [
@@ -81,6 +81,7 @@ The main AI-agent chat completion endpoint that provides enhanced functionality 
 ### 1. Agent-Based Reasoning
 
 The `HumansaAgent` class analyzes incoming queries to determine:
+
 - Query intent and complexity
 - Required tools for processing
 - Confidence in tool selection
@@ -89,6 +90,7 @@ The `HumansaAgent` class analyzes incoming queries to determine:
 ### 2. Tool Management
 
 The `HumansaToolManager` class provides:
+
 - **embedding_search**: Advanced embedding search operations
 - **context_retrieval**: Enhanced context retrieval
 - **similarity_analysis**: Content similarity analysis
@@ -98,6 +100,7 @@ The `HumansaToolManager` class provides:
 ### 3. Modular Integration
 
 The humansa module reuses existing YouWoAI modules:
+
 - **RAG Processor**: For retrieval-augmented generation
 - **LLM Provider**: For model selection and execution
 - **Citation Engine**: For response citations
@@ -108,6 +111,7 @@ The humansa module reuses existing YouWoAI modules:
 ## Usage Examples
 
 ### Basic Query
+
 ```bash
 curl -X POST http://localhost:5001/v1-humansa/chat/completions \
   -H "Content-Type: application/json" \
@@ -121,6 +125,7 @@ curl -X POST http://localhost:5001/v1-humansa/chat/completions \
 ```
 
 ### Streaming Response
+
 ```bash
 curl -X POST http://localhost:5001/v1-humansa/chat/completions \
   -H "Content-Type: application/json" \
@@ -135,6 +140,7 @@ curl -X POST http://localhost:5001/v1-humansa/chat/completions \
 ```
 
 ### With Context and Attachments
+
 ```bash
 curl -X POST http://localhost:5001/v1-humansa/chat/completions \
   -H "Content-Type: application/json" \
@@ -158,6 +164,7 @@ curl -X POST http://localhost:5001/v1-humansa/chat/completions \
 To add a new tool:
 
 1. Add the tool function to `HumansaToolManager`:
+
 ```python
 async def _my_custom_tool(self, query: str, context: List, user_id: str) -> Dict[str, Any]:
     # Your tool implementation
@@ -165,11 +172,13 @@ async def _my_custom_tool(self, query: str, context: List, user_id: str) -> Dict
 ```
 
 2. Register the tool in `__init__`:
+
 ```python
 self.available_tools['my_custom_tool'] = self._my_custom_tool
 ```
 
 3. Update the agent reasoning patterns if needed:
+
 ```python
 self.reasoning_patterns['my_custom_tool'] = ['keyword1', 'keyword2']
 ```
@@ -202,6 +211,7 @@ The humansa module is designed to work alongside the existing YouWoAI system:
 ## Future Enhancements
 
 Planned enhancements include:
+
 - Advanced tool implementations
 - Tool chaining and orchestration
 - Custom agent personality and behavior
