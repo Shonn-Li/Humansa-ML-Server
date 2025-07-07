@@ -11,6 +11,9 @@ import logging
 from typing import List, Dict, Any
 from dotenv import load_dotenv
 
+# Import token management system
+from chat.token import get_token_counter, TextTruncator
+
 logger = logging.getLogger(__name__)
 
 # Load environment variables
@@ -23,6 +26,11 @@ class OpenAIEmbeddingClient:
     def __init__(self, model: str = "text-embedding-3-small"):
         self.model = model
         self.client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        
+        # Initialize token management
+        self.token_counter = get_token_counter(model)
+        self.truncator = TextTruncator(model)
+        
         logger.info(f"Initialized OpenAI embedding client with model: {model}")
 
     def get_text_embedding(self, text: str) -> List[float]:
@@ -39,6 +47,14 @@ class OpenAIEmbeddingClient:
             if not text or not text.strip():
                 raise ValueError("Text cannot be empty")
 
+            # Validate and truncate using accurate token counting
+            is_valid, token_count = self.truncator.validate_text_tokens(text)
+            
+            if not is_valid:
+                logger.warning(f"⚠️ Text too long ({token_count} tokens), truncating...")
+                text, final_tokens, was_truncated = self.truncator.truncate_text(text)
+                logger.info(f"📏 Truncated text: {token_count} -> {final_tokens} tokens ({len(text)} chars)")
+
             response = self.client.embeddings.create(
                 model=self.model,
                 input=text,
@@ -50,7 +66,7 @@ class OpenAIEmbeddingClient:
             return embedding
 
         except Exception as e:
-            logger.error(f"Failed to generate embedding for text: {e}")
+            logger.error(f"❌ OpenAI embedding failed: {e}")
             raise
 
     def get_text_embeddings_batch(self, texts: List[str]) -> List[List[float]]:
@@ -73,9 +89,25 @@ class OpenAIEmbeddingClient:
                 logger.warning("No valid texts provided for embedding")
                 return []
 
+            # Use intelligent batch truncation with conservative limits
+            max_tokens_per_text = 6000  # Individual text limit (conservative)
+            max_batch_tokens = 15000    # Batch limit (conservative for OpenAI)
+            
+            processed_texts, token_counts, total_tokens = self.truncator.truncate_texts_batch(
+                valid_texts,
+                max_tokens_per_text=max_tokens_per_text,
+                max_total_tokens=max_batch_tokens
+            )
+
+            if not processed_texts:
+                logger.warning("No valid texts to embed after processing")
+                return []
+
+            logger.debug(f"🔍 Processing batch: {len(processed_texts)} texts, {total_tokens} tokens")
+
             response = self.client.embeddings.create(
                 model=self.model,
-                input=valid_texts,
+                input=processed_texts,
                 encoding_format="float"
             )
 
@@ -129,8 +161,8 @@ class OpenAIEmbeddingClient:
 
     def estimate_tokens(self, text: str) -> int:
         """
-        Rough token estimation for text
-        Uses approximate 1 token per 4 characters rule
+        More accurate token estimation for text
+        Uses a more conservative estimate based on OpenAI's tokenization patterns
 
         Args:
             text: Text to estimate tokens for
@@ -138,15 +170,41 @@ class OpenAIEmbeddingClient:
         Returns:
             int: Estimated token count
         """
-        return len(text) // 4
+        if not text:
+            return 0
 
-    def validate_text_length(self, text: str, max_tokens: int = 8000) -> bool:
+        # More accurate estimation based on real tokenization patterns:
+        # - Average English text: ~3-3.5 chars per token
+        # - Technical text: ~2.5-3 chars per token
+        # - Text with punctuation/special chars: ~2-2.5 chars per token
+
+        # Use 2.5 chars per token for conservative estimation
+        base_estimate = len(text) / 2.5
+
+        # Add buffer for special tokens, punctuation, etc.
+        # Count special characters that tend to be separate tokens
+        special_chars = text.count('.') + text.count(',') + text.count('!') + text.count('?') + \
+            text.count(';') + text.count(':') + text.count('(') + text.count(')') + \
+            text.count('[') + text.count(']') + \
+            text.count('{') + text.count('}')
+
+        # Each special char might be a separate token
+        special_token_estimate = special_chars * 0.5
+
+        # Count newlines and spaces which can affect tokenization
+        whitespace_estimate = (text.count('\n') + text.count('\t')) * 0.3
+
+        total_estimate = base_estimate + special_token_estimate + whitespace_estimate
+
+        return int(total_estimate)
+
+    def validate_text_length(self, text: str, max_tokens: int = 6000) -> bool:
         """
-        Validate that text is within token limits
+        Validate that text is within token limits using improved estimation
 
         Args:
             text: Text to validate
-            max_tokens: Maximum allowed tokens
+            max_tokens: Maximum allowed tokens (default 6000 for safety)
 
         Returns:
             bool: True if text is within limits
@@ -154,7 +212,7 @@ class OpenAIEmbeddingClient:
         estimated_tokens = self.estimate_tokens(text)
         if estimated_tokens > max_tokens:
             logger.warning(
-                f"Text too long: {estimated_tokens} tokens (max: {max_tokens})")
+                f"Text too long: {estimated_tokens} estimated tokens (max: {max_tokens})")
             return False
         return True
 

@@ -1,3 +1,5 @@
+
+
 """
 Azure AI Inference Embeddings Client for Modular Embedding System
 
@@ -9,6 +11,9 @@ import os
 import logging
 from typing import List, Dict, Any
 from dotenv import load_dotenv
+
+# Import token management system
+from chat.token import get_token_counter, TextTruncator
 
 # Azure AI Inference imports
 try:
@@ -46,6 +51,10 @@ class AzureEmbeddingClient:
             credential=AzureKeyCredential(self.credential)
         )
 
+        # Initialize token management
+        self.token_counter = get_token_counter(model)
+        self.truncator = TextTruncator(model)
+
         logger.info(
             f"✅ Azure AI Inference embedding client initialized with model: {model}")
         logger.info(
@@ -64,6 +73,14 @@ class AzureEmbeddingClient:
         try:
             if not text or not text.strip():
                 raise ValueError("Text cannot be empty")
+
+            # Validate and truncate using accurate token counting
+            is_valid, token_count = self.truncator.validate_text_tokens(text)
+            
+            if not is_valid:
+                logger.warning(f"⚠️ Text too long ({token_count} tokens), truncating...")
+                text, final_tokens, was_truncated = self.truncator.truncate_text(text)
+                logger.info(f"📏 Truncated text: {token_count} -> {final_tokens} tokens ({len(text)} chars)")
 
             # Use Azure AI Inference embeddings API
             response = self.client.embed(
@@ -99,15 +116,37 @@ class AzureEmbeddingClient:
             if not valid_texts:
                 raise ValueError("No valid texts to embed")
 
+            # Use intelligent batch truncation with conservative limits
+            max_tokens_per_text = 6000  # Individual text limit (conservative)
+            max_batch_tokens = 15000    # Batch limit (conservative for Azure)
+            
+            processed_texts, token_counts, total_tokens = self.truncator.truncate_texts_batch(
+                valid_texts,
+                max_tokens_per_text=max_tokens_per_text,
+                max_total_tokens=max_batch_tokens
+            )
+
+            if not processed_texts:
+                raise ValueError("No valid texts to embed after processing")
+
+            logger.debug(f"🔍 Processing batch: {len(processed_texts)} texts, {total_tokens} tokens")
+
             # Use Azure AI Inference embeddings API for batch processing
             response = self.client.embed(
-                input=valid_texts,
+                input=processed_texts,
                 model=self.model
             )
 
             embeddings = [item.embedding for item in response.data]
-            logger.debug(
-                f"🔗 Azure batch embeddings generated for {len(valid_texts)} texts")
+            logger.debug(f"🔗 Azure batch embeddings generated for {len(processed_texts)} texts")
+
+            # If we had to skip some texts due to batch limits, process them recursively
+            remaining_texts = valid_texts[len(processed_texts):]
+            if remaining_texts:
+                logger.info(f"🔄 Processing remaining {len(remaining_texts)} texts in new batch")
+                remaining_embeddings = self.get_text_embeddings(remaining_texts)
+                embeddings.extend(remaining_embeddings)
+
             return embeddings
 
         except Exception as e:
@@ -157,44 +196,59 @@ class AzureEmbeddingClient:
                     break
 
                 except Exception as e:
+                    error_msg = str(e)
                     logger.warning(
                         f"⚠️ Batch {i//batch_size + 1} failed on attempt {attempt + 1}: {e}")
-                    if attempt == max_retries - 1:
-                        logger.error(
-                            f"❌ Failed to process batch after {max_retries} attempts")
-                        raise
 
-                    # Exponential backoff
-                    import time
-                    time.sleep(2 ** attempt)
+                    # Special handling for token limit errors
+                    if "maximum context length" in error_msg or "too many tokens" in error_msg.lower():
+                        logger.error(
+                            f"🚨 Token limit exceeded. Attempting more aggressive truncation...")
+                        try:
+                            # Use more aggressive truncation
+                            aggressive_texts = []
+                            for text in batch:
+                                truncated_text, token_count, was_truncated = self.truncator.truncate_text(
+                                    text, max_tokens=4000  # Very conservative limit
+                                )
+                                aggressive_texts.append(truncated_text)
+                                
+                            # Try again with aggressively truncated texts
+                            batch_embeddings = self.get_text_embeddings(aggressive_texts)
+                            all_embeddings.extend(batch_embeddings)
+                            logger.info(f"✅ Recovered with aggressive truncation")
+                            break
+                            
+                        except Exception as retry_e:
+                            logger.error(f"❌ Aggressive truncation also failed: {retry_e}")
+                            if attempt == max_retries - 1:
+                                # Last attempt failed, skip this batch or raise error
+                                logger.error(f"❌ Failed to process batch after {max_retries} attempts")
+                                raise
+                    else:
+                        # For other errors, just retry or fail
+                        if attempt == max_retries - 1:
+                            logger.error(f"❌ Failed to process batch after {max_retries} attempts")
+                            raise
 
         return all_embeddings
 
     def estimate_tokens(self, text: str) -> int:
         """
-        Rough token estimation for text
-        Uses approximate 1 token per 4 characters rule
-
-        Args:
-            text: Text to estimate tokens for
-
-        Returns:
-            int: Estimated token count
+        DEPRECATED: Use token_counter for accurate token counting
+        This method is kept for backward compatibility
         """
-        return len(text) // 4
+        logger.warning("estimate_tokens is deprecated. Use self.token_counter.count_tokens() instead")
+        return self.token_counter.count_tokens(text)
 
-    def validate_text_length(self, text: str, max_tokens: int = 8000) -> bool:
+    def validate_text_length(self, text: str, max_tokens: int = 6000) -> bool:
         """
-        Validate that text is within token limits
-
-        Args:
-            text: Text to validate
-            max_tokens: Maximum allowed tokens
-
-        Returns:
-            bool: True if text is within limits
+        DEPRECATED: Use truncator.validate_text_tokens() for accurate validation
+        This method is kept for backward compatibility
         """
-        return self.estimate_tokens(text) <= max_tokens
+        logger.warning("validate_text_length is deprecated. Use self.truncator.validate_text_tokens() instead")
+        is_valid, _ = self.truncator.validate_text_tokens(text, max_tokens)
+        return is_valid
 
     def test_connection(self) -> bool:
         """
