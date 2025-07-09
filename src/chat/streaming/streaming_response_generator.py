@@ -125,6 +125,25 @@ class StreamingResponseGenerator:
                 logger.info(
                     f"📚 RAG CONTEXT ADDED: {len(rag_context.chunks)} chunks")
 
+                # Log detailed RAG context content
+                logger.info("📚 === RAG CONTEXT DETAILS ===")
+                logger.info(
+                    f"RAG context preview (first 300 chars):\n{rag_context_text[:300]}{'...' if len(rag_context_text) > 300 else ''}")
+                logger.info(f"📊 Chunk breakdown:")
+                note_chunks = [
+                    c for c in rag_context.chunks if c.type == 'note']
+                conv_chunks = [
+                    c for c in rag_context.chunks if c.type == 'conversation']
+                logger.info(f"  - Note chunks: {len(note_chunks)}")
+                logger.info(f"  - Conversation chunks: {len(conv_chunks)}")
+                if note_chunks:
+                    logger.info(
+                        f"  - Note IDs: {list(set(c.type_id for c in note_chunks))[:5]}{'...' if len(set(c.type_id for c in note_chunks)) > 5 else ''}")
+                if conv_chunks:
+                    logger.info(
+                        f"  - Conversation IDs: {list(set(c.type_id for c in conv_chunks))[:5]}{'...' if len(set(c.type_id for c in conv_chunks)) > 5 else ''}")
+                logger.info("=== END RAG CONTEXT DETAILS ===")
+
             # Add web search context
             if websearch_context and websearch_context.results:
                 has_context = True
@@ -140,9 +159,27 @@ class StreamingResponseGenerator:
                 # WITH CONTEXT: Insert system message right before the last user message
                 combined_context = "\n\n".join(context_parts)
 
-                logger.info("🌊 STREAMING WITH CONTEXT: Adding system message before last user message")
+                logger.info(
+                    "🌊 STREAMING WITH CONTEXT: Adding system message before last user message")
                 logger.info(
                     f"🌊 Context length: {len(combined_context)} characters")
+
+                # Log the actual combined context content
+                logger.info("🌊 === FINAL COMBINED CONTEXT ===")
+                logger.info(
+                    f"Context preview (first 500 chars):\n{combined_context[:500]}{'...' if len(combined_context) > 500 else ''}")
+                logger.info(f"📊 Context structure:")
+                for i, part in enumerate(context_parts):
+                    part_type = "UNKNOWN"
+                    if part.startswith("FILE ATTACHMENTS:"):
+                        part_type = "FILE ATTACHMENTS"
+                    elif part.startswith("KNOWLEDGE BASE:"):
+                        part_type = "KNOWLEDGE BASE"
+                    elif part.startswith("WEB SEARCH RESULTS:"):
+                        part_type = "WEB SEARCH RESULTS"
+                    logger.info(
+                        f"  Part {i+1}: {part_type} ({len(part)} chars)")
+                logger.info("=== END FINAL COMBINED CONTEXT ===")
 
                 system_message = {
                     "role": "system",
@@ -222,31 +259,34 @@ Please use this context to answer the user's question accurately and naturally."
                     logger.info(f"🔍 DEBUG Chunk {chunk_count} structure:")
                     logger.info(f"🔍 - Type: {type(chunk)}")
                     logger.info(f"🔍 - Has delta: {hasattr(chunk, 'delta')}")
-                    logger.info(f"🔍 - Has message: {hasattr(chunk, 'message')}")
+                    logger.info(
+                        f"🔍 - Has message: {hasattr(chunk, 'message')}")
                     if hasattr(chunk, 'delta'):
-                        logger.info(f"🔍 - Delta content: '{str(chunk.delta)[:50]}...'")
+                        logger.info(
+                            f"🔍 - Delta content: '{str(chunk.delta)[:50]}...'")
                     if hasattr(chunk, 'message') and hasattr(chunk.message, 'content'):
-                        logger.info(f"🔍 - Message content: '{str(chunk.message.content)[:50]}...'")
+                        logger.info(
+                            f"🔍 - Message content: '{str(chunk.message.content)[:50]}...'")
 
                 # Extract content from chat stream chunk - handle different formats
                 new_content = ""
-                
+
                 # Method 1: Try delta first (incremental content)
                 if hasattr(chunk, 'delta') and chunk.delta:
                     delta_content = str(chunk.delta)
                     if delta_content and delta_content != 'None':
                         new_content = delta_content
-                        
+
                 # Method 2: Try message.content (usually cumulative)
                 elif hasattr(chunk, 'message') and hasattr(chunk.message, 'content'):
                     current_full_content = chunk.message.content
-                    
+
                     # Only extract NEW content if this is cumulative
                     if current_full_content and len(current_full_content) > len(full_content):
                         new_content = current_full_content[len(full_content):]
                     # If current_full_content is equal or smaller, it's likely a duplicate or final chunk
                     # DON'T use it as new_content to avoid duplication
-                    
+
                 # Method 3: Fallback to string conversion (be very careful here)
                 elif str(chunk) not in ['None', '', 'ChatResponse()']:
                     potential_content = str(chunk)
@@ -257,8 +297,9 @@ Please use this context to answer the user's question accurately and naturally."
                 # Only send if we have new content
                 if new_content:
                     full_content += new_content  # Update our running total
-                    
-                    logger.debug(f"🌊 Chunk {chunk_count}: NEW='{new_content[:30]}...' (total len: {len(full_content)})")
+
+                    logger.debug(
+                        f"🌊 Chunk {chunk_count}: NEW='{new_content[:30]}...' (total len: {len(full_content)})")
 
                     yield {
                         "id": chat_id,
@@ -691,7 +732,7 @@ ANSWER:"""
             "web_search_enabled": bool(websearch_context),
             "attachments_enabled": bool(attachment_context),
             "router_used": router_decision is not None,
-            "router_reasoning": router_decision.reason if router_decision else None,
+            "router_reasoning": router_decision.reasoning if router_decision else None,
             "router_confidence": router_decision.confidence if router_decision else None,
             "used_notes": rag_context.used_note_ids if rag_context else [],
             "used_conversations": rag_context.used_conversation_ids if rag_context else [],

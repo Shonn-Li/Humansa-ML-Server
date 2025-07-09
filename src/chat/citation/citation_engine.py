@@ -99,11 +99,27 @@ class CitationEngine:
 
         # Extract RAG sources
         if rag_context and rag_context.chunks:
+            # Get note titles for all note chunks at once
+            note_ids = [
+                chunk.type_id for chunk in rag_context.chunks if chunk.type == "note"]
+            note_titles = {}
+            if note_ids:
+                from ..postgres.db_manager import PostgresManager
+                postgres = PostgresManager()
+                note_titles = postgres.get_note_titles_batch(note_ids)
+
             for i, chunk in enumerate(rag_context.chunks):
+                # Use note title for notes, keep conversation ID for conversations
+                if chunk.type == "note":
+                    title = note_titles.get(
+                        chunk.type_id, f"Note {chunk.type_id}")
+                else:
+                    title = f"Conversation {chunk.type_id}"
+
                 source = CitationSource(
                     source_id=f"rag_{chunk.type}_{chunk.type_id}_{i}",
                     source_type=chunk.type,
-                    title=f"{chunk.type.title()} {chunk.type_id}",
+                    title=title,
                     content=chunk.chunk_text,
                     metadata={
                         'type_id': chunk.type_id,

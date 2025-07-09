@@ -10,6 +10,6 @@ from .text_truncator import TextTruncator
 
 __all__ = [
     "TokenCounter",
-    "get_token_counter", 
+    "get_token_counter",
     "TextTruncator"
 ]

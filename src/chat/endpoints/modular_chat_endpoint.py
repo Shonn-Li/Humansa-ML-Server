@@ -161,7 +161,7 @@ class ModularChatEndpoint:
         self.router = None  # Will be initialized when needed
         self.query_transformer = QueryTransformer(
             self.provider_selector)  # NEW: Query transformer
-        
+
         # NEW: Initialize streaming response generator
         self.streaming_generator = StreamingResponseGenerator(
             self.rag_processor,
@@ -208,6 +208,16 @@ class ModularChatEndpoint:
         # Extract parameters
         messages = request_data.get("messages", [])
         user_id = request_data.get("user_id")
+
+        # Convert user_id to integer for database compatibility
+        if user_id is not None:
+            try:
+                user_id = int(user_id)
+            except (ValueError, TypeError):
+                return {
+                    "error": f"user_id must be a valid integer, got: {user_id}",
+                    "status": "error"
+                }
         enable_rag = request_data.get("enable_rag", True)
         enable_citations = request_data.get("enable_citations", False)
         enable_web_search = request_data.get("enable_web_search", False)
@@ -303,9 +313,7 @@ class ModularChatEndpoint:
             # Initialize Pure Decision Router - MUST WORK!
             if enable_router_retriever and not self.router:
                 try:
-                    self.router = IntelligentRouter(
-                        provider_selector=self.provider_selector
-                    )
+                    self.router = IntelligentRouter()
                     logger.info(
                         "🎯 Pure Decision Router initialized successfully")
                 except RuntimeError as e:
@@ -321,6 +329,7 @@ class ModularChatEndpoint:
             attachment_context = None
             websearch_context = None
             router_decision = None
+            search_type = "mixed"  # Default search type when router is not used
 
             # Determine which sources are enabled
             available_sources = {
@@ -336,27 +345,41 @@ class ModularChatEndpoint:
 
                 try:
                     # Get pure routing decision using CONDENSED QUERY (no retrieval yet)
-                    router_decision = self.router.decide(
+                    router_decision = await self.router.route_query(
                         query=query,  # Using condensed query for better routing decisions
-                        available_sources=available_sources,
+                        user_id=user_id,
                         # Last 6 messages for context
-                        previous_messages=messages[-6:] if len(
-                            messages) > 6 else messages,
-                        # Pass ID parameters to force enable RAG when specific content is requested
-                        note_ids=note_ids,
-                        folder_ids=folder_ids,
-                        conversation_ids=conversation_ids
+                        conversation_history=messages[-6:] if len(
+                            messages) > 6 else messages
                     )
 
-                    # Override enable flags based on router decision
-                    enable_rag = router_decision.enable_rag
-                    enable_web_search = router_decision.enable_web_search
-                    enable_attachments = router_decision.enable_attachments
+                    # Map router decision to enable flags
+                    search_type = router_decision.search_type
+
+                    # Set enable flags based on search type
+                    if search_type == "none":
+                        enable_rag = False
+                        enable_web_search = False
+                        enable_attachments = False
+                    elif search_type == "web":
+                        enable_rag = False
+                        enable_web_search = True
+                        enable_attachments = False
+                    elif search_type == "attachments":
+                        enable_rag = False
+                        enable_web_search = False
+                        enable_attachments = True
+                    else:  # notes, conversations, mixed
+                        enable_rag = True
+                        enable_web_search = False
+                        enable_attachments = False
 
                     logger.info(
                         f"🎯 Router decision: RAG={enable_rag}, Web={enable_web_search}, Attachments={enable_attachments}")
                     logger.info(
-                        f"🧠 Router reasoning: {router_decision.reason}")
+                        f"🧠 Router reasoning: {router_decision.reasoning}")
+                    logger.info(
+                        f"🔍 Search type: {search_type}")
 
                 except RuntimeError as e:
                     logger.error(
@@ -376,7 +399,8 @@ class ModularChatEndpoint:
 
             # RAG Processing Task (if enabled)
             if enable_rag:
-                logger.info("🔍 STARTING RAG WITH CONDENSED QUERY...")
+                logger.info(
+                    f"🔍 STARTING RAG WITH CONDENSED QUERY (search_type: {search_type})...")
                 rag_task = self.rag_processor.process_rag_request(
                     messages=messages,
                     user_id=user_id,
@@ -384,7 +408,8 @@ class ModularChatEndpoint:
                     folder_ids=folder_ids,
                     conversation_ids=conversation_ids,
                     top_k=20,
-                    custom_query=query  # Use condensed query for better RAG results
+                    custom_query=query,  # Use condensed query for better RAG results
+                    search_type=search_type  # Pass search type from router
                 )
                 tasks.append(("rag", rag_task))
 
@@ -449,7 +474,8 @@ class ModularChatEndpoint:
             # Phase 3: Response Generation - Stream vs Non-Stream
             if stream:
                 # Streaming response - return async generator
-                logger.info("🌊 STREAMING MODE: Using modular streaming generator")
+                logger.info(
+                    "🌊 STREAMING MODE: Using modular streaming generator")
                 return self.streaming_generator.generate_streaming_response(
                     request_data=request_data,
                     rag_context=rag_context,
@@ -850,7 +876,7 @@ ANSWER:"""
                 "citations_enabled": enable_citations,
                 "web_search_enabled": enable_web_search,
                 "router_retriever_used": router_decision is not None,
-                "router_selected_sources": [s.value for s in router_decision.selected_sources] if router_decision else [],
+                "router_search_type": router_decision.search_type if router_decision else "mixed",
                 "router_reasoning": router_decision.reasoning if router_decision else "",
                 "router_confidence": router_decision.confidence if router_decision else 0.0,
                 "used_notes": rag_context.used_note_ids if rag_context else [],
@@ -969,7 +995,7 @@ ANSWER:"""
             "enableCitations": True,  # Always enabled in this endpoint
             # Additional router information
             "routerUsed": router_decision is not None,
-            "routerReasoning": router_decision.reason if router_decision else None,
+            "routerReasoning": router_decision.reasoning if router_decision else None,
             "routerConfidence": router_decision.confidence if router_decision else None
         }
 

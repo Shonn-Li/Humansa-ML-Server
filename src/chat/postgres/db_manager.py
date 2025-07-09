@@ -255,12 +255,12 @@ class PostgresManager:
 
                 if resolved_ids.notes:
                     where_conditions.append(
-                        "(type = 'note' AND type_id = ANY(%s))")
+                        "(e.type = 'note' AND e.type_id = ANY(%s))")
                     params.append(resolved_ids.notes)
 
                 if resolved_ids.conversations:
                     where_conditions.append(
-                        "(type = 'conversation' AND type_id = ANY(%s))")
+                        "(e.type = 'conversation' AND e.type_id = ANY(%s))")
                     params.append(resolved_ids.conversations)
 
                 if not where_conditions:
@@ -273,14 +273,20 @@ class PostgresManager:
 
                 query = f"""
                     SELECT 
-                        type_id,
-                        type,
-                        chunk_text,
-                        1 - (embedding <=> %s::vector) as similarity,
-                        section_id
-                    FROM embedding_v1 
+                        e.type_id,
+                        e.type,
+                        e.chunk_text,
+                        1 - (e.embedding <=> %s::vector) as similarity,
+                        e.section_id,
+                        CASE 
+                            WHEN e.type = 'note' THEN n."noteTitle"
+                            WHEN e.type = 'conversation' THEN c.title
+                        END as title
+                    FROM embedding_v1 e
+                    LEFT JOIN note_v1 n ON e.type = 'note' AND e.type_id = n.id
+                    LEFT JOIN conversation_v1 c ON e.type = 'conversation' AND e.type_id = c.id
                     WHERE {where_clause}
-                    ORDER BY embedding <=> %s::vector
+                    ORDER BY e.embedding <=> %s::vector
                     LIMIT %s
                 """
 
@@ -296,12 +302,123 @@ class PostgresManager:
                         type=row[1],
                         chunk_text=row[2],
                         similarity=row[3],
-                        section_id=row[4]
+                        section_id=row[4],
+                        metadata={"title": row[5]} if len(row) > 5 else None
                     )
                     chunks.append(chunk)
 
                 logger.info(
                     f"Mixed vector search found {len(chunks)} relevant chunks")
+                return chunks
+
+    def notes_only_vector_search(self, query_embedding: List[float], resolved_ids: ResolvedIDs,
+                                 top_k: int = 20) -> List[ChunkResult]:
+        """
+        Vector search ONLY in notes content
+        Filters by type='note' in embedding_v1 table
+        """
+        with self.get_connection() as conn:
+            with conn.cursor() as cursor:
+                # Convert embedding to pgvector format
+                query_vector = '[' + ','.join(map(str, query_embedding)) + ']'
+
+                if not resolved_ids.notes:
+                    logger.warning(
+                        "No note IDs to search - returning empty results")
+                    return []
+
+                params = [query_vector, resolved_ids.notes,
+                          query_vector, top_k]
+
+                query = """
+                    SELECT 
+                        e.type_id,
+                        e.type,
+                        e.chunk_text,
+                        1 - (e.embedding <=> %s::vector) as similarity,
+                        e.section_id,
+                        n."noteTitle"
+                    FROM embedding_v1 e
+                    LEFT JOIN note_v1 n ON e.type_id = n.id
+                    WHERE e.type = 'note' AND e.type_id = ANY(%s)
+                    ORDER BY e.embedding <=> %s::vector
+                    LIMIT %s
+                """
+
+                logger.info(
+                    f"Notes-only vector search - notes: {len(resolved_ids.notes)}")
+                cursor.execute(query, params)
+                results = cursor.fetchall()
+
+                chunks = []
+                for row in results:
+                    chunk = ChunkResult(
+                        type_id=row[0],
+                        type=row[1],
+                        chunk_text=row[2],
+                        similarity=row[3],
+                        section_id=row[4],
+                        metadata={"title": row[5]} if len(row) > 5 else None
+                    )
+                    chunks.append(chunk)
+
+                logger.info(
+                    f"Notes-only vector search found {len(chunks)} relevant chunks")
+                return chunks
+
+    def conversations_only_vector_search(self, query_embedding: List[float], resolved_ids: ResolvedIDs,
+                                         top_k: int = 20) -> List[ChunkResult]:
+        """
+        Vector search ONLY in conversation content
+        Filters by type='conversation' in embedding_v1 table
+        """
+        with self.get_connection() as conn:
+            with conn.cursor() as cursor:
+                # Convert embedding to pgvector format
+                query_vector = '[' + ','.join(map(str, query_embedding)) + ']'
+
+                if not resolved_ids.conversations:
+                    logger.warning(
+                        "No conversation IDs to search - returning empty results")
+                    return []
+
+                params = [query_vector, resolved_ids.conversations,
+                          query_vector, top_k]
+
+                query = """
+                    SELECT 
+                        e.type_id,
+                        e.type,
+                        e.chunk_text,
+                        1 - (e.embedding <=> %s::vector) as similarity,
+                        e.section_id,
+                        c.title
+                    FROM embedding_v1 e
+                    LEFT JOIN conversation_v1 c ON e.type_id = c.id
+                    WHERE e.type = 'conversation' AND e.type_id = ANY(%s)
+                    ORDER BY e.embedding <=> %s::vector
+                    LIMIT %s
+                """
+
+                logger.info(
+                    f"Conversations-only vector search - conversations: {len(resolved_ids.conversations)}")
+                cursor.execute(query, params)
+                results = cursor.fetchall()
+
+                chunks = []
+                for row in results:
+                    chunk = ChunkResult(
+                        type_id=row[0],
+                        type=row[1],
+                        chunk_text=row[2],
+                        similarity=row[3],
+                        section_id=row[4],
+                        metadata={"title": row[5]} if len(row) > 5 else None
+                    )
+                    chunks.append(chunk)
+
+                logger.info(
+                    f"Conversations-only vector search found {len(chunks)} relevant chunks")
                 return chunks
 
     def get_chunks_by_url(self, url: str) -> List[Dict[str, Any]]:
