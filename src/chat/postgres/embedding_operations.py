@@ -514,15 +514,27 @@ class EmbeddingDBOperations:
         try:
             with self.get_connection() as conn:
                 with conn.cursor() as cursor:
-                    # Insert a special marker record to indicate this note should be skipped
+                    # First check if any embedding already exists for this note
                     cursor.execute("""
-                        INSERT INTO embedding_v1 (type_id, type, section_id, chunk_text, embedding, last_updated)
-                        VALUES (%s, %s, %s, %s, %s, NOW())
-                        ON CONFLICT (type_id, type, section_id) DO NOTHING
-                    """, (note_id, 'note', -1, 'SKIP_EMBEDDING', None))
+                        SELECT COUNT(*) FROM embedding_v1 
+                        WHERE type_id = %s AND type = 'note'
+                    """, (note_id,))
 
-                    conn.commit()
-                    logger.info(f"Marked note {note_id} to skip embedding")
+                    existing_count = cursor.fetchone()[0]
+
+                    if existing_count == 0:
+                        # Insert a special marker record to indicate this note should be skipped
+                        cursor.execute("""
+                            INSERT INTO embedding_v1 (type_id, type, section_id, chunk_text, embedding, last_updated)
+                            VALUES (%s, %s, %s, %s, %s, NOW())
+                        """, (note_id, 'note', -1, 'SKIP_EMBEDDING', None))
+
+                        conn.commit()
+                        logger.info(f"Marked note {note_id} to skip embedding")
+                    else:
+                        logger.info(
+                            f"Note {note_id} already has embeddings, skipping mark operation")
+
                     return True
         except Exception as e:
             logger.error(

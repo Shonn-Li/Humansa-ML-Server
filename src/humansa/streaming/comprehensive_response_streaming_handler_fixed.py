@@ -1,11 +1,8 @@
 """
-Comprehensive Response Streaming Handler for Humansa Agentic Agent
+Enhanced Comprehensive Response Streaming Handler with OpenAI Integration
 
-Implements the full specification for event-driven streaming with proper lifecycle,
-output items, reasoning, web search, function calls, and assistant messages.
-
-Each ReAct step (Thought/Action/Observation) gets its own output_item wrapper.
-Proper content part streaming with delta chunks and completion events.
+Now supports both manual comprehensive streaming and OpenAI Responses API streaming
+based on request parameters.
 """
 
 import json
@@ -13,8 +10,16 @@ import logging
 import time
 import uuid
 import re
-from typing import Dict, Any, List, Optional, AsyncGenerator
+from typing import Dict, Any, List, Optional, AsyncGenerator, Union
 from datetime import datetime
+
+# Add OpenAI integration import (conditional)
+try:
+    from ..openai import get_openai_streaming_alternative, should_use_openai_streaming
+    OPENAI_AVAILABLE = True
+except ImportError:
+    OPENAI_AVAILABLE = False
+    print("⚠️ OpenAI integration not available. Install llama-index-llms-openai to enable.")
 
 logger = logging.getLogger(__name__)
 
@@ -95,8 +100,15 @@ class ComprehensiveResponseStreamingHandler:
             # Phase 3: Process all tool calls and results properly
             # First, stream reasoning steps from the agent trace
             if agent_trace:
+                logger.info(
+                    f"🔍 Agent trace content (first 500 chars): {agent_trace[:500]}")
                 react_steps = self._parse_react_trace(agent_trace)
                 logger.info(f"🧠 Parsed {len(react_steps)} ReAct steps")
+
+                # Log each step for debugging
+                for i, step in enumerate(react_steps):
+                    logger.info(
+                        f"🧠 Step {i}: {step.get('type')} - {step.get('content', '')[:100]}")
 
                 # Stream reasoning steps only (not the action executions)
                 for step in react_steps:
@@ -106,11 +118,11 @@ class ComprehensiveResponseStreamingHandler:
 
             # Phase 4: Stream all tool calls and their results
             # Use the tool_calls_observed data which has the complete information
-            for i, tool_call in enumerate(tool_calls_observed):
-                logger.info(
-                    f"🔧 Processing tool call {i+1}: {tool_call.get('tool_name', 'unknown')}")
-                async for event in self._stream_complete_tool_call(tool_call):
-                    yield event
+            # for i, tool_call in enumerate(tool_calls_observed):
+            #     logger.info(
+            #         f"🔧 Processing tool call {i+1}: {tool_call.get('tool_name', 'unknown')}")
+            #     async for event in self._stream_complete_tool_call(tool_call):
+            #         yield event
 
             # Phase 5: Stream final assistant answer
             final_answer = self._extract_final_answer(
@@ -151,13 +163,14 @@ class ComprehensiveResponseStreamingHandler:
                                     )
 
     def _parse_react_trace(self, agent_trace: str) -> List[Dict[str, Any]]:
-        """Parse ReAct agent trace into structured steps."""
+        """Parse ReAct agent trace into structured steps, avoiding duplicates."""
         if not agent_trace:
             return []
 
         steps = []
         lines = agent_trace.split('\n')
         current_step = None
+        seen_thoughts = set()  # Track seen thought content to avoid duplicates
 
         for line in lines:
             line = line.strip()
@@ -168,9 +181,17 @@ class ComprehensiveResponseStreamingHandler:
             if line.startswith('Thought:'):
                 if current_step:
                     steps.append(current_step)
+                thought_content = line[8:].strip()  # Remove "Thought:" prefix
+
+                # Skip duplicate thoughts
+                if thought_content in seen_thoughts:
+                    current_step = None
+                    continue
+
+                seen_thoughts.add(thought_content)
                 current_step = {
                     'type': 'thought',
-                    'content': line[8:].strip()  # Remove "Thought:" prefix
+                    'content': thought_content
                 }
             elif line.startswith('Action:'):
                 if current_step:
@@ -200,6 +221,8 @@ class ComprehensiveResponseStreamingHandler:
         if current_step:
             steps.append(current_step)
 
+        logger.info(
+            f"🧠 Parsed {len(steps)} ReAct steps, eliminated duplicates")
         return steps
 
     async def _stream_react_step(self, step: Dict[str, Any], tool_calls: List[Dict]) -> AsyncGenerator[Dict[str, Any], None]:
@@ -769,7 +792,7 @@ class ComprehensiveResponseStreamingHandler:
 async def convert_agent_response_to_comprehensive_stream(agent_response: Dict[str, Any],
                                                          model: str = "gpt-4.1-nano") -> AsyncGenerator[Dict[str, Any], None]:
     """
-    Convenience function to convert agent response to comprehensive streaming format.
+    Original conversion function for backward compatibility.
 
     Args:
         agent_response: Response from HumansaAgenticAgent.execute_with_tools()

@@ -118,10 +118,10 @@ class UnifiedRAGSearcher:
         logger.info("UnifiedRAGSearcher initialized")
 
     def search_relevant_chunks(self, query: str, resolved_ids: ResolvedIDs,
-                               top_k: int = 20) -> List[ChunkResult]:
+                               top_k: int = 20, search_type: str = "mixed") -> List[ChunkResult]:
         """
-        Single mixed vector search across notes and conversations
-        Uses unified embedding_v1 table query
+        Vector search across notes and conversations with type-specific routing
+        Supports "notes", "conversations", or "mixed" search types
         """
         if not query.strip():
             logger.warning("Empty query provided to RAG search")
@@ -131,7 +131,7 @@ class UnifiedRAGSearcher:
             logger.warning("No IDs provided for RAG search")
             return []
 
-        logger.info(f"=== RAG SEARCH ===")
+        logger.info(f"=== RAG SEARCH ({search_type.upper()}) ===")
         logger.info(f"Query: {query[:100]}...")
         logger.info(
             f"Searching {len(resolved_ids.notes)} notes, {len(resolved_ids.conversations)} conversations")
@@ -143,11 +143,19 @@ class UnifiedRAGSearcher:
             logger.error(f"Failed to generate query embedding: {e}")
             return []
 
-        # Perform unified vector search
-        chunks = self.postgres.mixed_vector_search(
-            query_embedding, resolved_ids, top_k)
+        # Perform search based on search_type
+        if search_type == "notes":
+            chunks = self.postgres.notes_only_vector_search(
+                query_embedding, resolved_ids, top_k)
+        elif search_type == "conversations":
+            chunks = self.postgres.conversations_only_vector_search(
+                query_embedding, resolved_ids, top_k)
+        else:  # search_type == "mixed" (default)
+            chunks = self.postgres.mixed_vector_search(
+                query_embedding, resolved_ids, top_k)
 
-        logger.info(f"Found {len(chunks)} relevant chunks")
+        logger.info(
+            f"Found {len(chunks)} relevant chunks using {search_type} search")
         for i, chunk in enumerate(chunks[:5]):  # Log top 5
             logger.info(
                 f"  {i+1}. {chunk.type}:{chunk.type_id} (sim: {chunk.similarity:.3f})")
@@ -198,7 +206,8 @@ class RAGProcessor:
                                   folder_ids: Optional[List[int]] = None,
                                   conversation_ids: Optional[List[int]] = None,
                                   top_k: int = 20,
-                                  custom_query: Optional[str] = None) -> RAGContext:
+                                  custom_query: Optional[str] = None,
+                                  search_type: str = "mixed") -> RAGContext:
         """
         Main RAG processing pipeline with optimized parallel processing:
         1. Extract query from messages (or use custom_query if provided)
@@ -267,9 +276,9 @@ class RAGProcessor:
 
         await self._check_and_ensure_embeddings(resolved_ids, is_targeted_search)
 
-        # Step 4: Search with embedded query
-        logger.info("=== UNIFIED SEARCH ===")
-        chunks = await self._search_with_embedding_async(query_embedding, resolved_ids, top_k)
+        # Step 4: Search with embedded query using router-determined search type
+        logger.info(f"=== {search_type.upper()} SEARCH ===")
+        chunks = await self._search_with_embedding_async(query_embedding, resolved_ids, top_k, search_type)
 
         # Step 5: Extract used IDs
         used_note_ids = list(
@@ -436,15 +445,25 @@ class RAGProcessor:
 
     async def _search_with_embedding_async(self, query_embedding: List[float],
                                            resolved_ids: ResolvedIDs,
-                                           top_k: int) -> List[ChunkResult]:
-        """Async wrapper for vector search"""
+                                           top_k: int, search_type: str = "mixed") -> List[ChunkResult]:
+        """Async wrapper for vector search with search type support"""
         loop = asyncio.get_event_loop()
+
+        # Choose the right search method based on search_type
+        if search_type == "notes":
+            search_func = self.postgres.notes_only_vector_search
+        elif search_type == "conversations":
+            search_func = self.postgres.conversations_only_vector_search
+        else:  # search_type == "mixed" (default)
+            search_func = self.postgres.mixed_vector_search
+
         chunks = await loop.run_in_executor(
             None,
-            self.postgres.mixed_vector_search,
+            search_func,
             query_embedding, resolved_ids, top_k
         )
-        logger.info(f"Found {len(chunks)} relevant chunks")
+        logger.info(
+            f"Found {len(chunks)} relevant chunks using {search_type} search")
         return chunks
 
     async def _create_embeddings_sync_async(self, type_name: str, ids: List[int]):
@@ -481,9 +500,20 @@ class RAGProcessor:
         total_length = 0
 
         for chunk in chunks:
-            # Create source identifier
-            source_type = "Note" if chunk.type == "note" else "Conversation"
-            source_id = f"{source_type} {chunk.type_id}"
+            # Extract title from metadata
+            title = chunk.metadata.get("title") if chunk.metadata else None
+
+            # Create source identifier with title if available
+            if chunk.type == "note":
+                if title:
+                    source_id = f"Note '{title}'"
+                else:
+                    source_id = f"Note {chunk.type_id}"
+            else:  # conversation
+                if title:
+                    source_id = f"Conversation '{title}'"
+                else:
+                    source_id = f"Conversation {chunk.type_id}"
 
             # Format chunk with source
             chunk_text = f"[{source_id}] {chunk.chunk_text.strip()}"
@@ -500,6 +530,20 @@ class RAGProcessor:
         context_text = "\n\n".join(context_parts)
         logger.info(
             f"Generated context text: {len(context_text)} chars from {len(context_parts)} chunks")
+
+        # Log the actual context content for debugging
+        logger.info("🔍 === RAG CONTEXT CONTENT ===")
+        logger.info(
+            f"Context preview (first 500 chars):\n{context_text[:500]}{'...' if len(context_text) > 500 else ''}")
+        if len(context_parts) > 0:
+            logger.info(f"📄 Individual chunks summary:")
+            for i, part in enumerate(context_parts[:3]):  # Show first 3 chunks
+                logger.info(
+                    f"  Chunk {i+1}: {part[:100]}{'...' if len(part) > 100 else ''}")
+            if len(context_parts) > 3:
+                logger.info(f"  ... and {len(context_parts) - 3} more chunks")
+        logger.info("=== END RAG CONTEXT CONTENT ===")
+
         return context_text
 
     def chunks_to_documents(self, chunks: List[ChunkResult]) -> List[Any]:

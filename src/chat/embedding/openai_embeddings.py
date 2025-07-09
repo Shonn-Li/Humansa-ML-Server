@@ -26,11 +26,11 @@ class OpenAIEmbeddingClient:
     def __init__(self, model: str = "text-embedding-3-small"):
         self.model = model
         self.client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        
+
         # Initialize token management
         self.token_counter = get_token_counter(model)
         self.truncator = TextTruncator(model)
-        
+
         logger.info(f"Initialized OpenAI embedding client with model: {model}")
 
     def get_text_embedding(self, text: str) -> List[float]:
@@ -49,11 +49,14 @@ class OpenAIEmbeddingClient:
 
             # Validate and truncate using accurate token counting
             is_valid, token_count = self.truncator.validate_text_tokens(text)
-            
+
             if not is_valid:
-                logger.warning(f"⚠️ Text too long ({token_count} tokens), truncating...")
-                text, final_tokens, was_truncated = self.truncator.truncate_text(text)
-                logger.info(f"📏 Truncated text: {token_count} -> {final_tokens} tokens ({len(text)} chars)")
+                logger.warning(
+                    f"⚠️ Text too long ({token_count} tokens), truncating...")
+                text, final_tokens, was_truncated = self.truncator.truncate_text(
+                    text)
+                logger.info(
+                    f"📏 Truncated text: {token_count} -> {final_tokens} tokens ({len(text)} chars)")
 
             response = self.client.embeddings.create(
                 model=self.model,
@@ -92,7 +95,7 @@ class OpenAIEmbeddingClient:
             # Use intelligent batch truncation with conservative limits
             max_tokens_per_text = 6000  # Individual text limit (conservative)
             max_batch_tokens = 15000    # Batch limit (conservative for OpenAI)
-            
+
             processed_texts, token_counts, total_tokens = self.truncator.truncate_texts_batch(
                 valid_texts,
                 max_tokens_per_text=max_tokens_per_text,
@@ -103,7 +106,8 @@ class OpenAIEmbeddingClient:
                 logger.warning("No valid texts to embed after processing")
                 return []
 
-            logger.debug(f"🔍 Processing batch: {len(processed_texts)} texts, {total_tokens} tokens")
+            logger.debug(
+                f"🔍 Processing batch: {len(processed_texts)} texts, {total_tokens} tokens")
 
             response = self.client.embeddings.create(
                 model=self.model,

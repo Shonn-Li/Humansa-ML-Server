@@ -362,6 +362,7 @@ def register_chat_endpoints(app):
                         # For streaming, the response should be a generator or async iterator
                         if hasattr(response, '__aiter__'):
                             async for chunk in response:
+                                # Chunk from Humansa endpoint is a Dict event, need to format as SSE
                                 yield f"data: {json.dumps(chunk)}\n\n"
                         else:
                             # If it's not a generator, yield the response as a single chunk
@@ -470,83 +471,80 @@ def register_chat_endpoints(app):
             # Create endpoint instance
             humansa_endpoint = HumansaChatEndpoint()
 
+            # Use Humansa endpoint with O3 demo toggle based on request data
+            demo_result = await humansa_endpoint.handle_chat_request(request_data)
+
             if request_data.get('stream', True):  # Default to streaming
-                # Return custom response streaming format
-                logger.info("🌊 Starting Humansa response streaming...")
+                # Return streaming response from Humansa endpoint
+                logger.info("🌊 Starting Humansa streaming response...")
 
-                async def generate_response_stream():
-                    try:
-                        # The handle_chat_request method returns the appropriate response format
-                        response = await humansa_endpoint.handle_chat_request(request_data)
-                        # For streaming, the response should be a generator or async iterator
-                        if hasattr(response, '__aiter__'):
-                            async for event in response:
-                                # Handle new canonical format with 'type' field
-                                if isinstance(event, dict) and 'type' in event:
-                                    # New canonical format - output as JSON data
-                                    yield f"data: {json.dumps(event)}\n\n"
-                                elif isinstance(event, dict) and 'event' in event:
-                                    # Legacy format with event type
-                                    event_type = event.get('event', 'message')
-                                    event_data = event.get('data', {})
-                                    yield f"event: {event_type}\n"
-                                    yield f"data: {json.dumps(event_data)}\n\n"
-                                else:
-                                    # Fallback for any other format
-                                    yield f"data: {json.dumps(event)}\n\n"
-                        else:
-                            # If it's not a generator, yield the response as a single event
-                            yield f"event: response.output_text.delta\n"
-                            yield f"data: {json.dumps({'delta': json.dumps(response)})}\n\n"
-                            yield f"event: response.output_text.done\n"
-                            yield f"data: {{}}\n\n"
-                        yield "data: [DONE]\n\n"
-                    except Exception as e:
-                        logger.error(
-                            f"❌ Humansa response streaming error: {e}")
-                        error_event = {
-                            "error": f"Humansa response streaming failed: {str(e)}",
-                            "status": "error"
-                        }
-                        yield f"event: response.error\n"
-                        yield f"data: {json.dumps(error_event)}\n\n"
-                        yield "data: [DONE]\n\n"
+                # Check if it's already a streaming response
+                if hasattr(demo_result, '__aiter__'):
+                    # Check if result is from O3 demo (already properly formatted) or regular Humansa (needs formatting)
+                    use_o3_demo = request_data.get('use_o3_demo', False)
 
-                response = Response(
-                    generate_response_stream(),
-                    headers={
-                        'Cache-Control': 'no-cache',
-                        'Connection': 'keep-alive',
-                        'Content-Type': 'text/event-stream'
-                    }
-                )
-                logger.info(
-                    "🌊 Humansa response streaming created and returning...")
-                return response
+                    if use_o3_demo:
+                        # O3 demo returns properly formatted SSE data - yield directly
+                        async def stream_o3_response():
+                            async for chunk in demo_result:
+                                yield chunk
+
+                        response = Response(
+                            stream_o3_response(),
+                            headers={
+                                'Cache-Control': 'no-cache',
+                                'Connection': 'keep-alive',
+                                'Content-Type': 'text/event-stream'
+                            }
+                        )
+                        logger.info(
+                            "🌊 O3 demo streaming response created and returning...")
+                        return response
+                    else:
+                        # Regular Humansa returns Dict events that need SSE formatting
+                        async def stream_humansa_response():
+                            async for chunk in demo_result:
+                                yield f"data: {json.dumps(chunk)}\n\n"
+                            yield "data: [DONE]\n\n"
+
+                        response = Response(
+                            stream_humansa_response(),
+                            headers={
+                                'Cache-Control': 'no-cache',
+                                'Connection': 'keep-alive',
+                                'Content-Type': 'text/event-stream'
+                            }
+                        )
+                        logger.info(
+                            "🌊 Humansa streaming response created and returning...")
+                        return response
+                else:
+                    # If demo_result is not streaming, convert to JSON response
+                    logger.info(
+                        "📝 Converting non-streaming Humansa result to JSON response...")
+                    return jsonify(demo_result)
 
             else:
-                # Non-streaming response
-                logger.info(
-                    "📝 Processing Humansa non-streaming response request...")
-                response = await humansa_endpoint.handle_chat_request(request_data)
+                # Non-streaming response from Humansa endpoint
+                logger.info("📝 Processing Humansa non-streaming response...")
 
                 logger.info(f"=== HUMANSA RESPONSE ===")
                 # Log response with truncation
-                truncated_response = truncate_dict(response, max_length=200)
+                truncated_response = truncate_dict(demo_result, max_length=200)
                 logger.info(
                     f"Response (truncated): {json.dumps(truncated_response, indent=2)}")
                 logger.info(f"========================")
 
                 # Ensure valid response format
-                if not isinstance(response, dict):
+                if not isinstance(demo_result, dict):
                     logger.error(
-                        f"❌ Invalid Humansa response type: {type(response)}")
+                        f"❌ Invalid Humansa response type: {type(demo_result)}")
                     return jsonify({
                         "error": "Invalid response format from Humansa endpoint",
                         "status": "error"
                     }), 500
 
-                return jsonify(response)
+                return jsonify(demo_result)
 
         except ImportError as import_error:
             logger.error(
@@ -554,7 +552,7 @@ def register_chat_endpoints(app):
             logger.error(f"Current working directory: {os.getcwd()}")
             logger.error(f"Python path: {os.sys.path}")
             return jsonify({
-                "error": f"Humansa response module import failed: {str(import_error)}",
+                "error": f"Humansa module import failed: {str(import_error)}",
                 "status": "error",
                 "debug_info": {
                     "cwd": os.getcwd(),
@@ -562,47 +560,69 @@ def register_chat_endpoints(app):
                 }
             }), 500
         except Exception as e:
-            logger.error(f"❌ Humansa response endpoint error: {e}")
+            logger.error(f"❌ Humansa endpoint error: {e}")
             logger.error(f"Request data: {request_data}")
             import traceback
             traceback.print_exc()
             return jsonify({
-                "error": f"Humansa response processing failed: {str(e)}",
+                "error": f"Humansa processing failed: {str(e)}",
                 "status": "error",
                 "request_data": request_data
             }), 500
 
-    @app.route("/v1/status", methods=["GET"])
-    async def v1_system_status():
-        """System status endpoint"""
+    @app.route("/humansa/o3-demo", methods=["POST"])
+    async def humansa_o3_demo():
+        """OpenAI O3 Demo Endpoint - Direct API forwarding with Humansa system prompt"""
+        request_data = None
         try:
-            logger.info("=== STATUS REQUEST ===")
+            request_data = await request.get_json()
+            logger.info(f"=== O3 DEMO REQUEST ===")
             logger.info(f"Method: {request.method}")
             logger.info(f"URL: {request.url}")
-            logger.info("===================")
+            logger.info(f"Headers: {dict(request.headers)}")
+            logger.info(f"Messages: {len(request_data.get('messages', []))}")
+            logger.info(f"Stream: {request_data.get('stream', False)}")
+            logger.info(f"=====================")
 
-            logger.info(
-                "🔄 Attempting to import modular_chat_endpoint for status...")
-            from chat.endpoints.modular_chat_endpoint import modular_chat_endpoint
-            logger.info(
-                "✅ Successfully imported modular_chat_endpoint for status")
+            # Import O3 demo endpoint
+            from humansa.endpoints.o3_demo_endpoint import o3_demo_endpoint
 
-            status = modular_chat_endpoint.get_status()
-            logger.info(f"✅ Status response: {json.dumps(status, indent=2)}")
-            return jsonify(status)
+            # Handle the O3 demo request
+            result = await o3_demo_endpoint.handle_demo_request(request_data)
+
+            # Check if it's a streaming response
+            if hasattr(result, '__aiter__'):
+                # Streaming response - return as SSE
+                response = Response(
+                    result,
+                    headers={
+                        'Cache-Control': 'no-cache',
+                        'Connection': 'keep-alive',
+                        'Content-Type': 'text/event-stream'
+                    }
+                )
+                logger.info(
+                    "🌊 O3 demo streaming response created and returning...")
+                return response
+            else:
+                # Non-streaming response
+                logger.info("📝 O3 demo non-streaming response")
+                return jsonify(result)
+
         except ImportError as import_error:
-            logger.error(f"❌ Import error for status endpoint: {import_error}")
+            logger.error(f"❌ O3 demo import error: {import_error}")
             return jsonify({
-                "error": f"Status module import failed: {str(import_error)}",
+                "error": f"O3 demo module import failed: {str(import_error)}",
                 "status": "error"
             }), 500
         except Exception as e:
-            logger.error(f"❌ Status endpoint error: {e}")
+            logger.error(f"❌ O3 demo endpoint error: {e}")
             import traceback
             traceback.print_exc()
             return jsonify({
-                "error": f"Status check failed: {str(e)}",
-                "status": "error"
+                "error": f"O3 demo processing failed: {str(e)}",
+                "status": "error",
+                "request_data": request_data
             }), 500
 
     # =============================================

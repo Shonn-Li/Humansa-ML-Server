@@ -76,11 +76,14 @@ class AzureEmbeddingClient:
 
             # Validate and truncate using accurate token counting
             is_valid, token_count = self.truncator.validate_text_tokens(text)
-            
+
             if not is_valid:
-                logger.warning(f"⚠️ Text too long ({token_count} tokens), truncating...")
-                text, final_tokens, was_truncated = self.truncator.truncate_text(text)
-                logger.info(f"📏 Truncated text: {token_count} -> {final_tokens} tokens ({len(text)} chars)")
+                logger.warning(
+                    f"⚠️ Text too long ({token_count} tokens), truncating...")
+                text, final_tokens, was_truncated = self.truncator.truncate_text(
+                    text)
+                logger.info(
+                    f"📏 Truncated text: {token_count} -> {final_tokens} tokens ({len(text)} chars)")
 
             # Use Azure AI Inference embeddings API
             response = self.client.embed(
@@ -119,7 +122,7 @@ class AzureEmbeddingClient:
             # Use intelligent batch truncation with conservative limits
             max_tokens_per_text = 6000  # Individual text limit (conservative)
             max_batch_tokens = 15000    # Batch limit (conservative for Azure)
-            
+
             processed_texts, token_counts, total_tokens = self.truncator.truncate_texts_batch(
                 valid_texts,
                 max_tokens_per_text=max_tokens_per_text,
@@ -129,7 +132,8 @@ class AzureEmbeddingClient:
             if not processed_texts:
                 raise ValueError("No valid texts to embed after processing")
 
-            logger.debug(f"🔍 Processing batch: {len(processed_texts)} texts, {total_tokens} tokens")
+            logger.debug(
+                f"🔍 Processing batch: {len(processed_texts)} texts, {total_tokens} tokens")
 
             # Use Azure AI Inference embeddings API for batch processing
             response = self.client.embed(
@@ -138,13 +142,16 @@ class AzureEmbeddingClient:
             )
 
             embeddings = [item.embedding for item in response.data]
-            logger.debug(f"🔗 Azure batch embeddings generated for {len(processed_texts)} texts")
+            logger.debug(
+                f"🔗 Azure batch embeddings generated for {len(processed_texts)} texts")
 
             # If we had to skip some texts due to batch limits, process them recursively
             remaining_texts = valid_texts[len(processed_texts):]
             if remaining_texts:
-                logger.info(f"🔄 Processing remaining {len(remaining_texts)} texts in new batch")
-                remaining_embeddings = self.get_text_embeddings(remaining_texts)
+                logger.info(
+                    f"🔄 Processing remaining {len(remaining_texts)} texts in new batch")
+                remaining_embeddings = self.get_text_embeddings(
+                    remaining_texts)
                 embeddings.extend(remaining_embeddings)
 
             return embeddings
@@ -212,23 +219,28 @@ class AzureEmbeddingClient:
                                     text, max_tokens=4000  # Very conservative limit
                                 )
                                 aggressive_texts.append(truncated_text)
-                                
+
                             # Try again with aggressively truncated texts
-                            batch_embeddings = self.get_text_embeddings(aggressive_texts)
+                            batch_embeddings = self.get_text_embeddings(
+                                aggressive_texts)
                             all_embeddings.extend(batch_embeddings)
-                            logger.info(f"✅ Recovered with aggressive truncation")
+                            logger.info(
+                                f"✅ Recovered with aggressive truncation")
                             break
-                            
+
                         except Exception as retry_e:
-                            logger.error(f"❌ Aggressive truncation also failed: {retry_e}")
+                            logger.error(
+                                f"❌ Aggressive truncation also failed: {retry_e}")
                             if attempt == max_retries - 1:
                                 # Last attempt failed, skip this batch or raise error
-                                logger.error(f"❌ Failed to process batch after {max_retries} attempts")
+                                logger.error(
+                                    f"❌ Failed to process batch after {max_retries} attempts")
                                 raise
                     else:
                         # For other errors, just retry or fail
                         if attempt == max_retries - 1:
-                            logger.error(f"❌ Failed to process batch after {max_retries} attempts")
+                            logger.error(
+                                f"❌ Failed to process batch after {max_retries} attempts")
                             raise
 
         return all_embeddings
@@ -238,7 +250,8 @@ class AzureEmbeddingClient:
         DEPRECATED: Use token_counter for accurate token counting
         This method is kept for backward compatibility
         """
-        logger.warning("estimate_tokens is deprecated. Use self.token_counter.count_tokens() instead")
+        logger.warning(
+            "estimate_tokens is deprecated. Use self.token_counter.count_tokens() instead")
         return self.token_counter.count_tokens(text)
 
     def validate_text_length(self, text: str, max_tokens: int = 6000) -> bool:
@@ -246,7 +259,8 @@ class AzureEmbeddingClient:
         DEPRECATED: Use truncator.validate_text_tokens() for accurate validation
         This method is kept for backward compatibility
         """
-        logger.warning("validate_text_length is deprecated. Use self.truncator.validate_text_tokens() instead")
+        logger.warning(
+            "validate_text_length is deprecated. Use self.truncator.validate_text_tokens() instead")
         is_valid, _ = self.truncator.validate_text_tokens(text, max_tokens)
         return is_valid
 

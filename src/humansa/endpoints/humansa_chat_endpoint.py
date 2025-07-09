@@ -7,24 +7,23 @@ structured schemas, with NO heuristic/regex-based fallbacks.
 
 Key Features:
 - LLM-only tool selection and argument parsing
-- Structured        # Add agent reasoning trace if available
-        agent_trace = enhanced_context.get('agent_trace', '')
-        logger.info(f"🔍 Agent trace length: {len(agent_trace)} chars")
-        logger.info(f"🔍 Agent trace preview: {agent_trace[:200]}...")
-        
-        if agent_trace and agent_trace.strip():
-            system_content += f"\n🧠 AGENT REASONING CHAIN:\n{agent_trace}\n"
-            logger.info("✅ Added agent reasoning trace to system content")
-        else:
-            logger.warning("⚠️ No agent reasoning trace available")schemas for all tool arguments
+- Structured schemas for all tool arguments
 - Business/safety rules enforced in system prompt and post-processing
 - Observable tool calls via LlamaIndex CallbackManager
 - No fallback/direct tool execution (fail fast if agent unhealthy)
+
+A/B Testing Support:
+- Toggle between O3 Demo and Regular Humansa implementations
+- Easy switching via USE_O3_DEMO flag in handle_chat_request method
+- Both implementations emit the same canonical streaming format
 """
 
 from ..streaming.comprehensive_response_streaming_handler_fixed import convert_agent_response_to_comprehensive_stream
 from ..agent.humansa_agent import HumansaAgenticAgent
 from ..tools.humansa_tools import HumansaAgenticToolManager
+from ..prompts.appointment_booking_prompt import build_intelligent_system_prompt
+from ..prompts.humansa_react_system_header import get_humansa_react_system_prompt
+from ..prompts.intelligent_prompt_selector import intelligent_prompt_selector
 from chat.query.query_transformer import QueryTransformer
 from chat.streaming.streaming_response_generator import StreamingResponseGenerator
 from chat.citation import CitationEngine, StreamingCitationEngine
@@ -38,6 +37,9 @@ import time
 import asyncio
 from typing import Dict, Any, List, Optional
 from datetime import datetime
+import requests
+import json
+from ..prompts.appointment_booking_prompt import APPOINTMENT_BOOKING_PROMPT
 
 # Import existing modules for reuse
 import sys
@@ -114,6 +116,28 @@ class HumansaChatEndpoint:
         """
         start_time = time.time()
 
+        # 🔄 A/B TESTING: Toggle between O3 Demo and Regular Humansa Implementation
+        #
+        # For A/B testing and comparison:
+        # - Set use_o3_demo = True  in request_data to use O3 demo endpoint (wraps OpenAI O3)
+        # - Set use_o3_demo = False in request_data to use regular Humansa agentic implementation
+        #
+        # This allows dynamic switching between implementations based on request parameters
+        # Default to regular Humansa implementation
+        USE_O3_DEMO = request_data.get('use_o3_demo', False)
+
+        if USE_O3_DEMO:
+            logger.info("🚀 A/B TEST MODE: Using O3 Demo Implementation")
+            try:
+                from .o3_demo_endpoint import o3_demo_endpoint
+                return await o3_demo_endpoint.handle_demo_request(request_data)
+            except Exception as e:
+                logger.error(f"❌ O3 demo failed, falling back to Humansa: {e}")
+                # Fall through to regular Humansa implementation
+
+        # 🤖 Regular Humansa Agentic Implementation starts here
+        logger.info(
+            "🚀 A/B TEST MODE: Using Regular Humansa Agentic Implementation")
         try:
             logger.info("🚀 Starting AGENTIC Humansa chat request processing")
 
@@ -232,9 +256,26 @@ class HumansaChatEndpoint:
 
             # The agent decides which tools to call and with what arguments
             # NO heuristic tool selection - agent has full autonomy
+
+            # Build Humansa system prompt for the agent using intelligent selector
+            humansa_system_prompt = await self._build_humansa_system_prompt(condensed_query, messages)
+            logger.info(
+                f"🤖 Built Humansa system prompt: {len(humansa_system_prompt)} chars")
+            logger.info(
+                f"🔍 System prompt preview: {humansa_system_prompt[:200]}...")
+
+            # Prepare enhanced messages with system prompt for the agent
+            agent_messages = messages.copy()
+            agent_messages.insert(0, {
+                'role': 'system',
+                'content': humansa_system_prompt
+            })
+            logger.info(
+                f"📝 Agent will receive {len(agent_messages)} messages (including system prompt)")
+
             agent_response = await self.agent.execute_with_tools(
                 query=condensed_query,
-                conversation_history=messages,
+                conversation_history=agent_messages,  # Pass messages with system prompt
                 context_results=context_results,
                 user_id=user_id
             )
@@ -260,10 +301,10 @@ class HumansaChatEndpoint:
             tool_results = agent_response.get('tool_results', [])
             logger.info(f"🛠️ Agent executed {len(tool_results)} tools")
 
-            # Phase 4: LLM Response Generation
-            logger.info("🤖 Phase 4: LLM response generation")
+            # Phase 4: Response Generation (Direct from Agent)
+            logger.info("🤖 Phase 4: Direct agent response generation")
 
-            # Build enhanced context with tool results and streaming data
+            # Build enhanced context with tool results and streaming data for metadata
             enhanced_context = self._build_enhanced_context(
                 context_results,
                 tool_results,
@@ -271,25 +312,14 @@ class HumansaChatEndpoint:
                 streaming_data
             )
 
-            # Prepare messages with enhanced context
-            enhanced_messages = self._prepare_enhanced_messages(
-                messages,
-                enhanced_context,
-                condensed_query
-            )
-
-            # Select LLM provider
-            provider_enum, llm_provider = self.llm_provider.select_provider_and_model(
-                None, model)
-
-            # Generate response
+            # Generate response directly from agent (no additional LLM processing)
             if stream:
-                return self._generate_streaming_response(
-                    llm_provider, enhanced_messages, model, enhanced_context
+                return self._generate_streaming_response_from_agent(
+                    agent_response, enhanced_context, model
                 )
             else:
-                return await self._generate_non_streaming_response_with_agent(
-                    llm_provider, enhanced_messages, model, enhanced_context
+                return self._generate_non_streaming_response_from_agent(
+                    agent_response, enhanced_context, model
                 )
 
         except Exception as e:
@@ -344,206 +374,80 @@ class HumansaChatEndpoint:
 
         return enhanced_context
 
-    def _prepare_enhanced_messages(self, messages: List, enhanced_context: Dict, query: str) -> List:
-        """Prepare messages with enhanced context and comprehensive agentic system prompt."""
-        enhanced_messages = messages.copy()
-
-        # Get current date for system prompt
-        current_date = datetime.now().strftime("%Y-%m-%d")
-
-        # Create comprehensive agentic system prompt
-        system_content = f"""### <AGENTIC_POLICY v2.0 ({current_date})>
-Current date: {current_date}
-Locale: zh-CN
-
-You are **Humansa Health-Assist**, an AI concierge for high-end clinics operating in FULLY AGENTIC mode.
-
-🎯 SUCCESS METRICS:
-1️⃣   Grow official-account reads & video plays  
-2️⃣   Maximise completed medical appointments  
-3️⃣   Increase in-app store conversions  
-4️⃣   Keep every interaction clinically safe & HIPAA-compliant  
-
-🛠️ AGENTIC TOOL CALLING:
-You have access to structured tools with Pydantic schemas. All tools have intelligent fuzzy matching and fallbacks:
-• find_doctor_info(name: str, specialty: str, city: str) - Always returns 5 relevant doctors from our network
-• find_doctor_availability(doctor_name: str, start_date: str, end_date: str, days_ahead: int) - Flexible date ranges up to 30 days, suggests alternatives
-• search_clinics(clinic_name: str, city: str, specialty: str) - Always returns 5 relevant clinics with fuzzy matching  
-• search_services(service_name: str, specialty: str, clinic_name: str) - Always returns 5 relevant services with pricing
-• get_pricing(service_type: str, clinic_name: str, specialty: str) - Pricing with intelligent fallbacks
-• book_appointment(doctor_name: str, date_iso: str, time_hhdd: str, patient_name: str, phone: str, service_type: str)
-• place_call(phone_number: str, purpose: str, urgency: str)
-• recommend_product(product_category: str, reason: str, price_range: str)
-• push_content(content_type: str, topic: str, target_audience: str)
-• search_web(query: str, language: str) - ONLY for external news/research, NOT for Humansa services
-
-🏥 DOCTOR NAME REQUIREMENTS:
-• **CRITICAL**: For all doctor search tools (find_doctor_info, find_doctor_availability, book_appointment), always use ONLY the actual Chinese family name or personal name (e.g., "张", "王", "李明")
-• **NEVER** include titles like "医生", "主任", "Dr.", "医师", "教授" etc. in doctor_name parameters
-• If user says "张医生", extract only "张" for the search
-• If user says "Dr. Wang", extract only "Wang" for the search
-• The system supports fuzzy/partial matching - even single characters like "张" will find relevant doctors
-• If search fails, ask user for more specific name details or suggest they provide specialty/city to narrow results
-
-🔍 ENHANCED SEARCH CAPABILITIES:
-• **ALL tools have intelligent fallbacks** - they always return 5 useful results even if exact search fails
-• **Date range flexibility** - availability tool supports "next week" (7 days), "this month" (30 days), specific ranges
-• **Fuzzy matching everywhere** - partial names, service types, clinic names all work with intelligent matching
-• **Smart suggestions** - if exact doctor not found, tools suggest similar doctors with availability
-• **Context-aware responses** - tools explain search method and provide helpful alternatives
-
-🎯 INTELLIGENT SEARCH BEHAVIOR:
-• **ALWAYS use Humansa internal tools first** for doctors, clinics, services, pricing
-• **NEVER use web search for Humansa services** - web search is ONLY for external news, research, health education
-• **Trust the fallback results** - our tools always return helpful alternatives when exact matches aren't found
-• **Explain search results** - tell users when we're showing alternatives vs exact matches
-• **Use date ranges wisely** - when users ask "this week" or "next month", use the days_ahead parameter
-
-🚨 SAFETY & BUSINESS RULES (enforced here, not in code):
-• Emergency symptoms (胸痛、呼吸困难、昏迷等) → **DO NOT book** → "请立即拨打 120 / call 911"
-• No medical diagnosis - only information and booking assistance
-• Always quote prices in "¥" and name the clinic
-• Verify patient details before booking: name, phone, preferred date/time
-• When recommending products, explain WHY they help the upcoming service
-• Language: Respond in user's language (Chinese/English)
-• Tone: Concise, warm, professional
-• Always end with a short next-step sentence
-
-🎯 AGENT BEHAVIOR:
-• Make ≤ 8 tool calls per user turn
-• If arguments are missing: ask clarifying questions
-• **DOCTOR NAME PROCESSING**: Always strip titles (医生, 主任, Dr., etc.) from doctor names before tool calls
-• **ALWAYS try internal Humansa tools first** - our tools have intelligent fallbacks with 5 relevant alternatives
-• **NEVER use web search for Humansa services** - only for external news, research, health information
-• If internal tools return alternatives, present them to user as helpful suggestions
-• Be autonomous in tool selection - no heuristics needed
-• Use structured schemas for all tool arguments
-• All tool calls and arguments will be observed and logged        ### <DYNAMIC_CONTEXT>"""
-
-        # Add agent chain of thought if available
-        agent_chain_of_thought = enhanced_context.get(
-            'agent_trace', '')  # Use agent_trace instead
-        logger.info(
-            f"🔍 Agent chain of thought length: {len(agent_chain_of_thought)} chars")
-        logger.info(
-            f"🔍 Agent chain of thought preview: {agent_chain_of_thought[:200]}...")
-
-        if agent_chain_of_thought and agent_chain_of_thought.strip():
-            system_content += f"\n🧠 AGENT REASONING CHAIN:\n{agent_chain_of_thought}\n"
-            logger.info("✅ Added agent reasoning chain to system content")
-        else:
-            logger.warning("⚠️ No agent chain of thought available")
-
-        # Add tool execution results if available
-        if enhanced_context.get('tool_results'):
-            logger.info(
-                f"🔍 Tool results count: {len(enhanced_context['tool_results'])}")
-            system_content += f"\n✅ Tool Results Available: {len(enhanced_context['tool_results'])} tools executed."
-            for tool_result in enhanced_context['tool_results']:
-                if tool_result.get('success', False):
-                    tool_name = tool_result.get('tool')
-                    result_summary = str(tool_result.get('result', ''))[:150]
-                    system_content += f"\n• {tool_name}: {result_summary}..."
-                    logger.info(f"🔍 Added tool result: {tool_name}")
-
-        # Add callback observation info
-        if enhanced_context.get('tool_calls_observed'):
-            system_content += f"\n📊 Observed {len(enhanced_context['tool_calls_observed'])} tool call events via CallbackManager"
-            logger.info(
-                f"🔍 Tool calls observed: {len(enhanced_context['tool_calls_observed'])}")
-
-        # Add context sources summary
-        context_sources = enhanced_context.get('context_sources', [])
-        if context_sources:
-            system_content += f"\n📚 Available Context: {len(context_sources)} sources"
-            logger.info(f"🔍 Context sources: {len(context_sources)}")
-
-        system_content += "\n</DYNAMIC_CONTEXT>"
-
-        # 🔍 FULL SYSTEM MESSAGE LOGGING
-        logger.info(
-            "🔍 ======================== FULL SYSTEM MESSAGE START ========================")
-        logger.info(system_content)
-        logger.info(
-            "🔍 ======================== FULL SYSTEM MESSAGE END ==========================")
-
-        system_message = {
-            'role': 'system',
-            'content': system_content
-        }
-
-        # Insert system message at the beginning
-        enhanced_messages.insert(0, system_message)
-
-        return enhanced_messages
-
-    async def _generate_streaming_response(self, llm_provider, messages: List, model: str, context: Dict):
-        """Generate OpenAI v1-compatible streaming response for agent reasoning and tool calls."""
+    async def _build_humansa_system_prompt(self, query: str, conversation_history: List[Dict] = None) -> str:
+        """使用智能LLM选择器分析查询并动态构建系统提示。"""
         try:
             logger.info(
-                "🌊 Generating OpenAI v1-compatible agentic streaming response")
+                f"🧠 Analyzing query for intelligent prompt selection: {query[:100]}...")
 
-            # Check if we have agent response data for streaming
-            agent_response_data = {
-                'agent_trace': context.get('agent_trace', ''),
-                'tool_calls_observed': context.get('tool_calls_observed', []),
-                'reasoning': context.get('agent_reasoning', ''),
-                'agent_response': context.get('agent_response', ''),
-                'tool_results': context.get('tool_results', []),
-                # Include streaming data
-                'streaming_data': context.get('streaming_data', [])
-            }
+            # Use intelligent prompt selector to select the best prompt template
+            prompt_decision = await intelligent_prompt_selector.select_prompt_template(
+                query, conversation_history
+            )
 
-            # If we have agent data, use custom response streaming
-            if (agent_response_data['agent_trace'] or
-                agent_response_data['tool_calls_observed'] or
-                    agent_response_data['reasoning']):
+            # Build prompt using selected template
+            system_prompt = build_intelligent_system_prompt(
+                prompt_decision.selected_prompt)
 
-                logger.info(
-                    "🤖 Streaming agent reasoning using custom response format")
+            logger.info(
+                f"🎯 Built intelligent system prompt with template: {prompt_decision.selected_prompt}")
+            logger.info(f"🧠 Selection reasoning: {prompt_decision.reasoning}")
+            logger.info(f"📝 System prompt length: {len(system_prompt)} chars")
 
-                # 🔍 HUMANSA DEBUG - Log what we're sending to streaming handler
-                logger.info(
-                    f"🔍 HUMANSA DEBUG - Sending to response streaming handler:")
-                logger.info(
-                    f"  agent_trace: {len(agent_response_data['agent_trace'])} chars")
-                logger.info(
-                    f"  tool_calls_observed: {len(agent_response_data['tool_calls_observed'])}")
-                logger.info(
-                    f"  reasoning: {len(agent_response_data['reasoning'])} chars")
-                logger.info(
-                    f"  agent_response: {len(agent_response_data['agent_response'])} chars")
-                logger.info(
-                    f"  tool_results: {len(agent_response_data['tool_results'])}")
-                logger.info(
-                    f"  streaming_data: {len(agent_response_data['streaming_data'])} items")
-
-                # Stream agent reasoning with comprehensive response format
-                async for event in convert_agent_response_to_comprehensive_stream(agent_response_data):
-                    # Add agentic metadata
-                    event['agentic_mode'] = True
-                    if context.get('metadata'):
-                        event['agentic_metadata'] = context['metadata']
-                    yield event
-
-                # DON'T generate additional LLM response - the agent already provided the final answer
-
-            else:
-                # Fallback to regular streaming if no agent data
-                logger.info(
-                    "🌊 No agent data available, using regular streaming")
-                async for event in self._stream_regular_response(llm_provider, messages, model, context):
-                    yield event
+            return system_prompt
 
         except Exception as e:
-            logger.error(f"❌ Agentic streaming failed: {e}")
+            logger.error(f"❌ Intelligent prompt selection failed: {e}")
+            # Fallback to full prompt
+            from ..prompts.appointment_booking_prompt import get_full_humansa_system_prompt
+            logger.warning("⚠️ Using fallback full system prompt")
+            return get_full_humansa_system_prompt()
+
+    async def _generate_streaming_response_from_agent(self, agent_response: Dict, enhanced_context: Dict, model: str):
+        """Generate OpenAI v1-compatible streaming response directly from agent results."""
+        try:
+            logger.info("🌊 Generating streaming response directly from agent")
+
+            # Prepare agent response data for streaming
+            agent_response_data = {
+                'agent_trace': agent_response.get('agent_trace', ''),
+                'tool_calls_observed': agent_response.get('tool_calls_observed', []),
+                'reasoning': agent_response.get('reasoning', ''),
+                'agent_response': agent_response.get('agent_response', ''),
+                'tool_results': agent_response.get('tool_results', []),
+                'streaming_data': enhanced_context.get('streaming_data', [])
+            }
+
+            # Ensure we have agent response content
+            if not agent_response_data['agent_response']:
+                logger.warning("⚠️ No agent response content available")
+                agent_response_data['agent_response'] = "抱歉，我无法处理您的请求。请稍后再试。"
+
+            logger.info(f"🔍 Streaming agent data:")
+            logger.info(
+                f"  agent_trace: {len(agent_response_data['agent_trace'])} chars")
+            logger.info(
+                f"  agent_response: {len(agent_response_data['agent_response'])} chars")
+            logger.info(
+                f"  tool_results: {len(agent_response_data['tool_results'])}")
+
+            # Stream agent response with comprehensive format
+            async for event in convert_agent_response_to_comprehensive_stream(agent_response_data):
+                # Add agentic metadata
+                event['agentic_mode'] = True
+                if enhanced_context.get('metadata'):
+                    event['agentic_metadata'] = enhanced_context['metadata']
+                yield event
+
+        except Exception as e:
+            logger.error(f"❌ Agent streaming failed: {e}")
             import traceback
             traceback.print_exc()
 
-            # Stream error response in custom response format
+            # Stream error response
             error_event = {
                 "event": "response.output_text.delta",
-                "data": {"delta": f"Error in agentic processing: {str(e)}"}
+                "data": {"delta": f"处理请求时出现错误: {str(e)}"}
             }
             yield error_event
 
@@ -552,140 +456,23 @@ You have access to structured tools with Pydantic schemas. All tools have intell
                 "data": {}
             }
 
-            # Final error chunk
-            final_chunk = {
-                "id": f"chatcmpl-error-{int(time.time())}",
-                "object": "chat.completion.chunk",
-                "created": int(time.time()),
-                "model": model,
-                "choices": [{
-                    "index": 0,
-                    "delta": {},
-                    "finish_reason": "stop"
-                }]
-            }
-            yield final_chunk
-
-    async def _stream_final_llm_response(self, llm_provider, messages: List, model: str, context: Dict):
-        """Stream final LLM response after agent reasoning in OpenAI v1 format."""
+    def _generate_non_streaming_response_from_agent(self, agent_response: Dict, enhanced_context: Dict, model: str):
+        """Generate non-streaming response directly from agent results."""
         try:
-            # Add a final user message to get LLM response
-            enhanced_messages = messages.copy()
+            logger.info(
+                "🤖 Generating non-streaming response directly from agent")
 
-            # Add system context if available
-            if context.get('tool_results'):
-                tool_summary = f"Based on the tool results: {len(context['tool_results'])} tools were executed."
-                enhanced_messages.append({
-                    'role': 'system',
-                    'content': f"{tool_summary} Please provide a final response to the user."
-                })
+            # Extract the agent's final response
+            agent_content = agent_response.get('agent_response', '')
 
-            # Generate final response with regular streaming
-            async for event in self._stream_regular_response(llm_provider, enhanced_messages, model, context):
-                # Don't mark regular LLM content with reasoning type - let it be treated as normal chat content
-                yield event
+            if not agent_content:
+                logger.warning("⚠️ No agent response content available")
+                agent_content = "抱歉，我无法处理您的请求。请稍后再试。"
 
-        except Exception as e:
-            logger.error(f"❌ Final LLM response streaming failed: {e}")
+            logger.info(
+                f"📝 Agent response content: {len(agent_content)} chars")
 
-    async def _stream_regular_response(self, llm_provider, messages: List, model: str, context: Dict):
-        """Stream regular response using existing streaming generator and convert to new event format."""
-        try:
-            # Prepare request data for the streaming generator
-            request_data = {
-                'messages': messages,
-                'model': model,
-                'stream': True
-            }
-
-            # Extract context components
-            rag_context = None
-            attachment_context = None
-            websearch_context = None
-
-            context_sources = context.get('context_sources', [])
-            for source in context_sources:
-                if isinstance(source, dict):
-                    if 'rag_context' in source or 'chunks' in source:
-                        rag_context = source
-                    elif 'attachments' in source or 'attachment_context' in source:
-                        attachment_context = source
-                    elif 'web_search' in source or 'search_results' in source:
-                        websearch_context = source
-
-            # Use default provider enum
-            from chat.provider.llm_provider import LLMProvider
-            provider_enum = LLMProvider.AZURE_INFERENCE
-
-            # Use the streaming response generator and convert OpenAI chunks to events
-            async for chunk in self.streaming_generator.generate_streaming_response(
-                request_data=request_data,
-                rag_context=rag_context,
-                attachment_context=attachment_context,
-                websearch_context=websearch_context,
-                llm=llm_provider,
-                provider_enum=provider_enum,
-                model=model,
-                enable_citations=True,
-                router_decision=None,
-                generate_title=False
-            ):
-                # Convert OpenAI chunk format to our new event format
-                if isinstance(chunk, dict) and 'choices' in chunk:
-                    choice = chunk['choices'][0] if chunk['choices'] else {}
-                    delta = choice.get('delta', {})
-                    content = delta.get('content', '')
-                    finish_reason = choice.get('finish_reason')
-
-                    if content:
-                        # Stream content as output text delta
-                        yield {
-                            "event": "response.output_text.delta",
-                            "data": {"delta": content}
-                        }
-
-                    if finish_reason == "stop":
-                        # Signal output is done
-                        yield {
-                            "event": "response.output_text.done",
-                            "data": {}
-                        }
-                else:
-                    # Pass through other formats as-is for now
-                    yield chunk
-
-        except Exception as e:
-            logger.error(f"❌ Regular streaming failed: {e}")
-            # Stream error as output text
-            yield {
-                "event": "response.output_text.delta",
-                "data": {"delta": f"Error: {str(e)}"}
-            }
-            yield {
-                "event": "response.output_text.done",
-                "data": {}
-            }
-
-    async def _generate_non_streaming_response_with_agent(self, llm_provider, messages: List, model: str, context: Dict):
-        """Generate non-streaming response using traditional agent execution."""
-        try:
-            logger.info("🤖 Generating non-streaming agentic response")
-
-            # Extract context for agent
-            user_query = messages[-1]['content'] if messages else ""
-            conversation_history = messages[:-1] if len(messages) > 1 else []
-            context_results = context.get('context_results', [])
-            user_id = context.get('user_id', 'unknown')
-
-            # Execute agent traditionally (non-streaming)
-            agent_response = await self.agent.execute_with_tools(
-                query=user_query,
-                conversation_history=conversation_history,
-                context_results=context_results,
-                user_id=user_id
-            )
-
-            # Return the agent response directly
+            # Return the agent response directly in OpenAI format
             return {
                 "id": f"resp_{int(time.time())}",
                 "object": "chat.completion",
@@ -696,7 +483,7 @@ You have access to structured tools with Pydantic schemas. All tools have intell
                         "index": 0,
                         "message": {
                             "role": "assistant",
-                            "content": agent_response.get('agent_response', 'No response generated'),
+                            "content": agent_content,
                         },
                         "finish_reason": "stop"
                     }
@@ -708,15 +495,17 @@ You have access to structured tools with Pydantic schemas. All tools have intell
                 },
                 "agentic_mode": True,
                 "agent_trace": agent_response.get('agent_trace', ''),
-                "tool_calls_observed": agent_response.get('tool_calls_observed', [])
+                "tool_calls_observed": agent_response.get('tool_calls_observed', []),
+                "metadata": enhanced_context.get('metadata', {})
             }
 
         except Exception as e:
-            logger.error(f"❌ Non-streaming agentic response failed: {e}")
+            logger.error(f"❌ Non-streaming agent response failed: {e}")
             import traceback
             traceback.print_exc()
 
             return {
                 "error": str(e),
-                "message": "Failed to generate non-streaming agentic response"
+                "message": "处理请求时出现错误",
+                "agentic_mode": True
             }

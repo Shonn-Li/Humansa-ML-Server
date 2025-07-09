@@ -225,15 +225,6 @@ class SearchArgs(BaseModel):
     language: str = Field("zh", description="Search language: 'zh' or 'en'")
 
 
-class ClinicSearchArgs(BaseModel):
-    """Arguments for searching clinic information."""
-    name: Optional[str] = Field(
-        None, description="Clinic name or partial name (e.g., '仁和', '北京医院'). Supports fuzzy matching.")
-    city: Optional[str] = Field(
-        None, description="City or area name (e.g., 'Beijing', '北京', '朝阳区')")
-    language: str = Field("zh", description="Response language: 'zh' or 'en'")
-
-
 class ServiceSearchArgs(BaseModel):
     """Arguments for searching medical services."""
     service_name: Optional[str] = Field(
@@ -608,91 +599,85 @@ class HumansaAgenticToolManager:
 
         tools = []
 
-        # Medical tools with structured schemas and intelligent fallbacks
+        # 医疗工具，带结构化 schema 和智能回退
         tools.extend([
             FunctionTool.from_defaults(
                 fn=self.find_doctor_info_structured,
                 name="find_doctor_info",
-                description="Find Humansa doctors by name, specialty, or city with fuzzy matching. Returns doctor details including specialties, clinic information, and registration fees/consultation prices. Always returns relevant results. For doctor names, use only actual Chinese family/personal names (e.g., '张', '王', '李明') - do NOT include titles like '医生', '主任', 'Dr.', etc. If no exact match, returns similar doctors from our network.",
+                description="通过姓名、专科或城市模糊查找Humansa医生。用户想找特定城市（如'深圳'、'北京'）医生时请优先使用本工具。返回医生详细信息，包括专科、诊所信息、挂号费/咨询价格。始终返回相关结果。医生姓名仅填写真实中文姓氏或姓名（如'张'、'王'、'李明'），不要包含'医生'、'主任'、'Dr.'等头衔。如无精确匹配，将返回网络内相似医生。",
                 fn_schema=DoctorSearchArgs
             ),
             FunctionTool.from_defaults(
                 fn=self.find_doctor_availability_structured,
                 name="find_doctor_availability",
-                description="Check Humansa doctor availability across flexible date ranges (up to 30 days). Returns available time slots along with doctor information including registration fees. Supports 'next week', 'this month' requests. Uses fuzzy matching for doctor names. Always returns helpful results - if doctor not found, suggests similar available doctors with time slots and pricing. For doctor names, use only actual Chinese family/personal names (e.g., '张', '王', '李明') - do NOT include titles.",
+                description="查询Humansa医生在灵活日期范围（最多30天）内的可用时间。必须提供doctor_name参数——如需按城市/专科查找医生请先用find_doctor_info。返回可预约时段及医生信息（含挂号费）。支持'下周'、'本月'等请求。医生姓名模糊匹配。始终返回有用结果——如未找到医生，将推荐有空档的相似医生及价格。医生姓名仅填写真实中文姓氏或姓名（如'张'、'王'、'李明'），不要包含头衔。",
                 fn_schema=DoctorAvailabilityArgs
             ),
             FunctionTool.from_defaults(
                 fn=self.search_clinics_structured,
                 name="search_clinics",
-                description="Search Humansa clinics by name, location, or specialty. Always returns 5 relevant clinics from our network. Uses intelligent fuzzy matching - even partial names find relevant results. If no matches, returns top available clinics.",
+                description="按名称、地点或专科查找Humansa诊所。始终返回5个相关诊所。智能模糊匹配——即使部分名称也能找到相关诊所。如无匹配，将返回可用诊所。",
                 fn_schema=ClinicSearchArgs
             ),
             FunctionTool.from_defaults(
                 fn=self.search_services_structured,
                 name="search_services",
-                description="Search Humansa medical services by type, specialty, or clinic. Always returns 5 relevant services with pricing. Uses intelligent fuzzy matching - even partial service names find relevant results. If no matches, returns popular available services.",
+                description="按类型、专科或诊所查找Humansa医疗服务。始终返回5个相关服务及价格。智能模糊匹配——即使部分服务名也能找到。如无匹配，将返回热门可用服务。",
                 fn_schema=ServiceSearchArgs
             ),
             FunctionTool.from_defaults(
                 fn=self.get_pricing_structured,
                 name="get_pricing",
-                description="Get pricing information for Humansa medical services with fuzzy matching. Always returns relevant pricing from our clinics. If no exact match, returns available services with prices.",
+                description="获取Humansa医疗服务价格信息，支持模糊匹配。始终返回相关诊所价格。如无精确匹配，将返回可用服务及价格。",
                 fn_schema=PricingArgs
+            ),
+            FunctionTool.from_defaults(
+                fn=self.prepare_booking_confirmation_structured,
+                name="prepare_booking_confirmation",
+                description="准备预约确认信息。收集并验证所有预约信息后，生成确认摘要供用户最终确认。只有在收集到所有必要信息（患者姓名、电话、医生、时间）后才调用此工具。返回完整预约信息等待用户确认。医生姓名仅填写真实中文姓氏或姓名（如'张'、'王'、'李明'），不要包含头衔。",
+                fn_schema=BookingArgs
+            ),
+            FunctionTool.from_defaults(
+                fn=self.book_appointment_confirmation_structured,
+                name="book_appointment_confirmation",
+                description="发起预约确认流程。在用户提供所有预约信息后调用，向用户展示最终确认详情并要求明确确认。这是预约前的最后确认步骤。只有用户明确同意后才能进行实际预约。医生姓名仅填写真实中文姓氏或姓名。",
+                fn_schema=BookingArgs
             ),
             FunctionTool.from_defaults(
                 fn=self.book_appointment_structured,
                 name="book_appointment",
-                description="Book appointments with Humansa doctors. For doctor names, use only actual Chinese family/personal names (e.g., '张', '王', '李明') - do NOT include titles like '医生', '主任', 'Dr.', etc. Validates doctor exists before booking.",
+                description="执行最终预约操作。只有在用户通过book_appointment_confirmation明确确认预约信息后才调用。用于完成实际预约并返回预约成功确认。必须确保用户已经通过之前的确认流程明确表示同意预约。医生姓名仅填写真实中文姓氏或姓名。",
                 fn_schema=BookingArgs
             ),
             FunctionTool.from_defaults(
                 fn=self.place_call_structured,
                 name="place_call",
-                description="Place phone calls for urgent medical consultations or follow-ups",
+                description="为紧急医疗咨询或跟进发起电话呼叫。",
                 fn_schema=CallArgs
             ),
             FunctionTool.from_defaults(
                 fn=self.recommend_product_structured,
                 name="recommend_product",
-                description="Recommend health products relevant to medical services",
+                description="推荐与医疗服务相关的健康产品。",
                 fn_schema=ProductRecommendationArgs
             ),
-            FunctionTool.from_defaults(
-                fn=self.push_content_structured,
-                name="push_content",
-                description="Push health education content and medical articles",
-                fn_schema=ContentPushArgs
-            ),
+            # FunctionTool.from_defaults(
+            #     fn=self.push_content_structured,
+            #     name="push_content",
+            #     description="推送健康教育内容和医学文章。",
+            #     fn_schema=ContentPushArgs
+            # ),
             FunctionTool.from_defaults(
                 fn=self.search_web_structured_streaming,
                 name="search_web",
-                description="Search external web for news, research, general health information - NOT for Humansa services. Use internal tools (find_doctor_info, find_clinic_info, find_medical_services) for our clinical services.",
+                description="外部网络搜索新闻、研究、健康信息——不用于Humansa服务。查找诊所/医生/服务请用内部工具（find_doctor_info、find_clinic_info、search_services）。",
                 fn_schema=SearchArgs
             ),
             FunctionTool.from_defaults(
                 fn=self.find_clinic_info_structured,
                 name="find_clinic_info",
-                description="Find clinic information by name or location. Supports fuzzy matching for clinic names and exact matching for cities or areas.",
+                description="按名称或地点查找诊所信息。诊所名称支持模糊匹配，城市/区域精确匹配。",
                 fn_schema=ClinicSearchArgs
-            ),
-            FunctionTool.from_defaults(
-                fn=self.search_services_structured,
-                name="search_services",
-                description="Search Humansa medical services by type, specialty, or clinic. Always returns 5 relevant services with pricing. Uses intelligent fuzzy matching - even partial service names find relevant results. If no matches, returns popular available services.",
-                fn_schema=ServiceSearchArgs
-            ),
-            FunctionTool.from_defaults(
-                fn=self.search_clinics_structured,
-                name="search_clinics",
-                description="Search available Humansa clinics by name, city, or specialty with intelligent fuzzy matching. Always returns relevant clinic results. If no specific criteria, returns top 5 available clinics.",
-                fn_schema=ClinicSearchArgs
-            ),
-            FunctionTool.from_defaults(
-                fn=self.search_services_structured,
-                name="search_services",
-                description="Search available Humansa medical services by name, specialty, or clinic with intelligent fuzzy matching. Always returns relevant services. If no specific criteria, returns top 5 available services.",
-                fn_schema=ServiceSearchArgs
             )
         ])
 
@@ -877,9 +862,165 @@ class HumansaAgenticToolManager:
             logger.error(f"❌ get_pricing_structured failed: {e}")
             return {"error": str(e), "success": False}
 
+    async def prepare_booking_confirmation_structured(self, doctor_name: str, date_iso: str, time_hhmm: str,
+                                                      patient_name: str, phone: str, service_type: str) -> Dict[str, Any]:
+        """Prepare booking confirmation with all collected information - REQUIRES USER APPROVAL AFTER THIS."""
+        logger.info(
+            f"📋 prepare_booking_confirmation_structured called with: doctor={doctor_name}, patient={patient_name}")
+
+        try:
+            # Validate required fields are not empty
+            if not doctor_name or doctor_name.strip() == "":
+                return {
+                    "success": False,
+                    "error": "Doctor name is required and cannot be empty",
+                    "source": "validation_error"
+                }
+
+            if not patient_name or patient_name.strip() == "":
+                return {
+                    "success": False,
+                    "error": "Patient name is required and cannot be empty",
+                    "source": "validation_error"
+                }
+
+            # Check if doctor exists in REAL database first
+            doctor_info = db.find_doctor_by_name(doctor_name)
+            if not doctor_info:
+                return {
+                    "success": False,
+                    "error": f"Doctor {doctor_name} not found in system",
+                    "source": "database_validation"
+                }
+
+            # Check if appointment slot is available
+            availability = db.find_doctor_availability(doctor_name, date_iso)
+            if not availability:
+                return {
+                    "success": False,
+                    "error": f"No available slots found for {doctor_name} on {date_iso}",
+                    "source": "database_validation"
+                }
+
+            # Generate confirmation summary (NOT BOOKING YET)
+            confirmation_id = f"CONFIRM_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+            return {
+                "success": True,
+                "confirmation_ready": True,
+                "confirmation_id": confirmation_id,
+                "booking_summary": {
+                    "doctor_name": doctor_name,
+                    "doctor_info": doctor_info,
+                    "appointment_date": date_iso,
+                    "appointment_time": time_hhmm,
+                    "patient_name": patient_name,
+                    "phone": phone,
+                    "service_type": service_type,
+                    "clinic": doctor_info.get('clinic_name', 'Unknown Clinic'),
+                    "registration_fee": doctor_info.get('registration_fee', 0),
+                },
+                "status": "awaiting_user_confirmation",
+                "source": "booking_preparation",
+                "message": f"""预约信息确认：
+📋 预约详情：
+• 医生：{doctor_name}（{doctor_info.get('specialty', 'N/A')}）
+• 时间：{date_iso} {time_hhmm}
+• 患者：{patient_name}
+• 电话：{phone}
+• 诊所：{doctor_info.get('clinic_name', 'Unknown Clinic')}
+• 挂号费：¥{doctor_info.get('registration_fee', 0)}
+
+🔸 请确认是否预约？回复"确认"或"是"即可完成预约。"""
+            }
+
+        except Exception as e:
+            logger.error(
+                f"❌ prepare_booking_confirmation_structured failed: {e}")
+            return {"error": str(e), "success": False}
+
+    async def book_appointment_confirmation_structured(self, doctor_name: str, date_iso: str, time_hhmm: str,
+                                                       patient_name: str, phone: str, service_type: str) -> Dict[str, Any]:
+        """Initiate booking confirmation flow - requires explicit user confirmation before actual booking."""
+        logger.info(
+            f"📋 book_appointment_confirmation_structured called with: doctor={doctor_name}, patient={patient_name}")
+
+        try:
+            # Validate required fields are not empty
+            if not doctor_name or doctor_name.strip() == "":
+                return {
+                    "success": False,
+                    "error": "Doctor name is required and cannot be empty",
+                    "source": "validation_error"
+                }
+
+            if not patient_name or patient_name.strip() == "":
+                return {
+                    "success": False,
+                    "error": "Patient name is required and cannot be empty",
+                    "source": "validation_error"
+                }
+
+            # Check if doctor exists in REAL database
+            doctor_info = db.find_doctor_by_name(doctor_name)
+            if not doctor_info:
+                return {
+                    "success": False,
+                    "error": f"Doctor {doctor_name} not found in system",
+                    "source": "database_validation"
+                }
+
+            # Check if appointment slot is available
+            availability = db.find_doctor_availability(doctor_name, date_iso)
+            if not availability:
+                return {
+                    "success": False,
+                    "error": f"No available slots found for {doctor_name} on {date_iso}",
+                    "source": "database_validation"
+                }
+
+            # Generate confirmation details but DO NOT book yet
+            confirmation_id = f"CONF_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+
+            return {
+                "success": True,
+                "confirmation_id": confirmation_id,
+                "requires_user_confirmation": True,
+                "booking_details": {
+                    "doctor_name": doctor_name,
+                    "appointment_date": date_iso,
+                    "appointment_time": time_hhmm,
+                    "patient_name": patient_name,
+                    "phone": phone,
+                    "service_type": service_type,
+                    "clinic": doctor_info.get('clinic_name', 'Unknown Clinic'),
+                    "registration_fee": doctor_info.get('registration_fee', 0),
+                },
+                "status": "pending_user_confirmation",
+                "source": "booking_confirmation",
+                "message": f"""🚨 最终预约确认 🚨
+
+📋 预约详情：
+• 医生：{doctor_name}（{doctor_info.get('specialty', 'N/A')}）
+• 时间：{date_iso} {time_hhmm}
+• 患者：{patient_name}
+• 电话：{phone}
+• 诊所：{doctor_info.get('clinic_name', 'Unknown Clinic')}
+• 挂号费：¥{doctor_info.get('registration_fee', 0)}
+
+⚠️  请注意：这将立即预约上述时间段。
+
+请明确回复"确认预约"、"确认"或"是"来完成最终预约。
+如需修改任何信息，请告诉我具体要更改的内容。"""
+            }
+
+        except Exception as e:
+            logger.error(
+                f"❌ book_appointment_confirmation_structured failed: {e}")
+            return {"error": str(e), "success": False}
+
     async def book_appointment_structured(self, doctor_name: str, date_iso: str, time_hhmm: str,
                                           patient_name: str, phone: str, service_type: str) -> Dict[str, Any]:
-        """Book appointment using structured arguments - REAL DATABASE VALIDATION, SIMULATED BOOKING."""
+        """Execute final booking - ONLY after explicit user confirmation via book_appointment_confirmation."""
         logger.info(
             f"📅 book_appointment_structured called with: doctor={doctor_name}, date={date_iso}, time={time_hhmm}")
 
