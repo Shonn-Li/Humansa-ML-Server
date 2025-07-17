@@ -1,0 +1,42 @@
+{
+  "Simple Conversation (Non-Streaming)": {
+    "status": "error",
+    "error": "HTTP 500: {\n  \"error\": \"404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\",\n  \"status\": \"error\",\n  \"type\": \"unhandled_exception\"\n}\n"
+  },
+  "Simple Conversation (Streaming)": {
+    "status": "error",
+    "error": "HTTP 500: {\n  \"error\": \"404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\",\n  \"status\": \"error\",\n  \"type\": \"unhandled_exception\"\n}\n"
+  },
+  "RAG Query with Specific Notes (Non-Streaming)": {
+    "status": "error",
+    "error": "HTTP 500: {\n  \"error\": \"404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\",\n  \"status\": \"error\",\n  \"type\": \"unhandled_exception\"\n}\n"
+  },
+  "RAG Query with Specific Notes (Streaming)": {
+    "status": "error",
+    "error": "HTTP 500: {\n  \"error\": \"404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\",\n  \"status\": \"error\",\n  \"type\": \"unhandled_exception\"\n}\n"
+  },
+  "Empty Notes/Conversations Test (Non-Streaming)": {
+    "status": "error",
+    "error": "HTTP 500: {\n  \"error\": \"404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\",\n  \"status\": \"error\",\n  \"type\": \"unhandled_exception\"\n}\n"
+  },
+  "Empty Notes/Conversations Test (Streaming)": {
+    "status": "error",
+    "error": "HTTP 500: {\n  \"error\": \"404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\",\n  \"status\": \"error\",\n  \"type\": \"unhandled_exception\"\n}\n"
+  },
+  "Web Search Query (Non-Streaming)": {
+    "status": "error",
+    "error": "HTTP 500: {\n  \"error\": \"404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\",\n  \"status\": \"error\",\n  \"type\": \"unhandled_exception\"\n}\n"
+  },
+  "Web Search Query (Streaming)": {
+    "status": "error",
+    "error": "HTTP 500: {\n  \"error\": \"404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\",\n  \"status\": \"error\",\n  \"type\": \"unhandled_exception\"\n}\n"
+  },
+  "File Attachment Processing (Non-Streaming)": {
+    "status": "error",
+    "error": "HTTP 500: {\n  \"error\": \"404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\",\n  \"status\": \"error\",\n  \"type\": \"unhandled_exception\"\n}\n"
+  },
+  "Mixed Workflow with Context (Non-Streaming)": {
+    "status": "error",
+    "error": "HTTP 500: {\n  \"error\": \"404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\",\n  \"status\": \"error\",\n  \"type\": \"unhandled_exception\"\n}\n"
+  }
+}
