@@ -1,0 +1,165 @@
+====================================================================================================
+HUMANSA RESPONSE COMPARISON REPORT - O3 DEMO vs REGULAR HUMANSA
+====================================================================================================
+Generated: 2025-07-08 16:26:08
+Test Message: 你好，请介绍一下你自己
+Web Search: Disabled
+
+📊 EXECUTIVE SUMMARY
+--------------------------------------------------
+O3 Demo Success: ✅ Yes
+Regular Humansa Success: ✅ Yes
+O3 Demo Output Items: 2
+Regular Humansa Output Items: 3
+O3 Demo Duration: 10.27s
+Regular Humansa Duration: 3.61s
+O3 Demo Validation: 1/2 valid (50.0%)
+Regular Humansa Validation: 1/3 valid (33.3%)
+
+================================================================================
+O3 DEMO MODE DETAILED ANALYSIS
+================================================================================
+📊 METRICS:
+  Success: ✅ Yes
+  Duration: 10.27 seconds
+  Total Events: 6
+  Output Items Completed: 2
+  Output Item Types: {'reasoning': 1, 'message': 1}
+  Final Message Length: 508 characters
+
+🔍 VALIDATION SUMMARY:
+  Valid Items: 1/2 (50.0%)
+  Invalid Items: 1/2 (50.0%)
+  Total Errors: 1
+  Total Warnings: 1
+  Average Compliance: 75.0%
+
+📡 RAW EVENTS ANALYSIS:
+  Total Raw Events: 7
+  Event Types: {'response.created': 1, 'response.in_progress': 1, 'response.output_item.added': 1, 'response.output_item.done': 2, 'response.completed': 1, 'unknown': 1}
+  First 3 Raw Events:
+    Event 1 (0.80s): response.created
+      Data: {'event': 'response.created', 'sequence_number': 0, 'response': {'id': 'resp_81f53ff5', 'object': 'response', 'created_at': 1752017155, 'status': 'in_progress', 'model': 'gpt-o4-mini', 'output': []}}...
+    Event 2 (0.80s): response.in_progress
+      Data: {'event': 'response.in_progress', 'sequence_number': 1, 'response': {'id': 'resp_81f53ff5', 'status': 'in_progress'}}...
+    Event 3 (5.66s): response.output_item.added
+      Data: {'event': 'response.output_item.added', 'sequence_number': 2, 'output_index': 1, 'item': {'id': 'rs_a2c5f969', 'type': 'reasoning', 'content': []}}...
+
+📦 PROCESSED OUTPUT ITEMS:
+  Item 1: REASONING - ❌ INVALID (50.0% compliant)
+    ID: rs_ffd27bf0
+    Index: 0
+    Completion Time: 5.66s
+    Content Length: 0 characters
+    🚨 Validation Errors: ['Reasoning item missing reasoning_text content part']
+    Raw Item Keys: ['id', 'type', 'status', 'content']
+
+  Item 2: MESSAGE - ✅ VALID (100.0% compliant)
+    ID: msg_0ddd304f
+    Index: 0
+    Completion Time: 10.09s
+    Content Length: 508 characters
+    Content Preview: 您好，我是 “诺亚新舟健康医疗助理”——专为 Humansa | 诺亚新舟高端诊所量身打造的 AI 健康管家。  
+我能为您做到：
+
+1. 健康咨询与智能分诊  
+   根据您的症状描述，快速判断就诊科室、建议检查项目，帮助您精准就医。
+
+2. 实时预约与挂号  
+   即时查询各诊所名医剩余号源，分时段展示；经您确认后可直接为您锁号预约。
+
+3. 检查项目下单  
+   对比不同诊所同类检查的价格与优势，一键跳转「诺言商城」完成支付。
+
+4. 诊所导航与到院指引  
+   提供地址、电话、营业时间、交通路线，让您就医不迷路。
+
+5. 体检报告解读 & 慢病管理  
+   深度解析体检/化验结...
+    ⚠️  Validation Warnings: ['Message has 0 annotations']
+    Raw Item Keys: ['id', 'type', 'role', 'status', 'content']
+
+================================================================================
+REGULAR HUMANSA MODE DETAILED ANALYSIS
+================================================================================
+📊 METRICS:
+  Success: ✅ Yes
+  Duration: 3.61 seconds
+  Total Events: 21
+  Output Items Completed: 3
+  Output Item Types: {'reasoning': 2, 'message': 1}
+  Final Message Length: 72 characters
+
+🔍 VALIDATION SUMMARY:
+  Valid Items: 1/3 (33.3%)
+  Invalid Items: 2/3 (66.7%)
+  Total Errors: 2
+  Total Warnings: 1
+  Average Compliance: 55.6%
+
+📡 RAW EVENTS ANALYSIS:
+  Total Raw Events: 22
+  Event Types: {'response.created': 1, 'response.in_progress': 1, 'response.output_item.added': 3, 'response.reasoning_part.added': 2, 'response.reasoning_text.delta': 2, 'response.reasoning_text.done': 2, 'response.reasoning_part.done': 2, 'response.output_item.done': 3, 'response.content_part.added': 1, 'response.output_text.delta': 1, 'response.output_text.done': 1, 'response.content_part.done': 1, 'response.completed': 1, 'unknown': 1}
+  First 3 Raw Events:
+    Event 1 (3.61s): response.created
+      Data: {'type': 'response.created', 'sequence_number': 0, 'response': {'id': 'resp_2a438a51', 'object': 'response', 'created_at': 1752017168, 'status': 'in_progress', 'model': 'gpt-4.1-nano', 'output': []}, ...
+    Event 2 (3.61s): response.in_progress
+      Data: {'type': 'response.in_progress', 'sequence_number': 1, 'response': {'id': 'resp_2a438a51', 'status': 'in_progress'}, 'agentic_mode': True, 'agentic_metadata': {'agentic_mode': True, 'tools_used': ['ag...
+    Event 3 (3.61s): response.output_item.added
+      Data: {'type': 'response.output_item.added', 'sequence_number': 2, 'output_index': 0, 'item': {'id': 'rs_e940dac0', 'type': 'reasoning', 'content': []}, 'agentic_mode': True, 'agentic_metadata': {'agentic_m...
+
+📦 PROCESSED OUTPUT ITEMS:
+  Item 1: REASONING - ❌ INVALID (33.3% compliant)
+    ID: rs_e940dac0
+    Index: 0
+    Completion Time: 3.61s
+    Content Length: 60 characters
+    Content Preview: 用户在用中文询问我自己，请我介绍一下自己。作为健康医疗助理，我可以简要介绍我的身份和功能，但目前没有需要调用工具的必要。
+    🚨 Validation Errors: ["Invalid status: None, expected 'completed'"]
+    Raw Item Keys: ['id', 'type', 'content']
+
+  Item 2: REASONING - ❌ INVALID (33.3% compliant)
+    ID: rs_2c945f67
+    Index: 0
+    Completion Time: 3.61s
+    Content Length: 60 characters
+    Content Preview: 用户在用中文询问我自己，请我介绍一下自己。作为健康医疗助理，我可以简要介绍我的身份和功能，但目前没有需要调用工具的必要。
+    🚨 Validation Errors: ["Invalid status: None, expected 'completed'"]
+    Raw Item Keys: ['id', 'type', 'content']
+
+  Item 3: MESSAGE - ✅ VALID (100.0% compliant)
+    ID: msg_17cfdfc3
+    Index: 0
+    Completion Time: 3.61s
+    Content Length: 72 characters
+    Content Preview: 你好！我是诺亚新舟健康医疗助理，专为高端诊所提供智能健康管理服务。我可以帮助你查找医生、预约挂号、查询医疗信息等。如果你有具体的需求，请告诉我！
+    ⚠️  Validation Warnings: ['Message has 0 annotations']
+    Raw Item Keys: ['id', 'type', 'role', 'status', 'content']
+
+====================================================================================================
+SIDE-BY-SIDE COMPARISON
+====================================================================================================
+📊 OUTPUT ITEMS COMPARISON:
+Item Type            O3 Demo         Regular Humansa Difference     
+-----------------------------------------------------------------
+message              1               1               0              
+reasoning            1               2               -1             
+
+📡 EVENT STRUCTURE COMPARISON:
+Event Type                     O3 Demo         Regular Humansa Difference     
+---------------------------------------------------------------------------
+response.completed             1               1               0              
+response.content_part.added    0               1               -1             
+response.content_part.done     0               1               -1             
+response.created               1               1               0              
+response.in_progress           1               1               0              
+response.output_item.added     1               3               -2             
+response.output_item.done      2               3               -1             
+response.output_text.delta     0               1               -1             
+response.output_text.done      0               1               -1             
+response.reasoning_part.added  0               2               -2             
+response.reasoning_part.done   0               2               -2             
+response.reasoning_text.delta  0               2               -2             
+response.reasoning_text.done   0               2               -2             
+unknown                        1               1               0              
+

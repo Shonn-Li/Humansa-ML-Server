@@ -1,0 +1,525 @@
+🌐 ML SERVER: Successfully parsed event: {
+  type: 'response.reasoning_text.done',
+  sequence_number: 5,
+  item_id: 'rs_4e1eb137',
+  output_index: 0,
+  content_index: 0,
+  text: '用户只输入了“nihao”，这是一个问候语，没有具体的医疗需求或问题。根据情况，我可以直接用中文回应用户的问候，表达友好。无需调用任何工具。',
+  agentic_mode: true,
+  agentic_metadata: {
+    agentic_mode: true,
+    tools_used: [ 'agent_executed_tools' ],
+    agent_confidence: 1,
+    callback_events: 0,
+    streaming_steps: 5
+  }
+}
+🌐 ML SERVER: Forwarding to frontend: data: {"type": "response.reasoning_text.done", "sequence_number": 5, "item_id": "rs_4e1eb137", "output_index": 0, "content_index": 0, "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Raw chunk received: data: {"type": "response.reasoning_part.done", "sequence_number": 6, "item_id": "rs_4e1eb137", "output_index": 0, "content_index": 0, "part": {"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: data: {"type": "response.reasoning_part.done", "sequence_number": 6, "item_id": "rs_4e1eb137", "output_index": 0, "content_index": 0, "part": {"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Extracted data: {"type": "response.reasoning_part.done", "sequence_number": 6, "item_id": "rs_4e1eb137", "output_index": 0, "content_index": 0, "part": {"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Attempting to parse JSON: {"type": "response.reasoning_part.done", "sequence_number": 6, "item_id": "rs_4e1eb137", "output_index": 0, "content_index": 0, "part": {"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Successfully parsed event: {
+  type: 'response.reasoning_part.done',
+  sequence_number: 6,
+  item_id: 'rs_4e1eb137',
+  output_index: 0,
+  content_index: 0,
+  part: {
+    type: 'reasoning_text',
+    text: '用户只输入了“nihao”，这是一个问候语，没有具体的医疗需求或问题。根据情况，我可以直接用中文回应用户的问候，表达友好。无需调用任何工具。'
+  },
+  agentic_mode: true,
+  agentic_metadata: {
+    agentic_mode: true,
+    tools_used: [ 'agent_executed_tools' ],
+    agent_confidence: 1,
+    callback_events: 0,
+    streaming_steps: 5
+  }
+}
+🌐 ML SERVER: Forwarding to frontend: data: {"type": "response.reasoning_part.done", "sequence_number": 6, "item_id": "rs_4e1eb137", "output_index": 0, "content_index": 0, "part": {"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Raw chunk received: data: {"type": "response.output_item.done", "sequence_number": 7, "output_index": 0, "item": {"id": "rs_4e1eb137", "type": "reasoning", "content": [{"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}]}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: data: {"type": "response.output_item.done", "sequence_number": 7, "output_index": 0, "item": {"id": "rs_4e1eb137", "type": "reasoning", "content": [{"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}]}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Extracted data: {"type": "response.output_item.done", "sequence_number": 7, "output_index": 0, "item": {"id": "rs_4e1eb137", "type": "reasoning", "content": [{"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}]}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Attempting to parse JSON: {"type": "response.output_item.done", "sequence_number": 7, "output_index": 0, "item": {"id": "rs_4e1eb137", "type": "reasoning", "content": [{"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}]}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Successfully parsed event: {
+  type: 'response.output_item.done',
+  sequence_number: 7,
+  output_index: 0,
+  item: { id: 'rs_4e1eb137', type: 'reasoning', content: [ [Object] ] },
+  agentic_mode: true,
+  agentic_metadata: {
+    agentic_mode: true,
+    tools_used: [ 'agent_executed_tools' ],
+    agent_confidence: 1,
+    callback_events: 0,
+    streaming_steps: 5
+  }
+}
+🌐 ML SERVER: Forwarding to frontend: data: {"type": "response.output_item.done", "sequence_number": 7, "output_index": 0, "item": {"id": "rs_4e1eb137", "type": "reasoning", "content": [{"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}]}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Raw chunk received: data: {"type": "response.output_item.added", "sequence_number": 8, "output_index": 1, "item": {"id": "rs_6c7e6e1b", "type": "reasoning", "content": []}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: data: {"type": "response.output_item.added", "sequence_number": 8, "output_index": 1, "item": {"id": "rs_6c7e6e1b", "type": "reasoning", "content": []}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Extracted data: {"type": "response.output_item.added", "sequence_number": 8, "output_index": 1, "item": {"id": "rs_6c7e6e1b", "type": "reasoning", "content": []}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Attempting to parse JSON: {"type": "response.output_item.added", "sequence_number": 8, "output_index": 1, "item": {"id": "rs_6c7e6e1b", "type": "reasoning", "content": []}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Successfully parsed event: {
+  type: 'response.output_item.added',
+  sequence_number: 8,
+  output_index: 1,
+  item: { id: 'rs_6c7e6e1b', type: 'reasoning', content: [] },
+  agentic_mode: true,
+  agentic_metadata: {
+    agentic_mode: true,
+    tools_used: [ 'agent_executed_tools' ],
+    agent_confidence: 1,
+    callback_events: 0,
+    streaming_steps: 5
+  }
+}
+🌐 ML SERVER: Forwarding to frontend: data: {"type": "response.output_item.added", "sequence_number": 8, "output_index": 1, "item": {"id": "rs_6c7e6e1b", "type": "reasoning", "content": []}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Raw chunk received: data: {"type": "response.reasoning_part.added", "sequence_number": 9, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "part": {"type": "reasoning_text", "text": ""}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: data: {"type": "response.reasoning_part.added", "sequence_number": 9, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "part": {"type": "reasoning_text", "text": ""}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Extracted data: {"type": "response.reasoning_part.added", "sequence_number": 9, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "part": {"type": "reasoning_text", "text": ""}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Attempting to parse JSON: {"type": "response.reasoning_part.added", "sequence_number": 9, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "part": {"type": "reasoning_text", "text": ""}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Successfully parsed event: {
+  type: 'response.reasoning_part.added',
+  sequence_number: 9,
+  item_id: 'rs_6c7e6e1b',
+  output_index: 1,
+  content_index: 0,
+  part: { type: 'reasoning_text', text: '' },
+  agentic_mode: true,
+  agentic_metadata: {
+    agentic_mode: true,
+    tools_used: [ 'agent_executed_tools' ],
+    agent_confidence: 1,
+    callback_events: 0,
+    streaming_steps: 5
+  }
+}
+🌐 ML SERVER: Forwarding to frontend: data: {"type": "response.reasoning_part.added", "sequence_number": 9, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "part": {"type": "reasoning_text", "text": ""}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Raw chunk received: data: {"type": "response.reasoning_text.delta", "sequence_number": 10, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "delta": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: data: {"type": "response.reasoning_text.delta", "sequence_number": 10, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "delta": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Extracted data: {"type": "response.reasoning_text.delta", "sequence_number": 10, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "delta": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Attempting to parse JSON: {"type": "response.reasoning_text.delta", "sequence_number": 10, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "delta": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Successfully parsed event: {
+  type: 'response.reasoning_text.delta',
+  sequence_number: 10,
+  item_id: 'rs_6c7e6e1b',
+  output_index: 1,
+  content_index: 0,
+  delta: '用户只输入了“nihao”，这是一个问候语，没有具体的医疗需求或问题。根据情况，我可以直接用中文回应用户的问候，表达友好。无需调用任何工具。',
+  agentic_mode: true,
+  agentic_metadata: {
+    agentic_mode: true,
+    tools_used: [ 'agent_executed_tools' ],
+    agent_confidence: 1,
+    callback_events: 0,
+    streaming_steps: 5
+  }
+}
+🌐 ML SERVER: Forwarding to frontend: data: {"type": "response.reasoning_text.delta", "sequence_number": 10, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "delta": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Raw chunk received: data: {"type": "response.reasoning_text.done", "sequence_number": 11, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: data: {"type": "response.reasoning_text.done", "sequence_number": 11, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Extracted data: {"type": "response.reasoning_text.done", "sequence_number": 11, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Attempting to parse JSON: {"type": "response.reasoning_text.done", "sequence_number": 11, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Successfully parsed event: {
+  type: 'response.reasoning_text.done',
+  sequence_number: 11,
+  item_id: 'rs_6c7e6e1b',
+  output_index: 1,
+  content_index: 0,
+  text: '用户只输入了“nihao”，这是一个问候语，没有具体的医疗需求或问题。根据情况，我可以直接用中文回应用户的问候，表达友好。无需调用任何工具。',
+  agentic_mode: true,
+  agentic_metadata: {
+    agentic_mode: true,
+    tools_used: [ 'agent_executed_tools' ],
+    agent_confidence: 1,
+    callback_events: 0,
+    streaming_steps: 5
+  }
+}
+🌐 ML SERVER: Forwarding to frontend: data: {"type": "response.reasoning_text.done", "sequence_number": 11, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Raw chunk received: data: {"type": "response.reasoning_part.done", "sequence_number": 12, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "part": {"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: data: {"type": "response.reasoning_part.done", "sequence_number": 12, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "part": {"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Extracted data: {"type": "response.reasoning_part.done", "sequence_number": 12, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "part": {"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Attempting to parse JSON: {"type": "response.reasoning_part.done", "sequence_number": 12, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "part": {"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Successfully parsed event: {
+  type: 'response.reasoning_part.done',
+  sequence_number: 12,
+  item_id: 'rs_6c7e6e1b',
+  output_index: 1,
+  content_index: 0,
+  part: {
+    type: 'reasoning_text',
+    text: '用户只输入了“nihao”，这是一个问候语，没有具体的医疗需求或问题。根据情况，我可以直接用中文回应用户的问候，表达友好。无需调用任何工具。'
+  },
+  agentic_mode: true,
+  agentic_metadata: {
+    agentic_mode: true,
+    tools_used: [ 'agent_executed_tools' ],
+    agent_confidence: 1,
+    callback_events: 0,
+    streaming_steps: 5
+  }
+}
+🌐 ML SERVER: Forwarding to frontend: data: {"type": "response.reasoning_part.done", "sequence_number": 12, "item_id": "rs_6c7e6e1b", "output_index": 1, "content_index": 0, "part": {"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Raw chunk received: data: {"type": "response.output_item.done", "sequence_number": 13, "output_index": 1, "item": {"id": "rs_6c7e6e1b", "type": "reasoning", "content": [{"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}]}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: data: {"type": "response.output_item.done", "sequence_number": 13, "output_index": 1, "item": {"id": "rs_6c7e6e1b", "type": "reasoning", "content": [{"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}]}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Extracted data: {"type": "response.output_item.done", "sequence_number": 13, "output_index": 1, "item": {"id": "rs_6c7e6e1b", "type": "reasoning", "content": [{"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}]}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Attempting to parse JSON: {"type": "response.output_item.done", "sequence_number": 13, "output_index": 1, "item": {"id": "rs_6c7e6e1b", "type": "reasoning", "content": [{"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}]}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Successfully parsed event: {
+  type: 'response.output_item.done',
+  sequence_number: 13,
+  output_index: 1,
+  item: { id: 'rs_6c7e6e1b', type: 'reasoning', content: [ [Object] ] },
+  agentic_mode: true,
+  agentic_metadata: {
+    agentic_mode: true,
+    tools_used: [ 'agent_executed_tools' ],
+    agent_confidence: 1,
+    callback_events: 0,
+    streaming_steps: 5
+  }
+}
+🌐 ML SERVER: Forwarding to frontend: data: {"type": "response.output_item.done", "sequence_number": 13, "output_index": 1, "item": {"id": "rs_6c7e6e1b", "type": "reasoning", "content": [{"type": "reasoning_text", "text": "\u7528\u6237\u53ea\u8f93\u5165\u4e86\u201cnihao\u201d\uff0c\u8fd9\u662f\u4e00\u4e2a\u95ee\u5019\u8bed\uff0c\u6ca1\u6709\u5177\u4f53\u7684\u533b\u7597\u9700\u6c42\u6216\u95ee\u9898\u3002\u6839\u636e\u60c5\u51b5\uff0c\u6211\u53ef\u4ee5\u76f4\u63a5\u7528\u4e2d\u6587\u56de\u5e94\u7528\u6237\u7684\u95ee\u5019\uff0c\u8868\u8fbe\u53cb\u597d\u3002\u65e0\u9700\u8c03\u7528\u4efb\u4f55\u5de5\u5177\u3002"}]}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Raw chunk received: data: {"type": "response.output_item.added", "sequence_number": 14, "output_index": 2, "item": {"id": "msg_ce5433f1", "type": "message", "role": "assistant", "status": "in_progress"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: data: {"type": "response.output_item.added", "sequence_number": 14, "output_index": 2, "item": {"id": "msg_ce5433f1", "type": "message", "role": "assistant", "status": "in_progress"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Extracted data: {"type": "response.output_item.added", "sequence_number": 14, "output_index": 2, "item": {"id": "msg_ce5433f1", "type": "message", "role": "assistant", "status": "in_progress"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Attempting to parse JSON: {"type": "response.output_item.added", "sequence_number": 14, "output_index": 2, "item": {"id": "msg_ce5433f1", "type": "message", "role": "assistant", "status": "in_progress"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Successfully parsed event: {
+  type: 'response.output_item.added',
+  sequence_number: 14,
+  output_index: 2,
+  item: {
+    id: 'msg_ce5433f1',
+    type: 'message',
+    role: 'assistant',
+    status: 'in_progress'
+  },
+  agentic_mode: true,
+  agentic_metadata: {
+    agentic_mode: true,
+    tools_used: [ 'agent_executed_tools' ],
+    agent_confidence: 1,
+    callback_events: 0,
+    streaming_steps: 5
+  }
+}
+🌐 ML SERVER: Forwarding to frontend: data: {"type": "response.output_item.added", "sequence_number": 14, "output_index": 2, "item": {"id": "msg_ce5433f1", "type": "message", "role": "assistant", "status": "in_progress"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Raw chunk received: data: {"type": "response.content_part.added", "sequence_number": 15, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "part": {"type": "output_text", "annotations": [], "logprobs": [], "text": ""}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: data: {"type": "response.content_part.added", "sequence_number": 15, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "part": {"type": "output_text", "annotations": [], "logprobs": [], "text": ""}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Extracted data: {"type": "response.content_part.added", "sequence_number": 15, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "part": {"type": "output_text", "annotations": [], "logprobs": [], "text": ""}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Attempting to parse JSON: {"type": "response.content_part.added", "sequence_number": 15, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "part": {"type": "output_text", "annotations": [], "logprobs": [], "text": ""}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Successfully parsed event: {
+  type: 'response.content_part.added',
+  sequence_number: 15,
+  item_id: 'msg_ce5433f1',
+  output_index: 2,
+  content_index: 0,
+  part: { type: 'output_text', annotations: [], logprobs: [], text: '' },
+  agentic_mode: true,
+  agentic_metadata: {
+    agentic_mode: true,
+    tools_used: [ 'agent_executed_tools' ],
+    agent_confidence: 1,
+    callback_events: 0,
+    streaming_steps: 5
+  }
+}
+🌐 ML SERVER: Forwarding to frontend: data: {"type": "response.content_part.added", "sequence_number": 15, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "part": {"type": "output_text", "annotations": [], "logprobs": [], "text": ""}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Raw chunk received: data: {"type": "response.output_text.delta", "sequence_number": 16, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "delta": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: data: {"type": "response.output_text.delta", "sequence_number": 16, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "delta": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Extracted data: {"type": "response.output_text.delta", "sequence_number": 16, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "delta": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Attempting to parse JSON: {"type": "response.output_text.delta", "sequence_number": 16, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "delta": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Successfully parsed event: {
+  type: 'response.output_text.delta',
+  sequence_number: 16,
+  item_id: 'msg_ce5433f1',
+  output_index: 2,
+  content_index: 0,
+  delta: '你好！很高兴为您服务，有什么我可以帮您的吗？',
+  agentic_mode: true,
+  agentic_metadata: {
+    agentic_mode: true,
+    tools_used: [ 'agent_executed_tools' ],
+    agent_confidence: 1,
+    callback_events: 0,
+    streaming_steps: 5
+  }
+}
+🌐 ML SERVER: Forwarding to frontend: data: {"type": "response.output_text.delta", "sequence_number": 16, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "delta": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Raw chunk received: data: {"type": "response.output_text.done", "sequence_number": 17, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "text": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: data: {"type": "response.output_text.done", "sequence_number": 17, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "text": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Extracted data: {"type": "response.output_text.done", "sequence_number": 17, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "text": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Attempting to parse JSON: {"type": "response.output_text.done", "sequence_number": 17, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "text": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Successfully parsed event: {
+  type: 'response.output_text.done',
+  sequence_number: 17,
+  item_id: 'msg_ce5433f1',
+  output_index: 2,
+  content_index: 0,
+  text: '你好！很高兴为您服务，有什么我可以帮您的吗？',
+  agentic_mode: true,
+  agentic_metadata: {
+    agentic_mode: true,
+    tools_used: [ 'agent_executed_tools' ],
+    agent_confidence: 1,
+    callback_events: 0,
+    streaming_steps: 5
+  }
+}
+🌐 ML SERVER: Forwarding to frontend: data: {"type": "response.output_text.done", "sequence_number": 17, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "text": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f", "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Raw chunk received: data: {"type": "response.content_part.done", "sequence_number": 18, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "part": {"type": "output_text", "annotations": [], "logprobs": [], "text": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: data: {"type": "response.content_part.done", "sequence_number": 18, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "part": {"type": "output_text", "annotations": [], "logprobs": [], "text": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Extracted data: {"type": "response.content_part.done", "sequence_number": 18, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "part": {"type": "output_text", "annotations": [], "logprobs": [], "text": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Attempting to parse JSON: {"type": "response.content_part.done", "sequence_number": 18, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "part": {"type": "output_text", "annotations": [], "logprobs": [], "text": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Successfully parsed event: {
+  type: 'response.content_part.done',
+  sequence_number: 18,
+  item_id: 'msg_ce5433f1',
+  output_index: 2,
+  content_index: 0,
+  part: {
+    type: 'output_text',
+    annotations: [],
+    logprobs: [],
+    text: '你好！很高兴为您服务，有什么我可以帮您的吗？'
+  },
+  agentic_mode: true,
+  agentic_metadata: {
+    agentic_mode: true,
+    tools_used: [ 'agent_executed_tools' ],
+    agent_confidence: 1,
+    callback_events: 0,
+    streaming_steps: 5
+  }
+}
+🌐 ML SERVER: Forwarding to frontend: data: {"type": "response.content_part.done", "sequence_number": 18, "item_id": "msg_ce5433f1", "output_index": 2, "content_index": 0, "part": {"type": "output_text", "annotations": [], "logprobs": [], "text": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f"}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Raw chunk received: data: {"type": "response.output_item.done", "sequence_number": 19, "output_index": 2, "item": {"id": "msg_ce5433f1", "type": "message", "role": "assistant", "status": "completed", "content": [{"type": "output_text", "text": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f", "annotations": []}]}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: data: {"type": "response.output_item.done", "sequence_number": 19, "output_index": 2, "item": {"id": "msg_ce5433f1", "type": "message", "role": "assistant", "status": "completed", "content": [{"type": "output_text", "text": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f", "annotations": []}]}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Extracted data: {"type": "response.output_item.done", "sequence_number": 19, "output_index": 2, "item": {"id": "msg_ce5433f1", "type": "message", "role": "assistant", "status": "completed", "content": [{"type": "output_text", "text": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f", "annotations": []}]}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Attempting to parse JSON: {"type": "response.output_item.done", "sequence_number": 19, "output_index": 2, "item": {"id": "msg_ce5433f1", "type": "message", "role": "assistant", "status": "completed", "content": [{"type": "output_text", "text": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f", "annotations": []}]}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Successfully parsed event: {
+  type: 'response.output_item.done',
+  sequence_number: 19,
+  output_index: 2,
+  item: {
+    id: 'msg_ce5433f1',
+    type: 'message',
+    role: 'assistant',
+    status: 'completed',
+    content: [ [Object] ]
+  },
+  agentic_mode: true,
+  agentic_metadata: {
+    agentic_mode: true,
+    tools_used: [ 'agent_executed_tools' ],
+    agent_confidence: 1,
+    callback_events: 0,
+    streaming_steps: 5
+  }
+}
+🌐 ML SERVER: Forwarding to frontend: data: {"type": "response.output_item.done", "sequence_number": 19, "output_index": 2, "item": {"id": "msg_ce5433f1", "type": "message", "role": "assistant", "status": "completed", "content": [{"type": "output_text", "text": "\u4f60\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\uff0c\u6709\u4ec0\u4e48\u6211\u53ef\u4ee5\u5e2e\u60a8\u7684\u5417\uff1f", "annotations": []}]}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Raw chunk received: data: {"type": "response.completed", "sequence_number": 20, "response": {"id": "resp_7ea004e4", "status": "completed", "object": "response", "output": []}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: data: {"type": "response.completed", "sequence_number": 20, "response": {"id": "resp_7ea004e4", "status": "completed", "object": "response", "output": []}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Extracted data: {"type": "response.completed", "sequence_number": 20, "response": {"id": "resp_7ea004e4", "status": "completed", "object": "response", "output": []}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Attempting to parse JSON: {"type": "response.completed", "sequence_number": 20, "response": {"id": "resp_7ea004e4", "status": "completed", "object": "response", "output": []}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+🌐 ML SERVER: Successfully parsed event: {
+  type: 'response.completed',
+  sequence_number: 20,
+  response: {
+    id: 'resp_7ea004e4',
+    status: 'completed',
+    object: 'response',
+    output: []
+  },
+  agentic_mode: true,
+  agentic_metadata: {
+    agentic_mode: true,
+    tools_used: [ 'agent_executed_tools' ],
+    agent_confidence: 1,
+    callback_events: 0,
+    streaming_steps: 5
+  }
+}
+🌐 ML SERVER: Forwarding to frontend: data: {"type": "response.completed", "sequence_number": 20, "response": {"id": "resp_7ea004e4", "status": "completed", "object": "response", "output": []}, "agentic_mode": true, "agentic_metadata": {"agentic_mode": true, "tools_used": ["agent_executed_tools"], "agent_confidence": 1.0, "callback_events": 0, "streaming_steps": 5}}
+
+
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Processing line: 
+🌐 ML SERVER: Raw chunk received: data: [DONE]
+
+
+🌐 ML SERVER: Processing line: data: [DONE]
+🌐 ML SERVER: Extracted data: [DONE]
+🔍 HUMANSA DEBUG - Stream completed, final state: {
+  final_response_length: 22,
+  final_response_content: '你好！很高兴为您服务，有什么我可以帮您的吗？',
+  citations_count: 0,
+  reasoning_length: 140,
+  output_items_count: 3,
+  thinking_duration_ms: 3889
+}
+🔍 HUMANSA DEBUG - Output Items Analysis: {
+  outputItemsCount: 3,
+  outputItems: [
+    {
+      index: 0,
+      id: 'rs_4e1eb137',
+      type: 'reasoning',
+      status: 'completed',
+      hasContent: true,
+      contentLength: 1,
+      contentPreview: [Array],
+      hasAction: false,
+      actionQuery: undefined,
+      hasResults: false,
+      resultsCount: 0,
+      createdAt: '2025-07-09T00:01:25.966Z',
+      completedAt: '2025-07-09T00:01:25.970Z',
+      outputIndex: 0
+    },
+    {
+      index: 1,
+      id: 'rs_6c7e6e1b',
+      type: 'reasoning',
+      status: 'completed',
+      hasContent: true,
+      contentLength: 1,
+      contentPreview: [Array],
+      hasAction: false,
+      actionQuery: undefined,
+      hasResults: false,
+      resultsCount: 0,
+      createdAt: '2025-07-09T00:01:25.970Z',
+      completedAt: '2025-07-09T00:01:25.974Z',
+      outputIndex: 1
+    },
+    {
+      index: 2,
+      id: 'msg_ce5433f1',
+      type: 'message',
+      status: 'completed',
+      hasContent: true,
+      contentLength: 1,
+      contentPreview: [Array],
+      hasAction: false,
+      actionQuery: undefined,
+      hasResults: false,
+      resultsCount: 0,
+      createdAt: '2025-07-09T00:01:25.975Z',
+      completedAt: '2025-07-09T00:01:25.976Z',
+      outputIndex: 2
+    }
+  ],
+  draftItemsRemaining: 0,
+  reasoningLength: 140,
+  reasoningPreview: '用户只输入了“nihao”，这是一个问候语，没有具体的医疗需求或问题。根据情况，我可以直接用中文回应用户的问候，表达友好。无需调用任何工具。用户只输入了“nihao”，这是一个问候语，没有具体的医疗需...'
+}
+🔍 HUMANSA DEBUG - Message stored in conversation: {
+  messageIndex: 1,
+  messageRole: 'assistant',
+  contentLength: 22,
+  hasReasoning: true,
+  reasoningLength: 140,
+  hasOutputItems: true,
+  outputItemsCount: 3,
+  outputItemsStored: [
+    { id: 'rs_4e1eb137', type: 'reasoning', status: 'completed' },
+    { id: 'rs_6c7e6e1b', type: 'reasoning', status: 'completed' },
+    { id: 'msg_ce5433f1', type: 'message', status: 'completed' }
+  ],
+  hasAgentTrace: false,
+  hasCitations: false,
+  hasThinkingDuration: true
