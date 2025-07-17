@@ -510,6 +510,38 @@ class PostgresManager:
 
                 return ""
 
+    def get_note_titles_batch(self, note_ids: List[int]) -> Dict[int, str]:
+        """Get titles for multiple notes"""
+        if not note_ids:
+            return {}
+            
+        with self.get_connection() as conn:
+            with conn.cursor() as cursor:
+                cursor.execute("""
+                    SELECT id, "noteTitle"
+                    FROM note_v1 
+                    WHERE id = ANY(%s)
+                """, (note_ids,))
+
+                results = cursor.fetchall()
+                return {row[0]: row[1] or f"Note {row[0]}" for row in results}
+
+    def get_conversation_titles_batch(self, conversation_ids: List[int]) -> Dict[int, str]:
+        """Get titles for multiple conversations"""
+        if not conversation_ids:
+            return {}
+            
+        with self.get_connection() as conn:
+            with conn.cursor() as cursor:
+                cursor.execute("""
+                    SELECT id, title
+                    FROM conversation_v1 
+                    WHERE id = ANY(%s)
+                """, (conversation_ids,))
+
+                results = cursor.fetchall()
+                return {row[0]: row[1] or f"Conversation {row[0]}" for row in results}
+
     def health_check(self) -> bool:
         """Simple database health check"""
         try:
