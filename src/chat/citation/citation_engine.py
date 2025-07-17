@@ -34,6 +34,17 @@ class CitationResult:
     source_mapping: Dict[str, str]  # Maps citation IDs to source IDs
     total_sources: int
 
+    def to_dict(self) -> Dict[str, Any]:
+        """Return a serializable representation of the citation result."""
+        from dataclasses import asdict
+
+        return {
+            "response": self.response,
+            "sources": [asdict(src) for src in self.sources],
+            "source_mapping": self.source_mapping,
+            "total_sources": self.total_sources,
+        }
+
 
 class CitationEngine:
     """Core citation engine using existing context chunks"""
@@ -45,17 +56,19 @@ class CitationEngine:
                                  rag_context: Optional[RAGContext],
                                  attachment_context: Optional[Dict[str, Any]],
                                  websearch_context: Optional[WebSearchContext],
-                                 model_name: str = "gpt-4o-mini") -> CitationResult:
+                                 model_name: str = "gpt-4o-mini",
+                                 llm=None) -> CitationResult:
         """
         Generate a response with citations based on provided context.
         """
         logger.info(f"Generating citation response for query: '{query}'")
 
-        # Get an LLM instance
-        from ..provider.llm_provider import LLMProviderSelector
-        llm_selector = LLMProviderSelector()
-        provider_info = llm_selector.get_provider(model=model_name)
-        llm = provider_info["llm"]
+        # Get an LLM instance if not provided
+        if llm is None:
+            from ..provider.llm_provider import LLMProviderSelector
+            llm_selector = LLMProviderSelector()
+            provider_info = llm_selector.get_provider(model=model_name)
+            llm = provider_info["llm"]
 
         if not llm:
             raise ValueError(
@@ -106,9 +119,14 @@ class CitationEngine:
                 chunk.type_id for chunk in rag_context.chunks if chunk.type == "note"]
             note_titles = {}
             if note_ids:
-                from ..postgres.db_manager import PostgresManager
-                postgres = PostgresManager()
-                note_titles = postgres.get_note_titles_batch(note_ids)
+                try:
+                    from ..postgres.db_manager import PostgresManager
+                    postgres = PostgresManager()
+                    note_titles = postgres.get_note_titles_batch(note_ids)
+                except Exception as e:
+                    logger.warning(
+                        f"Failed to fetch note titles from database: {e}")
+                    note_titles = {}
 
             for i, chunk in enumerate(rag_context.chunks):
                 # Use note title for notes, keep conversation ID for conversations
