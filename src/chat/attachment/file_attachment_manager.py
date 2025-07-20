@@ -191,7 +191,14 @@ class FileAttachmentManager:
         urls = []
 
         for attachment in attachments:
-            url = attachment.get('url')
+            # Handle both string URLs and attachment objects
+            if isinstance(attachment, str):
+                url = attachment
+            elif isinstance(attachment, dict):
+                url = attachment.get('url')
+            else:
+                url = None
+                
             if url and isinstance(url, str) and url.startswith(('http://', 'https://')):
                 urls.append(url)
             else:

@@ -1,0 +1,520 @@
+{
+  "test_run": {
+    "timestamp": "2025-07-19T17:38:40.872021",
+    "ml_server": "http://localhost:5001",
+    "test_user_id": 10001,
+    "total_tests": 18,
+    "passed": 0,
+    "failed": 18
+  },
+  "results": [
+    {
+      "test_name": "RAG_Research_Paper_Query",
+      "query": "What is the main contribution of the PARL paper?",
+      "attachments": [],
+      "expected_agents": [
+        "router",
+        "rag",
+        "response",
+        "citation"
+      ],
+      "actual_agents": [
+        "router",
+        "web_search",
+        "response"
+      ],
+      "agent_outputs": {
+        "reasoning": [],
+        "web_search": []
+      },
+      "final_response": "The PARL paper, which stands for \"Public Parks and Active Living,\" primarily contributes to understanding the role of public parks in promoting physical activity and public health. It presents a conceptual model that highlights the benefits of parks, their usage, and the relationships between these factors. The paper emphasizes how access to parks can encourage individuals to engage in physical activities, contributing positively to overall community health and well-being. \n\nIf you're looking fo...",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "5.08s",
+      "notes": [
+        "Missing expected agents: {'citation', 'rag'}"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "RAG_Cross_Note_Synthesis",
+      "query": "Compare the reinforcement learning approaches in PARL and G1",
+      "attachments": [],
+      "expected_agents": [
+        "router",
+        "rag",
+        "response",
+        "citation"
+      ],
+      "actual_agents": [
+        "router",
+        "web_search",
+        "response"
+      ],
+      "agent_outputs": {
+        "reasoning": [],
+        "web_search": []
+      },
+      "final_response": "To compare the reinforcement learning (RL) approaches in **PARL** (a framework for RL) and **G1** (as mentioned in the bootstrapping perception and reasoning abilities paper), let\u2019s discuss their key aspects:\n\n1. **Learning Paradigm**:\n   - **PARL**: Generally emphasizes a structured approach to reinforcement learning, focusing on modularity, scalability, and ease of use. It likely incorporates various algorithms and tools that allow for flexible experimentation and deployment in RL tasks.\n   - ...",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "13.61s",
+      "notes": [
+        "Missing expected agents: {'citation', 'rag'}"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "RAG_Business_Content",
+      "query": "How did Zepto achieve 10-minute delivery?",
+      "attachments": [],
+      "expected_agents": [
+        "router",
+        "rag",
+        "response",
+        "citation"
+      ],
+      "actual_agents": [
+        "router",
+        "web_search",
+        "response"
+      ],
+      "agent_outputs": {
+        "reasoning": [],
+        "web_search": []
+      },
+      "final_response": "Zepto achieved its impressive 10-minute grocery delivery service through several key strategies:\n\n1. **Dark Stores**: Zepto utilizes a network of dark stores, which are small, unstaffed warehouses located in densely populated urban areas. These locations allow them to stock a variety of essential items close to where customers live, reducing delivery times significantly.\n\n2. **Strategic Location**: The company strategically places its dark stores in proximity to high-demand neighborhoods. This h...",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "8.88s",
+      "notes": [
+        "Missing expected agents: {'citation', 'rag'}"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "RAG_Chinese_Content",
+      "query": "\u7531\u6211AI\u7684\u4e3b\u8981\u529f\u80fd\u662f\u4ec0\u4e48\uff1f",
+      "attachments": [],
+      "expected_agents": [
+        "router",
+        "rag",
+        "response",
+        "citation"
+      ],
+      "actual_agents": [
+        "router",
+        "response"
+      ],
+      "agent_outputs": {
+        "reasoning": []
+      },
+      "final_response": "\u7531\u6211AI\u7684\u4e3b\u8981\u529f\u80fd\u5305\u62ec\uff1a\n\n1. **\u63d0\u4f9b\u4fe1\u606f\u548c\u77e5\u8bc6**\uff1a\u56de\u7b54\u5404\u7c7b\u95ee\u9898\uff0c\u63d0\u4f9b\u76f8\u5173\u7684\u77e5\u8bc6\u548c\u4fe1\u606f\u3002\n2. **\u5b66\u4e60\u8f85\u52a9**\uff1a\u5e2e\u52a9\u7528\u6237\u7406\u89e3\u590d\u6742\u7684\u6982\u5ff5\uff0c\u63d0\u4f9b\u5b66\u4e60\u8d44\u6e90\u548c\u5efa\u8bae\u3002\n3. **\u6587\u672c\u751f\u6210**\uff1a\u534f\u52a9\u64b0\u5199\u6587\u7ae0\u3001\u62a5\u544a\u3001\u90ae\u4ef6\u7b49\u5404\u79cd\u6587\u672c\u5185\u5bb9\u3002\n4. **\u8bed\u8a00\u7ffb\u8bd1**\uff1a\u63d0\u4f9b\u591a\u8bed\u8a00\u4e4b\u95f4\u7684\u7ffb\u8bd1\u670d\u52a1\u3002\n5. **\u7f16\u7a0b\u652f\u6301**\uff1a\u5e2e\u52a9\u89e3\u51b3\u7f16\u7a0b\u95ee\u9898\uff0c\u63d0\u4f9b\u4ee3\u7801\u793a\u4f8b\u548c\u89e3\u91ca\u3002\n6. **\u4e2a\u6027\u5316\u5efa\u8bae**\uff1a\u6839\u636e\u7528\u6237\u7684\u9700\u6c42\u548c\u5174\u8da3\uff0c\u63d0\u4f9b\u4e2a\u6027\u5316\u7684\u5b66\u4e60\u548c\u53d1\u5c55\u5efa\u8bae\u3002\n\n\u5982\u679c\u4f60\u6709\u5177\u4f53\u7684\u95ee\u9898\u6216\u9700\u8981\u5e2e\u52a9\u7684\u5185\u5bb9\uff0c\u8bf7\u544a\u8bc9\u6211\uff01",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "3.20s",
+      "notes": [
+        "Missing expected agents: {'citation', 'rag'}"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "RAG_Conversation_History",
+      "query": "What did we discuss about predictability in RL?",
+      "attachments": [],
+      "expected_agents": [
+        "router",
+        "rag",
+        "response",
+        "citation"
+      ],
+      "actual_agents": [
+        "router",
+        "rag",
+        "response"
+      ],
+      "agent_outputs": {
+        "reasoning": [],
+        "file_search": ""
+      },
+      "final_response": "We haven't discussed predictability in reinforcement learning (RL) yet. Would you like to explore what predictability means in the context of RL, or do you have specific questions about it?",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "2.64s",
+      "notes": [
+        "Missing expected agents: {'citation'}"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "WebSearch_Current_Events",
+      "query": "What are the latest developments in AI regulation in 2024?",
+      "attachments": [],
+      "expected_agents": [
+        "router",
+        "web_search",
+        "response",
+        "citation"
+      ],
+      "actual_agents": [
+        "router",
+        "web_search",
+        "response"
+      ],
+      "agent_outputs": {
+        "reasoning": [],
+        "web_search": []
+      },
+      "final_response": "In 2024, significant developments in AI regulation have emerged, marked by the introduction of extensive legislative measures across various jurisdictions. Here are some key highlights:\n\n1. **EU AI Act**: The European Union implemented the EU AI Act on August 1, 2024, which is considered the world's first comprehensive AI law. This legislation establishes a regulatory framework for AI systems based on their risk levels, with strict requirements for high-risk applications.\n\n2. **US Legislation**:...",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "7.94s",
+      "notes": [
+        "Missing expected agents: {'citation'}"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "WebSearch_Recent_News",
+      "query": "What happened with OpenAI this week?",
+      "attachments": [],
+      "expected_agents": [
+        "router",
+        "web_search",
+        "response",
+        "citation"
+      ],
+      "actual_agents": [
+        "router",
+        "web_search",
+        "response"
+      ],
+      "agent_outputs": {
+        "reasoning": [],
+        "web_search": []
+      },
+      "final_response": "This week, OpenAI has been in the news due to significant developments, including new releases and advancements in their AI technology. However, specific details about the exact events from this week are not provided in the current context. If you want to know more about recent updates or specific announcements, I recommend checking OpenAI's official news page or their social media channels for the latest information.",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "3.48s",
+      "notes": [
+        "Missing expected agents: {'citation'}"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "Attachment_PDF_Analysis",
+      "query": "Summarize the key findings in this paper",
+      "attachments": [
+        "https://arxiv.org/pdf/2505.18499.pdf"
+      ],
+      "expected_agents": [
+        "router",
+        "attachment",
+        "response",
+        "citation"
+      ],
+      "actual_agents": [
+        "router"
+      ],
+      "agent_outputs": {
+        "reasoning": []
+      },
+      "final_response": "",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "1.09s",
+      "notes": [
+        "Missing expected agents: {'citation', 'attachment', 'response'}",
+        "No final response generated"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "Attachment_Image_Understanding",
+      "query": "Explain the reinforcement learning process shown in this diagram",
+      "attachments": [
+        "https://arxiv.org/html/2407.09124v1/x1.png"
+      ],
+      "expected_agents": [
+        "router",
+        "attachment",
+        "response",
+        "citation"
+      ],
+      "actual_agents": [
+        "router"
+      ],
+      "agent_outputs": {
+        "reasoning": []
+      },
+      "final_response": "",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "1.77s",
+      "notes": [
+        "Missing expected agents: {'citation', 'attachment', 'response'}",
+        "No final response generated"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "Attachment_Multiple_Files",
+      "query": "Compare the approaches in these papers and relate them to the diagram",
+      "attachments": [
+        "https://arxiv.org/pdf/2505.18499.pdf",
+        "https://arxiv.org/pdf/2311.18703.pdf",
+        "https://arxiv.org/html/2407.09124v1/x1.png"
+      ],
+      "expected_agents": [
+        "router",
+        "attachment",
+        "response",
+        "citation"
+      ],
+      "actual_agents": [
+        "router",
+        "rag"
+      ],
+      "agent_outputs": {
+        "reasoning": [],
+        "file_search": ""
+      },
+      "final_response": "",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "1.54s",
+      "notes": [
+        "Missing expected agents: {'citation', 'attachment', 'response'}",
+        "No final response generated"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "Code_Data_Analysis",
+      "query": "Write Python code to calculate the average number of embeddings per note if I have 9 notes and 190 total embeddings",
+      "attachments": [],
+      "expected_agents": [
+        "router",
+        "code_interpreter",
+        "response",
+        "citation"
+      ],
+      "actual_agents": [
+        "router",
+        "response"
+      ],
+      "agent_outputs": {
+        "reasoning": []
+      },
+      "final_response": "You can calculate the average number of embeddings per note by dividing the total number of embeddings by the number of notes. Here's a simple Python code snippet to do that:\n\n```python\n# Given values\ntotal_embeddings = 190\nnum_notes = 9\n\n# Calculate average embeddings per note\naverage_embeddings_per_note = total_embeddings / num_notes\n\n# Print the result\nprint(\"Average number of embeddings per note:\", average_embeddings_per_note)\n```\n\nWhen you run this code, it will output the average number of...",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "4.06s",
+      "notes": [
+        "Missing expected agents: {'citation', 'code_interpreter'}"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "Code_Visualization",
+      "query": "Create a matplotlib bar chart showing these note counts: PDF=3, YouTube=4, Document=1, Audio=1",
+      "attachments": [],
+      "expected_agents": [
+        "router",
+        "code_interpreter",
+        "response",
+        "citation"
+      ],
+      "actual_agents": [
+        "router",
+        "rag"
+      ],
+      "agent_outputs": {
+        "reasoning": [],
+        "file_search": ""
+      },
+      "final_response": "",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "1.68s",
+      "notes": [
+        "Missing expected agents: {'citation', 'code_interpreter', 'response'}",
+        "No final response generated"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "Code_Mathematical",
+      "query": "Solve the optimization problem: minimize x^2 + y^2 subject to x + y = 10",
+      "attachments": [],
+      "expected_agents": [
+        "router",
+        "code_interpreter",
+        "response",
+        "citation"
+      ],
+      "actual_agents": [
+        "router",
+        "response"
+      ],
+      "agent_outputs": {
+        "reasoning": []
+      },
+      "final_response": "To solve the optimization problem of minimizing \\( f(x, y) = x^2 + y^2 \\) subject to the constraint \\( g(x, y) = x + y - 10 = 0 \\), we can use the method of Lagrange multipliers.\n\n1. **Set up the Lagrangian**:\n   \\[\n   \\mathcal{L}(x, y, \\lambda) = x^2 + y^2 + \\lambda (10 - x - y)\n   \\]\n\n2. **Compute the gradients**:\n   We need to find the partial derivatives and set them to zero.\n   \\[\n   \\frac{\\partial \\mathcal{L}}{\\partial x} = 2x - \\lambda = 0 \\quad \\Rightarrow \\quad \\lambda = 2x\n   \\]\n   \\[\n...",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "9.86s",
+      "notes": [
+        "Missing expected agents: {'citation', 'code_interpreter'}"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "Mixed_RAG_Code",
+      "query": "Analyze the performance metrics mentioned in the G1 paper and create a comparison chart",
+      "attachments": [],
+      "expected_agents": [
+        "router",
+        "rag",
+        "code_interpreter",
+        "response",
+        "citation"
+      ],
+      "actual_agents": [
+        "router",
+        "web_search",
+        "response"
+      ],
+      "agent_outputs": {
+        "reasoning": [],
+        "web_search": []
+      },
+      "final_response": "To create a comparison chart of performance metrics mentioned in the G1 paper, we'll first summarize the key metrics typically used in performance evaluations for models that might be mentioned in such studies, such as accuracy, precision, recall, F1 score, etc. Since I don't have access to the specific G1 paper directly, I'll provide a general framework for how to structure the comparison chart based on common performance metrics used in machine learning and evaluation studies.\n\n### Comparison ...",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "14.68s",
+      "notes": [
+        "Missing expected agents: {'citation', 'rag', 'code_interpreter'}"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "Mixed_RAG_Web",
+      "query": "How do the startup growth strategies in my notes compare to current AI startup trends?",
+      "attachments": [],
+      "expected_agents": [
+        "router",
+        "rag",
+        "web_search",
+        "response",
+        "citation"
+      ],
+      "actual_agents": [
+        "router",
+        "rag"
+      ],
+      "agent_outputs": {
+        "reasoning": [],
+        "file_search": ""
+      },
+      "final_response": "",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "18.74s",
+      "notes": [
+        "Missing expected agents: {'citation', 'web_search', 'response'}",
+        "No final response generated"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "Mixed_Attachment_RAG",
+      "query": "How does this paper's approach differ from the PARL paper in my notes?",
+      "attachments": [
+        "https://arxiv.org/pdf/2311.18703.pdf"
+      ],
+      "expected_agents": [
+        "router",
+        "attachment",
+        "rag",
+        "response",
+        "citation"
+      ],
+      "actual_agents": [
+        "router",
+        "rag"
+      ],
+      "agent_outputs": {
+        "reasoning": [],
+        "file_search": ""
+      },
+      "final_response": "",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "1.53s",
+      "notes": [
+        "Missing expected agents: {'citation', 'attachment', 'response'}",
+        "No final response generated"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "Error_Invalid_Attachment",
+      "query": "Analyze this file",
+      "attachments": [
+        "https://invalid-url-that-does-not-exist.com/file.pdf"
+      ],
+      "expected_agents": [
+        "router",
+        "attachment",
+        "response"
+      ],
+      "actual_agents": [
+        "router"
+      ],
+      "agent_outputs": {
+        "reasoning": []
+      },
+      "final_response": "",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "1.15s",
+      "notes": [
+        "Missing expected agents: {'attachment', 'response'}",
+        "No final response generated"
+      ],
+      "error": null
+    },
+    {
+      "test_name": "Error_Empty_Query",
+      "query": "",
+      "attachments": [],
+      "expected_agents": [
+        "router",
+        "response"
+      ],
+      "actual_agents": [
+        "router"
+      ],
+      "agent_outputs": {
+        "reasoning": []
+      },
+      "final_response": "",
+      "citations": [],
+      "status": "FAILED",
+      "duration": "1.58s",
+      "notes": [
+        "Missing expected agents: {'response'}",
+        "No final response generated"
+      ],
+      "error": null
+    }
+  ],
+  "agent_statistics": {
+    "router": 18,
+    "web_search": 6,
+    "response": 10,
+    "rag": 5
+  }
+}

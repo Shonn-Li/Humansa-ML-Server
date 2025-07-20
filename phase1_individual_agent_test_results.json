@@ -1,0 +1,375 @@
+{
+  "summary": {
+    "total_tests": 26,
+    "passed": 26,
+    "failed": 0,
+    "success_rate": 100.0,
+    "total_execution_time": 6.233218431472778,
+    "average_execution_time": 0.2397391704412607
+  },
+  "agents": {
+    "RouterAgent": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "tests": [
+        {
+          "test_case": "knowledge_base_query",
+          "success": true,
+          "error": "",
+          "execution_time": 0.8953931331634521,
+          "details": {
+            "selected_tool": "knowledge_base_notes",
+            "enabled_agents": [
+              "response",
+              "rag",
+              "citation"
+            ],
+            "expected_tool": [
+              "knowledge_base_notes",
+              "knowledge_base_full"
+            ],
+            "tool_match": true,
+            "agents_match": true
+          }
+        },
+        {
+          "test_case": "web_search_query",
+          "success": true,
+          "error": "",
+          "execution_time": 0.8142008781433105,
+          "details": {
+            "selected_tool": "web_search",
+            "enabled_agents": [
+              "response",
+              "web_search",
+              "citation"
+            ],
+            "expected_tool": [
+              "web_search"
+            ],
+            "tool_match": true,
+            "agents_match": true
+          }
+        },
+        {
+          "test_case": "code_query",
+          "success": true,
+          "error": "",
+          "execution_time": 0.9773099422454834,
+          "details": {
+            "selected_tool": "no_context",
+            "enabled_agents": [
+              "response",
+              "code_interpreter",
+              "citation"
+            ],
+            "expected_tool": [
+              "no_context"
+            ],
+            "tool_match": true,
+            "agents_match": true
+          }
+        },
+        {
+          "test_case": "attachment_query",
+          "success": true,
+          "error": "",
+          "execution_time": 1.108170986175537,
+          "details": {
+            "selected_tool": "knowledge_base_notes",
+            "enabled_agents": [
+              "response",
+              "rag",
+              "attachment",
+              "citation"
+            ],
+            "expected_tool": [
+              "attachments"
+            ],
+            "tool_match": false,
+            "agents_match": true
+          }
+        }
+      ]
+    },
+    "RAGAgent": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "tests": [
+        {
+          "test_case": "notes_search",
+          "success": true,
+          "error": "",
+          "execution_time": 0.2384650707244873,
+          "details": {
+            "context_length": 0,
+            "total_chunks": 0,
+            "search_type": "knowledge_base_notes"
+          }
+        },
+        {
+          "test_case": "conversation_search",
+          "success": true,
+          "error": "",
+          "execution_time": 0.15947794914245605,
+          "details": {
+            "context_length": 0,
+            "total_chunks": 0,
+            "search_type": "knowledge_base_conversations"
+          }
+        },
+        {
+          "test_case": "mixed_search",
+          "success": true,
+          "error": "",
+          "execution_time": 0.1562178134918213,
+          "details": {
+            "context_length": 0,
+            "total_chunks": 0,
+            "search_type": "knowledge_base_full"
+          }
+        }
+      ]
+    },
+    "WebSearchAgent": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "tests": [
+        {
+          "test_case": "current_events",
+          "success": true,
+          "error": "",
+          "execution_time": 1.1274020671844482,
+          "details": {
+            "result_count": 5,
+            "context_length": 1450,
+            "cache_hit": false
+          }
+        },
+        {
+          "test_case": "technical_query",
+          "success": true,
+          "error": "",
+          "execution_time": 0.015832185745239258,
+          "details": {
+            "result_count": 5,
+            "context_length": 1373,
+            "cache_hit": true
+          }
+        },
+        {
+          "test_case": "local_query",
+          "success": true,
+          "error": "",
+          "execution_time": 0.7293980121612549,
+          "details": {
+            "result_count": 5,
+            "context_length": 1332,
+            "cache_hit": false
+          }
+        }
+      ]
+    },
+    "AttachmentAgent": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "tests": [
+        {
+          "test_case": "pdf_attachment",
+          "success": true,
+          "error": "",
+          "execution_time": 7.82012939453125e-05,
+          "details": {
+            "attachment_count": 1,
+            "context_length": 0
+          }
+        },
+        {
+          "test_case": "image_attachment",
+          "success": true,
+          "error": "",
+          "execution_time": 4.887580871582031e-05,
+          "details": {
+            "attachment_count": 1,
+            "context_length": 0
+          }
+        },
+        {
+          "test_case": "multiple_attachments",
+          "success": true,
+          "error": "",
+          "execution_time": 5.2928924560546875e-05,
+          "details": {
+            "attachment_count": 2,
+            "context_length": 0
+          }
+        },
+        {
+          "test_case": "no_attachments",
+          "success": true,
+          "error": "",
+          "execution_time": 2.1457672119140625e-06,
+          "details": {
+            "attachment_count": 0,
+            "context_length": 0
+          }
+        }
+      ]
+    },
+    "CodeInterpreterAgent": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "tests": [
+        {
+          "test_case": "simple_print",
+          "success": true,
+          "error": "",
+          "execution_time": 0.008910894393920898,
+          "details": {
+            "code_blocks": 1,
+            "successful_executions": 1,
+            "total_execution_time": 5.0067901611328125e-05
+          }
+        },
+        {
+          "test_case": "math_calculation",
+          "success": true,
+          "error": "",
+          "execution_time": 0.0002219676971435547,
+          "details": {
+            "code_blocks": 1,
+            "successful_executions": 1,
+            "total_execution_time": 2.193450927734375e-05
+          }
+        },
+        {
+          "test_case": "code_block",
+          "success": true,
+          "error": "",
+          "execution_time": 0.0012590885162353516,
+          "details": {
+            "code_blocks": 2,
+            "successful_executions": 1,
+            "total_execution_time": 4.506111145019531e-05
+          }
+        },
+        {
+          "test_case": "data_analysis",
+          "success": true,
+          "error": "",
+          "execution_time": 0.00022792816162109375,
+          "details": {
+            "code_blocks": 1,
+            "successful_executions": 1,
+            "total_execution_time": 3.0994415283203125e-05
+          }
+        }
+      ]
+    },
+    "ResponseAgent": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "tests": [
+        {
+          "test_case": "no_context",
+          "success": true,
+          "error": "",
+          "execution_time": 0.0003991127014160156,
+          "details": {
+            "response_length": 41,
+            "context_used": false,
+            "model": "gpt-4o-mini"
+          }
+        },
+        {
+          "test_case": "with_rag_context",
+          "success": true,
+          "error": "",
+          "execution_time": 5.1975250244140625e-05,
+          "details": {
+            "response_length": 41,
+            "context_used": true,
+            "model": "gpt-4o-mini"
+          }
+        },
+        {
+          "test_case": "with_web_context",
+          "success": true,
+          "error": "",
+          "execution_time": 4.029273986816406e-05,
+          "details": {
+            "response_length": 41,
+            "context_used": true,
+            "model": "gpt-4o-mini"
+          }
+        },
+        {
+          "test_case": "with_all_contexts",
+          "success": true,
+          "error": "",
+          "execution_time": 3.62396240234375e-05,
+          "details": {
+            "response_length": 41,
+            "context_used": true,
+            "model": "gpt-4o-mini"
+          }
+        }
+      ]
+    },
+    "CitationAgent": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "tests": [
+        {
+          "test_case": "no_sources",
+          "success": true,
+          "error": "",
+          "execution_time": 4.0531158447265625e-06,
+          "details": {
+            "citation_count": 0,
+            "source_count": 0
+          }
+        },
+        {
+          "test_case": "with_rag_sources",
+          "success": true,
+          "error": "",
+          "execution_time": 7.867813110351562e-06,
+          "details": {
+            "citation_count": 0,
+            "source_count": 1
+          }
+        },
+        {
+          "test_case": "with_web_sources",
+          "success": true,
+          "error": "",
+          "execution_time": 5.0067901611328125e-06,
+          "details": {
+            "citation_count": 0,
+            "source_count": 1
+          }
+        },
+        {
+          "test_case": "with_mixed_sources",
+          "success": true,
+          "error": "",
+          "execution_time": 3.814697265625e-06,
+          "details": {
+            "citation_count": 0,
+            "source_count": 2
+          }
+        }
+      ]
+    }
+  },
+  "phase_1_success": true,
+  "timestamp": "2025-07-18 21:32:51"
+}

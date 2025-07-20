@@ -1,0 +1,28 @@
+{
+  "summary": {
+    "total": 3,
+    "passed": 0,
+    "failed": 3,
+    "timestamp": "2025-07-18 21:42:59"
+  },
+  "test_results": [
+    {
+      "test_name": "rag_workflow",
+      "success": false,
+      "duration": 0.0030100345611572266,
+      "error": "No module named 'llama_index'"
+    },
+    {
+      "test_name": "web_search_workflow",
+      "success": false,
+      "duration": 0.005589008331298828,
+      "error": "No module named 'llama_index'"
+    },
+    {
+      "test_name": "code_interpreter_workflow",
+      "success": false,
+      "duration": 0.004114866256713867,
+      "error": "No module named 'llama_index'"
+    }
+  ]
+}
