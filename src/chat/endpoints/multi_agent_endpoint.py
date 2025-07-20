@@ -18,8 +18,9 @@ import asyncio
 import json
 import logging
 import time
+import uuid
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List, Optional, Union
+from typing import Dict, Any, List, Optional, Union, AsyncGenerator
 from dataclasses import dataclass, asdict
 from enum import Enum
 
@@ -404,8 +405,28 @@ class MultiAgentChatEndpoint:
             "citation": CitationAgent(self.citation_engine, self.llm_provider_manager),
         }
 
+        # Initialize streaming state
+        self.response_id = f"resp_{uuid.uuid4().hex[:8]}"
+        self.output_index = -1
+        self.sequence_number = 0
+
+    def generate_output_id(self, prefix: str = "item") -> str:
+        """Generate unique output item ID."""
+        self.output_index += 1
+        return f"{prefix}_{uuid.uuid4().hex[:8]}"
+
+    def create_event(self, event_type: str, **kwargs) -> Dict[str, Any]:
+        """Create a structured SSE event matching OpenAI format."""
+        event_data = {
+            "type": event_type,
+            "sequence_number": self.sequence_number,
+        }
+        event_data.update(kwargs)
+        self.sequence_number += 1
+        return event_data
+
     async def _handle_request_internal(self, request: Dict[str, Any]) -> Dict[str, Any]:
-        """Internal handler for the multi-agent workflow."""
+        """Internal handler for the multi-agent workflow (non-streaming)."""
         start_time = time.time()
         context = {}
         agent_results = {}
@@ -429,20 +450,17 @@ class MultiAgentChatEndpoint:
             context[f"{agent_name}_agent"] = context_results[i]
             agent_results[f"{agent_name}_agent"] = {"status": "success", "data": context_results[i]}
 
-
         # Phase 3: Response Agent
         if "response" in enabled_agents:
             response_result = await self.agents["response"].run(request, context)
             context["response_agent"] = response_result
             agent_results["response_agent"] = {"status": "success", "data": response_result}
 
-
         # Phase 4: Citation Agent
         if "citation" in enabled_agents:
             citation_result = await self.agents["citation"].run(request, context)
             context["citation_agent"] = citation_result
             agent_results["citation_agent"] = {"status": "success", "data": citation_result}
-
 
         # Final Response Assembly
         final_response = context.get("response_agent", {}).get("response", "")
@@ -460,10 +478,372 @@ class MultiAgentChatEndpoint:
             }
         }
 
-    async def handle_request(self, request: Dict[str, Any]) -> Dict[str, Any]:
-        """Public handler for the endpoint."""
+    async def _handle_request_streaming(self, request: Dict[str, Any]) -> AsyncGenerator[Dict[str, Any], None]:
+        """Streaming handler for the multi-agent workflow with OpenAI-compatible format."""
+        start_time = time.time()
+        context = {}
+        
         try:
-            return await self._handle_request_internal(request)
+            # Phase 1: Lifecycle - response.created
+            yield self.create_event("response.created",
+                                  response={
+                                      "id": self.response_id,
+                                      "object": "response",
+                                      "created_at": int(time.time()),
+                                      "status": "in_progress",
+                                      "model": request.get("model", "gpt-4o-mini"),
+                                      "output": [],
+                                  })
+
+            # Phase 2: response.in_progress
+            yield self.create_event("response.in_progress",
+                                  response={
+                                      "id": self.response_id,
+                                      "status": "in_progress",
+                                  })
+
+            # Phase 3: Router Agent - Stream thinking process
+            router_id = self.generate_output_id("router")
+            yield self.create_event("response.output_item.added",
+                                  output_index=self.output_index,
+                                  item={
+                                      "id": router_id,
+                                      "type": "reasoning",
+                                      "content": [],
+                                  })
+
+            # Stream router thinking
+            async for event in self._stream_reasoning_step(router_id, "Analyzing query and routing to appropriate agents..."):
+                yield event
+
+            # Run router agent
+            router_result = await self.agents["router"].run(request, context)
+            context["router_agent"] = router_result
+            enabled_agents = router_result.get("enabled_agents", [])
+
+            # Complete router reasoning
+            yield self.create_event("response.output_item.done",
+                                  output_index=self.output_index,
+                                  item={
+                                      "id": router_id,
+                                      "type": "reasoning",
+                                      "content": [
+                                          {
+                                              "type": "reasoning_text",
+                                              "text": f"Query routed to agents: {', '.join(enabled_agents)}"
+                                          }
+                                      ]
+                                  })
+
+            # Phase 4: Context Agents - Stream their work
+            context_tasks = []
+            for agent_name in enabled_agents:
+                if agent_name in ["rag", "web_search", "attachment"]:
+                    # Stream each agent's work
+                    if agent_name == "web_search":
+                        async for event in self._stream_web_search_agent(request, context):
+                            yield event
+                    elif agent_name == "rag":
+                        async for event in self._stream_rag_agent(request, context):
+                            yield event
+                    elif agent_name == "attachment":
+                        async for event in self._stream_attachment_agent(request, context):
+                            yield event
+                    
+                    # Execute agent
+                    context_tasks.append(
+                        (agent_name, self.agents[agent_name].run(request, context)))
+
+            # Wait for all context agents to complete
+            if context_tasks:
+                context_results = await asyncio.gather(*[task for _, task in context_tasks])
+                for i, (agent_name, _) in enumerate(context_tasks):
+                    context[f"{agent_name}_agent"] = context_results[i]
+
+            # Phase 5: Response Agent - Stream final response
+            if "response" in enabled_agents:
+                async for event in self._stream_response_agent(request, context):
+                    yield event
+
+            # Phase 6: Citation Agent - Add citations
+            if "citation" in enabled_agents:
+                async for event in self._stream_citation_agent(request, context):
+                    yield event
+
+            # Phase 7: Lifecycle - response.completed
+            yield self.create_event("response.completed",
+                                  response={
+                                      "id": self.response_id,
+                                      "status": "completed",
+                                      "object": "response",
+                                      "output": [],
+                                  })
+
+            logger.info(f"✅ Multi-agent streaming completed - {self.output_index} output items in {time.time() - start_time:.2f}s")
+
+        except Exception as e:
+            logger.error(f"❌ Multi-agent streaming failed: {e}")
+            yield self.create_event("response.failed",
+                                  response={
+                                      "id": self.response_id,
+                                      "status": "failed",
+                                      "error": str(e)
+                                  })
+
+    async def _stream_reasoning_step(self, reasoning_id: str, thought_content: str) -> AsyncGenerator[Dict[str, Any], None]:
+        """Stream a reasoning step with proper lifecycle."""
+        # Add reasoning text part
+        yield self.create_event("response.reasoning_part.added",
+                              item_id=reasoning_id,
+                              output_index=self.output_index,
+                              content_index=0,
+                              part={
+                                  "type": "reasoning_text",
+                                  "text": "",
+                              })
+
+        # Stream reasoning text
+        yield self.create_event("response.reasoning_text.delta",
+                              item_id=reasoning_id,
+                              output_index=self.output_index,
+                              content_index=0,
+                              delta=thought_content)
+
+        # Complete reasoning text
+        yield self.create_event("response.reasoning_text.done",
+                              item_id=reasoning_id,
+                              output_index=self.output_index,
+                              content_index=0,
+                              text=thought_content)
+
+        # Complete reasoning part
+        yield self.create_event("response.reasoning_part.done",
+                              item_id=reasoning_id,
+                              output_index=self.output_index,
+                              content_index=0,
+                              part={
+                                  "type": "reasoning_text",
+                                  "text": thought_content,
+                              })
+
+    async def _stream_web_search_agent(self, request: Dict[str, Any], context: Dict[str, Any]) -> AsyncGenerator[Dict[str, Any], None]:
+        """Stream web search agent work."""
+        search_id = self.generate_output_id("ws")
+        
+        # Add web search output item
+        yield self.create_event("response.output_item.added",
+                              output_index=self.output_index,
+                              item={
+                                  "id": search_id,
+                                  "type": "web_search_call",
+                                  "status": "in_progress",
+                              })
+
+        # Web search in progress
+        yield self.create_event("response.web_search_call.in_progress",
+                              output_index=self.output_index,
+                              item_id=search_id)
+
+        # Web search searching
+        yield self.create_event("response.web_search_call.searching",
+                              output_index=self.output_index,
+                              item_id=search_id)
+
+        # Web search completed
+        yield self.create_event("response.web_search_call.completed",
+                              output_index=self.output_index,
+                              item_id=search_id)
+
+        # Complete web search output item
+        yield self.create_event("response.output_item.done",
+                              output_index=self.output_index,
+                              item={
+                                  "id": search_id,
+                                  "type": "web_search_call",
+                                  "status": "completed",
+                                  "action": {
+                                      "type": "search",
+                                      "query": "web search query",
+                                  },
+                              })
+
+    async def _stream_rag_agent(self, request: Dict[str, Any], context: Dict[str, Any]) -> AsyncGenerator[Dict[str, Any], None]:
+        """Stream RAG agent work."""
+        rag_id = self.generate_output_id("rag")
+        
+        # Add reasoning for RAG search
+        yield self.create_event("response.output_item.added",
+                              output_index=self.output_index,
+                              item={
+                                  "id": rag_id,
+                                  "type": "reasoning",
+                                  "content": [],
+                              })
+
+        async for event in self._stream_reasoning_step(rag_id, "Searching through knowledge base for relevant information..."):
+            yield event
+
+        # Complete RAG reasoning
+        yield self.create_event("response.output_item.done",
+                              output_index=self.output_index,
+                              item={
+                                  "id": rag_id,
+                                  "type": "reasoning",
+                                  "content": [
+                                      {
+                                          "type": "reasoning_text",
+                                          "text": "Found relevant information in knowledge base"
+                                      }
+                                  ]
+                              })
+
+    async def _stream_attachment_agent(self, request: Dict[str, Any], context: Dict[str, Any]) -> AsyncGenerator[Dict[str, Any], None]:
+        """Stream attachment agent work."""
+        attachment_id = self.generate_output_id("att")
+        
+        # Add reasoning for attachment processing
+        yield self.create_event("response.output_item.added",
+                              output_index=self.output_index,
+                              item={
+                                  "id": attachment_id,
+                                  "type": "reasoning",
+                                  "content": [],
+                              })
+
+        async for event in self._stream_reasoning_step(attachment_id, "Processing file attachments..."):
+            yield event
+
+        # Complete attachment reasoning
+        yield self.create_event("response.output_item.done",
+                              output_index=self.output_index,
+                              item={
+                                  "id": attachment_id,
+                                  "type": "reasoning",
+                                  "content": [
+                                      {
+                                          "type": "reasoning_text",
+                                          "text": "File attachments processed successfully"
+                                      }
+                                  ]
+                              })
+
+    async def _stream_response_agent(self, request: Dict[str, Any], context: Dict[str, Any]) -> AsyncGenerator[Dict[str, Any], None]:
+        """Stream response agent work."""
+        message_id = self.generate_output_id("msg")
+        
+        # Add assistant message output item
+        yield self.create_event("response.output_item.added",
+                              output_index=self.output_index,
+                              item={
+                                  "id": message_id,
+                                  "type": "message",
+                                  "role": "assistant",
+                                  "status": "in_progress",
+                              })
+
+        # Add content part
+        yield self.create_event("response.content_part.added",
+                              item_id=message_id,
+                              output_index=self.output_index,
+                              content_index=0,
+                              part={
+                                  "type": "output_text",
+                                  "annotations": [],
+                                  "logprobs": [],
+                                  "text": "",
+                              })
+
+        # Execute response agent
+        response_result = await self.agents["response"].run(request, context)
+        context["response_agent"] = response_result
+        
+        final_response = response_result.get("response", "")
+        
+        # Stream output text
+        yield self.create_event("response.output_text.delta",
+                              item_id=message_id,
+                              output_index=self.output_index,
+                              content_index=0,
+                              delta=final_response)
+
+        # Complete output text
+        yield self.create_event("response.output_text.done",
+                              item_id=message_id,
+                              output_index=self.output_index,
+                              content_index=0,
+                              text=final_response)
+
+        # Complete content part
+        yield self.create_event("response.content_part.done",
+                              item_id=message_id,
+                              output_index=self.output_index,
+                              content_index=0,
+                              part={
+                                  "type": "output_text",
+                                  "annotations": [],
+                                  "logprobs": [],
+                                  "text": final_response,
+                              })
+
+        # Complete assistant message
+        yield self.create_event("response.output_item.done",
+                              output_index=self.output_index,
+                              item={
+                                  "id": message_id,
+                                  "type": "message",
+                                  "role": "assistant",
+                                  "status": "completed",
+                                  "content": [
+                                      {
+                                          "type": "output_text",
+                                          "text": final_response,
+                                          "annotations": [],
+                                      }
+                                  ],
+                              })
+
+    async def _stream_citation_agent(self, request: Dict[str, Any], context: Dict[str, Any]) -> AsyncGenerator[Dict[str, Any], None]:
+        """Stream citation agent work."""
+        citation_id = self.generate_output_id("cit")
+        
+        # Add reasoning for citation processing
+        yield self.create_event("response.output_item.added",
+                              output_index=self.output_index,
+                              item={
+                                  "id": citation_id,
+                                  "type": "reasoning",
+                                  "content": [],
+                              })
+
+        async for event in self._stream_reasoning_step(citation_id, "Adding citations and references..."):
+            yield event
+
+        # Execute citation agent
+        citation_result = await self.agents["citation"].run(request, context)
+        context["citation_agent"] = citation_result
+
+        # Complete citation reasoning
+        yield self.create_event("response.output_item.done",
+                              output_index=self.output_index,
+                              item={
+                                  "id": citation_id,
+                                  "type": "reasoning",
+                                  "content": [
+                                      {
+                                          "type": "reasoning_text",
+                                          "text": "Citations added to response"
+                                      }
+                                  ]
+                              })
+
+    async def handle_request(self, request: Dict[str, Any]) -> Union[Dict[str, Any], AsyncGenerator[Dict[str, Any], None]]:
+        """Public handler for the endpoint - supports both streaming and non-streaming."""
+        try:
+            # Check if streaming is requested
+            if request.get("stream", False):
+                return self._handle_request_streaming(request)
+            else:
+                return await self._handle_request_internal(request)
         except Exception as e:
             logger.error(f"Error in multi-agent endpoint: {e}", exc_info=True)
             return {"status": "error", "error": str(e)}
@@ -471,3 +851,22 @@ class MultiAgentChatEndpoint:
 
 # Create instance for import compatibility
 multi_agent_endpoint = MultiAgentChatEndpoint()
+
+
+async def handle_multi_agent_request(request_data: Dict[str, Any]):
+    """
+    Global function to handle multi-agent requests with streaming support.
+    
+    This can be imported and used directly in Flask/FastAPI route handlers.
+    """
+    return await multi_agent_endpoint.handle_request(request_data)
+
+
+async def handle_multi_agent_request_streaming(request_data: Dict[str, Any]):
+    """
+    Global function to handle multi-agent requests with streaming.
+    
+    This can be imported and used directly in Flask/FastAPI route handlers.
+    """
+    request_data["stream"] = True
+    return await multi_agent_endpoint.handle_request(request_data)

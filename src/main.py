@@ -221,25 +221,32 @@ def register_chat_endpoints(app):
                     chunk_count = 0
                     try:
                         # Get the streaming response from handle_chat_request
+                        # Note: When streaming, handle_chat_request returns a generator directly
                         stream_response = await modular_chat_endpoint.handle_chat_request(request_data)
 
-                        # The stream_response should be an async generator
-                        async for chunk in stream_response:
-                            chunk_count += 1
-                            if chunk_count <= 3:  # Log first 3 chunks
-                                truncated_chunk = truncate_dict(
-                                    chunk, max_length=200)
-                                logger.info(
-                                    f"📦 Stream chunk {chunk_count}: {json.dumps(truncated_chunk)}")
-                            elif chunk_count == 4:
-                                logger.info(
-                                    f"📦 ... (logging first 3 chunks only, total so far: {chunk_count})")
+                        # Check if it's a generator or a dict (error response)
+                        if hasattr(stream_response, '__aiter__'):
+                            # It's an async generator, iterate over it
+                            async for chunk in stream_response:
+                                chunk_count += 1
+                                if chunk_count <= 3:  # Log first 3 chunks
+                                    truncated_chunk = truncate_dict(
+                                        chunk, max_length=200)
+                                    logger.info(
+                                        f"📦 Stream chunk {chunk_count}: {json.dumps(truncated_chunk)}")
+                                elif chunk_count == 4:
+                                    logger.info(
+                                        f"📦 ... (logging first 3 chunks only, total so far: {chunk_count})")
 
-                            yield f"data: {json.dumps(chunk)}\n\n"
+                                yield f"data: {json.dumps(chunk)}\n\n"
 
-                        logger.info(
-                            f"✅ Streaming complete: {chunk_count} chunks sent")
-                        yield "data: [DONE]\n\n"
+                            logger.info(
+                                f"✅ Streaming complete: {chunk_count} chunks sent")
+                            yield "data: [DONE]\n\n"
+                        else:
+                            # It's a dict response (likely an error)
+                            logger.warning(f"⚠️ Got non-streaming response in streaming mode: {stream_response}")
+                            yield f"data: {json.dumps(stream_response)}\n\n"
                     except Exception as stream_error:
                         logger.error(f"❌ Streaming error: {stream_error}")
                         import traceback
@@ -318,9 +325,9 @@ def register_chat_endpoints(app):
 
         try:
             # Import the multi-agent endpoint with better error handling
-            logger.info("🔄 Attempting to import multi_agent_endpoint...")
-            from chat.endpoints.multi_agent_endpoint import multi_agent_endpoint
-            logger.info("✅ Successfully imported multi_agent_endpoint")
+            logger.info("🔄 Attempting to import multi_agent_endpoint_v2...")
+            from chat.endpoints.multi_agent_endpoint_v2 import multi_agent_endpoint_v2 as multi_agent_endpoint
+            logger.info("✅ Successfully imported multi_agent_endpoint_v2 with streaming support")
 
             if request_data.get('stream'):
                 # Return streaming response
@@ -332,23 +339,29 @@ def register_chat_endpoints(app):
                         # Get the streaming response from handle_request
                         stream_response = await multi_agent_endpoint.handle_request(request_data)
 
-                        # The stream_response should be an async generator
-                        async for chunk in stream_response:
-                            chunk_count += 1
-                            if chunk_count <= 3:  # Log first 3 chunks
-                                truncated_chunk = truncate_dict(
-                                    chunk, max_length=200)
-                                logger.info(
-                                    f"📦 Multi-agent stream chunk {chunk_count}: {json.dumps(truncated_chunk)}")
-                            elif chunk_count == 4:
-                                logger.info(
-                                    f"📦 ... (logging first 3 chunks only, total so far: {chunk_count})")
+                        # Check if it's a generator or a dict (error response)
+                        if hasattr(stream_response, '__aiter__'):
+                            # It's an async generator, iterate over it
+                            async for chunk in stream_response:
+                                chunk_count += 1
+                                if chunk_count <= 3:  # Log first 3 chunks
+                                    truncated_chunk = truncate_dict(
+                                        chunk, max_length=200)
+                                    logger.info(
+                                        f"📦 Multi-agent stream chunk {chunk_count}: {json.dumps(truncated_chunk)}")
+                                elif chunk_count == 4:
+                                    logger.info(
+                                        f"📦 ... (logging first 3 chunks only, total so far: {chunk_count})")
 
-                            yield f"data: {json.dumps(chunk)}\n\n"
+                                yield f"data: {json.dumps(chunk)}\n\n"
 
-                        logger.info(
-                            f"✅ Multi-agent streaming complete: {chunk_count} chunks sent")
-                        yield "data: [DONE]\n\n"
+                            logger.info(
+                                f"✅ Multi-agent streaming complete: {chunk_count} chunks sent")
+                            yield "data: [DONE]\n\n"
+                        else:
+                            # It's a dict response (likely an error)
+                            logger.warning(f"⚠️ Got non-streaming response in multi-agent streaming mode: {stream_response}")
+                            yield f"data: {json.dumps(stream_response)}\n\n"
                     except Exception as stream_error:
                         logger.error(
                             f"❌ Multi-agent streaming error: {stream_error}")

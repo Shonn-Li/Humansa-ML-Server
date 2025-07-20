@@ -1,0 +1,629 @@
+INFO:main:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/bin/python
+INFO:main:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server
+INFO:main:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src
+INFO:main:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13']
+INFO:main:🔄 Registering embedding endpoints...
+INFO:main:🔄 Attempting to import URL embedding endpoints...
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
+INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
+INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
+INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
+INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:main:✅ Successfully imported URL embedding endpoints
+INFO:main:✅ URL embedding endpoints registered successfully
+INFO:main:🔄 Attempting to import admin embedding endpoints...
+INFO:main:✅ Successfully imported admin embedding endpoints
+INFO:main:✅ Admin embedding endpoints registered successfully
+INFO:main:🔄 Attempting to import file analyzer endpoints...
+INFO:main:✅ Successfully imported file analyzer blueprint
+INFO:main:✅ File analyzer endpoints registered successfully
+INFO:main:✅ Embedding endpoints registration completed
+INFO:main:🚀 Starting YouWoAI ML Test Server on port 5002...
+INFO:main:📍 This is a test instance for development purposes
+INFO:main:🔗 Test endpoint: http://localhost:5002/v1/chat/completions
+INFO:main:🔗 Multi-agent endpoint: http://localhost:5002/v1/multi-agent/response
+[2025-07-18 13:25:40 -0700] [49811] [INFO] Running on http://0.0.0.0:5002 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:5002 (CTRL + C to quit)
+[2025-07-18 13:25:48 -0700] [49811] [INFO] 127.0.0.1:49277 - - [18/Jul/2025:13:25:48 -0700] "GET /health 1.1" 200 96 "-" "Python/3.13 aiohttp/3.11.18"
+INFO:main:=== CHAT REQUEST ===
+INFO:main:Method: POST
+INFO:main:URL: http://localhost:5002/v1/chat/completions
+INFO:main:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '270', 'Content-Type': 'application/json'}
+INFO:main:Request Body: {
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful AI assistant."
+    },
+    {
+      "role": "user",
+      "content": "What is the capital of France? Please provide a brief answer."
+    }
+  ],
+  "model": "gpt-4o-mini",
+  "stream": false,
+  "user_id": 123,
+  "temperature": 0.7,
+  "max_tokens": 100
+}
+INFO:main:==================
+INFO:main:🔄 Attempting to import modular_chat_endpoint...
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:chat.title.title_generator:TitleGenerator initialized
+INFO:chat.provider.llm_provider:=== LLM Provider Initialization Debug ===
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_ENDPOINT: SET
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_CREDENTIAL: SET
+INFO:chat.provider.llm_provider:OPENAI_API_KEY: SET
+INFO:chat.provider.llm_provider:ANTHROPIC_API_KEY: SET
+INFO:chat.provider.llm_provider:GOOGLE_API_KEY: SET
+INFO:chat.provider.llm_provider:DEEPSEEK_API_KEY: SET
+INFO:chat.provider.llm_provider:XAI_API_KEY: SET
+INFO:chat.provider.llm_provider:===========================================
+INFO:chat.provider.llm_provider:✅ Azure AI Inference provider initialized (PRIMARY - NO MULTIMODAL)
+INFO:chat.provider.llm_provider:✅ Azure OpenAI provider initialized (ROUTER COMPATIBLE + MULTIMODAL)
+INFO:chat.provider.llm_provider:✅ OpenAI multimodal support enabled
+INFO:chat.provider.llm_provider:✅ OpenAI provider initialized
+INFO:chat.provider.llm_provider:✅ Anthropic provider initialized
+INFO:chat.provider.llm_provider:✅ Gemini provider initialized
+INFO:chat.provider.llm_provider:✅ DeepSeek provider initialized
+INFO:chat.provider.llm_provider:✅ xAI provider initialized
+INFO:chat.provider.llm_provider:=== Provider Initialization Complete ===
+INFO:chat.provider.llm_provider:Available providers: 7
+INFO:chat.provider.llm_provider:  azure_inference: 9 models
+INFO:chat.provider.llm_provider:  azure_openai: 6 models
+INFO:chat.provider.llm_provider:  openai: 12 models
+INFO:chat.provider.llm_provider:  anthropic: 4 models
+INFO:chat.provider.llm_provider:  gemini: 5 models
+INFO:chat.provider.llm_provider:  deepseek: 3 models
+INFO:chat.provider.llm_provider:  xai: 5 models
+INFO:chat.provider.llm_provider:=========================================
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.rag.rag_processor:IDResolver initialized
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
+INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.rag.rag_processor:UnifiedRAGSearcher initialized
+INFO:chat.rag.rag_processor:RAGProcessor initialized
+INFO:chat.citation.citation_engine:CitationEngine initialized
+INFO:chat.citation.citation_engine:CitationEngine initialized
+INFO:chat.citation.streaming_citation_engine:StreamingCitationEngine initialized
+INFO:chat.streaming.streaming_response_generator:StreamingResponseGenerator initialized with unified astream_chat approach
+INFO:chat.endpoints.modular_chat_endpoint:🔇 Azure logging configured - reduced verbosity
+INFO:chat.endpoints.modular_chat_endpoint:ModularChatEndpoint initialized with citation engines, router retriever support, query transformer, and streaming generator
+INFO:main:✅ Successfully imported modular_chat_endpoint
+INFO:main:📄 Starting non-streaming response...
+INFO:chat.endpoints.modular_chat_endpoint:=== NEW MODULAR CHAT REQUEST ===
+INFO:chat.endpoints.modular_chat_endpoint:User: 123, RAG: True, Citations: False, WebSearch: False, Stream: False
+INFO:chat.endpoints.modular_chat_endpoint:Router Retriever: True, Generate Title: False
+INFO:chat.endpoints.modular_chat_endpoint:Provider: None, Model: gpt-4o-mini
+INFO:chat.endpoints.modular_chat_endpoint:Attachments: 0 files
+INFO:chat.endpoints.modular_chat_endpoint:💰 Defaulting to Azure Inference for cost savings: azure_inference with gpt-4o-mini
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: azure_inference, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: azure_inference)
+INFO:chat.endpoints.modular_chat_endpoint:✅ Selected: azure_inference
+INFO:chat.endpoints.modular_chat_endpoint:🔄 STARTING QUERY TRANSFORMATION...
+INFO:chat.query.query_transformer:⚡ Query transformation temporarily disabled - using original query
+INFO:chat.endpoints.modular_chat_endpoint:⚠️ Query transformation failed, using original query: temporarily_disabled
+INFO:chat.endpoints.modular_chat_endpoint:🎯 Pure Decision Router initialized successfully
+INFO:chat.endpoints.modular_chat_endpoint:🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING WITH CONDENSED QUERY...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:chat.router.intelligent_router:LLM selected tool 0: no_context
+INFO:chat.router.intelligent_router:LLM routing successful: no_context
+INFO:chat.endpoints.modular_chat_endpoint:🎯 Router decision: RAG=False, Web=False, Attachments=False
+INFO:chat.endpoints.modular_chat_endpoint:🧠 Router reasoning: The query is a general knowledge question that does not require specific user data or context.
+INFO:chat.endpoints.modular_chat_endpoint:🔍 Search type: none
+INFO:chat.endpoints.modular_chat_endpoint:⚡ PROCESSING ENABLED SOURCES...
+INFO:chat.endpoints.modular_chat_endpoint:⚡ No RAG, attachment, or web search processing needed
+INFO:chat.endpoints.modular_chat_endpoint:💬 NON-STREAMING MODE: Generating complete response
+INFO:chat.endpoints.modular_chat_endpoint:🔧 === CONTEXT BUILDING STAGE ===
+INFO:chat.endpoints.modular_chat_endpoint:🤖 AZURE completion starting: unknown (prompt: 61 chars)
+INFO:main:=== CHAT RESPONSE ===
+INFO:main:Response type: <class 'dict'>
+INFO:main:Response keys: ['id', 'object', 'created', 'model', 'provider', 'choices', 'usage', 'metadata', 'status']
+INFO:main:Content length: 31 characters
+INFO:main:Content preview: The capital of France is Paris.
+INFO:main:===================
+[2025-07-18 13:25:52 -0700] [49811] [INFO] 127.0.0.1:49277 - - [18/Jul/2025:13:25:52 -0700] "POST /v1/chat/completions 1.1" 200 863 "-" "Python/3.13 aiohttp/3.11.18"
+INFO:main:=== CHAT REQUEST ===
+INFO:main:Method: POST
+INFO:main:URL: http://localhost:5002/v1/chat/completions
+INFO:main:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Accept': 'text/event-stream', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '269', 'Content-Type': 'application/json'}
+INFO:main:Request Body: {
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful AI assistant."
+    },
+    {
+      "role": "user",
+      "content": "What is the capital of France? Please provide a brief answer."
+    }
+  ],
+  "model": "gpt-4o-mini",
+  "stream": true,
+  "user_id": 123,
+  "temperature": 0.7,
+  "max_tokens": 100
+}
+INFO:main:==================
+INFO:main:🔄 Attempting to import modular_chat_endpoint...
+INFO:main:✅ Successfully imported modular_chat_endpoint
+INFO:main:🌊 Starting streaming response...
+INFO:chat.endpoints.modular_chat_endpoint:=== NEW MODULAR CHAT REQUEST ===
+INFO:chat.endpoints.modular_chat_endpoint:User: 123, RAG: True, Citations: False, WebSearch: False, Stream: True
+INFO:chat.endpoints.modular_chat_endpoint:Router Retriever: True, Generate Title: False
+INFO:chat.endpoints.modular_chat_endpoint:Provider: None, Model: gpt-4o-mini
+INFO:chat.endpoints.modular_chat_endpoint:Attachments: 0 files
+INFO:chat.endpoints.modular_chat_endpoint:💰 Defaulting to Azure Inference for cost savings: azure_inference with gpt-4o-mini
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: azure_inference, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: azure_inference)
+INFO:chat.endpoints.modular_chat_endpoint:✅ Selected: azure_inference
+INFO:chat.endpoints.modular_chat_endpoint:🔄 STARTING QUERY TRANSFORMATION...
+INFO:chat.query.query_transformer:⚡ Query transformation temporarily disabled - using original query
+INFO:chat.endpoints.modular_chat_endpoint:⚠️ Query transformation failed, using original query: temporarily_disabled
+INFO:chat.endpoints.modular_chat_endpoint:🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING WITH CONDENSED QUERY...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:chat.router.intelligent_router:LLM selected tool 0: no_context
+INFO:chat.router.intelligent_router:LLM routing successful: no_context
+INFO:chat.endpoints.modular_chat_endpoint:🎯 Router decision: RAG=False, Web=False, Attachments=False
+INFO:chat.endpoints.modular_chat_endpoint:🧠 Router reasoning: The query is a general knowledge question that does not require user-specific data or context.
+INFO:chat.endpoints.modular_chat_endpoint:🔍 Search type: none
+INFO:chat.endpoints.modular_chat_endpoint:⚡ PROCESSING ENABLED SOURCES...
+INFO:chat.endpoints.modular_chat_endpoint:⚡ No RAG, attachment, or web search processing needed
+INFO:chat.endpoints.modular_chat_endpoint:🌊 STREAMING MODE: Using modular streaming generator
+INFO:chat.streaming.streaming_response_generator:🌊 === UNIFIED STREAMING RESPONSE (astream_chat) ===
+INFO:chat.streaming.streaming_response_generator:🌊 Chat ID: chatcmpl-modular-a94ff365
+INFO:chat.streaming.streaming_response_generator:🌊 Model: gpt-4o-mini, Provider: azure_inference
+INFO:main:📦 Stream chunk 1: {"id": "chatcmpl-modular-a94ff365", "object": "chat.completion.chunk", "created": 1752870354, "model": "gpt-4o-mini", "provider": "azure_inference", "choices": [{"index": 0, "delta": {}, "finish_reason": null}], "progress": {"stage": "initializing", "message": "Starting response generation..."}}
+INFO:chat.streaming.streaming_response_generator:🔧 === CONTEXT BUILDING STAGE ===
+INFO:chat.streaming.streaming_response_generator:🌊 STREAMING WITHOUT CONTEXT: Using original messages
+INFO:chat.streaming.streaming_response_generator:🔄 Converted 2 messages to ChatMessage objects
+INFO:chat.streaming.streaming_response_generator:🔄 Roles: ['system', 'user']
+INFO:chat.streaming.streaming_response_generator:🌊 Final chat messages count: 2
+INFO:chat.streaming.streaming_response_generator:🌊 Message roles: ['system', 'user']
+INFO:main:📦 Stream chunk 2: {"id": "chatcmpl-modular-a94ff365", "object": "chat.completion.chunk", "created": 1752870354, "model": "gpt-4o-mini", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"role": "assistant", "content": ""}, "finish_reason": null}], "progress": {"stage": "generating_response", "message": "Generating AI response..."}}
+INFO:chat.streaming.streaming_response_generator:🌊 CALLING: llm.astream_chat (unified approach)
+INFO:chat.streaming.streaming_response_generator:🔍 DEBUG Chunk 1 structure:
+INFO:chat.streaming.streaming_response_generator:🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+INFO:chat.streaming.streaming_response_generator:🔍 - Has delta: True
+INFO:chat.streaming.streaming_response_generator:🔍 - Has message: True
+INFO:chat.streaming.streaming_response_generator:🔍 - Delta content: '...'
+INFO:chat.streaming.streaming_response_generator:🔍 - Message content: 'None...'
+INFO:chat.streaming.streaming_response_generator:🔍 DEBUG Chunk 2 structure:
+INFO:chat.streaming.streaming_response_generator:🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+INFO:chat.streaming.streaming_response_generator:🔍 - Has delta: True
+INFO:chat.streaming.streaming_response_generator:🔍 - Has message: True
+INFO:chat.streaming.streaming_response_generator:🔍 - Delta content: 'The...'
+INFO:chat.streaming.streaming_response_generator:🔍 - Message content: 'The...'
+INFO:main:📦 Stream chunk 3: {"id": "chatcmpl-modular-a94ff365", "object": "chat.completion.chunk", "created": 1752870355, "model": "gpt-4o-mini", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"content": "The"}, "finish_reason": null}]}
+INFO:chat.streaming.streaming_response_generator:🔍 DEBUG Chunk 3 structure:
+INFO:chat.streaming.streaming_response_generator:🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+INFO:chat.streaming.streaming_response_generator:🔍 - Has delta: True
+INFO:chat.streaming.streaming_response_generator:🔍 - Has message: True
+INFO:chat.streaming.streaming_response_generator:🔍 - Delta content: ' capital...'
+INFO:chat.streaming.streaming_response_generator:🔍 - Message content: 'The capital...'
+INFO:main:📦 ... (logging first 3 chunks only, total so far: 4)
+INFO:chat.streaming.streaming_response_generator:🌊 STREAMING COMPLETED: 8 chunks, 31 characters
+INFO:chat.streaming.streaming_response_generator:🌊 Context used: False
+INFO:chat.streaming.streaming_response_generator:🌊 === STREAMING RESPONSE COMPLETED ===
+INFO:main:✅ Streaming complete: 10 chunks sent
+[2025-07-18 13:25:55 -0700] [49811] [INFO] 127.0.0.1:49277 - - [18/Jul/2025:13:25:55 -0700] "POST /v1/chat/completions 1.1" 200 - "-" "Python/3.13 aiohttp/3.11.18"
+INFO:main:=== MULTI-AGENT REQUEST ===
+INFO:main:Method: POST
+INFO:main:URL: http://localhost:5002/v1/multi-agent/response
+INFO:main:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '186', 'Content-Type': 'application/json'}
+INFO:main:Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "Search for the latest news about AI advancements in 2024"
+    }
+  ],
+  "model": "gpt-4o-mini",
+  "stream": false,
+  "user_id": 123,
+  "enable_citations": true
+}
+INFO:main:========================
+INFO:main:🔄 Attempting to import multi_agent_endpoint_v2...
+INFO:chat.config.system_prompts:SystemPromptManager initialized
+INFO:chat.provider.llm_provider:=== LLM Provider Initialization Debug ===
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_ENDPOINT: SET
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_CREDENTIAL: SET
+INFO:chat.provider.llm_provider:OPENAI_API_KEY: SET
+INFO:chat.provider.llm_provider:ANTHROPIC_API_KEY: SET
+INFO:chat.provider.llm_provider:GOOGLE_API_KEY: SET
+INFO:chat.provider.llm_provider:DEEPSEEK_API_KEY: SET
+INFO:chat.provider.llm_provider:XAI_API_KEY: SET
+INFO:chat.provider.llm_provider:===========================================
+INFO:chat.provider.llm_provider:✅ Azure AI Inference provider initialized (PRIMARY - NO MULTIMODAL)
+INFO:chat.provider.llm_provider:✅ Azure OpenAI provider initialized (ROUTER COMPATIBLE + MULTIMODAL)
+INFO:chat.provider.llm_provider:✅ OpenAI multimodal support enabled
+INFO:chat.provider.llm_provider:✅ OpenAI provider initialized
+INFO:chat.provider.llm_provider:✅ Anthropic provider initialized
+INFO:chat.provider.llm_provider:✅ Gemini provider initialized
+INFO:chat.provider.llm_provider:✅ DeepSeek provider initialized
+INFO:chat.provider.llm_provider:✅ xAI provider initialized
+INFO:chat.provider.llm_provider:=== Provider Initialization Complete ===
+INFO:chat.provider.llm_provider:Available providers: 7
+INFO:chat.provider.llm_provider:  azure_inference: 9 models
+INFO:chat.provider.llm_provider:  azure_openai: 6 models
+INFO:chat.provider.llm_provider:  openai: 12 models
+INFO:chat.provider.llm_provider:  anthropic: 4 models
+INFO:chat.provider.llm_provider:  gemini: 5 models
+INFO:chat.provider.llm_provider:  deepseek: 3 models
+INFO:chat.provider.llm_provider:  xai: 5 models
+INFO:chat.provider.llm_provider:=========================================
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.rag.rag_processor:IDResolver initialized
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
+INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.rag.rag_processor:UnifiedRAGSearcher initialized
+INFO:chat.rag.rag_processor:RAGProcessor initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:chat.citation.citation_engine:CitationEngine initialized
+INFO:chat.config.system_prompts:SystemPromptManager initialized
+INFO:main:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
+INFO:main:📄 Starting multi-agent non-streaming response...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:chat.router.intelligent_router:LLM selected tool 5: web_search
+INFO:chat.router.intelligent_router:LLM routing successful: web_search
+INFO:chat.websearch.web_search_processor:🔍 Web search request: 'Search for the latest news about AI advancements in 2024...' (5 results)
+INFO:chat.websearch.web_search_processor:❌ Cache miss for query: Search for the latest news about AI advancements i... - performing search
+INFO:chat.websearch.web_search_processor:🔍 Using Serper API for search: Search for the latest news about AI advancements i...
+INFO:chat.websearch.web_search_processor:✅ Serper API returned 5 results
+INFO:chat.websearch.web_search_processor:💾 Cached search results for 2 hours
+WARNING:chat.config.system_prompts:Unknown completion_type 'gpt-4o-mini', defaulting to YouWoAI system prompt
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4o-mini
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4o-mini
+ERROR:chat.endpoints.multi_agent_endpoint_v2:Error in multi-agent endpoint: 'CitationEngine' object has no attribute 'generate_citations'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/endpoints/multi_agent_endpoint_v2.py", line 487, in _handle_non_streaming_request
+    citation_result = await self.agents["citation"].run(request, context)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/endpoints/multi_agent_endpoint_v2.py", line 409, in run
+    citation_result = await self.citation_engine.generate_citations(
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'CitationEngine' object has no attribute 'generate_citations'
+INFO:main:=== MULTI-AGENT RESPONSE ===
+INFO:main:Response type: <class 'dict'>
+INFO:main:Response keys: ['status', 'error']
+WARNING:main:⚠️ No choices found in response
+INFO:main:===========================
+[2025-07-18 13:26:07 -0700] [49811] [INFO] 127.0.0.1:49346 - - [18/Jul/2025:13:26:07 -0700] "POST /v1/multi-agent/response 1.1" 200 91 "-" "Python/3.13 aiohttp/3.11.18"
+INFO:main:=== CHAT REQUEST ===
+INFO:main:Method: POST
+INFO:main:URL: http://localhost:5002/v1/chat/completions
+INFO:main:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '180', 'Content-Type': 'application/json'}
+INFO:main:Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "Tell me about machine learning. Include citations."
+    }
+  ],
+  "model": "gpt-4o-mini",
+  "stream": false,
+  "user_id": 123,
+  "enable_citations": true
+}
+INFO:main:==================
+INFO:main:🔄 Attempting to import modular_chat_endpoint...
+INFO:main:✅ Successfully imported modular_chat_endpoint
+INFO:main:📄 Starting non-streaming response...
+INFO:chat.endpoints.modular_chat_endpoint:=== NEW MODULAR CHAT REQUEST ===
+INFO:chat.endpoints.modular_chat_endpoint:User: 123, RAG: True, Citations: True, WebSearch: False, Stream: False
+INFO:chat.endpoints.modular_chat_endpoint:Router Retriever: True, Generate Title: False
+INFO:chat.endpoints.modular_chat_endpoint:Provider: None, Model: gpt-4o-mini
+INFO:chat.endpoints.modular_chat_endpoint:Attachments: 0 files
+INFO:chat.endpoints.modular_chat_endpoint:💰 Defaulting to Azure Inference for cost savings: azure_inference with gpt-4o-mini
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: azure_inference, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: azure_inference)
+INFO:chat.endpoints.modular_chat_endpoint:✅ Selected: azure_inference
+INFO:chat.endpoints.modular_chat_endpoint:🔄 STARTING QUERY TRANSFORMATION...
+INFO:chat.query.query_transformer:⚡ Query transformation temporarily disabled - using original query
+INFO:chat.endpoints.modular_chat_endpoint:⚠️ Query transformation failed, using original query: temporarily_disabled
+INFO:chat.endpoints.modular_chat_endpoint:🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING WITH CONDENSED QUERY...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:chat.router.intelligent_router:LLM selected tool 5: web_search
+INFO:chat.router.intelligent_router:LLM routing successful: web_search
+INFO:chat.endpoints.modular_chat_endpoint:🎯 Router decision: RAG=False, Web=True, Attachments=False
+INFO:chat.endpoints.modular_chat_endpoint:🧠 Router reasoning: User is asking for information about machine learning, which is a broad topic that may require current and comprehensive sources, making web search the best option.
+INFO:chat.endpoints.modular_chat_endpoint:🔍 Search type: web
+INFO:chat.endpoints.modular_chat_endpoint:⚡ PROCESSING ENABLED SOURCES...
+INFO:chat.endpoints.modular_chat_endpoint:🌐 STARTING WEB SEARCH WITH CONDENSED QUERY...
+INFO:chat.websearch.web_search_processor:🔍 Web search request: 'Tell me about machine learning. Include citations....' (5 results)
+INFO:chat.websearch.web_search_processor:✅ Cache hit for query: Tell me about machine learning. Include citations....
+INFO:chat.endpoints.modular_chat_endpoint:🌐 WEB SEARCH COMPLETE: 5 results found (cache hit)
+INFO:chat.endpoints.modular_chat_endpoint:💬 NON-STREAMING MODE: Generating complete response
+INFO:chat.endpoints.modular_chat_endpoint:🎯 Citation mode - using new citation engine
+ERROR:chat.endpoints.modular_chat_endpoint:❌ Citation engine failed: CitationEngine.generate_citation_response() missing 1 required positional argument: 'query'
+INFO:chat.endpoints.modular_chat_endpoint:🔄 Falling back to direct response
+INFO:chat.endpoints.modular_chat_endpoint:🔧 === CONTEXT BUILDING STAGE ===
+INFO:chat.websearch.web_search_processor:Generated web search context: 1830 chars from 5 results
+INFO:chat.endpoints.modular_chat_endpoint:🌐 WEB SEARCH CONTEXT ADDED: 5 results
+INFO:chat.endpoints.modular_chat_endpoint:🌐 Web search context preview: [Web Search Result 1]
+Title: Springer Nature book on machine learning is full of made-up citations
+URL: https://retractionwatch.com/2025/06/30/springer-nature-book-on-machine-learning-is-full-of-made-...
+INFO:chat.endpoints.modular_chat_endpoint:🎯 === FINAL COMBINED CONTEXT ===
+INFO:chat.endpoints.modular_chat_endpoint:🎯 Context parts order: ['WEB SEARCH RESULTS']
+INFO:chat.endpoints.modular_chat_endpoint:🎯 Total context length: 1850 characters
+INFO:chat.endpoints.modular_chat_endpoint:🎯 Query used: Tell me about machine learning. Include citations.
+INFO:chat.endpoints.modular_chat_endpoint:🎯 Combined context preview (first 500 chars):
+INFO:chat.endpoints.modular_chat_endpoint:🎯 WEB SEARCH RESULTS:
+[Web Search Result 1]
+Title: Springer Nature book on machine learning is full of made-up citations
+URL: https://retractionwatch.com/2025/06/30/springer-nature-book-on-machine-learning-is-full-of-made-up-citations/
+Content: Based on a tip from a reader, we checked 18 of the 46 citations in the book. Two-thirds of them either did not exist or had substantial errors.
+Source: serper (cached)
+
+[Web Search Result 2]
+Title: AI & Machine Learning: Citing Sources - Library Guides
+URL:...
+INFO:chat.endpoints.modular_chat_endpoint:🎯 ================================
+INFO:chat.endpoints.modular_chat_endpoint:🤖 AZURE completion starting: unknown (prompt: 2245 chars)
+INFO:main:=== CHAT RESPONSE ===
+INFO:main:Response type: <class 'dict'>
+INFO:main:Response keys: ['id', 'object', 'created', 'model', 'provider', 'choices', 'usage', 'metadata', 'status']
+INFO:main:Content length: 1364 characters
+INFO:main:Content preview: Machine learning (ML) is a field of study within artificial intelligence that focuses on the development and analysis of statistical algorithms that enable computers to learn from and make predictions... (truncated from 1364 chars)
+INFO:main:===================
+[2025-07-18 13:26:15 -0700] [49811] [INFO] 127.0.0.1:49346 - - [18/Jul/2025:13:26:15 -0700] "POST /v1/chat/completions 1.1" 200 2324 "-" "Python/3.13 aiohttp/3.11.18"
+INFO:main:=== CHAT REQUEST ===
+INFO:main:Method: POST
+INFO:main:URL: http://localhost:5002/v1/chat/completions
+INFO:main:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '315', 'Content-Type': 'application/json'}
+INFO:main:Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "Summarize the attached document."
+    }
+  ],
+  "model": "gpt-4o-mini",
+  "stream": false,
+  "user_id": 123,
+  "attachments": [
+    {
+      "type": "text",
+      "name": "test_document.txt",
+      "content": "VGhpcyBpcyBhIHRlc3QgZG9jdW1lbnQgYWJvdXQgYXJ0aWZpY2lhbCBpbnRlbGxpZ2VuY2UgYW5kIG1hY2hpbmUgbGVhcm5pbmcu"
+    }
+  ]
+}
+INFO:main:==================
+INFO:main:🔄 Attempting to import modular_chat_endpoint...
+INFO:main:✅ Successfully imported modular_chat_endpoint
+INFO:main:📄 Starting non-streaming response...
+INFO:chat.endpoints.modular_chat_endpoint:=== NEW MODULAR CHAT REQUEST ===
+INFO:chat.endpoints.modular_chat_endpoint:User: 123, RAG: True, Citations: False, WebSearch: False, Stream: False
+INFO:chat.endpoints.modular_chat_endpoint:Router Retriever: True, Generate Title: False
+INFO:chat.endpoints.modular_chat_endpoint:Provider: None, Model: gpt-4o-mini
+INFO:chat.endpoints.modular_chat_endpoint:Attachments: 1 files
+INFO:chat.endpoints.modular_chat_endpoint:💰 Defaulting to Azure Inference for cost savings: azure_inference with gpt-4o-mini
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: azure_inference, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: azure_inference)
+INFO:chat.endpoints.modular_chat_endpoint:✅ Selected: azure_inference
+INFO:chat.endpoints.modular_chat_endpoint:🔄 STARTING QUERY TRANSFORMATION...
+INFO:chat.query.query_transformer:⚡ Query transformation temporarily disabled - using original query
+INFO:chat.endpoints.modular_chat_endpoint:⚠️ Query transformation failed, using original query: temporarily_disabled
+INFO:chat.endpoints.modular_chat_endpoint:🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING WITH CONDENSED QUERY...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:chat.router.intelligent_router:LLM selected tool 4: attachments
+INFO:chat.router.intelligent_router:LLM routing successful: attachments
+INFO:chat.endpoints.modular_chat_endpoint:🎯 Router decision: RAG=False, Web=False, Attachments=True
+INFO:chat.endpoints.modular_chat_endpoint:🧠 Router reasoning: User is asking for a summary of an attached document, which requires analyzing the content of the file.
+INFO:chat.endpoints.modular_chat_endpoint:🔍 Search type: attachments
+INFO:chat.endpoints.modular_chat_endpoint:⚡ PROCESSING ENABLED SOURCES...
+INFO:chat.endpoints.modular_chat_endpoint:📎 STARTING FILE ATTACHMENT PROCESSING: 1 files
+INFO:chat.attachment.file_attachment_manager:🔗 Processing 1 file attachments
+WARNING:chat.attachment.file_attachment_manager:Invalid or missing URL in attachment: {'type': 'text', 'name': 'test_document.txt', 'content': 'VGhpcyBpcyBhIHRlc3QgZG9jdW1lbnQgYWJvdXQgYXJ0aWZpY2lhbCBpbnRlbGxpZ2VuY2UgYW5kIG1hY2hpbmUgbGVhcm5pbmcu'}
+WARNING:chat.attachment.file_attachment_manager:No valid URLs found in attachments
+INFO:chat.endpoints.modular_chat_endpoint:📎 ATTACHMENTS COMPLETE: 0 chunks found
+INFO:chat.endpoints.modular_chat_endpoint:💬 NON-STREAMING MODE: Generating complete response
+INFO:chat.endpoints.modular_chat_endpoint:🔧 === CONTEXT BUILDING STAGE ===
+INFO:chat.endpoints.modular_chat_endpoint:🤖 AZURE completion starting: unknown (prompt: 32 chars)
+INFO:main:=== CHAT RESPONSE ===
+INFO:main:Response type: <class 'dict'>
+INFO:main:Response keys: ['id', 'object', 'created', 'model', 'provider', 'choices', 'usage', 'metadata', 'status']
+INFO:main:Content length: 179 characters
+INFO:main:Content preview: I'm sorry, but I can't view or summarize documents directly. However, if you provide me with text or key points from the document, I'd be happy to help summarize that information!
+INFO:main:===================
+[2025-07-18 13:26:19 -0700] [49811] [INFO] 127.0.0.1:49346 - - [18/Jul/2025:13:26:19 -0700] "POST /v1/chat/completions 1.1" 200 1030 "-" "Python/3.13 aiohttp/3.11.18"
+INFO:main:=== CHAT REQUEST ===
+INFO:main:Method: POST
+INFO:main:URL: http://localhost:5002/v1/chat/completions
+INFO:main:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Accept': 'text/event-stream', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '238', 'Content-Type': 'application/json'}
+INFO:main:Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "What are the main principles of machine learning? Please cite sources."
+    }
+  ],
+  "model": "gpt-4o-mini",
+  "stream": true,
+  "user_id": 123,
+  "enable_citations": true,
+  "temperature": 0.7,
+  "max_tokens": 200
+}
+INFO:main:==================
+INFO:main:🔄 Attempting to import modular_chat_endpoint...
+INFO:main:✅ Successfully imported modular_chat_endpoint
+INFO:main:🌊 Starting streaming response...
+INFO:chat.endpoints.modular_chat_endpoint:=== NEW MODULAR CHAT REQUEST ===
+INFO:chat.endpoints.modular_chat_endpoint:User: 123, RAG: True, Citations: True, WebSearch: False, Stream: True
+INFO:chat.endpoints.modular_chat_endpoint:Router Retriever: True, Generate Title: False
+INFO:chat.endpoints.modular_chat_endpoint:Provider: None, Model: gpt-4o-mini
+INFO:chat.endpoints.modular_chat_endpoint:Attachments: 0 files
+INFO:chat.endpoints.modular_chat_endpoint:💰 Defaulting to Azure Inference for cost savings: azure_inference with gpt-4o-mini
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: azure_inference, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: azure_inference)
+INFO:chat.endpoints.modular_chat_endpoint:✅ Selected: azure_inference
+INFO:chat.endpoints.modular_chat_endpoint:🔄 STARTING QUERY TRANSFORMATION...
+INFO:chat.query.query_transformer:⚡ Query transformation temporarily disabled - using original query
+INFO:chat.endpoints.modular_chat_endpoint:⚠️ Query transformation failed, using original query: temporarily_disabled
+INFO:chat.endpoints.modular_chat_endpoint:🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING WITH CONDENSED QUERY...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:chat.router.intelligent_router:LLM selected tool 5: web_search
+INFO:chat.router.intelligent_router:LLM routing successful: web_search
+INFO:chat.endpoints.modular_chat_endpoint:🎯 Router decision: RAG=False, Web=True, Attachments=False
+INFO:chat.endpoints.modular_chat_endpoint:🧠 Router reasoning: The query is about general knowledge on machine learning principles, which may require current information and sources that are not in the knowledge base.
+INFO:chat.endpoints.modular_chat_endpoint:🔍 Search type: web
+INFO:chat.endpoints.modular_chat_endpoint:⚡ PROCESSING ENABLED SOURCES...
+INFO:chat.endpoints.modular_chat_endpoint:🌐 STARTING WEB SEARCH WITH CONDENSED QUERY...
+INFO:chat.websearch.web_search_processor:🔍 Web search request: 'What are the main principles of machine learning? Please cite sources....' (5 results)
+INFO:chat.websearch.web_search_processor:✅ Cache hit for query: What are the main principles of machine learning? ...
+INFO:chat.endpoints.modular_chat_endpoint:🌐 WEB SEARCH COMPLETE: 5 results found (cache hit)
+INFO:chat.endpoints.modular_chat_endpoint:🌊 STREAMING MODE: Using modular streaming generator
+INFO:chat.streaming.streaming_response_generator:🌊 === UNIFIED STREAMING RESPONSE (astream_chat) ===
+INFO:chat.streaming.streaming_response_generator:🌊 Chat ID: chatcmpl-modular-776ca94d
+INFO:chat.streaming.streaming_response_generator:🌊 Model: gpt-4o-mini, Provider: azure_inference
+INFO:main:📦 Stream chunk 1: {"id": "chatcmpl-modular-776ca94d", "object": "chat.completion.chunk", "created": 1752870381, "model": "gpt-4o-mini", "provider": "azure_inference", "choices": [{"index": 0, "delta": {}, "finish_reason": null}], "progress": {"stage": "initializing", "message": "Starting response generation..."}}
+INFO:chat.streaming.streaming_response_generator:🔧 === CONTEXT BUILDING STAGE ===
+INFO:chat.websearch.web_search_processor:Generated web search context: 1551 chars from 5 results
+INFO:chat.streaming.streaming_response_generator:🌐 WEB SEARCH CONTEXT ADDED: 5 results
+INFO:chat.streaming.streaming_response_generator:🌊 STREAMING WITH CONTEXT: Adding system message before last user message
+INFO:chat.streaming.streaming_response_generator:🌊 Context length: 1571 characters
+INFO:chat.streaming.streaming_response_generator:🌊 === FINAL COMBINED CONTEXT ===
+INFO:chat.streaming.streaming_response_generator:Context preview (first 500 chars):
+WEB SEARCH RESULTS:
+[Web Search Result 1]
+Title: A Guide to Machine Learning [Principles and Use in Software ...
+URL: https://sam-solutions.com/blog/machine-learning/
+Content: Machine learning is a technology that extracts valuable knowledge from raw data and learns from it to address information-intensive tasks.
+Source: serper (cached)
+
+[Web Search Result 2]
+Title: Machine Learning Components: Elements & Classifications - lakeFS
+URL: https://lakefs.io/blog/machine-learning-components/
+Content: ...
+INFO:chat.streaming.streaming_response_generator:📊 Context structure:
+INFO:chat.streaming.streaming_response_generator:  Part 1: WEB SEARCH RESULTS (1571 chars)
+INFO:chat.streaming.streaming_response_generator:=== END FINAL COMBINED CONTEXT ===
+INFO:chat.streaming.streaming_response_generator:🔄 Converted 2 messages to ChatMessage objects
+INFO:chat.streaming.streaming_response_generator:🔄 Roles: ['system', 'user']
+INFO:chat.streaming.streaming_response_generator:🌊 Final chat messages count: 2
+INFO:chat.streaming.streaming_response_generator:🌊 Message roles: ['system', 'user']
+INFO:main:📦 Stream chunk 2: {"id": "chatcmpl-modular-776ca94d", "object": "chat.completion.chunk", "created": 1752870381, "model": "gpt-4o-mini", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"role": "assistant", "content": ""}, "finish_reason": null}], "progress": {"stage": "generating_response", "message": "Generating AI response..."}}
+INFO:chat.streaming.streaming_response_generator:🌊 CALLING: llm.astream_chat (unified approach)
+INFO:chat.streaming.streaming_response_generator:🔍 DEBUG Chunk 1 structure:
+INFO:chat.streaming.streaming_response_generator:🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+INFO:chat.streaming.streaming_response_generator:🔍 - Has delta: True
+INFO:chat.streaming.streaming_response_generator:🔍 - Has message: True
+INFO:chat.streaming.streaming_response_generator:🔍 - Delta content: '...'
+INFO:chat.streaming.streaming_response_generator:🔍 - Message content: 'None...'
+INFO:chat.streaming.streaming_response_generator:🔍 DEBUG Chunk 2 structure:
+INFO:chat.streaming.streaming_response_generator:🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+INFO:chat.streaming.streaming_response_generator:🔍 - Has delta: True
+INFO:chat.streaming.streaming_response_generator:🔍 - Has message: True
+INFO:chat.streaming.streaming_response_generator:🔍 - Delta content: 'The...'
+INFO:chat.streaming.streaming_response_generator:🔍 - Message content: 'The...'
+INFO:main:📦 Stream chunk 3: {"id": "chatcmpl-modular-776ca94d", "object": "chat.completion.chunk", "created": 1752870382, "model": "gpt-4o-mini", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"content": "The"}, "finish_reason": null}]}
+INFO:chat.streaming.streaming_response_generator:🔍 DEBUG Chunk 3 structure:
+INFO:chat.streaming.streaming_response_generator:🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+INFO:chat.streaming.streaming_response_generator:🔍 - Has delta: True
+INFO:chat.streaming.streaming_response_generator:🔍 - Has message: True
+INFO:chat.streaming.streaming_response_generator:🔍 - Delta content: ' main...'
+INFO:chat.streaming.streaming_response_generator:🔍 - Message content: 'The main...'
+INFO:main:📦 ... (logging first 3 chunks only, total so far: 4)
+INFO:chat.streaming.streaming_response_generator:🌊 STREAMING COMPLETED: 201 chunks, 1066 characters
+INFO:chat.streaming.streaming_response_generator:🌊 Context used: True
+INFO:chat.streaming.streaming_response_generator:🌊 === STREAMING RESPONSE COMPLETED ===
+INFO:main:✅ Streaming complete: 203 chunks sent
+[2025-07-18 13:26:25 -0700] [49811] [INFO] 127.0.0.1:49346 - - [18/Jul/2025:13:26:25 -0700] "POST /v1/chat/completions 1.1" 200 - "-" "Python/3.13 aiohttp/3.11.18"
