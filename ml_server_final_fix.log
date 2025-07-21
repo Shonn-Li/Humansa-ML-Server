@@ -1,0 +1,3767 @@
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/bin/python
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
+INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
+INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
+INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
+INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:5001
+INFO:__main__:
+INFO:__main__:📋 V1 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:120> wait_for=<Future pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.225 seconds
+[2025-07-19 22:08:03 -0700] [73071] [INFO] Running on http://0.0.0.0:5001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:5001 (CTRL + C to quit)
+INFO:__main__:=== MULTI-AGENT REQUEST ===
+INFO:__main__:Method: POST
+INFO:__main__:URL: http://localhost:5001/v1/multi-agent/response
+INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5001', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'User-Agent': 'python-httpx/0.28.1', 'Content-Length': '169', 'Content-Type': 'application/json'}
+INFO:__main__:Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "Analyze this paper"
+    }
+  ],
+  "user_id": 10001,
+  "model": "gpt-4o-mini",
+  "stream": false,
+  "attachments": [
+    "https://arxiv.org/pdf/2505.18499.pdf"
+  ]
+}
+INFO:__main__:========================
+INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:chat.config.system_prompts:SystemPromptManager initialized
+INFO:chat.provider.llm_provider:=== LLM Provider Initialization Debug ===
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_ENDPOINT: SET
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_CREDENTIAL: SET
+INFO:chat.provider.llm_provider:OPENAI_API_KEY: SET
+INFO:chat.provider.llm_provider:ANTHROPIC_API_KEY: SET
+INFO:chat.provider.llm_provider:GOOGLE_API_KEY: SET
+INFO:chat.provider.llm_provider:DEEPSEEK_API_KEY: SET
+INFO:chat.provider.llm_provider:XAI_API_KEY: SET
+INFO:chat.provider.llm_provider:===========================================
+INFO:chat.provider.llm_provider:✅ Azure AI Inference provider initialized (PRIMARY - NO MULTIMODAL)
+INFO:chat.provider.llm_provider:✅ Azure OpenAI provider initialized (ROUTER COMPATIBLE + MULTIMODAL)
+INFO:chat.provider.llm_provider:✅ OpenAI multimodal support enabled
+INFO:chat.provider.llm_provider:✅ OpenAI provider initialized
+INFO:chat.provider.llm_provider:✅ Anthropic provider initialized
+INFO:chat.provider.llm_provider:✅ Gemini provider initialized
+INFO:chat.provider.llm_provider:✅ DeepSeek provider initialized
+INFO:chat.provider.llm_provider:✅ xAI provider initialized
+INFO:chat.provider.llm_provider:=== Provider Initialization Complete ===
+INFO:chat.provider.llm_provider:Available providers: 7
+INFO:chat.provider.llm_provider:  azure_inference: 9 models
+INFO:chat.provider.llm_provider:  azure_openai: 6 models
+INFO:chat.provider.llm_provider:  openai: 12 models
+INFO:chat.provider.llm_provider:  anthropic: 4 models
+INFO:chat.provider.llm_provider:  gemini: 5 models
+INFO:chat.provider.llm_provider:  deepseek: 3 models
+INFO:chat.provider.llm_provider:  xai: 5 models
+INFO:chat.provider.llm_provider:=========================================
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.rag.rag_processor:IDResolver initialized
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
+INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.rag.rag_processor:UnifiedRAGSearcher initialized
+INFO:chat.rag.rag_processor:RAGProcessor initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:chat.citation.citation_engine:CitationEngine initialized
+INFO:chat.config.system_prompts:SystemPromptManager initialized
+INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
+INFO:__main__:📄 Starting multi-agent non-streaming response...
+INFO:chat.router.intelligent_router:Attachments detected - routing to attachment tool with high priority
+WARNING:asyncio:Executing <Task pending name='Task-11' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:765> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 1.112 seconds
+INFO:chat.attachment.file_attachment_manager:🔗 Processing 1 file attachments
+INFO:chat.attachment.file_attachment_manager:📎 Found URLs: ['https://arxiv.org/pdf/2505.18499.pdf']
+INFO:chat.attachment.file_attachment_manager:✅ All attachment URLs already have embeddings
+INFO:chat.rag.rag_processor:=== STARTING RAG REQUEST ===
+INFO:chat.rag.rag_processor:Using custom query for RAG: Analyze this paper...
+INFO:chat.rag.rag_processor:=== PARALLEL: QUERY EMBEDDING + ID RESOLUTION ===
+INFO:chat.attachment.file_attachment_manager:🔍 Found 31 chunks for URL: https://arxiv.org/pdf/2505.18499.pdf...
+INFO:chat.attachment.file_attachment_manager:📊 URL https://arxiv.org/pdf/2505.18499.pdf... has 0 image chunks, 31 text chunks
+INFO:chat.attachment.file_attachment_manager:📄 Processing 31 text chunks with explicit attachment logic
+INFO:chat.rag.rag_processor:🔄 Embedding query: Analyze this paper...
+INFO:chat.rag.rag_processor:🔄 Resolving IDs for user 10001...
+INFO:chat.rag.rag_processor:=== ID RESOLUTION WITH CORRECTED SCOPED SEARCH ===
+INFO:chat.rag.rag_processor:User: 10001
+INFO:chat.rag.rag_processor:Note IDs: None
+INFO:chat.rag.rag_processor:Folder IDs: None
+INFO:chat.rag.rag_processor:Conversation IDs: None
+INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Getting all user content
+INFO:chat.postgres.db_manager:Resolved 9 total user notes
+INFO:chat.postgres.db_manager:Resolved 9 total user conversations
+INFO:chat.rag.rag_processor:=== RESOLVED WITH CORRECTED LOGIC ===
+INFO:chat.rag.rag_processor:Notes: 9
+INFO:chat.rag.rag_processor:Conversations: 9
+INFO:chat.rag.rag_processor:Search type: FULL CONTEXT
+INFO:chat.rag.rag_processor:==================
+INFO:chat.rag.rag_processor:✅ ID resolution completed: 9 notes, 9 conversations
+INFO:chat.rag.rag_processor:✅ Query embedding completed
+INFO:chat.rag.rag_processor:=== EMBEDDING CHECKS (AFTER ID RESOLUTION) ===
+INFO:chat.rag.rag_processor:🔍 CHECKING EMBEDDINGS FOR RESOLVED IDs...
+INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Using background embedding for missing embeddings
+INFO:chat.postgres.embedding_operations:Notes without embeddings: 0/9
+INFO:chat.rag.rag_processor:✅ All 9 notes have embeddings
+INFO:chat.postgres.embedding_operations:Conversations without embeddings (skipEmbedding=false): 0/9
+INFO:chat.rag.rag_processor:✅ All 9 conversations have embeddings
+INFO:chat.rag.rag_processor:=== ATTACHMENTS SEARCH ===
+INFO:chat.postgres.db_manager:Mixed vector search - notes: 9, conversations: 9
+INFO:chat.postgres.db_manager:Mixed vector search found 20 relevant chunks
+INFO:chat.rag.rag_processor:Found 20 relevant chunks using attachments search
+INFO:chat.rag.rag_processor:=== RAG CONTEXT SUMMARY ===
+INFO:chat.rag.rag_processor:Query: Analyze this paper...
+INFO:chat.rag.rag_processor:Total chunks: 20
+INFO:chat.rag.rag_processor:Used notes: 3
+INFO:chat.rag.rag_processor:Used conversations: 2
+INFO:chat.rag.rag_processor:===========================
+INFO:chat.attachment.file_attachment_manager:📎 Including top chunk for explicit attachment (similarity: 0.343)
+INFO:chat.attachment.file_attachment_manager:✅ Added text chunk: 4203 chars, similarity: 0.343
+INFO:chat.attachment.file_attachment_manager:✅ URL https://arxiv.org/pdf/2505.18499.pdf: 1 relevant chunks
+INFO:chat.attachment.file_attachment_manager:🎯 File attachment processing complete: 1 total chunks from 1 URLs
+INFO:chat.attachment.file_attachment_manager:📊 Chunk breakdown: 0 image chunks, 1 text chunks
+INFO:chat.attachment.file_attachment_manager:📄 Adding 1 text chunks (similarity filtered)
+WARNING:chat.config.system_prompts:Unknown completion_type 'gpt-4o-mini', defaulting to YouWoAI system prompt
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4o-mini
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4o-mini
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4o-mini
+ * Serving Quart app 'main'
+ * Debug mode: True
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:5001 (CTRL + C to quit)
+[2025-07-19 22:08:42 -0700] [73071] [INFO] 127.0.0.1:64685 POST /v1/multi-agent/response 1.1 - - 30001400
+INFO:__main__:=== MULTI-AGENT REQUEST ===
+INFO:__main__:Method: POST
+INFO:__main__:URL: http://localhost:5001/v1/multi-agent/response
+INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5001', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'User-Agent': 'python-httpx/0.28.1', 'Content-Length': '156', 'Content-Type': 'application/json'}
+INFO:__main__:Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "What?"
+    }
+  ],
+  "user_id": 10001,
+  "model": "gpt-4o-mini",
+  "stream": false,
+  "attachments": [
+    "https://arxiv.org/pdf/2505.18499.pdf"
+  ]
+}
+INFO:__main__:========================
+INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
+INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
+INFO:__main__:📄 Starting multi-agent non-streaming response...
+INFO:chat.router.intelligent_router:Attachments detected - routing to attachment tool with high priority
+INFO:chat.attachment.file_attachment_manager:🔗 Processing 1 file attachments
+INFO:chat.attachment.file_attachment_manager:📎 Found URLs: ['https://arxiv.org/pdf/2505.18499.pdf']
+INFO:chat.attachment.file_attachment_manager:✅ All attachment URLs already have embeddings
+INFO:chat.rag.rag_processor:=== STARTING RAG REQUEST ===
+INFO:chat.rag.rag_processor:Using custom query for RAG: What?...
+INFO:chat.rag.rag_processor:=== PARALLEL: QUERY EMBEDDING + ID RESOLUTION ===
+INFO:chat.attachment.file_attachment_manager:🔍 Found 31 chunks for URL: https://arxiv.org/pdf/2505.18499.pdf...
+INFO:chat.attachment.file_attachment_manager:📊 URL https://arxiv.org/pdf/2505.18499.pdf... has 0 image chunks, 31 text chunks
+INFO:chat.attachment.file_attachment_manager:📄 Processing 31 text chunks with explicit attachment logic
+INFO:chat.rag.rag_processor:🔄 Embedding query: What?...
+INFO:chat.rag.rag_processor:🔄 Resolving IDs for user 10001...
+INFO:chat.rag.rag_processor:=== ID RESOLUTION WITH CORRECTED SCOPED SEARCH ===
+INFO:chat.rag.rag_processor:User: 10001
+INFO:chat.rag.rag_processor:Note IDs: None
+INFO:chat.rag.rag_processor:Folder IDs: None
+INFO:chat.rag.rag_processor:Conversation IDs: None
+INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Getting all user content
+INFO:chat.postgres.db_manager:Resolved 9 total user notes
+INFO:chat.postgres.db_manager:Resolved 9 total user conversations
+INFO:chat.rag.rag_processor:=== RESOLVED WITH CORRECTED LOGIC ===
+INFO:chat.rag.rag_processor:Notes: 9
+INFO:chat.rag.rag_processor:Conversations: 9
+INFO:chat.rag.rag_processor:Search type: FULL CONTEXT
+INFO:chat.rag.rag_processor:==================
+INFO:chat.rag.rag_processor:✅ ID resolution completed: 9 notes, 9 conversations
+INFO:chat.attachment.file_attachment_manager:📎 Including top chunk for explicit attachment (similarity: 0.179)
+INFO:chat.attachment.file_attachment_manager:✅ Added text chunk: 2421 chars, similarity: 0.179
+INFO:chat.attachment.file_attachment_manager:✅ URL https://arxiv.org/pdf/2505.18499.pdf: 1 relevant chunks
+INFO:chat.attachment.file_attachment_manager:🎯 File attachment processing complete: 1 total chunks from 1 URLs
+INFO:chat.attachment.file_attachment_manager:📊 Chunk breakdown: 0 image chunks, 1 text chunks
+INFO:chat.attachment.file_attachment_manager:📄 Adding 1 text chunks (similarity filtered)
+INFO:chat.rag.rag_processor:✅ Query embedding completed
+INFO:chat.rag.rag_processor:=== EMBEDDING CHECKS (AFTER ID RESOLUTION) ===
+INFO:chat.rag.rag_processor:🔍 CHECKING EMBEDDINGS FOR RESOLVED IDs...
+INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Using background embedding for missing embeddings
+INFO:chat.postgres.embedding_operations:Notes without embeddings: 0/9
+INFO:chat.rag.rag_processor:✅ All 9 notes have embeddings
+INFO:chat.postgres.embedding_operations:Conversations without embeddings (skipEmbedding=false): 0/9
+INFO:chat.rag.rag_processor:✅ All 9 conversations have embeddings
+INFO:chat.rag.rag_processor:=== ATTACHMENTS SEARCH ===
+INFO:chat.postgres.db_manager:Mixed vector search - notes: 9, conversations: 9
+INFO:chat.postgres.db_manager:Mixed vector search found 20 relevant chunks
+INFO:chat.rag.rag_processor:Found 20 relevant chunks using attachments search
+INFO:chat.rag.rag_processor:=== RAG CONTEXT SUMMARY ===
+INFO:chat.rag.rag_processor:Query: What?...
+INFO:chat.rag.rag_processor:Total chunks: 20
+INFO:chat.rag.rag_processor:Used notes: 6
+INFO:chat.rag.rag_processor:Used conversations: 0
+INFO:chat.rag.rag_processor:===========================
+WARNING:chat.config.system_prompts:Unknown completion_type 'gpt-4o-mini', defaulting to YouWoAI system prompt
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4o-mini
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4o-mini
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4o-mini
+INFO:__main__:=== MULTI-AGENT RESPONSE ===
+INFO:__main__:Response type: <class 'dict'>
+INFO:__main__:Response keys: ['id', 'object', 'created', 'model', 'choices', 'usage', 'metadata']
+INFO:__main__:Content length: 356 characters
+INFO:__main__:Content preview: It seems like you might be looking for clarification or more information on a specific topic. Could you please specify what you're referring to or what you would like to discuss? For instance, there a... (truncated from 356 chars)
+INFO:__main__:===========================
+[2025-07-19 22:09:29 -0700] [73071] [INFO] 127.0.0.1:65169 POST /v1/multi-agent/response 1.1 200 106465 5494553
+INFO:__main__:=== MULTI-AGENT REQUEST ===
+INFO:__main__:Method: POST
+INFO:__main__:URL: http://localhost:5001/v1/multi-agent/response
+INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5001', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'User-Agent': 'python-httpx/0.28.1', 'Content-Length': '136', 'Content-Type': 'application/json'}
+INFO:__main__:Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "Tell me about AI"
+    }
+  ],
+  "user_id": 10001,
+  "model": "gpt-4o-mini",
+  "stream": false,
+  "enable_citations": true
+}
+INFO:__main__:========================
+INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
+INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
+INFO:__main__:📄 Starting multi-agent non-streaming response...
+WARNING:asyncio:Executing <Task pending name='Task-46' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.108 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:chat.router.intelligent_router:LLM selected tool 0: no_context
+INFO:chat.router.intelligent_router:LLM routing successful: no_context
+WARNING:chat.config.system_prompts:Unknown completion_type 'gpt-4o-mini', defaulting to YouWoAI system prompt
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4o-mini
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4o-mini
+INFO:__main__:=== MULTI-AGENT RESPONSE ===
+INFO:__main__:Response type: <class 'dict'>
+INFO:__main__:Response keys: ['id', 'object', 'created', 'model', 'choices', 'usage', 'metadata']
+INFO:__main__:Content length: 2566 characters
+INFO:__main__:Content preview: Artificial Intelligence (AI) refers to the simulation of human intelligence processes by machines, particularly computer systems. These processes include learning (the acquisition of information and r... (truncated from 2566 chars)
+INFO:__main__:===========================
+[2025-07-19 22:09:38 -0700] [73071] [INFO] 127.0.0.1:65248 POST /v1/multi-agent/response 1.1 200 9482 7571278
+INFO:__main__:=== MULTI-AGENT REQUEST ===
+INFO:__main__:Method: POST
+INFO:__main__:URL: http://localhost:5001/v1/multi-agent/response
+INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5001', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'User-Agent': 'python-httpx/0.28.1', 'Content-Length': '192', 'Content-Type': 'application/json'}
+INFO:__main__:Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "Summarize this paper's main contributions"
+    }
+  ],
+  "user_id": 10001,
+  "model": "gpt-4o-mini",
+  "stream": false,
+  "attachments": [
+    "https://arxiv.org/pdf/2505.18499.pdf"
+  ]
+}
+INFO:__main__:========================
+INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
+INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
+INFO:__main__:📄 Starting multi-agent non-streaming response...
+INFO:chat.router.intelligent_router:Attachments detected - routing to attachment tool with high priority
+INFO:chat.attachment.file_attachment_manager:🔗 Processing 1 file attachments
+INFO:chat.attachment.file_attachment_manager:📎 Found URLs: ['https://arxiv.org/pdf/2505.18499.pdf']
+INFO:chat.attachment.file_attachment_manager:✅ All attachment URLs already have embeddings
+INFO:chat.rag.rag_processor:=== STARTING RAG REQUEST ===
+INFO:chat.rag.rag_processor:Using custom query for RAG: Summarize this paper's main contributions...
+INFO:chat.rag.rag_processor:=== PARALLEL: QUERY EMBEDDING + ID RESOLUTION ===
+INFO:chat.attachment.file_attachment_manager:🔍 Found 31 chunks for URL: https://arxiv.org/pdf/2505.18499.pdf...
+INFO:chat.attachment.file_attachment_manager:📊 URL https://arxiv.org/pdf/2505.18499.pdf... has 0 image chunks, 31 text chunks
+INFO:chat.attachment.file_attachment_manager:📄 Processing 31 text chunks with explicit attachment logic
+INFO:chat.rag.rag_processor:🔄 Embedding query: Summarize this paper's main contributions...
+INFO:chat.rag.rag_processor:🔄 Resolving IDs for user 10001...
+INFO:chat.rag.rag_processor:=== ID RESOLUTION WITH CORRECTED SCOPED SEARCH ===
+INFO:chat.rag.rag_processor:User: 10001
+INFO:chat.rag.rag_processor:Note IDs: None
+INFO:chat.rag.rag_processor:Folder IDs: None
+INFO:chat.rag.rag_processor:Conversation IDs: None
+INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Getting all user content
+INFO:chat.postgres.db_manager:Resolved 9 total user notes
+INFO:chat.postgres.db_manager:Resolved 9 total user conversations
+INFO:chat.rag.rag_processor:=== RESOLVED WITH CORRECTED LOGIC ===
+INFO:chat.rag.rag_processor:Notes: 9
+INFO:chat.rag.rag_processor:Conversations: 9
+INFO:chat.rag.rag_processor:Search type: FULL CONTEXT
+INFO:chat.rag.rag_processor:==================
+INFO:chat.rag.rag_processor:✅ ID resolution completed: 9 notes, 9 conversations
+INFO:chat.rag.rag_processor:✅ Query embedding completed
+INFO:chat.rag.rag_processor:=== EMBEDDING CHECKS (AFTER ID RESOLUTION) ===
+INFO:chat.rag.rag_processor:🔍 CHECKING EMBEDDINGS FOR RESOLVED IDs...
+INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Using background embedding for missing embeddings
+INFO:chat.postgres.embedding_operations:Notes without embeddings: 0/9
+INFO:chat.rag.rag_processor:✅ All 9 notes have embeddings
+INFO:chat.postgres.embedding_operations:Conversations without embeddings (skipEmbedding=false): 0/9
+INFO:chat.rag.rag_processor:✅ All 9 conversations have embeddings
+INFO:chat.rag.rag_processor:=== ATTACHMENTS SEARCH ===
+INFO:chat.postgres.db_manager:Mixed vector search - notes: 9, conversations: 9
+INFO:chat.postgres.db_manager:Mixed vector search found 20 relevant chunks
+INFO:chat.rag.rag_processor:Found 20 relevant chunks using attachments search
+INFO:chat.rag.rag_processor:=== RAG CONTEXT SUMMARY ===
+INFO:chat.rag.rag_processor:Query: Summarize this paper's main contributions...
+INFO:chat.rag.rag_processor:Total chunks: 20
+INFO:chat.rag.rag_processor:Used notes: 3
+INFO:chat.rag.rag_processor:Used conversations: 2
+INFO:chat.rag.rag_processor:===========================
+INFO:chat.attachment.file_attachment_manager:📎 Including top chunk for explicit attachment (similarity: 0.334)
+INFO:chat.attachment.file_attachment_manager:✅ Added text chunk: 4202 chars, similarity: 0.334
+INFO:chat.attachment.file_attachment_manager:✅ URL https://arxiv.org/pdf/2505.18499.pdf: 1 relevant chunks
+INFO:chat.attachment.file_attachment_manager:🎯 File attachment processing complete: 1 total chunks from 1 URLs
+INFO:chat.attachment.file_attachment_manager:📊 Chunk breakdown: 0 image chunks, 1 text chunks
+INFO:chat.attachment.file_attachment_manager:📄 Adding 1 text chunks (similarity filtered)
+WARNING:chat.config.system_prompts:Unknown completion_type 'gpt-4o-mini', defaulting to YouWoAI system prompt
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4o-mini
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4o-mini
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4o-mini
+INFO:__main__:=== MULTI-AGENT RESPONSE ===
+INFO:__main__:Response type: <class 'dict'>
+INFO:__main__:Response keys: ['id', 'object', 'created', 'model', 'choices', 'usage', 'metadata']
+INFO:__main__:Content length: 2321 characters
+INFO:__main__:Content preview: The paper makes several key contributions to the field of reinforcement learning (RL) and graph reasoning:
+
+1. **Introduction of PARL Framework**: The paper presents the Predictability-Aware Reinforce... (truncated from 2321 chars)
+INFO:__main__:===========================
+[2025-07-19 22:11:02 -0700] [73071] [INFO] 127.0.0.1:49356 POST /v1/multi-agent/response 1.1 200 71213 12424273
+INFO:__main__:=== MULTI-AGENT REQUEST ===
+INFO:__main__:Method: POST
+INFO:__main__:URL: http://localhost:5001/v1/multi-agent/response
+INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5001', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'User-Agent': 'python-httpx/0.28.1', 'Content-Length': '189', 'Content-Type': 'application/json'}
+INFO:__main__:Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "What do my notes say about reinforcement learning? Include citations."
+    }
+  ],
+  "user_id": 10001,
+  "model": "gpt-4o-mini",
+  "stream": false,
+  "enable_citations": true
+}
+INFO:__main__:========================
+INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
+INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
+INFO:__main__:📄 Starting multi-agent non-streaming response...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:chat.router.intelligent_router:LLM selected tool 1: knowledge_base_notes
+INFO:chat.router.intelligent_router:LLM routing successful: knowledge_base_notes
+INFO:chat.rag.rag_processor:=== STARTING RAG REQUEST ===
+INFO:chat.rag.rag_processor:Using custom query for RAG: What do my notes say about reinforcement learning? Include citations....
+INFO:chat.rag.rag_processor:=== PARALLEL: QUERY EMBEDDING + ID RESOLUTION ===
+INFO:chat.rag.rag_processor:🔄 Embedding query: What do my notes say about reinforcement learning? Include citations....
+INFO:chat.rag.rag_processor:🔄 Resolving IDs for user 10001...
+INFO:chat.rag.rag_processor:=== ID RESOLUTION WITH CORRECTED SCOPED SEARCH ===
+INFO:chat.rag.rag_processor:User: 10001
+INFO:chat.rag.rag_processor:Note IDs: None
+INFO:chat.rag.rag_processor:Folder IDs: None
+INFO:chat.rag.rag_processor:Conversation IDs: None
+INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Getting all user content
+INFO:chat.postgres.db_manager:Resolved 9 total user notes
+INFO:chat.postgres.db_manager:Resolved 9 total user conversations
+INFO:chat.rag.rag_processor:=== RESOLVED WITH CORRECTED LOGIC ===
+INFO:chat.rag.rag_processor:Notes: 9
+INFO:chat.rag.rag_processor:Conversations: 9
+INFO:chat.rag.rag_processor:Search type: FULL CONTEXT
+INFO:chat.rag.rag_processor:==================
+INFO:chat.rag.rag_processor:✅ ID resolution completed: 9 notes, 9 conversations
+INFO:chat.rag.rag_processor:✅ Query embedding completed
+INFO:chat.rag.rag_processor:=== EMBEDDING CHECKS (AFTER ID RESOLUTION) ===
+INFO:chat.rag.rag_processor:🔍 CHECKING EMBEDDINGS FOR RESOLVED IDs...
+INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Using background embedding for missing embeddings
+INFO:chat.postgres.embedding_operations:Notes without embeddings: 0/9
+INFO:chat.rag.rag_processor:✅ All 9 notes have embeddings
+INFO:chat.postgres.embedding_operations:Conversations without embeddings (skipEmbedding=false): 0/9
+INFO:chat.rag.rag_processor:✅ All 9 conversations have embeddings
+INFO:chat.rag.rag_processor:=== NOTES SEARCH ===
+INFO:chat.postgres.db_manager:Notes-only vector search - notes: 9
+INFO:chat.postgres.db_manager:Notes-only vector search found 20 relevant chunks
+INFO:chat.rag.rag_processor:Found 20 relevant chunks using notes search
+INFO:chat.rag.rag_processor:=== RAG CONTEXT SUMMARY ===
+INFO:chat.rag.rag_processor:Query: What do my notes say about reinforcement learning?...
+INFO:chat.rag.rag_processor:Total chunks: 20
+INFO:chat.rag.rag_processor:Used notes: 3
+INFO:chat.rag.rag_processor:Used conversations: 0
+INFO:chat.rag.rag_processor:===========================
+WARNING:chat.config.system_prompts:Unknown completion_type 'gpt-4o-mini', defaulting to YouWoAI system prompt
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4o-mini
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4o-mini
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4o-mini
+WARNING:chat.endpoints.multi_agent_endpoint_v2:Iteration evaluation failed: Expecting value: line 1 column 1 (char 0)
+INFO:__main__:=== MULTI-AGENT RESPONSE ===
+INFO:__main__:Response type: <class 'dict'>
+INFO:__main__:Response keys: ['id', 'object', 'created', 'model', 'choices', 'usage', 'metadata']
+INFO:__main__:Content length: 2937 characters
+INFO:__main__:Content preview: Your notes on reinforcement learning (RL) cover various approaches, algorithms, and applications. Here’s a summary of the key points along with citations:
+
+1. **General Overview**: Reinforcement Learn... (truncated from 2937 chars)
+INFO:__main__:===========================
+[2025-07-19 22:11:19 -0700] [73071] [INFO] 127.0.0.1:49445 POST /v1/multi-agent/response 1.1 200 75472 15088089
+INFO:__main__:=== MULTI-AGENT REQUEST ===
+INFO:__main__:Method: POST
+INFO:__main__:URL: http://localhost:5001/v1/multi-agent/response
+INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5001', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'User-Agent': 'python-httpx/0.28.1', 'Content-Length': '248', 'Content-Type': 'application/json'}
+INFO:__main__:Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "Compare this paper with my notes on AI and suggest research improvements"
+    }
+  ],
+  "user_id": 10001,
+  "model": "gpt-4o-mini",
+  "stream": false,
+  "enable_iterations": true,
+  "attachments": [
+    "https://arxiv.org/pdf/2311.18703.pdf"
+  ]
+}
+INFO:__main__:========================
+INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
+INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
+INFO:__main__:📄 Starting multi-agent non-streaming response...
+INFO:chat.router.intelligent_router:Attachments detected - routing to attachment tool with high priority
+INFO:chat.attachment.file_attachment_manager:🔗 Processing 1 file attachments
+INFO:chat.attachment.file_attachment_manager:📎 Found URLs: ['https://arxiv.org/pdf/2311.18703.pdf']
+INFO:chat.attachment.file_attachment_manager:🔄 SYNC EMBEDDING: 1 URLs missing embeddings - creating now...
+INFO:chat.rag.rag_processor:=== STARTING RAG REQUEST ===
+INFO:chat.rag.rag_processor:Using custom query for RAG: Compare this paper with my notes on AI and suggest research improvements...
+INFO:chat.rag.rag_processor:=== PARALLEL: QUERY EMBEDDING + ID RESOLUTION ===
+INFO:chat.attachment.file_attachment_manager:🔄 Creating embedding for URL: https://arxiv.org/pdf/2311.18703.pdf...
+INFO:chat.postgres.url_embedding_operations:Using LlamaIndex PDFReader for: /var/folders/7w/cpvdmy_x76s4w3qhkk5x4gn00000gn/T/tmpzp9ttz1w.pdf
+INFO:chat.postgres.url_embedding_operations:✅ LlamaIndex PDF extraction successful: arXiv:2311.18703v5  [cs.LG]  3 Jun 2025
+Predictable Reinforcement Learning Dynamics
+through Entropy Rate Minimization
+Daniel Jarne Ornia∗† daniel.jarneornia@ox.cs.ac.uk
+University of Oxford
+Giannis Delimpaltadakis∗
+Eindhoven University of Technology
+Jens Kober
+Delft University of Technology
+Javier Alonso-Mora
+Delft University of Technology
+Abstract
+In Reinforcement Learning (RL), agents have no incentive to exhibit predictable trajectories,
+and are often pushed (through e.g. policy entropy regularisation) to randomise their actions
+in favor of exploration. This lack of predictability awareness often makes it challenging
+for other agents and humans to predict an agent’s trajectories, possibly triggering unsafe
+scenarios (e.g. in human-robot interaction). We propose a novel method to induce pre-
+dictable trajectories in RL agents, termedPredictability-Aware RL(PARL), employing the
+agent’s trajectory entropy rateto quantify predictability. Our method maximizes a linear
+combination of a standard discounted reward and the negative entropy rate, thus trading off
+optimality with predictability. We show how the entropy rate can be formally cast as an av-
+erage reward, how entropy-rate value functions can be estimated from a learned model and
+incorporate this in policy-gradient algorithms, and demonstrate how this approach produces
+predictable (near-optimal) policies in tasks inspired by human-robot use-cases.
+1 Introduction
+As Reinforcement Learning (RL) (Sutton & Barto, 2018) agents are deployed to interact with humans,
+it becomes crucial to ensure that their behaviours1 are predictable. A robot trained under general RL
+algorithms operating in a human environment has no incentive to follow trajectories that are easy to predict.
+This makes it challenging for other robots or humans to forecast the robot’s behaviour, affecting coordination
+and interactions, and possibly triggering unsafe scenarios. RL algorithms are oblivious to the predictability of
+behaviours they induce in agents: one aims to maximize an expected reward, regardless of how unpredictable
+trajectories taken by the agents may be. In fact, many algorithms propose some form of regularisation in
+action complexity (Schulman et al., 2017; Han & Sung, 2021) or value functions (Pitis et al., 2020; Zhao et al.,
+2019; Kim et al., 2023) for better exploration, inducing higher aleatoric uncertainty in agents’ trajectories.
+∗Equal contribution.
+†Work done while at Delft University of Technology.
+1We use agent behaviour to refer to, throughout this work, the state trajectories agents exhibit (and observers may perceive).
+We consider ’agent behaviour’ or ’agent trajectory’ interchangeably, but note that we mainly focus on state predictability. We
+make the case that an agent ispredictable if their next state (for a fixed policy) is easy to predict given their past state(s) for
+standard inference algorithms.
+1
+
+We quantify predictability of an RL agent’s trajectories by employing the notion of entropy
+rate: the infinite-horizon time-average entropy of the agent’s trajectories, which measures the
+complexity of the trajectory distributions induced in RL agents. Higher entropy rate implies
+more complex and less predictable trajectories, and vice-versa. Similar information-theoretic met-
+rics have been widely used to quantify (un)predictability of stochastic processes Shannon (1948);
+Savas et al. (2022); Biondi et al. (2014); Duan et al. (2019); Stefansson & Johansson (2021).
+x0
+π⋆
+π∗
+PA-RL xf
+Figure 1: Qualitative representation of
+PARL.Trajectoriesarerepresentedsymbol-
+ically as connecting an initial with a final
+set of states. PARL shifts the policies to-
+wards smaller trajectory entropy.
+Motivation In general, RL agents are oblivious to the infor-
+mation theoretic loads they generate with their behaviour. In
+a world where agents do not exist in a vacuum (even if we train
+RL agents in single-agent settings, these agents will rarely be
+deployed in isolation), one could argue there is an advantage to
+inducing acomplexity awarenessin RL agents;If an agent can
+solve a task generating lower information rates, it should do so.
+Lower information rates correspond (intuitively and formally,
+through forms of entropy) with lower uncertainty. However, we
+do not argue that this is a necessary feature in all agents (or
+even always desireable). We simply argue that it is an interest-
+ing feature to consider for general RL agents that can benefit
+the deployment of RL agents, propose a formal approach to tar-
+get this, and evaluate how this impacts such agents in different
+settings.
+Entropy and Predictability The established notion for
+predictability in information theory is entropy: a lower-entropy
+stochastic process is easier to predict by standard inference al-
+gorithms. For example, assuming the trajectory distribution is Gaussian, lower entropy is equivalent to
+lower variance. Then it is clear that (inside the family of normal distributions) inference algorithms would
+be able to predict more accurately a lower variance distribution. The same applies to other distribution
+families, including discrete distributions. In the limit, minimum entropy implies that the agent follows the
+same deterministic trajectory over and over, which means it can be predicted with no prediction error from
+inference on past data (since it is deterministic).
+Contributions We propose a novel approach to model-based RL that induces more predictable behaviour
+in RL agents, termedPredictability-Aware RL(PARL). We maximize the linear combination of a standard
+discounted cumulative reward and the negative entropy rate, thus trading-off optimality with predictability.
+Towards this, we cast entropy-rate minimization as an expected average reward minimization problem, with a
+policy-dependent reward function, calledlocal entropy. To circumvent local entropy’s policy-dependency and
+enable the use of on- and off-policy RL algorithms, we introduce a state-action-dependent surrogate entropy,
+and show that deterministic policies minimizing the average surrogate entropy exist andalso minimize the
+entropy rate. Further, we show how, employing a learned model and the surrogate reward, we can estimate
+entropy-rate value functions, and incorporate this in policy-gradient schemes. Finally, we showcase how
+PARL produces much more predictable agents while achieving near-optimal rewards in several robotics and
+autonomous driving tasks2.
+1.1 Related work
+The idea of introducing some form of entropy objectives in policy gradient algorithms has been extensively
+explored Williams & Peng (1991); Fox et al. (2015); Peters et al. (2010); Zimin & Neu (2013); Neu et al.
+(2017); Tiapkin et al. (2023). In most instances, these regularization terms are designed to either help policy
+randomization and exploration Mutti et al. (2021; 2022), or to stabilize RL algorithms. However, these
+2See the project repository https://github.com/tud-amr/parl for details.
+2
+
+works focus on policy (state-action) entropy maximization, and do not focus on trajectory entropy and how
+it affects predictability of RL agents.
+Instead, Guo et al. (2023b;a); Biondi et al. (2014); George et al. (2018); Duan et al. (2019); Stefansson &
+Johansson (2021); Savas et al. (2020; 2022) consider entropy (rate) maximization in (PO)MDPs, to yield
+unpredictable behaviours. However, these works require full knowledge of the model, and entropy (rate)
+maximization is cast as a non-linear program. Instead, in our work, the model is not known, and we resort
+to learning entropy-rate value functions.
+Recent work Lu et al. (2020); Eysenbach et al. (2021); Park & Levine (2023) has tackled robustness and
+generalization via introducing Information-Theoretic penalty terms in the reward function. In particular,
+Eysenbach et al. 2021 makes the explicit connection from such information-theoretic penalties to the emer-
+gence of predictable behaviour in RL agents, and uses mutual information penalties to restrict the bits of
+information that the agents are allowed to use, resulting in simpler, less complex policies. We address di-
+rectly this predictability problem by the minimisation of entropy rates in RL agents’ stochastic dynamics.
+This allows us to provide theoretical results regarding existence and convergence of optimal (predictable)
+policies towards minimum entropy-rate agents, and make our scheme generalizeable toany RL algorithm
+(on and off policy). In this line, Berseth et al. (2021) proposeSurprise Minimizing Reinforcement Learning,
+where an estimate of the state stationary distribution of visited states is kept, and the agents are penalised
+for visiting states with low probabilities in this stationary distribution. While having a similar flavour, our
+work addressesstate trajectoryentropy, contrary to stationary distribution entropy, since we aim to address
+the predictability of the agent’s data generating process (and not simply avoid unknown and changing en-
+vironment regions)3. Finally, our work is tangentially related to alignment and interpretability in RL Shah
+et al. (2019); Carroll et al. (2019), where human-agent interaction requires exhibiting human-interpretable
+behaviour. Further, work on legibility of robot motion Dragan et al. (2013); Liu et al. (2023); Busch et al.
+(2017) shares our motivation; to make robotic systems behaviour more legible by humans.
+2 Background
+We, first, introduce preliminary concepts employed throughout this work. For more detail on Markov
+chains and decision processes, the reader is referred to Puterman (2014). Given a setA, ∆(A) denotes the
+probability simplex overA, andAk denotes thek-times Cartesian productA×A×···×A . If Ais finite,
+|A|denotes its cardinality. Given two probability distributionsµ,ν, we useDTV (µ∥ν) as the total variation
+distance between two distributions. We usesupp(µ) to denote the support ofµ. Given two vectorsξ,η, we
+write ξ⪰η, if eachi-th entry ofξ is bigger or equal to thei-th entry ofη.
+2.1 Markov processes and Rewards
+A Markov Chain (MC) is a tupleC= (X,P,µ 0) where X is a finite set of states,P : X×X → [0,1] is a
+transition probability measure andµ0 ∈∆(X) is a probability distribution over initial states. Specifically,
+P(x,y) is the probability of transitioning from statex to state y. Pt(x,y) is the probability of landing in
+y after t time-steps, starting fromx. The limit transition function isP∗:= limt→∞Pt. We use uppercase
+Xt to refer to the random variable that is the state of the random process governed by the MC at time
+t, and lower case to indicate specific states,e.g. x ∈X . Similarly, a trajectory or a path is a sequence
+of states xk = {x0,x1,...,x k}, where xi ∈X , and Pk denotes the set of all(k+ 1)-length paths. We also
+denote Xt:k = {Xt,Xt+1,...,X k}. Further, we definep: P∞→[0,1] as a probability measure over the Borel
+σ-algebra B(X0:∞) of infinite-length paths of a MC4 conditioned to initial distributionµ0. For example,
+p(X0 = x) ≡µ0(x) is the probability of the initial state beingx; p(X0:3 = x3) is the probability that the
+MC’s state follows the pathx3. A Markov Decision Process (MDP) is a tupleM= (X,U,P,R,µ 0) where
+X is a finite set of states,U is a finite set of actions,P : X×U×X → [0,1] is a probability measure
+of the transitions between states given an action,R : X×U×X → R is a bounded reward function and
+µ0 ∈∆(X) is the probability distribution of initial states. A stationary Markov policy is a stochastic kernel
+3A simple counterexample can show that an agent can have (almost)zero trajectory entropyand have high stationary
+distribution entropy; think of two connected statesA↔B where A has one self loop with near to zero probability.
+4This measure is well defined by the Ionescu-Tulcea Theorem, seee.g. Dudley (2018).
+3
+
+π : X →∆(U). With abuse of notation, we useπ(u |x) as the probability of taking actionu at state x,
+under policy π. Let Π be the set of all stationary Markov policies, andΠD ⊆Π the set of deterministic
+policies. The composition of an MDPMand a policyπ ∈Π generates a MC with transition probabilities
+Pπ(x,y) := ∑
+u∈Uπ(u |x)P(x,u,y ). If said MC admits a unique stationary distribution, we denote it by
+µπ, whereµπ : X→ [0,1]. We, also, use the shorthandRπ
+t ≡Eu∼π(x)[R(Xt,u,X t+1)]. We will assume any
+fixed policyπ in MDPMinduces an aperiodic and irreducible MC.
+Discounted Reward MDPs In discounted cumulative reward problems the goal is to find a policyπ′that
+maximizes the discounted sum of rewards for discount factorγ ∈[0,1): i.e. π′∈arg maxπ∈Π E[∑∞
+t=0 γtRπ
+t |
+X0 = x], for all x ∈ X. In this case Puterman (2014) given a policy π, the value function under π,
+Vπ : X ↦→R, is Vπ(x) := E[∑∞
+t=0 γtRπ
+t |X0 = x]. The action-value function (or Q-function) under π is
+given byQπ(x,u) := ∑
+y∈XP(x,u,y )(R(x,u,y ) + γVπ(y)).
+Average Reward MDPs In average reward maximization problems, we aim at maximizing thereward
+rate (or gain)gπ(x), defined as, together with thebias5
+gπ(x) := E
+[
+lim
+T→∞
+1
+T
+T∑
+t=0
+Rπ
+t |X0 = x
+]
+, bπ(x) := E
+[
+lim
+T→∞
+T∑
+t=0
+(Rπ
+t −g(Xt)) |X0 = x
+]
+. (1)
+Note that the bias is the expected difference between the stationary rate and the rewards obtained
+by initialising the system at a given state. For π ∈ Π, the average-reward (action) value-functions6
+Vπ
+avg : X →R is defined by Abounadi et al. (2001)Vπ
+avg(x) := Eu∼π,y∼P(x,u,·)[R(x,u,y ) −gπ + Vπ
+avg(y)]
+and Qπ
+avg(x,u) := Ey∼P(x,u,·)
+[
+R(x,u,y ) −gπ + Vπ
+avg(y)
+]
+. The optimal (action) value functions (which ex-
+ists for ergodic MDPs) satisfy V∗
+avg(x) = max u∈UEy∼P(x,u,·)
+[
+R(x,u,y ) −g∗+ V∗
+avg(y)
+]
+and Q∗
+avg(x,u) =
+Ey∼P(x,u,·)
+[
+R(x,u,y ) −g∗+ V∗
+avg(y)
+]
+where g∗is the optimal reward rate.
+2.2 Shannon Entropy and MDPs
+For a discrete random variableA with finite supportA, Shannon entropy Shannon (1948) is a measure of
+uncertainty induced by its distribution, and it is defined ash(A) := −∑
+a∈APr (A= a) log(Pr (A= a)).
+Shannon entropy measures the amount of information encoded in a random variable: a uniform distribution
+maximizes entropy (minimal information), and a Dirac distribution minimizes it (maximal information).
+Recall p : P∞ →[0,1] is a probability measure over the Borelσ-algebra of infinite-length paths of a MC.
+Let us denote the dependency ofp on a fixed policyπ as pπ (a fixed policy in a MDP induces a MC For an
+MDP under policyπ, recall Section 2.1). Then we define the conditional entropy (Cover, 1999; Biondi et al.,
+2014) ofXT+1 given X0:T as:
+hπ(XT+1 |X0:T) := −
+∑
+y∈X,xT∈XT
+pπ(XT+1 = y,X0:T = xT) log(pπ(XT+1 = y|X0:T = xT)),
+and the joint entropy7 of the pathX0:T is hπ(X0:T) := h(X0) + ∑T
+t=1 hπ(Xt |X0:t−1).
+Definition 1(Entropy Rate Shannon (1948)). Whenever the limit exists, the entropy rate of an MDPM
+under policyπ is defined by¯hπ := limT→∞ 1
+Thπ(X0:T).
+The entropy rate represents the rate ofdiversity in the information generated by the induced MC’s paths.
+Smaller entropy rates imply more predictable trajectories of the induced MC.
+3 Entropy Rates: Estimation and Learning
+Problem Statement The problem considered in this work is the following. Consider an unknown MDP
+M= ( X,U,P,R,µ 0). Further, assume that we can sample transitions
+(
+x,u,y,R (x,u,y )
+)
+applying any
+5The bias can also be written in vector form asb = (I −P + P∗)−1(I −P∗)Rπ where Rπ ∈R|X| is the vector of state
+rewards, Rπ
+x = Eu∼π[R(x,u,y )]. See Chapter 8 in Puterman (2014).
+6Observe that, for ergodic MDPs,bπ(x) = Vπ
+avgπ(x).
+7The second equality is obtained by applying the general product rule to the joint probabilities ofYT.
+4
+
+action u∈U and lettingMevolve according toP(x,u, ·). We want
+π⋆ ∈arg max
+π∈Π
+E[
+∞∑
+t=0
+γtRπ
+t] −k¯hπ, (2)
+wherek> 0 isatuneableparameter 8. Inwords, wearelookingforpoliciesthatmaximizeatuneableweighted
+linear combination of the negative entropy−¯hπ and a standard expected discounted cumulative reward. As
+such, we establish a trade-off, which is tuned via the parameterk, between entropy rate minimization (i.e.
+predictability) and optimality w.r.t. the cumulative reward.
+Proposed approach We first show how the entropy rate¯hπ can be treated as an average reward criterion,
+with the so-calledlocal entropylπ as its corresponding local reward. Then, becauselπ is policy-dependent, we
+introduce a surrogate reward, that solely depends on states and actions and can be learned in-the-loop. We
+show that deterministic policies minimizing the expected average surrogate reward exist and also minimize
+the actual entropy rate. Moreover, we prove that, given a learned model of the MDP, we are able to (locally
+optimally) approximate the value function associated to the entropy rate, via learning the surrogate’s value
+functions. Based on these results, we propose a (model-based9) RL algorithm with its maximization objective
+being the combination of the cumulative reward and an average reward involving the surrogate local entropy.
+Estimating Entropy Rates Towards writing the entropy rate¯hπ as an expected average reward, let us
+define thelocal entropy, under policyπ, for statex∈X as
+lπ(x) := −
+∑
+y∈X
+Pπ(x,y) logPπ(x,y). (3)
+Now, making use of the Markov property, the entropy rate for an MDP reduces to
+¯hπ = lim
+T→∞
+1
+T
+(
+h(X0) +
+T∑
+t=1
+hπ(Xt |X0:t−1)
+)
+= lim
+T→∞
+1
+T
+(
+h(X0) +
+T∑
+t=1
+hπ(Xt |Xt−1)
+)
+. (4)
+Observe now, from the definition ofpπ and again the Markov property,
+hπ(Xt |Xt−1) = −
+∑
+y∈X,x∈X
+pπ(Xt = y,Xt−1 = x) logpπ(Xt = y|Xt−1 = x)
+= −
+∑
+y∈X,x∈X
+pπ(Xt−1 = x)Pπ(x,y) logpπ(Xt = y|Xt−1 = x) = E
+
+−
+∑
+y∈X
+Pπ(x,y) logPπ(x,y)
+
+.
+Therefore, substituting in equation 4,
+¯hπ = lim
+T→∞
+1
+T
+T∑
+t=0
+E[lπ(Xt)] = E
+[
+lim
+T→∞
+1
+T
+T∑
+t=0
+lπ(Xt)
+]
+. (5)
+We can treat the local entropylπ under policy π as a policy-dependent reward (or cost) function, since lπ
+is stationary, history independent and bounded. Thus,¯hπ is treated as an expected average reward, with
+reward functionlπ.
+8We choose to cast the problem as a maximization of a linear combination of objectives to allow agents to find efficient
+trade-offs. This problem could be solved throughe.g. multi-objective optimization methods Skalse et al. (2022); Hayes et al.
+(2022). We leave this as an application-dependent choice.
+9We use the termmodel-based, since we require learning a (approximated) representation of the dynamics of the MDP to
+estimate the entropy. However, the choice of whether to improve the policy using pure model free algorithms versus using the
+learned model is left as a design choice, beyond the scope of this work.
+5
+
+3.1 A Surrogate for Local Entropy
+In conventional RL settings, one is able to sample rewards (and transitions, e.g. from a simulator). However,
+here, part of the expected reward to be maximized in equation 2 is the negative entropy−¯hπ, which, as
+aforementioned, can be seen as an expected average reward with a state- and policy-dependent local reward
+lπ(x). It is not reasonable to assume that one can directly sample local entropieslπ(x): one would have
+to estimate lπ(x) through estimating transition probabilitiesPπ(x,y) (by sampling transitions) and using
+equation 3. However, a new challenge arises:lπ depends on the action distributionand to apply average
+reward MDP theory we need the rewards to be state-action dependent. To address this, we consider a
+surrogate forlπ that is policy-independent:
+s(x,u) = −
+∑
+y∈X
+P(x,u,y ) log (P(x,u,y )) .
+Define ¯hπ
+s(x) := limT→∞E[ 1
+T
+∑T
+t=0 s(Xt,π(Xt))|X0 = x]. The following relationships hold.
+Lemma 1. Consider MDP M = ( X,U,P,R,µ 0). The following statements hold.
+a) Eu∼π(x)[s(x,u)] ≤ lπ(x), for all π ∈ Π. b ) ¯hπ
+s(x) = ¯hπ
+s ≤ ¯hπ, for some ¯hπ
+s ∈ R, for all π ∈ Π.
+c) Eu∼π(x)[s(x,u)] = lπ(x) and ¯hπ
+s = ¯hπ, for allπ∈ΠD.
+Observe that, by considering the surrogate entropy rate, we effectively decouple the influence of the policy
+entropy in the entropy rate estimations. Policy stochasticity directly influences the true entropy rate¯hπ, but
+does not affect the surrogate entropy rate¯hπ
+s; in a fully deterministic environment,¯hπ
+s = 0 for allπ∈Π, but
+¯hπ would not. We make the case that, given the formal results in Lemma 1 (and the results to be presented
+in coming sections) this effect does not degrade the effectiveness of our method; in fact, it allows agents
+to find less uncertain environment regions while not directly discouraging exploration (and can still render
+minimum entropy rate policies, as discussed in Theorem 1 below).
+3.2 Minimum Entropy Policies
+Based on Lemma 1, we derive one of our main results. For the proof, we make use of fundamental results on
+existance of average reward optimal policies of MDPs. In particular Theorem 3 included in the Appendix,
+applied directly from Puterman (2014), which states that under mild assumptions the gain and bias exist in
+average reward MDPs for any policy, and that an optimal policy exists that maximises the reward rate.
+Theorem 1. Consider MDP M= ( X,U,P,R,µ 0). The following hold: a) There exists a deterministic
+policy ˆπ ∈ ΠD minimizing the surrogate entropy rate , i.e. ˆπ ∈ arg minπ¯hπ
+s. b ) Any ˆπ ∈ ΠD mini-
+mizing the surrogate entropy rate also minimizes the true entropy rate:ˆπ ∈arg minπ∈Π ¯hπ
+s and ˆπ ∈ΠD
+=⇒ ˆπ∈arg minπ∈Π ¯hπ. Additionally, deterministic policies locally minimizing¯hπ
+s also locally minimize¯hπ.
+c) There exists a deterministic policyˆπ∈ΠD such that ˆπ∈arg minπ¯hπ.
+Proof of Theorem 1.The first statement follows directly from Theorem 3 in the Appendix, which guarantees
+that there is at least one deterministic policyˆπ that minimizes the surrogate entropy rate¯hπ
+s. Then, since
+ˆπ∈ΠD, from Lemma 1 statementsb) andc), we have that the following holds for allπ∈Π:
+¯hˆπ = ¯hˆπ ≤¯hπ
+s ≤¯hπ
+Thus, ˆπ minimizes ¯hπ and it follows thatˆπ ∈arg minπ∈Π ¯hπ
+s and ˆπ ∈ΠD =⇒ ˆπ ∈arg minπ∈Π ¯hπ. The
+same argument also applies locally, thereby yileding that deterministic local minimizers of¯hπ
+s are also local
+minimizers of¯hπ. Finally, the third statement follows as a combination of the other two.
+Theorem 1 is an utterly relevant result for our work. First, it guarantees that minimizing policies both for¯hπ
+s
+and ¯hπ exist. More importantly, it tells us that,to minimize the entropy rate of an RL agent, it is sufficient
+to minimize the surrogate entropy rate. Since (globally) minimizing¯hπ
+s implies minimizing¯hπ and sincesis
+policy-independent, in contrast tolπ, in what follows, our RL algorithm uses estimates ofsto minimize¯hπ
+s,
+instead of estimates oflπ to minimize¯hπ.10
+10Observe that we cannot employ the same method for entropy rate maximization, since the maximizer of¯hπ
+s is not necessarily
+a maximizer of¯hπ.
+6
+
+4 Learning to Act Predictably
+In the following, we show how predictability of the agent’s behaviour can be cast as an RL objective and
+combined with a primary discounted reward goal. To do this, we rely on Theorem 1 and employ the surrogate
+entropys(x,u) as a local reward along with its corresponding value function. We prove that, given a learned
+model of the MDP, we are able to approximate the true entropy rate value functions. In the next section,
+we combine this section’s results with conventional discounted rewards and standard PG results, to address
+the problem mentioned in the Problem Statement and derive a PG algorithm that maximizes the combined
+reward objective. We define the predictability objective to be minimized:
+Js(π) ≡¯hπ
+s = E
+[
+lim
+T→∞
+1
+T
+T∑
+t=0
+s
+(
+Xt,π(Xt)
+)
+]
+.
+Motivated by Theorem 1, we have employed the surrogate entropy as a local reward and consider the
+corresponding average-reward problem. As commonly done in average reward problems, we define the
+(surrogate) entropy value functionfor a policyπ, Wπ : X→ R to be equal to the bias, i.e.:
+Wπ(x) :=E
+[∞∑
+t=0
+s
+(
+Xt,π(Xt)
+)
+−¯hπ
+s |X0 = x
+]
+= Ey∼Pπ(x,·)
+[
+s
+(
+x,π(x)
+)
+−¯hπ
+s + Wπ(y)
+]
+, (6)
+Additionally, we define the (surrogate) entropy action-value functionSπ : X×U → R by Sπ(x,u) :=
+Ey∼Pπ(x,u,·)
+[
+s
+(
+x,u
+)
+−¯hπ
+s + Wπ(y)
+]
+. However, recall thatwe do not knowthe local rewards. To estimate
+s, one needs to have an estimate of the transition functionP of the MDP. We use
+sϕ(x,u) = −
+∑
+y∈X
+Pϕ(x,u,y ) log
+(
+Pϕ(x,u,y )
+)
+(and ¯hπ
+sϕ correspondingly, for its associated rate) to denote the – parameterised byϕ – estimate ofs, which
+results from a corresponding estimatePϕ of P (i.e. Pϕ is the learned model). Similarly, we will useJsϕ, Wπ
+ϕ
+and Sπ
+ϕ to denote value functions computed with the model estimatessϕ. Now, it is crucial to know that by
+using the model estimatessϕ we are still able to approximate well the objectiveJs and the value functions
+Wπ,Sπ. Let us first show that for a small error betweenPϕ and P (i.e. small modeling error), the error
+between sϕ and s and the objectivesJs(π) ≡¯hπ
+s and Jsϕ(π) ≡¯hπ
+sϕ is also small.
+Proposition 1. Consider MDP M= (X,U,P,R,µ 0). Consider Pϕ : X×U×X → [0,1], parameterised
+by ϕ ∈Φ. Assume that the total variation error betweenPϕ and P is bounded as,∀x ∈X and u ∈U ,
+maxx∈X,u∈UDTV
+(
+Pϕ(x,u, ·)∥P(x,u, ·)
+)
+≤ϵ, for some ϵ, with 0 ≤ϵ ≤1. Let K(ϵ) = ϵlog
+(
+|X|
+)
+−ϵlog ϵ.
+Then, ∥sϕ(x,u) −s(x,u)∥∞≤K(ϵ), and the surrogate entropy rate error for any policyπ,
+E
+[
+lim
+T→∞
+1
+T
+T∑
+t=0
+sϕ(Xt,π(Xt)) |X0 ∼µ0
+]
+−¯hπ
+s ≤K(ϵ).
+The proof of proposition 1 hinges on the Fannes-Audenaert inequality for Von Neumann entropies Fannes
+(1973); Audenaert (2007), where we simply assume the density matrices are diagonal matrices with the
+transition probability densities as eigenvalues. Observe that asϵ→0, i.e. as the learned model approaches
+the real one, then the surrogate entropy rate converges to the actual one11 (since K(ϵ) →0). This result
+indicates that we can indeed usesϕ, obtained by a learned modelPϕ, instead of the unknowns, as the error
+between the objectivesJs(π) ≡¯hπ
+s and Jsϕ(π) ≡¯hπ
+sϕ is small, for small model errors. Assume now, without
+loss of generality that we have parameterised entropy value function (critic) Sω with parametersω∈Ω. We
+show that a standard on-policy algorithm, with policyπ, with value function approximationSω, using the
+approximated modelPϕ, learns entropy value functions that are in aδ(ϵ)-neighbourhood of the true entropy
+value functionsSπ, andδ(ϵ) vanishes withϵ.
+11This result echoes the Simulation Lemma in Kearns & Singh (2002), but with a bound derived in infinite horizon by using
+the entropy properties.
+7
+
+Assumption 1. Any learning rateαt ∈(0,1) satisfies ∑∞
+t=0 αt = ∞, ∑∞
+t=0 α2
+t <∞.
+Assumption 2. The modelPϕ satisfies maxx∈X,u∈UDTV (Pϕ(x,u, ·)∥P(x,u, ·)) ≤ϵ for a smallϵ∈[0,1].
+Proposition 2. Consider an MDPM, a policyπ, a learned modelPϕ of the MDP and criticSω linear on
+ω, andω∈Ω ⊂Rn, whereΩ is compact. Let Assumption 2 hold. At every stepk of parameter iteration, let
+us collectk trajectories Tk of lengthT, and construct (unbiased) estimates12 ˆSπ
+ϕ. Let the critic parameters
+ω∈Ω be updated asωk+1 = ωk −βk ˆ∆ωk, with ω0 ∈Ω, βk being a learning rate and
+ˆ∆ωk =
+(
+ˆSπ
+ϕ(xk,uk) −Sω(xk,uk)
+)∂Sω(xk,uk)
+∂ω .
+Then, ω converge to a δ(ϵ)-neighbourhood of one of the (local) minimizers of
+E x∼µπ
+u∼πθ(x)
+[
+1
+2 (Sπ(x,u) −Sω(x,u))2
+]
+, whereδ(ϵ) is vanishing withϵ.
+In other words, for small model errors, the value function approximator converges to a locally optimal value
+function approximation of the true value functionSπ.
+4.1 Predictability-Aware Policy Gradient
+Now, we are ready to address the Problem Statement, combining the entropy rate objective with a discounted
+reward objective. In what follows, assume that we have a parameterised policyπθ with parametersθ ∈Θ.
+Let J(πθ) = E[∑∞
+t=0 γtRπθ
+t ]. We useQξ with parametersξ∈Ξ for the parameterised critic of the discounted
+reward objective (when using a form of actor-critic algorithm).
+Theorem 2. Consider an MDPM, parameterised policyπθ, a learned modelPϕ of the MDP and (linear)
+critic Sω. Let Assumption 2 hold. Let a given PG algorithm maximize (locally) the discounted reward
+objective J(πθ) = E[∑∞
+t=0 γtRπθ
+t ]. Let the value function Qξ (or Vξ) be parameterised byξ ∈Ξ, and the
+entropy value functionSω (or Wω) have the same parameterisation class. Then, the same PG algorithm
+with updates
+θ←projΘ
+[
+θ+ αt
+(
+ˆ∇θJ(πθ) −kˆ∇θJsϕ(πθ)
+)]
+converges to a local maximum of the combined objectiveJ(πθ) −kJsϕ(πθ).
+Proof of Theorem 2 (Sketch).By standard PG arguments Sutton et al. (1999), if a PG algorithm converges
+to a local maximum of the objectiveJ(πθ) then the updates ˆ∇θJ(πθ) are in the direction of the gradient
+(up to stochastic approximation noise). By the same arguments, given Proposition 2, the same algorithm
+converges to a local minimum of the entropy value functionWω through updates −ˆ∇θJs(πθ), and these
+are in the direction of the true gradient (again, up to stochastic approximation noise). Then, the linear
+combination of gradient updatesˆ∇θJ(πθ) −kˆ∇θJs(πθ) is in the direction of the gradient of the combined
+objective J(πθ) −kJs(πθ). Finally, since both objectives are locally concave (necessary condition following
+from existence of gradient schemes that locally maximize them), their linear combination is also locally
+concave. This concludes the proof.
+Remark 1. Regarding pure entropy rate minimization, i.e. without the discounted reward objective, as
+already proven by Theorem 1, a policy that is globally optimal for the surrogate entropy rateJs(π) is also
+optimal for the actual entropy rate¯hπ. The same holds for locally optimal deterministic policies. However,
+in general, this is not the case for stochastic local minimizers.
+Following a vanilla policy gradient structure, in Algorithm 1 we first sample a trajectoryτ of lengthT, under
+a policy πθ, and store it in a bufferD(for training the approximate modelPϕ). Then, we useDto train
+Pϕ; update the estimated entropy rate; compute estimated objective gradientsˆ∇θJ(πθ), ˆ∇θJsϕ(πθ) from
+trajectory τ13; and finally update the policy and criticsSω,Qξ.
+Remark2. If we were to consider average reward MDPs instead of discounted reward MDPs, the formulation
+of the optimization problem solved in Theorem 2 results in a more natural interpretation when adding entropy
+rate objectives. See Appendix 6 for details.
+12Via e.g. TD(0) value estimation Sutton & Barto (2018).
+13This can be done through any policy gradient algorithm at choice.
+8
+
+4.2 Implementation
+Algorithm 1 Predictability Aware Policy Gradi-
+ent
+Require: Pϕ,πθ, criticsWω, Vξ
+Require: αt, k> 0
+for E epochs do
+D← Trajectory τ of lengthT.
+TrainPϕ from D.
+¯hπ
+sϕ ←1
+T
+∑
+x,u∈τ sϕ(x,u).
+Compute ˆ∇θJ(πθ), ˆ∇θJsϕ(πθ) from τ.
+θ←projΘ
+[
+θ+ αt
+(
+ˆ∇θJ(πθ) −kˆ∇θJsϕ(πθ)
+)]
+Update Sω (and Qξ if used)
+end for
+Policy Learning We implement our predictability-
+aware scheme as first, an on-policy version based on
+an average-reward PPO algorithm Ma et al. (2021); we
+call this PAPPO. In particular, for every collected tra-
+jectory τ, we update the estimate¯hπ
+sϕ and (surrogate)
+entropy value function Wω parameterised by ω ∈ Ω
+from the collected samples, and we compute entropy
+advantages for all(x,u,y,s ϕ(x,u)) in the collected tra-
+jectories as: ˆAπ
+s = sϕ(x,u)−¯hπ
+sϕ+Wω(y)−Wω(x).Then
+we apply the gradient steps as in PPO Schulman et al.
+(2015; 2017) by clipping the policy updates. Second, we
+implement it in an off-policy fashion to compare with
+recent results on information-theoretic RL, based on a
+Soft Actor-Critic (Haarnoja et al., 2018) implementa-
+tion; we call this PASAC. The only modification necessary is the learning of a secondQfunction (S) for the
+surrogate trajectory entropy, and the policy loss is computed as a weighted sum ofQ and S. See Appendix
+C.1 for details on PASAC.
+Model Learning To learn the approximated modelPϕ, we assume the transitions to follow Gaussian
+distributions, similarly to Janner et al. (2019).14 Following the definition ofdifferential entropyof a con-
+tinuous Gaussian distribution, sϕ(x,u) = log( σ2
+xu) + K, where K = 1
+2
+(
+log(2π) + 1). Therefore, we can
+estimate the entropy directly by the variance output of our model. Furthermore, since we only need to
+estimate the variance per transition(x,u) →y, it is sufficient to construct a modelfϕ : X×U→X that
+approximates themean fϕ(x,u) ≈
+∫
+yP(x,u,y )dy, and we do this through minimizing a mean-squared er-
+ror loss of transition samples in our model. Then, we estimate the entropy of an observed transition as
+sϕ(x,u) = log(Ey∼P(x,u,·)[(fϕ(x,u) −y)2]).
+Entropy Rate Computation Given a trained agent, the entropy rates are estimated equally for all
+algorithms. At inference (when rolling out the trained agent), given the trained modelfϕ, the entropy rate
+foratrajectory {(Xt,π(Xt))}0≤t≤T−1 oflength T isestimatedas ¯hπ = 1
+T
+∑T−2
+t=0 log((fϕ(Xt,π(Xt))−Xt+1)2]).
+5 Experiments
+We implemented PARL on a set of robotics and autonomous driving tasks, evaluated the obtained rewards
+and entropy rates, and compared against different baselines. For the MuJoCo hyperparameters, we took pre-
+tuned values from Raffin et al. (2019). For the experiments using PASAC and explicit comparison against
+other SAC-based baselines including RPC (Eysenbach et al. 2021), see Appendix C.1.15
+Rewards, Entropies and Ablation To evaluate the influence of the trade-off parameterk, we test
+PAPPO on MuJoCo tasks and compare to on-policy baselines. We train all agents using the same hyper-
+parameters, and we only vary the trade-offk in the PARL agents to evaluate the influence. Additionally,
+we run both the deterministic and stochastic resulting policies (deterministic chooses the mean action that
+comes out of the policy, stochastic samples from it). The results are reported in Figure 2. Note that, as
+Mujoco tasks have continuous state and action spaces, entropy rates may be negative.16
+14This is a strong assumption, and in many multi-modal problems, it may not be sufficient to capture the dynamics. Note,
+however, that our method is compatible with any representation of learned modelPϕ.
+15We have also designed two additional representative robotic tasks where agents use PARL to avoid unnecessary stochasticity
+in the environment. See the Appendix for these.
+16Recall that, for our implementation, to address continuous state/action tasks, we usedifferential entropy to quantify
+predictability for continuous random variables, which may indeed be negative. A different metric one may use isrelative
+entropy (the KL-divergence from the uniform distribution).
+9
+
+PPO
+k= 0
+.05
+k= 0
+.1
+k= 0
+.25
+k= 0
+.5
+−2
+0
+2
+4
+6
+0
+Rewards (k’s)
+Determ. Stoch.
+PPO
+k= 0
+.05
+k= 0
+.1
+k= 0
+.25
+k= 0
+.5
+−4
+−2
+0
+2
+4
+0
+Entropy Rate
+Determ. Stoch.
+(a) Walker
+PPO
+k= 0
+.05
+k= 0
+.1
+k= 0
+.25
+k= 0
+.5
+−2
+0
+2
+4
+6
+0
+Rewards (k’s)
+Determ. Stoch.
+PPO
+k= 0
+.05
+k= 0
+.1
+k= 0
+.25
+k= 0
+.5
+−10
+−5
+0
+5
+0
+Entropy Rate
+Determ. Stoch.
+(b) Ant
+PPO
+k= 0
+.05
+k= 0
+.1
+k= 0
+.25
+k= 0
+.5
+0
+2
+4
+6
+8
+Rewards (k’s)
+Determ. Stoch.
+PPO
+k= 0
+.05
+k= 0
+.1
+k= 0
+.25
+k= 0
+.5
+−2
+0
+2
+0
+Entropy Rate
+Determ. Stoch.
+(c) HalfCheetah
+Figure 2: Rewards and Entropy rates for PAPPO as a function ofk. Leftmost is PPO baseline.
+Trajectory Complexity in MuJoCoThe effect of entropy-rate minimization and PAPPO on trajectory
+distributions is showcased in Figure 3. We evaluated trained agents over 10 full episodes, and plotted the
+observed trajectories in task space to compare trajectory distributions. We plot as representative variables
+the z-position and angle of the front tip of the robot. In both cases, we observe that PAPPO policies induce
+more regular, clustered trajectories, which suggests smaller distributional complexity. Generally, PAPPO
+trajectories have considerably smaller variance, and visit a smaller portion of the state-space. In the Walker
+and Ant environments this difference is very pronounced, as PAPPO trajectories are concentrated in a tiny
+region of the state-space, and especially in terms of the angles observed, are limited to a much smaller range.
+Predictable Driving We test PAPPO in the Highway Environment (Leurent, 2018), where an agent
+learns to drive at a desired speed while navigating a crowded road with other autonomous agents. The
+agent gets rewarded for tracking the desired speed and penalised for collisions. We consider ahighway and
+a roundabout scenario (see Figure 4). We compare against PPO (Schulman et al., 2017) and DQN Mnih
+et al. (2015)) agents, and take the hyperparameters directly from Leurent (2018). The results are presented
+in Table 1. In the highway environment, agents slow down their speed and stop overtaking (arguably, a
+more predictable driving pattern). This results in longer episode lengths (and larger episodic rewards), but
+lower rewards per time-step (since reward is given for driving faster). In the roundabout scenario, a different
+behaviour emerges: Agents keep a constant high speed to traverse the roundabout as fast as possible, as the
+roundabout is the main source of complexity.
+10
+
+0.8 1.0 1.2 1.4 1.6 1.8
+angle (rad)
+0.000
+0.005
+0.010
+0.015
+0.020
+0.025
+0.030
+0.035pos (m)
+0.6 0.8 1.0 1.2 1.4 1.6 1.8
+angle (rad)
+0.6
+0.4
+0.2
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+pos (m)
+(a) Walker
+0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.4
+0.6
+0.8
+1.0
+1.2position (m)
+0.2 0.4 0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4position (m) (b) Ant
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m) (c) HalfCheetah
+Figure 3: 10 trajectory plots for agents with seed 0. Blue is PPO, orange is PAPPO withk= 0.5.
+Table 1: Results for autonomous driving environments.
+Highway Rewards Ep. Length Avg. Speed Entropy Rate
+DQN 17.51 ±7.73 20.92 ±9.08 6.51 ±0.34 -0.37 ±0.16
+PPO 18.88 ±6.74 24.41 ±8.49 5.62 ±0.10 -0.88 ±0.05
+PAPPOk=0.1 21.05 ±4.03 28.56 ±5.27 5.11 ±0.05 -1.43 ±0.09
+PAPPOk=0.5 21.03 ±2.05 29.60 ±2.64 5.06 ±0.01 -1.51 ±0.09
+PAPPOk=1 20.89 ±2.05 29.61 ±2.58 5.05 ±0.00 -1.51 ±0.06
+Roundabout Rewards Ep. Length Avg. Speed Entropy Rate
+DQN 22.53 ±11.93 26.92 ±14.41 3.09 ±0.47 -0.55 ±0.88
+PPO 29.26 ±10.68 32.92 ±11.67 2.80 ±0.12 -0.23 ±0.27
+PAPPOk=0.1 28.86 ±10.96 32.98 ±12.23 2.65 ±0.50 -0.28 ±0.77
+PAPPOk=0.5 17.99 ±13.34 23.45 ±17.60 3.75 ±0.05 -2.13 ±0.12
+PAPPOk=1 16.83 ±13.28 22.05 ±17.67 3.79 ±0.04 -2.21 ±0.14
+6 Average Reward Formulation
+Through the work we argue that the entropy rate can be efficiently cast and implemented as an aver-
+age reward criterion, to be combined with other primary reward objectives. A natural question to ask
+is how does the formulation of our work adapt to the case where the primary objective is an average
+reward objective over the MDP rewards. Consider the case where we are interested in optimizing a lin-
+ear combination of average reward and entropy rate objectives. Then, we can write the reward objec-
+tive as J(π) = E
+[
+limT→∞ 1
+T
+∑T
+t=0 Rπ
+t
+]
+, and since both the average rewards and the average entropies
+are taken in expectation over the same probability space, the trade-off objective in equation 2 becomes
+arg max
+π∈Π
+J(π) −kJs(π) = E
+[
+limT→∞ 1
+T
+∑T
+t=0 Rπ
+t −ksπ
+t
+]
+, where we already included the surrogate entropy
+sπ
+t = s(Xt,π(Xt)). Further, recall thats(x,u) = Ey∼P(x,u,·)[−log P(x,u,y )]. Then, assuming knowledge of
+P (or an approximation of it), one can define an adjusted reward˜R(x,u,y ) := R(x,u,y ) + klog P(x,u,y )
+and a modified value function˜Vπ
+avg(x) := Eu∼π,y∼P(x,u,·)[R(x,u,y ) + klog P(x,u,y ) −˜gπ + Vπ
+avg(y)], where
+˜gπ = E
+[
+limT→∞ 1
+T
+∑T
+t=0 ˜Rπ
+t
+]
+is the modified reward rate under policyπ (which is independent of the initial
+set of states for ergodic MDPs). Observe that, even though˜R(x,u,y ) ̸= R(x,u,y ) −ks(x,u), they are equal
+in expectation. Then, for any fixed policy, the expected average reward can be computed through˜R, and a
+11
+
+policy π∗solving the optimization problemπ∗∈arg max
+π∈Π
+˜Vπ
+avg(x) ∀x∈X is guaranteed to solve the average
+reward objective. This allows for more compact formulation, and for the learning of a single value function
+(instead of two), which can be desirable in some cases. It also implies that transitions with low probabilities
+of being observed are penalized. Computationally, this is also advantageous since we do not need to compute
+the entropy of the learned model, but instead evaluate the likelihood of the observed transition and adjust
+the rewards accordingly.
+7 Discussion
+Summary of Results We proposed a novel method, namely PARL, that induces more predictable be-
+haviour in RL agents by maximizing a tuneable linear combination of a standard expected reward and the
+negative entropy rate, thus trading-offoptimality with predictability. In the experimental results, we see how
+PARL greatly reduces the entropy rates of the RL agents while achieving near-optimal rewards, depending
+on the trade-off parameter. In the autonomous driving setting, agents learn to be more predictable while
+driving around stochastic agents. In the MuJoCo experiments, PARL obtains policies that yield more clus-
+tered, less complex trajectory distributions, allowing models to predict better the dynamics. This results
+in, for example, a smaller range of values of orientation angles as seen in the trajectory representations on
+Figure 3. Additionally, following our method, the entropy rate can be directly interpreted as the average
+complexity necessary to correctly predict the trajectory of the agents, and if assuming Gaussian predictions,
+this is proportional to the log of the prediction variance observed by the agent’s internal prediction model,
+which shows how lower entropy rates yield predictability.
+Shortcomings Our scheme results in a setting where agents maximize a trade-off between two different
+objectives. This, combined with learning a dynamic model (which is notoriously difficult), introduces imple-
+mentation challenges related to learning multiple coupled models simultaneously. We make an attempt at
+discussing a systematic way of addressing these in the Appendix. Additionally, for many applications, avoid-
+ing high-entropy policies may restrict the ability of RL agents to learn optimal behaviours (see, e.g., results
+in Eysenbach et al. 2021). And although in human-robot interaction and human-aligned AI predictability is
+intuitively beneficial, we cannot claim that minimizing entropy-rates is desirable for all RL applications. Ad-
+ditionally, a question remains regarding how would our method change in partially observable environments.
+The entropy rate of a POMDP (if measured on the state sequence, not on observations) is influenced by the
+policy given an observation, observation probability given a state, and the state transition, resulting in a
+much more difficult object to estimate (see e.g. Savas et al. (2022)). We believe the theoretical and practical
+considerations of minimising entropy rates in POMDPs (in model-free settings) will be a very interesting
+future direction.
+Entropy and Exploration One might wonder if minimizing entropy rates of RL agents may hinder
+exploration. From a theoretical perspective, this is not a problem due to ergodicity. From a practical
+perspective, this undesired effect is highly mitigated by the fact that for the first (many) steps, the agent is
+still learning an adequate model of the dynamics, and therefore the entropy signal is very noisy which favors
+exploration.
+Acknowledgements
+Authors want to thank Alvaro Serra, Lasse Peters, Khaled A. Mustafa and Elia Trevisan for the useful
+discussions on this topic. This research was supported by funding from the Dutch Research Council NWO-
+NWA, within the “Acting under uncertainty” (ACT) project (Grant No. NWA.1292.19.298).
+References
+J. Abounadi, D. Bertsekas, and V. S. Borkar. Learning Algorithms for Markov Decision Processes
+with Average Cost. SIAM Journal on Control and Optimization, 40(3):681–698, January 2001. ISSN
+12
+
+0363-0129, 1095-7138. doi: 10.1137/S0363012999361974. URL http://epubs.siam.org/doi/10.1137/
+S0363012999361974.
+Takuya Akiba, Shotaro Sano, Toshihiko Yanase, Takeru Ohta, and Masanori Koyama. Optuna: A next-
+generation hyperparameter optimization framework. InProceedings of the 25th ACM SIGKDD Interna-
+tional Conference on Knowledge Discovery and Data Mining, 2019.
+Koenraad M R Audenaert. A sharp continuity estimate for the von neumann entropy.Journal of Physics A:
+Mathematical and Theoretical, 40(28):8127, jun 2007. doi: 10.1088/1751-8113/40/28/S18. URL https:
+//dx.doi.org/10.1088/1751-8113/40/28/S18.
+Glen Berseth, Daniel Geng, Coline Manon Devin, Nicholas Rhinehart, Chelsea Finn, Dinesh Jayaraman,
+and Sergey Levine. Smirl: Surprise minimizing reinforcement learning in unstable environments. In
+International Conference on Learning Representations, 2021.
+Fabrizio Biondi, Axel Legay, Bo Friis Nielsen, and Andrzej Wasowski. Maximizing entropy over Markov
+processes. Journal of Logical and Algebraic Methods in Programming, 83(5-6):384–399, September 2014.
+ISSN 23522208. doi: 10.1016/j.jlamp.2014.05.001.
+Vivek S Borkar.Stochastic approximation: a dynamical systems viewpoint, volume 48. Springer, 2009.
+Baptiste Busch, Jonathan Grizou, Manuel Lopes, and Freek Stulp. Learning legible motion from human–
+robot interactions. International Journal of Social Robotics, 9(5):765–779, 2017.
+Micah Carroll, Rohin Shah, Mark K Ho, Tom Griffiths, Sanjit Seshia, Pieter Abbeel, and Anca Dragan. On
+the utility of learning about humans for human-ai coordination. In H. Wallach, H. Larochelle, A. Beygelz-
+imer, F. d'Alché-Buc, E. Fox, and R. Garnett (eds.),Advances in Neural Information Processing Systems,
+volume32.CurranAssociates, Inc., 2019. URLhttps://proceedings.neurips.cc/paper_files/paper/
+2019/file/f5b1b89d98b7286673128a5fb112cb9a-Paper.pdf.
+Maxime Chevalier-Boisvert, Bolun Dai, Mark Towers, Rodrigo de Lazcano, Lucas Willems, Salem Lahlou,
+Suman Pal, Pablo Samuel Castro, and Jordan Terry. Minigrid & miniworld: Modular & customizable
+reinforcement learning environments for goal-oriented tasks.CoRR, abs/2306.13831, 2023.
+Thomas M Cover.Elements of information theory. John Wiley & Sons, 1999.
+AncaD. Dragan, KentonC.T. Lee, andSiddhartha S.Srinivasa. Legibilityandpredictability ofrobotmotion.
+In 2013 8th ACM/IEEE International Conference on Human-Robot Interaction (HRI), pp. 301–308, 2013.
+doi: 10.1109/HRI.2013.6483603.
+Xiaoming Duan, Mishel George, and Francesco Bullo. Markov chains with maximum return time entropy
+for robotic surveillance.IEEE Transactions on Automatic Control, 65(1):72–86, 2019.
+Richard M Dudley.Real analysis and probability. CRC Press, 2018.
+Ben Eysenbach, Russ R Salakhutdinov, and Sergey Levine. Robust predictable control.Advances in Neural
+Information Processing Systems, 34:27813–27825, 2021.
+Mark Fannes. A continuity property of the entropy density for spin lattice systems.Communications in
+Mathematical Physics, 31:291–294, 1973.
+Roy Fox, Ari Pakman, and Naftali Tishby. Taming the noise in reinforcement learning via soft updates.
+arXiv preprint arXiv:1512.08562, 2015.
+Mishel George, Saber Jafarpour, and Francesco Bullo. Markov chains with maximum entropy for robotic
+surveillance. IEEE Transactions on Automatic Control, 64(4):1566–1580, 2018.
+HongliangGuo, QiKang, Wei-YunYau, MarceloH.Ang, andDanielaRus. Em-patroller: Entropymaximized
+multi-robot patrolling with steady state distribution approximation. IEEE Robotics and Automation
+Letters, 8(9):5712–5719, 2023a. doi: 10.1109/LRA.2023.3300245.
+13
+
+Lingxiao Guo, Haoxuan Pan, Xiaoming Duan, and Jianping He. Balancing efficiency and unpredictability in
+multi-robot patrolling: A marl-based approach. In2023 IEEE International Conference on Robotics and
+Automation (ICRA), pp. 3504–3509, 2023b. doi: 10.1109/ICRA48891.2023.10160923.
+Tuomas Haarnoja, Aurick Zhou, Pieter Abbeel, and Sergey Levine. Soft actor-critic: Off-policy maximum
+entropy deep reinforcement learning with a stochastic actor. In International conference on machine
+learning, pp. 1861–1870. PMLR, 2018.
+Seungyul Han and Youngchul Sung. A max-min entropy framework for reinforcement learn-
+ing. In M. Ranzato, A. Beygelzimer, Y. Dauphin, P.S. Liang, and J. Wortman Vaughan
+(eds.), Advances in Neural Information Processing Systems , volume 34, pp. 25732–25745. Curran
+Associates, Inc., 2021. URL https://proceedings.neurips.cc/paper_files/paper/2021/file/
+d7b76edf790923bf7177f7ebba5978df-Paper.pdf.
+Conor F Hayes, Roxana Rădulescu, Eugenio Bargiacchi, Johan Källström, Matthew Macfarlane, Mathieu
+Reymond, TimothyVerstraeten, LuisaMZintgraf, RichardDazeley, FredrikHeintz, etal. Apracticalguide
+to multi-objective reinforcement learning and planning.Autonomous Agents and Multi-Agent Systems, 36
+(1):26, 2022.
+Michael Janner, Justin Fu, Marvin Zhang, and Sergey Levine. When to trust your model: Model-based
+policy optimization. Advances in neural information processing systems, 32, 2019.
+Michael Kearns and Satinder Singh. Near-optimal reinforcement learning in polynomial time. Machine
+learning, 49:209–232, 2002.
+Dongyoung Kim, Jinwoo Shin, Pieter Abbeel, and Younggyo Seo. Accelerating reinforcement learning with
+value-conditional state entropy exploration, 2023.
+Edouard Leurent. An environment for autonomous driving decision-making. https://github.com/
+eleurent/highway-env, 2018.
+Yanyu Liu, Yifeng Zeng, Biyang Ma, Yinghui Pan, Huifan Gao, and Xiaohan Huang. Improvement and
+evaluation of the policy legibility in reinforcement learning. In Proceedings of the 2023 International
+Conference on Autonomous Agents and Multiagent Systems, pp. 3044–3046, 2023.
+XingyuLu, KiminLee, PieterAbbeel, andStasTiomkin. Dynamicsgeneralizationviainformationbottleneck
+in deep reinforcement learning.arXiv preprint arXiv:2008.00614, 2020.
+Xiaoteng Ma, Xiaohang Tang, Li Xia, Jun Yang, and Qianchuan Zhao. Average-reward reinforcement
+learning with trust region methods.arXiv preprint arXiv:2106.03442, 2021.
+Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness, Marc G Bellemare, Alex
+Graves, Martin Riedmiller, Andreas K Fidjeland, Georg Ostrovski, et al. Human-level control through
+deep reinforcement learning.nature, 518(7540):529–533, 2015.
+Mirco Mutti, Lorenzo Pratissoli, and Marcello Restelli. Task-agnostic exploration via policy gradient of a
+non-parametric state entropy estimate. InProceedings of the AAAI Conference on Artificial Intelligence,
+volume 35, pp. 9028–9036, 2021.
+Mirco Mutti, Riccardo De Santi, and Marcello Restelli. The importance of non-markovianity in maximum
+state entropy exploration. InInternational Conference on Machine Learning, pp. 16223–16239. PMLR,
+2022.
+Gergely Neu, Anders Jonsson, and Vicenç Gómez. A unified view of entropy-regularized markov decision
+processes. arXiv preprint arXiv:1705.07798, 2017.
+Seohong Park and Sergey Levine. Predictable mdp abstraction for unsupervised model-based rl. arXiv
+preprint arXiv:2302.03921, 2023.
+14
+
+Jan Peters, Katharina Mulling, and Yasemin Altun. Relative entropy policy search. InProceedings of the
+AAAI Conference on Artificial Intelligence, volume 24, pp. 1607–1612, 2010.
+Silviu Pitis, Harris Chan, Stephen Zhao, Bradly Stadie, and Jimmy Ba. Maximum entropy gain exploration
+for long horizon multi-goal reinforcement learning. In Hal Daumé III and Aarti Singh (eds.),Proceedings
+of the 37th International Conference on Machine Learning, volume 119 ofProceedings of Machine Learn-
+ing Research, pp. 7750–7761. PMLR, 13–18 Jul 2020. URL https://proceedings.mlr.press/v119/
+pitis20a.html.
+Martin L Puterman. Markov decision processes: discrete stochastic dynamic programming. John Wiley &
+Sons, 2014.
+Antonin Raffin, Ashley Hill, Maximilian Ernestus, Adam Gleave, Anssi Kanervisto, and Noah Dormann.
+Stable baselines3, 2019.
+YagizSavas, MelkiorOrnik, MuratCubuktepe, MustafaO.Karabag, andUfukTopcu. EntropyMaximization
+for Markov Decision Processes Under Temporal Logic Constraints. IEEE Transactions on Automatic
+Control, 65(4):1552–1567, April 2020. ISSN 0018-9286, 1558-2523, 2334-3303. doi: 10.1109/TAC.2019.
+2922583. URL https://ieeexplore.ieee.org/document/8735817/.
+Yagiz Savas, Michael Hibbard, Bo Wu, Takashi Tanaka, and Ufuk Topcu. Entropy maximization for partially
+observable markov decision processes.IEEE transactions on automatic control, 67(12):6948–6955, 2022.
+John Schulman, Sergey Levine, Pieter Abbeel, Michael Jordan, and Philipp Moritz. Trust region policy
+optimization. In International conference on machine learning, pp. 1889–1897. PMLR, 2015.
+John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal policy optimiza-
+tion algorithms. arXiv preprint arXiv:1707.06347, 2017.
+Rohin Shah, Noah Gundotra, Pieter Abbeel, and Anca Dragan. On the feasibility of learning, rather
+than assuming, human biases for reward inference. In Kamalika Chaudhuri and Ruslan Salakhutdinov
+(eds.), Proceedings of the 36th International Conference on Machine Learning, volume 97 ofProceedings of
+Machine Learning Research, pp. 5670–5679. PMLR, 09–15 Jun 2019. URLhttps://proceedings.mlr.
+press/v97/shah19a.html.
+Claude E Shannon. A mathematical theory of communication. The Bell system technical journal, 27(3):
+379–423, 1948.
+JoarSkalse, LewisHammond, CharlieGriffin, andAlessandroAbate. Lexicographicmulti-objectivereinforce-
+ment learning. In Lud De Raedt (ed.),Proceedings of the Thirty-First International Joint Conference on
+Artificial Intelligence, IJCAI-22, pp. 3430–3436. International Joint Conferences on Artificial Intelligence
+Organization, 7 2022. doi: 10.24963/ijcai.2022/476. URLhttps://doi.org/10.24963/ijcai.2022/476.
+Main Track.
+Elis Stefansson and Karl H Johansson. Computing complexity-aware plans using kolmogorov complexity. In
+2021 60th IEEE Conference on Decision and Control (CDC), pp. 3420–3427. IEEE, 2021.
+Richard S Sutton and Andrew G Barto.Reinforcement learning: An introduction. MIT press, 2018.
+Richard S Sutton, David McAllester, Satinder Singh, and Yishay Mansour. Policy gradient methods for
+reinforcement learning with function approximation.Advances in neural information processing systems,
+12, 1999.
+Daniil Tiapkin, Denis Belomestny, Daniele Calandriello, Eric Moulines, Remi Munos, Alexey Naumov, Pierre
+Perrault, Yunhao Tang, Michal Valko, and Pierre Menard. Fast rates for maximum entropy exploration.
+In International Conference on Machine Learning, pp. 34161–34221. PMLR, 2023.
+Ronald J Williams and Jing Peng. Function optimization using connectionist reinforcement learning algo-
+rithms. Connection Science, 3(3):241–268, 1991.
+15
+
+Rui Zhao, Xudong Sun, and Volker Tresp. Maximum entropy-regularized multi-goal reinforcement learning.
+In Kamalika Chaudhuri and Ruslan Salakhutdinov (eds.),Proceedings of the 36th International Conference
+on Machine Learning, volume 97 ofProceedings of Machine Learning Research, pp. 7553–7562. PMLR,
+09–15 Jun 2019. URLhttps://proceedings.mlr.press/v97/zhao19d.html.
+Alexander Zimin and Gergely Neu. Online learning in episodic markovian decision processes by relative
+entropy policy search.Advances in neural information processing systems, 26, 2013.
+16
+
+A Auxiliary Results
+We include in this Appendix some existing results used throughout our work. The following Theorem is
+a combination of results presented by Puterman (2014) regarding the existence of optimal average reward
+policies.
+Theorem 3(Average Reward Policies Puterman (2014)). Given an MDPMthe following hold:gπ(x) and
+bπ(x) exist, gπ(x) = gπ for all x (i.e. gπ(x) is constant), and there exists a deterministic, stationary policy
+ˆπ∈argmaxπ∈Π gπ that maximizes the expected average reward. Additionally, the same holds ifUis compact
+and R and P are continuous functions ofU.
+Theorem 4(Stochastic Recursive Inclusions Borkar (2009)). Let xn ∈Rd be a vector following a sequence:
+xn+1 = xn + an(h(xn) + Mn+1 + ηn), (7)
+where supn∥xn∥< ∞a.s., an is a learning rate,h : Rd →Rd is a Lipschitz map, Mn is a Martingale
+difference sequence with respect to theσ−algebra Fn := σ(x0,M1,M2,...,M n) (and square integrable), and
+ηn is an error term bounded byϵ0. Define H := {x∈Rd : h(x) = 0}. Then, for anyδ >0, there exists an
+ϵ> 0 such that∀ϵ0 ∈(0,ϵ) the sequence{xn}converges almost surelyto aδ-neighbourhood ofH.
+Theorem 5(Policy Gradient with Function Approximation Sutton et al. (1999)). Letπθ be a parameterised
+policy andfw : X×U→ R be a parameterised (approximation of) action value function in an MDPM. Let
+the parameterisationbe compatible, i.e. satisfy:
+∂fw(x,u)
+∂w = ∂πθ(x,u)
+∂θ
+1
+πθ(x,u).
+Let the parametersw and θ be updated at each step such that:
+wk :
+∑
+x
+µπθ(x)
+∑
+u
+πθ(x,u)
+(
+Qπθ(x,u) −fwk(x,u)
+)∂fw(x,u)
+∂wk
+= 0,
+θk+1 = θk + αt
+∑
+x
+µπθ(x)
+∑
+u
+∂πθ(x,u)
+∂θ fwk(x,u).
+Then, limk→∞
+∂ρ(θk)
+∂θ = 0, whereρ(θ) is either the discounted or average reward in the MDP.
+B Technical Proofs
+Proof of Lemma 1.For statementa), observelπ(x) can be expressed as
+lπ(x) = −E[P(x,u,y )|u∼π(x)] log
+(
+E[P(x,u,y )|u∼π(x)]
+)
+,
+and recall
+Eu∼π(x)[s(x,u)] = −Eu∼π(x)
+[∑
+y∈X
+P(x,u,y ) log (P(x,u,y ))
+]
+.
+Then, from Jensen’s inequality,Eu∼π(x)[s(x,u)] ≤lπ.
+In Statementb), the fact that¯hπ
+s(x) is constant follows from Theorem 3 by consideringR(x,u,y ) ≡s(x,u).
+Now, note that we can write¯hπ
+s = ∑
+x∈XEu∼π(x)[s(x,u)]µπ(x) and ¯hπ = ∑
+x∈Xlπ(x)µπ(x) (see Puterman
+(2014)). Thus:
+¯hπ
+s =
+∑
+x∈X
+Eu∼π(x)[s(x,u)]µπ(x) ≤
+∑
+x∈X
+lπ(x)µπ(x) = ¯hπ,
+where we employed Statementa).
+For Statementc), takeπ ∈ΠD. Then, π(u′|x) = 1 and π(u|x) = 0 for an actionu′∈U and allu̸= u′.
+Then
+Eu∼π(x)[s(x,u)] =
+∑
+y∈X
+P(x,u′,y) log (P(x,u′,y)) = lπ(x).
+The fact that¯hπ
+s = ¯hπ follows, then, trivially.
+17
+
+Proof of Proposition 1.Observe that s(x,u) and sϕ(x,u) are the entropies of probability distributions
+P(x,u, ·) and Pϕ(x,u, ·), respectively. Thus, the Fannes–Audenaert inequality Audenaert (2007) for two
+probability distributionsp and q states:
+|H(p) −H(q)|≤ 2Tlog(d) −2Tlog(2T),
+where T = |p−q|1
+2 and d is the dimensions of the support of the distributions. Then, takingP(x,u, ·) and
+Pϕ(x,u, ·) as distributions, for any actionu we obtain:
+∥sϕ(x,u) −s(x,u)∥∞≤ϵlog
+(
+|X|
+)
+−ϵlog ϵ=: K(ϵ),
+Finally:
+E
+[
+lim
+T→∞
+1
+T
+T∑
+t=0
+sϕ(Xt,π(Xt)) |X0 ∼µ0
+]
+−¯hπ
+s =
+E
+[
+lim
+T→∞
+1
+T
+T∑
+t=0
+sϕ(Xt,π(Xt)) −s(Xt,π(Xt))
+]
+≤
+E
+[
+lim
+T→∞
+1
+T
+T∑
+t=0
+⏐⏐sϕ(Xt,π(Xt)) −s(Xt,π(Xt))
+⏐⏐
+]
+≤E
+[
+lim
+T→∞
+1
+T
+T∑
+t=0
+K(ϵ)
+]
+= K(ϵ).
+Proof of Proposition 2.Since Sω is linear onω ∈Ω and Ω is compact, there exists at least one minimizer
+ω∗. Now, from equation 1 and Theorem 8.2.6 (Puterman, 2014),Sπ and Sπ
+ϕ can be written in vector form
+(over the statesX) as:
+Sπ = (I−Pπ + P∗
+π)−1(I−P∗
+π)sπ,
+Sπ
+ϕ = (I−Pπ + P∗
+π)−1(I−P∗
+π)sπ
+ϕ,
+where sπ is the vector representation ofs(·,π(·)) (and analogously forsπ
+ϕ). Therefore, from Proposition 1,
+∥Sπ(x) −Sπ
+ϕ(x)∥∞≤K(ϵ). Then, we can write without loss of generality
+Sπ(x,u) = Sπ
+ϕ(x,u) + η(ϵ,x),
+with η(ϵ,x) being O(ϵ) for allx since it is bounded by a functionK(ϵ which isO(ϵ). Finally, we can write
+the parameter iteration as
+ωt+1 = ωt + βt
+[
+−∇ωLπ
+ω + Mt+1 + η(ϵ)
+]
+,
+with Lπ
+ω := E x∼µπ
+u∼πθ(x)
+[
+1
+2 (Sπ(x,u) −Sω(x,u))2
+]
+and the termMt+1 :=
+(
+ˆSπ(x,u) −Sπ(x,u)
+)
+∂Sω(x,u)
+∂ω is a
+Martingale with bounded variance (sinces is bounded).
+Therefore, by Theorem 6 in (Borkar, 2009), the iterates converge to some pointωt →Ω∗
+δ(πθ) almost surely
+as t→∞, withΩ∗
+δ(πθ) being theO(δ) neighbourhood of the stationary points satisfying∇ωLπ
+ω = 0.
+C Experimental Results and Methodology
+We present here the extended experimental results, training curves and additional details corresponding to
+the experimental framework. All experiments were run in a single CPU, running Ubuntu 20.04, and all
+libraries and requirements are properly listed in the paper code.
+18
+
+Figure 4: Self-Driving Environments.
+C.1 Soft Actor-Critic Experiments
+As discussed in Section 4.2, we implemented a version of PARL based on a Soft Actor-Critic implementation
+(Haarnoja et al., 2018). For this, we simply learn in parallel an average reward Q function to optimize the
+entropy rate (Sω), and combine the Q functions to compute the actor objective as:
+Jsac(π) = Ex∼D
+[
+Eu∼π
+[
+αlog π(u|x) −Qξ(x,u)+
++ kSω(x,u)
+]]
+. (8)
+As a baseline for our SAC implementation, we use RPC (Eysenbach et al., 2021), which is another SAC based
+algorithm aiming to maximize rewards while compressing policies to a maximum complexity, to achieve more
+simple, robust and predictable behaviours. Please note, the comparison is merelyqualitative: RPC does not
+optimize for entropy rate in the agent’s behaviour, however simpler policies do induce smaller entropy rates
+(as seen in the reported results) and thus it is still useful as a baseline to evaluate the impact of entropy
+rate objectives in SAC agents. We trained all agents with the same parameters, 5 agents per parameter
+combination and evaluated over 50 independent episodes. For RPC, we trained agents with different policy
+compression rates (2 bits and 5 bits), and for PASAC with two different trade-off parameters (k = 1 and
+k= 0.5). We train both PASAC and RPC with the same architecture for the prediction models (decoder in
+RPC), and we use an identity encoder for RPC to make the prediction models equivalent, and the entropy
+to be estimated in task space (not in a latent space). The results are presented in table 2. We also include
+a DDPG () baseline17 which is an inherently deterministic policy.
+Table 2: Results for MuJoCo environments, Off Policy algorithms.
+Ant Rewards Ep. Length Entropy Rate
+DDPG 1371.23 ± 757.25 899.60 ± 170.73 4.14 ± 0.91
+PASACk=1 6173.43 ± 442.87 997.12 ± 48.45 -0.70 ± 0.12
+PASACk=0.5 5235.99 ± 1268.48 957.72 ± 168.55 -0.27 ± 0.44
+RPC2bit 2084.51 ± 674.39 983.44 ± 108.75 1.81 ± 0.56
+RPC5bit 5640.18 ± 496.67 996.15 ± 60.78 1.92 ± 0.12
+HalfCheetah Rewards Ep. Length Entropy Rate
+DDPG 10829.94 ± 1316.95 1000.0 ± 0.0 3.84 ± 0.10
+PASACk=1 11134.25 ± 1398.77 1000.00 ± 0.0 -0.02 ± 0.21
+PASACk=0.5 11014.73 ± 816.36 1000.00 ± 0.0 0.07 ± 0.22
+RPC2bit 5105.49 ± 470.98 1000.00 ± 0.0 2.94 ± 0.12
+RPC5bit 6003.90 ± 666.42 1000.00 ± 0.0 2.55 ± 0.17
+Hopper Rewards Ep. Length Entropy Rate
+DDPG 1080.03 ± 640.22 343.40 ± 193.73 0.89 ± 0.23
+PASACk=1 1556.92 ± 946.95 479.17 ± 300.50 -4.28 ± 0.30
+PASACk=0.5 2645.24 ± 1140.11 739.70 ± 332.04 -3.69 ± 0.24
+RPC2bit 2667.34 ± 1091.18 732.44 ± 319.22 0.98 ± 0.15
+RPC5bit 2456.70 ± 1236.72 655.78 ± 339.75 1.19 ± 0.09
+17The Ant-v4 DDPG obtain very high variance rewards and entropies. To get a more conservative baseline, we trained 10
+agents and picked the best one in terms of mean reward obtained.
+19
+
+Figure 5: Interactive Tasks. Left is a moving obstacle navigation task where the agent has the option to
+de-activate the obstacles. Right is a navigation problem where the ground is slippery, resulting in random
+motion.
+C.2 Interactive Robot Tasks
+We created two tasks inspired by real human-robot use-cases, where it is beneficial for agents to avoid high
+entropy state-space regions. These are based on Minigrid environments Chevalier-Boisvert et al. (2023), see
+Figure 5. The agents can execute actionsU= {forward,turn-left,turn-right,toggle}, and the observation
+space is X = Rn such that the observation includes the robot’s position and orientation, the position of
+obstacles and the state of environment features (e.g. the switch). In both tasks, the agent gets a reward of1
+for reaching the goal, or a negative reward of−1 for colliding or falling in the lava. Both grid environments
+were wrapped in a normalizing vectorized wrapper, to normalize observations, but the model data was kept
+un-normalized.
+Task 1: Turning Off ObstaclesThis task is designed as a dynamic obstacle navigation task, where the
+motion of the obstacles can be stopped (the obstacles can be switched off) by the agent toggling a switch at
+a small cost of rewards. The environment is depicted in Figure 5 (left). The switch is to the left of the agent,
+shown as a green bar (orange if off). The agent gets a reward ofr = 0.95 if it turns the obstacle off. The
+intuition behind this task is that agents do not learn to turn off the obstacles, and attempt to navigate the
+environment. This, however, induces less predictable dynamics since the obstacle keeps adding noise to the
+observation, and the agent is forced to take high variance trajectories to avoid it. Our Predictability-Aware
+algorithm converges to policies that consistently disable the stochasticity of the obstacles, navigating the
+environment freely afterwards, while staying near-optimal.
+Task 2: Slippery Navigation The second task is inspired by a cliff navigation environment, where a
+large portion of the ground is slippery, but a path around it is not. In this problem, the slippery part has
+uncertain transitions (i.e. a given action does not yield always the same result, because the robot might slip),
+but the non-slippery path induces deterministic behaviour (the robot follows the direction dictated by the
+action). The agent needs to navigate to the green square avoiding the lava. If it enters theslippery region,
+it has a probability ofp = 0 .35 of spinning and changing direction randomly. The intuition behind this
+environment is that PPO agents do not learn to avoid the slippery regions, resulting in higher entropy rates
+and less predictable behaviours. On the contrary, PAPPO agents consistently avoid the slippery regions.
+This can be seen in Figure 6.
+C.3 MuJoCo Experiments
+We include here the full set of trajectory plots in task space, both forz position of the front tip versus angle
+of the front tip, andx-y velocities of the front tip (See Figures 7, 8, 9, 10, 11 and 12). Additionally, we
+include in tables 4 and 3 the full numerical results for the simulated agents. Each result is reported computed
+for 10 independently trained agents, and each agent evaluated over 50 independent trajectories.
+20
+
+π⋆
+π∗
+(a) Dyn Obstacle Env.
+xf
+x0
+π⋆
+π∗ (b) Slippery Nav. Env.
+Figure 6: 2D trajectory projections. Blue is a PPO policy, orange is a PAPPO policy.
+Table 3: Results for MuJoCo environments, Stochastic Policies.
+Walker Rewards Ep. Length Entropy Rate
+PPO 2466.27 ± 1329.71 638.29 ± 296.82 1.19 ± 0.40
+PAPPOk=0.05 2430.12 ± 1199.45 626.77 ± 263.34 0.36 ± 0.74
+PAPPOk=0.1 2047.30 ± 1106.09 551.40 ± 252.01 0.06 ± 0.61
+PAPPOk=0.25 1315.47 ± 910.03 550.18 ± 296.42 -1.26 ± 1.79
+PAPPOk=0.5 1072.88 ± 980.41 648.38 ± 358.74 -1.90 ± 1.16
+Ant Rewards Ep. Length Entropy Rate
+PPO 2459.29 ± 1411.75 734.79 ± 342.21 0.80 ± 0.27
+PAPPOk=0.05 2510.29 ± 1504.11 774.54 ± 343.79 0.66 ± 0.24
+PAPPOk=0.1 2107.21 ± 1195.23 786.88 ± 330.96 -0.04 ± 1.64
+PAPPOk=0.25 1497.67 ± 854.79 950.96 ± 186.39 -3.54 ± 3.04
+PAPPOk=0.5 1204.47 ± 1076.30 987.53 ± 87.62 -5.00 ± 1.98
+HalfCheetah Rewards Ep. Length Entropy Rate
+PPO 4150.53 ± 1645.16 1000.0 ± 0.0 1.01 ± 0.34
+PAPPOk=0.05 3575.56 ± 1743.91 1000.0 ± 0.0 0.46 ± 0.45
+PAPPOk=0.1 4482.48 ± 1679.52 1000.0 ± 0.0 0.31 ± 0.25
+PAPPOk=0.25 4427.07 ± 1930.60 1000.0 ± 0.0 -0.27 ± 0.74
+PAPPOk=0.5 3962.70 ± 1822.80 1000.0 ± 0.0 -0.54 ± 0.99
+Trajectory Representations As expected, the observed trajectories for the case of PARL agents present
+a much less complex (lower entropy) distribution. In particular, for the slippery navigation task where agents
+have the choice of taking fully deterministic paths, it is even more obvious that the PARL agent chooses to
+execute the same trajectory over and over, where PPO agents result in a more complex distribution due to
+the traversing of the stochastic regions.
+C.4 Learning Results
+We include the learning curves for the trained agents on all the environments included in the paper.
+C.5 Model Learning
+Our proposed predictable RL scheme consists of a model-based architecture where the agent learns simulta-
+neously a modelPϕ for the transition function and a policyπθ and value functionsVξ, Wω for the discounted
+rewards and entropy rates. Simultaneously to a policy and a value function, we learn a modelPϕ to ap-
+proximate the transitions (means) in the environment. For this, we train a neural network with inputs
+(x,u) ∈X×U and outputs the mean next state¯yxu. The model is trained using the MSE loss for stored
+data D= {(x,u,y )}:
+Ly = 1
+2|D|
+∑
+D
+(
+¯yxu −y
+)2
+.
+We do this by considering D to be a replay buffer (to reduce bias towards current policy parameters),
+and at each iteration we performK mini-batch updates of the model sampling uniformly from the buffer.
+Additionally, we pre-train the model a set number of steps before beginning to update the agents, by
+running a fixed number of environment steps with a randomly initialised policy, and training the model on
+this preliminary data. All models are implemented as feed-forward networks with ReLU activations.
+21
+
+0.6 0.8 1.0 1.2 1.4 1.6 1.8
+angle (rad)
+0.6
+0.4
+0.2
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+pos (m)
+0.75 1.00 1.25 1.50 1.75 2.00 2.25
+angle (rad)
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+pos (m)
+0.75 1.00 1.25 1.50 1.75 2.00 2.25 2.50
+angle (rad)
+0.6
+0.4
+0.2
+0.0
+0.2
+0.4
+0.6
+0.8
+pos (m)
+0.8 1.0 1.2 1.4 1.6 1.8
+angle (rad)
+0.00
+0.01
+0.02
+0.03
+0.04pos (m)
+0.8 1.0 1.2 1.4 1.6 1.8
+angle (rad)
+0.04
+0.03
+0.02
+0.01
+0.00
+0.01
+0.02
+0.03
+0.04
+pos (m)
+0.6 0.8 1.0 1.2 1.4 1.6 1.8
+angle (rad)
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2pos (m)
+0.6 0.8 1.0 1.2 1.4 1.6 1.8
+angle (rad)
+0.0
+0.2
+0.4
+0.6
+0.8pos (m)
+0.6 0.8 1.0 1.2 1.4 1.6 1.8 2.0
+angle (rad)
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0pos (m)
+0.50 0.75 1.00 1.25 1.50 1.75 2.00 2.25
+angle (rad)
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2pos (m)
+0.8 1.0 1.2 1.4 1.6 1.8
+angle (rad)
+0.075
+0.050
+0.025
+0.000
+0.025
+0.050
+0.075
+pos (m)
+0.8 1.0 1.2 1.4 1.6 1.8
+angle (rad)
+0.04
+0.02
+0.00
+0.02
+0.04
+pos (m)
+0.6 0.8 1.0 1.2 1.4 1.6 1.8 2.0
+angle (rad)
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2pos (m)
+0.75 1.00 1.25 1.50 1.75 2.00 2.25 2.50
+angle (rad)
+0.2
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+pos (m)
+0.6 0.8 1.0 1.2 1.4 1.6 1.8
+angle (rad)
+0.4
+0.2
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+pos (m)
+0.6 0.8 1.0 1.2 1.4 1.6 1.8 2.0
+angle (rad)
+0.6
+0.4
+0.2
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+pos (m)
+0.8 1.0 1.2 1.4 1.6 1.8
+angle (rad)
+0.000
+0.005
+0.010
+0.015
+0.020
+0.025
+0.030
+0.035pos (m)
+0.6 0.8 1.0 1.2 1.4 1.6 1.8
+angle (rad)
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4pos (m)
+0.6 0.8 1.0 1.2 1.4 1.6 1.8 2.0
+angle (rad)
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0pos (m)
+0.75 1.00 1.25 1.50 1.75 2.00 2.25
+angle (rad)
+0.2
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+pos (m)
+0.8 1.0 1.2 1.4 1.6 1.8
+angle (rad)
+0.00
+0.05
+0.10
+0.15
+0.20pos (m)
+Figure 7: Walker Trajectory Plots,x-axis is torso angle in radians,y-axis is z coordinate position of the
+torso. Blue are PPO agents, orange are PARL agents.
+0 2 4 6 8
+vx (m/s)
+3
+2
+1
+0
+1
+2
+3
+vz (m/s)
+1
+ 0 1 2 3 4 5 6
+vx (m/s)
+6
+4
+2
+0
+2
+4
+6
+vz (m/s)
+2
+ 0 2 4 6
+vx (m/s)
+4
+2
+0
+2
+4
+vz (m/s)
+0.1
+ 0.0 0.1 0.2
+vx (m/s)
+1.00
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+1.00
+vz (m/s)
+0.3
+ 0.2
+ 0.1
+ 0.0 0.1 0.2 0.3
+vx (m/s)
+1.00
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+1.00
+vz (m/s)
+0 1 2 3 4 5 6 7 8
+vx (m/s)
+4
+2
+0
+2
+4
+vz (m/s)
+0 1 2 3 4 5 6 7 8
+vx (m/s)
+2
+1
+0
+1
+2
+vz (m/s)
+0 1 2 3 4 5 6 7
+vx (m/s)
+4
+2
+0
+2
+4
+vz (m/s)
+0 1 2 3 4 5 6
+vx (m/s)
+4
+2
+0
+2
+4
+vz (m/s)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+vx (m/s)
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+vz (m/s)
+0.4
+ 0.2
+ 0.0 0.2 0.4
+vx (m/s)
+1.0
+0.5
+0.0
+0.5
+1.0
+vz (m/s)
+0 1 2 3 4 5
+vx (m/s)
+4
+3
+2
+1
+0
+1
+2
+3
+4
+vz (m/s)
+1
+ 0 1 2 3 4 5 6
+vx (m/s)
+4
+2
+0
+2
+4
+vz (m/s)
+0 2 4 6 8
+vx (m/s)
+3
+2
+1
+0
+1
+2
+3
+vz (m/s)
+0 1 2 3 4 5 6 7
+vx (m/s)
+3
+2
+1
+0
+1
+2
+3
+vz (m/s)
+0.05
+ 0.00 0.05 0.10 0.15 0.20 0.25
+vx (m/s)
+1.00
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+1.00
+vz (m/s)
+1 2 3 4
+vx (m/s)
+3
+2
+1
+0
+1
+2
+3
+vz (m/s)
+0 1 2 3 4 5 6
+vx (m/s)
+3
+2
+1
+0
+1
+2
+3
+4
+5
+vz (m/s)
+0 2 4 6 8 10
+vx (m/s)
+3
+2
+1
+0
+1
+2
+3
+4
+vz (m/s)
+0.6
+ 0.4
+ 0.2
+ 0.0 0.2 0.4 0.6
+vx (m/s)
+1.0
+0.5
+0.0
+0.5
+1.0
+vz (m/s)
+Figure 8: Walker Trajectory Plots,xaxis isxvelocity,y axis isy velocity. Blue are PPO agents, orange are
+PARL agents.
+22
+
+0.2 0.4 0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4position (m)
+0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4position (m)
+0.4 0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4position (m)
+0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.4
+0.6
+0.8
+1.0position (m)
+0.4 0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4position (m)
+0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.4
+0.6
+0.8
+1.0position (m)
+0.2 0.4 0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4position (m)
+0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00 1.25
+angle (rad)
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4position (m)
+0.4 0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4position (m)
+0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.4
+0.6
+0.8
+1.0
+1.2position (m)
+0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.4
+0.6
+0.8
+1.0
+1.2position (m)
+0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0
+1.1position (m)
+0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4position (m)
+0.4 0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2position (m)
+0.4 0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2position (m)
+0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.4
+0.6
+0.8
+1.0
+1.2position (m)
+0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0position (m)
+0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0
+1.1position (m)
+0.4 0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2position (m)
+0.6 0.8 1.0 1.2 1.4
+angle (rad)
+0.4
+0.6
+0.8
+1.0position (m)
+Figure 9: Ant Trajectory Plots,x-axis is torso angle in radians,y-axis isz coordinate position of the torso.
+Blue are PPO agents, orange are PARL agents.
+1
+ 0 1 2 3 4 5 6 7
+vx (m/s)
+2
+1
+0
+1
+2
+3
+4
+vz (m/s)
+0 2 4 6 8 10
+vx (m/s)
+6
+4
+2
+0
+2
+4
+6
+vz (m/s)
+0 1 2 3 4 5
+vx (m/s)
+2
+1
+0
+1
+2
+vz (m/s)
+0.2
+ 0.0 0.2 0.4 0.6 0.8 1.0
+vx (m/s)
+0.6
+0.4
+0.2
+0.0
+0.2
+0.4
+0.6
+vz (m/s)
+0 2 4 6 8 10
+vx (m/s)
+3
+2
+1
+0
+1
+2
+3
+4
+5
+vz (m/s)
+0.2
+ 0.0 0.2 0.4 0.6 0.8 1.0 1.2
+vx (m/s)
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4vz (m/s)
+0 2 4 6 8
+vx (m/s)
+4
+2
+0
+2
+4
+vz (m/s)
+2
+ 1
+ 0 1 2 3 4 5 6
+vx (m/s)
+2
+1
+0
+1
+2
+3
+4
+vz (m/s)
+0 2 4 6 8 10
+vx (m/s)
+8
+6
+4
+2
+0
+2
+4
+6
+8
+vz (m/s)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+vx (m/s)
+0.2
+0.0
+0.2
+0.4
+0.6
+0.8
+vz (m/s)
+0.25
+ 0.00 0.25 0.50 0.75 1.00 1.25
+vx (m/s)
+0.6
+0.4
+0.2
+0.0
+0.2
+0.4
+0.6
+0.8
+vz (m/s)
+0.2
+ 0.0 0.2 0.4 0.6
+vx (m/s)
+0.6
+0.4
+0.2
+0.0
+0.2
+0.4
+0.6
+vz (m/s)
+1 2 3 4 5 6 7
+vx (m/s)
+3
+2
+1
+0
+1
+2
+3
+4
+vz (m/s)
+0 2 4 6 8
+vx (m/s)
+4
+3
+2
+1
+0
+1
+2
+3
+4
+vz (m/s)
+0 2 4 6 8
+vx (m/s)
+4
+3
+2
+1
+0
+1
+2
+3
+4
+vz (m/s)
+0.4
+ 0.2
+ 0.0 0.2 0.4 0.6
+vx (m/s)
+0.5
+0.0
+0.5
+1.0
+1.5
+vz (m/s)
+1.0
+ 0.5
+ 0.0 0.5 1.0
+vx (m/s)
+1.00
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+1.00
+vz (m/s)
+0.4
+ 0.2
+ 0.0 0.2 0.4 0.6 0.8 1.0
+vx (m/s)
+0.2
+0.0
+0.2
+0.4
+0.6
+vz (m/s)
+0 2 4 6 8 10
+vx (m/s)
+2
+1
+0
+1
+2
+3
+4
+vz (m/s)
+0.2
+ 0.0 0.2 0.4 0.6 0.8 1.0 1.2
+vx (m/s)
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+1.00
+vz (m/s)
+Figure 10: Ant Trajectory Plots,x axis isx velocity,y axis isy velocity. Blue are PPO agents, orange are
+PARL agents.
+23
+
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+1.00
+ 0.75
+ 0.50
+ 0.25
+ 0.00 0.25 0.50 0.75 1.00
+angle (rad)
+0.4
+0.3
+0.2
+0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+position (m)
+Figure 11: HalfCheetah Trajectory Plots,x-axis is torso angle in radians,y-axis isz coordinate position of
+the torso. Blue are PPO agents, orange are PARL agents.
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+2.0
+ 1.5
+ 1.0
+ 0.5
+ 0.0 0.5 1.0 1.5 2.0
+vx (m/s)
+2.0
+1.5
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+vy (m/s)
+Figure 12: HalfCheetah Trajectory Plots,x axis is x velocity, y axis is y velocity. Blue are PPO agents,
+orange are PARL agents.
+24
+
+Table 4: Results for MuJoCo environments, Deterministic policies.
+Walker Rewards Ep. Length Entropy Rate
+PPO 3144.66 ± 1428.29 769.80 ± 297.99 0.74 ± 0.43
+PAPPOk=0.05 3413.70 ± 1062.22 848.21 ± 218.93 -0.16 ± 0.79
+PAPPOk=0.1 2278.67 ± 1352.92 598.13 ± 301.35 -0.20 ± 0.58
+PAPPOk=0.25 1794.17 ± 1331.01 662.40 ± 319.09 -1.51 ± 1.84
+PAPPOk=0.5 1212.20 ± 1201.21 672.42 ± 368.88 -1.98 ± 1.12
+Ant Rewards Ep. Length Entropy Rate
+PPO 3013.54 ± 1524.71 808.31 ± 313.55 0.52 ± 0.38
+PAPPOk=0.05 3185.06 ± 1490.56 883.68 ± 260.07 0.27 ± 0.54
+PAPPOk=0.1 2633.50 ± 1336.18 829.38 ± 301.95 -0.41 ± 2.17
+PAPPOk=0.25 1611.57 ± 963.54 964.98 ± 155.04 -4.77 ± 3.83
+PAPPOk=0.5 1218.27 ± 1129.12 986.36 ± 99.72 -6.44 ± 2.53
+HalfCheetah Rewards Ep. Length Entropy Rate
+PPO 5192.49 ± 1181.34 1000.0 ± 0.0 0.82 ± 0.31
+PAPPOk=0.05 5115.65 ± 1178.23 1000.0 ± 0.0 0.27 ± 0.54
+PAPPOk=0.1 5342.42 ± 1215.20 1000.0 ± 0.0 0.11 ± 0.26
+PAPPOk=0.25 5686.88 ± 1096.06 1000.0 ± 0.0 -0.37 ± 0.40
+PAPPOk=0.5 4462.63 ± 1740.05 1000.0 ± 0.0 -0.97 ± 0.96
+0 50000 100000 150000 200000 250000 300000 350000 400000
+Steps
+0
+1
+2
+3
+4
+5Returns
+0 100000 200000 300000 400000
+Steps
+10
+20
+30
+40
+50
+60Ep Length
+0 100000 200000 300000 400000
+Steps
+−4
+−3
+−2
+−1
+Entropy Rate
+PPO PARL
+Figure 13: Training results for Slippery Navigation task.
+Entropy estimation We found that it is more numerically stable to use the variance estimations as the
+surrogate entropy (we do this since thelog function is monotonically increasing, and thus maximizing the
+variancemaximizesthelogarithmofthevariance). Thispreventedentropyvaluestoexplodeforenvironments
+where some of the transitions are deterministic, thus yielding very large (negative) entropies.
+C.6 Tuning and Hyperparamters
+The tuning of PARL, due to its modular structure, can be done through the following steps:
+1. Tune (adequate) parameters for vanilla RL algorithm used (e.g. PPO).
+2. Without the predictable objectives, tune the model learning parameters using the vanilla hyperpa-
+rameters.
+3. Freezing both agent and model parameters, tune the trade-off parameter k and specific PARL
+parameters (e.g. entropy value function updates) to desired behaviours.
+For our experiments, we took PPO and SAC parameters tuned from Stable-Baselines3 Raffin et al. (2019)
+and Haarnoja et al. (2018), and used automatic hyperparameter tuning Akiba et al. (2019) for model and
+predictability parameters. In the implementation we introduced a delay parameter to allow agents to start
+optimizing the policy for some steps without minimizing the entropy rate. For all hyperparameters used in
+every environment and implementation details we refer the reader to the project repository.
+25
+
+0 100000 200000 300000 400000 500000
+Steps
+1
+2
+3
+4Returns
+0 100000 200000 300000 400000 500000
+Steps
+25
+50
+75
+100
+125
+150Ep Length
+0 100000 200000 300000 400000 500000
+Steps
+−1.0
+−0.5
+0.0
+0.5
+Entropy Rate
+PPO PARL
+Figure 14: Training results for Obstacle Navigation task.
+10000 20000 30000 40000 50000 60000 70000
+Steps
+12
+14
+16
+18
+20Returns
+10000 20000 30000 40000 50000 60000 70000
+Steps
+15.0
+17.5
+20.0
+22.5
+25.0
+27.5
+30.0
+Ep Length
+10000 20000 30000 40000 50000 60000 70000
+Steps
+−0.5
+0.0
+0.5
+1.0
+1.5
+2.0
+Entropy Rate
+PPO PARL (k = 0.1) PARL (k = 0.5) PARL (k = 1)
+Figure 15: Training results for Highway environment.
+0 50000 100000 150000 200000 250000 300000
+Steps
+15
+20
+25
+30Returns
+0 50000 100000 150000 200000 250000 300000
+Steps
+20.0
+22.5
+25.0
+27.5
+30.0
+32.5
+35.0
+Ep Length
+0 50000 100000 150000 200000 250000 300000
+Steps
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4
+Entropy Rate
+PPO PARL (k = 0.1) PARL (k = 0.5) PARL (k = 1)
+Figure 16: Training results for Roundabout environment.
+0.0 0.2 0.4 0.6 0.8 1.0
+Steps ×106
+0
+1000
+2000
+3000
+4000
+5000Returns
+0.0 0.2 0.4 0.6 0.8 1.0
+Steps ×106
+960
+980
+1000
+1020
+1040Ep Length
+0.0 0.2 0.4 0.6 0.8 1.0
+Steps ×106
+−1
+0
+1
+2
+Entropy Rate
+PPO PARL (k = 0.05) PARL (k = 0.1) PARL (k = 0.25) PARL (k = 0.5) PARL (k = 1)
+Figure 17: Training results for HalfCheetah-v4 environment.
+0.0 0.2 0.4 0.6 0.8 1.0
+Steps ×106
+0
+500
+1000
+1500
+2000
+2500Returns
+0.0 0.2 0.4 0.6 0.8 1.0
+Steps ×106
+0
+200
+400
+600
+800Ep Length
+0.0 0.2 0.4 0.6 0.8 1.0
+Steps ×106
+−2
+0
+2
+4
+Entropy Rate
+PPO PARL (k = 0.05) PARL (k = 0.1) PARL (k = 0.25) PARL (k = 0.5) PARL (k = 1)
+Figure 18: Training results for Walker2d-v4 environment.
+26
+
+0.0 0.2 0.4 0.6 0.8 1.0
+Steps ×106
+1000
+1500
+2000
+2500Returns
+0.0 0.2 0.4 0.6 0.8 1.0
+Steps ×106
+700
+800
+900
+1000Ep Length
+0.0 0.2 0.4 0.6 0.8 1.0
+Steps ×106
+−2
+−1
+0
+1
+2
+Entropy Rate
+PPO PARL (k = 0.05) PARL (k = 0.1) PARL (k = 0.25) PARL (k = 0.5) PARL (k = 1)
+Figure 19: Training results for Ant-v4 environment.
+27 chars
+ERROR:chat.postgres.url_embedding_operations:Database connection error: duplicate key value violates unique constraint "embedding_v1_unique_idx"
+DETAIL:  Key (type_id, type, section_id)=(10001, user, 0) already exists.
+
+ERROR:chat.postgres.url_embedding_operations:Error saving user URL embeddings: duplicate key value violates unique constraint "embedding_v1_unique_idx"
+DETAIL:  Key (type_id, type, section_id)=(10001, user, 0) already exists.
+
+ERROR:chat.attachment.file_attachment_manager:❌ Failed to create embedding for URL: https://arxiv.org/pdf/2311.18703.pdf...
+WARNING:asyncio:Executing <Task finished name='Task-97' coro=<FileAttachmentManager._create_url_embedding_sync() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/attachment/file_attachment_manager.py:264> result=False created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 102.651 seconds
+INFO:chat.rag.rag_processor:🔄 Embedding query: Compare this paper with my notes on AI and suggest research improvements...
+INFO:chat.rag.rag_processor:🔄 Resolving IDs for user 10001...
+INFO:chat.rag.rag_processor:=== ID RESOLUTION WITH CORRECTED SCOPED SEARCH ===
+INFO:chat.rag.rag_processor:User: 10001
+INFO:chat.rag.rag_processor:Note IDs: None
+INFO:chat.rag.rag_processor:Folder IDs: None
+INFO:chat.rag.rag_processor:Conversation IDs: None
+INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Getting all user content
+ERROR:chat.attachment.file_attachment_manager:❌ Embedding failed for URL: https://arxiv.org/pdf/2311.18703.pdf...
+INFO:chat.attachment.file_attachment_manager:🎯 SYNC EMBEDDING COMPLETE: 0/1 URLs embedded successfully
+[2025-07-19 22:13:03 -0700] [73071] [INFO] 127.0.0.1:49555 POST /v1/multi-agent/response 1.1 - - 102724092
+INFO:chat.postgres.db_manager:Resolved 9 total user notes
+WARNING:chat.attachment.file_attachment_manager:No embeddings found for URL: https://arxiv.org/pdf/2311.18703.pdf
+INFO:chat.attachment.file_attachment_manager:⚠️ URL https://arxiv.org/pdf/2311.18703.pdf: No relevant chunks found
+INFO:chat.attachment.file_attachment_manager:🎯 File attachment processing complete: 0 total chunks from 0 URLs
+INFO:chat.attachment.file_attachment_manager:📊 Chunk breakdown: 0 image chunks, 0 text chunks
+INFO:chat.postgres.db_manager:Resolved 9 total user conversations
+INFO:chat.rag.rag_processor:=== RESOLVED WITH CORRECTED LOGIC ===
+INFO:chat.rag.rag_processor:Notes: 9
+INFO:chat.rag.rag_processor:Conversations: 9
+INFO:chat.rag.rag_processor:Search type: FULL CONTEXT
+INFO:chat.rag.rag_processor:==================

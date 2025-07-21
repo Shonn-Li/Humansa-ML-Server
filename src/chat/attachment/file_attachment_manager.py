@@ -407,6 +407,10 @@ class FileAttachmentManager:
             List of (chunk_data, similarity_score) tuples
         """
         try:
+            # Check if this is a generic query that needs document overview
+            generic_queries = ['summarize', 'summary', 'analyze', 'explain', 'what is', 'overview', 'about']
+            is_generic_query = any(keyword in query.lower() for keyword in generic_queries)
+            
             # Get query embedding using the embedding manager
             query_embedding = await embedding_manager.get_query_embedding(query)
 
@@ -434,20 +438,46 @@ class FileAttachmentManager:
 
             # For explicit attachments, always include at least the top chunk
             if is_explicit_attachment and all_scored_chunks:
-                # Always include the highest scoring chunk
-                scored_chunks.append(all_scored_chunks[0])
-                logger.info(
-                    f"📎 Including top chunk for explicit attachment (similarity: {all_scored_chunks[0][1]:.3f})")
+                # For generic queries on explicit attachments, include first chunks and lower threshold
+                if is_generic_query:
+                    logger.info(f"📎 Generic query detected: '{query}' - using document overview strategy")
+                    
+                    # Include first 2-3 chunks regardless of similarity (document beginning)
+                    for i, chunk in enumerate(url_chunks[:3]):
+                        if i < len(all_scored_chunks):
+                            # Find this chunk in scored chunks
+                            for scored_chunk, sim in all_scored_chunks:
+                                if scored_chunk.get('section_id') == chunk.get('section_id'):
+                                    scored_chunks.append((scored_chunk, sim))
+                                    logger.info(f"📎 Including chunk {i} (section_id: {chunk.get('section_id')}) for document overview")
+                                    break
+                    
+                    # Then add high-scoring chunks with very low threshold
+                    threshold = 0.3  # Very low threshold for generic queries
+                    for chunk, similarity in all_scored_chunks:
+                        # Skip if already added
+                        if any(c[0].get('section_id') == chunk.get('section_id') for c in scored_chunks):
+                            continue
+                        if similarity >= threshold:
+                            scored_chunks.append((chunk, similarity))
+                            logger.info(f"📎 Including chunk (similarity: {similarity:.3f} >= {threshold})")
+                        if len(scored_chunks) >= top_k:
+                            break
+                else:
+                    # Always include the highest scoring chunk
+                    scored_chunks.append(all_scored_chunks[0])
+                    logger.info(
+                        f"📎 Including top chunk for explicit attachment (similarity: {all_scored_chunks[0][1]:.3f})")
 
-                # Add additional chunks that meet the lower threshold for explicit attachments
-                threshold = self.explicit_attachment_threshold
-                for chunk, similarity in all_scored_chunks[1:]:
-                    if similarity >= threshold:
-                        scored_chunks.append((chunk, similarity))
-                        logger.info(
-                            f"📎 Including additional chunk (similarity: {similarity:.3f} >= {threshold})")
-                    if len(scored_chunks) >= top_k:
-                        break
+                    # Add additional chunks that meet the lower threshold for explicit attachments
+                    threshold = self.explicit_attachment_threshold
+                    for chunk, similarity in all_scored_chunks[1:]:
+                        if similarity >= threshold:
+                            scored_chunks.append((chunk, similarity))
+                            logger.info(
+                                f"📎 Including additional chunk (similarity: {similarity:.3f} >= {threshold})")
+                        if len(scored_chunks) >= top_k:
+                            break
             else:
                 # Standard filtering: only chunks above regular threshold
                 threshold = self.similarity_threshold
@@ -512,6 +542,7 @@ class FileAttachmentManager:
             logger.info(
                 f"📸 Adding {len(image_chunks)} image chunks (always included)")
             for chunk in image_chunks:
+                # For image chunks, use smaller preview (500 chars)
                 chunk_text = f"{chunk.chunk_header}\n{chunk.chunk_text[:500]}{'...' if len(chunk.chunk_text) > 500 else ''}\n"
 
                 if current_length + len(chunk_text) > max_length:
@@ -527,7 +558,9 @@ class FileAttachmentManager:
             logger.info(
                 f"📄 Adding {len(chunks)} text chunks (similarity filtered)")
             for i, chunk in enumerate(chunks):
-                chunk_text = f"{chunk.chunk_header}\n{chunk.chunk_text[:500]}{'...' if len(chunk.chunk_text) > 500 else ''}\n"
+                # For text chunks from PDFs/documents, use larger preview (2000 chars) for better context
+                max_chunk_chars = 2000 if 'pdf' in chunk.chunk_header.lower() or 'document' in chunk.source else 500
+                chunk_text = f"{chunk.chunk_header}\n{chunk.chunk_text[:max_chunk_chars]}{'...' if len(chunk.chunk_text) > max_chunk_chars else ''}\n"
 
                 if current_length + len(chunk_text) > max_length:
                     logger.info(

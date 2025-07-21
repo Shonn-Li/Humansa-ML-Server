@@ -9,7 +9,7 @@ import asyncio
 import json
 from datetime import datetime
 
-ML_SERVER_URL = "http://localhost:5001"
+ML_SERVER_URL = "http://localhost:5002"
 
 async def check_ml_server():
     """Check ML server health and configuration"""

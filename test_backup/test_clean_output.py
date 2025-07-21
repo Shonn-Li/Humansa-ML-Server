@@ -14,7 +14,7 @@ import sys
 class CleanAgentTester:
     def __init__(self):
         self.client = httpx.AsyncClient(timeout=60.0)
-        self.base_url = "http://localhost:5001/v1/multi-agent/response"
+        self.base_url = "http://localhost:5002/v1/multi-agent/response"
         
     async def test_query(self, name: str, query: str, attachments: List[str] = None) -> Dict:
         """Test a single query and return clean results"""

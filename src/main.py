@@ -164,7 +164,7 @@ def create_app():
         return jsonify({
             "status": "healthy",
             "service": "ml-server",
-            "port": 5001,
+            "port": int(os.getenv('ML_SERVER_PORT', '5001')),
             "timestamp": str(__import__('datetime').datetime.now())
         })
 
@@ -684,8 +684,17 @@ if not os.getenv('DEBUG_AZURE_WARNINGS'):
 app = create_app()
 
 if __name__ == "__main__":
+    # Get port from environment variable or command line argument
+    import argparse
+    parser = argparse.ArgumentParser(description='YouWoAI ML Server')
+    parser.add_argument('--port', type=int, default=int(os.getenv('ML_SERVER_PORT', '5001')),
+                        help='Port to run the server on (default: 5001 or ML_SERVER_PORT env var)')
+    args = parser.parse_args()
+    
+    port = args.port
+    
     logger.info("=== YouWoAI ML Server Starting ===")
-    logger.info("Server will be available at: http://0.0.0.0:5001")
+    logger.info(f"Server will be available at: http://0.0.0.0:{port}")
     logger.info("")
     logger.info("📋 V1 Endpoint Summary:")
     logger.info("✅ CHAT ENDPOINTS:")
