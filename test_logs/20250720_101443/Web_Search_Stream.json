@@ -1,0 +1,863 @@
+{
+  "test_name": "Web Search Stream",
+  "timestamp": "2025-07-20T10:16:15.859553",
+  "query": "What are the latest AI developments today?",
+  "attachments": [],
+  "stream": true,
+  "output_items": [
+    {
+      "timestamp": "2025-07-20T10:16:15.863467",
+      "type": "reasoning",
+      "id": "router_74869fc2",
+      "sequence": 2,
+      "agent": "router",
+      "content": "Analyzing query and routing to appropriate agents..."
+    },
+    {
+      "timestamp": "2025-07-20T10:16:16.766039",
+      "type": "web_search_call",
+      "id": "ws_35687084",
+      "sequence": 8,
+      "agent": "web_search"
+    },
+    {
+      "timestamp": "2025-07-20T10:16:17.768325",
+      "type": "message",
+      "id": "msg_0413307b",
+      "sequence": 13
+    },
+    {
+      "timestamp": "2025-07-20T10:16:23.569525",
+      "type": "reasoning",
+      "id": "cit_a6b3a523",
+      "sequence": 80,
+      "agent": "citation",
+      "content": "Adding citations and references..."
+    }
+  ],
+  "agents_executed": {
+    "router": {
+      "status": "completed",
+      "start_time": "2025-07-20 10:16:15.863471",
+      "duration": 0.902438
+    },
+    "web_search": {
+      "status": "completed",
+      "start_time": "2025-07-20 10:16:16.766044",
+      "duration": 0.101723
+    },
+    "citation": {
+      "status": "completed",
+      "start_time": "2025-07-20 10:16:23.569532",
+      "duration": 3.348407
+    }
+  },
+  "status": "success",
+  "errors": [],
+  "final_response": "Here are some of the latest AI developments as of today, July 20, 2025:\n\n1. **AI for Diabetic Eye Disease Detection**: Recent research has demonstrated that AI technology can accurately screen for diabetic retinopathy, which is a leading cause of blindness. This advancement could significantly improve early detection and treatment options for patients.\n\n2. **Google's MedGemma AI Models**: Google has introduced open-source MedGemma AI models aimed at transforming healthcare. These models are expected to enhance various healthcare applications, including diagnostics and patient management.\n\n3. **Performance Benchmarks**: Tencent has launched a new benchmark called ArtifactsBench, designed to address current challenges in AI performance evaluation, particularly in creative tasks.\n\n4. **Robotic Innovations in Everyday Tasks**: Advancements are being made in robotic technology, such as coffee-making robots that are showcasing new capabilities in AI and machine learning to perform everyday tasks more efficiently.\n\nThese developments reflect the ongoing progress and integration of AI in various fields, particularly in healthcare and automation. If you want more detailed information on any specific development, feel free to ask!",
+  "citations": [],
+  "raw_events": [
+    {
+      "type": "response.created",
+      "sequence_number": 0,
+      "response": {
+        "id": "resp_1b12e163",
+        "object": "response",
+        "created_at": 1753031775,
+        "status": "in_progress",
+        "model": "gpt-4o-mini",
+        "output": []
+      }
+    },
+    {
+      "type": "response.in_progress",
+      "sequence_number": 1,
+      "response": {
+        "id": "resp_1b12e163",
+        "status": "in_progress"
+      }
+    },
+    {
+      "type": "response.output_item.added",
+      "sequence_number": 2,
+      "output_index": 0,
+      "item": {
+        "id": "router_74869fc2",
+        "type": "reasoning",
+        "content": []
+      }
+    },
+    {
+      "type": "response.reasoning_part.added",
+      "sequence_number": 3,
+      "item_id": "router_74869fc2",
+      "output_index": 0,
+      "content_index": 0,
+      "part": {
+        "type": "reasoning_text",
+        "text": ""
+      }
+    },
+    {
+      "type": "response.reasoning_text.delta",
+      "sequence_number": 4,
+      "item_id": "router_74869fc2",
+      "output_index": 0,
+      "content_index": 0,
+      "delta": "Analyzing query and routing to appropriate agents..."
+    },
+    {
+      "type": "response.reasoning_text.done",
+      "sequence_number": 5,
+      "item_id": "router_74869fc2",
+      "output_index": 0,
+      "content_index": 0,
+      "text": "Analyzing query and routing to appropriate agents..."
+    },
+    {
+      "type": "response.reasoning_part.done",
+      "sequence_number": 6,
+      "item_id": "router_74869fc2",
+      "output_index": 0,
+      "content_index": 0,
+      "part": {
+        "type": "reasoning_text",
+        "text": "Analyzing query and routing to appropriate agents..."
+      }
+    },
+    {
+      "type": "response.output_item.done",
+      "sequence_number": 7,
+      "output_index": 0,
+      "item": {
+        "id": "router_74869fc2",
+        "type": "reasoning",
+        "content": [
+          {
+            "type": "reasoning_text",
+            "text": "Query routed to agents: response, web_search, citation"
+          }
+        ]
+      }
+    },
+    {
+      "type": "response.output_item.added",
+      "sequence_number": 8,
+      "output_index": 1,
+      "item": {
+        "id": "ws_35687084",
+        "type": "web_search_call",
+        "status": "in_progress"
+      }
+    },
+    {
+      "type": "response.web_search_call.in_progress",
+      "sequence_number": 9,
+      "output_index": 1,
+      "item_id": "ws_35687084"
+    },
+    {
+      "type": "response.web_search_call.searching",
+      "sequence_number": 10,
+      "output_index": 1,
+      "item_id": "ws_35687084"
+    },
+    {
+      "type": "response.web_search_call.completed",
+      "sequence_number": 11,
+      "output_index": 1,
+      "item_id": "ws_35687084"
+    },
+    {
+      "type": "response.output_item.done",
+      "sequence_number": 12,
+      "output_index": 1,
+      "item": {
+        "id": "ws_35687084",
+        "type": "web_search_call",
+        "status": "completed",
+        "action": {
+          "type": "search",
+          "query": "What are the latest AI developments today?",
+          "search_engine": "serper"
+        },
+        "results": [],
+        "created_at": "2025-07-20T17:16:16Z",
+        "completed_at": "2025-07-20T17:16:16Z"
+      }
+    },
+    {
+      "type": "response.output_item.added",
+      "sequence_number": 13,
+      "output_index": 2,
+      "item": {
+        "id": "msg_0413307b",
+        "type": "message",
+        "role": "assistant",
+        "status": "in_progress"
+      }
+    },
+    {
+      "type": "response.content_part.added",
+      "sequence_number": 14,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "part": {
+        "type": "output_text",
+        "annotations": [],
+        "logprobs": [],
+        "text": ""
+      }
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 15,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "Here are some of the"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 16,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": " latest AI developme"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 17,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "nts as of today, Jul"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 18,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "y 20, 2025:\n\n1. **AI"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 19,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": " for Diabetic Eye Di"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 20,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "sease Detection**: R"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 21,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "ecent research has d"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 22,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "emonstrated that AI "
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 23,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "technology can accur"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 24,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "ately screen for dia"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 25,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "betic retinopathy, w"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 26,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "hich is a leading ca"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 27,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "use of blindness. Th"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 28,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "is advancement could"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 29,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": " significantly impro"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 30,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "ve early detection a"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 31,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "nd treatment options"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 32,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": " for patients.\n\n2. *"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 33,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "*Google's MedGemma A"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 34,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "I Models**: Google h"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 35,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "as introduced open-s"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 36,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "ource MedGemma AI mo"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 37,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "dels aimed at transf"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 38,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "orming healthcare. T"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 39,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "hese models are expe"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 40,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "cted to enhance vari"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 41,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "ous healthcare appli"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 42,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "cations, including d"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 43,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "iagnostics and patie"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 44,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "nt management.\n\n3. *"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 45,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "*Performance Benchma"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 46,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "rks**: Tencent has l"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 47,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "aunched a new benchm"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 48,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "ark called Artifacts"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 49,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "Bench, designed to a"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 50,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "ddress current chall"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 51,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "enges in AI performa"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 52,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "nce evaluation, part"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 53,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "icularly in creative"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 54,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": " tasks.\n\n4. **Roboti"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 55,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "c Innovations in Eve"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 56,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "ryday Tasks**: Advan"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 57,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "cements are being ma"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 58,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "de in robotic techno"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 59,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "logy, such as coffee"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 60,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "-making robots that "
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 61,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "are showcasing new c"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 62,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "apabilities in AI an"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 63,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "d machine learning t"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 64,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "o perform everyday t"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 65,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "asks more efficientl"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 66,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "y.\n\nThese developmen"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 67,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "ts reflect the ongoi"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 68,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "ng progress and inte"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 69,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "gration of AI in var"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 70,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "ious fields, particu"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 71,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "larly in healthcare "
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 72,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "and automation. If y"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 73,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "ou want more detaile"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 74,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "d information on any"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 75,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": " specific developmen"
+    },
+    {
+      "type": "response.output_text.delta",
+      "sequence_number": 76,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "delta": "t, feel free to ask!"
+    },
+    {
+      "type": "response.output_text.done",
+      "sequence_number": 77,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "text": "Here are some of the latest AI developments as of today, July 20, 2025:\n\n1. **AI for Diabetic Eye Disease Detection**: Recent research has demonstrated that AI technology can accurately screen for diabetic retinopathy, which is a leading cause of blindness. This advancement could significantly improve early detection and treatment options for patients.\n\n2. **Google's MedGemma AI Models**: Google has introduced open-source MedGemma AI models aimed at transforming healthcare. These models are expected to enhance various healthcare applications, including diagnostics and patient management.\n\n3. **Performance Benchmarks**: Tencent has launched a new benchmark called ArtifactsBench, designed to address current challenges in AI performance evaluation, particularly in creative tasks.\n\n4. **Robotic Innovations in Everyday Tasks**: Advancements are being made in robotic technology, such as coffee-making robots that are showcasing new capabilities in AI and machine learning to perform everyday tasks more efficiently.\n\nThese developments reflect the ongoing progress and integration of AI in various fields, particularly in healthcare and automation. If you want more detailed information on any specific development, feel free to ask!"
+    },
+    {
+      "type": "response.content_part.done",
+      "sequence_number": 78,
+      "item_id": "msg_0413307b",
+      "output_index": 2,
+      "content_index": 0,
+      "part": {
+        "type": "output_text",
+        "annotations": [],
+        "logprobs": [],
+        "text": "Here are some of the latest AI developments as of today, July 20, 2025:\n\n1. **AI for Diabetic Eye Disease Detection**: Recent research has demonstrated that AI technology can accurately screen for diabetic retinopathy, which is a leading cause of blindness. This advancement could significantly improve early detection and treatment options for patients.\n\n2. **Google's MedGemma AI Models**: Google has introduced open-source MedGemma AI models aimed at transforming healthcare. These models are expected to enhance various healthcare applications, including diagnostics and patient management.\n\n3. **Performance Benchmarks**: Tencent has launched a new benchmark called ArtifactsBench, designed to address current challenges in AI performance evaluation, particularly in creative tasks.\n\n4. **Robotic Innovations in Everyday Tasks**: Advancements are being made in robotic technology, such as coffee-making robots that are showcasing new capabilities in AI and machine learning to perform everyday tasks more efficiently.\n\nThese developments reflect the ongoing progress and integration of AI in various fields, particularly in healthcare and automation. If you want more detailed information on any specific development, feel free to ask!"
+      }
+    },
+    {
+      "type": "response.output_item.done",
+      "sequence_number": 79,
+      "output_index": 2,
+      "item": {
+        "id": "msg_0413307b",
+        "type": "message",
+        "role": "assistant",
+        "status": "completed",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "Here are some of the latest AI developments as of today, July 20, 2025:\n\n1. **AI for Diabetic Eye Disease Detection**: Recent research has demonstrated that AI technology can accurately screen for diabetic retinopathy, which is a leading cause of blindness. This advancement could significantly improve early detection and treatment options for patients.\n\n2. **Google's MedGemma AI Models**: Google has introduced open-source MedGemma AI models aimed at transforming healthcare. These models are expected to enhance various healthcare applications, including diagnostics and patient management.\n\n3. **Performance Benchmarks**: Tencent has launched a new benchmark called ArtifactsBench, designed to address current challenges in AI performance evaluation, particularly in creative tasks.\n\n4. **Robotic Innovations in Everyday Tasks**: Advancements are being made in robotic technology, such as coffee-making robots that are showcasing new capabilities in AI and machine learning to perform everyday tasks more efficiently.\n\nThese developments reflect the ongoing progress and integration of AI in various fields, particularly in healthcare and automation. If you want more detailed information on any specific development, feel free to ask!",
+            "annotations": []
+          }
+        ]
+      }
+    },
+    {
+      "type": "response.output_item.added",
+      "sequence_number": 80,
+      "output_index": 3,
+      "item": {
+        "id": "cit_a6b3a523",
+        "type": "reasoning",
+        "content": []
+      }
+    },
+    {
+      "type": "response.reasoning_part.added",
+      "sequence_number": 81,
+      "item_id": "cit_a6b3a523",
+      "output_index": 3,
+      "content_index": 0,
+      "part": {
+        "type": "reasoning_text",
+        "text": ""
+      }
+    },
+    {
+      "type": "response.reasoning_text.delta",
+      "sequence_number": 82,
+      "item_id": "cit_a6b3a523",
+      "output_index": 3,
+      "content_index": 0,
+      "delta": "Adding citations and references..."
+    },
+    {
+      "type": "response.reasoning_text.done",
+      "sequence_number": 83,
+      "item_id": "cit_a6b3a523",
+      "output_index": 3,
+      "content_index": 0,
+      "text": "Adding citations and references..."
+    },
+    {
+      "type": "response.reasoning_part.done",
+      "sequence_number": 84,
+      "item_id": "cit_a6b3a523",
+      "output_index": 3,
+      "content_index": 0,
+      "part": {
+        "type": "reasoning_text",
+        "text": "Adding citations and references..."
+      }
+    },
+    {
+      "type": "response.output_item.done",
+      "sequence_number": 85,
+      "output_index": 3,
+      "item": {
+        "id": "cit_a6b3a523",
+        "type": "reasoning",
+        "content": [
+          {
+            "type": "reasoning_text",
+            "text": "Citations added to response"
+          }
+        ]
+      }
+    },
+    {
+      "type": "response.citations",
+      "sequence_number": 86,
+      "citations": [
+        {
+          "id": 1,
+          "title": "AI News | Latest AI News, Analysis & Events",
+          "url": "https://www.artificialintelligence-news.com/",
+          "type": "web",
+          "snippet": ""
+        },
+        {
+          "id": 2,
+          "title": "Latest AI Breakthroughs and News: May, June, July 2025 | News",
+          "url": "https://www.crescendo.ai/news/latest-ai-news-and-updates",
+          "type": "web",
+          "snippet": ""
+        },
+        {
+          "id": 3,
+          "title": "Artificial Intelligence News - ScienceDaily",
+          "url": "https://www.sciencedaily.com/news/computers_math/artificial_intelligence/",
+          "type": "web",
+          "snippet": ""
+        }
+      ]
+    },
+    {
+      "type": "response.title_generated",
+      "sequence_number": 87,
+      "title": "What are the latest AI..."
+    },
+    {
+      "type": "response.usage",
+      "sequence_number": 88,
+      "usage": {
+        "prompt_tokens": 18,
+        "completion_tokens": 310,
+        "total_tokens": 328
+      }
+    },
+    {
+      "type": "response.completed",
+      "sequence_number": 89,
+      "response": {
+        "id": "resp_1b12e163",
+        "status": "completed",
+        "object": "response",
+        "output": []
+      }
+    }
+  ]
+}

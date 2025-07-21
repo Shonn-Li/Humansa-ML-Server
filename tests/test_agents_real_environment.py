@@ -15,7 +15,7 @@ from pathlib import Path
 
 # Test configuration
 TEST_USER_ID = 10001  # test_Shonn Li from our test environment
-ML_SERVER_URL = "http://localhost:5001"
+ML_SERVER_URL = "http://localhost:5002"
 MULTI_AGENT_ENDPOINT = f"{ML_SERVER_URL}/v1/multi-agent/response"
 
 # Test attachments (ML-related files)

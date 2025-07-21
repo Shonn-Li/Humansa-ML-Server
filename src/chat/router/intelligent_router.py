@@ -41,10 +41,15 @@ class IntelligentRouter:
             "web_search": "For current events, real-time information, or topics not in the knowledge base"
         }
 
-    async def route_query(self, query: str, user_id: str, conversation_history: Optional[List[Dict]] = None) -> RouterDecision:
+    async def route_query(self, query: str, user_id: str, conversation_history: Optional[List[Dict]] = None, has_attachments: bool = False) -> RouterDecision:
         """Route a query to the appropriate tool using LLM-based routing."""
+        # Priority: If attachments are present, route to attachments tool
+        if has_attachments:
+            logger.info("Attachments detected - routing to attachment tool with high priority")
+            return self._map_tool_to_decision("attachments", 0.95, "Attachments present in request", "attachment_priority")
+        
         try:
-            llm_decision = await self._llm_route(query, conversation_history)
+            llm_decision = await self._llm_route(query, conversation_history, has_attachments)
             if llm_decision:
                 logger.info(
                     f"LLM routing successful: {llm_decision.selected_tool}")
@@ -56,7 +61,7 @@ class IntelligentRouter:
         logger.info("Falling back to heuristic routing")
         return self._heuristic_route(query)
 
-    async def _llm_route(self, query: str, conversation_history: Optional[List[Dict]] = None) -> Optional[RouterDecision]:
+    async def _llm_route(self, query: str, conversation_history: Optional[List[Dict]] = None, has_attachments: bool = False) -> Optional[RouterDecision]:
         """Use LLM to intelligently route the query."""
 
         # Build tools description for prompt

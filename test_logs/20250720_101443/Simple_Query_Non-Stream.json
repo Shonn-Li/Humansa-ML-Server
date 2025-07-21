@@ -1,0 +1,60 @@
+{
+  "test_name": "Simple Query Non-Stream",
+  "timestamp": "2025-07-20T10:15:07.979211",
+  "query": "What is 2+2?",
+  "attachments": [],
+  "stream": false,
+  "output_items": [],
+  "agents_executed": {
+    "citation": {
+      "status": "success",
+      "data": {
+        "citations": {
+          "response": "2 + 2 equals 4.",
+          "sources": []
+        },
+        "metadata": {
+          "citation_count": 0
+        },
+        "status": "success"
+      }
+    },
+    "response": {
+      "status": "success",
+      "data": {
+        "metadata": {
+          "context_used": false,
+          "model": "gpt-4o-mini"
+        },
+        "response": "2 + 2 equals 4.",
+        "status": "success"
+      }
+    },
+    "router": {
+      "status": "success",
+      "data": {
+        "condensed_query": "What is 2+2?",
+        "enabled_agents": [
+          "response",
+          "citation"
+        ],
+        "model": "gpt-4o-mini",
+        "original_query": "What is 2+2?",
+        "router_decision": {
+          "confidence": 1.0,
+          "query_classification": "general_question",
+          "reasoning": "The question is a general math query that does not require specific user data or context.",
+          "search_type": "none",
+          "selected_tool": "no_context"
+        },
+        "search_type": "none"
+      }
+    }
+  },
+  "status": "success",
+  "errors": [],
+  "final_response": "2 + 2 equals 4.",
+  "citations": [],
+  "raw_events": [],
+  "workflow_time": 2.8213860988616943
+}
