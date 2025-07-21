@@ -1,0 +1,6 @@
+=== ML Server Logs for: RAG: Mixed Search ===
+Query: Show me everything about G1 from my notes and conversations
+Timestamp: 2025-07-19 21:54:30.629312
+================================================================================
+
+ ===

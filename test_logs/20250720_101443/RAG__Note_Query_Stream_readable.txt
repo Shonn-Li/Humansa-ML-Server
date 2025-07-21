@@ -1,0 +1,44 @@
+TEST: RAG: Note Query Stream
+TIME: 2025-07-20T10:15:12.833526
+STATUS: success
+================================================================================
+
+QUERY: What information do I have about the PARL paper?
+
+OUTPUT ITEMS FLOW:
+--------------------------------------------------------------------------------
+
+2025-07-20T10:15:12.851826 - reasoning (ID: router_06395a02)
+  Agent: router
+  Content: Analyzing query and routing to appropriate agents......
+
+2025-07-20T10:15:13.771244 - file_search_call (ID: fs_bfcda296)
+
+2025-07-20T10:15:14.764006 - message (ID: msg_1240ec5c)
+  Content preview: ...
+
+2025-07-20T10:15:26.516642 - reasoning (ID: cit_7bd6cab0)
+  Agent: citation
+  Content: Adding citations and references......
+
+
+AGENT EXECUTION SUMMARY:
+--------------------------------------------------------------------------------
+- router: completed (took 0.919352s)
+- citation: completed (took 4.863843s)
+
+
+FINAL RESPONSE:
+--------------------------------------------------------------------------------
+You have a comprehensive set of details regarding the Predictability-Aware Reinforcement Learning (PARL) paper. Here are the key points:
+
+1. **Objective**: PARL aims to induce predictable behavior in reinforcement learning (RL) agents by minimizing the entropy rate of their trajectories. This addresses challenges in coordination and safety in multi-agent or human-interactive environments.
+
+2. **Methodology**:
+   - **Entropy Rate**: Introduces the concept of entropy rate, which quantifies the complexity and predictability of an agent's state trajectories.
+   - **Optimization**: The core idea is to maximize a weighted combination of expected reward and the negative entropy rate, which allows a trade-off between optimality and predictability.
+   - **Surrogate Entropy**: A policy-independent surrogate based on state-action pairs is used to estimate the entropy rate, enabling the application of standard RL algorithms.
+
+3. **Algorithms**: The proposed method includes:
+   - **PAPPO**: On-poli
+... [truncated]
