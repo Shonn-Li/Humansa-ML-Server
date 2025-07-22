@@ -1,0 +1,100 @@
+[TEST] 2025-07-21 20:08:21,682 - main - INFO - 🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/bin/python
+[TEST] 2025-07-21 20:08:21,682 - main - INFO - 📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server
+[TEST] 2025-07-21 20:08:21,682 - main - INFO - 📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src
+[TEST] 2025-07-21 20:08:21,682 - main - INFO - 🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
+[TEST] 2025-07-21 20:08:22,527 - main - INFO - 🔄 Registering embedding endpoints...
+[TEST] 2025-07-21 20:08:22,527 - main - INFO - 🔄 Attempting to import URL embedding endpoints...
+[TEST] 2025-07-21 20:08:25,965 - chat.embedding.embedding_provider_selector - INFO - === Embedding Provider Initialization ===
+[TEST] 2025-07-21 20:08:26,031 - chat.token.token_counter - INFO - TokenCounter initialized for model: gpt-3.5-turbo
+[TEST] 2025-07-21 20:08:26,031 - chat.token.token_counter - INFO - Initialized token counter for gpt-3.5-turbo
+[TEST] 2025-07-21 20:08:26,031 - chat.token.token_counter - INFO - TokenCounter initialized for model: gpt-4
+[TEST] 2025-07-21 20:08:26,031 - chat.token.token_counter - INFO - Initialized token counter for gpt-4
+[TEST] 2025-07-21 20:08:26,031 - chat.token.token_counter - INFO - TokenCounter initialized for model: text-embedding-3-small
+[TEST] 2025-07-21 20:08:26,031 - chat.token.token_counter - INFO - Initialized token counter for text-embedding-3-small
+[TEST] 2025-07-21 20:08:26,031 - chat.token.token_counter - INFO - TokenCounter initialized for model: text-embedding-3-large
+[TEST] 2025-07-21 20:08:26,031 - chat.token.token_counter - INFO - Initialized token counter for text-embedding-3-large
+[TEST] 2025-07-21 20:08:26,031 - chat.token.token_counter - INFO - TokenCounter initialized for model: text-embedding-ada-002
+[TEST] 2025-07-21 20:08:26,031 - chat.token.token_counter - INFO - Initialized token counter for text-embedding-ada-002
+[TEST] 2025-07-21 20:08:26,034 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-21 20:08:26,034 - chat.embedding.azure_embeddings - INFO - ✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+[TEST] 2025-07-21 20:08:26,034 - chat.embedding.azure_embeddings - INFO - 🔗 Endpoint: 
+[TEST] 2025-07-21 20:08:26,815 - chat.embedding.embedding_provider_selector - INFO - ✅ Azure AI Inference embedding provider initialized (PRIMARY)
+[TEST] 2025-07-21 20:08:26,877 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-21 20:08:26,878 - chat.embedding.openai_embeddings - INFO - Initialized OpenAI embedding client with model: text-embedding-3-small
+[TEST] 2025-07-21 20:08:26,886 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-21 20:08:26,886 - chat.embedding.openai_embeddings - INFO - Initialized OpenAI embedding client with model: text-embedding-3-small
+[TEST] 2025-07-21 20:08:26,886 - chat.embedding.embedding_provider_selector - INFO - ✅ OpenAI embedding provider initialized (FALLBACK)
+[TEST] 2025-07-21 20:08:26,886 - chat.embedding.embedding_provider_selector - INFO - 📊 Available embedding providers: ['azure_inference', 'openai']
+[TEST] 2025-07-21 20:08:26,888 - chat.embedding.text_processing - INFO - Initialized TextProcessor with chunk_size=1024, overlap=100
+[TEST] 2025-07-21 20:08:26,888 - chat.embedding.text_processing - INFO - Initialized TextProcessor with chunk_size=1024, overlap=100
+[TEST] 2025-07-21 20:08:26,888 - chat.embedding.text_processing - INFO - Initialized ConversationProcessor with max_tokens=1024
+[TEST] 2025-07-21 20:08:26,894 - chat.embedding.embedding_provider_selector - INFO - === Embedding Provider Initialization ===
+[TEST] 2025-07-21 20:08:26,897 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-21 20:08:26,897 - chat.embedding.azure_embeddings - INFO - ✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+[TEST] 2025-07-21 20:08:26,897 - chat.embedding.azure_embeddings - INFO - 🔗 Endpoint: 
+[TEST] 2025-07-21 20:08:27,429 - chat.embedding.embedding_provider_selector - INFO - ✅ Azure AI Inference embedding provider initialized (PRIMARY)
+[TEST] 2025-07-21 20:08:27,434 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-21 20:08:27,434 - chat.embedding.openai_embeddings - INFO - Initialized OpenAI embedding client with model: text-embedding-3-small
+[TEST] 2025-07-21 20:08:27,434 - chat.embedding.embedding_provider_selector - INFO - ✅ OpenAI embedding provider initialized (FALLBACK)
+[TEST] 2025-07-21 20:08:27,434 - chat.embedding.embedding_provider_selector - INFO - 📊 Available embedding providers: ['azure_inference', 'openai']
+[TEST] 2025-07-21 20:08:27,434 - chat.embedding.embedding_provider_selector - INFO - ✅ Auto-selected embedding provider: azure_inference
+[TEST] 2025-07-21 20:08:27,435 - chat.embedding.text_processing - INFO - Initialized TextProcessor with chunk_size=1024, overlap=100
+[TEST] 2025-07-21 20:08:27,435 - chat.postgres.embedding_operations - INFO - EmbeddingDBOperations initialized
+[TEST] 2025-07-21 20:08:27,435 - chat.embedding.note_embedder - INFO - NoteEmbedder initialized with independent modules
+[TEST] 2025-07-21 20:08:27,435 - chat.embedding.embedding_provider_selector - INFO - === Embedding Provider Initialization ===
+[TEST] 2025-07-21 20:08:27,435 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-21 20:08:27,435 - chat.embedding.azure_embeddings - INFO - ✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+[TEST] 2025-07-21 20:08:27,435 - chat.embedding.azure_embeddings - INFO - 🔗 Endpoint: 
+[TEST] 2025-07-21 20:08:27,961 - chat.embedding.embedding_provider_selector - INFO - ✅ Azure AI Inference embedding provider initialized (PRIMARY)
+[TEST] 2025-07-21 20:08:27,971 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-21 20:08:27,971 - chat.embedding.openai_embeddings - INFO - Initialized OpenAI embedding client with model: text-embedding-3-small
+[TEST] 2025-07-21 20:08:27,971 - chat.embedding.embedding_provider_selector - INFO - ✅ OpenAI embedding provider initialized (FALLBACK)
+[TEST] 2025-07-21 20:08:27,971 - chat.embedding.embedding_provider_selector - INFO - 📊 Available embedding providers: ['azure_inference', 'openai']
+[TEST] 2025-07-21 20:08:27,971 - chat.embedding.embedding_provider_selector - INFO - ✅ Auto-selected embedding provider: azure_inference
+[TEST] 2025-07-21 20:08:27,972 - chat.embedding.text_processing - INFO - Initialized TextProcessor with chunk_size=1024, overlap=100
+[TEST] 2025-07-21 20:08:27,972 - chat.embedding.text_processing - INFO - Initialized ConversationProcessor with max_tokens=1024
+[TEST] 2025-07-21 20:08:27,972 - chat.postgres.embedding_operations - INFO - EmbeddingDBOperations initialized
+[TEST] 2025-07-21 20:08:27,972 - chat.embedding.conversation_embedder - INFO - ConversationEmbedder initialized with independent modules
+[TEST] 2025-07-21 20:08:28,046 - chat.postgres.url_embedding_operations - INFO - ✅ python-pptx available for PowerPoint processing
+[TEST] 2025-07-21 20:08:28,046 - chat.embedding.embedding_provider_selector - INFO - === Embedding Provider Initialization ===
+[TEST] 2025-07-21 20:08:28,046 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-21 20:08:28,047 - chat.embedding.azure_embeddings - INFO - ✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+[TEST] 2025-07-21 20:08:28,047 - chat.embedding.azure_embeddings - INFO - 🔗 Endpoint: 
+[TEST] 2025-07-21 20:08:28,562 - chat.embedding.embedding_provider_selector - INFO - ✅ Azure AI Inference embedding provider initialized (PRIMARY)
+[TEST] 2025-07-21 20:08:28,567 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-21 20:08:28,567 - chat.embedding.openai_embeddings - INFO - Initialized OpenAI embedding client with model: text-embedding-3-small
+[TEST] 2025-07-21 20:08:28,567 - chat.embedding.embedding_provider_selector - INFO - ✅ OpenAI embedding provider initialized (FALLBACK)
+[TEST] 2025-07-21 20:08:28,567 - chat.embedding.embedding_provider_selector - INFO - 📊 Available embedding providers: ['azure_inference', 'openai']
+[TEST] 2025-07-21 20:08:28,567 - chat.embedding.embedding_provider_selector - INFO - ✅ Auto-selected embedding provider: azure_inference
+[TEST] 2025-07-21 20:08:28,568 - chat.postgres.url_embedding_operations - INFO - URLEmbeddingOperations initialized
+[TEST] 2025-07-21 20:08:28,570 - chat.attachment.file_attachment_manager - INFO - FileAttachmentManager initialized
+[TEST] 2025-07-21 20:08:28,571 - main - INFO - ✅ Successfully imported URL embedding endpoints
+[TEST] 2025-07-21 20:08:28,571 - main - INFO - ✅ URL embedding endpoints registered successfully
+[TEST] 2025-07-21 20:08:28,571 - main - INFO - 🔄 Attempting to import admin embedding endpoints...
+[TEST] 2025-07-21 20:08:28,572 - main - INFO - ✅ Successfully imported admin embedding endpoints
+[TEST] 2025-07-21 20:08:28,573 - main - INFO - ✅ Admin embedding endpoints registered successfully
+[TEST] 2025-07-21 20:08:28,573 - main - INFO - 🔄 Attempting to import file analyzer endpoints...
+[TEST] 2025-07-21 20:08:28,573 - main - INFO - ✅ Successfully imported file analyzer blueprint
+[TEST] 2025-07-21 20:08:28,574 - main - INFO - ✅ File analyzer endpoints registered successfully
+[TEST] 2025-07-21 20:08:28,574 - main - INFO - ✅ Embedding endpoints registration completed
+[2025-07-21 20:08:28 -0700] [3230] [INFO] Running on http://0.0.0.0:5002 (CTRL + C to quit)
+[TEST] 2025-07-21 20:08:28,790 - hypercorn.error - INFO - Running on http://0.0.0.0:5002 (CTRL + C to quit)
+================================================================================
+STARTING TEST SERVER
+================================================================================
+Environment: TEST
+Database: postgresql://localhost:5454/youwoai_test
+Port: 5002
+================================================================================
+
+🚀 Test server starting on http://localhost:5002
+📝 Use this server for all testing to ensure isolation from production
+🔍 Test data includes pre-seeded notes and conversations
+
+Press Ctrl+C to stop the server
+
+ * Serving Quart app 'main'
+ * Debug mode: False
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:5002 (CTRL + C to quit)
+[2025-07-21 20:08:29 -0700] [3230] [INFO] 127.0.0.1:62493 GET /health 1.1 200 96 1087

@@ -1,0 +1,40 @@
+TEST: Web Search Non-Stream
+TIME: 2025-07-20T10:16:28.920992
+STATUS: success
+================================================================================
+
+QUERY: What are the latest AI developments today?
+
+OUTPUT ITEMS FLOW:
+--------------------------------------------------------------------------------
+
+
+AGENT EXECUTION SUMMARY:
+--------------------------------------------------------------------------------
+- citation: success (took N/As)
+- response: success (took N/As)
+- router: success (took N/As)
+- web_search: success (took N/As)
+
+
+FINAL RESPONSE:
+--------------------------------------------------------------------------------
+Here are some of the latest AI developments as of today, July 20, 2025:
+
+1. **Diabetic Eye Disease Detection**: New research has shown that AI can significantly improve early detection of diabetic retinopathy, a leading cause of blindness. This technology aims to enhance screening processes and outcomes for patients at risk [2].
+
+2. **MedGemma AI Models**: Google has introduced open MedGemma AI models that could potentially transform healthcare by improving diagnostic accuracy and treatment personalization [1].
+
+3. **CellLENS System**: A new AI system developed at MIT, named CellLENS, has been designed to uncover hidden cell subtypes and boost precision medicine by revealing underlying patterns in cell behavior within tissues [4].
+
+4. **AI Agents for Task Automation**: OpenAI has launched a new AI agent that allows users to automate online tasks such as shopping, showcasing advancements in independently operating AI bots [5].
+
+For more detailed updates, you might want to check out news
+... [truncated]
+
+CITATIONS:
+--------------------------------------------------------------------------------
+[1] [1] AI News | Latest AI News, Analysis & Events.
+[2] [2] Latest AI Breakthroughs and News: May, June, July 2025.
+[3] [4] Artificial intelligence | Massachusetts Institute of Technology.
+[4] [5] Artificial Intelligence - Latest AI News and Analysis - WSJ.com.
