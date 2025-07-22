@@ -1,0 +1,28 @@
+{
+  "summary": {
+    "total": 3,
+    "passed": 0,
+    "failed": 3,
+    "timestamp": "2025-07-19 22:56:36"
+  },
+  "test_results": [
+    {
+      "test_name": "rag_workflow",
+      "success": false,
+      "duration": 7.302734136581421,
+      "error": "<module 'chat.endpoints.multi_agent_endpoint_v2' from '/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/endpoints/multi_agent_endpoint_v2.py'> does not have the attribute 'WebSearchManager'"
+    },
+    {
+      "test_name": "web_search_workflow",
+      "success": false,
+      "duration": 0.0010380744934082031,
+      "error": "<module 'chat.endpoints.multi_agent_endpoint_v2' from '/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/endpoints/multi_agent_endpoint_v2.py'> does not have the attribute 'WebSearchManager'"
+    },
+    {
+      "test_name": "code_interpreter_workflow",
+      "success": false,
+      "duration": 0.0020678043365478516,
+      "error": "<module 'chat.endpoints.multi_agent_endpoint_v2' from '/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/endpoints/multi_agent_endpoint_v2.py'> does not have the attribute 'WebSearchManager'"
+    }
+  ]
+}

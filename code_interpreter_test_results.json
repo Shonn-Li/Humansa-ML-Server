@@ -1,0 +1,176 @@
+{
+  "detection": [
+    {
+      "name": "Python Code Request",
+      "query": "Please execute this Python code: print('Hello World')",
+      "expected": true,
+      "actual": true,
+      "success": true,
+      "enabled_agents": [
+        "response",
+        "code_interpreter",
+        "citation"
+      ]
+    },
+    {
+      "name": "Math Calculation",
+      "query": "Calculate the square root of 144 using Python",
+      "expected": true,
+      "actual": true,
+      "success": true,
+      "enabled_agents": [
+        "response",
+        "code_interpreter",
+        "citation"
+      ]
+    },
+    {
+      "name": "Data Analysis Request",
+      "query": "Analyze this dataset and create a plot",
+      "expected": true,
+      "actual": true,
+      "success": true,
+      "enabled_agents": [
+        "response",
+        "attachment",
+        "code_interpreter",
+        "citation"
+      ]
+    },
+    {
+      "name": "Code Block Request",
+      "query": "Can you help me with this?\n```python\nimport numpy as np\nprint(np.array([1,2,3]))\n```",
+      "expected": true,
+      "actual": true,
+      "success": true,
+      "enabled_agents": [
+        "response",
+        "code_interpreter",
+        "citation"
+      ]
+    },
+    {
+      "name": "Regular Question",
+      "query": "What is the weather like today?",
+      "expected": false,
+      "actual": false,
+      "success": true,
+      "enabled_agents": [
+        "response",
+        "web_search",
+        "citation"
+      ]
+    }
+  ],
+  "execution": {
+    "execution_results": [
+      {
+        "name": "Simple Print",
+        "success": true,
+        "code_blocks": 1,
+        "execution_results": 1,
+        "details": {
+          "status": "success",
+          "code_blocks": 1,
+          "results": [
+            {
+              "code": "\n# Simple Python example\nprint(\"Hello from Code Interpreter!\")\nprint(\"I can execute Python code to help with:\")\nprint(\"- Data analysis and statistics\")\nprint(\"- Mathematical calculations\") \nprint(\"- Creating plots and visualizations\")\nprint(\"- Processing and transforming data\")\n\n# Example calculation\nimport math\nresult = math.sqrt(16) + math.factorial(5)\nprint(f\"\\nExample calculation: sqrt(16) + 5! = {result}\")\n",
+              "result": {
+                "success": false,
+                "output": "Hello from Code Interpreter!\nI can execute Python code to help with:\n- Data analysis and statistics\n- Mathematical calculations\n- Creating plots and visualizations\n- Processing and transforming data\n",
+                "error": "__import__ not found",
+                "execution_time": 7.295608520507812e-05,
+                "traceback": "Traceback (most recent call last):\n  File \"/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/agent/code_interpreter_agent.py\", line 193, in execute_code\n    exec(compile(code, '<string>', 'exec'), execution_globals)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 11, in <module>\nImportError: __import__ not found\n"
+              },
+              "block_index": 0
+            }
+          ],
+          "metadata": {
+            "total_execution_time": 7.295608520507812e-05,
+            "successful_executions": 0
+          }
+        }
+      },
+      {
+        "name": "Math Calculation",
+        "success": true,
+        "code_blocks": 1,
+        "execution_results": 1,
+        "details": {
+          "status": "success",
+          "code_blocks": 1,
+          "results": [
+            {
+              "code": "\nimport pandas as pd\nimport numpy as np\nimport statistics\n\n# Generate sample dataset\ndata = {\n    'values': np.random.normal(50, 15, 100),\n    'categories': np.random.choice(['A', 'B', 'C'], 100)\n}\ndf = pd.DataFrame(data)\n\n# Basic statistics\nprint(\"Dataset Overview:\")\nprint(df.describe())\nprint(f\"\\nMean: {df['values'].mean():.2f}\")\nprint(f\"Median: {df['values'].median():.2f}\")\nprint(f\"Standard Deviation: {df['values'].std():.2f}\")\nprint(f\"\\nCategory Counts:\")\nprint(df['categories'].value_counts())\n",
+              "result": {
+                "success": false,
+                "output": "",
+                "error": "__import__ not found",
+                "execution_time": 8.082389831542969e-05,
+                "traceback": "Traceback (most recent call last):\n  File \"/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/agent/code_interpreter_agent.py\", line 193, in execute_code\n    exec(compile(code, '<string>', 'exec'), execution_globals)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 2, in <module>\nImportError: __import__ not found\n"
+              },
+              "block_index": 0
+            }
+          ],
+          "metadata": {
+            "total_execution_time": 8.082389831542969e-05,
+            "successful_executions": 0
+          }
+        }
+      },
+      {
+        "name": "Python Code Block",
+        "success": true,
+        "code_blocks": 2,
+        "execution_results": 2,
+        "details": {
+          "status": "success",
+          "code_blocks": 2,
+          "results": [
+            {
+              "code": "import math\nresult = math.sqrt(16)\nprint(f'Square root of 16 is {result}')",
+              "result": {
+                "success": false,
+                "output": "",
+                "error": "__import__ not found",
+                "execution_time": 2.3126602172851562e-05,
+                "traceback": "Traceback (most recent call last):\n  File \"/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/agent/code_interpreter_agent.py\", line 193, in execute_code\n    exec(compile(code, '<string>', 'exec'), execution_globals)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 1, in <module>\nImportError: __import__ not found\n"
+              },
+              "block_index": 0
+            },
+            {
+              "code": "python\nimport math\nresult = math.sqrt(16)\nprint(f'Square root of 16 is {result}')\n",
+              "result": {
+                "success": false,
+                "output": "",
+                "error": "name 'python' is not defined",
+                "execution_time": 2.3126602172851562e-05,
+                "traceback": "Traceback (most recent call last):\n  File \"/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/agent/code_interpreter_agent.py\", line 193, in execute_code\n    exec(compile(code, '<string>', 'exec'), execution_globals)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 1, in <module>\nNameError: name 'python' is not defined\n"
+              },
+              "block_index": 1
+            }
+          ],
+          "metadata": {
+            "total_execution_time": 4.6253204345703125e-05,
+            "successful_executions": 0
+          }
+        }
+      }
+    ],
+    "streaming_events": 5,
+    "streaming_success": true
+  },
+  "integration": {
+    "success": true,
+    "total_events": 50,
+    "code_interpreter_events": 8,
+    "code_interpreter_triggered": true
+  },
+  "summary": {
+    "detection_success": 5,
+    "detection_total": 5,
+    "execution_success": true,
+    "integration_success": true,
+    "overall_success": true
+  }
+}

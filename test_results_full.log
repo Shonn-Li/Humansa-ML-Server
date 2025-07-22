@@ -1,0 +1,360 @@
+Multi-Agent Test Suite - Real Environment
+Make sure:
+1. ML Server is running on port 5001
+2. ML Server is configured to use test database (port 5454)
+3. You have internet access for web search and attachment downloads
+
+Starting tests automatically...
+
+Starting Multi-Agent Test Suite
+ML Server: http://localhost:5001
+Test User ID: 10001
+Timestamp: 2025-07-19T17:36:58.360873
+
+
+### RAG AGENT TESTS ###
+
+================================================================================
+Running Test: RAG_Research_Paper_Query
+Query: What is the main contribution of the PARL paper?
+Expected Agents: ['router', 'rag', 'response', 'citation']
+
+Actual Agents Triggered: ['router', 'web_search', 'response']
+Status: FAILED
+Notes: ["Missing expected agents: {'citation', 'rag'}"]
+Response Length: 559 chars
+Citations: 0
+
+================================================================================
+Running Test: RAG_Cross_Note_Synthesis
+Query: Compare the reinforcement learning approaches in PARL and G1
+Expected Agents: ['router', 'rag', 'response', 'citation']
+
+Actual Agents Triggered: ['router', 'web_search', 'response']
+Status: FAILED
+Notes: ["Missing expected agents: {'citation', 'rag'}"]
+Response Length: 2975 chars
+Citations: 0
+
+================================================================================
+Running Test: RAG_Business_Content
+Query: How did Zepto achieve 10-minute delivery?
+Expected Agents: ['router', 'rag', 'response', 'citation']
+
+Actual Agents Triggered: ['router', 'web_search', 'response']
+Status: FAILED
+Notes: ["Missing expected agents: {'citation', 'rag'}"]
+Response Length: 1377 chars
+Citations: 0
+
+================================================================================
+Running Test: RAG_Chinese_Content
+Query: 由我AI的主要功能是什么？
+Expected Agents: ['router', 'rag', 'response', 'citation']
+
+Actual Agents Triggered: ['router', 'response']
+Status: FAILED
+Notes: ["Missing expected agents: {'citation', 'rag'}"]
+Response Length: 237 chars
+Citations: 0
+
+================================================================================
+Running Test: RAG_Conversation_History
+Query: What did we discuss about predictability in RL?
+Expected Agents: ['router', 'rag', 'response', 'citation']
+
+Actual Agents Triggered: ['router', 'rag', 'response']
+Status: FAILED
+Notes: ["Missing expected agents: {'citation'}"]
+Response Length: 189 chars
+Citations: 0
+
+
+### WEB SEARCH AGENT TESTS ###
+
+================================================================================
+Running Test: WebSearch_Current_Events
+Query: What are the latest developments in AI regulation in 2024?
+Expected Agents: ['router', 'web_search', 'response', 'citation']
+
+Actual Agents Triggered: ['router', 'web_search', 'response']
+Status: FAILED
+Notes: ["Missing expected agents: {'citation'}"]
+Response Length: 1434 chars
+Citations: 0
+
+================================================================================
+Running Test: WebSearch_Recent_News
+Query: What happened with OpenAI this week?
+Expected Agents: ['router', 'web_search', 'response', 'citation']
+
+Actual Agents Triggered: ['router', 'web_search', 'response']
+Status: FAILED
+Notes: ["Missing expected agents: {'citation'}"]
+Response Length: 421 chars
+Citations: 0
+
+
+### ATTACHMENT AGENT TESTS ###
+
+================================================================================
+Running Test: Attachment_PDF_Analysis
+Query: Summarize the key findings in this paper
+Attachments: ['https://arxiv.org/pdf/2505.18499.pdf']
+Expected Agents: ['router', 'attachment', 'response', 'citation']
+
+Actual Agents Triggered: ['router']
+Status: FAILED
+Notes: ["Missing expected agents: {'citation', 'attachment', 'response'}", 'No final response generated']
+Response Length: 0 chars
+Citations: 0
+
+================================================================================
+Running Test: Attachment_Image_Understanding
+Query: Explain the reinforcement learning process shown in this diagram
+Attachments: ['https://arxiv.org/html/2407.09124v1/x1.png']
+Expected Agents: ['router', 'attachment', 'response', 'citation']
+
+Actual Agents Triggered: ['router']
+Status: FAILED
+Notes: ["Missing expected agents: {'citation', 'attachment', 'response'}", 'No final response generated']
+Response Length: 0 chars
+Citations: 0
+
+================================================================================
+Running Test: Attachment_Multiple_Files
+Query: Compare the approaches in these papers and relate them to the diagram
+Attachments: ['https://arxiv.org/pdf/2505.18499.pdf', 'https://arxiv.org/pdf/2311.18703.pdf', 'https://arxiv.org/html/2407.09124v1/x1.png']
+Expected Agents: ['router', 'attachment', 'response', 'citation']
+
+Actual Agents Triggered: ['router', 'rag']
+Status: FAILED
+Notes: ["Missing expected agents: {'citation', 'attachment', 'response'}", 'No final response generated']
+Response Length: 0 chars
+Citations: 0
+
+
+### CODE INTERPRETER TESTS ###
+
+================================================================================
+Running Test: Code_Data_Analysis
+Query: Write Python code to calculate the average number of embeddings per note if I have 9 notes and 190 total embeddings
+Expected Agents: ['router', 'code_interpreter', 'response', 'citation']
+
+Actual Agents Triggered: ['router', 'response']
+Status: FAILED
+Notes: ["Missing expected agents: {'citation', 'code_interpreter'}"]
+Response Length: 521 chars
+Citations: 0
+
+================================================================================
+Running Test: Code_Visualization
+Query: Create a matplotlib bar chart showing these note counts: PDF=3, YouTube=4, Document=1, Audio=1
+Expected Agents: ['router', 'code_interpreter', 'response', 'citation']
+
+Actual Agents Triggered: ['router', 'rag']
+Status: FAILED
+Notes: ["Missing expected agents: {'citation', 'code_interpreter', 'response'}", 'No final response generated']
+Response Length: 0 chars
+Citations: 0
+
+================================================================================
+Running Test: Code_Mathematical
+Query: Solve the optimization problem: minimize x^2 + y^2 subject to x + y = 10
+Expected Agents: ['router', 'code_interpreter', 'response', 'citation']
+
+Actual Agents Triggered: ['router', 'response']
+Status: FAILED
+Notes: ["Missing expected agents: {'citation', 'code_interpreter'}"]
+Response Length: 1391 chars
+Citations: 0
+
+
+### MIXED AGENT TESTS ###
+
+================================================================================
+Running Test: Mixed_RAG_Code
+Query: Analyze the performance metrics mentioned in the G1 paper and create a comparison chart
+Expected Agents: ['router', 'rag', 'code_interpreter', 'response', 'citation']
+
+Actual Agents Triggered: ['router', 'web_search', 'response']
+Status: FAILED
+Notes: ["Missing expected agents: {'citation', 'rag', 'code_interpreter'}"]
+Response Length: 3049 chars
+Citations: 0
+
+================================================================================
+Running Test: Mixed_RAG_Web
+Query: How do the startup growth strategies in my notes compare to current AI startup trends?
+Expected Agents: ['router', 'rag', 'web_search', 'response', 'citation']
+
+Actual Agents Triggered: ['router', 'rag']
+Status: FAILED
+Notes: ["Missing expected agents: {'citation', 'web_search', 'response'}", 'No final response generated']
+Response Length: 0 chars
+Citations: 0
+
+================================================================================
+Running Test: Mixed_Attachment_RAG
+Query: How does this paper's approach differ from the PARL paper in my notes?
+Attachments: ['https://arxiv.org/pdf/2311.18703.pdf']
+Expected Agents: ['router', 'attachment', 'rag', 'response', 'citation']
+
+Actual Agents Triggered: ['router', 'rag']
+Status: FAILED
+Notes: ["Missing expected agents: {'citation', 'attachment', 'response'}", 'No final response generated']
+Response Length: 0 chars
+Citations: 0
+
+
+### ERROR SCENARIO TESTS ###
+
+================================================================================
+Running Test: Error_Invalid_Attachment
+Query: Analyze this file
+Attachments: ['https://invalid-url-that-does-not-exist.com/file.pdf']
+Expected Agents: ['router', 'attachment', 'response']
+
+Actual Agents Triggered: ['router']
+Status: FAILED
+Notes: ["Missing expected agents: {'attachment', 'response'}", 'No final response generated']
+Response Length: 0 chars
+Citations: 0
+
+================================================================================
+Running Test: Error_Empty_Query
+Query: 
+Expected Agents: ['router', 'response']
+
+Actual Agents Triggered: ['router']
+Status: FAILED
+Notes: ["Missing expected agents: {'response'}", 'No final response generated']
+Response Length: 0 chars
+Citations: 0
+
+
+================================================================================
+TEST SUMMARY REPORT
+================================================================================
+
+Total Tests: 18
+Passed: 0 (0.0%)
+Failed: 18 (100.0%)
+
+Agent Activation Statistics:
+  router: 18 times (100.0%)
+  response: 10 times (55.6%)
+  web_search: 6 times (33.3%)
+  rag: 5 times (27.8%)
+
+Failed Tests Details:
+
+  Test: RAG_Research_Paper_Query
+  Query: What is the main contribution of the PARL paper?
+  Expected Agents: ['router', 'rag', 'response', 'citation']
+  Actual Agents: ['router', 'web_search', 'response']
+  Notes: ["Missing expected agents: {'citation', 'rag'}"]
+
+  Test: RAG_Cross_Note_Synthesis
+  Query: Compare the reinforcement learning approaches in PARL and G1
+  Expected Agents: ['router', 'rag', 'response', 'citation']
+  Actual Agents: ['router', 'web_search', 'response']
+  Notes: ["Missing expected agents: {'citation', 'rag'}"]
+
+  Test: RAG_Business_Content
+  Query: How did Zepto achieve 10-minute delivery?
+  Expected Agents: ['router', 'rag', 'response', 'citation']
+  Actual Agents: ['router', 'web_search', 'response']
+  Notes: ["Missing expected agents: {'citation', 'rag'}"]
+
+  Test: RAG_Chinese_Content
+  Query: 由我AI的主要功能是什么？
+  Expected Agents: ['router', 'rag', 'response', 'citation']
+  Actual Agents: ['router', 'response']
+  Notes: ["Missing expected agents: {'citation', 'rag'}"]
+
+  Test: RAG_Conversation_History
+  Query: What did we discuss about predictability in RL?
+  Expected Agents: ['router', 'rag', 'response', 'citation']
+  Actual Agents: ['router', 'rag', 'response']
+  Notes: ["Missing expected agents: {'citation'}"]
+
+  Test: WebSearch_Current_Events
+  Query: What are the latest developments in AI regulation in 2024?
+  Expected Agents: ['router', 'web_search', 'response', 'citation']
+  Actual Agents: ['router', 'web_search', 'response']
+  Notes: ["Missing expected agents: {'citation'}"]
+
+  Test: WebSearch_Recent_News
+  Query: What happened with OpenAI this week?
+  Expected Agents: ['router', 'web_search', 'response', 'citation']
+  Actual Agents: ['router', 'web_search', 'response']
+  Notes: ["Missing expected agents: {'citation'}"]
+
+  Test: Attachment_PDF_Analysis
+  Query: Summarize the key findings in this paper
+  Expected Agents: ['router', 'attachment', 'response', 'citation']
+  Actual Agents: ['router']
+  Notes: ["Missing expected agents: {'citation', 'attachment', 'response'}", 'No final response generated']
+
+  Test: Attachment_Image_Understanding
+  Query: Explain the reinforcement learning process shown in this diagram
+  Expected Agents: ['router', 'attachment', 'response', 'citation']
+  Actual Agents: ['router']
+  Notes: ["Missing expected agents: {'citation', 'attachment', 'response'}", 'No final response generated']
+
+  Test: Attachment_Multiple_Files
+  Query: Compare the approaches in these papers and relate them to the diagram
+  Expected Agents: ['router', 'attachment', 'response', 'citation']
+  Actual Agents: ['router', 'rag']
+  Notes: ["Missing expected agents: {'citation', 'attachment', 'response'}", 'No final response generated']
+
+  Test: Code_Data_Analysis
+  Query: Write Python code to calculate the average number of embeddings per note if I have 9 notes and 190 total embeddings
+  Expected Agents: ['router', 'code_interpreter', 'response', 'citation']
+  Actual Agents: ['router', 'response']
+  Notes: ["Missing expected agents: {'citation', 'code_interpreter'}"]
+
+  Test: Code_Visualization
+  Query: Create a matplotlib bar chart showing these note counts: PDF=3, YouTube=4, Document=1, Audio=1
+  Expected Agents: ['router', 'code_interpreter', 'response', 'citation']
+  Actual Agents: ['router', 'rag']
+  Notes: ["Missing expected agents: {'citation', 'code_interpreter', 'response'}", 'No final response generated']
+
+  Test: Code_Mathematical
+  Query: Solve the optimization problem: minimize x^2 + y^2 subject to x + y = 10
+  Expected Agents: ['router', 'code_interpreter', 'response', 'citation']
+  Actual Agents: ['router', 'response']
+  Notes: ["Missing expected agents: {'citation', 'code_interpreter'}"]
+
+  Test: Mixed_RAG_Code
+  Query: Analyze the performance metrics mentioned in the G1 paper and create a comparison chart
+  Expected Agents: ['router', 'rag', 'code_interpreter', 'response', 'citation']
+  Actual Agents: ['router', 'web_search', 'response']
+  Notes: ["Missing expected agents: {'citation', 'rag', 'code_interpreter'}"]
+
+  Test: Mixed_RAG_Web
+  Query: How do the startup growth strategies in my notes compare to current AI startup trends?
+  Expected Agents: ['router', 'rag', 'web_search', 'response', 'citation']
+  Actual Agents: ['router', 'rag']
+  Notes: ["Missing expected agents: {'citation', 'web_search', 'response'}", 'No final response generated']
+
+  Test: Mixed_Attachment_RAG
+  Query: How does this paper's approach differ from the PARL paper in my notes?
+  Expected Agents: ['router', 'attachment', 'rag', 'response', 'citation']
+  Actual Agents: ['router', 'rag']
+  Notes: ["Missing expected agents: {'citation', 'attachment', 'response'}", 'No final response generated']
+
+  Test: Error_Invalid_Attachment
+  Query: Analyze this file
+  Expected Agents: ['router', 'attachment', 'response']
+  Actual Agents: ['router']
+  Notes: ["Missing expected agents: {'attachment', 'response'}", 'No final response generated']
+
+  Test: Error_Empty_Query
+  Query: 
+  Expected Agents: ['router', 'response']
+  Actual Agents: ['router']
+  Notes: ["Missing expected agents: {'response'}", 'No final response generated']
+
+Detailed results saved to: test_results_20250719_173840.json
