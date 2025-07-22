@@ -12,7 +12,7 @@ async def test_streaming():
         request_data = {
             'messages': [{'role': 'user', 'content': 'What notes do I have about reinforcement learning?'}],
             'user_id': 10001,
-            'model': 'gpt-4o-mini',
+            'model': 'gpt-4.1-nano',
             'stream': True
         }
         

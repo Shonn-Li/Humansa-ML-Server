@@ -49,7 +49,7 @@ async def test_iteration_with_logging():
             request_data = {
                 "messages": [{"role": "user", "content": test['query']}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False,
                 "enable_iterations": True
             }

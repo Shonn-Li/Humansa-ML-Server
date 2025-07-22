@@ -50,7 +50,7 @@ class StreamingChunk:
     
     @staticmethod
     def create(content: str, role: str = "assistant", finish_reason: Optional[str] = None, 
-               model: str = "gpt-4o-mini", chunk_id: Optional[str] = None) -> Dict[str, Any]:
+               model: str = "gpt-4o-nano", chunk_id: Optional[str] = None) -> Dict[str, Any]:
         """Create an OpenAI-standard streaming chunk"""
         if not chunk_id:
             chunk_id = f"chatcmpl-{uuid.uuid4().hex[:8]}"
@@ -154,7 +154,7 @@ class RouterAgent(BaseAgent):
             "original_query": query,
             "condensed_query": condensed_query,  # Add condensed query
             "enabled_agents": enabled_agents,
-            "model": request.get("model", "gpt-4o-mini"),
+            "model": request.get("model", "gpt-4o-nano"),
             "search_type": router_decision.search_type if hasattr(router_decision, 'search_type') else "knowledge_base"
         }
 
@@ -295,7 +295,7 @@ class ResponseAgent(BaseAgent):
         messages = self._prepare_messages(request, combined_context)
         
         # Get LLM provider
-        model = request.get("model", "gpt-4o-mini")
+        model = request.get("model", "gpt-4o-nano")
         provider_info = self.llm_provider_manager.get_provider(None, model)
         llm = provider_info["llm"]
         
@@ -306,7 +306,7 @@ class ResponseAgent(BaseAgent):
             "status": "success",
             "response": response.message.content,
             "metadata": {
-                "model": request.get("model", "gpt-4o-mini"),
+                "model": request.get("model", "gpt-4o-nano"),
                 "context_used": bool(combined_context)
             }
         }
@@ -321,7 +321,7 @@ class ResponseAgent(BaseAgent):
         messages = self._prepare_messages(request, combined_context)
         
         # Get LLM provider
-        model = request.get("model", "gpt-4o-mini")
+        model = request.get("model", "gpt-4o-nano")
         provider_info = self.llm_provider_manager.get_provider(None, model)
         llm = provider_info["llm"]
         
@@ -342,7 +342,7 @@ class ResponseAgent(BaseAgent):
             yield {
                 "status": "success",
                 "metadata": {
-                    "model": request.get("model", "gpt-4o-mini"),
+                    "model": request.get("model", "gpt-4o-nano"),
                     "context_used": bool(combined_context)
                 }
             }
@@ -381,7 +381,7 @@ class ResponseAgent(BaseAgent):
         
         # System message
         system_prompt = self.system_prompt_manager.get_system_prompt(
-            request.get("model", "gpt-4o-mini")
+            request.get("model", "gpt-4o-nano")
         )
         messages.append(ChatMessage(role="system", content=system_prompt))
         
@@ -460,7 +460,7 @@ class CitationAgent(BaseAgent):
             }
         
         # Get provider for citation generation
-        model = request.get("model", "gpt-4o-mini")
+        model = request.get("model", "gpt-4o-nano")
         provider_info = self.llm_provider_manager.get_provider(None, model)
         llm = provider_info["llm"]
         
@@ -586,7 +586,7 @@ class IterativeOrchestrator:
             return False, []
         
         # Use LLM to evaluate response quality
-        model = request.get("model", "gpt-4o-mini")
+        model = request.get("model", "gpt-4o-nano")
         provider_info = self.llm_provider_manager.get_provider(None, model)
         llm = provider_info["llm"]
         
@@ -785,7 +785,7 @@ class MultiAgentChatEndpointV2:
                 "id": f"chatcmpl-{uuid.uuid4().hex[:8]}",
                 "object": "chat.completion",
                 "created": int(time.time()),
-                "model": request.get("model", "gpt-4o-mini"),
+                "model": request.get("model", "gpt-4o-nano"),
                 "choices": [{
                     "index": 0,
                     "message": {
@@ -820,7 +820,7 @@ class MultiAgentChatEndpointV2:
         response_id = f"resp_{uuid.uuid4().hex[:8]}"
         output_index = -1
         sequence_number = 0
-        model = request.get("model", "gpt-4o-mini")
+        model = request.get("model", "gpt-4o-nano")
         
         def generate_output_id(prefix: str = "item") -> str:
             """Generate unique output item ID."""

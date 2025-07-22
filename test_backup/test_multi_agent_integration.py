@@ -60,7 +60,7 @@ class MultiAgentIntegrationTester:
                     "messages": [
                         {"role": "user", "content": "What are my notes about machine learning?"}
                     ],
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "user_id": 123,
                     "stream": True,
                     "enable_rag": True,
@@ -92,7 +92,7 @@ class MultiAgentIntegrationTester:
                     "messages": [
                         {"role": "user", "content": "What are the latest developments in quantum computing?"}
                     ],
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "user_id": 123,
                     "stream": True,
                     "enable_web_search": True,
@@ -125,7 +125,7 @@ class MultiAgentIntegrationTester:
                     "messages": [
                         {"role": "user", "content": "Calculate the factorial of 10 using Python"}
                     ],
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "user_id": 123,
                     "stream": True,
                     "enable_code_interpreter": True
@@ -155,7 +155,7 @@ class MultiAgentIntegrationTester:
                     "messages": [
                         {"role": "user", "content": "Compare my notes on AI with the latest research in the field"}
                     ],
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "user_id": 123,
                     "stream": True,
                     "enable_rag": True,
@@ -189,7 +189,7 @@ class MultiAgentIntegrationTester:
                     "messages": [
                         {"role": "user", "content": "Analyze the attached document"}
                     ],
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "user_id": 123,
                     "stream": True,
                     "attachments": [

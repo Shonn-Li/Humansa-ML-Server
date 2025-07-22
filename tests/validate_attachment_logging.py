@@ -25,7 +25,7 @@ async def validate_attachment_logging():
         "messages": [{"role": "user", "content": "Analyze this document"}],
         "attachments": ["https://arxiv.org/pdf/2311.10122.pdf"],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "stream": False,
         "enable_citations": True
     }
@@ -138,7 +138,7 @@ async def validate_attachment_logging():
     request_data = {
         "messages": [{"role": "user", "content": "What is machine learning?"}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "stream": False,
         "enable_citations": True
     }

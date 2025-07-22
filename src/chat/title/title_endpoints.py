@@ -23,7 +23,7 @@ async def generate_conversation_title_endpoint():
         "messages": [...],  // Optional, can be empty
         "user_id": 456,     // Optional
         "provider": "openai",  // Optional, defaults to openai
-        "model": "gpt-4o-mini"  // Optional, defaults to gpt-4o-mini
+        "model": "gpt-4.1-nano"  // Optional, defaults to gpt-4.1-nano
     }
     """
     try:
@@ -68,7 +68,7 @@ async def generate_conversation_titles_batch_endpoint():
             }
         ],
         "provider": "openai",     // Optional, applied to all
-        "model": "gpt-4o-mini"    // Optional, applied to all
+        "model": "gpt-4.1-nano"    // Optional, applied to all
     }
     """
     try:
@@ -109,7 +109,7 @@ async def migrate_conversation_titles_endpoint():
         "batch_size": 50,        // Optional, max conversations per batch (default: 50, max: 100)
         "dry_run": false,        // Optional, if true, doesn't update database (default: false)
         "provider": "openai",    // Optional, LLM provider (default: openai)
-        "model": "gpt-4o-mini",  // Optional, model to use (default: gpt-4o-mini)
+        "model": "gpt-4.1-nano",  // Optional, model to use (default: gpt-4.1-nano)
         "max_conversations": 1000 // Optional, max total conversations to process (default: 1000)
     }
     """

@@ -390,7 +390,7 @@ async def main():
     # Test request
     test_request = {
         "messages": [{"role": "user", "content": "What are the latest AI developments?"}],
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "user_id": 123,
         "stream": True,
         "enable_web_search": True,

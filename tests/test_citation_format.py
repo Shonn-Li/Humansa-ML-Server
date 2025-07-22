@@ -26,7 +26,7 @@ async def test_citation_format():
                     "content": "What is machine learning? Give a brief answer with sources."
                 }],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "enable_citations": True,
                 "stream": False
             }
@@ -39,7 +39,7 @@ async def test_citation_format():
                     "content": "What is artificial intelligence? Give a brief answer with sources."
                 }],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "enable_citations": True,
                 "stream": True
             }

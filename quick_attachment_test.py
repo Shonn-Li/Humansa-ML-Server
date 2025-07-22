@@ -11,7 +11,7 @@ async def test_attachment():
         request = {
             "messages": [{"role": "user", "content": "What is this?"}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False,
             "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"]
         }

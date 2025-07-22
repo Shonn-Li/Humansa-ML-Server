@@ -95,7 +95,7 @@ Sources:
     "response_agent": {
       "status": "success",
       "data": {
-        "model_used": "gpt-4o-mini",
+        "model_used": "gpt-4o-nano",
         "tokens_generated": 850
       }
     },

@@ -16,7 +16,7 @@ async def test_citation_tracking():
     request = {
         "messages": [{"role": "user", "content": "What are the benefits of machine learning in healthcare? Cite sources."}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "stream": True,
         "enable_citations": True
     }

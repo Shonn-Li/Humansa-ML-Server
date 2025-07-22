@@ -26,7 +26,7 @@ async def test_deliberately_incomplete():
             "content": "List 10 different programming languages with detailed explanations of their use cases, syntax examples, and popular frameworks. Be extremely thorough."
         }],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_iterations": True,
         "stream": True
     }

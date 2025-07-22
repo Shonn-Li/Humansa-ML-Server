@@ -25,7 +25,7 @@ async def test_real_implementation():
     request = {
         "messages": [{"role": "user", "content": "What is Python? Give me 2 facts with sources."}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_citations": True,
         "stream": False
     }
@@ -59,7 +59,7 @@ async def test_real_implementation():
     request = {
         "messages": [{"role": "user", "content": "Hello, how are you?"}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "stream": True
     }
     
@@ -100,7 +100,7 @@ async def test_real_implementation():
     request = {
         "messages": [{"role": "user", "content": "What is machine learning? One fact with source."}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_citations": True,
         "stream": True
     }
@@ -158,7 +158,7 @@ async def test_real_implementation():
     request = {
         "messages": [{"role": "user", "content": "What's in this file?"}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "attachments": [{
             "content": "This is a test file with sample content about artificial intelligence.",
             "type": "text",
@@ -192,7 +192,7 @@ async def test_real_implementation():
     request = {
         "messages": [{"role": "user", "content": "Explain quantum computing, its principles, applications, challenges, and future prospects in detail."}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_iterations": True,
         "stream": False
     }

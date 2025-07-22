@@ -21,7 +21,7 @@ class FeatureTester:
         request = {
             "messages": [{"role": "user", "content": "What is this document about?"}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": stream,
             "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"]
         }
@@ -91,7 +91,7 @@ class FeatureTester:
         request = {
             "messages": [{"role": "user", "content": "What are transformers in AI? Please include citations."}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": stream
         }
         
@@ -187,7 +187,7 @@ class FeatureTester:
         request = {
             "messages": [{"role": "user", "content": "Provide a comprehensive analysis of quantum computing applications in cryptography, including current research, challenges, and future prospects. Be very thorough and detailed."}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": stream
         }
         

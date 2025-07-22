@@ -33,7 +33,7 @@ from ..config.system_prompts import SystemPromptManager
 from ..agent import (
     BaseAgent,
     RouterAgent,
-    RAGAgent,
+    ContextSearchAgent,
     WebSearchAgent,
     AttachmentAgent,
     ResponseAgent,
@@ -49,7 +49,7 @@ class StreamingChunk:
     
     @staticmethod
     def create(content: str, role: str = "assistant", finish_reason: Optional[str] = None, 
-              model: str = "gpt-4o-mini") -> Dict[str, Any]:
+              model: str = "gpt-4.1-nano") -> Dict[str, Any]:
         """Create a standard streaming chunk"""
         return {
             "id": f"chatcmpl-{uuid.uuid4().hex[:8]}",
@@ -87,7 +87,7 @@ class IterativeOrchestrator:
             return False, []
         
         # Use LLM to evaluate response quality
-        model = request.get("model", "gpt-4o-mini")
+        model = request.get("model", "gpt-4.1-nano")
         provider_info = self.llm_provider_manager.get_provider(None, model)
         llm = provider_info["llm"]
         
@@ -189,7 +189,7 @@ class MultiAgentChatEndpointV2:
         # Initialize agents
         self.agents = {
             "router": RouterAgent(self.llm_provider_manager),
-            "rag": RAGAgent(self.rag_processor),
+            "context_search": ContextSearchAgent(self.rag_processor),
             "web_search": WebSearchAgent(self.web_search_processor),
             "attachment": AttachmentAgent(self.file_attachment_manager),
             "code_interpreter": CodeInterpreterAgent(),
@@ -228,8 +228,8 @@ class MultiAgentChatEndpointV2:
             # Phase 2: Context Collection (parallel where possible)
             tasks = []
             
-            if "rag" in enabled_agents:
-                tasks.append(("rag", self.agents["rag"].run(request, context)))
+            if "context_search" in enabled_agents:
+                tasks.append(("context_search", self.agents["context_search"].run(request, context)))
             
             if "web_search" in enabled_agents:
                 tasks.append(("web_search", self.agents["web_search"].run(request, context)))
@@ -305,7 +305,7 @@ class MultiAgentChatEndpointV2:
                 "id": f"chatcmpl-{uuid.uuid4().hex[:8]}",
                 "object": "chat.completion",
                 "created": int(time.time()),
-                "model": request.get("model", "gpt-4o-mini"),
+                "model": request.get("model", "gpt-4.1-nano"),
                 "choices": [{
                     "index": 0,
                     "message": {
@@ -372,7 +372,7 @@ class MultiAgentChatEndpointV2:
                                  "object": "response",
                                  "created_at": int(time.time()),
                                  "status": "in_progress",
-                                 "model": request.get("model", "gpt-4o-mini"),
+                                 "model": request.get("model", "gpt-4.1-nano"),
                                  "output": []
                              })
             sequence += 1
@@ -431,7 +431,7 @@ class MultiAgentChatEndpointV2:
             
             # Phase 2: Context Collection Agents
             # Stream each enabled agent's work
-            for agent_name in ["rag", "web_search", "attachment", "code_interpreter"]:
+            for agent_name in ["context_search", "web_search", "attachment", "code_interpreter"]:
                 if agent_name in enabled_agents:
                     # Delegate to agent-specific streaming methods
                     if agent_name == "web_search":
@@ -440,58 +440,100 @@ class MultiAgentChatEndpointV2:
                             event["sequence_number"] = sequence
                             yield event
                             sequence += 1
-                        current_output_index += 2  # Web search adds 2 items (reasoning + function)
+                        current_output_index += 1  # Web search adds 1 item
                     elif agent_name == "code_interpreter":
                         async for event in self._stream_code_interpreter_agent(request, context, create_event,
                                                                              generate_output_id, current_output_index):
                             event["sequence_number"] = sequence
                             yield event
                             sequence += 1
-                        current_output_index += 2  # Code interpreter adds 2 items (function call + result)
+                        current_output_index += 1  # Code interpreter adds 1 item
                     else:
-                        # Other agents use simple reasoning format
-                        agent_id = generate_output_id(agent_name)
-                        yield create_event("response.output_item.added",
-                                         sequence_number=sequence,
-                                         output_index=current_output_index,
-                                         item={
-                                             "id": agent_id,
-                                             "type": "reasoning",
-                                             "content": []
-                                         })
-                        sequence += 1
-                        current_output_index += 1
-                        
-                        # Stream agent work
-                        agent_messages = {
-                            "rag": "Searching knowledge base...",
-                            "attachment": "Processing attachments..."
-                        }
-                        
-                        async for event in self._stream_reasoning_step(agent_id, current_output_index - 1,
-                                                                     agent_messages.get(agent_name, f"Running {agent_name}..."),
-                                                                     create_event):
-                            event["sequence_number"] = sequence
-                            yield event
+                        # Context search uses context_search_call, attachment uses file_search_call
+                        if agent_name == "context_search":
+                            # Use context_search_call for context search
+                            agent_id = generate_output_id("cs")
+                            yield create_event("response.output_item.added",
+                                             sequence_number=sequence,
+                                             output_index=current_output_index,
+                                             item={
+                                                 "id": agent_id,
+                                                 "type": "context_search_call",
+                                                 "status": "in_progress"
+                                             })
                             sequence += 1
-                        
-                        # Run agent
-                        result = await self.agents[agent_name].run(request, context)
-                        context[f"{agent_name}_agent"] = result
-                        
-                        # Complete agent reasoning
-                        yield create_event("response.output_item.done",
-                                         sequence_number=sequence,
-                                         output_index=current_output_index - 1,
-                                         item={
-                                             "id": agent_id,
-                                             "type": "reasoning",
-                                             "content": [{
-                                                 "type": "reasoning_text",
-                                                 "text": f"{agent_name.replace('_', ' ').title()} completed"
-                                             }]
-                                         })
-                        sequence += 1
+                            current_output_index += 1
+                            
+                            # Run context search agent
+                            result = await self.agents["context_search"].run(request, context)
+                            context["context_search_agent"] = result
+                            
+                            # Complete context search call
+                            yield create_event("response.output_item.done",
+                                             sequence_number=sequence,
+                                             output_index=current_output_index - 1,
+                                             item={
+                                                 "id": agent_id,
+                                                 "type": "context_search_call",
+                                                 "status": "completed"
+                                             })
+                            sequence += 1
+                        elif agent_name == "attachment":
+                            # Use file_search_call for attachments
+                            agent_id = generate_output_id("fs")
+                            yield create_event("response.output_item.added",
+                                             sequence_number=sequence,
+                                             output_index=current_output_index,
+                                             item={
+                                                 "id": agent_id,
+                                                 "type": "file_search_call",
+                                                 "status": "in_progress"
+                                             })
+                            sequence += 1
+                            current_output_index += 1
+                            
+                            # Run attachment agent
+                            result = await self.agents["attachment"].run(request, context)
+                            context["attachment_agent"] = result
+                            
+                            # Complete file search call
+                            yield create_event("response.output_item.done",
+                                             sequence_number=sequence,
+                                             output_index=current_output_index - 1,
+                                             item={
+                                                 "id": agent_id,
+                                                 "type": "file_search_call",
+                                                 "status": "completed"
+                                             })
+                            sequence += 1
+                        else:
+                            # This should not happen with current agent types
+                            logger.warning(f"Unknown agent type for streaming: {agent_name}")
+                            
+                            async for event in self._stream_reasoning_step(agent_id, current_output_index - 1,
+                                                                         agent_messages.get(agent_name, f"Running {agent_name}..."),
+                                                                         create_event):
+                                event["sequence_number"] = sequence
+                                yield event
+                                sequence += 1
+                            
+                            # Run agent
+                            result = await self.agents[agent_name].run(request, context)
+                            context[f"{agent_name}_agent"] = result
+                            
+                            # Complete agent reasoning
+                            yield create_event("response.output_item.done",
+                                             sequence_number=sequence,
+                                             output_index=current_output_index - 1,
+                                             item={
+                                                 "id": agent_id,
+                                                 "type": "reasoning",
+                                                 "content": [{
+                                                     "type": "reasoning_text",
+                                                     "text": f"{agent_name.replace('_', ' ').title()} completed"
+                                                 }]
+                                             })
+                            sequence += 1
             
             # Phase 3: Response Generation (streaming)
             async for event in self._stream_response_agent(request, context, create_event, 
@@ -635,70 +677,32 @@ class MultiAgentChatEndpointV2:
     
     async def _stream_web_search_agent(self, request: Dict[str, Any], context: Dict[str, Any], 
                                      create_event, generate_output_id, current_output_index) -> AsyncGenerator[Dict[str, Any], None]:
-        """Stream web search agent work"""
-        # Add reasoning for web search
-        search_id = generate_output_id("search")
+        """Stream web search agent work using OpenAI Response API format"""
+        # Add web search call output item
+        search_id = generate_output_id("ws")
         yield create_event("response.output_item.added",
                          output_index=current_output_index,
                          item={
                              "id": search_id,
-                             "type": "reasoning",
-                             "content": []
+                             "type": "web_search_call",
+                             "status": "in_progress"
                          })
-        
-        async for event in self._stream_reasoning_step(search_id, current_output_index, 
-                                                     "Searching the web for current information...", create_event):
-            yield event
         
         # Execute web search
         search_result = await self.agents["web_search"].run(request, context)
         context["web_search_agent"] = search_result
         
-        # Complete reasoning
+        # Complete web search call
         yield create_event("response.output_item.done",
                          output_index=current_output_index,
                          item={
                              "id": search_id,
-                             "type": "reasoning",
-                             "content": [{
-                                 "type": "reasoning_text",
-                                 "text": f"Found {len(search_result.get('results', []))} relevant results"
-                             }]
+                             "type": "web_search_call",
+                             "status": "completed"
                          })
         
-        # Add function call for web search
-        func_id = generate_output_id("func")
-        yield create_event("response.output_item.added",
-                         output_index=current_output_index + 1,
-                         item={
-                             "id": func_id,
-                             "type": "function_call",
-                             "function": {
-                                 "name": "web_search",
-                                 "arguments": json.dumps({
-                                     "query": context.get("router_agent", {}).get("original_query", "")
-                                 })
-                             }
-                         })
-        
-        # Add function result
-        result_text = f"Found {len(search_result.get('results', []))} search results"
-        yield create_event("response.output_item.done",
-                         output_index=current_output_index + 1,
-                         item={
-                             "id": func_id,
-                             "type": "function_tool_result",
-                             "status": "completed",
-                             "role": "tool",
-                             "content": [
-                                 {
-                                     "type": "output_text",
-                                     "text": result_text
-                                 }
-                             ],
-                             "created_at": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                             "completed_at": time.strftime("%Y-%m-%dT%H:%M:%SZ")
-                         })
+        # Note: The actual search results and citations will be included
+        # in the response message by the response agent
 
     async def _stream_response_agent(self, request: Dict[str, Any], context: Dict[str, Any], create_event, generate_output_id, current_output_index) -> AsyncGenerator[Dict[str, Any], None]:
         """Stream response agent work with integrated citations."""
@@ -811,72 +815,33 @@ class MultiAgentChatEndpointV2:
     # async def _stream_citation_agent(...) - DEPRECATED
 
     async def _stream_code_interpreter_agent(self, request: Dict[str, Any], context: Dict[str, Any], create_event, generate_output_id, current_output_index) -> AsyncGenerator[Dict[str, Any], None]:
-        """Stream code interpreter agent work with function tool calls."""
-        code_id = generate_output_id("code")
+        """Stream code interpreter agent work using OpenAI Response API format"""
+        code_id = generate_output_id("ci")
         
-        # Extract user message
-        user_messages = [msg for msg in request["messages"] if msg["role"] == "user"]
-        user_message = user_messages[-1]["content"] if user_messages else "analyze data"
+        # Add code interpreter call output item
+        yield create_event("response.output_item.added",
+                         output_index=current_output_index,
+                         item={
+                             "id": code_id,
+                             "type": "code_interpreter_call",
+                             "status": "in_progress"
+                         })
         
-        # Check if code interpreter agent is available
+        # Execute code interpreter
         if "code_interpreter" in self.agents:
-            # Extract code from message if available
-            code_agent = self.agents["code_interpreter"]
-            code_blocks = code_agent.extract_code_from_message(user_message)
-            
-            # Determine the code to show
-            code_to_show = ""
-            if code_blocks:
-                code_to_show = code_blocks[0]
-            else:
-                # Generate simple example code based on query
-                if "plot" in user_message.lower() or "graph" in user_message.lower():
-                    code_to_show = "import matplotlib.pyplot as plt\nimport numpy as np\n\n# Generate sample data\nx = np.linspace(0, 10, 100)\ny = np.sin(x)\n\nplt.plot(x, y)\nplt.title('Sample Plot')\nplt.show()"
-                elif "calculate" in user_message.lower():
-                    code_to_show = "# Perform calculation\nresult = sum(range(1, 101))\nprint(f'Sum of 1 to 100: {result}')"
-                else:
-                    code_to_show = "# Data analysis code\nimport pandas as pd\nimport numpy as np\n\n# Your code here"
-            
-            # Add function call output item
-            yield create_event("response.output_item.added",
-                             output_index=current_output_index,
-                             item={
-                                 "id": code_id,
-                                 "type": "function_call",
-                                 "function": {
-                                     "name": "execute_python",
-                                     "arguments": json.dumps({
-                                         "code": code_to_show
-                                     })
-                                 }
-                             })
-            
-            # Execute code
             code_result = await self.agents["code_interpreter"].run(request, context)
             context["code_interpreter_agent"] = code_result
-            
-            # Extract result
-            result_text = code_result.get("result", "Code executed successfully")
-            if isinstance(result_text, dict):
-                result_text = json.dumps(result_text, indent=2)
-            
-            # Add function result output item  
-            yield create_event("response.output_item.done",
-                             output_index=current_output_index + 1,
-                             item={
-                                 "id": f"result_{code_id}",
-                                 "type": "function_tool_result",
-                                 "status": "completed",
-                                 "role": "tool",
-                                 "content": [
-                                     {
-                                         "type": "output_text",
-                                         "text": result_text
-                                     }
-                                 ],
-                                 "created_at": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                                 "completed_at": time.strftime("%Y-%m-%dT%H:%M:%SZ")
-                             })
+        
+        # Complete code interpreter call
+        yield create_event("response.output_item.done",
+                         output_index=current_output_index,
+                         item={
+                             "id": code_id,
+                             "type": "code_interpreter_call",
+                             "status": "completed"
+                         })
+        
+        # Note: The actual code output will be included in the response message
     
     async def _generate_title(self, messages: List[Dict[str, Any]], response: str) -> str:
         """Generate a title for the conversation"""

@@ -89,7 +89,7 @@ class AgentTestSuite:
             try:
                 request = {
                     "messages": [{"role": "user", "content": test_case["query"]}],
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "user_id": "test_user_123",
                     "attachments": test_case.get("attachments", [])
                 }
@@ -175,7 +175,7 @@ class AgentTestSuite:
             try:
                 request = {
                     "messages": [{"role": "user", "content": test_case["query"]}],
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "user_id": 123  # Use integer user ID
                 }
                 
@@ -254,7 +254,7 @@ class AgentTestSuite:
             try:
                 request = {
                     "messages": [{"role": "user", "content": test_case["query"]}],
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "user_id": 123  # Use integer user ID
                 }
                 
@@ -340,7 +340,7 @@ class AgentTestSuite:
             try:
                 request = {
                     "messages": [{"role": "user", "content": "Process these attachments"}],
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "user_id": "test_user_123",
                     "attachments": test_case["attachments"]
                 }
@@ -424,7 +424,7 @@ class AgentTestSuite:
             try:
                 request = {
                     "messages": [{"role": "user", "content": test_case["query"]}],
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "user_id": 123  # Use integer user ID
                 }
                 
@@ -541,7 +541,7 @@ class AgentTestSuite:
             try:
                 request = {
                     "messages": [{"role": "user", "content": "Tell me about AI"}],
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "user_id": 123  # Use integer user ID
                 }
                 
@@ -671,7 +671,7 @@ class AgentTestSuite:
             try:
                 request = {
                     "messages": [{"role": "user", "content": "Tell me about AI"}],
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "user_id": 123  # Use integer user ID
                 }
                 

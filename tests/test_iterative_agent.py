@@ -33,7 +33,7 @@ async def test_iterative_processing():
             Make sure to be thorough and cite any relevant information from my notes or web sources."""
         }],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_iterations": True,
         "enable_citations": True,
         "stream": True
@@ -184,7 +184,7 @@ async def main():
     simple_request = {
         "messages": [{"role": "user", "content": "What is 2+2?"}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_iterations": True,
         "stream": False
     }

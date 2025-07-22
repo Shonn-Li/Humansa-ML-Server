@@ -46,7 +46,7 @@ class QueryTransformer:
                 logger.warning(
                     f"Azure failed for query transformer, falling back to OpenAI: {e}")
                 provider_enum, llm = self.provider_selector.select_provider_and_model(
-                    "openai", "gpt-4o-mini"
+                    "openai", "gpt-4.1-nano"
                 )
                 self._llm = llm
                 logger.info(

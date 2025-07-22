@@ -56,7 +56,7 @@ class CitationEngine:
                                  rag_context: Optional[RAGContext],
                                  attachment_context: Optional[Dict[str, Any]],
                                  websearch_context: Optional[WebSearchContext],
-                                 model_name: str = "gpt-4o-mini",
+                                 model_name: str = "gpt-4.1-nano",
                                  llm=None) -> CitationResult:
         """
         Generate a response with citations based on provided context.

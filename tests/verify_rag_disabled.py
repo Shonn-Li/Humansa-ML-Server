@@ -16,7 +16,7 @@ async def test_rag_disabled():
         "messages": [{"role": "user", "content": "Tell me about this paper"}],
         "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "stream": False
     }
     

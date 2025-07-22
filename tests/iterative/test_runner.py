@@ -61,7 +61,7 @@ class IterativeTestRunner:
         # Test configuration
         self.max_iterations = 100
         self.fix_attempts = 3
-        self.model = "gpt-4o-mini"
+        self.model = "gpt-4.1-nano"
         
     async def __aenter__(self):
         """Async context manager entry"""

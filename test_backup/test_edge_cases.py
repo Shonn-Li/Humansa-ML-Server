@@ -18,7 +18,7 @@ async def test_edge_cases():
         request = {
             "messages": [{"role": "user", "content": "Compare these papers and cite key findings"}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False,
             "attachments": [
                 "https://arxiv.org/pdf/2311.10122.pdf",
@@ -51,7 +51,7 @@ async def test_edge_cases():
         request = {
             "messages": [{"role": "user", "content": "Compare this paper with my PARL notes"}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False,
             "attachments": ["https://arxiv.org/pdf/2311.10122.pdf"]
         }
@@ -78,7 +78,7 @@ async def test_edge_cases():
         request = {
             "messages": [{"role": "user", "content": "Explain neural networks with citations"}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": True
         }
         
@@ -123,7 +123,7 @@ async def test_edge_cases():
         request = {
             "messages": [{"role": "user", "content": "Create a comprehensive guide on implementing reinforcement learning for robotics applications. Include: 1) Mathematical foundations 2) Algorithm implementations 3) Hardware considerations 4) Real-world examples 5) Code samples. Be extremely detailed and thorough."}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False
         }
         
@@ -150,7 +150,7 @@ async def test_edge_cases():
         request = {
             "messages": [{"role": "user", "content": "Test error"}],
             "user_id": 99999,  # Non-existent user
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False
         }
         

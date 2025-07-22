@@ -72,7 +72,7 @@ class CitationAgent(BaseAgent):
             }
         
         # Get provider for citation generation
-        model = request.get("model", "gpt-4o-mini")
+        model = request.get("model", "gpt-4.1-nano")
         provider_info = self.llm_provider_manager.get_provider(None, model)
         llm = provider_info["llm"]
         

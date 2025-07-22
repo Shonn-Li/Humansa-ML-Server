@@ -27,7 +27,7 @@ async def test_all_features():
     request = {
         "messages": [{"role": "user", "content": "What does this file say?"}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "attachments": [{
             "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
             "type": "pdf",
@@ -57,7 +57,7 @@ async def test_all_features():
     request = {
         "messages": [{"role": "user", "content": "What is Python programming? Give me a brief answer with sources."}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_citations": True,
         "stream": True
     }
@@ -96,7 +96,7 @@ async def test_all_features():
     request = {
         "messages": [{"role": "user", "content": "What is machine learning? One sentence with source."}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_citations": True,
         "stream": True
     }
@@ -138,7 +138,7 @@ async def test_all_features():
     request = {
         "messages": [{"role": "user", "content": "Explain quantum computing in detail with its applications, challenges, and future prospects."}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_iterations": True,
         "stream": False
     }
@@ -166,7 +166,7 @@ async def test_all_features():
     request = {
         "messages": [{"role": "user", "content": "Hello, how are you?"}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "stream": True
     }
     

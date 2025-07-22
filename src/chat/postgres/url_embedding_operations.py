@@ -791,7 +791,7 @@ class URLEmbeddingOperations:
             # Use the dedicated vision method to avoid azure_inference override
             try:
                 provider_enum, llm = provider_selector.force_provider_for_vision(
-                    "azure_openai", "gpt-4o-mini")
+                    "azure_openai", "gpt-4.1-nano")
                 logger.info(
                     "Using Azure OpenAI for image processing (proper vision support) - bypassing cost override")
             except ValueError as e:

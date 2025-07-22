@@ -32,7 +32,7 @@ async def test_multi_agent_streaming():
             "messages": [
                 {"role": "user", "content": "Search for AI developments and explain them"}
             ],
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "user_id": "test_user_123",
             "stream": True,
             "enable_web_search": True,

@@ -18,7 +18,7 @@ async def test_attachment():
     request = {
         "messages": [{"role": "user", "content": "What does this PDF say?"}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "attachments": [{
             "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
             "type": "pdf",

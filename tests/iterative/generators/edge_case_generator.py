@@ -389,7 +389,7 @@ class EdgeCaseGenerator:
             'request': {
                 'messages': [{'role': 'user', 'content': random.choice(content_types)}],
                 'user_id': random.randint(1, 100000),
-                'model': random.choice(['gpt-4o-mini', 'gpt-4', 'invalid-model'])
+                'model': random.choice(['gpt-4.1-nano', 'gpt-4', 'invalid-model'])
             },
             'expected': {
                 'should_not_crash': True

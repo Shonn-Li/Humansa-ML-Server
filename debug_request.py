@@ -10,7 +10,7 @@ async def debug_request():
     """Send a simple request and print the raw response"""
     
     request = {
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "messages": [
             {
                 "role": "user", 

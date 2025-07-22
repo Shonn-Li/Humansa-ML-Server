@@ -42,7 +42,7 @@ class ResponseAgent(BaseAgent):
         messages = self._prepare_messages(request, combined_context, sources, enable_citations)
         
         # Get LLM provider
-        model = request.get("model", "gpt-4o-mini")
+        model = request.get("model", "gpt-4.1-nano")
         provider_info = self.llm_provider_manager.get_provider(None, model)
         llm = provider_info["llm"]
         
@@ -61,7 +61,7 @@ class ResponseAgent(BaseAgent):
             "annotations": [ann.to_dict() for ann in annotations],
             "sources": sources if enable_citations else [],
             "metadata": {
-                "model": request.get("model", "gpt-4o-mini"),
+                "model": request.get("model", "gpt-4.1-nano"),
                 "context_used": bool(combined_context),
                 "citations_enabled": enable_citations
             }
@@ -80,7 +80,7 @@ class ResponseAgent(BaseAgent):
         messages = self._prepare_messages(request, combined_context, sources, enable_citations)
         
         # Get LLM provider
-        model = request.get("model", "gpt-4o-mini")
+        model = request.get("model", "gpt-4.1-nano")
         provider_info = self.llm_provider_manager.get_provider(None, model)
         llm = provider_info["llm"]
         
@@ -117,7 +117,7 @@ class ResponseAgent(BaseAgent):
                 "status": "success",
                 "response": accumulated_response,
                 "metadata": {
-                    "model": request.get("model", "gpt-4o-mini"),
+                    "model": request.get("model", "gpt-4.1-nano"),
                     "context_used": bool(combined_context),
                     "citations_enabled": enable_citations,
                     "source_count": len(sources)
@@ -136,42 +136,55 @@ class ResponseAgent(BaseAgent):
         
         # Attachment context and sources
         if "attachment_agent" in context:
-            attachment_context = context["attachment_agent"].get("context", "")
+            attachment_data = context["attachment_agent"]
+            attachment_context = attachment_data.get("context", "")
+            
+            # Add attachment context
             if attachment_context:
                 context_parts.append(f"[{source_counter}] Attachment Content:\n{attachment_context}")
-                # Add attachment as a source
+                source_counter += 1
+            
+            # Add attachment sources
+            attachment_sources = attachment_data.get("sources", [])
+            for source in attachment_sources:
                 all_sources.append({
                     "source_id": f"attachment_{source_counter}",
                     "type": "attachment",
-                    "title": "User Attachment",
-                    "content": attachment_context[:500],  # First 500 chars
-                    "url": context["attachment_agent"].get("url", ""),
+                    "title": source.get("title", "User Attachment"),
+                    "content": attachment_context[:500] if attachment_context else "Attachment content",
+                    "url": source.get("url", ""),
                     "metadata": {
-                        "filename": context["attachment_agent"].get("filename", "attachment")
+                        "filename": source.get("filename", "attachment"),
+                        "file_type": source.get("file_type", "unknown"),
+                        "file_id": source.get("file_id")
                     }
                 })
-                source_counter += 1
         
-        # RAG context and sources
-        if "rag_agent" in context:
-            rag_sources = context["rag_agent"].get("sources", [])
-            for source in rag_sources:
+        # Context search sources (notes and conversations)
+        if "context_search_agent" in context:
+            context_sources = context["context_search_agent"].get("sources", [])
+            for source in context_sources:
                 # Format source content
                 source_content = source.get("content", "")[:500]
                 context_parts.append(f"[{source_counter}] Knowledge Base:\n{source_content}")
                 
-                # Add RAG source with custom metadata
+                # Add context search source with proper metadata
+                source_type = source.get("type", "note")
+                source_id = source.get("note_id") or source.get("conversation_id")
+                
                 all_sources.append({
-                    "source_id": f"rag_{source_counter}",
-                    "type": "rag_node",
-                    "title": source.get("title", f"Note {source_counter}"),
+                    "source_id": f"context_{source_counter}",
+                    "type": "context_search",
+                    "title": source.get("title", f"{source_type.capitalize()} {source_counter}"),
                     "content": source_content,
-                    "url": f"youwo://note/{source.get('note_id', '')}",  # Custom URL scheme
+                    "url": f"youwo://{source_type}/{source_id}" if source_id else "",
                     "metadata": {
                         "note_id": source.get("note_id"),
+                        "conversation_id": source.get("conversation_id"),
                         "node_id": source.get("node_id"),
                         "chunk_id": source.get("chunk_id"),
-                        "score": source.get("score", 0.0)
+                        "score": source.get("score", 0.0),
+                        "type": source_type
                     }
                 })
                 source_counter += 1
@@ -209,7 +222,7 @@ class ResponseAgent(BaseAgent):
         
         # System message
         system_prompt = self.system_prompt_manager.get_system_prompt(
-            request.get("model", "gpt-4o-mini")
+            request.get("model", "gpt-4.1-nano")
         )
         messages.append(ChatMessage(role="system", content=system_prompt))
         

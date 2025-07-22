@@ -95,7 +95,7 @@ class RouterAgent(BaseAgent):
             "router_decision": asdict(router_decision),
             "original_query": query,
             "enabled_agents": enabled_agents,
-            "model": request.get("model", "gpt-4o-mini"),
+            "model": request.get("model", "gpt-4.1-nano"),
             "search_type": router_decision.search_type if hasattr(router_decision, 'search_type') else "knowledge_base"
         }
 
@@ -213,7 +213,7 @@ class ResponseAgent(BaseAgent):
         # Get query and model from context
         router_data = context.get("router_agent", {})
         query = router_data.get("original_query", "")
-        model = router_data.get("model", "gpt-4o-mini")
+        model = router_data.get("model", "gpt-4.1-nano")
 
         # Get an LLM instance
         provider_info = self.llm_manager.get_provider(model=model)
@@ -315,7 +315,7 @@ class CitationAgent(BaseAgent):
             # Get the original query and model from context
             router_data = context.get("router_agent", {})
             query = router_data.get("original_query", "")
-            model = router_data.get("model", "gpt-4o-mini")
+            model = router_data.get("model", "gpt-4.1-nano")
 
             # Reconstruct proper context objects for citation engine
             rag_context_data = context.get("rag_agent", {}).get("rag_context")
@@ -491,7 +491,7 @@ class MultiAgentChatEndpoint:
                                       "object": "response",
                                       "created_at": int(time.time()),
                                       "status": "in_progress",
-                                      "model": request.get("model", "gpt-4o-mini"),
+                                      "model": request.get("model", "gpt-4.1-nano"),
                                       "output": [],
                                   })
 

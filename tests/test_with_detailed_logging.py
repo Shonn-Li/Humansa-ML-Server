@@ -116,7 +116,7 @@ class DetailedAgentTester:
         request_data = {
             "messages": [{"role": "user", "content": query}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": stream,
             "enable_citations": True,
             "attachments": attachments or []
@@ -471,7 +471,7 @@ class DetailedAgentTester:
         request_data = {
             "messages": [{"role": "user", "content": "What is AI? Search for information and cite sources."}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": True,
             "enable_citations": True
         }
