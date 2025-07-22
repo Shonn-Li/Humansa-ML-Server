@@ -25,7 +25,7 @@ async def test_iteration_system():
             "request": {
                 "messages": [{"role": "user", "content": "Explain in detail: 1) How transformers work in NLP 2) The attention mechanism 3) Differences between BERT and GPT 4) Real-world applications 5) Current limitations and future directions"}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "enable_iterations": True,
                 "max_iterations": 3,
                 "stream": False
@@ -36,7 +36,7 @@ async def test_iteration_system():
             "request": {
                 "messages": [{"role": "user", "content": "What is the capital of France?"}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "enable_iterations": True,
                 "stream": False
             }
@@ -46,7 +46,7 @@ async def test_iteration_system():
             "request": {
                 "messages": [{"role": "user", "content": "Give me a comprehensive analysis of climate change including: causes, effects, current data, mitigation strategies, international agreements, and future projections. Be detailed and thorough."}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "enable_iterations": True,
                 "stream": True
             }
@@ -175,7 +175,7 @@ async def test_iteration_quality():
     request_no_iter = {
         "messages": [{"role": "user", "content": query}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_iterations": False,
         "stream": False
     }
@@ -194,7 +194,7 @@ async def test_iteration_quality():
     request_with_iter = {
         "messages": [{"role": "user", "content": query}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_iterations": True,
         "max_iterations": 3,
         "stream": False

@@ -101,7 +101,7 @@ Generated dynamically by EdgeCaseGenerator:
    - Citation with missing sources
 
 ### Features:
-- 3-attempt validation with gpt-4o-mini
+- 3-attempt validation with gpt-4o-nano
 - Git integration for version control
 - Performance metrics tracking
 - OpenAI Response API format validation

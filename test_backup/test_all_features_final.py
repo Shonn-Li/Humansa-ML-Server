@@ -97,7 +97,7 @@ async def main():
             "data": {
                 "messages": [{"role": "user", "content": "Summarize this paper's main contributions"}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False,
                 "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"]
             }
@@ -109,7 +109,7 @@ async def main():
             "data": {
                 "messages": [{"role": "user", "content": "What do my notes say about reinforcement learning? Include citations."}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False,
                 "enable_citations": True
             }
@@ -121,7 +121,7 @@ async def main():
             "data": {
                 "messages": [{"role": "user", "content": "Compare this paper with my notes on AI and suggest research improvements"}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False,
                 "enable_iterations": True,
                 "attachments": ["https://arxiv.org/pdf/2311.18703.pdf"]

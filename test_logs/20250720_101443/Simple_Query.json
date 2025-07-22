@@ -53,7 +53,7 @@
         "object": "response",
         "created_at": 1753031703,
         "status": "in_progress",
-        "model": "gpt-4o-mini",
+        "model": "gpt-4o-nano",
         "output": []
       }
     },

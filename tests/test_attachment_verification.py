@@ -29,7 +29,7 @@ async def test_attachment_processing():
             "request": {
                 "messages": [{"role": "user", "content": "What text is in this PDF file?"}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "attachments": [{
                     "content": pdf_base64,
                     "type": "pdf",
@@ -46,7 +46,7 @@ async def test_attachment_processing():
             "request": {
                 "messages": [{"role": "user", "content": "Summarize all the attached files."}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "attachments": [
                     {
                         "content": pdf_base64,
@@ -70,7 +70,7 @@ async def test_attachment_processing():
             "request": {
                 "messages": [{"role": "user", "content": "Compare this PDF content with current information about the topic online."}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "attachments": [{
                     "content": "Machine learning is a subset of artificial intelligence.",
                     "type": "text",
@@ -180,7 +180,7 @@ async def test_attachment_routing_logic():
             "request": {
                 "messages": [{"role": "user", "content": "analyze this file"}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "attachments": [{"content": "test", "type": "text", "name": "test.txt"}],
                 "stream": False
             },
@@ -191,7 +191,7 @@ async def test_attachment_routing_logic():
             "request": {
                 "messages": [{"role": "user", "content": "tell me about files"}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "attachments": [],
                 "stream": False
             },
@@ -202,7 +202,7 @@ async def test_attachment_routing_logic():
             "request": {
                 "messages": [{"role": "user", "content": "hello"}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "attachments": [{"content": "important data", "type": "text", "name": "data.txt"}],
                 "stream": False
             },

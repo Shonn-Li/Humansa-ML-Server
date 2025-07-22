@@ -202,7 +202,7 @@ async def main():
             "request": {
                 "messages": [{"role": "user", "content": "What is quantum computing?"}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini"
+                "model": "gpt-4.1-nano"
             }
         },
         {
@@ -210,7 +210,7 @@ async def main():
             "request": {
                 "messages": [{"role": "user", "content": "What are the latest breakthroughs in AI for 2024? Include sources."}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "enable_citations": True
             }
         },
@@ -219,7 +219,7 @@ async def main():
             "request": {
                 "messages": [{"role": "user", "content": "What do my notes say about reinforcement learning and PARL?"}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "enable_citations": True
             }
         },
@@ -229,7 +229,7 @@ async def main():
                 "messages": [{"role": "user", "content": "Summarize the key findings from this paper"}],
                 "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "enable_citations": True
             }
         },
@@ -242,7 +242,7 @@ async def main():
                     "https://arxiv.org/pdf/2311.10122.pdf"
                 ],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "enable_citations": True
             }
         },
@@ -251,7 +251,7 @@ async def main():
             "request": {
                 "messages": [{"role": "user", "content": "Based on my notes and recent research, provide a comprehensive analysis of transformer architectures: 1) Evolution from attention mechanisms, 2) Current state-of-the-art variants, 3) Future directions. Include citations."}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "enable_iterations": True,
                 "enable_citations": True
             }

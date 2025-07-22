@@ -17,7 +17,7 @@ async def validate_citation_annotations():
     request = {
         "messages": [{"role": "user", "content": "What is machine learning? Explain with proper citations."}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "stream": True,
         "enable_citations": True
     }

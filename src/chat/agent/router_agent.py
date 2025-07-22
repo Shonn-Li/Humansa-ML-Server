@@ -8,6 +8,7 @@ should be activated to handle the request.
 from typing import Dict, Any
 from dataclasses import asdict
 import logging
+import re
 
 from .base import BaseAgent
 from ..router.intelligent_router import IntelligentRouter
@@ -54,27 +55,38 @@ class RouterAgent(BaseAgent):
             # Do NOT automatically enable RAG when attachments are present
             # The attachment content should be the primary source
         
-        # Enable agents based on router decision
-        # IMPORTANT: Don't enable RAG if attachments are present - attachment content takes priority
-        if router_decision.selected_tool in ["knowledge_base_notes", "knowledge_base_conversations", "knowledge_base_full"]:
-            if "rag" not in enabled_agents and not has_attachments:
-                enabled_agents.append("rag")
+        # Enable agents based on router decision AND query content
+        # Support mixed agent scenarios by checking multiple conditions
+        query_lower = query.lower()
         
-        if router_decision.selected_tool == "web_search":
+        # Context search check (notes and conversations)
+        context_keywords = ['my notes', 'my documents', 'search notes', 'find in notes', 'remember', 'recall', 'what did i', 'based on my', 'in my knowledge', 'conversation', 'discussed', 'talked about']
+        note_id_pattern = r'note\s*(?:id\s*)?(\d+)'
+        conversation_id_pattern = r'conversation\s*(?:id\s*)?(\d+)'
+        
+        if (router_decision.selected_tool in ["knowledge_base_notes", "knowledge_base_conversations", "knowledge_base_full"] or
+            any(keyword in query_lower for keyword in context_keywords) or
+            re.search(note_id_pattern, query_lower) or
+            re.search(conversation_id_pattern, query_lower)):
+            if "context_search" not in enabled_agents:
+                enabled_agents.append("context_search")
+        
+        # Web search check
+        web_keywords = ['current', 'latest', 'today', 'recent', '2025', '2024', 'news', 'update', 'trend', 'search web', 'online', 'internet']
+        if (router_decision.selected_tool == "web_search" or
+            any(keyword in query_lower for keyword in web_keywords)):
             enabled_agents.append("web_search")
         
-        # Legacy check - keep for backward compatibility
+        # File attachment check - only when attachments are present
         if router_decision.selected_tool == "attachments" and "attachment" not in enabled_agents:
             enabled_agents.append("attachment")
         
         # Check for code interpreter requests
-        code_keywords = ['code', 'python', 'execute', 'calculate', 'plot', 'graph', 'analyze data', 'statistics', 'math', 'solve']
-        query_lower = query.lower()
+        code_keywords = ['code', 'python', 'execute', 'calculate', 'plot', 'graph', 'chart', 'visualiz', 'analyze data', 'statistics', 'math', 'solve', 'fibonacci', 'bar chart']
         if any(keyword in query_lower for keyword in code_keywords) or '```python' in query or 'import ' in query:
             enabled_agents.append("code_interpreter")
         
-        if request.get("enable_citations", True):
-            enabled_agents.append("citation")
+        # Note: Citation is now part of response agent, not a separate agent
         
         # Transform query if needed (for now, use original query)
         condensed_query = query
@@ -84,6 +96,6 @@ class RouterAgent(BaseAgent):
             "original_query": query,
             "condensed_query": condensed_query,  # Add condensed query
             "enabled_agents": enabled_agents,
-            "model": request.get("model", "gpt-4o-mini"),
+            "model": request.get("model", "gpt-4.1-nano"),
             "search_type": router_decision.search_type if hasattr(router_decision, 'search_type') else "knowledge_base"
         }

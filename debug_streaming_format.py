@@ -10,7 +10,7 @@ async def debug_streaming():
     """Send a streaming request and print raw events"""
     
     request = {
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "messages": [
             {
                 "role": "user", 

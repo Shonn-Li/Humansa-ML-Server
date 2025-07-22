@@ -30,7 +30,7 @@ async def test_direct_citation():
     
     # Create a test request
     request = {
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "messages": [
             {
                 "role": "user", 

@@ -370,7 +370,7 @@ async def test_multi_agent_endpoint():
         "messages": [
             {"role": "user", "content": "Search for information about AI and then explain the latest developments"}
         ],
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "user_id": "test_user",
         "stream": True,
         "enable_web_search": True,

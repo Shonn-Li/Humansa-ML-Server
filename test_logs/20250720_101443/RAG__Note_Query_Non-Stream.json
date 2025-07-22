@@ -95,7 +95,7 @@
       "data": {
         "metadata": {
           "context_used": true,
-          "model": "gpt-4o-mini"
+          "model": "gpt-4o-nano"
         },
         "response": "The PARL (Predictability-Aware Reinforcement Learning) paper presents a novel framework aimed at inducing predictable behavior in reinforcement learning (RL) agents. Here are the key points:\n\n1. **Motivation**: Traditional RL methods often push agents to explore by maximizing policy entropy, leading to unpredictable behaviors. This unpredictability can create challenges in multi-agent or human-interactive environments, impacting coordination and safety.\n\n2. **Core Concept**: PARL introduces the concept of **entropy rate**, which quantifies the complexity and unpredictability of an agent's state trajectories. The framework aims to maximize a linear combination of expected reward and negative entropy rate, effectively trading off optimality for predictability.\n\n3. **Surrogate Entropy**: To facilitate the use of standard RL algorithms, PARL replaces the policy-dependent local entropy with a state-action-dependent surrogate entropy. This allows the learning of policies that minimize the true trajectory entropy rate.\n\n4. **Implementation**: PARL is implemented through two main variants: \n   - **PAPPO**: An on-policy variant based on Proximal Policy Optimization (PPO).\n   - **PASAC**: An off-policy variant based on Soft Actor-Critic (SAC).\n\n5. **Experimental Validation**: The paper provides empirical results demonstrating that PARL-trained agents achieve lower entropy rates while maintaining near-optimal performance across various tasks, including robotics and autonomous driving.\n\n6. **Findings**: \n   - As the weight on predictability increases, agent behaviors become more deterministic, leading to more clustered trajectory distributions.\n   - PARL agents exhibit improved legibility and coordination potential in multi-agent scenarios and tend to avoid high-uncertainty regions.\n\n7. **Trade-offs and Limitations**: The paper discusses potential trade-offs, such as the complexity of optimization when balancing reward and predictability and the possible limitations in discovering globally optimal behaviors.\n\n8. **Future Directions**: The authors suggest exploring the impact of predictability-aware methods in partially observable domains (POMDPs) and how it might affect exploration strategies.\n\n9. **Experimental Results**: Detailed results are provided for various MuJoCo environments, comparing performance metrics such as rewards, episode lengths, and entropy rates between PPO and PARL agents.\n\nOverall, PARL proposes a principled approach to enhance the predictability of RL agents, crucial for applications in interactive and safety-critical settings.",
         "status": "success"
@@ -110,7 +110,7 @@
           "rag",
           "citation"
         ],
-        "model": "gpt-4o-mini",
+        "model": "gpt-4o-nano",
         "original_query": "What information do I have about the PARL paper?",
         "router_decision": {
           "confidence": 0.85,

@@ -29,7 +29,7 @@ async def test_math_calculation():
     # Test via agent.run
     request = {
         "messages": [{"role": "user", "content": test_message}],
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "user_id": 123
     }
     context = {}

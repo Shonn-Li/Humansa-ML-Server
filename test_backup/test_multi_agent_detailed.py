@@ -407,7 +407,7 @@ async def run_enhanced_multi_agent_tests():
                     {"role": "user", "content": "Hello! Can you introduce yourself and tell me what you can help me with?"}
                 ],
                 "user_id": TEST_USER_ID,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False,
                 "enable_citations": False,
                 "completion_type": "system"
@@ -420,7 +420,7 @@ async def run_enhanced_multi_agent_tests():
                     {"role": "user", "content": "What can you tell me about my research notes on artificial intelligence?"}
                 ],
                 "user_id": TEST_USER_ID,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False,
                 "note_ids": [],
                 "conversation_ids": [],
@@ -435,7 +435,7 @@ async def run_enhanced_multi_agent_tests():
                     {"role": "user", "content": "What are the latest developments in AI technology this week?"}
                 ],
                 "user_id": TEST_USER_ID,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False,
                 "enable_citations": True,
                 "completion_type": "system"
@@ -448,7 +448,7 @@ async def run_enhanced_multi_agent_tests():
                     {"role": "user", "content": "Summarize the key points from my notes about machine learning algorithms"}
                 ],
                 "user_id": TEST_USER_ID,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False,
                 "note_ids": [1, 2, 3],
                 "conversation_ids": [10],
@@ -464,7 +464,7 @@ async def run_enhanced_multi_agent_tests():
                         "content": "Explain the benefits of using AI in education"}
                 ],
                 "user_id": TEST_USER_ID,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": True,
                 "enable_citations": False,
                 "completion_type": "system"
@@ -515,7 +515,7 @@ async def test_server_connection():
             test_payload = {
                 "messages": [{"role": "user", "content": "test"}],
                 "user_id": TEST_USER_ID,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False
             }
             async with session.post(

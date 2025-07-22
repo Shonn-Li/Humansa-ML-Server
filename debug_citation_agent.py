@@ -45,7 +45,7 @@ async def test_citation_flow():
             request_data = {
                 "messages": [{"role": "user", "content": test['query']}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": test['stream'],
                 "enable_citations": True
             }

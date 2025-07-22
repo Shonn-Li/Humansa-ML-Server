@@ -72,7 +72,7 @@ async def run_validation():
         print("-" * 50)
         
         request = {
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "messages": [{"role": "user", "content": test['query']}],
             "stream": True,
             "temperature": 0.7,

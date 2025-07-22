@@ -34,7 +34,7 @@ async def test_server_connection():
             test_payload = {
                 "messages": [{"role": "user", "content": "test"}],
                 "user_id": TEST_USER_ID,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False
             }
             async with session.post(
@@ -74,7 +74,7 @@ async def test_multi_agent_endpoint():
                     {"role": "user", "content": "Hello! Can you introduce yourself?"}
                 ],
                 "user_id": TEST_USER_ID,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False,
                 "enable_citations": False,
                 "completion_type": "system"
@@ -87,7 +87,7 @@ async def test_multi_agent_endpoint():
                     {"role": "user", "content": "What can you tell me about my notes?"}
                 ],
                 "user_id": TEST_USER_ID,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False,
                 "note_ids": [],
                 "conversation_ids": [],

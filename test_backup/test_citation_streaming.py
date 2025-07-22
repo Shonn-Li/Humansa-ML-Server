@@ -26,7 +26,7 @@ async def test_citation_with_mock_sources():
     
     # Create a test request that should trigger citations
     request = {
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "messages": [
             {
                 "role": "user", 

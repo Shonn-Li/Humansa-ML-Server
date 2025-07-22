@@ -264,7 +264,7 @@ class ComprehensiveStreamingTester:
                 "request": {
                     "messages": [{"role": "user", "content": "What is machine learning?"}],
                     "user_id": 10001,
-                    "model": "gpt-4o-mini"
+                    "model": "gpt-4.1-nano"
                 }
             },
             
@@ -275,7 +275,7 @@ class ComprehensiveStreamingTester:
                 "request": {
                     "messages": [{"role": "user", "content": "What are the latest AI developments in 2024? Include sources."}],
                     "user_id": 10001,
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "enable_citations": True
                 }
             },
@@ -287,7 +287,7 @@ class ComprehensiveStreamingTester:
                 "request": {
                     "messages": [{"role": "user", "content": "What do my notes say about PARL? Include citations."}],
                     "user_id": 10001,
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "enable_citations": True
                 }
             },
@@ -300,7 +300,7 @@ class ComprehensiveStreamingTester:
                     "messages": [{"role": "user", "content": "Summarize this paper and cite key findings"}],
                     "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"],
                     "user_id": 10001,
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "enable_citations": True
                 }
             },
@@ -316,7 +316,7 @@ class ComprehensiveStreamingTester:
                         "https://arxiv.org/pdf/2311.10122.pdf"
                     ],
                     "user_id": 10001,
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "enable_citations": True
                 }
             },
@@ -328,7 +328,7 @@ class ComprehensiveStreamingTester:
                 "request": {
                     "messages": [{"role": "user", "content": "Analyze the pros and cons of different machine learning approaches for time series forecasting, then recommend the best approach for financial data with explanations."}],
                     "user_id": 10001,
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "enable_iterations": True,
                     "enable_citations": True
                 }
@@ -341,7 +341,7 @@ class ComprehensiveStreamingTester:
                 "request": {
                     "messages": [{"role": "user", "content": "Search for recent papers on transformer architectures, compare with my notes on attention mechanisms, and summarize the key innovations."}],
                     "user_id": 10001,
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "enable_iterations": True,
                     "enable_citations": True
                 }
@@ -354,7 +354,7 @@ class ComprehensiveStreamingTester:
                 "request": {
                     "messages": [{"role": "user", "content": ""}],
                     "user_id": 10001,
-                    "model": "gpt-4o-mini"
+                    "model": "gpt-4.1-nano"
                 }
             },
             
@@ -364,7 +364,7 @@ class ComprehensiveStreamingTester:
                 "request": {
                     "messages": [{"role": "user", "content": "Explain recursion with citations"}],
                     "user_id": 10001,
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "enable_citations": True
                 }
             },
@@ -376,7 +376,7 @@ class ComprehensiveStreamingTester:
                 "request": {
                     "messages": [{"role": "user", "content": "Calculate the fibonacci sequence up to 20 terms and plot it"}],
                     "user_id": 10001,
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "enable_code_interpreter": True
                 }
             }

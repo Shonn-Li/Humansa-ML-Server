@@ -629,7 +629,7 @@ async def process_image_with_gpt4o(image_path: str, url: str) -> Optional[str]:
             f"File size: {Path(image_path).stat().st_size if Path(image_path).exists() else 'N/A'} bytes")
 
         # Initialize GPT-4o mini model via LlamaIndex
-        llm = OpenAI(model="gpt-4o-mini", temperature=0.1)
+        llm = OpenAI(model="gpt-4.1-nano", temperature=0.1)
 
         # Create message with image and text prompt using LlamaIndex blocks
         messages = [

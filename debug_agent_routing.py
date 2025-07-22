@@ -49,7 +49,7 @@ async def debug_single_query(test_case: Dict):
         request_data = {
             "messages": [{"role": "user", "content": test_case['query']}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": True,
             "enable_citations": True,
             "attachments": test_case['attachments']

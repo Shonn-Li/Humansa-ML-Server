@@ -33,7 +33,7 @@ class OpenAIResponseStreamingHandler:
     - OPENAI_API_KEY: OpenAI API key
     """
 
-    def __init__(self, model: str = "gpt-4o-mini", system_prompt: str = None, use_azure: bool = False):
+    def __init__(self, model: str = "gpt-4.1-nano", system_prompt: str = None, use_azure: bool = False):
         self.model = model
         self.system_prompt = system_prompt or "You are a helpful AI assistant."
         self.response_id = f"resp_{uuid.uuid4().hex[:8]}"
@@ -423,7 +423,7 @@ async def stream_openai_response(user_message: str,
                                  system_prompt: str = None,
                                  tools: List[FunctionTool] = None,
                                  conversation_history: List[ChatMessage] = None,
-                                 model: str = "gpt-4o-mini",
+                                 model: str = "gpt-4.1-nano",
                                  use_azure: bool = True) -> AsyncGenerator[Dict[str, Any], None]:
     """
     Convenience function to stream OpenAI response using Azure or standard OpenAI.

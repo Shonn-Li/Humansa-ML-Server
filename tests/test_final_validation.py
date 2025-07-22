@@ -39,7 +39,7 @@ async def test_comprehensive_citations():
         {
             "name": "RAG Test - Explicit Note Search",
             "request": {
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "messages": [
                     {"role": "user", "content": "Search my notes for information about PARL and predictable AI"}
                 ],
@@ -52,7 +52,7 @@ async def test_comprehensive_citations():
         {
             "name": "RAG Test - My Notes Query",
             "request": {
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "messages": [
                     {"role": "user", "content": "What do my notes say about machine learning and AI frameworks?"}
                 ],
@@ -65,7 +65,7 @@ async def test_comprehensive_citations():
         {
             "name": "Web Search Test",
             "request": {
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "messages": [
                     {"role": "user", "content": "What are the latest OpenAI announcements in 2025?"}
                 ],
@@ -78,7 +78,7 @@ async def test_comprehensive_citations():
         {
             "name": "Cross-Source Test",
             "request": {
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "messages": [
                     {"role": "user", "content": "Based on my notes about startups and current web trends, what are good AI business opportunities?"}
                 ],
@@ -91,7 +91,7 @@ async def test_comprehensive_citations():
         {
             "name": "Code Interpreter Test",
             "request": {
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "messages": [
                     {"role": "user", "content": "Calculate and plot the first 20 Fibonacci numbers"}
                 ],

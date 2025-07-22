@@ -42,7 +42,7 @@ async def check_ml_server():
             test_request = {
                 "messages": [{"role": "user", "content": "Hello, this is a test"}],
                 "user_id": 10001,  # Test user
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False,
                 "max_tokens": 100
             }
@@ -72,7 +72,7 @@ async def check_ml_server():
             test_request = {
                 "messages": [{"role": "user", "content": "What notes do I have about reinforcement learning?"}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False
             }
             

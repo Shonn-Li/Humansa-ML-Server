@@ -35,7 +35,7 @@ async def handle_openai_streaming(agent_response: Dict[str, Any],
 
         # Get model from request params or use default
         model = request_params.get(
-            'model', 'gpt-4o-mini') if request_params else 'gpt-4o-mini'
+            'model', 'gpt-4.1-nano') if request_params else 'gpt-4.1-nano'
 
         # Convert tools if available
         tools = None

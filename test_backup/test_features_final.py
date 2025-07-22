@@ -15,7 +15,7 @@ async def test_streaming_citation():
     request = {
         "messages": [{"role": "user", "content": "What is machine learning? Please cite sources."}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "stream": True
     }
     
@@ -78,7 +78,7 @@ async def test_attachment_debug():
     request = {
         "messages": [{"role": "user", "content": "Analyze this PDF attachment"}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "stream": False,
         "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"]
     }
@@ -136,7 +136,7 @@ async def test_iterative_debug():
     request = {
         "messages": [{"role": "user", "content": "I need a comprehensive analysis of neural networks including: 1) Mathematical foundations, 2) Different architectures, 3) Training algorithms, 4) Recent advances, 5) Practical applications. Be extremely thorough and detailed."}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "stream": False
     }
     

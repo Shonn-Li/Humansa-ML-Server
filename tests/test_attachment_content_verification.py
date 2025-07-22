@@ -36,7 +36,7 @@ class AttachmentContentVerifier:
                 "messages": [{"role": "user", "content": "Summarize this paper and tell me what it's about"}],
                 "attachments": [pdf_url],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": stream,
                 "enable_citations": True
             }

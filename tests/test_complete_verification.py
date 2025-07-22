@@ -44,7 +44,7 @@ async def test_complete_citation_system():
             "request": {
                 "messages": [{"role": "user", "content": "What are the key features of GPT-4? List 3 features with sources."}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "enable_citations": True,
                 "enable_web_search": True,
                 "enable_rag": False,
@@ -56,7 +56,7 @@ async def test_complete_citation_system():
             "request": {
                 "messages": [{"role": "user", "content": "Tell me about machine learning algorithms. Include information from my notes and web sources."}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "enable_citations": True,
                 "enable_web_search": True,
                 "enable_rag": True,
@@ -68,7 +68,7 @@ async def test_complete_citation_system():
             "request": {
                 "messages": [{"role": "user", "content": "Compare Python and JavaScript. Give me 3 differences with citations for each point."}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "enable_citations": True,
                 "enable_web_search": True,
                 "stream": True
@@ -195,7 +195,7 @@ async def test_non_streaming_citations():
     request = {
         "messages": [{"role": "user", "content": "What is artificial intelligence? Give me 2 facts with citations."}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_citations": True,
         "stream": False
     }
@@ -237,7 +237,7 @@ async def test_edge_cases():
             "request": {
                 "messages": [{"role": "user", "content": ""}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "enable_citations": True,
                 "stream": True
             }
@@ -247,7 +247,7 @@ async def test_edge_cases():
             "request": {
                 "messages": [{"role": "user", "content": "What is 2 + 2?"}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "enable_citations": True,
                 "stream": True
             }
@@ -257,7 +257,7 @@ async def test_edge_cases():
             "request": {
                 "messages": [{"role": "user", "content": "Give me a comprehensive overview of: 1) Machine learning types 2) Deep learning architectures 3) Natural language processing 4) Computer vision 5) Reinforcement learning. Include citations for each topic."}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "enable_citations": True,
                 "stream": True
             }

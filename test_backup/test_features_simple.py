@@ -21,7 +21,7 @@ async def test_features():
         attachment_request = {
             "messages": [{"role": "user", "content": "What is this document about?"}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False,
             "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"]
         }
@@ -57,7 +57,7 @@ async def test_features():
         citation_request = {
             "messages": [{"role": "user", "content": "What are transformers in AI? Please cite your sources."}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False
         }
         
@@ -104,7 +104,7 @@ async def test_features():
         complex_request = {
             "messages": [{"role": "user", "content": "Analyze the latest AI trends and provide a comprehensive overview with examples, research papers, and practical applications. Make sure to be thorough."}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False
         }
         

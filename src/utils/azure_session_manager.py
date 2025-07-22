@@ -36,7 +36,7 @@ class AzureSessionManager:
 
             session = aiohttp.ClientSession(
                 connector=connector,
-                timeout=aiohttp.ClientTimeout(total=120, connect=30)
+                timeout=aiohttp.ClientTimeout(total=180, connect=30)
             )
 
             self.session_pool[endpoint] = session

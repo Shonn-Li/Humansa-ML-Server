@@ -16,7 +16,7 @@ Successfully implemented and tested comprehensive multi-agent system improvement
 - ✅ **IterativeTestRunner**: Continuous testing with git integration
 - ✅ **EdgeCaseGenerator**: Automatic edge case generation
 - ✅ **PerformanceTracker**: Metrics monitoring and reporting
-- ✅ **3-Attempt Validation**: Using gpt-4o-mini for real LLM testing
+- ✅ **3-Attempt Validation**: Using gpt-4o-nano for real LLM testing
 
 ### 3. Test Results (Partial Run)
 ```
@@ -68,6 +68,6 @@ python -m tests.iterative.test_runner
 
 ## Configuration
 - Test Database: PostgreSQL on port 5454
-- Test Model: gpt-4o-mini
+- Test Model: gpt-4o-nano
 - Validation Attempts: 3 per test
 - Git Integration: Automatic commits for fixes

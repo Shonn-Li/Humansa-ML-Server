@@ -18,7 +18,7 @@ async def test_attachment_only():
             json={
                 "messages": [{"role": "user", "content": "Analyze this paper"}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False,
                 "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"]
             }
@@ -55,7 +55,7 @@ async def test_citation_only():
             json={
                 "messages": [{"role": "user", "content": "What is AI? Cite sources."}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False,
                 "enable_citations": True
             }
@@ -102,7 +102,7 @@ async def test_iteration_only():
             json={
                 "messages": [{"role": "user", "content": "Analyze trends in my AI notes and suggest improvements"}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False,
                 "enable_iterations": True
             }

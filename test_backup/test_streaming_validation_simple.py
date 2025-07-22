@@ -257,7 +257,7 @@ async def simulate_streaming_response() -> AsyncGenerator[Dict[str, Any], None]:
     
     # Lifecycle start
     yield create_event("response.created", response={
-        "id": "resp_123", "status": "created", "model": "gpt-4o-mini"
+        "id": "resp_123", "status": "created", "model": "gpt-4.1-nano"
     })
     yield create_event("response.in_progress", response={
         "id": "resp_123", "status": "in_progress"

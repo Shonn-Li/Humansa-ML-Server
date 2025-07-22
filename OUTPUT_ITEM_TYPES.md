@@ -175,7 +175,7 @@ The final `response.usage` event contains:
     },
     "workflow_time": 3.45,
     "total_tokens": 1250,
-    "model": "gpt-4o-mini"
+    "model": "gpt-4o-nano"
   }
 }
 ```

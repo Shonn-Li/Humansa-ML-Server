@@ -40,7 +40,7 @@ class ConversationTitleService:
                 - messages: list of messages (can be empty)
                 - user_id: user ID (optional)
                 - provider: LLM provider (optional, defaults to openai)
-                - model: model to use (optional, defaults to gpt-4o-mini)
+                - model: model to use (optional, defaults to gpt-4.1-nano)
 
         Returns:
             Dictionary with generated title and metadata
@@ -57,7 +57,7 @@ class ConversationTitleService:
             messages = request_data.get("messages", [])
             user_id = request_data.get("user_id")
             provider = request_data.get("provider", "openai")
-            model = request_data.get("model", "gpt-4o-mini")
+            model = request_data.get("model", "gpt-4.1-nano")
 
             logger.info(
                 f"🎯 Generating title for conversation {conversation_id} with {len(messages)} messages")
@@ -133,7 +133,7 @@ class ConversationTitleService:
         try:
             # Apply global provider/model settings to each conversation
             provider = request_data.get("provider", "openai")
-            model = request_data.get("model", "gpt-4o-mini")
+            model = request_data.get("model", "gpt-4.1-nano")
 
             for conv in conversations:
                 if "provider" not in conv:
@@ -206,7 +206,7 @@ class ConversationTitleService:
                 - batch_size: Max conversations per batch (default: 50, max: 100)
                 - dry_run: If true, doesn't update database (default: false)
                 - provider: LLM provider (default: openai)
-                - model: Model to use (default: gpt-4o-mini)
+                - model: Model to use (default: gpt-4.1-nano)
                 - max_conversations: Max total conversations to process (default: 1000)
 
         Returns:
@@ -218,7 +218,7 @@ class ConversationTitleService:
                 "batch_size", 50), 100)  # Max 100 per batch
             dry_run = request_data.get("dry_run", False)
             provider = request_data.get("provider", "openai")
-            model = request_data.get("model", "gpt-4o-mini")
+            model = request_data.get("model", "gpt-4.1-nano")
             max_conversations = request_data.get("max_conversations", 1000)
 
             logger.info(f"=== TITLE MIGRATION START ===")

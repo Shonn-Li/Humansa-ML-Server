@@ -185,7 +185,7 @@ class NewFeaturesTester:
         request_data = {
             "messages": [{"role": "user", "content": query}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False,  # Non-streaming for easier testing
             "enable_citations": enable_citations,
             "enable_iterations": enable_iterations,
