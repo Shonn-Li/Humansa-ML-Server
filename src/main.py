@@ -182,6 +182,7 @@ def create_app():
     register_chat_endpoints(app)
     register_preserved_endpoints(app)
     register_embedding_endpoints(app)
+    register_humansa_endpoints(app)
 
     return app
 
@@ -649,6 +650,92 @@ def register_embedding_endpoints(app):
     logger.info("✅ Embedding endpoints registration completed")
 
 
+def register_humansa_endpoints(app):
+    """Register Humansa-specific endpoints."""
+    
+    # Import Humansa endpoints
+    try:
+        logger.info("🔄 Registering Humansa endpoints...")
+        
+        # V1 Humansa Chat Completions endpoint
+        @app.route("/v1-humansa/chat/completions", methods=["POST"])
+        async def v1_humansa_chat_completions():
+            """Humansa AI-Agent chat endpoint with tool calling"""
+            try:
+                from humansa.endpoints.humansa_chat_endpoint import HumansaChatEndpoint
+                endpoint = HumansaChatEndpoint()
+                request_data = await request.get_json()
+                
+                if request_data.get("stream", False):
+                    async def generate():
+                        async for chunk in endpoint.handle_chat_request(request_data):
+                            yield chunk
+                    return Response(generate(), mimetype="text/event-stream")
+                else:
+                    result = await endpoint.handle_chat_request(request_data)
+                    return jsonify(result)
+                    
+            except Exception as e:
+                logger.error(f"❌ Humansa chat error: {e}")
+                import traceback
+                traceback.print_exc()
+                return jsonify({"error": str(e), "status": "error"}), 500
+        
+        # Humansa Response endpoint (used by backend)
+        @app.route("/humansa/response", methods=["POST"])
+        async def humansa_response():
+            """Humansa response endpoint - used by backend for Humansa conversations"""
+            try:
+                from humansa.endpoints.humansa_chat_endpoint import HumansaChatEndpoint
+                endpoint = HumansaChatEndpoint()
+                request_data = await request.get_json()
+                
+                if request_data.get("stream", False):
+                    async def generate():
+                        async for chunk in endpoint.handle_chat_request(request_data):
+                            yield chunk
+                    return Response(generate(), mimetype="text/event-stream")
+                else:
+                    result = await endpoint.handle_chat_request(request_data)
+                    return jsonify(result)
+                    
+            except Exception as e:
+                logger.error(f"❌ Humansa conversations error: {e}")
+                import traceback
+                traceback.print_exc()
+                return jsonify({"error": str(e), "status": "error"}), 500
+                
+        # O3 Demo endpoint
+        @app.route("/o3-demo", methods=["POST"])
+        async def o3_demo():
+            """O3 Demo endpoint"""
+            try:
+                from humansa.endpoints.o3_demo_endpoint import O3DemoEndpoint
+                endpoint = O3DemoEndpoint()
+                request_data = await request.get_json()
+                
+                if request_data.get("stream", False):
+                    async def generate():
+                        async for chunk in endpoint.handle_request(request_data):
+                            yield chunk
+                    return Response(generate(), mimetype="text/event-stream")
+                else:
+                    result = await endpoint.handle_request(request_data)
+                    return jsonify(result)
+                    
+            except Exception as e:
+                logger.error(f"❌ O3 demo error: {e}")
+                import traceback
+                traceback.print_exc()
+                return jsonify({"error": str(e), "status": "error"}), 500
+                
+        logger.info("✅ Humansa endpoints registered successfully")
+        
+    except ImportError as e:
+        logger.error(f"❌ Failed to import Humansa endpoints: {e}")
+        logger.error("Humansa endpoints will not be available")
+
+
 # Additional cleanup for stderr warnings
 
 
@@ -701,7 +788,13 @@ if __name__ == "__main__":
     logger.info(
         "   - /v1/chat/completions - Modular chat with citations & streaming")
     logger.info(
-        "   - /v1-humansa/chat/completions - AI-Agent chat with tool calling")
+        "   - /v1/multi-agent/response - Multi-agent workflow")
+    logger.info(
+        "   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (legacy)")
+    logger.info(
+        "   - /humansa/response - Humansa conversations (used by backend)")
+    logger.info(
+        "   - /o3-demo - O3 reasoning demo")
     logger.info("   - /v1/status - System status")
     logger.info("")
     logger.info("✅ PRESERVED ENDPOINTS:")
