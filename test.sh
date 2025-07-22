@@ -85,13 +85,13 @@ case $TEST_MODE in
     direct)
         echo -e "${BLUE}Running direct endpoint tests (no server needed)...${NC}"
         echo ""
-        python validate.py
+        python test/core/validate.py
         ;;
         
     quick)
         echo -e "${BLUE}Running quick validation tests (no server needed)...${NC}"
         echo ""
-        python validate.py
+        python test/core/validate.py
         echo ""
         echo -e "${GREEN}Quick tests completed!${NC}"
         ;;
@@ -102,7 +102,7 @@ case $TEST_MODE in
         echo ""
         
         # Run the comprehensive tests (direct endpoint version)
-        python test_comprehensive_detailed.py
+        python test/core/test_comprehensive_detailed.py
         
         echo ""
         echo -e "${GREEN}Comprehensive tests completed!${NC}"
