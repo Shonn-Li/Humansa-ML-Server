@@ -1,0 +1,42 @@
+TEST: RAG with Citations
+TIME: 2025-07-20T10:15:48.385333
+STATUS: success
+================================================================================
+
+QUERY: What do my notes say about reinforcement learning? Include citations.
+
+OUTPUT ITEMS FLOW:
+--------------------------------------------------------------------------------
+
+2025-07-20T10:15:48.388104 - reasoning (ID: router_51daee51)
+  Agent: router
+  Content: Analyzing query and routing to appropriate agents......
+
+2025-07-20T10:15:49.494395 - file_search_call (ID: fs_bf156607)
+
+2025-07-20T10:15:49.983062 - message (ID: msg_2cb0860a)
+  Content preview: ...
+
+2025-07-20T10:16:05.834414 - reasoning (ID: cit_0ad21100)
+  Agent: citation
+  Content: Adding citations and references......
+
+
+AGENT EXECUTION SUMMARY:
+--------------------------------------------------------------------------------
+- router: completed (took 1.106181s)
+- citation: completed (took 8.019438s)
+
+
+FINAL RESPONSE:
+--------------------------------------------------------------------------------
+Your notes cover several aspects of reinforcement learning (RL) and its applications, particularly in the context of strategic games and resource allocation. Here are the key points:
+
+1. **General Framework**: Reinforcement Learning has been established as a powerful tool for computing optimal policies in strategic environments. Notable implementations include the game of Go, where the RL agent AlphaGo Zero achieved superhuman performance through self-play and model-based planning.
+
+2. **Methodologies**: The notes mention the use of various RL algorithms, including:
+   - **Deep Q-Network (DQN)** and **Proximal Policy Optimization (PPO)**, which were applied to model a multi-step Colonel Blotto Game (MCBG) as a Markov Decision Process (MDP).
+   - The introduction of an action-displacement adjacency matrix to manage valid action sets within graph constraints (relevant for competitive resource allocation) (IEEE Transactions on Computational Social Systems, 2023) [14].
+
+3. **Predictability
+... [truncated]
