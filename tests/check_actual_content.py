@@ -17,7 +17,7 @@ async def check_content():
         "messages": [{"role": "user", "content": "What is this paper about? Give me the main topic."}],
         "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "stream": False
     }
     

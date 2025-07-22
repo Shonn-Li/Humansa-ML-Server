@@ -26,7 +26,12 @@ class AttachmentAgent(BaseAgent):
         
         attachments = request.get("attachments", [])
         if not attachments:
-            return {"status": "success", "context": "", "metadata": {"attachment_count": 0}}
+            return {
+                "status": "success", 
+                "context": "", 
+                "sources": [],
+                "metadata": {"attachment_count": 0, "file_types": []}
+            }
         
         router_result = context.get("router_agent", {})
         condensed_query = router_result.get("condensed_query", router_result.get("original_query", ""))
@@ -43,11 +48,36 @@ class AttachmentAgent(BaseAgent):
             attachment_result.image_chunks
         ) if attachment_result else ""
         
+        # Build sources for file attachments
+        sources = []
+        file_types = set()
+        
+        for i, attachment_url in enumerate(attachments):
+            # Extract filename from URL
+            filename = attachment_url.split('/')[-1].split('?')[0]
+            file_extension = filename.split('.')[-1].lower() if '.' in filename else 'unknown'
+            file_types.add(file_extension)
+            
+            source = {
+                "file_id": f"file_{i}",
+                "filename": filename,
+                "url": attachment_url,
+                "type": "file_attachment",
+                "file_type": file_extension,
+                "title": f"Attachment: {filename}",
+                "content": f"Content from {filename}"  # Preview
+            }
+            sources.append(source)
+        
         return {
             "status": "success",
             "context": attachment_context,
+            "sources": sources,
             "metadata": {
                 "attachment_count": len(attachments),
-                "context_length": len(attachment_context)
+                "context_length": len(attachment_context),
+                "file_types": list(file_types),
+                "chunk_count": len(attachment_result.chunks) if attachment_result else 0,
+                "image_chunk_count": len(attachment_result.image_chunks) if attachment_result else 0
             }
         }

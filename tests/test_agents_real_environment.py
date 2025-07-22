@@ -76,7 +76,7 @@ class MultiAgentTester:
         request_data = {
             "messages": [{"role": "user", "content": query}],
             "user_id": TEST_USER_ID,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": stream,
             "temperature": 0.7,
             "max_tokens": 4000,

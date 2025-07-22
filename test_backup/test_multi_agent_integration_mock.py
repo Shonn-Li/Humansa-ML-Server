@@ -50,7 +50,7 @@ class MockedMultiAgentTester:
                 description="Test RAG + Response + Citation workflow",
                 request={
                     "messages": [{"role": "user", "content": "What are my notes about AI?"}],
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "user_id": 123,
                     "stream": True,
                     "enable_rag": True,
@@ -70,7 +70,7 @@ class MockedMultiAgentTester:
                 description="Test Web Search + Response workflow",
                 request={
                     "messages": [{"role": "user", "content": "Latest news on quantum computing"}],
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "user_id": 123,
                     "stream": True,
                     "enable_web_search": True
@@ -88,7 +88,7 @@ class MockedMultiAgentTester:
                 description="Test Code Interpreter + Response workflow",
                 request={
                     "messages": [{"role": "user", "content": "print(2+2)"}],
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-4.1-nano",
                     "user_id": 123,
                     "stream": True,
                     "enable_code_interpreter": True
@@ -163,7 +163,7 @@ class MockedMultiAgentTester:
             "status": "success",
             "response": "Based on the information found, here's what I can tell you...",
             "metadata": {
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "context_used": True
             }
         })
@@ -218,7 +218,7 @@ class MockedMultiAgentTester:
         mock_provider_selector.get_provider = Mock(return_value={
             "llm": mock_llm,
             "provider_type": "openai",
-            "model": "gpt-4o-mini"
+            "model": "gpt-4.1-nano"
         })
         
         # Mock other providers

@@ -38,7 +38,29 @@ class RAGAgent(BaseAgent):
         
         # Build context from chunks
         context_parts = []
-        for chunk in rag_result.chunks:
+        sources = []
+        
+        for chunk in rag_result.chunks[:5]:  # Limit sources to top 5
+            context_parts.append(chunk.chunk_text)
+            
+            # Create properly formatted source for citations
+            source = {
+                "chunk_id": chunk.section_id,
+                "content": chunk.chunk_text,
+                "note_id": chunk.type_id,  # This is the note ID
+                "node_id": chunk.section_id,
+                "title": f"Note {chunk.type_id}",  # Default title, can be improved
+                "score": getattr(chunk, 'distance', 0.0) if hasattr(chunk, 'distance') else 0.0
+            }
+            
+            # Add conversation-specific info if available
+            if hasattr(chunk, 'note_title') and chunk.note_title:
+                source["title"] = chunk.note_title
+            
+            sources.append(source)
+        
+        # Include all chunks in context, not just top 5
+        for chunk in rag_result.chunks[5:]:
             context_parts.append(chunk.chunk_text)
         
         combined_context = "\n\n".join(context_parts)
@@ -46,7 +68,7 @@ class RAGAgent(BaseAgent):
         return {
             "status": "success",
             "context": combined_context,
-            "sources": [{"chunk_id": chunk.section_id, "content": chunk.chunk_text[:100] + "..."} for chunk in rag_result.chunks[:5]],
+            "sources": sources,
             "metadata": {
                 "search_type": search_type,
                 "context_length": len(combined_context),

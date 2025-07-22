@@ -28,7 +28,7 @@ async def test_citation_flow():
             "content": "What are the latest AI breakthroughs in 2024? Please cite your sources."
         }],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_citations": True,
         "stream": False
     }
@@ -139,7 +139,7 @@ async def test_citation_flow():
             "content": "latest news about OpenAI"
         }],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_citations": True,
         "stream": False
     }

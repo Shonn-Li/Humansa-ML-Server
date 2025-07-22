@@ -59,8 +59,6 @@ class SystemPromptManager:
                 "Using legacy content generator prompt with current date")
             return get_legacy_content_generator_prompt()
         else:
-            logger.warning(
-                f"Unknown completion_type '{completion_type}', defaulting to YouWoAI system prompt")
             return get_youwoai_system_prompt()
 
     def should_include_system_prompt(self, messages: list) -> bool:

@@ -40,7 +40,7 @@ class ConversationTitleEndpoint:
                 - messages: list of messages (can be empty)
                 - user_id: user ID (optional, for context)
                 - provider: LLM provider to use (optional, defaults to openai)
-                - model: model to use (optional, defaults to gpt-4o-mini)
+                - model: model to use (optional, defaults to gpt-4.1-nano)
 
         Returns:
             Dictionary with generated title and metadata
@@ -50,7 +50,7 @@ class ConversationTitleEndpoint:
             messages = conversation_data.get("messages", [])
             user_id = conversation_data.get("user_id")
             provider = conversation_data.get("provider", "openai")
-            model = conversation_data.get("model", "gpt-4o-mini")
+            model = conversation_data.get("model", "gpt-4.1-nano")
 
             logger.info(
                 f"🎯 Generating title for conversation {conversation_id} with {len(messages)} messages")

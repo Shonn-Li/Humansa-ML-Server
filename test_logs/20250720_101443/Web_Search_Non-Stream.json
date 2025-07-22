@@ -65,7 +65,7 @@
       "data": {
         "metadata": {
           "context_used": true,
-          "model": "gpt-4o-mini"
+          "model": "gpt-4o-nano"
         },
         "response": "Here are some of the latest AI developments as of today, July 20, 2025:\n\n1. **Diabetic Eye Disease Detection**: New research has shown that AI can significantly improve early detection of diabetic retinopathy, a leading cause of blindness. This technology aims to enhance screening processes and outcomes for patients at risk.\n\n2. **MedGemma AI Models**: Google has introduced open MedGemma AI models that could potentially transform healthcare by improving diagnostic accuracy and treatment personalization.\n\n3. **CellLENS System**: A new AI system developed at MIT, named CellLENS, has been designed to uncover hidden cell subtypes and boost precision medicine by revealing underlying patterns in cell behavior within tissues.\n\n4. **AI Agents for Task Automation**: OpenAI has launched a new AI agent that allows users to automate online tasks such as shopping, showcasing advancements in independently operating AI bots.\n\nFor more detailed updates, you might want to check out news sources like TechCrunch, MIT, and WSJ for ongoing coverage on AI advancements.",
         "status": "success"
@@ -80,7 +80,7 @@
           "web_search",
           "citation"
         ],
-        "model": "gpt-4o-mini",
+        "model": "gpt-4o-nano",
         "original_query": "What are the latest AI developments today?",
         "router_decision": {
           "confidence": 0.95,

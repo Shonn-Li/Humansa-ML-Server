@@ -51,7 +51,7 @@ def test_model_selection():
         # (provider, model, description)
         (None, None, "Auto-select default"),
         ("openai", None, "OpenAI with default model"),
-        (None, "gpt-4o-mini", "Find provider for gpt-4o-mini"),
+        (None, "gpt-4.1-nano", "Find provider for gpt-4.1-nano"),
         (None, "claude-3.5-sonnet", "Find provider for Claude Sonnet (fuzzy)"),
         (None, "grok-3", "Find provider for Grok (fuzzy)"),
         (None, "gemini-flash", "Find provider for Gemini (fuzzy)"),
@@ -84,7 +84,7 @@ def test_compatibility_methods():
 
     try:
         # Test get_provider method (enhanced chatbot compatibility)
-        provider_info = selector.get_provider("openai", "gpt-4o-mini")
+        provider_info = selector.get_provider("openai", "gpt-4.1-nano")
         logger.info(f"✅ get_provider method works")
         logger.info(f"  Provider: {provider_info['provider'].value}")
         logger.info(f"  Models: {len(provider_info['models'])} available")

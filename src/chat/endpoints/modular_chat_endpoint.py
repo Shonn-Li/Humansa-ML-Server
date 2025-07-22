@@ -199,7 +199,7 @@ class ModularChatEndpoint:
                 {"url": "https://example.com/file2.jpg"}
             ],
             "provider": "openai",
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "temperature": 0.7,
             "max_tokens": 1000
         }

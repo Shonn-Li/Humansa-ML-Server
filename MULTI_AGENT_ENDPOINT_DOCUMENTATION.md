@@ -45,7 +45,7 @@ POST /v1/multi-agent/response
     }
   ],
   "user_id": 12345,
-  "model": "gpt-4o-mini",
+  "model": "gpt-4o-nano",
   "stream": false,
   "temperature": 0.7,
   "max_tokens": 4000,
@@ -77,7 +77,7 @@ POST /v1/multi-agent/response
   "status": "success",
   "data": {
     "response": "Generated response text with context",
-    "model": "gpt-4o-mini",
+    "model": "gpt-4o-nano",
     "usage": {
       "workflow_time": 2.45,
       "enabled_agents": ["router", "rag", "response", "citation"],
@@ -175,7 +175,7 @@ POST /v1/multi-agent/response
 {
   "messages": [{ "role": "user", "content": "Hello! How are you today?" }],
   "user_id": 12345,
-  "model": "gpt-4o-mini",
+  "model": "gpt-4o-nano",
   "stream": false,
   "enable_citations": false,
   "completion_type": "system"
@@ -193,7 +193,7 @@ POST /v1/multi-agent/response
     }
   ],
   "user_id": 12345,
-  "model": "gpt-4o-mini",
+  "model": "gpt-4o-nano",
   "stream": false,
   "enable_citations": true,
   "completion_type": "system"
@@ -211,7 +211,7 @@ POST /v1/multi-agent/response
     }
   ],
   "user_id": 12345,
-  "model": "gpt-4o-mini",
+  "model": "gpt-4o-nano",
   "stream": false,
   "enable_citations": true,
   "completion_type": "system"
@@ -226,7 +226,7 @@ POST /v1/multi-agent/response
     { "role": "user", "content": "Analyze this document for key insights" }
   ],
   "user_id": 12345,
-  "model": "gpt-4o-mini",
+  "model": "gpt-4o-nano",
   "stream": false,
   "attachments": ["https://example.com/document.pdf"],
   "enable_citations": true,
@@ -245,7 +245,7 @@ POST /v1/multi-agent/response
     }
   ],
   "user_id": 12345,
-  "model": "gpt-4o-mini",
+  "model": "gpt-4o-nano",
   "stream": false,
   "note_ids": [1, 2, 3],
   "conversation_ids": [10, 11],

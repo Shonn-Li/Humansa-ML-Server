@@ -22,7 +22,7 @@ http://localhost:5001
     {"role": "system", "content": "You are a helpful assistant"},
     {"role": "user", "content": "Hello, how are you?"}
   ],
-  "model": "gpt-4o-mini",  // or other supported models
+  "model": "gpt-4o-nano",  // or other supported models
   "stream": false,          // Enable streaming response
   "user_id": "user123",     // Required for RAG functionality
   "attachments": [],        // Optional file attachments
@@ -38,7 +38,7 @@ http://localhost:5001
   "id": "chatcmpl-abc123",
   "object": "chat.completion",
   "created": 1234567890,
-  "model": "gpt-4o-mini",
+  "model": "gpt-4o-nano",
   "choices": [{
     "index": 0,
     "message": {
@@ -57,9 +57,9 @@ http://localhost:5001
 
 **Response (Streaming):**
 ```
-data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1234567890,"model":"gpt-4o-mini","choices":[{"index":0,"delta":{"content":"Hello"},"finish_reason":null}]}
+data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1234567890,"model":"gpt-4o-nano","choices":[{"index":0,"delta":{"content":"Hello"},"finish_reason":null}]}
 
-data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1234567890,"model":"gpt-4o-mini","choices":[{"index":0,"delta":{"content":"!"},"finish_reason":null}]}
+data: {"id":"chatcmpl-abc123","object":"chat.completion.chunk","created":1234567890,"model":"gpt-4o-nano","choices":[{"index":0,"delta":{"content":"!"},"finish_reason":null}]}
 
 data: [DONE]
 ```
@@ -75,7 +75,7 @@ data: [DONE]
   "messages": [
     {"role": "user", "content": "What is the weather today?"}
   ],
-  "model": "gpt-4o-mini",
+  "model": "gpt-4o-nano",
   "stream": false,          // NOTE: Streaming not yet implemented
   "user_id": "user123",
   "enable_citations": true,
@@ -209,7 +209,7 @@ data: [DONE]
 
 ### OpenAI Models
 - gpt-4o
-- gpt-4o-mini
+- gpt-4o-nano
 - gpt-4-turbo
 - gpt-3.5-turbo
 

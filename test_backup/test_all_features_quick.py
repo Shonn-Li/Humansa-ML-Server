@@ -20,7 +20,7 @@ async def main():
         rag_request = {
             "messages": [{"role": "user", "content": "What information is in my PARL paper note?"}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False
         }
         
@@ -45,7 +45,7 @@ async def main():
         attachment_request = {
             "messages": [{"role": "user", "content": "Analyze this document"}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False,
             "attachments": ["https://arxiv.org/pdf/2311.10122.pdf"]
         }
@@ -78,7 +78,7 @@ async def main():
         citation_request = {
             "messages": [{"role": "user", "content": "What do my notes say about reinforcement learning? Include citations."}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False
         }
         
@@ -114,7 +114,7 @@ async def main():
         stream_request = {
             "messages": [{"role": "user", "content": "What is machine learning? Cite sources."}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": True
         }
         
@@ -159,7 +159,7 @@ async def main():
         complex_request = {
             "messages": [{"role": "user", "content": "Based on all my ML research notes, provide a comprehensive analysis of the current state of reinforcement learning, including key algorithms, recent advances, and future directions. Be extremely detailed."}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False
         }
         
@@ -191,7 +191,7 @@ async def main():
         mixed_request = {
             "messages": [{"role": "user", "content": "What have we discussed about startups and what do my notes say about them?"}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False
         }
         

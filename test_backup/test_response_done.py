@@ -9,7 +9,7 @@ async def test_response_done():
         request_data = {
             "messages": [{"role": "user", "content": "Hi"}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": True
         }
         

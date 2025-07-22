@@ -25,7 +25,7 @@ async def test_attachment():
         request_data = {
             "messages": [{"role": "user", "content": "Summarize the key findings in this paper"}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": True,
             "attachments": [TEST_ATTACHMENTS["pdfs"][0]]
         }
@@ -70,7 +70,7 @@ async def test_attachment():
         request_data = {
             "messages": [{"role": "user", "content": "Explain what's shown in this diagram"}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": True,
             "attachments": [TEST_ATTACHMENTS["images"][0]]
         }

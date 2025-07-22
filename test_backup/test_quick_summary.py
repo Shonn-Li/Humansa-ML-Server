@@ -14,7 +14,7 @@ async def run_tests():
         "messages": [{"role": "user", "content": "Summarize this paper"}],
         "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "stream": False
     })
     content = response.json()['choices'][0]['message']['content']
@@ -26,7 +26,7 @@ async def run_tests():
         "messages": [{"role": "user", "content": "What is AI?"}],
         "attachments": [],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "stream": False
     })
     agents = list(response.json()['metadata']['agent_results'].keys())
@@ -38,7 +38,7 @@ async def run_tests():
     async with client.stream('POST', 'http://localhost:5002/v1/multi-agent/response', json={
         "messages": [{"role": "user", "content": "Hi"}],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "stream": True
     }) as stream_response:
         async for line in stream_response.aiter_lines():

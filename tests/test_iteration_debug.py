@@ -26,7 +26,7 @@ async def test_iteration_with_poor_response():
             "content": "Give me just one word about Python."  # Deliberately asking for minimal response
         }],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_iterations": True,
         "stream": False
     }
@@ -66,7 +66,7 @@ async def test_iteration_with_poor_response():
             Please be thorough and include examples."""
         }],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_iterations": True,
         "stream": True
     }
@@ -147,7 +147,7 @@ async def test_iteration_with_poor_response():
             "content": "What is 2+2?"
         }],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         # Not specifying enable_iterations to check default
         "stream": False
     }

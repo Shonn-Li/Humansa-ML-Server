@@ -15,7 +15,7 @@ async def test_attachment_simple():
             json={
                 "messages": [{"role": "user", "content": "What?"}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False,
                 "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"]
             }
@@ -41,7 +41,7 @@ async def test_citation_simple():
             json={
                 "messages": [{"role": "user", "content": "Tell me about AI"}],
                 "user_id": 10001,
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "stream": False,
                 "enable_citations": True
             }

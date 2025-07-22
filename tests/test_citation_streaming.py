@@ -26,7 +26,7 @@ async def test_citation_streaming():
             "content": "What is OpenAI's GPT-4? Give me one sentence with a source."
         }],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_citations": True,
         "stream": True
     }

@@ -115,7 +115,7 @@ async def main():
         {
             "messages": [{"role": "user", "content": "What is AI?"}],
             "user_id": 10001,
-            "model": "gpt-4o-mini"
+            "model": "gpt-4.1-nano"
         }
     )
     
@@ -125,7 +125,7 @@ async def main():
         {
             "messages": [{"role": "user", "content": "What are the latest AI breakthroughs in 2024? Include sources."}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "enable_citations": True
         }
     )
@@ -137,7 +137,7 @@ async def main():
             "messages": [{"role": "user", "content": "Summarize this paper and cite key findings"}],
             "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "enable_citations": True
         }
     )
@@ -148,7 +148,7 @@ async def main():
         {
             "messages": [{"role": "user", "content": "Compare supervised vs unsupervised learning approaches for anomaly detection. Consider accuracy, data requirements, and implementation complexity. Provide a recommendation."}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "enable_iterations": True,
             "enable_citations": True
         }
@@ -160,7 +160,7 @@ async def main():
         {
             "messages": [{"role": "user", "content": "What do my notes say about PARL? Include citations and key concepts."}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "enable_citations": True
         }
     )
@@ -171,11 +171,11 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         test_num = int(sys.argv[1])
         tests = [
-            ("Simple Query", {"messages": [{"role": "user", "content": "What is AI?"}], "user_id": 10001, "model": "gpt-4o-mini"}),
-            ("Web Search with Citations", {"messages": [{"role": "user", "content": "What are the latest AI breakthroughs in 2024? Include sources."}], "user_id": 10001, "model": "gpt-4o-mini", "enable_citations": True}),
-            ("PDF Attachment Analysis", {"messages": [{"role": "user", "content": "Summarize this paper and cite key findings"}], "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"], "user_id": 10001, "model": "gpt-4o-mini", "enable_citations": True}),
-            ("Complex Iterative Query", {"messages": [{"role": "user", "content": "Compare supervised vs unsupervised learning approaches for anomaly detection. Consider accuracy, data requirements, and implementation complexity. Provide a recommendation."}], "user_id": 10001, "model": "gpt-4o-mini", "enable_iterations": True, "enable_citations": True}),
-            ("Knowledge Base Query with Citations", {"messages": [{"role": "user", "content": "What do my notes say about PARL? Include citations and key concepts."}], "user_id": 10001, "model": "gpt-4o-mini", "enable_citations": True})
+            ("Simple Query", {"messages": [{"role": "user", "content": "What is AI?"}], "user_id": 10001, "model": "gpt-4.1-nano"}),
+            ("Web Search with Citations", {"messages": [{"role": "user", "content": "What are the latest AI breakthroughs in 2024? Include sources."}], "user_id": 10001, "model": "gpt-4.1-nano", "enable_citations": True}),
+            ("PDF Attachment Analysis", {"messages": [{"role": "user", "content": "Summarize this paper and cite key findings"}], "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"], "user_id": 10001, "model": "gpt-4.1-nano", "enable_citations": True}),
+            ("Complex Iterative Query", {"messages": [{"role": "user", "content": "Compare supervised vs unsupervised learning approaches for anomaly detection. Consider accuracy, data requirements, and implementation complexity. Provide a recommendation."}], "user_id": 10001, "model": "gpt-4.1-nano", "enable_iterations": True, "enable_citations": True}),
+            ("Knowledge Base Query with Citations", {"messages": [{"role": "user", "content": "What do my notes say about PARL? Include citations and key concepts."}], "user_id": 10001, "model": "gpt-4.1-nano", "enable_citations": True})
         ]
         if 0 < test_num <= len(tests):
             asyncio.run(test_streaming_flow(*tests[test_num-1]))

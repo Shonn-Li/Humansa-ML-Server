@@ -52,7 +52,7 @@ class MLServerTester:
         
         request_data = {
             "messages": TEST_MESSAGES,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": True,
             "user_id": TEST_USER_ID,
             "temperature": 0.7,
@@ -114,7 +114,7 @@ class MLServerTester:
         
         request_data = {
             "messages": TEST_MESSAGES,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False,
             "user_id": TEST_USER_ID,
             "temperature": 0.7,
@@ -150,7 +150,7 @@ class MLServerTester:
             "messages": [
                 {"role": "user", "content": "Search for the latest news about AI advancements in 2024"}
             ],
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False,  # Streaming not supported yet
             "user_id": TEST_USER_ID,
             "enable_citations": True
@@ -195,7 +195,7 @@ class MLServerTester:
             "messages": [
                 {"role": "user", "content": "Tell me about machine learning. Include citations."}
             ],
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False,
             "user_id": TEST_USER_ID,
             "enable_citations": True
@@ -240,7 +240,7 @@ class MLServerTester:
             "messages": [
                 {"role": "user", "content": "Summarize the attached document."}
             ],
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False,
             "user_id": TEST_USER_ID,
             "attachments": [
@@ -280,7 +280,7 @@ class MLServerTester:
             "messages": [
                 {"role": "user", "content": "What are the main principles of machine learning? Please cite sources."}
             ],
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": True,
             "user_id": TEST_USER_ID,
             "enable_citations": True,

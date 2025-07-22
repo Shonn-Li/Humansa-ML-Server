@@ -92,7 +92,7 @@ class ComprehensiveValidator:
             "messages": [{"role": "user", "content": test["query"]}],
             "attachments": test["attachments"],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False
         }
         
@@ -225,7 +225,7 @@ class ComprehensiveValidator:
             "messages": [{"role": "user", "content": test["query"]}],
             "attachments": test.get("attachments", []),
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": test.get("stream", False),
             "enable_citations": True
         }
@@ -340,7 +340,7 @@ class ComprehensiveValidator:
         request = {
             "messages": [{"role": "user", "content": "Test streaming format"}],
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": True
         }
         
@@ -464,7 +464,7 @@ class ComprehensiveValidator:
             "messages": [{"role": "user", "content": test["query"]}],
             "attachments": test.get("attachments", []),
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False
         }
         
@@ -575,7 +575,7 @@ class ComprehensiveValidator:
             "messages": [{"role": "user", "content": test["query"]}],
             "attachments": test.get("attachments", []),
             "user_id": 10001,
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "stream": False,
             "enable_citations": test.get("enable_citations", True)
         }

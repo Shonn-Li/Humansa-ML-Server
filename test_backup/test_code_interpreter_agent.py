@@ -61,7 +61,7 @@ async def test_code_interpreter_detection():
             # Test router detection
             request = {
                 "messages": [{"role": "user", "content": test_case["query"]}],
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "user_id": "test_user_123"
             }
             
@@ -134,7 +134,7 @@ async def test_code_interpreter_execution():
             
             request = {
                 "messages": [{"role": "user", "content": test_case["message"]}],
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "user_id": "test_user_123"
             }
             
@@ -163,7 +163,7 @@ async def test_code_interpreter_execution():
         
         stream_request = {
             "messages": [{"role": "user", "content": "Create a simple plot using matplotlib"}],
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "user_id": "test_user_123"
         }
         
@@ -201,7 +201,7 @@ async def test_multi_agent_with_code_interpreter():
             "messages": [
                 {"role": "user", "content": "Please calculate the fibonacci sequence up to 10 terms using Python code and explain the results"}
             ],
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "user_id": "test_user_123",
             "stream": True
         }

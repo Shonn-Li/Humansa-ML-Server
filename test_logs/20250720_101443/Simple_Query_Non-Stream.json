@@ -24,7 +24,7 @@
       "data": {
         "metadata": {
           "context_used": false,
-          "model": "gpt-4o-mini"
+          "model": "gpt-4o-nano"
         },
         "response": "2 + 2 equals 4.",
         "status": "success"
@@ -38,7 +38,7 @@
           "response",
           "citation"
         ],
-        "model": "gpt-4o-mini",
+        "model": "gpt-4o-nano",
         "original_query": "What is 2+2?",
         "router_decision": {
           "confidence": 1.0,

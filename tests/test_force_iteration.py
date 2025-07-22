@@ -36,7 +36,7 @@ async def test_force_iteration():
             This should be at least 2000 words with proper citations from academic papers and recent research."""
         }],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_iterations": True,
         "enable_citations": True,
         "stream": True
@@ -176,7 +176,7 @@ async def test_simple_iteration_check():
             "content": "Tell me three things: 1) What is Python? 2) What is JavaScript? 3) What is Rust? Be very detailed."
         }],
         "user_id": 10001,
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "enable_iterations": True,
         "stream": False
     }

@@ -225,7 +225,7 @@ class LLMProviderManager:
                     temperature=0.7,
                     callback_manager=CallbackManager([self.token_counter])
                 ),
-                "models": ["gpt-4.1-nano", "gpt-4o-mini", "gpt-4o", "gpt-3.5-turbo", "gpt-4-turbo", "gpt-4.1", "gpt-4.1-mini", "o3", "o4-mini"]
+                "models": ["gpt-4.1-nano", "gpt-4.1-nano", "gpt-4o", "gpt-3.5-turbo", "gpt-4-turbo", "gpt-4.1", "gpt-4.1-mini", "o3", "o4-mini"]
             }
 
             # Add multimodal if available

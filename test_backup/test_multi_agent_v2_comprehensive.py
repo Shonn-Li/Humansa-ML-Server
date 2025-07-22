@@ -33,7 +33,7 @@ async def test_individual_agents():
         logger.info("📍 Testing Router Agent...")
         router_request = {
             "messages": [{"role": "user", "content": "Search for AI developments and analyze my uploaded research paper"}],
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "user_id": "test_user_123",
             "attachments": [{"type": "pdf", "url": "research.pdf", "filename": "ai_research.pdf"}],
             "enable_web_search": True,
@@ -49,7 +49,7 @@ async def test_individual_agents():
         logger.info("🌐 Testing Web Search Agent...")
         web_request = {
             "messages": [{"role": "user", "content": "Latest AI breakthroughs in 2025"}],
-            "model": "gpt-4o-mini", 
+            "model": "gpt-4.1-nano", 
             "user_id": "test_user_123"
         }
         context["router_agent"] = {"condensed_query": "Latest AI breakthroughs 2025", "original_query": "Latest AI breakthroughs in 2025"}
@@ -62,7 +62,7 @@ async def test_individual_agents():
         logger.info("🧠 Testing RAG Agent...")
         rag_request = {
             "messages": [{"role": "user", "content": "What are my previous notes about machine learning?"}],
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "user_id": "test_user_123"
         }
         context["router_agent"] = {"condensed_query": "machine learning notes", "search_type": "knowledge_base"}
@@ -75,7 +75,7 @@ async def test_individual_agents():
         logger.info("📎 Testing Attachment Agent...")
         attachment_request = {
             "messages": [{"role": "user", "content": "Analyze this research paper"}],
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "user_id": "test_user_123",
             "attachments": [
                 {"type": "pdf", "url": "research.pdf", "filename": "ai_research.pdf"},
@@ -96,7 +96,7 @@ async def test_individual_agents():
         
         response_request = {
             "messages": [{"role": "user", "content": "Explain the latest AI developments based on my research"}],
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "user_id": "test_user_123"
         }
         
@@ -135,7 +135,7 @@ async def test_full_workflow_non_streaming():
             "messages": [
                 {"role": "user", "content": "Search for recent AI developments, check my notes about machine learning, and analyze the attached research paper to give me a comprehensive overview"},
             ],
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-nano",
             "user_id": "test_user_123",
             "stream": False,
             "enable_web_search": True,
@@ -177,7 +177,7 @@ async def test_streaming_workflow():
             "messages": [
                 {"role": "user", "content": "Search the web for latest AI developments, find my previous notes about neural networks, process the attached research paper, and provide a comprehensive analysis with proper citations"}
             ],
-            "model": "gpt-4o-mini", 
+            "model": "gpt-4.1-nano", 
             "user_id": "test_user_123",
             "stream": True,
             "enable_web_search": True,
@@ -297,7 +297,7 @@ async def test_specific_use_cases():
             "name": "Knowledge Base Query",
             "request": {
                 "messages": [{"role": "user", "content": "What did I write about artificial intelligence in my notes?"}],
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "user_id": "test_user_123",
                 "stream": True
             },
@@ -307,7 +307,7 @@ async def test_specific_use_cases():
             "name": "Current Events Search", 
             "request": {
                 "messages": [{"role": "user", "content": "What are the latest developments in quantum computing?"}],
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "user_id": "test_user_123",
                 "stream": True,
                 "enable_web_search": True
@@ -318,7 +318,7 @@ async def test_specific_use_cases():
             "name": "File Analysis",
             "request": {
                 "messages": [{"role": "user", "content": "Analyze this research document and summarize key findings"}],
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "user_id": "test_user_123",
                 "stream": True,
                 "attachments": [{"type": "pdf", "url": "research.pdf", "filename": "research.pdf"}]
@@ -329,7 +329,7 @@ async def test_specific_use_cases():
             "name": "Comprehensive Research",
             "request": {
                 "messages": [{"role": "user", "content": "Research the topic of transformer architectures, check my existing notes, analyze the attached paper, and provide a complete overview with citations"}],
-                "model": "gpt-4o-mini",
+                "model": "gpt-4.1-nano",
                 "user_id": "test_user_123", 
                 "stream": True,
                 "enable_web_search": True,
