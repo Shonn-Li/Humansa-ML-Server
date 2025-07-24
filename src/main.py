@@ -24,6 +24,13 @@ import logging
 import warnings
 from quart import Quart, jsonify, request, Response
 from quart_cors import cors
+from dotenv import load_dotenv
+
+# Load environment variables
+# First load .env (shared configuration)
+load_dotenv()
+# Then load .env.local (local overrides)
+load_dotenv('.env.local', override=True)
 
 # CRITICAL: Add current directory to Python path for imports to work
 current_dir = os.path.dirname(os.path.abspath(__file__))

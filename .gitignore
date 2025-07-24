@@ -3,9 +3,6 @@ __pycache__
 *.pyc
 vector_store
 
-# Environment variables
-.env
+# Local environment variables
 .env.local
-.env.development
-.env.production
-.env
+.env.*.local
