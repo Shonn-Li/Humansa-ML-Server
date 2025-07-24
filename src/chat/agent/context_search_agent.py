@@ -1,15 +1,16 @@
 """
 Context Search Agent - Searches user's notes and conversations
 
-This agent performs hybrid search (keyword + semantic) across the user's knowledge base 
-(notes and conversations) and returns results with proper note IDs and conversation IDs 
-for reference. This is separate from file attachments which are handled by the file search tool.
+This agent performs intelligent multi-step search across the user's knowledge base 
+(notes and conversations) using an agentic approach that understands queries,
+handles temporal filters, and iteratively refines results.
 """
 
 from typing import Dict, Any, List, Optional
 import logging
 
 from .base import BaseAgent
+from .agentic_rag_processor import AgenticRAGProcessor
 from ..rag.rag_processor import RAGProcessor
 from ..search.hybrid_search import HybridSearchEngine
 from ..embedding.embedding_provider_selector import EmbeddingProviderSelector
@@ -27,18 +28,45 @@ class ContextSearchAgent(BaseAgent):
         self.postgres = PostgresManager()
         self.hybrid_search = HybridSearchEngine(self.postgres)
         self.embedder = EmbeddingProviderSelector().get_embedding_client()
+        self.agentic_processor = AgenticRAGProcessor(
+            rag_processor=rag_processor,
+            postgres=self.postgres,
+            hybrid_search=self.hybrid_search
+        )
     
     async def run(self, request: Dict[str, Any], context: Dict[str, Any]) -> Dict[str, Any]:
-        """Search user's knowledge base using hybrid search for better results"""
+        """Search user's knowledge base using agentic multi-step approach"""
         
         router_result = context.get("router_agent", {})
-        condensed_query = router_result.get("condensed_query", router_result.get("original_query", ""))
-        search_type = router_result.get("search_type", "mixed")
+        # Use the original query for agentic processing
+        original_query = router_result.get("original_query", request["messages"][-1]["content"])
         
         # Extract any specific IDs from the request if provided
         note_ids = request.get("note_ids", None)
         conversation_ids = request.get("conversation_ids", None)
         user_id = request["user_id"]
+        
+        logger.info(f"🤖 Using agentic RAG processor for query: {original_query}")
+        
+        # Use the agentic processor for intelligent multi-step retrieval
+        try:
+            agentic_result = await self.agentic_processor.process_query(
+                query=original_query,
+                user_id=user_id,
+                note_ids=note_ids,
+                conversation_ids=conversation_ids,
+                max_steps=3
+            )
+            
+            # Return the agentic results
+            return agentic_result
+            
+        except Exception as e:
+            logger.error(f"Agentic processor failed: {e}, falling back to hybrid search")
+            # Fall back to the original hybrid search implementation
+            
+        condensed_query = router_result.get("condensed_query", original_query)
+        search_type = router_result.get("search_type", "mixed")
         
         # Generate query embedding for hybrid search
         try:

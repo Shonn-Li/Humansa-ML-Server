@@ -24,6 +24,10 @@ import logging
 import warnings
 from quart import Quart, jsonify, request, Response
 from quart_cors import cors
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # CRITICAL: Add current directory to Python path for imports to work
 current_dir = os.path.dirname(os.path.abspath(__file__))

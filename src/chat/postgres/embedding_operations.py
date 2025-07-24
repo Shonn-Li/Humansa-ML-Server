@@ -446,7 +446,7 @@ class EmbeddingDBOperations:
 
                 # Get prefix images (not associated with any part)
                 cursor.execute("""
-                    SELECT "imageURL", "imageText", "latex"
+                    SELECT "imageURL", "imageText", latex
                     FROM image_v1
                     WHERE "noteId" = %s AND "partId" IS NULL
                     ORDER BY id
@@ -475,7 +475,7 @@ class EmbeddingDBOperations:
 
                     # Get images for this part
                     cursor.execute("""
-                        SELECT "imageURL", "imageText", "latex"
+                        SELECT "imageURL", "imageText", latex
                         FROM image_v1
                         WHERE "partId" = %s
                         ORDER BY id

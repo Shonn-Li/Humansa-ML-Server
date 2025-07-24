@@ -12,7 +12,7 @@ import logging
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../src'))
 
 # Set up TEST ENVIRONMENT before any imports
-os.environ['DATABASE_URL'] = 'postgresql://postgres:12931@localhost:5454/youwoai_test'
+os.environ['DATABASE_URL'] = 'postgresql://postgres:031203@localhost:5454/youwoai_test'
 os.environ['PUBLIC_ENV'] = 'test'
 os.environ['QUART_ENV'] = 'test'
 os.environ['PORT'] = '5002'

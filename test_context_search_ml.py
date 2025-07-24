@@ -1,4 +1,4 @@
-#\!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Test context search with agentic RAG
 """
@@ -85,4 +85,3 @@ async def test_context_search():
 
 if __name__ == "__main__":
     asyncio.run(test_context_search())
-EOF < /dev/null

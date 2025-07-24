@@ -32,6 +32,7 @@ DB_CONFIG = {
 }
 
 
+
 @dataclass
 class ResolvedIDs:
     """Container for resolved IDs"""
@@ -85,12 +86,12 @@ class PostgresManager:
             with conn.cursor() as cursor:
                 # Case 1: Specific note IDs provided
                 if note_ids:
-                    cursor.execute("""
+                    cursor.execute(f"""
                         SELECT id 
                         FROM note_v1 
                         WHERE "ownerId" = %s 
                         AND id = ANY(%s)
-                        AND completed = true
+                        AND "deletedAt" IS NULL
                         ORDER BY id DESC
                     """, (user_id, note_ids))
 
@@ -108,13 +109,13 @@ class PostgresManager:
 
                 # Case 2: Folder IDs provided
                 elif folder_ids:
-                    cursor.execute("""
+                    cursor.execute(f"""
                         SELECT DISTINCT n.id 
                         FROM note_v1 n
                         INNER JOIN folder_v1 f ON n."folderId" = f.id
                         WHERE f."ownerId" = %s 
                         AND f.id = ANY(%s)
-                        AND n.completed = true
+                        AND n."deletedAt" IS NULL
                         ORDER BY n.id DESC
                     """, (user_id, folder_ids))
 
@@ -126,11 +127,11 @@ class PostgresManager:
 
                 # Case 3: All user notes
                 else:
-                    cursor.execute("""
+                    cursor.execute(f"""
                         SELECT id 
                         FROM note_v1 
                         WHERE "ownerId" = %s 
-                        AND completed = true
+                        AND "deletedAt" IS NULL
                         ORDER BY id DESC
                     """, (user_id,))
 
@@ -518,7 +519,7 @@ class PostgresManager:
         with self.get_connection() as conn:
             with conn.cursor() as cursor:
                 cursor.execute("""
-                    SELECT id, "noteTitle"
+                    SELECT id, noteTitle
                     FROM note_v1 
                     WHERE id = ANY(%s)
                 """, (note_ids,))
