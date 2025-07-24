@@ -489,14 +489,23 @@ class MultiAgentChatEndpointV2:
                             context["context_search_agent"] = result
                             
                             # Complete context search call
+                            item_data = {
+                                "id": agent_id,
+                                "type": "context_search_call",
+                                "status": "completed"
+                            }
+                            
+                            # Include search results if available
+                            if result and isinstance(result, dict):
+                                if "sources" in result:
+                                    item_data["sources"] = result["sources"]
+                                elif "results" in result:
+                                    item_data["results"] = result["results"]
+                            
                             yield create_event("response.output_item.done",
                                              sequence_number=sequence,
                                              output_index=current_output_index - 1,
-                                             item={
-                                                 "id": agent_id,
-                                                 "type": "context_search_call",
-                                                 "status": "completed"
-                                             })
+                                             item=item_data)
                             sequence += 1
                             # Note: We only incremented current_output_index once above (tool call only)
                         elif agent_name == "attachment":
@@ -521,14 +530,23 @@ class MultiAgentChatEndpointV2:
                             context["attachment_agent"] = result
                             
                             # Complete file search call
+                            item_data = {
+                                "id": agent_id,
+                                "type": "file_search_call",
+                                "status": "completed"
+                            }
+                            
+                            # Include search results if available
+                            if result and isinstance(result, dict):
+                                if "results" in result:
+                                    item_data["results"] = result["results"]
+                                elif "sources" in result:
+                                    item_data["sources"] = result["sources"]
+                            
                             yield create_event("response.output_item.done",
                                              sequence_number=sequence,
                                              output_index=current_output_index - 1,
-                                             item={
-                                                 "id": agent_id,
-                                                 "type": "file_search_call",
-                                                 "status": "completed"
-                                             })
+                                             item=item_data)
                             sequence += 1
                         else:
                             # This should not happen with current agent types
@@ -723,13 +741,37 @@ class MultiAgentChatEndpointV2:
         context["web_search_agent"] = search_result
         
         # Complete web search call
+        item_data = {
+            "id": search_id,
+            "type": "web_search_call",
+            "status": "completed"
+        }
+        
+        # Include search results if available
+        if search_result and isinstance(search_result, dict):
+            if "results" in search_result:
+                # Convert WebSearchResult objects to dicts
+                results = []
+                for result in search_result["results"]:
+                    if hasattr(result, '__dict__'):
+                        # It's a dataclass or object, convert to dict
+                        results.append({
+                            "title": getattr(result, 'title', ''),
+                            "url": getattr(result, 'link', ''),
+                            "snippet": getattr(result, 'snippet', ''),
+                            "source": getattr(result, 'source', ''),
+                            "cached": getattr(result, 'cached', False)
+                        })
+                    else:
+                        # Already a dict
+                        results.append(result)
+                item_data["results"] = results
+            elif "sources" in search_result:
+                item_data["sources"] = search_result["sources"]
+        
         yield create_event("response.output_item.done",
                          output_index=current_output_index,
-                         item={
-                             "id": search_id,
-                             "type": "web_search_call",
-                             "status": "completed"
-                         })
+                         item=item_data)
         
         # Note: The actual search results and citations will be included
         # in the response message by the response agent

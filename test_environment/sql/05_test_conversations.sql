@@ -5,7 +5,7 @@
 -- Create test conversations for our notes
 INSERT INTO conversation_v1 (
   id, "ownerId", title, type, typeid, 
-  messages, "threadId", createdate, updatedate
+  messages, "threadId", "createDate", "updateDate"
 )
 VALUES
   -- Conversation for PARL paper (Note 10001)
@@ -105,7 +105,7 @@ VALUES
 -- Add a system conversation
 INSERT INTO conversation_v1 (
   id, "ownerId", title, type, typeid, 
-  messages, "threadId", createdate, updatedate
+  messages, "threadId", "createDate", "updateDate"
 )
 VALUES
   (10010, 10001, 'Welcome to YouWoAI Test Environment', 'user'::conversation_type_enum, 10001,

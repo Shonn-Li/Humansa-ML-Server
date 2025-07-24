@@ -56,22 +56,22 @@ class HybridSearchEngine:
                         SELECT 
                             n.id,
                             n."noteTitle" as title,
-                            n.promptcontent as content,
+                            n."promptContent" as content,
                             n."ownerId",
                             ts_rank_cd(
-                                to_tsvector('english', COALESCE(n."noteTitle", '') || ' ' || COALESCE(n.promptcontent->>'currentPromptContent', '')),
+                                to_tsvector('english', COALESCE(n."noteTitle", '') || ' ' || COALESCE(n."promptContent"->>'currentPromptContent', '')),
                                 to_tsquery('english', %s)
                             ) as rank,
                             ts_headline(
                                 'english',
-                                COALESCE(n.promptcontent->>'currentPromptContent', ''),
+                                COALESCE(n."promptContent"->>'currentPromptContent', ''),
                                 to_tsquery('english', %s),
                                 'StartSel=<mark>, StopSel=</mark>, MaxWords=50, MinWords=20'
                             ) as snippet
                         FROM note_v1 n
                         WHERE n."ownerId" = %s
                           AND n."deletedAt" IS NULL
-                          AND to_tsvector('english', COALESCE(n."noteTitle", '') || ' ' || COALESCE(n.promptcontent->>'currentPromptContent', '')) @@ to_tsquery('english', %s)
+                          AND to_tsvector('english', COALESCE(n."noteTitle", '') || ' ' || COALESCE(n."promptContent"->>'currentPromptContent', '')) @@ to_tsquery('english', %s)
                         ORDER BY rank DESC
                         LIMIT %s
                     )

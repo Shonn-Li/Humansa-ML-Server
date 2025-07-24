@@ -55,7 +55,7 @@ async def test_search():
             # Sample notes
             cur.execute("""
                 SELECT id, "noteTitle", 
-                       LEFT(COALESCE(promptcontent->>'currentPromptContent', ''), 100) as content_preview
+                       LEFT(COALESCE("promptContent"->>'currentPromptContent', ''), 100) as content_preview
                 FROM note_v1 
                 WHERE "ownerId" = %s AND "deletedAt" IS NULL
                 LIMIT 5
