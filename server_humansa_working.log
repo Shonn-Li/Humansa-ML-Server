@@ -1,0 +1,109 @@
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python3.13
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+WARNING:chat.postgres.url_embedding_operations:python-pptx not available - PowerPoint processing disabled
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:🔄 Attempting to import document converter endpoints...
+INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
+INFO:chat.utils.document_converter:❌ docx2pdf not available
+INFO:chat.utils.document_converter:❌ pypandoc not available
+INFO:chat.utils.document_converter:❌ python-docx not available
+INFO:chat.utils.document_converter:❌ openpyxl not available
+INFO:chat.utils.document_converter:❌ reportlab not available
+INFO:__main__:✅ Successfully imported document converter blueprint
+INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:🔄 Registering Humansa endpoints...
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/main.py", line 801, in <module>
+    app = create_app()
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/main.py", line 178, in create_app
+    register_humansa_endpoints(app)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/main.py", line 739, in register_humansa_endpoints
+    from humansa.v2 import humansa_v2_bp, initialize_v2_system
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/__init__.py", line 1, in <module>
+    from .api import humansa_v2_bp, initialize_v2_system
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/api.py", line 10, in <module>
+    from .workflows.orchestrator import HumansaOrchestrator
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/workflows/orchestrator.py", line 44, in <module>
+    class HumansaOrchestrator(Workflow):
+    ...<157 lines>...
+            return prompt
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/workflows/orchestrator.py", line 100, in HumansaOrchestrator
+    @step
+     ^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/workflow/decorators.py", line 91, in step
+    decorator(func)
+    ~~~~~~~~~^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/workflow/decorators.py", line 64, in decorator
+    validate_step_signature(spec)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/workflow/utils.py", line 153, in validate_step_signature
+    raise WorkflowValidationError(msg)
+llama_index.core.workflow.errors.WorkflowValidationError: Step signature must have at least one parameter annotated as type Event

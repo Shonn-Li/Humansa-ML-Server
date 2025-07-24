@@ -1,10 +1,10 @@
 # YouWoAI Test Environment
 
-This directory contains a complete, isolated test environment for YouWoAI with a PostgreSQL database running on port 5454.
+This directory contains a complete, isolated test environment for YouWoAI with a PostgreSQL database running on port 5456.
 
 ## Features
 
-- **Isolated PostgreSQL instance** with pgvector extension on port 5454
+- **Isolated PostgreSQL instance** with pgvector extension on port 5456
 - **Complete test dataset** including:
   - 1 test user with full configuration
   - 2 folders (June-ML, Startup)
@@ -26,7 +26,7 @@ This directory contains a complete, isolated test environment for YouWoAI with a
 
 # 2. The script will:
 #    - Export embeddings from production (if needed)
-#    - Start PostgreSQL on port 5454
+#    - Start PostgreSQL on port 5456
 #    - Create all tables
 #    - Load test data
 #    - Verify everything works
@@ -104,21 +104,21 @@ docker-compose down -v
 ### Backend Server
 Update your backend `.env`:
 ```bash
-DB_PORT=5454  # Change from 5432
+DB_PORT=5456  # Change from 5432
 DB_ACTIVE_DATABASE=youwoai_test
 ```
 
 ### ML Server
 Update your ML server `.env`:
 ```bash
-DB_PORT=5454  # Change from 5432
+DB_PORT=5456  # Change from 5432
 DB_ACTIVE_DATABASE=youwoai_test
 ```
 
 ## Troubleshooting
 
 ### Port Already in Use
-If port 5454 is already in use, edit `docker-compose.yml` and change the port mapping.
+If port 5456 is already in use, edit `docker-compose.yml` and change the port mapping.
 
 ### Python Dependencies
 The setup script requires `psycopg2-binary`. Install with:
