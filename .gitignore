@@ -3,6 +3,7 @@ __pycache__
 *.pyc
 vector_store
 
-# Local environment variables
+# Environment files
+.env
 .env.local
 .env.*.local
