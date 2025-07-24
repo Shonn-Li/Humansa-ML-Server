@@ -19,6 +19,13 @@ This is an **enhanced** machine learning inference server built with [Quart](htt
 python3 -m venv youwo-ml-venv && source youwo-ml-venv/bin/activate && python -m src.main
 ```
 
+```bash
+# Restart the ML server on port 5001
+lsof -ti tcp:5001 | xargs -r kill -9 && \
+source /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/bin/activate && \
+python /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/main.py
+```
+
 ## 🔧 Setup (Local Development)
 
 ### 1. Create and activate virtual environment

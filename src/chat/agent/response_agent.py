@@ -93,6 +93,7 @@ class ResponseAgent(BaseAgent):
             
             # Stream the response chunks
             async for chunk in stream:
+                # Handle regular content delta
                 if chunk.delta:
                     accumulated_response += chunk.delta
                     yield {
@@ -100,6 +101,24 @@ class ResponseAgent(BaseAgent):
                         "content": chunk.delta,
                         "metadata": {"agent": "response"}
                     }
+                
+                # Handle DeepSeek reasoning content
+                # Check if chunk has raw attribute (for llama-index chunks)
+                if hasattr(chunk, 'raw') and chunk.raw:
+                    raw_chunk = chunk.raw
+                    # Check for DeepSeek reasoning in choices[0].delta
+                    if hasattr(raw_chunk, 'choices') and raw_chunk.choices:
+                        choice = raw_chunk.choices[0]
+                        if hasattr(choice, 'delta') and choice.delta:
+                            delta = choice.delta
+                            # Check for reasoning_content field (DeepSeek R1 specific)
+                            if hasattr(delta, 'reasoning_content') and delta.reasoning_content:
+                                logger.info(f"🧠 DeepSeek reasoning chunk detected: {delta.reasoning_content[:50]}...")
+                                yield {
+                                    "type": "reasoning_chunk", 
+                                    "content": delta.reasoning_content,
+                                    "metadata": {"agent": "response", "model": model}
+                                }
             
             # Extract and yield citation annotations if enabled
             if enable_citations and sources:

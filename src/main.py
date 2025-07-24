@@ -608,6 +608,18 @@ def register_embedding_endpoints(app):
     except ImportError as e:
         logger.error(f"❌ File analyzer endpoints import failed: {e}")
 
+    # Document Converter Endpoints
+    try:
+        logger.info("🔄 Attempting to import document converter endpoints...")
+        from chat.endpoints.document_converter_endpoint import document_converter_bp
+        logger.info("✅ Successfully imported document converter blueprint")
+        
+        app.register_blueprint(document_converter_bp)
+        logger.info("✅ Document converter endpoints registered successfully")
+        
+    except ImportError as e:
+        logger.error(f"❌ Document converter endpoints import failed: {e}")
+
     # V1 Conversation Embedding Endpoint (called by backend)
     @app.route("/v1/embeddings/conversation", methods=["POST"])
     async def v1_conversation_embeddings():
