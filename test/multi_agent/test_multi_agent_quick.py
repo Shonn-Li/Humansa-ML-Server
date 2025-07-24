@@ -94,6 +94,19 @@ CRITICAL_TESTS = [
             "expected_tools": ["context_search_call", "file_search_call"],
             "should_have_citations": True
         }
+    },
+    {
+        "name": "6. DeepSeek R1 Reasoning Test",
+        "request": {
+            "model": "DeepSeek-R1",
+            "messages": [{"role": "user", "content": "Explain quantum entanglement in simple terms with step-by-step reasoning"}],
+            "stream": True,
+            "user_id": 10001
+        },
+        "validate": {
+            "should_have_reasoning": True,
+            "min_reasoning_length": 100
+        }
     }
 ]
 
@@ -116,6 +129,7 @@ async def run_test(test_case):
         tools_used = []
         citations_found = []
         full_response = ""
+        reasoning_content = ""
         
         if hasattr(response, '__aiter__'):
             async for event in response:
@@ -131,6 +145,10 @@ async def run_test(test_case):
                 # Collect response text
                 elif event_type == "response.output_text.delta":
                     full_response += event.get("delta", "")
+                
+                # Track reasoning content
+                elif event_type == "response.reasoning_text.delta":
+                    reasoning_content += event.get("delta", "")
                 
                 # Track citations
                 elif event_type == "response.output_text.annotation.added":
@@ -159,10 +177,20 @@ async def run_test(test_case):
             passed = False
             errors.append("No citations found")
         
+        # Check reasoning content
+        if validate.get("should_have_reasoning") and not reasoning_content:
+            passed = False
+            errors.append("No reasoning content found")
+        
+        if validate.get("min_reasoning_length") and len(reasoning_content) < validate["min_reasoning_length"]:
+            passed = False
+            errors.append(f"Reasoning content too short: {len(reasoning_content)} < {validate['min_reasoning_length']}")
+        
         # Print results
         print(f"Status: {'✅ PASS' if passed else '❌ FAIL'}")
         print(f"Tools Used: {', '.join(tools_used)}")
         print(f"Citations: {len(citations_found)}")
+        print(f"Reasoning Length: {len(reasoning_content)} chars")
         
         if not passed:
             print(f"Errors:")

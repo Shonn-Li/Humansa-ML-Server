@@ -196,9 +196,39 @@ async def _process_file_by_extension(file_path: str, filename: str) -> Optional[
     file_extension = Path(filename).suffix.lower()
 
     try:
+        # Import document converter
+        from chat.utils.document_converter import convert_document_to_pdf
+        
+        # Check if this is a document that should be converted to PDF
+        convertible_extensions = ['.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.txt', '.md', '.html', '.htm']
+        
+        if file_extension in convertible_extensions:
+            logger.info(f"📄 Converting {file_extension} to PDF for better processing...")
+            
+            # Convert to PDF
+            success, pdf_path = convert_document_to_pdf(file_path)
+            
+            if success and pdf_path:
+                logger.info(f"✅ Successfully converted to PDF: {pdf_path}")
+                # Process the converted PDF
+                content = url_embedding_ops._process_pdf_file(pdf_path)
+                
+                # Clean up the temporary PDF file
+                try:
+                    if pdf_path != file_path:  # Don't delete if it's the original file
+                        os.unlink(pdf_path)
+                except:
+                    pass
+                
+                return content
+            else:
+                logger.warning(f"❌ Failed to convert {file_extension} to PDF, falling back to direct processing")
+        
+        # Process files that are already PDF or don't need conversion
         if file_extension == '.pdf':
             return url_embedding_ops._process_pdf_file(file_path)
         elif file_extension in ['.pptx', '.ppt']:
+            # Still process PowerPoint directly as we have good extraction
             return url_embedding_ops._process_pptx_file(file_path)
         elif file_extension in ['.jpg', '.jpeg', '.png', '.gif', '.webp']:
             # For images, we could use the GPT-4o processing, but for now return basic info

@@ -1,0 +1,10 @@
+{
+  "id": "dark-mode-toggle",
+  "name": "Dark Mode Toggle",
+  "created": "2024-01-15 14:00:00",
+  "ended": "2024-01-15 14:25:00",
+  "status": "COMPLETE",
+  "phase": "completed",
+  "progress": "100%",
+  "description": "Add dark mode toggle to application settings"
+}

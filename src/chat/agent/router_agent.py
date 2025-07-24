@@ -60,7 +60,7 @@ class RouterAgent(BaseAgent):
         query_lower = query.lower()
         
         # Context search check (notes and conversations)
-        context_keywords = ['my notes', 'my documents', 'search notes', 'find in notes', 'remember', 'recall', 'what did i', 'based on my', 'in my knowledge', 'conversation', 'discussed', 'talked about']
+        context_keywords = ['my notes', 'my documents', 'search notes', 'find in notes', 'remember', 'recall', 'what did i', 'based on my', 'in my knowledge', 'conversation', 'discussed', 'talked about', 'summarize my', 'summary of my', 'analyze my', 'review my', 'go through my', 'check my', 'look at my', 'read my', 'from my notes', 'in my notes']
         note_id_pattern = r'note\s*(?:id\s*)?(\d+)'
         conversation_id_pattern = r'conversation\s*(?:id\s*)?(\d+)'
         
