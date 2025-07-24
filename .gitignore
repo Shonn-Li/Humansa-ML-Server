@@ -2,3 +2,10 @@ youwo-ml-venv
 __pycache__
 *.pyc
 vector_store
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+.env

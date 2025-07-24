@@ -956,4 +956,13 @@ if __name__ == "__main__":
     logger.info("   - ✅ Citations: Streaming & non-streaming support")
     logger.info("")
 
-    app.run(host="0.0.0.0", port=5001, debug=True)
+    # Allow port customization via environment variable (for local development only)
+    # Support dynamic DIGIT configuration
+    digit = os.environ.get('DIGIT')
+    if digit:
+        port = int(f"500{digit}")
+    else:
+        port = int(os.environ.get('PORT', 5001))
+
+    logger.info(f"🚀 Starting ML server on port {port}")
+    app.run(host="0.0.0.0", port=port, debug=True)
