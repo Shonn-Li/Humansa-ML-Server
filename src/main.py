@@ -164,7 +164,7 @@ def create_app():
         return jsonify({
             "status": "healthy",
             "service": "ml-server",
-            "port": int(os.getenv('ML_SERVER_PORT', '5001')),
+            "port": int(os.getenv('ML_SERVER_PORT', str(5000 + int(os.getenv('DIGIT', '0'))))),
             "timestamp": str(__import__('datetime').datetime.now())
         })
 
@@ -741,6 +741,31 @@ def register_humansa_endpoints(app):
                 traceback.print_exc()
                 return jsonify({"error": str(e), "status": "error"}), 500
                 
+        # Register Humansa v2 endpoints
+        try:
+            from humansa.v2 import humansa_v2_bp, initialize_v2_system
+            app.register_blueprint(humansa_v2_bp)
+            
+            # Initialize v2 system on startup
+            @app.before_serving
+            async def init_humansa_v2():
+                try:
+                    # Get database pool from app context if available
+                    db_pool = getattr(app, 'db_pool', None)
+                    openai_key = os.getenv('OPENAI_API_KEY')
+                    
+                    if db_pool and openai_key:
+                        await initialize_v2_system(db_pool, openai_key)
+                        logger.info("✅ Humansa v2 system initialized")
+                    else:
+                        logger.warning("⚠️ Humansa v2 system not initialized - missing db_pool or API key")
+                except Exception as e:
+                    logger.error(f"❌ Failed to initialize Humansa v2: {e}")
+                    
+            logger.info("✅ Humansa v2 blueprint registered")
+        except ImportError as e:
+            logger.warning(f"⚠️ Humansa v2 not available: {e}")
+        
         logger.info("✅ Humansa endpoints registered successfully")
         
     except ImportError as e:
@@ -786,8 +811,10 @@ if __name__ == "__main__":
     # Get port from environment variable or command line argument
     import argparse
     parser = argparse.ArgumentParser(description='YouWoAI ML Server')
-    parser.add_argument('--port', type=int, default=int(os.getenv('ML_SERVER_PORT', '5001')),
-                        help='Port to run the server on (default: 5001 or ML_SERVER_PORT env var)')
+    digit = os.getenv('DIGIT', '0')
+    default_port = 5000 + int(digit)
+    parser.add_argument('--port', type=int, default=int(os.getenv('ML_SERVER_PORT', str(default_port))),
+                        help=f'Port to run the server on (default: {default_port} or ML_SERVER_PORT env var)')
     args = parser.parse_args()
     
     port = args.port
@@ -795,14 +822,26 @@ if __name__ == "__main__":
     logger.info("=== YouWoAI ML Server Starting ===")
     logger.info(f"Server will be available at: http://0.0.0.0:{port}")
     logger.info("")
-    logger.info("📋 V1 Endpoint Summary:")
+    logger.info("📋 Endpoint Summary:")
     logger.info("✅ CHAT ENDPOINTS:")
     logger.info(
         "   - /v1/chat/completions - Modular chat with citations & streaming")
     logger.info(
         "   - /v1/multi-agent/response - Multi-agent workflow")
     logger.info(
-        "   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (legacy)")
+        "   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)")
+    logger.info("")
+    logger.info("✅ HUMANSA V2 ENDPOINTS:")
+    logger.info(
+        "   - /v2/humansa/chat - Multi-agent medical consultation")
+    logger.info(
+        "   - /v2/humansa/appointment/search - Search available appointments")
+    logger.info(
+        "   - /v2/humansa/appointment/book - Book appointment slots")
+    logger.info(
+        "   - /v2/humansa/patient/profile - Manage patient profiles")
+    logger.info(
+        "   - /v2/humansa/conversation/history - Get conversation history")
     logger.info(
         "   - /humansa/response - Humansa conversations (used by backend)")
     logger.info(

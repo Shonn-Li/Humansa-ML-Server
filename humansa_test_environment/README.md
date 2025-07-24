@@ -1,0 +1,184 @@
+# Humansa Test Environment
+
+A completely isolated test environment for the Humansa medical AI system, separate from the main YouWoAI ML Server test environment.
+
+## Overview
+
+This test environment provides:
+- 🏥 Medical consultation system with AI agents
+- 👨‍⚕️ 10 doctors across various specialties
+- 🏢 5 clinics in different Singapore regions
+- 📅 Appointment booking system
+- 💊 Patient medical records and medication tracking
+- 🏥 Health screening packages
+- 🏦 Insurance provider integration
+
+## Quick Start
+
+```bash
+# Setup the entire environment
+./setup.sh
+
+# Test the connection
+python tests/test_connection.py
+
+# Reset data (keep containers running)
+./scripts/reset_data.sh
+
+# Clean up everything
+./cleanup.sh
+```
+
+## Directory Structure
+
+```
+humansa_test_environment/
+├── docker/                 # Docker configuration
+│   └── docker-compose.yml  # PostgreSQL container setup
+├── sql/                    # Database schemas
+│   └── setup_humansa_test_db.sql
+├── scripts/                # Utility scripts
+│   ├── populate_humansa_test_data.py
+│   └── reset_data.sh
+├── tests/                  # Test files
+│   └── test_connection.py
+├── docs/                   # Documentation
+├── setup.sh               # Main setup script
+├── cleanup.sh             # Cleanup script
+└── README.md              # This file
+```
+
+## Database Configuration
+
+- **Host**: localhost
+- **Port**: 5456 (different from main test environment's 5454)
+- **Database**: youwoai
+- **User**: youwo
+- **Password**: youwo123
+- **Container**: humansa_test_postgres
+
+## Test Data
+
+### Users (5 test patients)
+- John Tan - Software Engineer, healthy
+- Mary Lim - Teacher with diabetes & hypertension
+- Robert Lee - Retiree with heart conditions
+- Sarah Wong - Marketing Manager with allergies
+- David Ng - Business Owner with asthma
+
+### Doctors (10 specialists)
+- General Practice (2)
+- Cardiology (2)
+- Endocrinology (1)
+- Dermatology (1)
+- Pediatrics (1)
+- Orthopedics (1)
+- Psychiatry (1)
+- Ophthalmology (1)
+
+### Clinics (5 locations)
+- Raffles Medical - Central
+- Mount Elizabeth Medical Centre - Orchard
+- Parkway East Hospital - East Coast
+- Gleneagles Medical Centre - Tanglin
+- Thomson Medical Centre - Novena
+
+### Features
+- 30 days of appointment slots
+- Dynamic slot availability
+- Medical history tracking
+- Medication management
+- Insurance verification
+- Health package recommendations
+
+## Running Tests
+
+### Test Database Connection
+```bash
+cd humansa_test_environment
+python tests/test_connection.py
+```
+
+### Run Humansa V2 Tests
+```bash
+# From project root
+source youwo-ml-venv/bin/activate
+export DB_PORT=5456
+python test_humansa_v2_comprehensive.py
+```
+
+### Start ML Server with Humansa Database
+```bash
+# From project root
+source youwo-ml-venv/bin/activate
+export DB_PORT=5456
+python -m src.main
+```
+
+## API Endpoints
+
+When the ML server is running with Humansa database:
+
+- `/v1-humansa/chat/completions` - Medical consultation with tool calling
+- `/v1-humansa/o3-demo` - O3 demo endpoint with advanced reasoning
+
+## Maintenance
+
+### Reset Data Only
+```bash
+./scripts/reset_data.sh
+```
+This keeps the Docker container running but drops and recreates all tables with fresh test data.
+
+### Complete Cleanup
+```bash
+./cleanup.sh
+```
+This removes:
+- Docker containers
+- Docker volumes
+- Test artifacts
+- Database data
+
+### Update Test Data
+Edit `src/humansa/v2/test_data.py` to modify:
+- Doctors
+- Clinics
+- Health packages
+- Insurance providers
+
+Then run `./scripts/reset_data.sh` to apply changes.
+
+## Independence from Main Test Environment
+
+This environment is completely independent:
+- Different port (5456 vs 5454)
+- Different container names
+- Separate Docker volumes
+- No shared resources
+- Can run simultaneously with main test environment
+
+## Troubleshooting
+
+### Port Already in Use
+If port 5456 is already in use:
+1. Check for existing containers: `docker ps`
+2. Stop conflicting containers: `docker stop <container>`
+3. Or modify port in `docker/docker-compose.yml`
+
+### Import Errors
+If you see import errors when running scripts:
+1. Ensure you're in the project root
+2. Activate virtual environment: `source youwo-ml-venv/bin/activate`
+3. Install dependencies: `pip install asyncpg psycopg2-binary`
+
+### Database Connection Failed
+1. Check Docker is running: `docker ps`
+2. Verify container is up: `docker ps | grep humansa_test_postgres`
+3. Check logs: `docker logs humansa_test_postgres`
+
+## Related Documentation
+
+- Main test environment: `/test_environment/README.md`
+- Humansa V2 implementation: `/src/humansa/v2/README.md`
+- Test environments guide: `/TEST_ENVIRONMENTS_GUIDE.md`
