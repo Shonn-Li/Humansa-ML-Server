@@ -1,0 +1,1576 @@
+[TEST] 2025-07-22 20:36:16,656 - main - INFO - 🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/bin/python
+[TEST] 2025-07-22 20:36:16,656 - main - INFO - 📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server
+[TEST] 2025-07-22 20:36:16,656 - main - INFO - 📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src
+[TEST] 2025-07-22 20:36:16,656 - main - INFO - 🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/test/core/../../src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/test/core', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server']
+[TEST] 2025-07-22 20:36:17,425 - main - INFO - 🔄 Registering embedding endpoints...
+[TEST] 2025-07-22 20:36:17,425 - main - INFO - 🔄 Attempting to import URL embedding endpoints...
+[TEST] 2025-07-22 20:36:20,411 - chat.embedding.embedding_provider_selector - INFO - === Embedding Provider Initialization ===
+[TEST] 2025-07-22 20:36:20,478 - chat.token.token_counter - INFO - TokenCounter initialized for model: gpt-3.5-turbo
+[TEST] 2025-07-22 20:36:20,478 - chat.token.token_counter - INFO - Initialized token counter for gpt-3.5-turbo
+[TEST] 2025-07-22 20:36:20,478 - chat.token.token_counter - INFO - TokenCounter initialized for model: gpt-4
+[TEST] 2025-07-22 20:36:20,478 - chat.token.token_counter - INFO - Initialized token counter for gpt-4
+[TEST] 2025-07-22 20:36:20,478 - chat.token.token_counter - INFO - TokenCounter initialized for model: text-embedding-3-small
+[TEST] 2025-07-22 20:36:20,478 - chat.token.token_counter - INFO - Initialized token counter for text-embedding-3-small
+[TEST] 2025-07-22 20:36:20,478 - chat.token.token_counter - INFO - TokenCounter initialized for model: text-embedding-3-large
+[TEST] 2025-07-22 20:36:20,478 - chat.token.token_counter - INFO - Initialized token counter for text-embedding-3-large
+[TEST] 2025-07-22 20:36:20,478 - chat.token.token_counter - INFO - TokenCounter initialized for model: text-embedding-ada-002
+[TEST] 2025-07-22 20:36:20,478 - chat.token.token_counter - INFO - Initialized token counter for text-embedding-ada-002
+[TEST] 2025-07-22 20:36:20,481 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:36:20,481 - chat.embedding.azure_embeddings - INFO - ✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+[TEST] 2025-07-22 20:36:20,481 - chat.embedding.azure_embeddings - INFO - 🔗 Endpoint: 
+[TEST] 2025-07-22 20:36:21,277 - chat.embedding.embedding_provider_selector - INFO - ✅ Azure AI Inference embedding provider initialized (PRIMARY)
+[TEST] 2025-07-22 20:36:21,321 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:36:21,321 - chat.embedding.openai_embeddings - INFO - Initialized OpenAI embedding client with model: text-embedding-3-small
+[TEST] 2025-07-22 20:36:21,326 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:36:21,326 - chat.embedding.openai_embeddings - INFO - Initialized OpenAI embedding client with model: text-embedding-3-small
+[TEST] 2025-07-22 20:36:21,326 - chat.embedding.embedding_provider_selector - INFO - ✅ OpenAI embedding provider initialized (FALLBACK)
+[TEST] 2025-07-22 20:36:21,326 - chat.embedding.embedding_provider_selector - INFO - 📊 Available embedding providers: ['azure_inference', 'openai']
+[TEST] 2025-07-22 20:36:21,327 - chat.embedding.text_processing - INFO - Initialized TextProcessor with chunk_size=1024, overlap=100
+[TEST] 2025-07-22 20:36:21,327 - chat.embedding.text_processing - INFO - Initialized TextProcessor with chunk_size=1024, overlap=100
+[TEST] 2025-07-22 20:36:21,327 - chat.embedding.text_processing - INFO - Initialized ConversationProcessor with max_tokens=1024
+[TEST] 2025-07-22 20:36:21,327 - chat.embedding.embedding_provider_selector - INFO - === Embedding Provider Initialization ===
+[TEST] 2025-07-22 20:36:21,327 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:36:21,327 - chat.embedding.azure_embeddings - INFO - ✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+[TEST] 2025-07-22 20:36:21,327 - chat.embedding.azure_embeddings - INFO - 🔗 Endpoint: 
+[TEST] 2025-07-22 20:36:21,948 - chat.embedding.embedding_provider_selector - INFO - ✅ Azure AI Inference embedding provider initialized (PRIMARY)
+[TEST] 2025-07-22 20:36:21,953 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:36:21,953 - chat.embedding.openai_embeddings - INFO - Initialized OpenAI embedding client with model: text-embedding-3-small
+[TEST] 2025-07-22 20:36:21,953 - chat.embedding.embedding_provider_selector - INFO - ✅ OpenAI embedding provider initialized (FALLBACK)
+[TEST] 2025-07-22 20:36:21,953 - chat.embedding.embedding_provider_selector - INFO - 📊 Available embedding providers: ['azure_inference', 'openai']
+[TEST] 2025-07-22 20:36:21,953 - chat.embedding.embedding_provider_selector - INFO - ✅ Auto-selected embedding provider: azure_inference
+[TEST] 2025-07-22 20:36:21,954 - chat.embedding.text_processing - INFO - Initialized TextProcessor with chunk_size=1024, overlap=100
+[TEST] 2025-07-22 20:36:21,954 - chat.postgres.embedding_operations - INFO - EmbeddingDBOperations initialized
+[TEST] 2025-07-22 20:36:21,954 - chat.embedding.note_embedder - INFO - NoteEmbedder initialized with independent modules
+[TEST] 2025-07-22 20:36:21,954 - chat.embedding.embedding_provider_selector - INFO - === Embedding Provider Initialization ===
+[TEST] 2025-07-22 20:36:21,954 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:36:21,954 - chat.embedding.azure_embeddings - INFO - ✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+[TEST] 2025-07-22 20:36:21,954 - chat.embedding.azure_embeddings - INFO - 🔗 Endpoint: 
+[TEST] 2025-07-22 20:36:22,704 - chat.embedding.embedding_provider_selector - INFO - ✅ Azure AI Inference embedding provider initialized (PRIMARY)
+[TEST] 2025-07-22 20:36:22,713 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:36:22,713 - chat.embedding.openai_embeddings - INFO - Initialized OpenAI embedding client with model: text-embedding-3-small
+[TEST] 2025-07-22 20:36:22,713 - chat.embedding.embedding_provider_selector - INFO - ✅ OpenAI embedding provider initialized (FALLBACK)
+[TEST] 2025-07-22 20:36:22,713 - chat.embedding.embedding_provider_selector - INFO - 📊 Available embedding providers: ['azure_inference', 'openai']
+[TEST] 2025-07-22 20:36:22,713 - chat.embedding.embedding_provider_selector - INFO - ✅ Auto-selected embedding provider: azure_inference
+[TEST] 2025-07-22 20:36:22,714 - chat.embedding.text_processing - INFO - Initialized TextProcessor with chunk_size=1024, overlap=100
+[TEST] 2025-07-22 20:36:22,714 - chat.embedding.text_processing - INFO - Initialized ConversationProcessor with max_tokens=1024
+[TEST] 2025-07-22 20:36:22,714 - chat.postgres.embedding_operations - INFO - EmbeddingDBOperations initialized
+[TEST] 2025-07-22 20:36:22,714 - chat.embedding.conversation_embedder - INFO - ConversationEmbedder initialized with independent modules
+[TEST] 2025-07-22 20:36:22,783 - chat.postgres.url_embedding_operations - INFO - ✅ python-pptx available for PowerPoint processing
+[TEST] 2025-07-22 20:36:22,783 - chat.embedding.embedding_provider_selector - INFO - === Embedding Provider Initialization ===
+[TEST] 2025-07-22 20:36:22,783 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:36:22,783 - chat.embedding.azure_embeddings - INFO - ✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+[TEST] 2025-07-22 20:36:22,783 - chat.embedding.azure_embeddings - INFO - 🔗 Endpoint: 
+[TEST] 2025-07-22 20:36:23,445 - chat.embedding.embedding_provider_selector - INFO - ✅ Azure AI Inference embedding provider initialized (PRIMARY)
+[TEST] 2025-07-22 20:36:23,451 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:36:23,451 - chat.embedding.openai_embeddings - INFO - Initialized OpenAI embedding client with model: text-embedding-3-small
+[TEST] 2025-07-22 20:36:23,451 - chat.embedding.embedding_provider_selector - INFO - ✅ OpenAI embedding provider initialized (FALLBACK)
+[TEST] 2025-07-22 20:36:23,451 - chat.embedding.embedding_provider_selector - INFO - 📊 Available embedding providers: ['azure_inference', 'openai']
+[TEST] 2025-07-22 20:36:23,451 - chat.embedding.embedding_provider_selector - INFO - ✅ Auto-selected embedding provider: azure_inference
+[TEST] 2025-07-22 20:36:23,452 - chat.postgres.url_embedding_operations - INFO - URLEmbeddingOperations initialized
+[TEST] 2025-07-22 20:36:23,455 - chat.attachment.file_attachment_manager - INFO - FileAttachmentManager initialized
+[TEST] 2025-07-22 20:36:23,455 - main - INFO - ✅ Successfully imported URL embedding endpoints
+[TEST] 2025-07-22 20:36:23,455 - main - INFO - ✅ URL embedding endpoints registered successfully
+[TEST] 2025-07-22 20:36:23,456 - main - INFO - 🔄 Attempting to import admin embedding endpoints...
+[TEST] 2025-07-22 20:36:23,456 - main - INFO - ✅ Successfully imported admin embedding endpoints
+[TEST] 2025-07-22 20:36:23,457 - main - INFO - ✅ Admin embedding endpoints registered successfully
+[TEST] 2025-07-22 20:36:23,457 - main - INFO - 🔄 Attempting to import file analyzer endpoints...
+[TEST] 2025-07-22 20:36:23,458 - main - INFO - ✅ Successfully imported file analyzer blueprint
+[TEST] 2025-07-22 20:36:23,458 - main - INFO - ✅ File analyzer endpoints registered successfully
+[TEST] 2025-07-22 20:36:23,458 - main - INFO - 🔄 Attempting to import document converter endpoints...
+[TEST] 2025-07-22 20:36:23,475 - chat.utils.document_converter - INFO - ❌ unoconv not available (install LibreOffice for best conversion quality)
+[TEST] 2025-07-22 20:36:23,475 - chat.utils.document_converter - INFO - ❌ docx2pdf not available
+[TEST] 2025-07-22 20:36:23,475 - chat.utils.document_converter - INFO - ❌ pypandoc not available
+[TEST] 2025-07-22 20:36:23,476 - chat.utils.document_converter - INFO - ❌ python-docx not available
+[TEST] 2025-07-22 20:36:23,476 - chat.utils.document_converter - INFO - ❌ openpyxl not available
+[TEST] 2025-07-22 20:36:23,476 - chat.utils.document_converter - INFO - ❌ reportlab not available
+[TEST] 2025-07-22 20:36:23,476 - main - INFO - ✅ Successfully imported document converter blueprint
+[TEST] 2025-07-22 20:36:23,477 - main - INFO - ✅ Document converter endpoints registered successfully
+[TEST] 2025-07-22 20:36:23,477 - main - INFO - ✅ Embedding endpoints registration completed
+[TEST] 2025-07-22 20:36:23,477 - main - INFO - 🔄 Registering Humansa endpoints...
+[TEST] 2025-07-22 20:36:23,478 - main - INFO - ✅ Humansa endpoints registered successfully
+[2025-07-22 20:36:23 -0700] [22732] [INFO] Running on http://0.0.0.0:5002 (CTRL + C to quit)
+[TEST] 2025-07-22 20:36:23,703 - hypercorn.error - INFO - Running on http://0.0.0.0:5002 (CTRL + C to quit)
+[TEST] 2025-07-22 20:36:28,018 - main - INFO - === MULTI-AGENT REQUEST ===
+[TEST] 2025-07-22 20:36:28,018 - main - INFO - Method: POST
+[TEST] 2025-07-22 20:36:28,018 - main - INFO - URL: http://localhost:5002/v1/multi-agent/response
+[TEST] 2025-07-22 20:36:28,018 - main - INFO - Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Content-Type': 'application/json', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '221'}
+[TEST] 2025-07-22 20:36:28,018 - main - INFO - Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "Summarize my notes about machine learning"
+    }
+  ],
+  "model": "gpt-4.1-nano",
+  "user_id": 10001,
+  "stream": true,
+  "enable_rag": true,
+  "enable_citations": true,
+  "enable_web_search": false
+}
+[TEST] 2025-07-22 20:36:28,018 - main - INFO - ========================
+[TEST] 2025-07-22 20:36:28,018 - main - INFO - 🔄 Attempting to import multi_agent_endpoint_v2...
+[TEST] 2025-07-22 20:36:28,030 - chat.postgres.db_manager - INFO - PostgresManager initialized
+[TEST] 2025-07-22 20:36:28,030 - chat.websearch.web_search_processor - INFO - WebSearchProcessor initialized - Search enabled: True
+[TEST] 2025-07-22 20:36:28,075 - chat.websearch.web_search_processor - INFO - Web search cache table initialized
+[TEST] 2025-07-22 20:36:28,077 - chat.config.system_prompts - INFO - SystemPromptManager initialized
+[TEST] 2025-07-22 20:36:28,082 - chat.provider.llm_provider - INFO - === LLM Provider Initialization Debug ===
+[TEST] 2025-07-22 20:36:28,082 - chat.provider.llm_provider - INFO - AZURE_INFERENCE_ENDPOINT: SET
+[TEST] 2025-07-22 20:36:28,082 - chat.provider.llm_provider - INFO - AZURE_INFERENCE_CREDENTIAL: SET
+[TEST] 2025-07-22 20:36:28,082 - chat.provider.llm_provider - INFO - OPENAI_API_KEY: SET
+[TEST] 2025-07-22 20:36:28,082 - chat.provider.llm_provider - INFO - ANTHROPIC_API_KEY: SET
+[TEST] 2025-07-22 20:36:28,082 - chat.provider.llm_provider - INFO - GOOGLE_API_KEY: SET
+[TEST] 2025-07-22 20:36:28,082 - chat.provider.llm_provider - INFO - DEEPSEEK_API_KEY: SET
+[TEST] 2025-07-22 20:36:28,082 - chat.provider.llm_provider - INFO - XAI_API_KEY: SET
+[TEST] 2025-07-22 20:36:28,082 - chat.provider.llm_provider - INFO - ===========================================
+[TEST] 2025-07-22 20:36:28,083 - chat.provider.llm_provider - INFO - ✅ Azure AI Inference provider initialized (PRIMARY - NO MULTIMODAL)
+[TEST] 2025-07-22 20:36:28,083 - chat.provider.llm_provider - INFO - ✅ Azure OpenAI provider initialized (ROUTER COMPATIBLE + MULTIMODAL)
+[TEST] 2025-07-22 20:36:28,083 - chat.provider.llm_provider - INFO - ✅ OpenAI multimodal support enabled
+[TEST] 2025-07-22 20:36:28,083 - chat.provider.llm_provider - INFO - ✅ OpenAI provider initialized
+[TEST] 2025-07-22 20:36:28,093 - chat.provider.llm_provider - INFO - ✅ Anthropic provider initialized
+[TEST] 2025-07-22 20:36:28,385 - chat.provider.llm_provider - INFO - ✅ Gemini provider initialized
+[TEST] 2025-07-22 20:36:28,385 - chat.provider.llm_provider - INFO - ✅ DeepSeek provider initialized
+[TEST] 2025-07-22 20:36:28,386 - chat.provider.llm_provider - INFO - ✅ xAI provider initialized
+[TEST] 2025-07-22 20:36:28,386 - chat.provider.llm_provider - INFO - === Provider Initialization Complete ===
+[TEST] 2025-07-22 20:36:28,386 - chat.provider.llm_provider - INFO - Available providers: 7
+[TEST] 2025-07-22 20:36:28,386 - chat.provider.llm_provider - INFO -   azure_inference: 9 models
+[TEST] 2025-07-22 20:36:28,386 - chat.provider.llm_provider - INFO -   azure_openai: 6 models
+[TEST] 2025-07-22 20:36:28,386 - chat.provider.llm_provider - INFO -   openai: 12 models
+[TEST] 2025-07-22 20:36:28,386 - chat.provider.llm_provider - INFO -   anthropic: 4 models
+[TEST] 2025-07-22 20:36:28,386 - chat.provider.llm_provider - INFO -   gemini: 5 models
+[TEST] 2025-07-22 20:36:28,386 - chat.provider.llm_provider - INFO -   deepseek: 3 models
+[TEST] 2025-07-22 20:36:28,386 - chat.provider.llm_provider - INFO -   xai: 5 models
+[TEST] 2025-07-22 20:36:28,386 - chat.provider.llm_provider - INFO - =========================================
+[TEST] 2025-07-22 20:36:28,386 - chat.postgres.db_manager - INFO - PostgresManager initialized
+[TEST] 2025-07-22 20:36:28,386 - chat.rag.rag_processor - INFO - IDResolver initialized
+[TEST] 2025-07-22 20:36:28,386 - chat.embedding.embedding_provider_selector - INFO - === Embedding Provider Initialization ===
+[TEST] 2025-07-22 20:36:28,386 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:36:28,387 - chat.embedding.azure_embeddings - INFO - ✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+[TEST] 2025-07-22 20:36:28,387 - chat.embedding.azure_embeddings - INFO - 🔗 Endpoint: 
+[TEST] 2025-07-22 20:36:28,995 - chat.embedding.embedding_provider_selector - INFO - ✅ Azure AI Inference embedding provider initialized (PRIMARY)
+[TEST] 2025-07-22 20:36:29,002 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:36:29,002 - chat.embedding.openai_embeddings - INFO - Initialized OpenAI embedding client with model: text-embedding-3-small
+[TEST] 2025-07-22 20:36:29,002 - chat.embedding.embedding_provider_selector - INFO - ✅ OpenAI embedding provider initialized (FALLBACK)
+[TEST] 2025-07-22 20:36:29,003 - chat.embedding.embedding_provider_selector - INFO - 📊 Available embedding providers: ['azure_inference', 'openai']
+[TEST] 2025-07-22 20:36:29,003 - chat.embedding.embedding_provider_selector - INFO - ✅ Auto-selected embedding provider: azure_inference
+[TEST] 2025-07-22 20:36:29,003 - chat.postgres.embedding_operations - INFO - EmbeddingDBOperations initialized
+[TEST] 2025-07-22 20:36:29,003 - chat.rag.rag_processor - INFO - UnifiedRAGSearcher initialized
+[TEST] 2025-07-22 20:36:29,003 - chat.rag.rag_processor - INFO - RAGProcessor initialized
+[TEST] 2025-07-22 20:36:29,003 - chat.postgres.db_manager - INFO - PostgresManager initialized
+[TEST] 2025-07-22 20:36:29,003 - chat.websearch.web_search_processor - INFO - WebSearchProcessor initialized - Search enabled: True
+[TEST] 2025-07-22 20:36:29,019 - chat.websearch.web_search_processor - INFO - Web search cache table initialized
+[TEST] 2025-07-22 20:36:29,019 - chat.attachment.file_attachment_manager - INFO - FileAttachmentManager initialized
+[TEST] 2025-07-22 20:36:29,020 - chat.citation.citation_engine - INFO - CitationEngine initialized
+[TEST] 2025-07-22 20:36:29,026 - chat.postgres.db_manager - INFO - PostgresManager initialized
+[TEST] 2025-07-22 20:36:29,026 - chat.embedding.embedding_provider_selector - INFO - === Embedding Provider Initialization ===
+[TEST] 2025-07-22 20:36:29,027 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:36:29,027 - chat.embedding.azure_embeddings - INFO - ✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+[TEST] 2025-07-22 20:36:29,027 - chat.embedding.azure_embeddings - INFO - 🔗 Endpoint: 
+[TEST] 2025-07-22 20:36:29,684 - chat.embedding.embedding_provider_selector - INFO - ✅ Azure AI Inference embedding provider initialized (PRIMARY)
+[TEST] 2025-07-22 20:36:29,691 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:36:29,691 - chat.embedding.openai_embeddings - INFO - Initialized OpenAI embedding client with model: text-embedding-3-small
+[TEST] 2025-07-22 20:36:29,691 - chat.embedding.embedding_provider_selector - INFO - ✅ OpenAI embedding provider initialized (FALLBACK)
+[TEST] 2025-07-22 20:36:29,691 - chat.embedding.embedding_provider_selector - INFO - 📊 Available embedding providers: ['azure_inference', 'openai']
+[TEST] 2025-07-22 20:36:29,691 - chat.embedding.embedding_provider_selector - INFO - ✅ Auto-selected embedding provider: azure_inference
+[TEST] 2025-07-22 20:36:29,692 - chat.config.system_prompts - INFO - SystemPromptManager initialized
+[TEST] 2025-07-22 20:36:29,692 - main - INFO - ✅ Successfully imported multi_agent_endpoint_v2 with streaming support
+[TEST] 2025-07-22 20:36:29,692 - main - INFO - 🌊 Starting multi-agent streaming response...
+[TEST] 2025-07-22 20:36:29,693 - main - INFO - 📦 Multi-agent stream chunk 1: {"type": "response.created", "response": {"id": "resp_d2958cbe", "object": "response", "created_at": 1753241789, "status": "in_progress", "model": "gpt-4.1-nano", "output": []}}
+[TEST] 2025-07-22 20:36:29,693 - main - INFO - 📦 Multi-agent stream chunk 2: {"type": "response.in_progress", "response": {"id": "resp_d2958cbe", "status": "in_progress"}}
+[TEST] 2025-07-22 20:36:29,693 - main - INFO - 📦 Multi-agent stream chunk 3: {"type": "response.output_item.added", "output_index": 0, "item": {"id": "router_87172ed7", "type": "reasoning", "content": []}}
+[TEST] 2025-07-22 20:36:29,693 - main - INFO - 📦 ... (logging first 3 chunks only, total so far: 4)
+[TEST] 2025-07-22 20:36:31,200 - chat.router.intelligent_router - INFO - LLM selected tool 1: knowledge_base_notes
+[TEST] 2025-07-22 20:36:31,201 - chat.router.intelligent_router - INFO - LLM routing successful: knowledge_base_notes
+[TEST] 2025-07-22 20:36:31,820 - chat.postgres.db_manager - ERROR - Database connection error: column n.promptContent does not exist
+LINE 6:                             n."promptContent" as content,
+                                    ^
+HINT:  Perhaps you meant to reference the column "n.promptcontent".
+
+[TEST] 2025-07-22 20:36:31,820 - chat.endpoints.multi_agent_endpoint_v2 - ERROR - Error in streaming request: column n.promptContent does not exist
+LINE 6:                             n."promptContent" as content,
+                                    ^
+HINT:  Perhaps you meant to reference the column "n.promptcontent".
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/endpoints/multi_agent_endpoint_v2.py", line 507, in _handle_streaming_request
+    result = await self.agents["context_search"].run(request, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/agent/context_search_agent.py", line 51, in run
+    hybrid_results = await self.hybrid_search.hybrid_search(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/search/hybrid_search.py", line 263, in hybrid_search
+    keyword_notes = self.keyword_search_notes(query, user_id, limit=top_k * 2)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/search/hybrid_search.py", line 54, in keyword_search_notes
+    cursor.execute("""
+    ~~~~~~~~~~~~~~^^^^
+        WITH note_search AS (
+        ^^^^^^^^^^^^^^^^^^^^^
+    ...<22 lines>...
+        SELECT * FROM note_search WHERE rank > 0
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """, (tsquery, tsquery, user_id, tsquery, limit))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column n.promptContent does not exist
+LINE 6:                             n."promptContent" as content,
+                                    ^
+HINT:  Perhaps you meant to reference the column "n.promptcontent".
+
+[TEST] 2025-07-22 20:36:31,823 - main - INFO - ✅ Multi-agent streaming complete: 29 chunks sent
+================================================================================
+STARTING TEST SERVER
+================================================================================
+Environment: TEST
+Database: postgresql://localhost:5454/youwoai_test
+Port: 5002
+================================================================================
+
+🚀 Test server starting on http://localhost:5002
+📝 Use this server for all testing to ensure isolation from production
+🔍 Test data includes pre-seeded notes and conversations
+
+Press Ctrl+C to stop the server
+
+ * Serving Quart app 'main'
+ * Debug mode: False
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:5002 (CTRL + C to quit)
+[2025-07-22 20:36:31 -0700] [22732] [INFO] 127.0.0.1:52493 POST /v1/multi-agent/response 1.1 200 - 3805592
+[TEST] 2025-07-22 20:36:31,828 - main - INFO - === MULTI-AGENT REQUEST ===
+[TEST] 2025-07-22 20:36:31,828 - main - INFO - Method: POST
+[TEST] 2025-07-22 20:36:31,828 - main - INFO - URL: http://localhost:5002/v1/multi-agent/response
+[TEST] 2025-07-22 20:36:31,828 - main - INFO - Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Content-Type': 'application/json', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '223'}
+[TEST] 2025-07-22 20:36:31,829 - main - INFO - Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "What did we discuss about Python yesterday?"
+    }
+  ],
+  "model": "gpt-4.1-nano",
+  "user_id": 10001,
+  "stream": true,
+  "enable_rag": true,
+  "enable_citations": true,
+  "enable_web_search": false
+}
+[TEST] 2025-07-22 20:36:31,829 - main - INFO - ========================
+[TEST] 2025-07-22 20:36:31,829 - main - INFO - 🔄 Attempting to import multi_agent_endpoint_v2...
+[TEST] 2025-07-22 20:36:31,829 - main - INFO - ✅ Successfully imported multi_agent_endpoint_v2 with streaming support
+[TEST] 2025-07-22 20:36:31,829 - main - INFO - 🌊 Starting multi-agent streaming response...
+[TEST] 2025-07-22 20:36:31,829 - main - INFO - 📦 Multi-agent stream chunk 1: {"type": "response.created", "response": {"id": "resp_5ec7be90", "object": "response", "created_at": 1753241791, "status": "in_progress", "model": "gpt-4.1-nano", "output": []}}
+[TEST] 2025-07-22 20:36:31,829 - main - INFO - 📦 Multi-agent stream chunk 2: {"type": "response.in_progress", "response": {"id": "resp_5ec7be90", "status": "in_progress"}}
+[TEST] 2025-07-22 20:36:31,829 - main - INFO - 📦 Multi-agent stream chunk 3: {"type": "response.output_item.added", "output_index": 0, "item": {"id": "router_d5157f22", "type": "reasoning", "content": []}}
+[TEST] 2025-07-22 20:36:31,829 - main - INFO - 📦 ... (logging first 3 chunks only, total so far: 4)
+[TEST] 2025-07-22 20:36:32,682 - chat.router.intelligent_router - INFO - LLM selected tool 2: knowledge_base_conversations
+[TEST] 2025-07-22 20:36:32,682 - chat.router.intelligent_router - INFO - LLM routing successful: knowledge_base_conversations
+[TEST] 2025-07-22 20:36:33,379 - chat.search.hybrid_search - INFO - Keyword search found 0 conversations for query: What did we discuss about Python yesterday?
+[TEST] 2025-07-22 20:36:33,380 - chat.embedding.embedding_provider_selector - INFO - === Embedding Provider Initialization ===
+[TEST] 2025-07-22 20:36:33,380 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:36:33,380 - chat.embedding.azure_embeddings - INFO - ✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+[TEST] 2025-07-22 20:36:33,380 - chat.embedding.azure_embeddings - INFO - 🔗 Endpoint: 
+[TEST] 2025-07-22 20:36:34,242 - chat.embedding.embedding_provider_selector - INFO - ✅ Azure AI Inference embedding provider initialized (PRIMARY)
+[TEST] 2025-07-22 20:36:34,251 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:36:34,251 - chat.embedding.openai_embeddings - INFO - Initialized OpenAI embedding client with model: text-embedding-3-small
+[TEST] 2025-07-22 20:36:34,251 - chat.embedding.embedding_provider_selector - INFO - ✅ OpenAI embedding provider initialized (FALLBACK)
+[TEST] 2025-07-22 20:36:34,251 - chat.embedding.embedding_provider_selector - INFO - 📊 Available embedding providers: ['azure_inference', 'openai']
+[TEST] 2025-07-22 20:36:34,251 - chat.embedding.embedding_provider_selector - INFO - ✅ Auto-selected embedding provider: azure_inference
+[TEST] 2025-07-22 20:36:34,252 - chat.postgres.embedding_operations - INFO - EmbeddingDBOperations initialized
+[TEST] 2025-07-22 20:36:34,252 - chat.rag.rag_processor - INFO - UnifiedRAGSearcher initialized
+[TEST] 2025-07-22 20:36:34,252 - chat.postgres.db_manager - INFO - 🌍 Full context search: Getting all user notes and conversations
+[TEST] 2025-07-22 20:36:34,266 - chat.postgres.db_manager - INFO - Resolved 9 total user notes
+[TEST] 2025-07-22 20:36:34,279 - chat.postgres.db_manager - INFO - Resolved 9 total user conversations
+[TEST] 2025-07-22 20:36:34,279 - chat.postgres.db_manager - INFO - Full context search results: 9 notes, 9 conversations
+[TEST] 2025-07-22 20:36:34,280 - chat.rag.rag_processor - INFO - === RAG SEARCH (CONVERSATIONS) ===
+[TEST] 2025-07-22 20:36:34,280 - chat.rag.rag_processor - INFO - Query: What did we discuss about Python yesterday?...
+[TEST] 2025-07-22 20:36:34,280 - chat.rag.rag_processor - INFO - Searching 9 notes, 9 conversations
+[TEST] 2025-07-22 20:36:34,447 - chat.postgres.db_manager - INFO - Conversations-only vector search - conversations: 9
+[TEST] 2025-07-22 20:36:34,461 - chat.postgres.db_manager - INFO - Conversations-only vector search found 20 relevant chunks
+[TEST] 2025-07-22 20:36:34,462 - chat.rag.rag_processor - INFO - Found 20 relevant chunks using conversations search
+[TEST] 2025-07-22 20:36:34,462 - chat.rag.rag_processor - INFO -   1. conversation:10001 (sim: 0.259)
+[TEST] 2025-07-22 20:36:34,462 - chat.rag.rag_processor - INFO -   2. conversation:10008 (sim: 0.241)
+[TEST] 2025-07-22 20:36:34,462 - chat.rag.rag_processor - INFO -   3. conversation:10009 (sim: 0.217)
+[TEST] 2025-07-22 20:36:34,462 - chat.rag.rag_processor - INFO -   4. conversation:10001 (sim: 0.202)
+[TEST] 2025-07-22 20:36:34,462 - chat.rag.rag_processor - INFO -   5. conversation:10009 (sim: 0.194)
+[TEST] 2025-07-22 20:36:34,462 - chat.search.hybrid_search - INFO - Hybrid search combined 0 keyword and 20 vector results into 9 hybrid results
+[TEST] 2025-07-22 20:36:34,462 - chat.agent.context_search_agent - INFO - Hybrid search returned 9 results
+[TEST] 2025-07-22 20:36:34,616 - chat.agent.code_interpreter_agent - INFO - Executing code block 1/1
+[TEST] 2025-07-22 20:36:34,776 - chat.provider.llm_provider - INFO - Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
+[TEST] 2025-07-22 20:36:34,777 - chat.provider.llm_provider - INFO - Searching for provider supporting model: gpt-4.1-nano
+[TEST] 2025-07-22 20:36:34,777 - chat.provider.llm_provider - INFO - 🎯 Found Azure match for gpt-4.1-nano
+[TEST] 2025-07-22 20:36:34,777 - chat.provider.llm_provider - INFO - 🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+[TEST] 2025-07-22 20:36:34,777 - chat.provider.llm_provider - INFO - ✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
+[TEST] 2025-07-22 20:36:36,014 - chat.provider.llm_provider - INFO - Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
+[TEST] 2025-07-22 20:36:36,015 - chat.provider.llm_provider - INFO - Searching for provider supporting model: gpt-4.1-nano
+[TEST] 2025-07-22 20:36:36,015 - chat.provider.llm_provider - INFO - 🎯 Found Azure match for gpt-4.1-nano
+[TEST] 2025-07-22 20:36:36,015 - chat.provider.llm_provider - INFO - 🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+[TEST] 2025-07-22 20:36:36,015 - chat.provider.llm_provider - INFO - ✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
+[TEST] 2025-07-22 20:36:36,937 - chat.endpoints.multi_agent_endpoint_v2 - INFO - Iteration evaluation raw response: {
+    "needs_iteration": false,
+    "reason": "Response is complete and accurate",
+    "suggested_agents": []
+}...
+[TEST] 2025-07-22 20:36:36,939 - main - INFO - ✅ Multi-agent streaming complete: 65 chunks sent
+[2025-07-22 20:36:36 -0700] [22732] [INFO] 127.0.0.1:52525 POST /v1/multi-agent/response 1.1 200 - 5111519
+[2025-07-22 20:39:20 -0700] [22732] [INFO] 127.0.0.1:54033 GET /health 1.1 200 96 2486
+[2025-07-22 20:39:52 -0700] [22732] [INFO] 127.0.0.1:54562 GET /health 1.1 200 96 372
+[TEST] 2025-07-22 20:39:52,626 - main - INFO - === CHAT REQUEST ===
+[TEST] 2025-07-22 20:39:52,626 - main - INFO - Method: POST
+[TEST] 2025-07-22 20:39:52,626 - main - INFO - URL: http://localhost:5002/v1/chat/completions
+[TEST] 2025-07-22 20:39:52,626 - main - INFO - Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Content-Type': 'application/json', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '122'}
+[TEST] 2025-07-22 20:39:52,626 - main - INFO - Request Body: {
+  "model": "gpt-4.1-nano",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What is 15 + 27?"
+    }
+  ],
+  "stream": true,
+  "user_id": 10001
+}
+[TEST] 2025-07-22 20:39:52,626 - main - INFO - ==================
+[TEST] 2025-07-22 20:39:52,626 - main - INFO - 🔄 Attempting to import modular_chat_endpoint...
+[TEST] 2025-07-22 20:39:52,629 - chat.title.title_generator - INFO - TitleGenerator initialized
+[TEST] 2025-07-22 20:39:52,629 - chat.provider.llm_provider - INFO - === LLM Provider Initialization Debug ===
+[TEST] 2025-07-22 20:39:52,630 - chat.provider.llm_provider - INFO - AZURE_INFERENCE_ENDPOINT: SET
+[TEST] 2025-07-22 20:39:52,630 - chat.provider.llm_provider - INFO - AZURE_INFERENCE_CREDENTIAL: SET
+[TEST] 2025-07-22 20:39:52,630 - chat.provider.llm_provider - INFO - OPENAI_API_KEY: SET
+[TEST] 2025-07-22 20:39:52,630 - chat.provider.llm_provider - INFO - ANTHROPIC_API_KEY: SET
+[TEST] 2025-07-22 20:39:52,630 - chat.provider.llm_provider - INFO - GOOGLE_API_KEY: SET
+[TEST] 2025-07-22 20:39:52,630 - chat.provider.llm_provider - INFO - DEEPSEEK_API_KEY: SET
+[TEST] 2025-07-22 20:39:52,630 - chat.provider.llm_provider - INFO - XAI_API_KEY: SET
+[TEST] 2025-07-22 20:39:52,630 - chat.provider.llm_provider - INFO - ===========================================
+[TEST] 2025-07-22 20:39:52,631 - chat.provider.llm_provider - INFO - ✅ Azure AI Inference provider initialized (PRIMARY - NO MULTIMODAL)
+[TEST] 2025-07-22 20:39:52,631 - chat.provider.llm_provider - INFO - ✅ Azure OpenAI provider initialized (ROUTER COMPATIBLE + MULTIMODAL)
+[TEST] 2025-07-22 20:39:52,631 - chat.provider.llm_provider - INFO - ✅ OpenAI multimodal support enabled
+[TEST] 2025-07-22 20:39:52,631 - chat.provider.llm_provider - INFO - ✅ OpenAI provider initialized
+[TEST] 2025-07-22 20:39:52,642 - chat.provider.llm_provider - INFO - ✅ Anthropic provider initialized
+[TEST] 2025-07-22 20:39:52,926 - chat.provider.llm_provider - INFO - ✅ Gemini provider initialized
+[TEST] 2025-07-22 20:39:52,927 - chat.provider.llm_provider - INFO - ✅ DeepSeek provider initialized
+[TEST] 2025-07-22 20:39:52,927 - chat.provider.llm_provider - INFO - ✅ xAI provider initialized
+[TEST] 2025-07-22 20:39:52,927 - chat.provider.llm_provider - INFO - === Provider Initialization Complete ===
+[TEST] 2025-07-22 20:39:52,927 - chat.provider.llm_provider - INFO - Available providers: 7
+[TEST] 2025-07-22 20:39:52,927 - chat.provider.llm_provider - INFO -   azure_inference: 9 models
+[TEST] 2025-07-22 20:39:52,927 - chat.provider.llm_provider - INFO -   azure_openai: 6 models
+[TEST] 2025-07-22 20:39:52,927 - chat.provider.llm_provider - INFO -   openai: 12 models
+[TEST] 2025-07-22 20:39:52,927 - chat.provider.llm_provider - INFO -   anthropic: 4 models
+[TEST] 2025-07-22 20:39:52,927 - chat.provider.llm_provider - INFO -   gemini: 5 models
+[TEST] 2025-07-22 20:39:52,927 - chat.provider.llm_provider - INFO -   deepseek: 3 models
+[TEST] 2025-07-22 20:39:52,927 - chat.provider.llm_provider - INFO -   xai: 5 models
+[TEST] 2025-07-22 20:39:52,927 - chat.provider.llm_provider - INFO - =========================================
+[TEST] 2025-07-22 20:39:52,927 - chat.postgres.db_manager - INFO - PostgresManager initialized
+[TEST] 2025-07-22 20:39:52,927 - chat.rag.rag_processor - INFO - IDResolver initialized
+[TEST] 2025-07-22 20:39:52,928 - chat.embedding.embedding_provider_selector - INFO - === Embedding Provider Initialization ===
+[TEST] 2025-07-22 20:39:52,928 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:39:52,928 - chat.embedding.azure_embeddings - INFO - ✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+[TEST] 2025-07-22 20:39:52,928 - chat.embedding.azure_embeddings - INFO - 🔗 Endpoint: 
+[TEST] 2025-07-22 20:39:53,675 - chat.embedding.embedding_provider_selector - INFO - ✅ Azure AI Inference embedding provider initialized (PRIMARY)
+[TEST] 2025-07-22 20:39:53,684 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:39:53,684 - chat.embedding.openai_embeddings - INFO - Initialized OpenAI embedding client with model: text-embedding-3-small
+[TEST] 2025-07-22 20:39:53,684 - chat.embedding.embedding_provider_selector - INFO - ✅ OpenAI embedding provider initialized (FALLBACK)
+[TEST] 2025-07-22 20:39:53,684 - chat.embedding.embedding_provider_selector - INFO - 📊 Available embedding providers: ['azure_inference', 'openai']
+[TEST] 2025-07-22 20:39:53,684 - chat.embedding.embedding_provider_selector - INFO - ✅ Auto-selected embedding provider: azure_inference
+[TEST] 2025-07-22 20:39:53,685 - chat.postgres.embedding_operations - INFO - EmbeddingDBOperations initialized
+[TEST] 2025-07-22 20:39:53,685 - chat.rag.rag_processor - INFO - UnifiedRAGSearcher initialized
+[TEST] 2025-07-22 20:39:53,685 - chat.rag.rag_processor - INFO - RAGProcessor initialized
+[TEST] 2025-07-22 20:39:53,685 - chat.citation.citation_engine - INFO - CitationEngine initialized
+[TEST] 2025-07-22 20:39:53,685 - chat.citation.citation_engine - INFO - CitationEngine initialized
+[TEST] 2025-07-22 20:39:53,685 - chat.citation.streaming_citation_engine - INFO - StreamingCitationEngine initialized
+[TEST] 2025-07-22 20:39:53,685 - chat.streaming.streaming_response_generator - INFO - StreamingResponseGenerator initialized with unified astream_chat approach
+[TEST] 2025-07-22 20:39:53,688 - chat.endpoints.modular_chat_endpoint - INFO - 🔇 Azure logging configured - reduced verbosity
+[TEST] 2025-07-22 20:39:53,688 - chat.endpoints.modular_chat_endpoint - INFO - ModularChatEndpoint initialized with citation engines, router retriever support, query transformer, and streaming generator
+[TEST] 2025-07-22 20:39:53,688 - main - INFO - ✅ Successfully imported modular_chat_endpoint
+[TEST] 2025-07-22 20:39:53,688 - main - INFO - 🌊 Starting streaming response...
+[TEST] 2025-07-22 20:39:53,688 - chat.endpoints.modular_chat_endpoint - INFO - === NEW MODULAR CHAT REQUEST ===
+[TEST] 2025-07-22 20:39:53,688 - chat.endpoints.modular_chat_endpoint - INFO - User: 10001, RAG: True, Citations: False, WebSearch: False, Stream: True
+[TEST] 2025-07-22 20:39:53,688 - chat.endpoints.modular_chat_endpoint - INFO - Router Retriever: True, Generate Title: False
+[TEST] 2025-07-22 20:39:53,688 - chat.endpoints.modular_chat_endpoint - INFO - Provider: None, Model: gpt-4.1-nano
+[TEST] 2025-07-22 20:39:53,688 - chat.endpoints.modular_chat_endpoint - INFO - Attachments: 0 files
+[TEST] 2025-07-22 20:39:53,688 - chat.endpoints.modular_chat_endpoint - INFO - 💰 Defaulting to Azure Inference for cost savings: azure_inference with gpt-4.1-nano
+[TEST] 2025-07-22 20:39:53,688 - chat.provider.llm_provider - INFO - Provider selection - requested_provider: azure_inference, requested_model: gpt-4.1-nano
+[TEST] 2025-07-22 20:39:53,688 - chat.provider.llm_provider - INFO - 🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+[TEST] 2025-07-22 20:39:53,688 - chat.provider.llm_provider - INFO - 🎯 Override to Azure for cost savings: azure_inference with gpt-4.1-nano (requested: azure_inference)
+[TEST] 2025-07-22 20:39:53,688 - chat.endpoints.modular_chat_endpoint - INFO - ✅ Selected: azure_inference
+[TEST] 2025-07-22 20:39:53,688 - chat.endpoints.modular_chat_endpoint - INFO - 🔄 STARTING QUERY TRANSFORMATION...
+[TEST] 2025-07-22 20:39:53,688 - chat.query.query_transformer - INFO - ⚡ Query transformation temporarily disabled - using original query
+[TEST] 2025-07-22 20:39:53,688 - chat.endpoints.modular_chat_endpoint - INFO - ⚠️ Query transformation failed, using original query: temporarily_disabled
+[TEST] 2025-07-22 20:39:53,695 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 Pure Decision Router initialized successfully
+[TEST] 2025-07-22 20:39:53,695 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING WITH CONDENSED QUERY...
+[TEST] 2025-07-22 20:39:55,200 - chat.router.intelligent_router - INFO - LLM selected tool 0: no_context
+[TEST] 2025-07-22 20:39:55,201 - chat.router.intelligent_router - INFO - LLM routing successful: no_context
+[TEST] 2025-07-22 20:39:55,201 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 Router decision: RAG=False, Web=False, Attachments=False
+[TEST] 2025-07-22 20:39:55,201 - chat.endpoints.modular_chat_endpoint - INFO - 🧠 Router reasoning: The question is a simple arithmetic problem that doesn't require user-specific data or context.
+[TEST] 2025-07-22 20:39:55,201 - chat.endpoints.modular_chat_endpoint - INFO - 🔍 Search type: none
+[TEST] 2025-07-22 20:39:55,201 - chat.endpoints.modular_chat_endpoint - INFO - ⚡ PROCESSING ENABLED SOURCES...
+[TEST] 2025-07-22 20:39:55,201 - chat.endpoints.modular_chat_endpoint - INFO - ⚡ No RAG, attachment, or web search processing needed
+[TEST] 2025-07-22 20:39:55,201 - chat.endpoints.modular_chat_endpoint - INFO - 🌊 STREAMING MODE: Using modular streaming generator
+[TEST] 2025-07-22 20:39:55,201 - chat.streaming.streaming_response_generator - INFO - 🌊 === UNIFIED STREAMING RESPONSE (astream_chat) ===
+[TEST] 2025-07-22 20:39:55,201 - chat.streaming.streaming_response_generator - INFO - 🌊 Chat ID: chatcmpl-modular-4c4f8352
+[TEST] 2025-07-22 20:39:55,202 - chat.streaming.streaming_response_generator - INFO - 🌊 Model: gpt-4.1-nano, Provider: azure_inference
+[TEST] 2025-07-22 20:39:55,202 - main - INFO - 📦 Stream chunk 1: {"id": "chatcmpl-modular-4c4f8352", "object": "chat.completion.chunk", "created": 1753241995, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {}, "finish_reason": null}], "progress": {"stage": "initializing", "message": "Starting response generation..."}}
+[TEST] 2025-07-22 20:39:55,202 - chat.streaming.streaming_response_generator - INFO - 🔧 === CONTEXT BUILDING STAGE ===
+[TEST] 2025-07-22 20:39:55,202 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING WITHOUT CONTEXT: Using original messages
+[TEST] 2025-07-22 20:39:55,202 - chat.streaming.streaming_response_generator - INFO - 🔄 Converted 1 messages to ChatMessage objects
+[TEST] 2025-07-22 20:39:55,202 - chat.streaming.streaming_response_generator - INFO - 🔄 Roles: ['user']
+[TEST] 2025-07-22 20:39:55,203 - chat.streaming.streaming_response_generator - INFO - 🌊 Final chat messages count: 1
+[TEST] 2025-07-22 20:39:55,203 - chat.streaming.streaming_response_generator - INFO - 🌊 Message roles: ['user']
+[TEST] 2025-07-22 20:39:55,203 - main - INFO - 📦 Stream chunk 2: {"id": "chatcmpl-modular-4c4f8352", "object": "chat.completion.chunk", "created": 1753241995, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"role": "assistant", "content": ""}, "finish_reason": null}], "progress": {"stage": "generating_response", "message": "Generating AI response..."}}
+[TEST] 2025-07-22 20:39:55,203 - chat.streaming.streaming_response_generator - INFO - 🌊 CALLING: llm.astream_chat (unified approach)
+[TEST] 2025-07-22 20:39:55,860 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 1 structure:
+[TEST] 2025-07-22 20:39:55,860 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:39:55,860 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:39:55,860 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:39:55,860 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: '...'
+[TEST] 2025-07-22 20:39:55,860 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'None...'
+[TEST] 2025-07-22 20:39:56,074 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 2 structure:
+[TEST] 2025-07-22 20:39:56,074 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:39:56,074 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:39:56,074 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:39:56,074 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: '15...'
+[TEST] 2025-07-22 20:39:56,074 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: '15...'
+[TEST] 2025-07-22 20:39:56,074 - main - INFO - 📦 Stream chunk 3: {"id": "chatcmpl-modular-4c4f8352", "object": "chat.completion.chunk", "created": 1753241996, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"content": "15"}, "finish_reason": null}]}
+[TEST] 2025-07-22 20:39:56,076 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 3 structure:
+[TEST] 2025-07-22 20:39:56,076 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:39:56,076 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:39:56,076 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:39:56,076 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: ' +...'
+[TEST] 2025-07-22 20:39:56,076 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: '15 +...'
+[TEST] 2025-07-22 20:39:56,076 - main - INFO - 📦 ... (logging first 3 chunks only, total so far: 4)
+[TEST] 2025-07-22 20:39:56,081 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING COMPLETED: 8 chunks, 12 characters
+[TEST] 2025-07-22 20:39:56,081 - chat.streaming.streaming_response_generator - INFO - 🌊 Context used: False
+[TEST] 2025-07-22 20:39:56,081 - chat.streaming.streaming_response_generator - INFO - 🌊 === STREAMING RESPONSE COMPLETED ===
+[TEST] 2025-07-22 20:39:56,083 - main - INFO - ✅ Streaming complete: 10 chunks sent
+[2025-07-22 20:39:56 -0700] [22732] [INFO] 127.0.0.1:54564 POST /v1/chat/completions 1.1 200 - 3457605
+[TEST] 2025-07-22 20:39:56,087 - main - INFO - === CHAT REQUEST ===
+[TEST] 2025-07-22 20:39:56,087 - main - INFO - Method: POST
+[TEST] 2025-07-22 20:39:56,087 - main - INFO - URL: http://localhost:5002/v1/chat/completions
+[TEST] 2025-07-22 20:39:56,087 - main - INFO - Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Content-Type': 'application/json', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '136'}
+[TEST] 2025-07-22 20:39:56,087 - main - INFO - Request Body: {
+  "model": "gpt-4.1-nano",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What is the capital of France?"
+    }
+  ],
+  "stream": true,
+  "user_id": 10001
+}
+[TEST] 2025-07-22 20:39:56,087 - main - INFO - ==================
+[TEST] 2025-07-22 20:39:56,087 - main - INFO - 🔄 Attempting to import modular_chat_endpoint...
+[TEST] 2025-07-22 20:39:56,087 - main - INFO - ✅ Successfully imported modular_chat_endpoint
+[TEST] 2025-07-22 20:39:56,087 - main - INFO - 🌊 Starting streaming response...
+[TEST] 2025-07-22 20:39:56,087 - chat.endpoints.modular_chat_endpoint - INFO - === NEW MODULAR CHAT REQUEST ===
+[TEST] 2025-07-22 20:39:56,087 - chat.endpoints.modular_chat_endpoint - INFO - User: 10001, RAG: True, Citations: False, WebSearch: False, Stream: True
+[TEST] 2025-07-22 20:39:56,087 - chat.endpoints.modular_chat_endpoint - INFO - Router Retriever: True, Generate Title: False
+[TEST] 2025-07-22 20:39:56,087 - chat.endpoints.modular_chat_endpoint - INFO - Provider: None, Model: gpt-4.1-nano
+[TEST] 2025-07-22 20:39:56,087 - chat.endpoints.modular_chat_endpoint - INFO - Attachments: 0 files
+[TEST] 2025-07-22 20:39:56,087 - chat.endpoints.modular_chat_endpoint - INFO - 💰 Defaulting to Azure Inference for cost savings: azure_inference with gpt-4.1-nano
+[TEST] 2025-07-22 20:39:56,087 - chat.provider.llm_provider - INFO - Provider selection - requested_provider: azure_inference, requested_model: gpt-4.1-nano
+[TEST] 2025-07-22 20:39:56,088 - chat.provider.llm_provider - INFO - 🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+[TEST] 2025-07-22 20:39:56,088 - chat.provider.llm_provider - INFO - 🎯 Override to Azure for cost savings: azure_inference with gpt-4.1-nano (requested: azure_inference)
+[TEST] 2025-07-22 20:39:56,088 - chat.endpoints.modular_chat_endpoint - INFO - ✅ Selected: azure_inference
+[TEST] 2025-07-22 20:39:56,088 - chat.endpoints.modular_chat_endpoint - INFO - 🔄 STARTING QUERY TRANSFORMATION...
+[TEST] 2025-07-22 20:39:56,088 - chat.query.query_transformer - INFO - ⚡ Query transformation temporarily disabled - using original query
+[TEST] 2025-07-22 20:39:56,088 - chat.endpoints.modular_chat_endpoint - INFO - ⚠️ Query transformation failed, using original query: temporarily_disabled
+[TEST] 2025-07-22 20:39:56,088 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING WITH CONDENSED QUERY...
+[TEST] 2025-07-22 20:39:58,168 - chat.router.intelligent_router - INFO - LLM selected tool 0: no_context
+[TEST] 2025-07-22 20:39:58,169 - chat.router.intelligent_router - INFO - LLM routing successful: no_context
+[TEST] 2025-07-22 20:39:58,169 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 Router decision: RAG=False, Web=False, Attachments=False
+[TEST] 2025-07-22 20:39:58,169 - chat.endpoints.modular_chat_endpoint - INFO - 🧠 Router reasoning: This is a general knowledge question about a well-known fact, not requiring user-specific data.
+[TEST] 2025-07-22 20:39:58,169 - chat.endpoints.modular_chat_endpoint - INFO - 🔍 Search type: none
+[TEST] 2025-07-22 20:39:58,169 - chat.endpoints.modular_chat_endpoint - INFO - ⚡ PROCESSING ENABLED SOURCES...
+[TEST] 2025-07-22 20:39:58,169 - chat.endpoints.modular_chat_endpoint - INFO - ⚡ No RAG, attachment, or web search processing needed
+[TEST] 2025-07-22 20:39:58,169 - chat.endpoints.modular_chat_endpoint - INFO - 🌊 STREAMING MODE: Using modular streaming generator
+[TEST] 2025-07-22 20:39:58,169 - chat.streaming.streaming_response_generator - INFO - 🌊 === UNIFIED STREAMING RESPONSE (astream_chat) ===
+[TEST] 2025-07-22 20:39:58,169 - chat.streaming.streaming_response_generator - INFO - 🌊 Chat ID: chatcmpl-modular-fee1bea5
+[TEST] 2025-07-22 20:39:58,169 - chat.streaming.streaming_response_generator - INFO - 🌊 Model: gpt-4.1-nano, Provider: azure_inference
+[TEST] 2025-07-22 20:39:58,169 - main - INFO - 📦 Stream chunk 1: {"id": "chatcmpl-modular-fee1bea5", "object": "chat.completion.chunk", "created": 1753241998, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {}, "finish_reason": null}], "progress": {"stage": "initializing", "message": "Starting response generation..."}}
+[TEST] 2025-07-22 20:39:58,169 - chat.streaming.streaming_response_generator - INFO - 🔧 === CONTEXT BUILDING STAGE ===
+[TEST] 2025-07-22 20:39:58,169 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING WITHOUT CONTEXT: Using original messages
+[TEST] 2025-07-22 20:39:58,169 - chat.streaming.streaming_response_generator - INFO - 🔄 Converted 1 messages to ChatMessage objects
+[TEST] 2025-07-22 20:39:58,169 - chat.streaming.streaming_response_generator - INFO - 🔄 Roles: ['user']
+[TEST] 2025-07-22 20:39:58,169 - chat.streaming.streaming_response_generator - INFO - 🌊 Final chat messages count: 1
+[TEST] 2025-07-22 20:39:58,169 - chat.streaming.streaming_response_generator - INFO - 🌊 Message roles: ['user']
+[TEST] 2025-07-22 20:39:58,169 - main - INFO - 📦 Stream chunk 2: {"id": "chatcmpl-modular-fee1bea5", "object": "chat.completion.chunk", "created": 1753241998, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"role": "assistant", "content": ""}, "finish_reason": null}], "progress": {"stage": "generating_response", "message": "Generating AI response..."}}
+[TEST] 2025-07-22 20:39:58,169 - chat.streaming.streaming_response_generator - INFO - 🌊 CALLING: llm.astream_chat (unified approach)
+[TEST] 2025-07-22 20:39:58,757 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 1 structure:
+[TEST] 2025-07-22 20:39:58,757 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:39:58,757 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:39:58,757 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:39:58,757 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: '...'
+[TEST] 2025-07-22 20:39:58,757 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'None...'
+[TEST] 2025-07-22 20:39:58,842 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 2 structure:
+[TEST] 2025-07-22 20:39:58,842 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:39:58,842 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:39:58,842 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:39:58,842 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: 'The...'
+[TEST] 2025-07-22 20:39:58,842 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'The...'
+[TEST] 2025-07-22 20:39:58,842 - main - INFO - 📦 Stream chunk 3: {"id": "chatcmpl-modular-fee1bea5", "object": "chat.completion.chunk", "created": 1753241998, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"content": "The"}, "finish_reason": null}]}
+[TEST] 2025-07-22 20:39:58,843 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 3 structure:
+[TEST] 2025-07-22 20:39:58,843 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:39:58,843 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:39:58,843 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:39:58,843 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: ' capital...'
+[TEST] 2025-07-22 20:39:58,843 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'The capital...'
+[TEST] 2025-07-22 20:39:58,843 - main - INFO - 📦 ... (logging first 3 chunks only, total so far: 4)
+[TEST] 2025-07-22 20:39:58,845 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING COMPLETED: 8 chunks, 31 characters
+[TEST] 2025-07-22 20:39:58,845 - chat.streaming.streaming_response_generator - INFO - 🌊 Context used: False
+[TEST] 2025-07-22 20:39:58,845 - chat.streaming.streaming_response_generator - INFO - 🌊 === STREAMING RESPONSE COMPLETED ===
+[TEST] 2025-07-22 20:39:58,845 - main - INFO - ✅ Streaming complete: 10 chunks sent
+[2025-07-22 20:39:58 -0700] [22732] [INFO] 127.0.0.1:54591 POST /v1/chat/completions 1.1 200 - 2758543
+[TEST] 2025-07-22 20:39:58,848 - main - INFO - === CHAT REQUEST ===
+[TEST] 2025-07-22 20:39:58,848 - main - INFO - Method: POST
+[TEST] 2025-07-22 20:39:58,848 - main - INFO - URL: http://localhost:5002/v1/chat/completions
+[TEST] 2025-07-22 20:39:58,848 - main - INFO - Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Content-Type': 'application/json', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '131'}
+[TEST] 2025-07-22 20:39:58,848 - main - INFO - Request Body: {
+  "model": "gpt-4.1-nano",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hello, how are you today?"
+    }
+  ],
+  "stream": true,
+  "user_id": 10001
+}
+[TEST] 2025-07-22 20:39:58,848 - main - INFO - ==================
+[TEST] 2025-07-22 20:39:58,848 - main - INFO - 🔄 Attempting to import modular_chat_endpoint...
+[TEST] 2025-07-22 20:39:58,848 - main - INFO - ✅ Successfully imported modular_chat_endpoint
+[TEST] 2025-07-22 20:39:58,848 - main - INFO - 🌊 Starting streaming response...
+[TEST] 2025-07-22 20:39:58,848 - chat.endpoints.modular_chat_endpoint - INFO - === NEW MODULAR CHAT REQUEST ===
+[TEST] 2025-07-22 20:39:58,848 - chat.endpoints.modular_chat_endpoint - INFO - User: 10001, RAG: True, Citations: False, WebSearch: False, Stream: True
+[TEST] 2025-07-22 20:39:58,848 - chat.endpoints.modular_chat_endpoint - INFO - Router Retriever: True, Generate Title: False
+[TEST] 2025-07-22 20:39:58,848 - chat.endpoints.modular_chat_endpoint - INFO - Provider: None, Model: gpt-4.1-nano
+[TEST] 2025-07-22 20:39:58,848 - chat.endpoints.modular_chat_endpoint - INFO - Attachments: 0 files
+[TEST] 2025-07-22 20:39:58,848 - chat.endpoints.modular_chat_endpoint - INFO - 💰 Defaulting to Azure Inference for cost savings: azure_inference with gpt-4.1-nano
+[TEST] 2025-07-22 20:39:58,848 - chat.provider.llm_provider - INFO - Provider selection - requested_provider: azure_inference, requested_model: gpt-4.1-nano
+[TEST] 2025-07-22 20:39:58,848 - chat.provider.llm_provider - INFO - 🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+[TEST] 2025-07-22 20:39:58,848 - chat.provider.llm_provider - INFO - 🎯 Override to Azure for cost savings: azure_inference with gpt-4.1-nano (requested: azure_inference)
+[TEST] 2025-07-22 20:39:58,848 - chat.endpoints.modular_chat_endpoint - INFO - ✅ Selected: azure_inference
+[TEST] 2025-07-22 20:39:58,848 - chat.endpoints.modular_chat_endpoint - INFO - 🔄 STARTING QUERY TRANSFORMATION...
+[TEST] 2025-07-22 20:39:58,848 - chat.query.query_transformer - INFO - ⚡ Query transformation temporarily disabled - using original query
+[TEST] 2025-07-22 20:39:58,848 - chat.endpoints.modular_chat_endpoint - INFO - ⚠️ Query transformation failed, using original query: temporarily_disabled
+[TEST] 2025-07-22 20:39:58,848 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING WITH CONDENSED QUERY...
+[TEST] 2025-07-22 20:40:00,116 - chat.router.intelligent_router - INFO - LLM selected tool 0: no_context
+[TEST] 2025-07-22 20:40:00,116 - chat.router.intelligent_router - INFO - LLM routing successful: no_context
+[TEST] 2025-07-22 20:40:00,116 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 Router decision: RAG=False, Web=False, Attachments=False
+[TEST] 2025-07-22 20:40:00,116 - chat.endpoints.modular_chat_endpoint - INFO - 🧠 Router reasoning: The query is a general greeting that doesn't require specific user data or context.
+[TEST] 2025-07-22 20:40:00,116 - chat.endpoints.modular_chat_endpoint - INFO - 🔍 Search type: none
+[TEST] 2025-07-22 20:40:00,116 - chat.endpoints.modular_chat_endpoint - INFO - ⚡ PROCESSING ENABLED SOURCES...
+[TEST] 2025-07-22 20:40:00,116 - chat.endpoints.modular_chat_endpoint - INFO - ⚡ No RAG, attachment, or web search processing needed
+[TEST] 2025-07-22 20:40:00,116 - chat.endpoints.modular_chat_endpoint - INFO - 🌊 STREAMING MODE: Using modular streaming generator
+[TEST] 2025-07-22 20:40:00,116 - chat.streaming.streaming_response_generator - INFO - 🌊 === UNIFIED STREAMING RESPONSE (astream_chat) ===
+[TEST] 2025-07-22 20:40:00,116 - chat.streaming.streaming_response_generator - INFO - 🌊 Chat ID: chatcmpl-modular-520fee87
+[TEST] 2025-07-22 20:40:00,116 - chat.streaming.streaming_response_generator - INFO - 🌊 Model: gpt-4.1-nano, Provider: azure_inference
+[TEST] 2025-07-22 20:40:00,116 - main - INFO - 📦 Stream chunk 1: {"id": "chatcmpl-modular-520fee87", "object": "chat.completion.chunk", "created": 1753242000, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {}, "finish_reason": null}], "progress": {"stage": "initializing", "message": "Starting response generation..."}}
+[TEST] 2025-07-22 20:40:00,116 - chat.streaming.streaming_response_generator - INFO - 🔧 === CONTEXT BUILDING STAGE ===
+[TEST] 2025-07-22 20:40:00,116 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING WITHOUT CONTEXT: Using original messages
+[TEST] 2025-07-22 20:40:00,116 - chat.streaming.streaming_response_generator - INFO - 🔄 Converted 1 messages to ChatMessage objects
+[TEST] 2025-07-22 20:40:00,116 - chat.streaming.streaming_response_generator - INFO - 🔄 Roles: ['user']
+[TEST] 2025-07-22 20:40:00,116 - chat.streaming.streaming_response_generator - INFO - 🌊 Final chat messages count: 1
+[TEST] 2025-07-22 20:40:00,116 - chat.streaming.streaming_response_generator - INFO - 🌊 Message roles: ['user']
+[TEST] 2025-07-22 20:40:00,116 - main - INFO - 📦 Stream chunk 2: {"id": "chatcmpl-modular-520fee87", "object": "chat.completion.chunk", "created": 1753242000, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"role": "assistant", "content": ""}, "finish_reason": null}], "progress": {"stage": "generating_response", "message": "Generating AI response..."}}
+[TEST] 2025-07-22 20:40:00,116 - chat.streaming.streaming_response_generator - INFO - 🌊 CALLING: llm.astream_chat (unified approach)
+[TEST] 2025-07-22 20:40:00,837 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 1 structure:
+[TEST] 2025-07-22 20:40:00,837 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:00,837 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:00,837 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:00,837 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: '...'
+[TEST] 2025-07-22 20:40:00,837 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'None...'
+[TEST] 2025-07-22 20:40:01,004 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 2 structure:
+[TEST] 2025-07-22 20:40:01,004 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:01,004 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:01,004 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:01,004 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: 'Hello...'
+[TEST] 2025-07-22 20:40:01,004 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'Hello...'
+[TEST] 2025-07-22 20:40:01,004 - main - INFO - 📦 Stream chunk 3: {"id": "chatcmpl-modular-520fee87", "object": "chat.completion.chunk", "created": 1753242001, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"content": "Hello"}, "finish_reason": null}]}
+[TEST] 2025-07-22 20:40:01,004 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 3 structure:
+[TEST] 2025-07-22 20:40:01,004 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:01,004 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:01,004 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:01,004 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: '!...'
+[TEST] 2025-07-22 20:40:01,004 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'Hello!...'
+[TEST] 2025-07-22 20:40:01,004 - main - INFO - 📦 ... (logging first 3 chunks only, total so far: 4)
+[TEST] 2025-07-22 20:40:01,006 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING COMPLETED: 17 chunks, 61 characters
+[TEST] 2025-07-22 20:40:01,006 - chat.streaming.streaming_response_generator - INFO - 🌊 Context used: False
+[TEST] 2025-07-22 20:40:01,006 - chat.streaming.streaming_response_generator - INFO - 🌊 === STREAMING RESPONSE COMPLETED ===
+[TEST] 2025-07-22 20:40:01,006 - main - INFO - ✅ Streaming complete: 19 chunks sent
+[2025-07-22 20:40:01 -0700] [22732] [INFO] 127.0.0.1:54613 POST /v1/chat/completions 1.1 200 - 2158578
+[TEST] 2025-07-22 20:40:01,008 - main - INFO - === CHAT REQUEST ===
+[TEST] 2025-07-22 20:40:01,008 - main - INFO - Method: POST
+[TEST] 2025-07-22 20:40:01,008 - main - INFO - URL: http://localhost:5002/v1/chat/completions
+[TEST] 2025-07-22 20:40:01,008 - main - INFO - Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Content-Type': 'application/json', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '133'}
+[TEST] 2025-07-22 20:40:01,008 - main - INFO - Request Body: {
+  "model": "gpt-4.1-nano",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What day of the week is it?"
+    }
+  ],
+  "stream": true,
+  "user_id": 10001
+}
+[TEST] 2025-07-22 20:40:01,008 - main - INFO - ==================
+[TEST] 2025-07-22 20:40:01,008 - main - INFO - 🔄 Attempting to import modular_chat_endpoint...
+[TEST] 2025-07-22 20:40:01,008 - main - INFO - ✅ Successfully imported modular_chat_endpoint
+[TEST] 2025-07-22 20:40:01,008 - main - INFO - 🌊 Starting streaming response...
+[TEST] 2025-07-22 20:40:01,008 - chat.endpoints.modular_chat_endpoint - INFO - === NEW MODULAR CHAT REQUEST ===
+[TEST] 2025-07-22 20:40:01,008 - chat.endpoints.modular_chat_endpoint - INFO - User: 10001, RAG: True, Citations: False, WebSearch: False, Stream: True
+[TEST] 2025-07-22 20:40:01,008 - chat.endpoints.modular_chat_endpoint - INFO - Router Retriever: True, Generate Title: False
+[TEST] 2025-07-22 20:40:01,008 - chat.endpoints.modular_chat_endpoint - INFO - Provider: None, Model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:01,008 - chat.endpoints.modular_chat_endpoint - INFO - Attachments: 0 files
+[TEST] 2025-07-22 20:40:01,008 - chat.endpoints.modular_chat_endpoint - INFO - 💰 Defaulting to Azure Inference for cost savings: azure_inference with gpt-4.1-nano
+[TEST] 2025-07-22 20:40:01,008 - chat.provider.llm_provider - INFO - Provider selection - requested_provider: azure_inference, requested_model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:01,008 - chat.provider.llm_provider - INFO - 🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+[TEST] 2025-07-22 20:40:01,008 - chat.provider.llm_provider - INFO - 🎯 Override to Azure for cost savings: azure_inference with gpt-4.1-nano (requested: azure_inference)
+[TEST] 2025-07-22 20:40:01,008 - chat.endpoints.modular_chat_endpoint - INFO - ✅ Selected: azure_inference
+[TEST] 2025-07-22 20:40:01,008 - chat.endpoints.modular_chat_endpoint - INFO - 🔄 STARTING QUERY TRANSFORMATION...
+[TEST] 2025-07-22 20:40:01,008 - chat.query.query_transformer - INFO - ⚡ Query transformation temporarily disabled - using original query
+[TEST] 2025-07-22 20:40:01,008 - chat.endpoints.modular_chat_endpoint - INFO - ⚠️ Query transformation failed, using original query: temporarily_disabled
+[TEST] 2025-07-22 20:40:01,008 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING WITH CONDENSED QUERY...
+[TEST] 2025-07-22 20:40:01,579 - chat.router.intelligent_router - INFO - LLM selected tool 5: web_search
+[TEST] 2025-07-22 20:40:01,579 - chat.router.intelligent_router - INFO - LLM routing successful: web_search
+[TEST] 2025-07-22 20:40:01,579 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 Router decision: RAG=False, Web=True, Attachments=False
+[TEST] 2025-07-22 20:40:01,579 - chat.endpoints.modular_chat_endpoint - INFO - 🧠 Router reasoning: The question asks for current date information, which requires real-time data.
+[TEST] 2025-07-22 20:40:01,579 - chat.endpoints.modular_chat_endpoint - INFO - 🔍 Search type: web
+[TEST] 2025-07-22 20:40:01,579 - chat.endpoints.modular_chat_endpoint - INFO - ⚡ PROCESSING ENABLED SOURCES...
+[TEST] 2025-07-22 20:40:01,579 - chat.endpoints.modular_chat_endpoint - INFO - 🌐 STARTING WEB SEARCH WITH CONDENSED QUERY...
+[TEST] 2025-07-22 20:40:01,579 - chat.websearch.web_search_processor - INFO - 🔍 Web search request: 'What day of the week is it?...' (5 results)
+[TEST] 2025-07-22 20:40:01,598 - chat.websearch.web_search_processor - INFO - ✅ Cache hit for query: What day of the week is it?...
+[TEST] 2025-07-22 20:40:01,598 - chat.endpoints.modular_chat_endpoint - INFO - 🌐 WEB SEARCH COMPLETE: 5 results found (cache hit)
+[TEST] 2025-07-22 20:40:01,598 - chat.endpoints.modular_chat_endpoint - INFO - 🌊 STREAMING MODE: Using modular streaming generator
+[TEST] 2025-07-22 20:40:01,598 - chat.streaming.streaming_response_generator - INFO - 🌊 === UNIFIED STREAMING RESPONSE (astream_chat) ===
+[TEST] 2025-07-22 20:40:01,598 - chat.streaming.streaming_response_generator - INFO - 🌊 Chat ID: chatcmpl-modular-ff0141d9
+[TEST] 2025-07-22 20:40:01,598 - chat.streaming.streaming_response_generator - INFO - 🌊 Model: gpt-4.1-nano, Provider: azure_inference
+[TEST] 2025-07-22 20:40:01,598 - main - INFO - 📦 Stream chunk 1: {"id": "chatcmpl-modular-ff0141d9", "object": "chat.completion.chunk", "created": 1753242001, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {}, "finish_reason": null}], "progress": {"stage": "initializing", "message": "Starting response generation..."}}
+[TEST] 2025-07-22 20:40:01,598 - chat.streaming.streaming_response_generator - INFO - 🔧 === CONTEXT BUILDING STAGE ===
+[TEST] 2025-07-22 20:40:01,598 - chat.websearch.web_search_processor - INFO - Generated web search context: 1468 chars from 5 results
+[TEST] 2025-07-22 20:40:01,598 - chat.streaming.streaming_response_generator - INFO - 🌐 WEB SEARCH CONTEXT ADDED: 5 results
+[TEST] 2025-07-22 20:40:01,599 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING WITH CONTEXT: Adding system message before last user message
+[TEST] 2025-07-22 20:40:01,599 - chat.streaming.streaming_response_generator - INFO - 🌊 Context length: 1488 characters
+[TEST] 2025-07-22 20:40:01,599 - chat.streaming.streaming_response_generator - INFO - 🌊 === FINAL COMBINED CONTEXT ===
+[TEST] 2025-07-22 20:40:01,599 - chat.streaming.streaming_response_generator - INFO - Context preview (first 500 chars):
+WEB SEARCH RESULTS:
+[Web Search Result 1]
+Title: Weekday Calculator: What Day Is It? - Time and Date
+URL: https://www.timeanddate.com/date/weekday.html
+Content: Finds the day of the week for any date. Find out which day of the week you were born, or if the Moon landing was on a Saturday or a Sunday.
+Source: serper (cached)
+
+[Web Search Result 2]
+Title: Day of the Week Calculator
+URL: https://www.calculator.net/day-of-the-week-calculator.html
+Content: Use the calculator below to find the day of t...
+[TEST] 2025-07-22 20:40:01,599 - chat.streaming.streaming_response_generator - INFO - 📊 Context structure:
+[TEST] 2025-07-22 20:40:01,599 - chat.streaming.streaming_response_generator - INFO -   Part 1: WEB SEARCH RESULTS (1488 chars)
+[TEST] 2025-07-22 20:40:01,599 - chat.streaming.streaming_response_generator - INFO - === END FINAL COMBINED CONTEXT ===
+[TEST] 2025-07-22 20:40:01,599 - chat.streaming.streaming_response_generator - INFO - 🔄 Converted 2 messages to ChatMessage objects
+[TEST] 2025-07-22 20:40:01,599 - chat.streaming.streaming_response_generator - INFO - 🔄 Roles: ['system', 'user']
+[TEST] 2025-07-22 20:40:01,599 - chat.streaming.streaming_response_generator - INFO - 🌊 Final chat messages count: 2
+[TEST] 2025-07-22 20:40:01,599 - chat.streaming.streaming_response_generator - INFO - 🌊 Message roles: ['system', 'user']
+[TEST] 2025-07-22 20:40:01,599 - main - INFO - 📦 Stream chunk 2: {"id": "chatcmpl-modular-ff0141d9", "object": "chat.completion.chunk", "created": 1753242001, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"role": "assistant", "content": ""}, "finish_reason": null}], "progress": {"stage": "generating_response", "message": "Generating AI response..."}}
+[TEST] 2025-07-22 20:40:01,599 - chat.streaming.streaming_response_generator - INFO - 🌊 CALLING: llm.astream_chat (unified approach)
+[TEST] 2025-07-22 20:40:02,367 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 1 structure:
+[TEST] 2025-07-22 20:40:02,367 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:02,367 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:02,367 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:02,367 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: '...'
+[TEST] 2025-07-22 20:40:02,367 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'None...'
+[TEST] 2025-07-22 20:40:02,367 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 2 structure:
+[TEST] 2025-07-22 20:40:02,368 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:02,368 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:02,368 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:02,368 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: 'Today...'
+[TEST] 2025-07-22 20:40:02,368 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'Today...'
+[TEST] 2025-07-22 20:40:02,368 - main - INFO - 📦 Stream chunk 3: {"id": "chatcmpl-modular-ff0141d9", "object": "chat.completion.chunk", "created": 1753242002, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"content": "Today"}, "finish_reason": null}]}
+[TEST] 2025-07-22 20:40:02,368 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 3 structure:
+[TEST] 2025-07-22 20:40:02,368 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:02,368 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:02,368 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:02,368 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: ' is...'
+[TEST] 2025-07-22 20:40:02,368 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'Today is...'
+[TEST] 2025-07-22 20:40:02,368 - main - INFO - 📦 ... (logging first 3 chunks only, total so far: 4)
+[TEST] 2025-07-22 20:40:02,371 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING COMPLETED: 5 chunks, 18 characters
+[TEST] 2025-07-22 20:40:02,371 - chat.streaming.streaming_response_generator - INFO - 🌊 Context used: True
+[TEST] 2025-07-22 20:40:02,371 - chat.streaming.streaming_response_generator - INFO - 🌊 === STREAMING RESPONSE COMPLETED ===
+[TEST] 2025-07-22 20:40:02,372 - main - INFO - ✅ Streaming complete: 7 chunks sent
+[2025-07-22 20:40:02 -0700] [22732] [INFO] 127.0.0.1:54625 POST /v1/chat/completions 1.1 200 - 1364678
+[TEST] 2025-07-22 20:40:02,376 - main - INFO - === CHAT REQUEST ===
+[TEST] 2025-07-22 20:40:02,377 - main - INFO - Method: POST
+[TEST] 2025-07-22 20:40:02,377 - main - INFO - URL: http://localhost:5002/v1/chat/completions
+[TEST] 2025-07-22 20:40:02,378 - main - INFO - Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Content-Type': 'application/json', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '136'}
+[TEST] 2025-07-22 20:40:02,378 - main - INFO - Request Body: {
+  "model": "gpt-4.1-nano",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Define artificial intelligence"
+    }
+  ],
+  "stream": true,
+  "user_id": 10001
+}
+[TEST] 2025-07-22 20:40:02,378 - main - INFO - ==================
+[TEST] 2025-07-22 20:40:02,378 - main - INFO - 🔄 Attempting to import modular_chat_endpoint...
+[TEST] 2025-07-22 20:40:02,378 - main - INFO - ✅ Successfully imported modular_chat_endpoint
+[TEST] 2025-07-22 20:40:02,378 - main - INFO - 🌊 Starting streaming response...
+[TEST] 2025-07-22 20:40:02,378 - chat.endpoints.modular_chat_endpoint - INFO - === NEW MODULAR CHAT REQUEST ===
+[TEST] 2025-07-22 20:40:02,378 - chat.endpoints.modular_chat_endpoint - INFO - User: 10001, RAG: True, Citations: False, WebSearch: False, Stream: True
+[TEST] 2025-07-22 20:40:02,378 - chat.endpoints.modular_chat_endpoint - INFO - Router Retriever: True, Generate Title: False
+[TEST] 2025-07-22 20:40:02,378 - chat.endpoints.modular_chat_endpoint - INFO - Provider: None, Model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:02,378 - chat.endpoints.modular_chat_endpoint - INFO - Attachments: 0 files
+[TEST] 2025-07-22 20:40:02,378 - chat.endpoints.modular_chat_endpoint - INFO - 💰 Defaulting to Azure Inference for cost savings: azure_inference with gpt-4.1-nano
+[TEST] 2025-07-22 20:40:02,378 - chat.provider.llm_provider - INFO - Provider selection - requested_provider: azure_inference, requested_model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:02,379 - chat.provider.llm_provider - INFO - 🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+[TEST] 2025-07-22 20:40:02,379 - chat.provider.llm_provider - INFO - 🎯 Override to Azure for cost savings: azure_inference with gpt-4.1-nano (requested: azure_inference)
+[TEST] 2025-07-22 20:40:02,379 - chat.endpoints.modular_chat_endpoint - INFO - ✅ Selected: azure_inference
+[TEST] 2025-07-22 20:40:02,379 - chat.endpoints.modular_chat_endpoint - INFO - 🔄 STARTING QUERY TRANSFORMATION...
+[TEST] 2025-07-22 20:40:02,379 - chat.query.query_transformer - INFO - ⚡ Query transformation temporarily disabled - using original query
+[TEST] 2025-07-22 20:40:02,379 - chat.endpoints.modular_chat_endpoint - INFO - ⚠️ Query transformation failed, using original query: temporarily_disabled
+[TEST] 2025-07-22 20:40:02,379 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING WITH CONDENSED QUERY...
+[TEST] 2025-07-22 20:40:03,132 - chat.router.intelligent_router - INFO - LLM selected tool 0: no_context
+[TEST] 2025-07-22 20:40:03,132 - chat.router.intelligent_router - INFO - LLM routing successful: no_context
+[TEST] 2025-07-22 20:40:03,132 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 Router decision: RAG=False, Web=False, Attachments=False
+[TEST] 2025-07-22 20:40:03,132 - chat.endpoints.modular_chat_endpoint - INFO - 🧠 Router reasoning: The query is a general definition of artificial intelligence and does not require user-specific data.
+[TEST] 2025-07-22 20:40:03,132 - chat.endpoints.modular_chat_endpoint - INFO - 🔍 Search type: none
+[TEST] 2025-07-22 20:40:03,132 - chat.endpoints.modular_chat_endpoint - INFO - ⚡ PROCESSING ENABLED SOURCES...
+[TEST] 2025-07-22 20:40:03,132 - chat.endpoints.modular_chat_endpoint - INFO - ⚡ No RAG, attachment, or web search processing needed
+[TEST] 2025-07-22 20:40:03,132 - chat.endpoints.modular_chat_endpoint - INFO - 🌊 STREAMING MODE: Using modular streaming generator
+[TEST] 2025-07-22 20:40:03,132 - chat.streaming.streaming_response_generator - INFO - 🌊 === UNIFIED STREAMING RESPONSE (astream_chat) ===
+[TEST] 2025-07-22 20:40:03,132 - chat.streaming.streaming_response_generator - INFO - 🌊 Chat ID: chatcmpl-modular-24375453
+[TEST] 2025-07-22 20:40:03,132 - chat.streaming.streaming_response_generator - INFO - 🌊 Model: gpt-4.1-nano, Provider: azure_inference
+[TEST] 2025-07-22 20:40:03,132 - main - INFO - 📦 Stream chunk 1: {"id": "chatcmpl-modular-24375453", "object": "chat.completion.chunk", "created": 1753242003, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {}, "finish_reason": null}], "progress": {"stage": "initializing", "message": "Starting response generation..."}}
+[TEST] 2025-07-22 20:40:03,132 - chat.streaming.streaming_response_generator - INFO - 🔧 === CONTEXT BUILDING STAGE ===
+[TEST] 2025-07-22 20:40:03,132 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING WITHOUT CONTEXT: Using original messages
+[TEST] 2025-07-22 20:40:03,132 - chat.streaming.streaming_response_generator - INFO - 🔄 Converted 1 messages to ChatMessage objects
+[TEST] 2025-07-22 20:40:03,132 - chat.streaming.streaming_response_generator - INFO - 🔄 Roles: ['user']
+[TEST] 2025-07-22 20:40:03,133 - chat.streaming.streaming_response_generator - INFO - 🌊 Final chat messages count: 1
+[TEST] 2025-07-22 20:40:03,133 - chat.streaming.streaming_response_generator - INFO - 🌊 Message roles: ['user']
+[TEST] 2025-07-22 20:40:03,133 - main - INFO - 📦 Stream chunk 2: {"id": "chatcmpl-modular-24375453", "object": "chat.completion.chunk", "created": 1753242003, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"role": "assistant", "content": ""}, "finish_reason": null}], "progress": {"stage": "generating_response", "message": "Generating AI response..."}}
+[TEST] 2025-07-22 20:40:03,133 - chat.streaming.streaming_response_generator - INFO - 🌊 CALLING: llm.astream_chat (unified approach)
+[TEST] 2025-07-22 20:40:03,934 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 1 structure:
+[TEST] 2025-07-22 20:40:03,934 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:03,934 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:03,934 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:03,934 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: '...'
+[TEST] 2025-07-22 20:40:03,935 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'None...'
+[TEST] 2025-07-22 20:40:04,157 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 2 structure:
+[TEST] 2025-07-22 20:40:04,157 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:04,157 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:04,157 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:04,157 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: 'Artificial...'
+[TEST] 2025-07-22 20:40:04,157 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'Artificial...'
+[TEST] 2025-07-22 20:40:04,157 - main - INFO - 📦 Stream chunk 3: {"id": "chatcmpl-modular-24375453", "object": "chat.completion.chunk", "created": 1753242004, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"content": "Artificial"}, "finish_reason": null}]}
+[TEST] 2025-07-22 20:40:04,158 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 3 structure:
+[TEST] 2025-07-22 20:40:04,158 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:04,158 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:04,158 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:04,158 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: ' intelligence...'
+[TEST] 2025-07-22 20:40:04,158 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'Artificial intelligence...'
+[TEST] 2025-07-22 20:40:04,158 - main - INFO - 📦 ... (logging first 3 chunks only, total so far: 4)
+[TEST] 2025-07-22 20:40:04,786 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING COMPLETED: 93 chunks, 528 characters
+[TEST] 2025-07-22 20:40:04,787 - chat.streaming.streaming_response_generator - INFO - 🌊 Context used: False
+[TEST] 2025-07-22 20:40:04,787 - chat.streaming.streaming_response_generator - INFO - 🌊 === STREAMING RESPONSE COMPLETED ===
+[TEST] 2025-07-22 20:40:04,787 - main - INFO - ✅ Streaming complete: 95 chunks sent
+[2025-07-22 20:40:04 -0700] [22732] [INFO] 127.0.0.1:54634 POST /v1/chat/completions 1.1 200 - 2411889
+[TEST] 2025-07-22 20:40:04,791 - main - INFO - === CHAT REQUEST ===
+[TEST] 2025-07-22 20:40:04,791 - main - INFO - Method: POST
+[TEST] 2025-07-22 20:40:04,791 - main - INFO - URL: http://localhost:5002/v1/chat/completions
+[TEST] 2025-07-22 20:40:04,792 - main - INFO - Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Content-Type': 'application/json', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '193'}
+[TEST] 2025-07-22 20:40:04,792 - main - INFO - Request Body: {
+  "model": "gpt-4.1-nano",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Search my notes for information about PARL and predictable AI"
+    }
+  ],
+  "stream": true,
+  "enable_citations": true,
+  "user_id": 10001
+}
+[TEST] 2025-07-22 20:40:04,792 - main - INFO - ==================
+[TEST] 2025-07-22 20:40:04,792 - main - INFO - 🔄 Attempting to import modular_chat_endpoint...
+[TEST] 2025-07-22 20:40:04,792 - main - INFO - ✅ Successfully imported modular_chat_endpoint
+[TEST] 2025-07-22 20:40:04,792 - main - INFO - 🌊 Starting streaming response...
+[TEST] 2025-07-22 20:40:04,792 - chat.endpoints.modular_chat_endpoint - INFO - === NEW MODULAR CHAT REQUEST ===
+[TEST] 2025-07-22 20:40:04,792 - chat.endpoints.modular_chat_endpoint - INFO - User: 10001, RAG: True, Citations: True, WebSearch: False, Stream: True
+[TEST] 2025-07-22 20:40:04,792 - chat.endpoints.modular_chat_endpoint - INFO - Router Retriever: True, Generate Title: False
+[TEST] 2025-07-22 20:40:04,792 - chat.endpoints.modular_chat_endpoint - INFO - Provider: None, Model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:04,792 - chat.endpoints.modular_chat_endpoint - INFO - Attachments: 0 files
+[TEST] 2025-07-22 20:40:04,792 - chat.endpoints.modular_chat_endpoint - INFO - 💰 Defaulting to Azure Inference for cost savings: azure_inference with gpt-4.1-nano
+[TEST] 2025-07-22 20:40:04,792 - chat.provider.llm_provider - INFO - Provider selection - requested_provider: azure_inference, requested_model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:04,792 - chat.provider.llm_provider - INFO - 🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+[TEST] 2025-07-22 20:40:04,792 - chat.provider.llm_provider - INFO - 🎯 Override to Azure for cost savings: azure_inference with gpt-4.1-nano (requested: azure_inference)
+[TEST] 2025-07-22 20:40:04,792 - chat.endpoints.modular_chat_endpoint - INFO - ✅ Selected: azure_inference
+[TEST] 2025-07-22 20:40:04,792 - chat.endpoints.modular_chat_endpoint - INFO - 🔄 STARTING QUERY TRANSFORMATION...
+[TEST] 2025-07-22 20:40:04,792 - chat.query.query_transformer - INFO - ⚡ Query transformation temporarily disabled - using original query
+[TEST] 2025-07-22 20:40:04,792 - chat.endpoints.modular_chat_endpoint - INFO - ⚠️ Query transformation failed, using original query: temporarily_disabled
+[TEST] 2025-07-22 20:40:04,792 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING WITH CONDENSED QUERY...
+[TEST] 2025-07-22 20:40:06,035 - chat.router.intelligent_router - INFO - LLM selected tool 1: knowledge_base_notes
+[TEST] 2025-07-22 20:40:06,035 - chat.router.intelligent_router - INFO - LLM routing successful: knowledge_base_notes
+[TEST] 2025-07-22 20:40:06,035 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 Router decision: RAG=True, Web=False, Attachments=False
+[TEST] 2025-07-22 20:40:06,035 - chat.endpoints.modular_chat_endpoint - INFO - 🧠 Router reasoning: User is asking to search their personal notes for specific information about PARL and predictable AI
+[TEST] 2025-07-22 20:40:06,035 - chat.endpoints.modular_chat_endpoint - INFO - 🔍 Search type: notes
+[TEST] 2025-07-22 20:40:06,035 - chat.endpoints.modular_chat_endpoint - INFO - ⚡ PROCESSING ENABLED SOURCES...
+[TEST] 2025-07-22 20:40:06,035 - chat.endpoints.modular_chat_endpoint - INFO - 🔍 STARTING RAG WITH CONDENSED QUERY (search_type: notes)...
+[TEST] 2025-07-22 20:40:06,035 - chat.rag.rag_processor - INFO - === STARTING RAG REQUEST ===
+[TEST] 2025-07-22 20:40:06,035 - chat.rag.rag_processor - INFO - Using custom query for RAG: Search my notes for information about PARL and predictable AI...
+[TEST] 2025-07-22 20:40:06,035 - chat.rag.rag_processor - INFO - === PARALLEL: QUERY EMBEDDING + ID RESOLUTION ===
+[TEST] 2025-07-22 20:40:06,035 - chat.rag.rag_processor - INFO - 🔄 Embedding query: Search my notes for information about PARL and predictable AI...
+[TEST] 2025-07-22 20:40:06,036 - chat.rag.rag_processor - INFO - 🔄 Resolving IDs for user 10001...
+[TEST] 2025-07-22 20:40:06,036 - chat.rag.rag_processor - INFO - === ID RESOLUTION WITH CORRECTED SCOPED SEARCH ===
+[TEST] 2025-07-22 20:40:06,036 - chat.rag.rag_processor - INFO - User: 10001
+[TEST] 2025-07-22 20:40:06,036 - chat.rag.rag_processor - INFO - Note IDs: None
+[TEST] 2025-07-22 20:40:06,036 - chat.rag.rag_processor - INFO - Folder IDs: None
+[TEST] 2025-07-22 20:40:06,036 - chat.rag.rag_processor - INFO - Conversation IDs: None
+[TEST] 2025-07-22 20:40:06,036 - chat.rag.rag_processor - INFO - 🌐 FULL CONTEXT SEARCH: Getting all user content
+[TEST] 2025-07-22 20:40:06,054 - chat.postgres.db_manager - INFO - Resolved 9 total user notes
+[TEST] 2025-07-22 20:40:06,068 - chat.postgres.db_manager - INFO - Resolved 9 total user conversations
+[TEST] 2025-07-22 20:40:06,068 - chat.rag.rag_processor - INFO - === RESOLVED WITH CORRECTED LOGIC ===
+[TEST] 2025-07-22 20:40:06,068 - chat.rag.rag_processor - INFO - Notes: 9
+[TEST] 2025-07-22 20:40:06,068 - chat.rag.rag_processor - INFO - Conversations: 9
+[TEST] 2025-07-22 20:40:06,068 - chat.rag.rag_processor - INFO - Search type: FULL CONTEXT
+[TEST] 2025-07-22 20:40:06,068 - chat.rag.rag_processor - INFO - ==================
+[TEST] 2025-07-22 20:40:06,068 - chat.rag.rag_processor - INFO - ✅ ID resolution completed: 9 notes, 9 conversations
+[TEST] 2025-07-22 20:40:06,166 - chat.rag.rag_processor - INFO - ✅ Query embedding completed
+[TEST] 2025-07-22 20:40:06,166 - chat.rag.rag_processor - INFO - === EMBEDDING CHECKS (AFTER ID RESOLUTION) ===
+[TEST] 2025-07-22 20:40:06,166 - chat.rag.rag_processor - INFO - 🔍 CHECKING EMBEDDINGS FOR RESOLVED IDs...
+[TEST] 2025-07-22 20:40:06,166 - chat.rag.rag_processor - INFO - 🌐 FULL CONTEXT SEARCH: Using background embedding for missing embeddings
+[TEST] 2025-07-22 20:40:06,187 - chat.postgres.embedding_operations - INFO - Notes without embeddings: 0/9
+[TEST] 2025-07-22 20:40:06,187 - chat.rag.rag_processor - INFO - ✅ All 9 notes have embeddings
+[TEST] 2025-07-22 20:40:06,201 - chat.postgres.embedding_operations - INFO - Conversations without embeddings (skipEmbedding=false): 0/9
+[TEST] 2025-07-22 20:40:06,202 - chat.rag.rag_processor - INFO - ✅ All 9 conversations have embeddings
+[TEST] 2025-07-22 20:40:06,202 - chat.rag.rag_processor - INFO - === NOTES SEARCH ===
+[TEST] 2025-07-22 20:40:06,211 - chat.postgres.db_manager - INFO - Notes-only vector search - notes: 9
+[TEST] 2025-07-22 20:40:06,227 - chat.postgres.db_manager - INFO - Notes-only vector search found 20 relevant chunks
+[TEST] 2025-07-22 20:40:06,227 - chat.rag.rag_processor - INFO - Found 20 relevant chunks using notes search
+[TEST] 2025-07-22 20:40:06,228 - chat.rag.rag_processor - INFO - === RAG CONTEXT SUMMARY ===
+[TEST] 2025-07-22 20:40:06,228 - chat.rag.rag_processor - INFO - Query: Search my notes for information about PARL and pre...
+[TEST] 2025-07-22 20:40:06,228 - chat.rag.rag_processor - INFO - Total chunks: 20
+[TEST] 2025-07-22 20:40:06,228 - chat.rag.rag_processor - INFO - Used notes: 3
+[TEST] 2025-07-22 20:40:06,228 - chat.rag.rag_processor - INFO - Used conversations: 0
+[TEST] 2025-07-22 20:40:06,228 - chat.rag.rag_processor - INFO - ===========================
+[TEST] 2025-07-22 20:40:06,228 - chat.endpoints.modular_chat_endpoint - INFO - 🧠 RAG COMPLETE: 20 chunks found
+[TEST] 2025-07-22 20:40:06,228 - chat.endpoints.modular_chat_endpoint - INFO - 🌊 STREAMING MODE: Using modular streaming generator
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - 🌊 === UNIFIED STREAMING RESPONSE (astream_chat) ===
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - 🌊 Chat ID: chatcmpl-modular-b57d92e4
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - 🌊 Model: gpt-4.1-nano, Provider: azure_inference
+[TEST] 2025-07-22 20:40:06,228 - main - INFO - 📦 Stream chunk 1: {"id": "chatcmpl-modular-b57d92e4", "object": "chat.completion.chunk", "created": 1753242006, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {}, "finish_reason": null}], "progress": {"stage": "initializing", "message": "Starting response generation..."}}
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - 🔧 === CONTEXT BUILDING STAGE ===
+[TEST] 2025-07-22 20:40:06,228 - chat.rag.rag_processor - INFO - Context length limit reached: 7572 chars
+[TEST] 2025-07-22 20:40:06,228 - chat.rag.rag_processor - INFO - Generated context text: 7576 chars from 3 chunks
+[TEST] 2025-07-22 20:40:06,228 - chat.rag.rag_processor - INFO - 🔍 === RAG CONTEXT CONTENT ===
+[TEST] 2025-07-22 20:40:06,228 - chat.rag.rag_processor - INFO - Context preview (first 500 chars):
+[Note '2311.18703v5.pdf'] The text presents a comprehensive study proposing Predictability-Aware Reinforcement Learning (PARL), a novel framework designed to induce predictable behavior in reinforcement learning (RL) agents by minimizing the entropy rate of their trajectories. The motivation stems from the observation that standard RL approaches, which often encourage exploration through policy entropy maximization, inadvertently produce agents whose behaviors are difficult to predict—posing cha...
+[TEST] 2025-07-22 20:40:06,228 - chat.rag.rag_processor - INFO - 📄 Individual chunks summary:
+[TEST] 2025-07-22 20:40:06,228 - chat.rag.rag_processor - INFO -   Chunk 1: [Note '2311.18703v5.pdf'] The text presents a comprehensive study proposing Predictability-Aware Rei...
+[TEST] 2025-07-22 20:40:06,228 - chat.rag.rag_processor - INFO -   Chunk 2: [Note '2311.18703v5.pdf'] Blue are PPO agents, orange are PARL agents. 24
+
+--- Page 25 ---
+
+Table 4:...
+[TEST] 2025-07-22 20:40:06,228 - chat.rag.rag_processor - INFO -   Chunk 3: [Note '2311.18703v5.pdf'] the average surrogate entropy exist and also minimize the entropy rate Fur...
+[TEST] 2025-07-22 20:40:06,228 - chat.rag.rag_processor - INFO - === END RAG CONTEXT CONTENT ===
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - 📚 RAG CONTEXT ADDED: 20 chunks
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - 📚 === RAG CONTEXT DETAILS ===
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - RAG context preview (first 300 chars):
+[Note '2311.18703v5.pdf'] The text presents a comprehensive study proposing Predictability-Aware Reinforcement Learning (PARL), a novel framework designed to induce predictable behavior in reinforcement learning (RL) agents by minimizing the entropy rate of their trajectories. The motivation stems f...
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - 📊 Chunk breakdown:
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO -   - Note chunks: 20
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO -   - Conversation chunks: 0
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO -   - Note IDs: [10001, 10002, 10003]
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - === END RAG CONTEXT DETAILS ===
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING WITH CONTEXT: Adding system message before last user message
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - 🌊 Context length: 7592 characters
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - 🌊 === FINAL COMBINED CONTEXT ===
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - Context preview (first 500 chars):
+KNOWLEDGE BASE:
+[Note '2311.18703v5.pdf'] The text presents a comprehensive study proposing Predictability-Aware Reinforcement Learning (PARL), a novel framework designed to induce predictable behavior in reinforcement learning (RL) agents by minimizing the entropy rate of their trajectories. The motivation stems from the observation that standard RL approaches, which often encourage exploration through policy entropy maximization, inadvertently produce agents whose behaviors are difficult to pr...
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - 📊 Context structure:
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO -   Part 1: KNOWLEDGE BASE (7592 chars)
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - === END FINAL COMBINED CONTEXT ===
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - 🔄 Converted 2 messages to ChatMessage objects
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - 🔄 Roles: ['system', 'user']
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - 🌊 Final chat messages count: 2
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - 🌊 Message roles: ['system', 'user']
+[TEST] 2025-07-22 20:40:06,228 - main - INFO - 📦 Stream chunk 2: {"id": "chatcmpl-modular-b57d92e4", "object": "chat.completion.chunk", "created": 1753242006, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"role": "assistant", "content": ""}, "finish_reason": null}], "progress": {"stage": "generating_response", "message": "Generating AI response..."}}
+[TEST] 2025-07-22 20:40:06,228 - chat.streaming.streaming_response_generator - INFO - 🌊 CALLING: llm.astream_chat (unified approach)
+[TEST] 2025-07-22 20:40:06,929 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 1 structure:
+[TEST] 2025-07-22 20:40:06,929 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:06,929 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:06,929 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:06,929 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: '...'
+[TEST] 2025-07-22 20:40:06,929 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'None...'
+[TEST] 2025-07-22 20:40:07,250 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 2 structure:
+[TEST] 2025-07-22 20:40:07,250 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:07,251 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:07,251 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:07,251 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: 'Based...'
+[TEST] 2025-07-22 20:40:07,251 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'Based...'
+[TEST] 2025-07-22 20:40:07,251 - main - INFO - 📦 Stream chunk 3: {"id": "chatcmpl-modular-b57d92e4", "object": "chat.completion.chunk", "created": 1753242007, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"content": "Based"}, "finish_reason": null}]}
+[TEST] 2025-07-22 20:40:07,251 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 3 structure:
+[TEST] 2025-07-22 20:40:07,251 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:07,251 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:07,251 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:07,251 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: ' on...'
+[TEST] 2025-07-22 20:40:07,251 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'Based on...'
+[TEST] 2025-07-22 20:40:07,251 - main - INFO - 📦 ... (logging first 3 chunks only, total so far: 4)
+[TEST] 2025-07-22 20:40:11,807 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING COMPLETED: 529 chunks, 2914 characters
+[TEST] 2025-07-22 20:40:11,808 - chat.streaming.streaming_response_generator - INFO - 🌊 Context used: True
+[TEST] 2025-07-22 20:40:11,808 - chat.streaming.streaming_response_generator - INFO - 🌊 === STREAMING RESPONSE COMPLETED ===
+[TEST] 2025-07-22 20:40:11,808 - main - INFO - ✅ Streaming complete: 531 chunks sent
+[2025-07-22 20:40:11 -0700] [22732] [INFO] 127.0.0.1:54695 POST /v1/chat/completions 1.1 200 - 7017220
+[TEST] 2025-07-22 20:40:11,810 - main - INFO - === CHAT REQUEST ===
+[TEST] 2025-07-22 20:40:11,810 - main - INFO - Method: POST
+[TEST] 2025-07-22 20:40:11,810 - main - INFO - URL: http://localhost:5002/v1/chat/completions
+[TEST] 2025-07-22 20:40:11,810 - main - INFO - Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Content-Type': 'application/json', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '177'}
+[TEST] 2025-07-22 20:40:11,810 - main - INFO - Request Body: {
+  "model": "gpt-4.1-nano",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What's in note id 10001?"
+    }
+  ],
+  "stream": true,
+  "enable_citations": true,
+  "note_ids": [
+    10001
+  ],
+  "user_id": 10001
+}
+[TEST] 2025-07-22 20:40:11,810 - main - INFO - ==================
+[TEST] 2025-07-22 20:40:11,810 - main - INFO - 🔄 Attempting to import modular_chat_endpoint...
+[TEST] 2025-07-22 20:40:11,810 - main - INFO - ✅ Successfully imported modular_chat_endpoint
+[TEST] 2025-07-22 20:40:11,810 - main - INFO - 🌊 Starting streaming response...
+[TEST] 2025-07-22 20:40:11,811 - chat.endpoints.modular_chat_endpoint - INFO - === NEW MODULAR CHAT REQUEST ===
+[TEST] 2025-07-22 20:40:11,811 - chat.endpoints.modular_chat_endpoint - INFO - User: 10001, RAG: True, Citations: True, WebSearch: False, Stream: True
+[TEST] 2025-07-22 20:40:11,811 - chat.endpoints.modular_chat_endpoint - INFO - Router Retriever: True, Generate Title: False
+[TEST] 2025-07-22 20:40:11,811 - chat.endpoints.modular_chat_endpoint - INFO - Provider: None, Model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:11,811 - chat.endpoints.modular_chat_endpoint - INFO - Attachments: 0 files
+[TEST] 2025-07-22 20:40:11,811 - chat.endpoints.modular_chat_endpoint - INFO - 💰 Defaulting to Azure Inference for cost savings: azure_inference with gpt-4.1-nano
+[TEST] 2025-07-22 20:40:11,811 - chat.provider.llm_provider - INFO - Provider selection - requested_provider: azure_inference, requested_model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:11,811 - chat.provider.llm_provider - INFO - 🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+[TEST] 2025-07-22 20:40:11,811 - chat.provider.llm_provider - INFO - 🎯 Override to Azure for cost savings: azure_inference with gpt-4.1-nano (requested: azure_inference)
+[TEST] 2025-07-22 20:40:11,811 - chat.endpoints.modular_chat_endpoint - INFO - ✅ Selected: azure_inference
+[TEST] 2025-07-22 20:40:11,811 - chat.endpoints.modular_chat_endpoint - INFO - 🔄 STARTING QUERY TRANSFORMATION...
+[TEST] 2025-07-22 20:40:11,811 - chat.query.query_transformer - INFO - ⚡ Query transformation temporarily disabled - using original query
+[TEST] 2025-07-22 20:40:11,811 - chat.endpoints.modular_chat_endpoint - INFO - ⚠️ Query transformation failed, using original query: temporarily_disabled
+[TEST] 2025-07-22 20:40:11,811 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING WITH CONDENSED QUERY...
+[TEST] 2025-07-22 20:40:12,994 - chat.router.intelligent_router - INFO - LLM selected tool 1: knowledge_base_notes
+[TEST] 2025-07-22 20:40:12,995 - chat.router.intelligent_router - INFO - LLM routing successful: knowledge_base_notes
+[TEST] 2025-07-22 20:40:12,995 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 Router decision: RAG=True, Web=False, Attachments=False
+[TEST] 2025-07-22 20:40:12,995 - chat.endpoints.modular_chat_endpoint - INFO - 🧠 Router reasoning: User is asking about a specific note in their notes database
+[TEST] 2025-07-22 20:40:12,995 - chat.endpoints.modular_chat_endpoint - INFO - 🔍 Search type: notes
+[TEST] 2025-07-22 20:40:12,995 - chat.endpoints.modular_chat_endpoint - INFO - ⚡ PROCESSING ENABLED SOURCES...
+[TEST] 2025-07-22 20:40:12,995 - chat.endpoints.modular_chat_endpoint - INFO - 🔍 STARTING RAG WITH CONDENSED QUERY (search_type: notes)...
+[TEST] 2025-07-22 20:40:12,995 - chat.rag.rag_processor - INFO - === STARTING RAG REQUEST ===
+[TEST] 2025-07-22 20:40:12,995 - chat.rag.rag_processor - INFO - Using custom query for RAG: What's in note id 10001?...
+[TEST] 2025-07-22 20:40:12,995 - chat.rag.rag_processor - INFO - === PARALLEL: QUERY EMBEDDING + ID RESOLUTION ===
+[TEST] 2025-07-22 20:40:12,995 - chat.rag.rag_processor - INFO - 🔄 Embedding query: What's in note id 10001?...
+[TEST] 2025-07-22 20:40:12,996 - chat.rag.rag_processor - INFO - 🔄 Resolving IDs for user 10001...
+[TEST] 2025-07-22 20:40:12,996 - chat.rag.rag_processor - INFO - === ID RESOLUTION WITH CORRECTED SCOPED SEARCH ===
+[TEST] 2025-07-22 20:40:12,996 - chat.rag.rag_processor - INFO - User: 10001
+[TEST] 2025-07-22 20:40:12,996 - chat.rag.rag_processor - INFO - Note IDs: [10001]
+[TEST] 2025-07-22 20:40:12,997 - chat.rag.rag_processor - INFO - Folder IDs: None
+[TEST] 2025-07-22 20:40:12,997 - chat.rag.rag_processor - INFO - Conversation IDs: None
+[TEST] 2025-07-22 20:40:12,997 - chat.rag.rag_processor - INFO - 🎯 SCOPED SEARCH: Using only specified IDs
+[TEST] 2025-07-22 20:40:13,012 - chat.postgres.db_manager - INFO - Resolved 1 specific note IDs
+[TEST] 2025-07-22 20:40:13,012 - chat.rag.rag_processor - INFO - === RESOLVED WITH CORRECTED LOGIC ===
+[TEST] 2025-07-22 20:40:13,012 - chat.rag.rag_processor - INFO - Notes: 1
+[TEST] 2025-07-22 20:40:13,012 - chat.rag.rag_processor - INFO - Conversations: 0
+[TEST] 2025-07-22 20:40:13,012 - chat.rag.rag_processor - INFO - Search type: SCOPED
+[TEST] 2025-07-22 20:40:13,012 - chat.rag.rag_processor - INFO - ==================
+[TEST] 2025-07-22 20:40:13,012 - chat.rag.rag_processor - INFO - ✅ ID resolution completed: 1 notes, 0 conversations
+[TEST] 2025-07-22 20:40:13,137 - chat.rag.rag_processor - INFO - ✅ Query embedding completed
+[TEST] 2025-07-22 20:40:13,137 - chat.rag.rag_processor - INFO - === EMBEDDING CHECKS (AFTER ID RESOLUTION) ===
+[TEST] 2025-07-22 20:40:13,137 - chat.rag.rag_processor - INFO - 🔍 CHECKING EMBEDDINGS FOR RESOLVED IDs...
+[TEST] 2025-07-22 20:40:13,137 - chat.rag.rag_processor - INFO - 🎯 TARGETED SEARCH: Ensuring embeddings exist for specific IDs (will wait if needed)
+[TEST] 2025-07-22 20:40:13,148 - chat.postgres.embedding_operations - INFO - Notes without embeddings: 0/1
+[TEST] 2025-07-22 20:40:13,148 - chat.rag.rag_processor - INFO - ✅ All 1 notes have embeddings
+[TEST] 2025-07-22 20:40:13,148 - chat.rag.rag_processor - INFO - === NOTES SEARCH ===
+[TEST] 2025-07-22 20:40:13,154 - chat.postgres.db_manager - INFO - Notes-only vector search - notes: 1
+[TEST] 2025-07-22 20:40:13,158 - chat.postgres.db_manager - INFO - Notes-only vector search found 20 relevant chunks
+[TEST] 2025-07-22 20:40:13,158 - chat.rag.rag_processor - INFO - Found 20 relevant chunks using notes search
+[TEST] 2025-07-22 20:40:13,158 - chat.rag.rag_processor - INFO - === RAG CONTEXT SUMMARY ===
+[TEST] 2025-07-22 20:40:13,158 - chat.rag.rag_processor - INFO - Query: What's in note id 10001?...
+[TEST] 2025-07-22 20:40:13,158 - chat.rag.rag_processor - INFO - Total chunks: 20
+[TEST] 2025-07-22 20:40:13,158 - chat.rag.rag_processor - INFO - Used notes: 1
+[TEST] 2025-07-22 20:40:13,158 - chat.rag.rag_processor - INFO - Used conversations: 0
+[TEST] 2025-07-22 20:40:13,158 - chat.rag.rag_processor - INFO - ===========================
+[TEST] 2025-07-22 20:40:13,158 - chat.endpoints.modular_chat_endpoint - INFO - 🧠 RAG COMPLETE: 20 chunks found
+[TEST] 2025-07-22 20:40:13,158 - chat.endpoints.modular_chat_endpoint - INFO - 🌊 STREAMING MODE: Using modular streaming generator
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO - 🌊 === UNIFIED STREAMING RESPONSE (astream_chat) ===
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO - 🌊 Chat ID: chatcmpl-modular-8a49c29b
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO - 🌊 Model: gpt-4.1-nano, Provider: azure_inference
+[TEST] 2025-07-22 20:40:13,158 - main - INFO - 📦 Stream chunk 1: {"id": "chatcmpl-modular-8a49c29b", "object": "chat.completion.chunk", "created": 1753242013, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {}, "finish_reason": null}], "progress": {"stage": "initializing", "message": "Starting response generation..."}}
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO - 🔧 === CONTEXT BUILDING STAGE ===
+[TEST] 2025-07-22 20:40:13,158 - chat.rag.rag_processor - INFO - Context length limit reached: 7068 chars
+[TEST] 2025-07-22 20:40:13,158 - chat.rag.rag_processor - INFO - Generated context text: 7072 chars from 3 chunks
+[TEST] 2025-07-22 20:40:13,158 - chat.rag.rag_processor - INFO - 🔍 === RAG CONTEXT CONTENT ===
+[TEST] 2025-07-22 20:40:13,158 - chat.rag.rag_processor - INFO - Context preview (first 500 chars):
+[Note '2311.18703v5.pdf'] 11 This result echoes the Simulation Lemma in Kearns & Singh (2002), but with a bound derived in infinite horizon by using the entropy properties.  7
+
+--- Page 8 ---
+
+[Note '2311.18703v5.pdf'] Blue are PPO agents, orange are PARL agents. 22
+
+--- Page 23 ---
+
+0.2   0.4   0.6   0.8   1.0   1.2   1.4  angle (rad)  0.2  0.4  0.6  0.8  1.0  1.2  1.4  position (m) 0.6   0.8   1.0   1.2   1.4  angle (rad)  0.2  0.4  0.6  0.8  1.0  1.2  1.4  position (m) 0.4   0.6   0.8   1.0  ...
+[TEST] 2025-07-22 20:40:13,158 - chat.rag.rag_processor - INFO - 📄 Individual chunks summary:
+[TEST] 2025-07-22 20:40:13,158 - chat.rag.rag_processor - INFO -   Chunk 1: [Note '2311.18703v5.pdf'] 11 This result echoes the Simulation Lemma in Kearns & Singh (2002), but w...
+[TEST] 2025-07-22 20:40:13,158 - chat.rag.rag_processor - INFO -   Chunk 2: [Note '2311.18703v5.pdf'] Blue are PPO agents, orange are PARL agents. 22
+
+--- Page 23 ---
+
+0.2   0....
+[TEST] 2025-07-22 20:40:13,158 - chat.rag.rag_processor - INFO -   Chunk 3: [Note '2311.18703v5.pdf'] Blue are PPO agents, orange are PARL agents 23
+
+--- Page 24 ---
+
+1.00   0....
+[TEST] 2025-07-22 20:40:13,158 - chat.rag.rag_processor - INFO - === END RAG CONTEXT CONTENT ===
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO - 📚 RAG CONTEXT ADDED: 20 chunks
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO - 📚 === RAG CONTEXT DETAILS ===
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO - RAG context preview (first 300 chars):
+[Note '2311.18703v5.pdf'] 11 This result echoes the Simulation Lemma in Kearns & Singh (2002), but with a bound derived in infinite horizon by using the entropy properties.  7
+
+--- Page 8 ---
+
+[Note '2311.18703v5.pdf'] Blue are PPO agents, orange are PARL agents. 22
+
+--- Page 23 ---
+
+0.2   0.4   0.6...
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO - 📊 Chunk breakdown:
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO -   - Note chunks: 20
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO -   - Conversation chunks: 0
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO -   - Note IDs: [10001]
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO - === END RAG CONTEXT DETAILS ===
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING WITH CONTEXT: Adding system message before last user message
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO - 🌊 Context length: 7088 characters
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO - 🌊 === FINAL COMBINED CONTEXT ===
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO - Context preview (first 500 chars):
+KNOWLEDGE BASE:
+[Note '2311.18703v5.pdf'] 11 This result echoes the Simulation Lemma in Kearns & Singh (2002), but with a bound derived in infinite horizon by using the entropy properties.  7
+
+--- Page 8 ---
+
+[Note '2311.18703v5.pdf'] Blue are PPO agents, orange are PARL agents. 22
+
+--- Page 23 ---
+
+0.2   0.4   0.6   0.8   1.0   1.2   1.4  angle (rad)  0.2  0.4  0.6  0.8  1.0  1.2  1.4  position (m) 0.6   0.8   1.0   1.2   1.4  angle (rad)  0.2  0.4  0.6  0.8  1.0  1.2  1.4  position (m) 0.4   0...
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO - 📊 Context structure:
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO -   Part 1: KNOWLEDGE BASE (7088 chars)
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO - === END FINAL COMBINED CONTEXT ===
+[TEST] 2025-07-22 20:40:13,158 - chat.streaming.streaming_response_generator - INFO - 🔄 Converted 2 messages to ChatMessage objects
+[TEST] 2025-07-22 20:40:13,159 - chat.streaming.streaming_response_generator - INFO - 🔄 Roles: ['system', 'user']
+[TEST] 2025-07-22 20:40:13,159 - chat.streaming.streaming_response_generator - INFO - 🌊 Final chat messages count: 2
+[TEST] 2025-07-22 20:40:13,159 - chat.streaming.streaming_response_generator - INFO - 🌊 Message roles: ['system', 'user']
+[TEST] 2025-07-22 20:40:13,159 - main - INFO - 📦 Stream chunk 2: {"id": "chatcmpl-modular-8a49c29b", "object": "chat.completion.chunk", "created": 1753242013, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"role": "assistant", "content": ""}, "finish_reason": null}], "progress": {"stage": "generating_response", "message": "Generating AI response..."}}
+[TEST] 2025-07-22 20:40:13,159 - chat.streaming.streaming_response_generator - INFO - 🌊 CALLING: llm.astream_chat (unified approach)
+[TEST] 2025-07-22 20:40:13,897 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 1 structure:
+[TEST] 2025-07-22 20:40:13,897 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:13,897 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:13,897 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:13,897 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: '...'
+[TEST] 2025-07-22 20:40:13,897 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'None...'
+[TEST] 2025-07-22 20:40:14,030 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 2 structure:
+[TEST] 2025-07-22 20:40:14,030 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:14,030 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:14,030 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:14,030 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: 'The...'
+[TEST] 2025-07-22 20:40:14,030 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'The...'
+[TEST] 2025-07-22 20:40:14,031 - main - INFO - 📦 Stream chunk 3: {"id": "chatcmpl-modular-8a49c29b", "object": "chat.completion.chunk", "created": 1753242014, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"content": "The"}, "finish_reason": null}]}
+[TEST] 2025-07-22 20:40:14,032 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 3 structure:
+[TEST] 2025-07-22 20:40:14,032 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:14,032 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:14,032 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:14,032 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: ' provided...'
+[TEST] 2025-07-22 20:40:14,032 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'The provided...'
+[TEST] 2025-07-22 20:40:14,032 - main - INFO - 📦 ... (logging first 3 chunks only, total so far: 4)
+[TEST] 2025-07-22 20:40:14,067 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING COMPLETED: 38 chunks, 175 characters
+[TEST] 2025-07-22 20:40:14,067 - chat.streaming.streaming_response_generator - INFO - 🌊 Context used: True
+[TEST] 2025-07-22 20:40:14,067 - chat.streaming.streaming_response_generator - INFO - 🌊 === STREAMING RESPONSE COMPLETED ===
+[TEST] 2025-07-22 20:40:14,067 - main - INFO - ✅ Streaming complete: 40 chunks sent
+[2025-07-22 20:40:14 -0700] [22732] [INFO] 127.0.0.1:54772 POST /v1/chat/completions 1.1 200 - 2257346
+[TEST] 2025-07-22 20:40:14,070 - main - INFO - === CHAT REQUEST ===
+[TEST] 2025-07-22 20:40:14,070 - main - INFO - Method: POST
+[TEST] 2025-07-22 20:40:14,070 - main - INFO - URL: http://localhost:5002/v1/chat/completions
+[TEST] 2025-07-22 20:40:14,070 - main - INFO - Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Content-Type': 'application/json', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '196'}
+[TEST] 2025-07-22 20:40:14,070 - main - INFO - Request Body: {
+  "model": "gpt-4.1-nano",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What did we discuss about machine learning in our conversations?"
+    }
+  ],
+  "stream": true,
+  "enable_citations": true,
+  "user_id": 10001
+}
+[TEST] 2025-07-22 20:40:14,070 - main - INFO - ==================
+[TEST] 2025-07-22 20:40:14,070 - main - INFO - 🔄 Attempting to import modular_chat_endpoint...
+[TEST] 2025-07-22 20:40:14,070 - main - INFO - ✅ Successfully imported modular_chat_endpoint
+[TEST] 2025-07-22 20:40:14,070 - main - INFO - 🌊 Starting streaming response...
+[TEST] 2025-07-22 20:40:14,070 - chat.endpoints.modular_chat_endpoint - INFO - === NEW MODULAR CHAT REQUEST ===
+[TEST] 2025-07-22 20:40:14,070 - chat.endpoints.modular_chat_endpoint - INFO - User: 10001, RAG: True, Citations: True, WebSearch: False, Stream: True
+[TEST] 2025-07-22 20:40:14,070 - chat.endpoints.modular_chat_endpoint - INFO - Router Retriever: True, Generate Title: False
+[TEST] 2025-07-22 20:40:14,070 - chat.endpoints.modular_chat_endpoint - INFO - Provider: None, Model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:14,070 - chat.endpoints.modular_chat_endpoint - INFO - Attachments: 0 files
+[TEST] 2025-07-22 20:40:14,070 - chat.endpoints.modular_chat_endpoint - INFO - 💰 Defaulting to Azure Inference for cost savings: azure_inference with gpt-4.1-nano
+[TEST] 2025-07-22 20:40:14,070 - chat.provider.llm_provider - INFO - Provider selection - requested_provider: azure_inference, requested_model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:14,071 - chat.provider.llm_provider - INFO - 🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+[TEST] 2025-07-22 20:40:14,071 - chat.provider.llm_provider - INFO - 🎯 Override to Azure for cost savings: azure_inference with gpt-4.1-nano (requested: azure_inference)
+[TEST] 2025-07-22 20:40:14,071 - chat.endpoints.modular_chat_endpoint - INFO - ✅ Selected: azure_inference
+[TEST] 2025-07-22 20:40:14,071 - chat.endpoints.modular_chat_endpoint - INFO - 🔄 STARTING QUERY TRANSFORMATION...
+[TEST] 2025-07-22 20:40:14,071 - chat.query.query_transformer - INFO - ⚡ Query transformation temporarily disabled - using original query
+[TEST] 2025-07-22 20:40:14,071 - chat.endpoints.modular_chat_endpoint - INFO - ⚠️ Query transformation failed, using original query: temporarily_disabled
+[TEST] 2025-07-22 20:40:14,071 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING WITH CONDENSED QUERY...
+[TEST] 2025-07-22 20:40:15,141 - chat.router.intelligent_router - INFO - LLM selected tool 2: knowledge_base_conversations
+[TEST] 2025-07-22 20:40:15,141 - chat.router.intelligent_router - INFO - LLM routing successful: knowledge_base_conversations
+[TEST] 2025-07-22 20:40:15,141 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 Router decision: RAG=True, Web=False, Attachments=False
+[TEST] 2025-07-22 20:40:15,141 - chat.endpoints.modular_chat_endpoint - INFO - 🧠 Router reasoning: User is asking about their chat history regarding machine learning discussions
+[TEST] 2025-07-22 20:40:15,141 - chat.endpoints.modular_chat_endpoint - INFO - 🔍 Search type: conversations
+[TEST] 2025-07-22 20:40:15,141 - chat.endpoints.modular_chat_endpoint - INFO - ⚡ PROCESSING ENABLED SOURCES...
+[TEST] 2025-07-22 20:40:15,141 - chat.endpoints.modular_chat_endpoint - INFO - 🔍 STARTING RAG WITH CONDENSED QUERY (search_type: conversations)...
+[TEST] 2025-07-22 20:40:15,141 - chat.rag.rag_processor - INFO - === STARTING RAG REQUEST ===
+[TEST] 2025-07-22 20:40:15,141 - chat.rag.rag_processor - INFO - Using custom query for RAG: What did we discuss about machine learning in our conversations?...
+[TEST] 2025-07-22 20:40:15,141 - chat.rag.rag_processor - INFO - === PARALLEL: QUERY EMBEDDING + ID RESOLUTION ===
+[TEST] 2025-07-22 20:40:15,141 - chat.rag.rag_processor - INFO - 🔄 Embedding query: What did we discuss about machine learning in our conversations?...
+[TEST] 2025-07-22 20:40:15,141 - chat.rag.rag_processor - INFO - 🔄 Resolving IDs for user 10001...
+[TEST] 2025-07-22 20:40:15,141 - chat.rag.rag_processor - INFO - === ID RESOLUTION WITH CORRECTED SCOPED SEARCH ===
+[TEST] 2025-07-22 20:40:15,141 - chat.rag.rag_processor - INFO - User: 10001
+[TEST] 2025-07-22 20:40:15,141 - chat.rag.rag_processor - INFO - Note IDs: None
+[TEST] 2025-07-22 20:40:15,141 - chat.rag.rag_processor - INFO - Folder IDs: None
+[TEST] 2025-07-22 20:40:15,141 - chat.rag.rag_processor - INFO - Conversation IDs: None
+[TEST] 2025-07-22 20:40:15,142 - chat.rag.rag_processor - INFO - 🌐 FULL CONTEXT SEARCH: Getting all user content
+[TEST] 2025-07-22 20:40:15,158 - chat.postgres.db_manager - INFO - Resolved 9 total user notes
+[TEST] 2025-07-22 20:40:15,170 - chat.postgres.db_manager - INFO - Resolved 9 total user conversations
+[TEST] 2025-07-22 20:40:15,170 - chat.rag.rag_processor - INFO - === RESOLVED WITH CORRECTED LOGIC ===
+[TEST] 2025-07-22 20:40:15,170 - chat.rag.rag_processor - INFO - Notes: 9
+[TEST] 2025-07-22 20:40:15,170 - chat.rag.rag_processor - INFO - Conversations: 9
+[TEST] 2025-07-22 20:40:15,170 - chat.rag.rag_processor - INFO - Search type: FULL CONTEXT
+[TEST] 2025-07-22 20:40:15,170 - chat.rag.rag_processor - INFO - ==================
+[TEST] 2025-07-22 20:40:15,170 - chat.rag.rag_processor - INFO - ✅ ID resolution completed: 9 notes, 9 conversations
+[TEST] 2025-07-22 20:40:15,293 - chat.rag.rag_processor - INFO - ✅ Query embedding completed
+[TEST] 2025-07-22 20:40:15,293 - chat.rag.rag_processor - INFO - === EMBEDDING CHECKS (AFTER ID RESOLUTION) ===
+[TEST] 2025-07-22 20:40:15,293 - chat.rag.rag_processor - INFO - 🔍 CHECKING EMBEDDINGS FOR RESOLVED IDs...
+[TEST] 2025-07-22 20:40:15,293 - chat.rag.rag_processor - INFO - 🌐 FULL CONTEXT SEARCH: Using background embedding for missing embeddings
+[TEST] 2025-07-22 20:40:15,300 - chat.postgres.embedding_operations - INFO - Notes without embeddings: 0/9
+[TEST] 2025-07-22 20:40:15,300 - chat.rag.rag_processor - INFO - ✅ All 9 notes have embeddings
+[TEST] 2025-07-22 20:40:15,307 - chat.postgres.embedding_operations - INFO - Conversations without embeddings (skipEmbedding=false): 0/9
+[TEST] 2025-07-22 20:40:15,307 - chat.rag.rag_processor - INFO - ✅ All 9 conversations have embeddings
+[TEST] 2025-07-22 20:40:15,307 - chat.rag.rag_processor - INFO - === CONVERSATIONS SEARCH ===
+[TEST] 2025-07-22 20:40:15,312 - chat.postgres.db_manager - INFO - Conversations-only vector search - conversations: 9
+[TEST] 2025-07-22 20:40:15,315 - chat.postgres.db_manager - INFO - Conversations-only vector search found 20 relevant chunks
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO - Found 20 relevant chunks using conversations search
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO - === RAG CONTEXT SUMMARY ===
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO - Query: What did we discuss about machine learning in our ...
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO - Total chunks: 20
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO - Used notes: 0
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO - Used conversations: 9
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO - ===========================
+[TEST] 2025-07-22 20:40:15,316 - chat.endpoints.modular_chat_endpoint - INFO - 🧠 RAG COMPLETE: 20 chunks found
+[TEST] 2025-07-22 20:40:15,316 - chat.endpoints.modular_chat_endpoint - INFO - 🌊 STREAMING MODE: Using modular streaming generator
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - 🌊 === UNIFIED STREAMING RESPONSE (astream_chat) ===
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - 🌊 Chat ID: chatcmpl-modular-ad7d89f7
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - 🌊 Model: gpt-4.1-nano, Provider: azure_inference
+[TEST] 2025-07-22 20:40:15,316 - main - INFO - 📦 Stream chunk 1: {"id": "chatcmpl-modular-ad7d89f7", "object": "chat.completion.chunk", "created": 1753242015, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {}, "finish_reason": null}], "progress": {"stage": "initializing", "message": "Starting response generation..."}}
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - 🔧 === CONTEXT BUILDING STAGE ===
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO - Context length limit reached: 7825 chars
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO - Generated context text: 7847 chars from 12 chunks
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO - 🔍 === RAG CONTEXT CONTENT ===
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO - Context preview (first 500 chars):
+[Conversation 'Building Faster with AI: Andrew Ng's Insights'] User: What are Andrew Ng's main points about building with AI?
+
+Assistant: Andrew Ng emphasizes several key principles for building with AI:
+
+1. **Iterative Development** - Start small, test quickly, and iterate based on results
+2. **Data-Centric AI** - Focus on improving data quality over model complexity
+3. **Domain Expertise Matters** - Combine AI capabilities with deep domain knowledge
+4. **Build vs Buy** - Understand when to use...
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO - 📄 Individual chunks summary:
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO -   Chunk 1: [Conversation 'Building Faster with AI: Andrew Ng's Insights'] User: What are Andrew Ng's main point...
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO -   Chunk 2: [Conversation 'Building Faster with AI: Andrew Ng's Insights'] User: How does he suggest teams get s...
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO -   Chunk 3: [Conversation 'Graph Reasoning with LLMs: The G1 Approach'] User: Why do LLMs struggle with graph-st...
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO -   ... and 9 more chunks
+[TEST] 2025-07-22 20:40:15,316 - chat.rag.rag_processor - INFO - === END RAG CONTEXT CONTENT ===
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - 📚 RAG CONTEXT ADDED: 20 chunks
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - 📚 === RAG CONTEXT DETAILS ===
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - RAG context preview (first 300 chars):
+[Conversation 'Building Faster with AI: Andrew Ng's Insights'] User: What are Andrew Ng's main points about building with AI?
+
+Assistant: Andrew Ng emphasizes several key principles for building with AI:
+
+1. **Iterative Development** - Start small, test quickly, and iterate based on results
+2. **Dat...
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - 📊 Chunk breakdown:
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO -   - Note chunks: 0
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO -   - Conversation chunks: 20
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO -   - Conversation IDs: [10001, 10002, 10003, 10004, 10005]...
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - === END RAG CONTEXT DETAILS ===
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING WITH CONTEXT: Adding system message before last user message
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - 🌊 Context length: 7863 characters
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - 🌊 === FINAL COMBINED CONTEXT ===
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - Context preview (first 500 chars):
+KNOWLEDGE BASE:
+[Conversation 'Building Faster with AI: Andrew Ng's Insights'] User: What are Andrew Ng's main points about building with AI?
+
+Assistant: Andrew Ng emphasizes several key principles for building with AI:
+
+1. **Iterative Development** - Start small, test quickly, and iterate based on results
+2. **Data-Centric AI** - Focus on improving data quality over model complexity
+3. **Domain Expertise Matters** - Combine AI capabilities with deep domain knowledge
+4. **Build vs Buy** - Unders...
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - 📊 Context structure:
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO -   Part 1: KNOWLEDGE BASE (7863 chars)
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - === END FINAL COMBINED CONTEXT ===
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - 🔄 Converted 2 messages to ChatMessage objects
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - 🔄 Roles: ['system', 'user']
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - 🌊 Final chat messages count: 2
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - 🌊 Message roles: ['system', 'user']
+[TEST] 2025-07-22 20:40:15,316 - main - INFO - 📦 Stream chunk 2: {"id": "chatcmpl-modular-ad7d89f7", "object": "chat.completion.chunk", "created": 1753242015, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"role": "assistant", "content": ""}, "finish_reason": null}], "progress": {"stage": "generating_response", "message": "Generating AI response..."}}
+[TEST] 2025-07-22 20:40:15,316 - chat.streaming.streaming_response_generator - INFO - 🌊 CALLING: llm.astream_chat (unified approach)
+[TEST] 2025-07-22 20:40:16,015 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 1 structure:
+[TEST] 2025-07-22 20:40:16,015 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:16,015 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:16,016 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:16,016 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: '...'
+[TEST] 2025-07-22 20:40:16,016 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'None...'
+[TEST] 2025-07-22 20:40:16,518 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 2 structure:
+[TEST] 2025-07-22 20:40:16,518 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:16,518 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:16,519 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:16,519 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: 'In...'
+[TEST] 2025-07-22 20:40:16,519 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'In...'
+[TEST] 2025-07-22 20:40:16,519 - main - INFO - 📦 Stream chunk 3: {"id": "chatcmpl-modular-ad7d89f7", "object": "chat.completion.chunk", "created": 1753242016, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"content": "In"}, "finish_reason": null}]}
+[TEST] 2025-07-22 20:40:16,519 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 3 structure:
+[TEST] 2025-07-22 20:40:16,519 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:16,519 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:16,519 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:16,519 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: ' our...'
+[TEST] 2025-07-22 20:40:16,519 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'In our...'
+[TEST] 2025-07-22 20:40:16,519 - main - INFO - 📦 ... (logging first 3 chunks only, total so far: 4)
+[TEST] 2025-07-22 20:40:17,279 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING COMPLETED: 141 chunks, 850 characters
+[TEST] 2025-07-22 20:40:17,279 - chat.streaming.streaming_response_generator - INFO - 🌊 Context used: True
+[TEST] 2025-07-22 20:40:17,279 - chat.streaming.streaming_response_generator - INFO - 🌊 === STREAMING RESPONSE COMPLETED ===
+[TEST] 2025-07-22 20:40:17,280 - main - INFO - ✅ Streaming complete: 143 chunks sent
+[2025-07-22 20:40:17 -0700] [22732] [INFO] 127.0.0.1:54793 POST /v1/chat/completions 1.1 200 - 3210508
+[TEST] 2025-07-22 20:40:17,283 - main - INFO - === CHAT REQUEST ===
+[TEST] 2025-07-22 20:40:17,283 - main - INFO - Method: POST
+[TEST] 2025-07-22 20:40:17,283 - main - INFO - URL: http://localhost:5002/v1/chat/completions
+[TEST] 2025-07-22 20:40:17,283 - main - INFO - Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Content-Type': 'application/json', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '204'}
+[TEST] 2025-07-22 20:40:17,283 - main - INFO - Request Body: {
+  "model": "gpt-4.1-nano",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Search both my notes and conversations for information about AI startups"
+    }
+  ],
+  "stream": true,
+  "enable_citations": true,
+  "user_id": 10001
+}
+[TEST] 2025-07-22 20:40:17,283 - main - INFO - ==================
+[TEST] 2025-07-22 20:40:17,283 - main - INFO - 🔄 Attempting to import modular_chat_endpoint...
+[TEST] 2025-07-22 20:40:17,283 - main - INFO - ✅ Successfully imported modular_chat_endpoint
+[TEST] 2025-07-22 20:40:17,283 - main - INFO - 🌊 Starting streaming response...
+[TEST] 2025-07-22 20:40:17,283 - chat.endpoints.modular_chat_endpoint - INFO - === NEW MODULAR CHAT REQUEST ===
+[TEST] 2025-07-22 20:40:17,283 - chat.endpoints.modular_chat_endpoint - INFO - User: 10001, RAG: True, Citations: True, WebSearch: False, Stream: True
+[TEST] 2025-07-22 20:40:17,283 - chat.endpoints.modular_chat_endpoint - INFO - Router Retriever: True, Generate Title: False
+[TEST] 2025-07-22 20:40:17,283 - chat.endpoints.modular_chat_endpoint - INFO - Provider: None, Model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:17,283 - chat.endpoints.modular_chat_endpoint - INFO - Attachments: 0 files
+[TEST] 2025-07-22 20:40:17,283 - chat.endpoints.modular_chat_endpoint - INFO - 💰 Defaulting to Azure Inference for cost savings: azure_inference with gpt-4.1-nano
+[TEST] 2025-07-22 20:40:17,283 - chat.provider.llm_provider - INFO - Provider selection - requested_provider: azure_inference, requested_model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:17,283 - chat.provider.llm_provider - INFO - 🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+[TEST] 2025-07-22 20:40:17,283 - chat.provider.llm_provider - INFO - 🎯 Override to Azure for cost savings: azure_inference with gpt-4.1-nano (requested: azure_inference)
+[TEST] 2025-07-22 20:40:17,283 - chat.endpoints.modular_chat_endpoint - INFO - ✅ Selected: azure_inference
+[TEST] 2025-07-22 20:40:17,283 - chat.endpoints.modular_chat_endpoint - INFO - 🔄 STARTING QUERY TRANSFORMATION...
+[TEST] 2025-07-22 20:40:17,283 - chat.query.query_transformer - INFO - ⚡ Query transformation temporarily disabled - using original query
+[TEST] 2025-07-22 20:40:17,283 - chat.endpoints.modular_chat_endpoint - INFO - ⚠️ Query transformation failed, using original query: temporarily_disabled
+[TEST] 2025-07-22 20:40:17,283 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING WITH CONDENSED QUERY...
+[TEST] 2025-07-22 20:40:19,140 - chat.router.intelligent_router - INFO - LLM selected tool 3: knowledge_base_full
+[TEST] 2025-07-22 20:40:19,140 - chat.router.intelligent_router - INFO - LLM routing successful: knowledge_base_full
+[TEST] 2025-07-22 20:40:19,140 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 Router decision: RAG=True, Web=False, Attachments=False
+[TEST] 2025-07-22 20:40:19,140 - chat.endpoints.modular_chat_endpoint - INFO - 🧠 Router reasoning: The query involves searching both notes and conversations for information about AI startups, which requires access to both sources.
+[TEST] 2025-07-22 20:40:19,140 - chat.endpoints.modular_chat_endpoint - INFO - 🔍 Search type: mixed
+[TEST] 2025-07-22 20:40:19,140 - chat.endpoints.modular_chat_endpoint - INFO - ⚡ PROCESSING ENABLED SOURCES...
+[TEST] 2025-07-22 20:40:19,140 - chat.endpoints.modular_chat_endpoint - INFO - 🔍 STARTING RAG WITH CONDENSED QUERY (search_type: mixed)...
+[TEST] 2025-07-22 20:40:19,140 - chat.rag.rag_processor - INFO - === STARTING RAG REQUEST ===
+[TEST] 2025-07-22 20:40:19,140 - chat.rag.rag_processor - INFO - Using custom query for RAG: Search both my notes and conversations for information about AI startups...
+[TEST] 2025-07-22 20:40:19,140 - chat.rag.rag_processor - INFO - === PARALLEL: QUERY EMBEDDING + ID RESOLUTION ===
+[TEST] 2025-07-22 20:40:19,140 - chat.rag.rag_processor - INFO - 🔄 Embedding query: Search both my notes and conversations for information about AI startups...
+[TEST] 2025-07-22 20:40:19,141 - chat.rag.rag_processor - INFO - 🔄 Resolving IDs for user 10001...
+[TEST] 2025-07-22 20:40:19,141 - chat.rag.rag_processor - INFO - === ID RESOLUTION WITH CORRECTED SCOPED SEARCH ===
+[TEST] 2025-07-22 20:40:19,141 - chat.rag.rag_processor - INFO - User: 10001
+[TEST] 2025-07-22 20:40:19,141 - chat.rag.rag_processor - INFO - Note IDs: None
+[TEST] 2025-07-22 20:40:19,141 - chat.rag.rag_processor - INFO - Folder IDs: None
+[TEST] 2025-07-22 20:40:19,141 - chat.rag.rag_processor - INFO - Conversation IDs: None
+[TEST] 2025-07-22 20:40:19,141 - chat.rag.rag_processor - INFO - 🌐 FULL CONTEXT SEARCH: Getting all user content
+[TEST] 2025-07-22 20:40:19,148 - chat.postgres.db_manager - INFO - Resolved 9 total user notes
+[TEST] 2025-07-22 20:40:19,156 - chat.postgres.db_manager - INFO - Resolved 9 total user conversations
+[TEST] 2025-07-22 20:40:19,156 - chat.rag.rag_processor - INFO - === RESOLVED WITH CORRECTED LOGIC ===
+[TEST] 2025-07-22 20:40:19,156 - chat.rag.rag_processor - INFO - Notes: 9
+[TEST] 2025-07-22 20:40:19,156 - chat.rag.rag_processor - INFO - Conversations: 9
+[TEST] 2025-07-22 20:40:19,156 - chat.rag.rag_processor - INFO - Search type: FULL CONTEXT
+[TEST] 2025-07-22 20:40:19,156 - chat.rag.rag_processor - INFO - ==================
+[TEST] 2025-07-22 20:40:19,156 - chat.rag.rag_processor - INFO - ✅ ID resolution completed: 9 notes, 9 conversations
+[TEST] 2025-07-22 20:40:19,271 - chat.rag.rag_processor - INFO - ✅ Query embedding completed
+[TEST] 2025-07-22 20:40:19,271 - chat.rag.rag_processor - INFO - === EMBEDDING CHECKS (AFTER ID RESOLUTION) ===
+[TEST] 2025-07-22 20:40:19,271 - chat.rag.rag_processor - INFO - 🔍 CHECKING EMBEDDINGS FOR RESOLVED IDs...
+[TEST] 2025-07-22 20:40:19,271 - chat.rag.rag_processor - INFO - 🌐 FULL CONTEXT SEARCH: Using background embedding for missing embeddings
+[TEST] 2025-07-22 20:40:19,286 - chat.postgres.embedding_operations - INFO - Notes without embeddings: 0/9
+[TEST] 2025-07-22 20:40:19,287 - chat.rag.rag_processor - INFO - ✅ All 9 notes have embeddings
+[TEST] 2025-07-22 20:40:19,300 - chat.postgres.embedding_operations - INFO - Conversations without embeddings (skipEmbedding=false): 0/9
+[TEST] 2025-07-22 20:40:19,301 - chat.rag.rag_processor - INFO - ✅ All 9 conversations have embeddings
+[TEST] 2025-07-22 20:40:19,301 - chat.rag.rag_processor - INFO - === MIXED SEARCH ===
+[TEST] 2025-07-22 20:40:19,307 - chat.postgres.db_manager - INFO - Mixed vector search - notes: 9, conversations: 9
+[TEST] 2025-07-22 20:40:19,318 - chat.postgres.db_manager - INFO - Mixed vector search found 20 relevant chunks
+[TEST] 2025-07-22 20:40:19,318 - chat.rag.rag_processor - INFO - Found 20 relevant chunks using mixed search
+[TEST] 2025-07-22 20:40:19,318 - chat.rag.rag_processor - INFO - === RAG CONTEXT SUMMARY ===
+[TEST] 2025-07-22 20:40:19,318 - chat.rag.rag_processor - INFO - Query: Search both my notes and conversations for informa...
+[TEST] 2025-07-22 20:40:19,318 - chat.rag.rag_processor - INFO - Total chunks: 20
+[TEST] 2025-07-22 20:40:19,318 - chat.rag.rag_processor - INFO - Used notes: 4
+[TEST] 2025-07-22 20:40:19,318 - chat.rag.rag_processor - INFO - Used conversations: 2
+[TEST] 2025-07-22 20:40:19,318 - chat.rag.rag_processor - INFO - ===========================
+[TEST] 2025-07-22 20:40:19,318 - chat.endpoints.modular_chat_endpoint - INFO - 🧠 RAG COMPLETE: 20 chunks found
+[TEST] 2025-07-22 20:40:19,318 - chat.endpoints.modular_chat_endpoint - INFO - 🌊 STREAMING MODE: Using modular streaming generator
+[TEST] 2025-07-22 20:40:19,318 - chat.streaming.streaming_response_generator - INFO - 🌊 === UNIFIED STREAMING RESPONSE (astream_chat) ===
+[TEST] 2025-07-22 20:40:19,318 - chat.streaming.streaming_response_generator - INFO - 🌊 Chat ID: chatcmpl-modular-9bb0e781
+[TEST] 2025-07-22 20:40:19,318 - chat.streaming.streaming_response_generator - INFO - 🌊 Model: gpt-4.1-nano, Provider: azure_inference
+[TEST] 2025-07-22 20:40:19,319 - main - INFO - 📦 Stream chunk 1: {"id": "chatcmpl-modular-9bb0e781", "object": "chat.completion.chunk", "created": 1753242019, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {}, "finish_reason": null}], "progress": {"stage": "initializing", "message": "Starting response generation..."}}
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - 🔧 === CONTEXT BUILDING STAGE ===
+[TEST] 2025-07-22 20:40:19,319 - chat.rag.rag_processor - INFO - Context length limit reached: 4840 chars
+[TEST] 2025-07-22 20:40:19,319 - chat.rag.rag_processor - INFO - Generated context text: 4842 chars from 2 chunks
+[TEST] 2025-07-22 20:40:19,319 - chat.rag.rag_processor - INFO - 🔍 === RAG CONTEXT CONTENT ===
+[TEST] 2025-07-22 20:40:19,319 - chat.rag.rag_processor - INFO - Context preview (first 500 chars):
+[Note 'Startup Ideas You Can Now Build With AI'] The conversation centers on the rapidly evolving landscape of AI-enabled startups, emphasizing both unprecedented opportunities and the shifting nature of foundational challenges. The speakers discuss how the explosion of large language models (LLMs) and AI agents has fundamentally altered the startup idea space, particularly by enabling new forms of infrastructure, tooling, and application layers that were previously impractical or impossible. Th...
+[TEST] 2025-07-22 20:40:19,319 - chat.rag.rag_processor - INFO - 📄 Individual chunks summary:
+[TEST] 2025-07-22 20:40:19,319 - chat.rag.rag_processor - INFO -   Chunk 1: [Note 'Startup Ideas You Can Now Build With AI'] The conversation centers on the rapidly evolving la...
+[TEST] 2025-07-22 20:40:19,319 - chat.rag.rag_processor - INFO -   Chunk 2: [Conversation 'AI-Enabled Startup Opportunities in 2024'] User: What startup ideas are now possible ...
+[TEST] 2025-07-22 20:40:19,319 - chat.rag.rag_processor - INFO - === END RAG CONTEXT CONTENT ===
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - 📚 RAG CONTEXT ADDED: 20 chunks
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - 📚 === RAG CONTEXT DETAILS ===
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - RAG context preview (first 300 chars):
+[Note 'Startup Ideas You Can Now Build With AI'] The conversation centers on the rapidly evolving landscape of AI-enabled startups, emphasizing both unprecedented opportunities and the shifting nature of foundational challenges. The speakers discuss how the explosion of large language models (LLMs) ...
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - 📊 Chunk breakdown:
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO -   - Note chunks: 17
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO -   - Conversation chunks: 3
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO -   - Note IDs: [10009, 10004, 10006, 10007]
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO -   - Conversation IDs: [10009, 10004]
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - === END RAG CONTEXT DETAILS ===
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING WITH CONTEXT: Adding system message before last user message
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - 🌊 Context length: 4858 characters
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - 🌊 === FINAL COMBINED CONTEXT ===
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - Context preview (first 500 chars):
+KNOWLEDGE BASE:
+[Note 'Startup Ideas You Can Now Build With AI'] The conversation centers on the rapidly evolving landscape of AI-enabled startups, emphasizing both unprecedented opportunities and the shifting nature of foundational challenges. The speakers discuss how the explosion of large language models (LLMs) and AI agents has fundamentally altered the startup idea space, particularly by enabling new forms of infrastructure, tooling, and application layers that were previously impractical o...
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - 📊 Context structure:
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO -   Part 1: KNOWLEDGE BASE (4858 chars)
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - === END FINAL COMBINED CONTEXT ===
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - 🔄 Converted 2 messages to ChatMessage objects
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - 🔄 Roles: ['system', 'user']
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - 🌊 Final chat messages count: 2
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - 🌊 Message roles: ['system', 'user']
+[TEST] 2025-07-22 20:40:19,319 - main - INFO - 📦 Stream chunk 2: {"id": "chatcmpl-modular-9bb0e781", "object": "chat.completion.chunk", "created": 1753242019, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"role": "assistant", "content": ""}, "finish_reason": null}], "progress": {"stage": "generating_response", "message": "Generating AI response..."}}
+[TEST] 2025-07-22 20:40:19,319 - chat.streaming.streaming_response_generator - INFO - 🌊 CALLING: llm.astream_chat (unified approach)
+[TEST] 2025-07-22 20:40:19,954 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 1 structure:
+[TEST] 2025-07-22 20:40:19,955 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:19,955 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:19,955 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:19,955 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: '...'
+[TEST] 2025-07-22 20:40:19,955 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'None...'
+[TEST] 2025-07-22 20:40:20,203 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 2 structure:
+[TEST] 2025-07-22 20:40:20,203 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:20,203 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:20,203 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:20,203 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: 'I...'
+[TEST] 2025-07-22 20:40:20,203 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'I...'
+[TEST] 2025-07-22 20:40:20,203 - main - INFO - 📦 Stream chunk 3: {"id": "chatcmpl-modular-9bb0e781", "object": "chat.completion.chunk", "created": 1753242020, "model": "gpt-4.1-nano", "provider": "azure_inference", "choices": [{"index": 0, "delta": {"content": "I"}, "finish_reason": null}]}
+[TEST] 2025-07-22 20:40:20,207 - chat.streaming.streaming_response_generator - INFO - 🔍 DEBUG Chunk 3 structure:
+[TEST] 2025-07-22 20:40:20,207 - chat.streaming.streaming_response_generator - INFO - 🔍 - Type: <class 'llama_index.core.base.llms.types.ChatResponse'>
+[TEST] 2025-07-22 20:40:20,208 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has delta: True
+[TEST] 2025-07-22 20:40:20,208 - chat.streaming.streaming_response_generator - INFO - 🔍 - Has message: True
+[TEST] 2025-07-22 20:40:20,208 - chat.streaming.streaming_response_generator - INFO - 🔍 - Delta content: ' don't...'
+[TEST] 2025-07-22 20:40:20,208 - chat.streaming.streaming_response_generator - INFO - 🔍 - Message content: 'I don't...'
+[TEST] 2025-07-22 20:40:20,208 - main - INFO - 📦 ... (logging first 3 chunks only, total so far: 4)
+[TEST] 2025-07-22 20:40:21,763 - chat.streaming.streaming_response_generator - INFO - 🌊 STREAMING COMPLETED: 228 chunks, 1320 characters
+[TEST] 2025-07-22 20:40:21,763 - chat.streaming.streaming_response_generator - INFO - 🌊 Context used: True
+[TEST] 2025-07-22 20:40:21,764 - chat.streaming.streaming_response_generator - INFO - 🌊 === STREAMING RESPONSE COMPLETED ===
+[TEST] 2025-07-22 20:40:21,764 - main - INFO - ✅ Streaming complete: 230 chunks sent
+[2025-07-22 20:40:21 -0700] [22732] [INFO] 127.0.0.1:54820 POST /v1/chat/completions 1.1 200 - 4481449
+[TEST] 2025-07-22 20:40:21,766 - main - INFO - === CHAT REQUEST ===
+[TEST] 2025-07-22 20:40:21,766 - main - INFO - Method: POST
+[TEST] 2025-07-22 20:40:21,766 - main - INFO - URL: http://localhost:5002/v1/chat/completions
+[TEST] 2025-07-22 20:40:21,766 - main - INFO - Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'Content-Type': 'application/json', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'Python/3.13 aiohttp/3.11.18', 'Content-Length': '193'}
+[TEST] 2025-07-22 20:40:21,766 - main - INFO - Request Body: {
+  "model": "gpt-4.1-nano",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Find all my notes about G1 and graph reasoning with citations"
+    }
+  ],
+  "stream": true,
+  "enable_citations": true,
+  "user_id": 10001
+}
+[TEST] 2025-07-22 20:40:21,766 - main - INFO - ==================
+[TEST] 2025-07-22 20:40:21,766 - main - INFO - 🔄 Attempting to import modular_chat_endpoint...
+[TEST] 2025-07-22 20:40:21,766 - main - INFO - ✅ Successfully imported modular_chat_endpoint
+[TEST] 2025-07-22 20:40:21,766 - main - INFO - 🌊 Starting streaming response...
+[TEST] 2025-07-22 20:40:21,766 - chat.endpoints.modular_chat_endpoint - INFO - === NEW MODULAR CHAT REQUEST ===
+[TEST] 2025-07-22 20:40:21,766 - chat.endpoints.modular_chat_endpoint - INFO - User: 10001, RAG: True, Citations: True, WebSearch: False, Stream: True
+[TEST] 2025-07-22 20:40:21,766 - chat.endpoints.modular_chat_endpoint - INFO - Router Retriever: True, Generate Title: False
+[TEST] 2025-07-22 20:40:21,766 - chat.endpoints.modular_chat_endpoint - INFO - Provider: None, Model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:21,766 - chat.endpoints.modular_chat_endpoint - INFO - Attachments: 0 files
+[TEST] 2025-07-22 20:40:21,766 - chat.endpoints.modular_chat_endpoint - INFO - 💰 Defaulting to Azure Inference for cost savings: azure_inference with gpt-4.1-nano
+[TEST] 2025-07-22 20:40:21,766 - chat.provider.llm_provider - INFO - Provider selection - requested_provider: azure_inference, requested_model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:21,766 - chat.provider.llm_provider - INFO - 🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+[TEST] 2025-07-22 20:40:21,766 - chat.provider.llm_provider - INFO - 🎯 Override to Azure for cost savings: azure_inference with gpt-4.1-nano (requested: azure_inference)
+[TEST] 2025-07-22 20:40:21,766 - chat.endpoints.modular_chat_endpoint - INFO - ✅ Selected: azure_inference
+[TEST] 2025-07-22 20:40:21,766 - chat.endpoints.modular_chat_endpoint - INFO - 🔄 STARTING QUERY TRANSFORMATION...
+[TEST] 2025-07-22 20:40:21,766 - chat.query.query_transformer - INFO - ⚡ Query transformation temporarily disabled - using original query
+[TEST] 2025-07-22 20:40:21,766 - chat.endpoints.modular_chat_endpoint - INFO - ⚠️ Query transformation failed, using original query: temporarily_disabled
+[TEST] 2025-07-22 20:40:21,766 - chat.endpoints.modular_chat_endpoint - INFO - 🎯 USING INTELLIGENT ROUTER FOR DECISION-MAKING WITH CONDENSED QUERY...
+[2025-07-22 20:40:22 -0700] [22732] [INFO] 127.0.0.1:54845 POST /v1/chat/completions 1.1 - - 759579
+[TEST] 2025-07-22 20:40:42,424 - main - INFO - === MULTI-AGENT REQUEST ===
+[TEST] 2025-07-22 20:40:42,425 - main - INFO - Method: POST
+[TEST] 2025-07-22 20:40:42,425 - main - INFO - URL: http://localhost:5002/v1/multi-agent/response
+[TEST] 2025-07-22 20:40:42,425 - main - INFO - Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '179'}
+[TEST] 2025-07-22 20:40:42,425 - main - INFO - Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "Search for notes about AI and machine learning"
+    }
+  ],
+  "user_id": 10001,
+  "query_type": "humansa",
+  "llm_provider": "openai",
+  "stream": false
+}
+[TEST] 2025-07-22 20:40:42,425 - main - INFO - ========================
+[TEST] 2025-07-22 20:40:42,425 - main - INFO - 🔄 Attempting to import multi_agent_endpoint_v2...
+[TEST] 2025-07-22 20:40:42,425 - main - INFO - ✅ Successfully imported multi_agent_endpoint_v2 with streaming support
+[TEST] 2025-07-22 20:40:42,425 - main - INFO - 📄 Starting multi-agent non-streaming response...
+[TEST] 2025-07-22 20:40:43,037 - chat.router.intelligent_router - INFO - LLM selected tool 1: knowledge_base_notes
+[TEST] 2025-07-22 20:40:43,037 - chat.router.intelligent_router - INFO - LLM routing successful: knowledge_base_notes
+[TEST] 2025-07-22 20:40:43,890 - chat.postgres.db_manager - ERROR - Database connection error: column n.promptContent does not exist
+LINE 6:                             n."promptContent" as content,
+                                    ^
+HINT:  Perhaps you meant to reference the column "n.promptcontent".
+
+[TEST] 2025-07-22 20:40:43,890 - chat.endpoints.multi_agent_endpoint_v2 - ERROR - context_search agent failed: column n.promptContent does not exist
+LINE 6:                             n."promptContent" as content,
+                                    ^
+HINT:  Perhaps you meant to reference the column "n.promptcontent".
+
+[TEST] 2025-07-22 20:40:43,890 - chat.provider.llm_provider - INFO - Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:43,890 - chat.provider.llm_provider - INFO - Searching for provider supporting model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:43,890 - chat.provider.llm_provider - INFO - 🎯 Found Azure match for gpt-4.1-nano
+[TEST] 2025-07-22 20:40:43,891 - chat.provider.llm_provider - INFO - 🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+[TEST] 2025-07-22 20:40:43,891 - chat.provider.llm_provider - INFO - ✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
+[TEST] 2025-07-22 20:40:44,988 - chat.provider.llm_provider - INFO - Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:44,988 - chat.provider.llm_provider - INFO - Searching for provider supporting model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:44,988 - chat.provider.llm_provider - INFO - 🎯 Found Azure match for gpt-4.1-nano
+[TEST] 2025-07-22 20:40:44,988 - chat.provider.llm_provider - INFO - 🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+[TEST] 2025-07-22 20:40:44,988 - chat.provider.llm_provider - INFO - ✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
+[TEST] 2025-07-22 20:40:45,889 - chat.endpoints.multi_agent_endpoint_v2 - INFO - Iteration evaluation raw response: {
+    "needs_iteration": false,
+    "reason": "Response is complete and accurate",
+    "suggested_agents": []
+}...
+[TEST] 2025-07-22 20:40:45,890 - main - INFO - === MULTI-AGENT RESPONSE ===
+[TEST] 2025-07-22 20:40:45,890 - main - INFO - Response type: <class 'dict'>
+[TEST] 2025-07-22 20:40:45,890 - main - INFO - Response keys: ['id', 'object', 'created', 'model', 'choices', 'usage', 'metadata']
+[TEST] 2025-07-22 20:40:45,890 - main - INFO - Content length: 221 characters
+[TEST] 2025-07-22 20:40:45,890 - main - INFO - Content preview: I don't have access to external sources or your personal notes, but I can provide a concise overview of AI and machine learning. Would you like a summary, detailed notes, or specific topics within AI ... (truncated from 221 chars)
+[TEST] 2025-07-22 20:40:45,890 - main - INFO - ===========================
+[2025-07-22 20:40:45 -0700] [22732] [INFO] 127.0.0.1:55149 POST /v1/multi-agent/response 1.1 200 1848 3465942
+[TEST] 2025-07-22 20:40:45,893 - main - INFO - === MULTI-AGENT REQUEST ===
+[TEST] 2025-07-22 20:40:45,893 - main - INFO - Method: POST
+[TEST] 2025-07-22 20:40:45,893 - main - INFO - URL: http://localhost:5002/v1/multi-agent/response
+[TEST] 2025-07-22 20:40:45,893 - main - INFO - Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5002', 'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '165'}
+[TEST] 2025-07-22 20:40:45,893 - main - INFO - Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "Find conversations about testing"
+    }
+  ],
+  "user_id": 10001,
+  "query_type": "humansa",
+  "llm_provider": "openai",
+  "stream": false
+}
+[TEST] 2025-07-22 20:40:45,893 - main - INFO - ========================
+[TEST] 2025-07-22 20:40:45,893 - main - INFO - 🔄 Attempting to import multi_agent_endpoint_v2...
+[TEST] 2025-07-22 20:40:45,893 - main - INFO - ✅ Successfully imported multi_agent_endpoint_v2 with streaming support
+[TEST] 2025-07-22 20:40:45,893 - main - INFO - 📄 Starting multi-agent non-streaming response...
+[TEST] 2025-07-22 20:40:46,483 - chat.router.intelligent_router - INFO - LLM selected tool 2: knowledge_base_conversations
+[TEST] 2025-07-22 20:40:46,483 - chat.router.intelligent_router - INFO - LLM routing successful: knowledge_base_conversations
+[TEST] 2025-07-22 20:40:46,642 - chat.search.hybrid_search - INFO - Keyword search found 0 conversations for query: Find conversations about testing
+[TEST] 2025-07-22 20:40:46,642 - chat.embedding.embedding_provider_selector - INFO - === Embedding Provider Initialization ===
+[TEST] 2025-07-22 20:40:46,643 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:40:46,643 - chat.embedding.azure_embeddings - INFO - ✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+[TEST] 2025-07-22 20:40:46,643 - chat.embedding.azure_embeddings - INFO - 🔗 Endpoint: 
+[TEST] 2025-07-22 20:40:47,308 - chat.embedding.embedding_provider_selector - INFO - ✅ Azure AI Inference embedding provider initialized (PRIMARY)
+[TEST] 2025-07-22 20:40:47,313 - chat.token.text_truncator - INFO - TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+[TEST] 2025-07-22 20:40:47,313 - chat.embedding.openai_embeddings - INFO - Initialized OpenAI embedding client with model: text-embedding-3-small
+[TEST] 2025-07-22 20:40:47,313 - chat.embedding.embedding_provider_selector - INFO - ✅ OpenAI embedding provider initialized (FALLBACK)
+[TEST] 2025-07-22 20:40:47,313 - chat.embedding.embedding_provider_selector - INFO - 📊 Available embedding providers: ['azure_inference', 'openai']
+[TEST] 2025-07-22 20:40:47,314 - chat.embedding.embedding_provider_selector - INFO - ✅ Auto-selected embedding provider: azure_inference
+[TEST] 2025-07-22 20:40:47,314 - chat.postgres.embedding_operations - INFO - EmbeddingDBOperations initialized
+[TEST] 2025-07-22 20:40:47,314 - chat.rag.rag_processor - INFO - UnifiedRAGSearcher initialized
+[TEST] 2025-07-22 20:40:47,314 - chat.postgres.db_manager - INFO - 🌍 Full context search: Getting all user notes and conversations
+[TEST] 2025-07-22 20:40:47,326 - chat.postgres.db_manager - INFO - Resolved 9 total user notes
+[TEST] 2025-07-22 20:40:47,338 - chat.postgres.db_manager - INFO - Resolved 9 total user conversations
+[TEST] 2025-07-22 20:40:47,338 - chat.postgres.db_manager - INFO - Full context search results: 9 notes, 9 conversations
+[TEST] 2025-07-22 20:40:47,338 - chat.rag.rag_processor - INFO - === RAG SEARCH (CONVERSATIONS) ===
+[TEST] 2025-07-22 20:40:47,338 - chat.rag.rag_processor - INFO - Query: Find conversations about testing...
+[TEST] 2025-07-22 20:40:47,338 - chat.rag.rag_processor - INFO - Searching 9 notes, 9 conversations
+[TEST] 2025-07-22 20:40:47,586 - chat.postgres.db_manager - INFO - Conversations-only vector search - conversations: 9
+[TEST] 2025-07-22 20:40:47,598 - chat.postgres.db_manager - INFO - Conversations-only vector search found 20 relevant chunks
+[TEST] 2025-07-22 20:40:47,598 - chat.rag.rag_processor - INFO - Found 20 relevant chunks using conversations search
+[TEST] 2025-07-22 20:40:47,598 - chat.rag.rag_processor - INFO -   1. conversation:10004 (sim: 0.309)
+[TEST] 2025-07-22 20:40:47,598 - chat.rag.rag_processor - INFO -   2. conversation:10009 (sim: 0.289)
+[TEST] 2025-07-22 20:40:47,598 - chat.rag.rag_processor - INFO -   3. conversation:10008 (sim: 0.282)
+[TEST] 2025-07-22 20:40:47,598 - chat.rag.rag_processor - INFO -   4. conversation:10004 (sim: 0.269)
+[TEST] 2025-07-22 20:40:47,598 - chat.rag.rag_processor - INFO -   5. conversation:10009 (sim: 0.266)
+[TEST] 2025-07-22 20:40:47,598 - chat.search.hybrid_search - INFO - Hybrid search combined 0 keyword and 20 vector results into 9 hybrid results
+[TEST] 2025-07-22 20:40:47,598 - chat.agent.context_search_agent - INFO - Hybrid search returned 9 results
+[TEST] 2025-07-22 20:40:47,598 - chat.provider.llm_provider - INFO - Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:47,598 - chat.provider.llm_provider - INFO - Searching for provider supporting model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:47,598 - chat.provider.llm_provider - INFO - 🎯 Found Azure match for gpt-4.1-nano
+[TEST] 2025-07-22 20:40:47,598 - chat.provider.llm_provider - INFO - 🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+[TEST] 2025-07-22 20:40:47,598 - chat.provider.llm_provider - INFO - ✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
+[TEST] 2025-07-22 20:40:49,158 - chat.citation.citation_position_tracker - INFO - 📍 Found citation [4] at position 383-386
+[TEST] 2025-07-22 20:40:49,158 - chat.citation.citation_position_tracker - INFO - 📍 Found citation [9] at position 564-567
+[TEST] 2025-07-22 20:40:49,159 - chat.provider.llm_provider - INFO - Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:49,159 - chat.provider.llm_provider - INFO - Searching for provider supporting model: gpt-4.1-nano
+[TEST] 2025-07-22 20:40:49,159 - chat.provider.llm_provider - INFO - 🎯 Found Azure match for gpt-4.1-nano
+[TEST] 2025-07-22 20:40:49,159 - chat.provider.llm_provider - INFO - 🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+[TEST] 2025-07-22 20:40:49,159 - chat.provider.llm_provider - INFO - ✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
+[TEST] 2025-07-22 20:40:50,072 - chat.endpoints.multi_agent_endpoint_v2 - INFO - Iteration evaluation raw response: {
+    "needs_iteration": false,
+    "reason": "Response is complete and accurate",
+    "suggested_agents": []
+}...
+[TEST] 2025-07-22 20:40:50,072 - main - INFO - === MULTI-AGENT RESPONSE ===
+[TEST] 2025-07-22 20:40:50,072 - main - INFO - Response type: <class 'dict'>
+[TEST] 2025-07-22 20:40:50,072 - main - INFO - Response keys: ['id', 'object', 'created', 'model', 'choices', 'usage', 'metadata']
+[TEST] 2025-07-22 20:40:50,072 - main - INFO - Content length: 669 characters
+[TEST] 2025-07-22 20:40:50,072 - main - INFO - Content preview: You haven't provided specific conversations or documents labeled as "testing." However, based on the context of the knowledge base, there are relevant mentions of testing related to AI models and appl... (truncated from 669 chars)
+[TEST] 2025-07-22 20:40:50,072 - main - INFO - ===========================
+[2025-07-22 20:40:50 -0700] [22732] [INFO] 127.0.0.1:55178 POST /v1/multi-agent/response 1.1 200 27713 4179671

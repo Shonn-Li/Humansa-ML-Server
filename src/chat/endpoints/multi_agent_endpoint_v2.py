@@ -402,9 +402,10 @@ class MultiAgentChatEndpointV2:
             sequence += 1
             current_output_index += 1
             
-            # Stream router reasoning
+            # Stream router reasoning with more detailed text
+            reasoning_text = "Analyzing the user's query to determine which tools and agents to use..."
             async for event in self._stream_reasoning_step(router_id, current_output_index - 1, 
-                                                         "Analyzing query and determining tools...", 
+                                                         reasoning_text, 
                                                          create_event):
                 event["sequence_number"] = sequence
                 yield event
@@ -415,6 +416,22 @@ class MultiAgentChatEndpointV2:
             context["router_agent"] = router_result
             enabled_agents = router_result.get("enabled_agents", ["response"])
             
+            # Stream additional reasoning about the decision
+            decision_text = f"\n\nBased on the query, I'll use: {', '.join(enabled_agents)}"
+            if "context_search" in enabled_agents:
+                decision_text += "\n- Context search: To find relevant information from your notes"
+            if "web_search" in enabled_agents:
+                decision_text += "\n- Web search: To get current information from the internet"
+            if "attachment" in enabled_agents:
+                decision_text += "\n- File search: To analyze attached files"
+            
+            async for event in self._stream_reasoning_step(router_id, current_output_index - 1, 
+                                                         decision_text, 
+                                                         create_event):
+                event["sequence_number"] = sequence
+                yield event
+                sequence += 1
+            
             # Complete router reasoning
             yield create_event("response.output_item.done",
                              sequence_number=sequence,
@@ -424,7 +441,7 @@ class MultiAgentChatEndpointV2:
                                  "type": "reasoning",
                                  "content": [{
                                      "type": "reasoning_text",
-                                     "text": f"Selected agents: {', '.join(enabled_agents)}"
+                                     "text": reasoning_text + decision_text
                                  }]
                              })
             sequence += 1
@@ -451,7 +468,7 @@ class MultiAgentChatEndpointV2:
                     else:
                         # Context search uses context_search_call, attachment uses file_search_call
                         if agent_name == "context_search":
-                            # Use context_search_call for context search
+                            # First add the context_search_call tool call
                             agent_id = generate_output_id("cs")
                             yield create_event("response.output_item.added",
                                              sequence_number=sequence,
@@ -463,6 +480,9 @@ class MultiAgentChatEndpointV2:
                                              })
                             sequence += 1
                             current_output_index += 1
+                            
+                            # Add a small delay to ensure the tool call event is processed
+                            await asyncio.sleep(0.1)
                             
                             # Run context search agent
                             result = await self.agents["context_search"].run(request, context)
@@ -478,6 +498,7 @@ class MultiAgentChatEndpointV2:
                                                  "status": "completed"
                                              })
                             sequence += 1
+                            # Note: We only incremented current_output_index once above (tool call only)
                         elif agent_name == "attachment":
                             # Use file_search_call for attachments
                             agent_id = generate_output_id("fs")
@@ -491,6 +512,9 @@ class MultiAgentChatEndpointV2:
                                              })
                             sequence += 1
                             current_output_index += 1
+                            
+                            # Add a small delay to ensure the tool call event is processed
+                            await asyncio.sleep(0.1)
                             
                             # Run attachment agent
                             result = await self.agents["attachment"].run(request, context)
@@ -510,8 +534,11 @@ class MultiAgentChatEndpointV2:
                             # This should not happen with current agent types
                             logger.warning(f"Unknown agent type for streaming: {agent_name}")
                             
-                            async for event in self._stream_reasoning_step(agent_id, current_output_index - 1,
-                                                                         agent_messages.get(agent_name, f"Running {agent_name}..."),
+                            # Generate agent ID for unknown agent
+                            unknown_agent_id = generate_output_id(agent_name[:2])
+                            
+                            async for event in self._stream_reasoning_step(unknown_agent_id, current_output_index - 1,
+                                                                         f"Running {agent_name}...",
                                                                          create_event):
                                 event["sequence_number"] = sequence
                                 yield event
@@ -526,7 +553,7 @@ class MultiAgentChatEndpointV2:
                                              sequence_number=sequence,
                                              output_index=current_output_index - 1,
                                              item={
-                                                 "id": agent_id,
+                                                 "id": unknown_agent_id,
                                                  "type": "reasoning",
                                                  "content": [{
                                                      "type": "reasoning_text",
@@ -541,7 +568,7 @@ class MultiAgentChatEndpointV2:
                 event["sequence_number"] = sequence
                 yield event
                 sequence += 1
-            current_output_index += 1  # Response adds 1 message item
+            current_output_index += 2  # Response adds 1 reasoning + 1 message item
             
             # Phase 4: Citations are now handled within response agent streaming
             
@@ -656,7 +683,7 @@ class MultiAgentChatEndpointV2:
                              output_index=output_index,
                              content_index=0,
                              delta=chunk)
-            await asyncio.sleep(0.02)  # Small delay for realistic streaming
+            await asyncio.sleep(0.05)  # Small delay for realistic streaming
         
         # Complete the reasoning text
         yield create_event("response.reasoning_text.done",
@@ -688,6 +715,9 @@ class MultiAgentChatEndpointV2:
                              "status": "in_progress"
                          })
         
+        # Add a small delay to ensure the tool call event is processed
+        await asyncio.sleep(0.1)
+        
         # Execute web search
         search_result = await self.agents["web_search"].run(request, context)
         context["web_search_agent"] = search_result
@@ -706,6 +736,25 @@ class MultiAgentChatEndpointV2:
 
     async def _stream_response_agent(self, request: Dict[str, Any], context: Dict[str, Any], create_event, generate_output_id, current_output_index) -> AsyncGenerator[Dict[str, Any], None]:
         """Stream response agent work with integrated citations."""
+        
+        # First, add reasoning for response generation
+        reasoning_id = generate_output_id("resp_reasoning")
+        yield create_event("response.output_item.added",
+                         output_index=current_output_index,
+                         item={
+                             "id": reasoning_id,
+                             "type": "reasoning",
+                             "content": []
+                         })
+        current_output_index += 1
+        
+        # Stream initial reasoning about generating response
+        initial_reasoning = "Generating response based on the collected information..."
+        async for event in self._stream_reasoning_step(reasoning_id, current_output_index - 1,
+                                                     initial_reasoning,
+                                                     create_event):
+            yield event
+        
         message_id = generate_output_id("msg")
         
         # Store message ID in context
@@ -734,24 +783,75 @@ class MultiAgentChatEndpointV2:
                              "text": "",
                          })
 
-        # Execute response agent to get full response with citations
-        response_result = await self.agents["response"].run(request, context)
-        context["response_agent"] = response_result
+        # Stream response from agent with real-time reasoning support
+        accumulated_response = ""
+        annotations = []
+        sources = []
+        reasoning_parts = []
         
-        final_response = response_result.get("response", "")
-        annotations = response_result.get("annotations", [])
-        sources = response_result.get("sources", [])
-        
-        # Stream output text in chunks
-        chunk_size = 20
-        for i in range(0, len(final_response), chunk_size):
-            chunk = final_response[i:i+chunk_size]
-            yield create_event("response.output_text.delta",
-                             item_id=message_id,
-                             output_index=current_output_index,
-                             content_index=0,
-                             delta=chunk)
-            await asyncio.sleep(0.05)
+        # Check if we have streaming support
+        if hasattr(self.agents["response"], "stream"):
+            # Use actual streaming for real-time reasoning
+            async for chunk in self.agents["response"].stream(request, context):
+                chunk_type = chunk.get("type", "")
+                
+                if chunk_type == "response_chunk":
+                    # Regular content chunk
+                    content = chunk.get("content", "")
+                    accumulated_response += content
+                    yield create_event("response.output_text.delta",
+                                     item_id=message_id,
+                                     output_index=current_output_index,
+                                     content_index=0,
+                                     delta=content)
+                
+                elif chunk_type == "reasoning_chunk":
+                    # DeepSeek reasoning chunk
+                    reasoning_content = chunk.get("content", "")
+                    reasoning_parts.append(reasoning_content)
+                    
+                    # Stream reasoning as separate events
+                    yield create_event("response.reasoning_part.added",
+                                     reasoning_part_id=generate_output_id("reason_part"),
+                                     type="reasoning",
+                                     output_index=current_output_index - 1)  # Add to reasoning item
+                    
+                    yield create_event("response.reasoning_text.delta",
+                                     delta=reasoning_content,
+                                     output_index=current_output_index - 1)
+                
+                elif chunk_type == "annotations":
+                    # Citation annotations
+                    annotations = chunk.get("annotations", [])
+                    sources = chunk.get("sources", [])
+                
+                elif chunk_type == "success":
+                    # Final success chunk with metadata
+                    final_response = chunk.get("response", accumulated_response)
+                    context["response_agent"] = chunk
+            
+            # Set final response if not already set
+            if 'final_response' not in locals():
+                final_response = accumulated_response
+        else:
+            # Fallback to non-streaming version
+            response_result = await self.agents["response"].run(request, context)
+            context["response_agent"] = response_result
+            
+            final_response = response_result.get("response", "")
+            annotations = response_result.get("annotations", [])
+            sources = response_result.get("sources", [])
+            
+            # Simulate streaming
+            chunk_size = 20
+            for i in range(0, len(final_response), chunk_size):
+                chunk = final_response[i:i+chunk_size]
+                yield create_event("response.output_text.delta",
+                                 item_id=message_id,
+                                 output_index=current_output_index,
+                                 content_index=0,
+                                 delta=chunk)
+                await asyncio.sleep(0.05)
 
         # Stream annotation events for each citation found
         for annotation in annotations:
@@ -781,6 +881,33 @@ class MultiAgentChatEndpointV2:
                          output_index=current_output_index,
                          content_index=0,
                          text=final_response)
+        
+        # Complete reasoning with all collected reasoning parts
+        if reasoning_parts:
+            # Send reasoning completion event if we collected DeepSeek reasoning
+            all_reasoning = initial_reasoning + "\n\n" + "".join(reasoning_parts)
+            yield create_event("response.reasoning_text.done",
+                             output_index=current_output_index - 1,
+                             text=all_reasoning)
+            
+            yield create_event("response.reasoning_part.done", 
+                             output_index=current_output_index - 1,
+                             part={
+                                 "type": "reasoning_text",
+                                 "text": all_reasoning
+                             })
+        
+        # Complete the reasoning output item
+        yield create_event("response.output_item.done",
+                         output_index=current_output_index - 1,
+                         item={
+                             "id": reasoning_id,
+                             "type": "reasoning",
+                             "content": [{
+                                 "type": "reasoning_text",
+                                 "text": initial_reasoning + ("\n\n" + "".join(reasoning_parts) if reasoning_parts else "")
+                             }]
+                         })
 
         # Complete content part with annotations
         yield create_event("response.content_part.done",
@@ -826,6 +953,9 @@ class MultiAgentChatEndpointV2:
                              "type": "code_interpreter_call",
                              "status": "in_progress"
                          })
+        
+        # Add a small delay to ensure the tool call event is processed
+        await asyncio.sleep(0.1)
         
         # Execute code interpreter
         if "code_interpreter" in self.agents:

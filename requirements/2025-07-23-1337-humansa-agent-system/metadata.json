@@ -1,0 +1,7 @@
+{
+  "name": "humansa-agent-system",
+  "created": "2025-07-23T13:37:00Z",
+  "status": "discovery",
+  "phase": "initial-analysis",
+  "description": "Multi-agent system for Humansa medical platform with appointment booking, RAG processing, and user memory management"
+}
