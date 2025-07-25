@@ -26,6 +26,13 @@ source /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-
 python /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/main.py
 ```
 
+```bash
+# Restart the ML server on port 5001
+lsof -ti tcp:5001 | xargs -r kill -9 && \
+source /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/bin/activate && \
+python /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/main.py
+```
+
 ## 🔧 Setup (Local Development)
 
 ### 1. Create and activate virtual environment
