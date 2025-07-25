@@ -47,6 +47,12 @@ class HumansaAgenticAgent:
         """Initialize the fully agentic agent."""
         self.llm = llm
         self.tools = tools or []
+        # Filter out search_web tool to prevent external searches
+        if self.tools:
+            original_count = len(self.tools)
+            self.tools = [tool for tool in self.tools if not (hasattr(tool, 'metadata') and hasattr(tool.metadata, 'name') and tool.metadata.name == 'search_web')]
+            if len(self.tools) < original_count:
+                logger.info(f'🚫 Filtered out search_web tool. Remaining tools: {len(self.tools)}')
         self.callback_manager = callback_manager
         self.agent = None
         self.memory = None

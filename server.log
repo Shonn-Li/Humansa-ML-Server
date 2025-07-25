@@ -1,6 +1,486 @@
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python3
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13']
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+INFO:chat.title.title_generator:TitleGenerator initialized
+INFO:chat.provider.llm_provider:=== LLM Provider Initialization Debug ===
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_ENDPOINT: NOT SET
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_CREDENTIAL: NOT SET
+INFO:chat.provider.llm_provider:OPENAI_API_KEY: SET
+INFO:chat.provider.llm_provider:ANTHROPIC_API_KEY: NOT SET
+INFO:chat.provider.llm_provider:GOOGLE_API_KEY: NOT SET
+INFO:chat.provider.llm_provider:DEEPSEEK_API_KEY: NOT SET
+INFO:chat.provider.llm_provider:XAI_API_KEY: NOT SET
+INFO:chat.provider.llm_provider:===========================================
+INFO:chat.provider.llm_provider:✅ OpenAI multimodal support enabled
+INFO:chat.provider.llm_provider:✅ OpenAI provider initialized
+INFO:chat.provider.llm_provider:=== Provider Initialization Complete ===
+INFO:chat.provider.llm_provider:Available providers: 1
+INFO:chat.provider.llm_provider:  openai: 12 models
+INFO:chat.provider.llm_provider:=========================================
+INFO:__main__:✅ Conversation title endpoints registered successfully
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:5001
+INFO:__main__:
+INFO:__main__:📋 V1 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+INFO:__main__:🚀 Starting ML server on port 5001
+[2025-07-24 17:03:46 -0700] [23451] [INFO] Running on http://0.0.0.0:5001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:5001 (CTRL + C to quit)
+ * Serving Quart app 'main'
+ * Debug mode: True
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:5001 (CTRL + C to quit)
+[2025-07-24 17:03:53 -0700] [23451] [INFO] 127.0.0.1:55293 GET /health 1.1 200 113 1915
+ERROR:__main__:🚨 UNHANDLED EXCEPTION: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+ERROR:__main__:Request method: GET
+ERROR:__main__:Request URL: http://localhost:5001/v1/status
+ERROR:__main__:Request data: None
 Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/YouWoAI-ML-Server-1/src/main.py", line 25, in <module>
-    from quart import Quart, jsonify, request, Response
-ModuleNotFoundError: No module named 'quart'
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1500, in full_dispatch_request
+    result = await self.dispatch_request(request_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1591, in dispatch_request
+    self.raise_routing_exception(request_)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1578, in raise_routing_exception
+    raise request.routing_exception
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/ctx.py", line 73, in match_request
+    ) = self.url_adapter.match(  # type: ignore
+        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+        return_rule=True
+        ^^^^^^^^^^^^^^^^
+    )  # noqa
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+[2025-07-24 17:03:58 -0700] [23451] [INFO] 127.0.0.1:55335 GET /v1/status 1.1 500 207 2868
+INFO:__main__:=== HUMANSA AI-AGENT REQUEST ===
+INFO:__main__:Method: POST
+INFO:__main__:URL: http://localhost:5001/v1-humansa/chat/completions
+INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5001', 'User-Agent': 'curl/8.7.1', 'Accept': '*/*', 'Content-Type': 'application/json', 'Content-Length': '147'}
+INFO:__main__:Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "\u4f60\u597d\uff0c\u6211\u662f\u6d4b\u8bd5Humansa AI Agent B2\u7684\u529f\u80fd"
+    }
+  ],
+  "model": "gpt-4",
+  "stream": false
+}
+INFO:__main__:==========================
+INFO:__main__:🤖 Attempting to import HumansaChatEndpoint...
+INFO:humansa.postgres.database:HumansaDatabase initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: False
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.prompts.intelligent_prompt_selector:🧠 IntelligentPromptSelector initialized
+INFO:__main__:✅ Successfully imported HumansaChatEndpoint
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.rag.rag_processor:IDResolver initialized
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.rag.rag_processor:UnifiedRAGSearcher initialized
+INFO:chat.rag.rag_processor:RAGProcessor initialized
+INFO:chat.provider.llm_provider:=== LLM Provider Initialization Debug ===
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_ENDPOINT: NOT SET
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_CREDENTIAL: NOT SET
+INFO:chat.provider.llm_provider:OPENAI_API_KEY: SET
+INFO:chat.provider.llm_provider:ANTHROPIC_API_KEY: NOT SET
+INFO:chat.provider.llm_provider:GOOGLE_API_KEY: NOT SET
+INFO:chat.provider.llm_provider:DEEPSEEK_API_KEY: NOT SET
+INFO:chat.provider.llm_provider:XAI_API_KEY: NOT SET
+INFO:chat.provider.llm_provider:===========================================
+INFO:chat.provider.llm_provider:✅ OpenAI multimodal support enabled
+INFO:chat.provider.llm_provider:✅ OpenAI provider initialized
+INFO:chat.provider.llm_provider:=== Provider Initialization Complete ===
+INFO:chat.provider.llm_provider:Available providers: 1
+INFO:chat.provider.llm_provider:  openai: 12 models
+INFO:chat.provider.llm_provider:=========================================
+INFO:chat.citation.citation_engine:CitationEngine initialized
+INFO:chat.citation.citation_engine:CitationEngine initialized
+INFO:chat.citation.streaming_citation_engine:StreamingCitationEngine initialized
+INFO:chat.streaming.streaming_response_generator:StreamingResponseGenerator initialized with unified astream_chat approach
+INFO:humansa.endpoints.humansa_chat_endpoint:ℹ️ Skipping IntelligentRouter initialization (not needed for basic functionality)
+INFO:humansa.endpoints.humansa_chat_endpoint:✅ QueryTransformer initialized successfully
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: False
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.tools.humansa_tools:✅ Created 12 LlamaIndex FunctionTools with Pydantic schemas
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.agent.humansa_agent:🧠 ReAct agent initialized with Humansa-specific system prompt
+INFO:humansa.agent.humansa_agent:🧠 ReAct agent initialized with structured tool calling
+INFO:humansa.agent.humansa_agent:🤖 HumansaAgenticAgent initialized with 12 tools
+INFO:humansa.agent.humansa_agent:✅ ReAct agent successfully initialized - FULLY AGENTIC MODE
+INFO:humansa.endpoints.humansa_chat_endpoint:🤖 HumansaChatEndpoint initialized - FULLY AGENTIC
+INFO:__main__:📝 Processing Humansa non-streaming request...
+INFO:humansa.endpoints.humansa_chat_endpoint:🚀 A/B TEST MODE: Using Regular Humansa Agentic Implementation
+INFO:humansa.endpoints.humansa_chat_endpoint:🚀 Starting AGENTIC Humansa chat request processing
+ERROR:humansa.endpoints.humansa_chat_endpoint:❌ Agentic chat request failed: User ID is required
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/endpoints/humansa_chat_endpoint.py", line 154, in handle_chat_request
+    raise ValueError("User ID is required")
+ValueError: User ID is required
+INFO:__main__:=== HUMANSA RESPONSE ===
+INFO:__main__:Response (truncated): {
+  "error": "User ID is required",
+  "status": "error",
+  "timestamp": 1753401846.992355,
+  "processing_time": 0.0006771087646484375,
+  "agentic_mode": true
+}
+INFO:__main__:========================
+[2025-07-24 17:04:06 -0700] [23451] [INFO] 127.0.0.1:55469 POST /v1-humansa/chat/completions 1.1 200 160 225960
+WARNING:asyncio:Executing <Task finished name='Task-27' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.226 seconds
+INFO:__main__:=== HUMANSA AI-AGENT REQUEST ===
+INFO:__main__:Method: POST
+INFO:__main__:URL: http://localhost:5001/v1-humansa/chat/completions
+INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5001', 'User-Agent': 'curl/8.7.1', 'Accept': '*/*', 'Content-Type': 'application/json', 'Content-Length': '177'}
+INFO:__main__:Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "\u4f60\u597d\uff0c\u6211\u60f3\u4e86\u89e3\u4e00\u4e0b\u8bfa\u4e9a\u65b0\u821f\u7684\u670d\u52a1"
+    }
+  ],
+  "model": "gpt-4",
+  "user_id": "test_user_b2",
+  "stream": false
+}
+INFO:__main__:==========================
+INFO:__main__:🤖 Attempting to import HumansaChatEndpoint...
+INFO:__main__:✅ Successfully imported HumansaChatEndpoint
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.rag.rag_processor:IDResolver initialized
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.rag.rag_processor:UnifiedRAGSearcher initialized
+INFO:chat.rag.rag_processor:RAGProcessor initialized
+INFO:chat.provider.llm_provider:=== LLM Provider Initialization Debug ===
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_ENDPOINT: NOT SET
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_CREDENTIAL: NOT SET
+INFO:chat.provider.llm_provider:OPENAI_API_KEY: SET
+INFO:chat.provider.llm_provider:ANTHROPIC_API_KEY: NOT SET
+INFO:chat.provider.llm_provider:GOOGLE_API_KEY: NOT SET
+INFO:chat.provider.llm_provider:DEEPSEEK_API_KEY: NOT SET
+INFO:chat.provider.llm_provider:XAI_API_KEY: NOT SET
+INFO:chat.provider.llm_provider:===========================================
+INFO:chat.provider.llm_provider:✅ OpenAI multimodal support enabled
+INFO:chat.provider.llm_provider:✅ OpenAI provider initialized
+INFO:chat.provider.llm_provider:=== Provider Initialization Complete ===
+INFO:chat.provider.llm_provider:Available providers: 1
+INFO:chat.provider.llm_provider:  openai: 12 models
+INFO:chat.provider.llm_provider:=========================================
+INFO:chat.citation.citation_engine:CitationEngine initialized
+INFO:chat.citation.citation_engine:CitationEngine initialized
+INFO:chat.citation.streaming_citation_engine:StreamingCitationEngine initialized
+INFO:chat.streaming.streaming_response_generator:StreamingResponseGenerator initialized with unified astream_chat approach
+INFO:humansa.endpoints.humansa_chat_endpoint:ℹ️ Skipping IntelligentRouter initialization (not needed for basic functionality)
+INFO:humansa.endpoints.humansa_chat_endpoint:✅ QueryTransformer initialized successfully
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: False
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.tools.humansa_tools:✅ Created 12 LlamaIndex FunctionTools with Pydantic schemas
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.agent.humansa_agent:🧠 ReAct agent initialized with Humansa-specific system prompt
+INFO:humansa.agent.humansa_agent:🧠 ReAct agent initialized with structured tool calling
+INFO:humansa.agent.humansa_agent:🤖 HumansaAgenticAgent initialized with 12 tools
+INFO:humansa.agent.humansa_agent:✅ ReAct agent successfully initialized - FULLY AGENTIC MODE
+INFO:humansa.endpoints.humansa_chat_endpoint:🤖 HumansaChatEndpoint initialized - FULLY AGENTIC
+INFO:__main__:📝 Processing Humansa non-streaming request...
+INFO:humansa.endpoints.humansa_chat_endpoint:🚀 A/B TEST MODE: Using Regular Humansa Agentic Implementation
+INFO:humansa.endpoints.humansa_chat_endpoint:🚀 Starting AGENTIC Humansa chat request processing
+INFO:humansa.endpoints.humansa_chat_endpoint:📊 Request params: model=gpt-4, stream=False, user_id=test_user_b2
+INFO:humansa.endpoints.humansa_chat_endpoint:🔄 Phase 1: Query transformation
+INFO:chat.query.query_transformer:⚡ Query transformation temporarily disabled - using original query
+INFO:humansa.endpoints.humansa_chat_endpoint:📝 Query transformation: '你好，我想了解一下诺亚新舟的服务...' → '你好，我想了解一下诺亚新舟的服务...'
+INFO:humansa.endpoints.humansa_chat_endpoint:📚 Phase 2: Context retrieval
+INFO:humansa.endpoints.humansa_chat_endpoint:🤖 Phase 3: AGENTIC tool execution - LLM decides ALL tools and arguments
+INFO:humansa.endpoints.humansa_chat_endpoint:🧠 Analyzing query for intelligent prompt selection: 你好，我想了解一下诺亚新舟的服务...
+WARNING:asyncio:Executing <Task pending name='Task-35' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.306 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.prompts.intelligent_prompt_selector:✅ LLM选择提示模板 0: general_only
+INFO:humansa.prompts.intelligent_prompt_selector:🎯 LLM prompt selection successful: general_only
+INFO:humansa.endpoints.humansa_chat_endpoint:🎯 Built intelligent system prompt with template: general_only
+INFO:humansa.endpoints.humansa_chat_endpoint:🧠 Selection reasoning: 用户的查询是关于诺亚新舟的服务，属于一般性的信息询问，没有特定的医疗或紧急需求
+INFO:humansa.endpoints.humansa_chat_endpoint:📝 System prompt length: 1934 chars
+INFO:humansa.endpoints.humansa_chat_endpoint:🤖 Built Humansa system prompt: 1934 chars
+INFO:humansa.endpoints.humansa_chat_endpoint:🔍 System prompt preview: 
+### <AGENTIC_POLICY v2.0 (2025-07-24)>
+当前日期: 2025-07-24
+语言环境: zh-CN
+
+你是 **诺亚新舟健康医疗助理**，为高端诊所服务的 AI 健康管家，始终以全智能体（AGENTIC）模式运行。
+
+� **关于诺亚新舟**：
+以爱行舟，亲近相守。Humansa|诺亚新舟以名医多、级别高、专业强为特色，拥有500多位三甲主任级名医专家，目前已...
+INFO:humansa.endpoints.humansa_chat_endpoint:📝 Agent will receive 2 messages (including system prompt)
+INFO:humansa.agent.humansa_agent:🚀 AGENTIC EXECUTION started for query: '你好，我想了解一下诺亚新舟的服务...'
+INFO:humansa.agent.humansa_agent:📝 Enhanced query prepared: User Query: 你好，我想了解一下诺亚新舟的服务
+User ID: test_user_b2
+Date: 2025-07-24 17:04:16
+\n\nRecent Conversation:\nsystem: 
+### <AGENTIC_POLICY v2.0 (2025-07-24)>
+当前日期: 2025-07-24
+语言环境: zh-CN
+
+你是 **诺亚新舟健康医疗助理**，为高端诊所服务的 AI 健康管家，始终以全智能体（AGENTIC）模式运行。
+
+� **关于诺亚新舟**：
+以爱行舟，亲近相守。Humansa|诺亚新舟以名医多、级别高、专业强为特色，拥有500多位三甲主任级名医专家，目前已\nuser: 你好，我想了解一下诺亚新舟的服务
+
+
+Please process this query using the appropriate tools. Call tools with structured arguments only.
+INFO:humansa.agent.humansa_agent:🤖 Executing with ReAct agent - LLM controls all tool selection
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🧠 TRACE CAPTURED: Thought: 用户想了解诺亚新舟的服务。需要查找诺亚新舟相关的医疗服务信息。可以使用search_services工具来获取相关服务及价格信息。
+Action: search_services
+A...
+INFO:humansa.tools.humansa_tools:🔧 TOOL CALL OBSERVED: unknown with args: {}
+INFO:humansa.tools.humansa_tools:🩺 search_services_structured called with: service=None, specialty=None, clinic=诺亚新舟
+INFO:humansa.tools.humansa_tools:✅ TOOL CALL COMPLETED: unknown
+INFO:humansa.tools.humansa_tools:🔍 OBSERVATION CAPTURED: Observation: {'success': True, 'services': [{'item_code': 'ITME1', 'item_name': '肝功三项', 'clinic_code...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🧠 TRACE CAPTURED: Thought: 诺亚新舟提供多种检测服务，包括肝功能三项和肾功能六项，价格因诊所不同而有所差异。可以根据具体需求选择相应的服务和诊所。
+Answer: 诺亚新舟提供的主要服务包括肝功能三项和肾功能六...
+INFO:humansa.agent.humansa_agent:🔍 Agent response type: <class 'llama_index.core.chat_engine.types.AgentChatResponse'>
+INFO:humansa.agent.humansa_agent:🔍 Agent response attributes: ['__annotations__', '__class__', '__dataclass_fields__', '__dataclass_params__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__firstlineno__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__match_args__', '__module__', '__ne__', '__new__', '__post_init__', '__reduce__', '__reduce_ex__', '__replace__', '__repr__', '__setattr__', '__sizeof__', '__static_attributes__', '__str__', '__subclasshook__', '__weakref__', 'async_response_gen', 'is_dummy_stream', 'metadata', 'response', 'response_gen', 'set_source_nodes', 'source_nodes', 'sources']
+INFO:humansa.agent.humansa_agent:🔍 Accessing agent memory for reasoning chain
+INFO:humansa.agent.humansa_agent:🔍 Chat history length: 2 messages
+INFO:humansa.agent.humansa_agent:🔍 Chat message preview: User Query: 你好，我想了解一下诺亚新舟的服务
+User ID: test_user_b2
+Date: 2025-07-24 17:04:16
+\n\nRecent Conversation...
+INFO:humansa.agent.humansa_agent:🔍 Chat message preview: 诺亚新舟提供的主要服务包括肝功能三项和肾功能六项，价格在28.50元到48.50元之间，具体价格根据不同诊所而定。如需详细信息或预约，请告诉我。...
+INFO:humansa.agent.humansa_agent:🔍 Accessing agent chat_history
+INFO:humansa.agent.humansa_agent:🔍 Chat history type: <class 'list'>
+INFO:humansa.agent.humansa_agent:🔍 Final answer: 诺亚新舟提供的主要服务包括肝功能三项和肾功能六项，价格在28.50元到48.50元之间，具体价格根据不同诊所而定。如需详细信息或预约，请告诉我。...
+INFO:humansa.agent.humansa_agent:✅ Using full reasoning chain (767 chars)
+INFO:humansa.agent.humansa_agent:🧠 CAPTURED FULL TRACE: 1225 characters
+INFO:humansa.agent.humansa_agent:🔗 Added observation for tool unknown
+INFO:humansa.agent.humansa_agent:✅ ENHANCED TRACE with tool results: 2124 characters
+INFO:humansa.agent.humansa_agent:🔗 Using full trace: 2124 chars
+INFO:humansa.agent.humansa_agent:✅ AGENTIC EXECUTION completed in 3.85s
+INFO:humansa.agent.humansa_agent:📊 Tools observed: 1
+INFO:humansa.endpoints.humansa_chat_endpoint:🔍 HUMANSA DEBUG - Agent response structure:
+INFO:humansa.endpoints.humansa_chat_endpoint:  agent_trace: 2124 chars
+INFO:humansa.endpoints.humansa_chat_endpoint:  agent_response: 2124 chars
+INFO:humansa.endpoints.humansa_chat_endpoint:  tool_calls_observed: 1
+INFO:humansa.endpoints.humansa_chat_endpoint:  reasoning: 40 chars
+INFO:humansa.endpoints.humansa_chat_endpoint:  agent_trace content: Thought: 用户想了解诺亚新舟的服务。需要查找诺亚新舟相关的医疗服务信息。可以使用search_services工具来获取相关服务及价格信息。
+Action: search_services
+Action Input: {"service_name": null, "clinic_name": "诺亚新舟", "language": "zh"}
+Observation: {'success': True, 'services': [{'item_code': 'ITME1', 'item_name': '肝功三项', 'clinic_code': 'H3', 'price': Decimal('48.50'), 'summary': '测试简介1', 'clinic_name': '深圳诊所'}, {'item_code': 'ITME1', 'item_name': '肝功三项', 'clinic_code': 'H2', 'price': Decimal('38.50'), 'summary': '测试简介1', 'clinic_name': '佛山诊所'}, {'item_code': 'ITME1', 'item_name': '肝功三项', 'clinic_code': 'H1', 'price': Decimal('28.50'), 'summary': '测试简介1', 'clinic_name': '广州诊所'}, {'item_code': 'ITME2', 'item_name': '肾功六项', 'clinic_code': 'H2', 'price': Decimal('47.00'), 'summary': '测试简介2', 'clinic_name': '佛山诊所'}, {'item_code': 'ITME2', 'item_name': '肾功六项', 'clinic_code': 'H1', 'price': Decimal('47.00'), 'summary': '测试简介2', 'clinic_name': '广州诊所'}], 'total_found': 5, 'search_method': 'fallback', 'filters_applied': {}, 'source': 'database', 'message': 'No services matched your criteria. Here are our available services.'}
+Observation: {'success': True, 'services': [{'item_code': 'ITME1', 'item_name': '肝功三项', 'clinic_code': 'H3', 'price': Decimal('48.50'), 'summary': '测试简介1', 'clinic_name': '深圳诊所'}, {'item_code': 'ITME1', 'item_name': '肝功三项', 'clinic_code': 'H2', 'price': Decimal('38.50'), 'summary': '测试简介1', 'clinic_name': '佛山诊所'}, {'item_code': 'ITME1', 'item_name': '肝功三项', 'clinic_code': 'H1', 'price': Decimal('28.50'), 'summary': '测试简介1', 'clinic_name': '广州诊所'}, {'item_code': 'ITME2', 'item_name': '肾功六项', 'clinic_code': 'H2', 'price': Decimal('47.00'), 'summary': '测试简介2', 'clinic_name': '佛山诊所'}, {'item_code': 'ITME2', 'item_name': '肾功六项', 'clinic_code': 'H1', 'price': Decimal('47.00'), 'summary': '测试简介2', 'clinic_name': '广州诊所'}], 'total_found': 5, 'search_method': 'fallback', 'filters_applied': {}, 'source': 'database', 'message': 'No services matched your criteria. Here are our available services.'}
+Thought: 诺亚新舟提供多种检测服务，包括肝功能三项和肾功能六项，价格因诊所不同而有所差异。可以根据具体需求选择相应的服务和诊所。
+Answer: 诺亚新舟提供的主要服务包括肝功能三项和肾功能六项，价格在28.50元到48.50元之间，具体价格根据不同诊所而定。如需详细信息或预约，请告诉我。
+INFO:humansa.endpoints.humansa_chat_endpoint:  agent_response content: Thought: 用户想了解诺亚新舟的服务。需要查找诺亚新舟相关的医疗服务信息。可以使用search_services工具来获取相关服务及价格信息。
+Action: search_services
+Action Input: {"service_name": null, "clinic_name": "诺亚新舟", "language": "zh"}
+Observation: {'success': True, 'services': [{'item_code': 'ITME1', 'item_name': '肝功三项', 'clinic_code': 'H3', 'price': Decimal('48.50'), 'summary': '测试简介1', 'clinic_name': '深圳诊所'}, {'item_code': 'ITME1', 'item_name': '肝功三项', 'clinic_code': 'H2', 'price': Decimal('38.50'), 'summary': '测试简介1', 'clinic_name': '佛山诊所'}, {'item_code': 'ITME1', 'item_name': '肝功三项', 'clinic_code': 'H1', 'price': Decimal('28.50'), 'summary': '测试简介1', 'clinic_name': '广州诊所'}, {'item_code': 'ITME2', 'item_name': '肾功六项', 'clinic_code': 'H2', 'price': Decimal('47.00'), 'summary': '测试简介2', 'clinic_name': '佛山诊所'}, {'item_code': 'ITME2', 'item_name': '肾功六项', 'clinic_code': 'H1', 'price': Decimal('47.00'), 'summary': '测试简介2', 'clinic_name': '广州诊所'}], 'total_found': 5, 'search_method': 'fallback', 'filters_applied': {}, 'source': 'database', 'message': 'No services matched your criteria. Here are our available services.'}
+Observation: {'success': True, 'services': [{'item_code': 'ITME1', 'item_name': '肝功三项', 'clinic_code': 'H3', 'price': Decimal('48.50'), 'summary': '测试简介1', 'clinic_name': '深圳诊所'}, {'item_code': 'ITME1', 'item_name': '肝功三项', 'clinic_code': 'H2', 'price': Decimal('38.50'), 'summary': '测试简介1', 'clinic_name': '佛山诊所'}, {'item_code': 'ITME1', 'item_name': '肝功三项', 'clinic_code': 'H1', 'price': Decimal('28.50'), 'summary': '测试简介1', 'clinic_name': '广州诊所'}, {'item_code': 'ITME2', 'item_name': '肾功六项', 'clinic_code': 'H2', 'price': Decimal('47.00'), 'summary': '测试简介2', 'clinic_name': '佛山诊所'}, {'item_code': 'ITME2', 'item_name': '肾功六项', 'clinic_code': 'H1', 'price': Decimal('47.00'), 'summary': '测试简介2', 'clinic_name': '广州诊所'}], 'total_found': 5, 'search_method': 'fallback', 'filters_applied': {}, 'source': 'database', 'message': 'No services matched your criteria. Here are our available services.'}
+Thought: 诺亚新舟提供多种检测服务，包括肝功能三项和肾功能六项，价格因诊所不同而有所差异。可以根据具体需求选择相应的服务和诊所。
+Answer: 诺亚新舟提供的主要服务包括肝功能三项和肾功能六项，价格在28.50元到48.50元之间，具体价格根据不同诊所而定。如需详细信息或预约，请告诉我。
+INFO:humansa.endpoints.humansa_chat_endpoint:  reasoning content: Agent executed 1 tool calls autonomously
+INFO:humansa.endpoints.humansa_chat_endpoint:🛠️ Agent executed 1 tools
+INFO:humansa.endpoints.humansa_chat_endpoint:🤖 Phase 4: Direct agent response generation
+INFO:humansa.endpoints.humansa_chat_endpoint:🤖 Generating non-streaming response directly from agent
+INFO:humansa.endpoints.humansa_chat_endpoint:📝 Agent response content: 2124 chars
+INFO:__main__:=== HUMANSA RESPONSE ===
+INFO:__main__:Response (truncated): {
+  "id": "resp_1753401860",
+  "object": "chat.completion",
+  "created": 1753401860,
+  "model": "gpt-4",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Thought: \u7528\u6237\u60f3\u4e86\u89e3\u8bfa\u4e9a\u65b0\u821f\u7684\u670d\u52a1\u3002\u9700\u8981\u67e5\u627e\u8bfa\u4e9a\u65b0\u821f\u76f8\u5173\u7684\u533b\u7597\u670d\u52a1\u4fe1\u606f\u3002\u53ef\u4ee5\u4f7f\u7528search_services\u5de5\u5177\u6765\u83b7\u53d6\u76f8\u5173\u670d\u52a1\u53ca\u4ef7\u683c\u4fe1\u606f\u3002\nAction: search_services\nAction Input: {\"service_name\": null, \"clinic_name\": \"\u8bfa\u4e9a\u65b0\u821f\", \"language\": \"zh\"}\nObservation: {'success': True, 'services': [{'item_code': 'ITME1', 'item_name': '\u809d\u529f\u4e09\u9879', 'clinic_code': 'H3', 'price': Decimal('48.50'), 'summary': '\u6d4b\u8bd5\u7b80\u4ecb1', 'clinic_name': '\u6df1\u5733\u8bca\u6240'}, {'item_code': 'ITME1', 'item_name': '\u809d\u529f\u4e09\u9879', 'clinic_code': 'H2', 'price': Decimal('38.50'), 'summary': '\u6d4b\u8bd5\u7b80\u4ecb1', 'clinic_name': '\u4f5b\u5c71\u8bca\u6240'}, {'item_code': 'ITME1', 'item_name': '\u809d\u529f\u4e09\u9879', 'clinic_code': 'H1', 'price': Decimal('28.50'), 'summary': '\u6d4b\u8bd5\u7b80\u4ecb1', 'clinic_name': '\u5e7f\u5dde\u8bca\u6240'}, {'item_code': 'ITME2', 'item_name': '\u80be\u529f\u516d\u9879', 'clinic_code': 'H2', 'price': Decimal('47.00'), 'summary': '\u6d4b\u8bd5\u7b80\u4ecb2', 'clinic_name': '\u4f5b\u5c71\u8bca\u6240'}, {'item_code': 'ITME2', 'item_name': '\u80be\u529f\u516d\u9879', 'clinic_code': 'H1', 'price': Decimal('47.00'), 'summary': '\u6d4b\u8bd5\u7b80\u4ecb2', 'clinic_name': '\u5e7f\u5dde\u8bca\u6240'}], 'total_found': 5, 'search_method': 'fallback', 'filters_applied': {}, 'source': 'database', 'message': 'No services matched your criteria. Here are our available services.'}\nObservation: {'success': True, 'services': [{'item_code': 'ITME1', 'item_name': '\u809d\u529f\u4e09\u9879', 'clinic_code': 'H3', 'price': Decimal('48.50'), 'summary': '\u6d4b\u8bd5\u7b80\u4ecb1', 'clinic_name': '\u6df1\u5733\u8bca\u6240'}, {'item_code': 'ITME1', 'item_name': '\u809d\u529f\u4e09\u9879', 'clinic_code': 'H2', 'price': Decimal('38.50'), 'summary': '\u6d4b\u8bd5\u7b80\u4ecb1', 'clinic_name': '\u4f5b\u5c71\u8bca\u6240'}, {'item_code': 'ITME1', 'item_name': '\u809d\u529f\u4e09\u9879', 'clinic_code': 'H1', 'price': Decimal('28.50'), 'summary': '\u6d4b\u8bd5\u7b80\u4ecb1', 'clinic_name': '\u5e7f\u5dde\u8bca\u6240'}, {'item_code': 'ITME2', 'item_name': '\u80be\u529f\u516d\u9879', 'clinic_code': 'H2', 'price': Decimal('47.00'), 'summary': '\u6d4b\u8bd5\u7b80\u4ecb2', 'clinic_name': '\u4f5b\u5c71\u8bca\u6240'}, {'item_code': 'ITME2', 'item_name': '\u80be\u529f\u516d\u9879', 'clinic_code': 'H1', 'price': Decimal('47.00'), 'summary': '\u6d4b\u8bd5\u7b80\u4ecb2', 'clinic_name': '\u5e7f\u5dde\u8bca\u6240'}], 'total_found': 5, 'search_method': 'fallback', 'filters_applied': {}, 'source': 'database', 'message': 'No services matched your criteria. Here are our available services.'}\nThought: \u8bfa\u4e9a\u65b0\u821f\u63d0\u4f9b\u591a\u79cd\u68c0\u6d4b\u670d\u52a1\uff0c\u5305\u62ec\u809d\u529f\u80fd\u4e09\u9879\u548c\u80be\u529f\u80fd\u516d\u9879\uff0c\u4ef7\u683c\u56e0\u8bca\u6240\u4e0d\u540c\u800c\u6709\u6240\u5dee\u5f02\u3002\u53ef\u4ee5\u6839\u636e\u5177\u4f53\u9700\u6c42\u9009\u62e9\u76f8\u5e94\u7684\u670d\u52a1\u548c\u8bca\u6240\u3002\nAnswer: \u8bfa\u4e9a\u65b0\u821f\u63d0\u4f9b\u7684\u4e3b\u8981\u670d\u52a1\u5305\u62ec\u809d\u529f\u80fd\u4e09\u9879\u548c\u80be\u529f\u80fd\u516d\u9879\uff0c\u4ef7\u683c\u572828.50\u5143\u523048.50\u5143\u4e4b\u95f4\uff0c\u5177\u4f53\u4ef7\u683c\u6839\u636e\u4e0d\u540c\u8bca\u6240\u800c\u5b9a\u3002\u5982\u9700\u8be6\u7ec6\u4fe1\u606f\u6216\u9884\u7ea6\uff0c\u8bf7\u544a\u8bc9\u6211\u3002"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_tokens": 0
+  },
+  "agentic_mode": true,
+  "agent_trace": "Thought: \u7528\u6237\u60f3\u4e86\u89e3\u8bfa\u4e9a\u65b0\u821f\u7684\u670d\u52a1\u3002\u9700\u8981\u67e5\u627e\u8bfa\u4e9a\u65b0\u821f\u76f8\u5173\u7684\u533b\u7597\u670d\u52a1\u4fe1\u606f\u3002\u53ef\u4ee5\u4f7f\u7528search_services\u5de5\u5177\u6765\u83b7\u53d6\u76f8\u5173\u670d\u52a1\u53ca\u4ef7\u683c\u4fe1\u606f\u3002\nAction: search_services\nAction Input: {\"service_name\": null, \"clinic_name\": \"\u8bfa\u4e9a\u65b0\u821f\", \"language\": \"zh\"}\nObservation: {'success'... (truncated from 2124 chars)",
+  "tool_calls_observed": [
+    {
+      "event_id": "3b4feab7-afbe-4246-9b0d-798a20391e3d",
+      "tool_name": "unknown",
+      "arguments": {},
+      "timestamp": "2025-07-24T17:04:18.553789",
+      "result": "{'success': True, 'services': [{'item_code': 'ITME1', 'item_name': '\u809d\u529f\u4e09\u9879', 'clinic_code': 'H3', 'price': Decimal('48.50'), 'summary': '\u6d4b\u8bd5\u7b80\u4ecb1', 'clinic_name': '\u6df1\u5733\u8bca\u6240'}, {'item_code': 'ITME1', 'item_name': '\u809d\u529f\u4e09\u9879', 'clinic_code': 'H2', 'price': Decimal('38.50'), 'summary': '\u6d4b\u8bd5\u7b80\u4ecb1', 'clinic_name': '\u4f5b\u5c71\u8bca\u6240'}, {'item_code': 'ITME1', 'item_name': '\u809d\u529f\u4e09\u9879', 'clinic_code': 'H1', 'price': Decimal('28.50'), 'summary': '\u6d4b\u8bd5\u7b80\u4ecb1', 'clinic_name': '\u5e7f\u5dde\u8bca\u6240'}, {'item_code': 'ITME2', 'item_name': '\u80be\u529f\u516d\u9879', 'clinic_code': 'H2', 'price': Decimal('47.00'), 'summary': '\u6d4b\u8bd5\u7b80\u4ecb2', 'clinic_name': '\u4f5b\u5c71\u8bca\u6240'}, {'item_code': 'ITME2', 'item_name': '\u80be\u529f\u516d\u9879', 'clinic_code': 'H1', 'price': Decimal('47.00'), 'summary': '\u6d4b\u8bd5\u7b80\u4ecb2', 'clinic_name': '\u5e7f\u5dde\u8bca\u6240'}], 'total_found': 5, 'search_method': 'fallback', 'filters_applied': {}, 'source': 'database', 'message': 'No services matched your criteria. Here are our available services.'}",
+      "completed": true
+    }
+  ],
+  "metadata": {
+    "agentic_mode": true,
+    "tools_used": [
+      "agent_executed_tools"
+    ],
+    "agent_confidence": 1.0,
+    "callback_events": 1,
+    "streaming_steps": 0
+  }
+}
+INFO:__main__:========================
+> Running step cbb82691-06b8-4de0-998a-1d5e7c4784ef. Step input: User Query: 你好，我想了解一下诺亚新舟的服务
+User ID: test_user_b2
+Date: 2025-07-24 17:04:16
+\n\nRecent Conversation:\nsystem: 
+### <AGENTIC_POLICY v2.0 (2025-07-24)>
+当前日期: 2025-07-24
+语言环境: zh-CN
+
+你是 **诺亚新舟健康医疗助理**，为高端诊所服务的 AI 健康管家，始终以全智能体（AGENTIC）模式运行。
+
+� **关于诺亚新舟**：
+以爱行舟，亲近相守。Humansa|诺亚新舟以名医多、级别高、专业强为特色，拥有500多位三甲主任级名医专家，目前已\nuser: 你好，我想了解一下诺亚新舟的服务
+
+
+Please process this query using the appropriate tools. Call tools with structured arguments only.
+[1;3;38;5;200mThought: 用户想了解诺亚新舟的服务。需要查找诺亚新舟相关的医疗服务信息。可以使用search_services工具来获取相关服务及价格信息。
+Action: search_services
+Action Input: {'service_name': None, 'clinic_name': '诺亚新舟', 'language': 'zh'}
+[0m[1;3;34mObservation: {'success': True, 'services': [{'item_code': 'ITME1', 'item_name': '肝功三项', 'clinic_code': 'H3', 'price': Decimal('48.50'), 'summary': '测试简介1', 'clinic_name': '深圳诊所'}, {'item_code': 'ITME1', 'item_name': '肝功三项', 'clinic_code': 'H2', 'price': Decimal('38.50'), 'summary': '测试简介1', 'clinic_name': '佛山诊所'}, {'item_code': 'ITME1', 'item_name': '肝功三项', 'clinic_code': 'H1', 'price': Decimal('28.50'), 'summary': '测试简介1', 'clinic_name': '广州诊所'}, {'item_code': 'ITME2', 'item_name': '肾功六项', 'clinic_code': 'H2', 'price': Decimal('47.00'), 'summary': '测试简介2', 'clinic_name': '佛山诊所'}, {'item_code': 'ITME2', 'item_name': '肾功六项', 'clinic_code': 'H1', 'price': Decimal('47.00'), 'summary': '测试简介2', 'clinic_name': '广州诊所'}], 'total_found': 5, 'search_method': 'fallback', 'filters_applied': {}, 'source': 'database', 'message': 'No services matched your criteria. Here are our available services.'}
+[0m> Running step 91f44283-ba44-41af-b62a-d2df4a7701e2. Step input: None
+[1;3;38;5;200mThought: 诺亚新舟提供多种检测服务，包括肝功能三项和肾功能六项，价格因诊所不同而有所差异。可以根据具体需求选择相应的服务和诊所。
+Answer: 诺亚新舟提供的主要服务包括肝功能三项和肾功能六项，价格在28.50元到48.50元之间，具体价格根据不同诊所而定。如需详细信息或预约，请告诉我。
+[0m[2025-07-24 17:04:20 -0700] [23451] [INFO] 127.0.0.1:55576 POST /v1-humansa/chat/completions 1.1 200 9248 6245709
