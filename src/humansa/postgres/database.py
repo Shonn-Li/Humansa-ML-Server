@@ -61,7 +61,7 @@ class HumansaDatabase:
                                d.expertise, d.bio, d.registration_fee,
                                c.name as clinic_name, c.address, c.phone
                         FROM humansa_doctor d
-                        LEFT JOIN humansa_clinic c ON d.clinic_code = c.clinic_code
+                        LEFT JOIN humansa_clinics c ON d.clinic_code = c.clinic_code
                         WHERE d.name = %s
                     """
                     cursor.execute(exact_query, (doctor_name,))
@@ -77,7 +77,7 @@ class HumansaDatabase:
                                d.expertise, d.bio, d.registration_fee,
                                c.name as clinic_name, c.address, c.phone
                         FROM humansa_doctor d
-                        LEFT JOIN humansa_clinic c ON d.clinic_code = c.clinic_code
+                        LEFT JOIN humansa_clinics c ON d.clinic_code = c.clinic_code
                         WHERE d.name ILIKE %s
                         ORDER BY d.name
                         LIMIT 1
@@ -128,7 +128,7 @@ class HumansaDatabase:
                                    d.name as doctor_name, c.name as clinic_name
                             FROM humansa_schedule s
                             LEFT JOIN humansa_doctor d ON s.doctor_code = d.doctor_code
-                            LEFT JOIN humansa_clinic c ON s.clinic_code = c.clinic_code
+                            LEFT JOIN humansa_clinics c ON s.clinic_code = c.clinic_code
                             WHERE d.name = %s AND s.shift_date = %s AND s.remaining_slots > 0
                             ORDER BY s.start_time
                         """
@@ -141,7 +141,7 @@ class HumansaDatabase:
                                    d.name as doctor_name, c.name as clinic_name
                             FROM humansa_schedule s
                             LEFT JOIN humansa_doctor d ON s.doctor_code = d.doctor_code
-                            LEFT JOIN humansa_clinic c ON s.clinic_code = c.clinic_code
+                            LEFT JOIN humansa_clinics c ON s.clinic_code = c.clinic_code
                             WHERE d.name = %s AND s.shift_date >= CURRENT_DATE AND s.remaining_slots > 0
                             ORDER BY s.shift_date, s.start_time
                         """
@@ -162,7 +162,7 @@ class HumansaDatabase:
                         SELECT ms.clinic_code, ms.service_name, 
                                ms.price, ms.description, c.name as clinic_name
                         FROM humansa_medical_service ms
-                        LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
+                        LEFT JOIN humansa_clinics c ON ms.clinic_code = c.clinic_code
                         WHERE c.name = %s
                         ORDER BY ms.service_name
                     """
@@ -180,20 +180,20 @@ class HumansaDatabase:
                 with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                     if service_name:
                         query = """
-                            SELECT ms.item_code, ms.clinic_code, ms.item_name, 
-                                   ms.price, ms.summary, c.name as clinic_name
+                            SELECT ms.clinic_code, ms.service_name, 
+                                   ms.price, ms.description, c.name as clinic_name
                             FROM humansa_medical_service ms
-                            LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
+                            LEFT JOIN humansa_clinics c ON ms.clinic_code = c.clinic_code
                             WHERE ms.service_name ILIKE %s
                             ORDER BY c.name, ms.service_name
                         """
                         cursor.execute(query, (f"%{service_name}%",))
                     else:
                         query = """
-                            SELECT ms.item_code, ms.clinic_code, ms.item_name, 
-                                   ms.price, ms.summary, c.name as clinic_name
+                            SELECT ms.clinic_code, ms.service_name, 
+                                   ms.price, ms.description, c.name as clinic_name
                             FROM humansa_medical_service ms
-                            LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
+                            LEFT JOIN humansa_clinics c ON ms.clinic_code = c.clinic_code
                             ORDER BY c.name, ms.service_name
                         """
                         cursor.execute(query)
@@ -211,7 +211,7 @@ class HumansaDatabase:
                 with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                     query = """
                         SELECT clinic_code, name, address, phone
-                        FROM humansa_clinic
+                        FROM humansa_clinics
                         ORDER BY name
                     """
                     cursor.execute(query)
@@ -241,7 +241,7 @@ class HumansaDatabase:
                     # First try exact match
                     exact_query = """
                         SELECT clinic_code, name, address, phone
-                        FROM humansa_clinic
+                        FROM humansa_clinics
                         WHERE name = %s
                     """
                     cursor.execute(exact_query, (clinic_name,))
@@ -254,7 +254,7 @@ class HumansaDatabase:
                     # If no exact match, try fuzzy matching with ILIKE
                     fuzzy_query = """
                         SELECT clinic_code, name, address, phone
-                        FROM humansa_clinic
+                        FROM humansa_clinics
                         WHERE name ILIKE %s
                         ORDER BY name
                         LIMIT 1
@@ -303,7 +303,7 @@ class HumansaDatabase:
                                    d.expertise, d.bio, d.registration_fee,
                                    c.name as clinic_name, c.address, c.phone
                             FROM humansa_doctor d
-                            LEFT JOIN humansa_clinic c ON d.clinic_code = c.clinic_code
+                            LEFT JOIN humansa_clinics c ON d.clinic_code = c.clinic_code
                             WHERE {' AND '.join(conditions)}
                             ORDER BY d.name
                             LIMIT %s
@@ -319,7 +319,7 @@ class HumansaDatabase:
                                    d.expertise, d.bio, d.registration_fee,
                                    c.name as clinic_name, c.address, c.phone
                             FROM humansa_doctor d
-                            LEFT JOIN humansa_clinic c ON d.clinic_code = c.clinic_code
+                            LEFT JOIN humansa_clinics c ON d.clinic_code = c.clinic_code
                             ORDER BY d.name
                             LIMIT %s
                         """
@@ -470,7 +470,7 @@ class HumansaDatabase:
                         SELECT DISTINCT d.doctor_code, d.name, d.title, d.expertise, 
                                c.name as clinic_name, COUNT(s.shift_date) as available_slots
                         FROM humansa_doctor d
-                        LEFT JOIN humansa_clinic c ON d.clinic_code = c.clinic_code
+                        LEFT JOIN humansa_clinics c ON d.clinic_code = c.clinic_code
                         LEFT JOIN humansa_schedule s ON d.doctor_code = s.doctor_code
                         WHERE s.shift_date BETWEEN %s AND %s
                         AND s.remaining_slots > 0
@@ -515,7 +515,7 @@ class HumansaDatabase:
                         SELECT DISTINCT c.clinic_code, c.name, c.address, c.phone,
                                COUNT(DISTINCT d.doctor_code) as doctor_count,
                                STRING_AGG(DISTINCT d.expertise, ', ') as specialties
-                        FROM humansa_clinic c
+                        FROM humansa_clinics c
                         LEFT JOIN humansa_doctor d ON c.clinic_code = d.clinic_code
                         WHERE {where_clause}
                         GROUP BY c.clinic_code, c.name, c.address, c.phone
@@ -544,7 +544,7 @@ class HumansaDatabase:
                         # No matches, return all clinics
                         fallback_query = """
                             SELECT clinic_code, name, address, phone
-                            FROM humansa_clinic
+                            FROM humansa_clinics
                             ORDER BY name
                             LIMIT %s
                         """
@@ -597,7 +597,7 @@ class HumansaDatabase:
                         SELECT ms.clinic_code, ms.service_name, ms.price, 
                                ms.description, c.name as clinic_name
                         FROM humansa_medical_service ms
-                        LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
+                        LEFT JOIN humansa_clinics c ON ms.clinic_code = c.clinic_code
                         WHERE {where_clause}
                         ORDER BY ms.service_name
                         LIMIT %s
@@ -623,10 +623,10 @@ class HumansaDatabase:
                     else:
                         # No matches, return popular services
                         fallback_query = """
-                            SELECT ms.item_code, ms.item_name, ms.clinic_code, ms.price, 
-                                   ms.summary, c.name as clinic_name
+                            SELECT ms.clinic_code, ms.service_name, ms.price, 
+                                   ms.description, c.name as clinic_name
                             FROM humansa_medical_service ms
-                            LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
+                            LEFT JOIN humansa_clinics c ON ms.clinic_code = c.clinic_code
                             ORDER BY ms.service_name
                             LIMIT %s
                         """
@@ -674,7 +674,7 @@ class HumansaDatabase:
                         SELECT ms.clinic_code, ms.service_name, ms.price, 
                                ms.description, c.name as clinic_name, c.address
                         FROM humansa_medical_service ms
-                        LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
+                        LEFT JOIN humansa_clinics c ON ms.clinic_code = c.clinic_code
                         WHERE {where_clause}
                         ORDER BY ms.price
                         LIMIT %s
