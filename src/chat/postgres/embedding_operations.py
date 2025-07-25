@@ -110,24 +110,55 @@ class EmbeddingDBOperations:
 
         with self.get_connection() as conn:
             with conn.cursor() as cursor:
-                # Query similar to notes - check with proper JOIN and skipEmbedding flag
+                # First check if skipEmbedding column exists
+                cursor.execute("""
+                    SELECT EXISTS (
+                        SELECT 1 
+                        FROM information_schema.columns 
+                        WHERE table_name = 'conversation_v1' 
+                        AND column_name = 'skipEmbedding'
+                    )
+                """)
+                
+                column_exists = cursor.fetchone()[0]
                 format_strings = ','.join(['%s'] * len(conversation_ids))
-                cursor.execute(f"""
-                    SELECT c.id 
-                    FROM conversation_v1 c
-                    LEFT JOIN embedding_v1 e ON c.id = e.type_id AND e.type = 'conversation'
-                    WHERE c.id IN ({format_strings})
-                      AND c."deletedAt" IS NULL
-                      AND c."skipEmbedding" = false
-                      AND e.type_id IS NULL
-                    ORDER BY c.id
-                """, conversation_ids)
+                
+                if column_exists:
+                    # Query with skipEmbedding column
+                    cursor.execute(f"""
+                        SELECT c.id 
+                        FROM conversation_v1 c
+                        LEFT JOIN embedding_v1 e ON c.id = e.type_id AND e.type = 'conversation'
+                        WHERE c.id IN ({format_strings})
+                          AND c."deletedAt" IS NULL
+                          AND c."skipEmbedding" = false
+                          AND e.type_id IS NULL
+                        ORDER BY c.id
+                    """, conversation_ids)
+                else:
+                    # Query without skipEmbedding column - exclude conversations with SKIP_EMBEDDING marker
+                    cursor.execute(f"""
+                        SELECT c.id 
+                        FROM conversation_v1 c
+                        LEFT JOIN embedding_v1 e ON c.id = e.type_id AND e.type = 'conversation'
+                        WHERE c.id IN ({format_strings})
+                          AND c."deletedAt" IS NULL
+                          AND e.type_id IS NULL
+                          AND NOT EXISTS (
+                              SELECT 1 FROM embedding_v1 skip_marker
+                              WHERE skip_marker.type_id = c.id 
+                              AND skip_marker.type = 'conversation'
+                              AND skip_marker.section_id = -1
+                              AND skip_marker.chunk_text = 'SKIP_EMBEDDING'
+                          )
+                        ORDER BY c.id
+                    """, conversation_ids)
 
                 conversations_without_embeddings = [
                     row[0] for row in cursor.fetchall()]
 
                 logger.info(
-                    f"Conversations without embeddings (skipEmbedding=false): {len(conversations_without_embeddings)}/{len(conversation_ids)}")
+                    f"Conversations without embeddings: {len(conversations_without_embeddings)}/{len(conversation_ids)}")
                 return conversations_without_embeddings
 
     def get_note_content(self, note_id: int) -> Optional[Dict[str, Any]]:
@@ -546,16 +577,52 @@ class EmbeddingDBOperations:
         try:
             with self.get_connection() as conn:
                 with conn.cursor() as cursor:
-                    # Update the conversation to set skipEmbedding = true
+                    # First check if skipEmbedding column exists
                     cursor.execute("""
-                        UPDATE conversation_v1 
-                        SET "skipEmbedding" = true
-                        WHERE id = %s
-                    """, (conversation_id,))
-
-                    conn.commit()
-                    logger.info(
-                        f"Marked conversation {conversation_id} to skip embedding")
+                        SELECT EXISTS (
+                            SELECT 1 
+                            FROM information_schema.columns 
+                            WHERE table_name = 'conversation_v1' 
+                            AND column_name = 'skipEmbedding'
+                        )
+                    """)
+                    
+                    column_exists = cursor.fetchone()[0]
+                    
+                    if column_exists:
+                        # Update the conversation to set skipEmbedding = true
+                        cursor.execute("""
+                            UPDATE conversation_v1 
+                            SET "skipEmbedding" = true
+                            WHERE id = %s
+                        """, (conversation_id,))
+                        
+                        conn.commit()
+                        logger.info(
+                            f"Marked conversation {conversation_id} to skip embedding")
+                    else:
+                        # Column doesn't exist, use embedding_v1 marker approach
+                        # First check if any embedding already exists for this conversation
+                        cursor.execute("""
+                            SELECT COUNT(*) FROM embedding_v1 
+                            WHERE type_id = %s AND type = 'conversation'
+                        """, (conversation_id,))
+                        
+                        existing_count = cursor.fetchone()[0]
+                        
+                        if existing_count == 0:
+                            # Insert a special marker record to indicate this conversation should be skipped
+                            cursor.execute("""
+                                INSERT INTO embedding_v1 (type_id, type, section_id, chunk_text, embedding, last_updated)
+                                VALUES (%s, %s, %s, %s, %s, NOW())
+                            """, (conversation_id, 'conversation', -1, 'SKIP_EMBEDDING', None))
+                            
+                            conn.commit()
+                            logger.info(f"Marked conversation {conversation_id} to skip embedding (using marker)")
+                        else:
+                            logger.info(
+                                f"Conversation {conversation_id} already has embeddings, skipping mark operation")
+                    
                     return True
         except Exception as e:
             logger.error(
@@ -567,16 +634,47 @@ class EmbeddingDBOperations:
         try:
             with self.get_connection() as conn:
                 with conn.cursor() as cursor:
-                    # Update the conversation to set skipEmbedding = false
+                    # First check if skipEmbedding column exists
                     cursor.execute("""
-                        UPDATE conversation_v1 
-                        SET "skipEmbedding" = false
-                        WHERE id = %s
-                    """, (conversation_id,))
-
-                    conn.commit()
-                    logger.info(
-                        f"Enabled embedding for conversation {conversation_id}")
+                        SELECT EXISTS (
+                            SELECT 1 
+                            FROM information_schema.columns 
+                            WHERE table_name = 'conversation_v1' 
+                            AND column_name = 'skipEmbedding'
+                        )
+                    """)
+                    
+                    column_exists = cursor.fetchone()[0]
+                    
+                    if column_exists:
+                        # Update the conversation to set skipEmbedding = false
+                        cursor.execute("""
+                            UPDATE conversation_v1 
+                            SET "skipEmbedding" = false
+                            WHERE id = %s
+                        """, (conversation_id,))
+                        
+                        conn.commit()
+                        logger.info(
+                            f"Enabled embedding for conversation {conversation_id}")
+                    else:
+                        # Column doesn't exist, remove the SKIP_EMBEDDING marker if it exists
+                        cursor.execute("""
+                            DELETE FROM embedding_v1 
+                            WHERE type_id = %s 
+                            AND type = 'conversation'
+                            AND section_id = -1
+                            AND chunk_text = 'SKIP_EMBEDDING'
+                        """, (conversation_id,))
+                        
+                        if cursor.rowcount > 0:
+                            conn.commit()
+                            logger.info(
+                                f"Enabled embedding for conversation {conversation_id} (removed marker)")
+                        else:
+                            logger.info(
+                                f"No skip marker found for conversation {conversation_id}")
+                    
                     return True
         except Exception as e:
             logger.error(
