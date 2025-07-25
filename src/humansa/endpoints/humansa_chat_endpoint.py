@@ -375,29 +375,24 @@ class HumansaChatEndpoint:
         return enhanced_context
 
     async def _build_humansa_system_prompt(self, query: str, conversation_history: List[Dict] = None) -> str:
-        """使用智能LLM选择器分析查询并动态构建系统提示。"""
+        """Use streamlined v2 system prompt without tables."""
         try:
             logger.info(
-                f"🧠 Analyzing query for intelligent prompt selection: {query[:100]}...")
+                f"🧠 Building Humansa v2 system prompt for query: {query[:100]}...")
 
-            # Use intelligent prompt selector to select the best prompt template
-            prompt_decision = await intelligent_prompt_selector.select_prompt_template(
-                query, conversation_history
-            )
-
-            # Build prompt using selected template
-            system_prompt = build_intelligent_system_prompt(
-                prompt_decision.selected_prompt)
+            # Use v2 system prompt without tables
+            from ..prompts.humansa_system_prompt_v2 import get_humansa_system_prompt_v2
+            current_date = datetime.now().strftime('%Y-%m-%d')
+            system_prompt = get_humansa_system_prompt_v2(current_date)
 
             logger.info(
-                f"🎯 Built intelligent system prompt with template: {prompt_decision.selected_prompt}")
-            logger.info(f"🧠 Selection reasoning: {prompt_decision.reasoning}")
+                f"🎯 Built Humansa v2 system prompt")
             logger.info(f"📝 System prompt length: {len(system_prompt)} chars")
 
             return system_prompt
 
         except Exception as e:
-            logger.error(f"❌ Intelligent prompt selection failed: {e}")
+            logger.error(f"❌ V2 system prompt generation failed: {e}")
             # Fallback to full prompt
             from ..prompts.appointment_booking_prompt import get_full_humansa_system_prompt
             logger.warning("⚠️ Using fallback full system prompt")

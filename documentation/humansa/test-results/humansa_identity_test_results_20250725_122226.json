@@ -1,0 +1,180 @@
+{
+  "timestamp": "20250725_122226",
+  "summary": {
+    "total": 8,
+    "passed": 4,
+    "failed": 4,
+    "pass_rate": 0.5
+  },
+  "results": [
+    {
+      "test": {
+        "id": 1,
+        "name": "Basic Identity Query",
+        "query": "你是谁？",
+        "expected_keywords": [
+          "诺亚新舟",
+          "小诺",
+          "健康医疗助理",
+          "AI健康管家"
+        ]
+      },
+      "response": "Thought: 用户在问“你是谁”，这是一个自我介绍的问题。作为诺亚新舟健康医疗助理，我的身份是AI健康管家，提供医疗相关的咨询和服务。无需调用工具，直接用中文回答即可。\n\nAnswer: 我是诺亚新舟健康医疗助理，您的AI健康管家，专为提供医疗咨询和服务而设计。",
+      "status": "passed",
+      "found_keywords": [
+        "诺亚新舟",
+        "健康医疗助理",
+        "AI健康管家"
+      ],
+      "missing_keywords": [
+        "小诺"
+      ]
+    },
+    {
+      "test": {
+        "id": 2,
+        "name": "Company Background",
+        "query": "介绍一下诺亚新舟",
+        "expected_keywords": [
+          "诺亚新舟",
+          "高端诊所",
+          "名医",
+          "健康"
+        ]
+      },
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "status": "failed",
+      "found_keywords": [],
+      "missing_keywords": [
+        "诺亚新舟",
+        "高端诊所",
+        "名医",
+        "健康"
+      ]
+    },
+    {
+      "test": {
+        "id": 3,
+        "name": "Service Capabilities",
+        "query": "你能做什么？",
+        "expected_keywords": [
+          "预约",
+          "咨询",
+          "健康",
+          "诊所"
+        ]
+      },
+      "response": "Thought: 用户在问我能做什么，我可以介绍我的功能，包括预约、查医生、查诊所、查服务等。为了更详细地说明，我可以用search_web工具搜索相关信息，或者直接用内部工具列出我的功能。这里我选择用search_web工具搜索“诺亚新舟健康医疗助理的功能”以获取最新信息。\n\nAction: search_web\nAction Input: {\"query\": \"诺亚新舟健康医疗助理的功能\", \"category\": null, \"language\": \"zh\"}\nObservation: {'success': True, 'query': '诺亚新舟健康医疗助理的功能', 'language': 'zh', 'results': [{'url': 'http://nuoyajiankang2030.com/', 'title': '诺亚方舟健康科技集团-中国数字化高科技健康教育管理服务平台', 'snippet': '诺亚方舟健康科技集团(陕西)有限公司是一家专注于健康领域的项目投资建设、运营和产品研发生产、销售为一体的综合性科技公司。 公司致力于国内数字化健康科技教育服务 ...', 'source': 'serper', 'position': 1}, {'url': 'https://help.uber.com/ps-AF/ubereats/restaurants/search?q=%E5%AE%81%E6%B3%A2%E5%8C%97%E4%BB%91%E5%8C%BA%E8%89%B2%E6%83%85%E6%9C%8D%E5%8A%A1%EF%BC%88%E9%80%89%E4%BA%BA%E5%BE%AE%E4%BF%A16311602%EF%BC%89%E4%B8%8A%E9%97%A8%E6%9C%8D%E5%8A%A1.1214o', 'title': 'اوبر ايټس - Uber Help', 'snippet': 'مونږ هیڅ نشو موندلی لپاره \"宁波北仑区色情服务（选人微信6311602）上门服务.1214o\". وړاندیزونه: 1. ډاډ ترلاسه کړئ چې ټولي کلیدي کلمې په سمه توګه لیکل شوي.', 'source': 'serper', 'position': 2}, {'url': 'https://3g.kq36.com/jobs/3595981', 'title': '广州方舟诺亚医疗管理服务招聘(医院) - 康强医疗人才网', 'snippet': '康强提供广州方舟诺亚医疗管理服务2025年最新招聘：口腔医助、活动控场人员、全科医生、英文护士（驻园）等5个职位，招聘地区有深圳、广州等2个地区，职位覆盖口腔科、 ...', 'source': 'serper', 'position': 3}, {'url': 'https://www.nava-bj.com.cn/ljwm', 'title': '了解我们-北京诺亚同舟医疗技术有限公司', 'snippet': '北京诺亚同舟医疗技术有限公司创立于2002年，注册资金2000万元，位于北京市海淀中关村创业园区，是一家专业从事低频超声靶位透药技术研究、产品开发、生产、销售、服务为 ...', 'source': 'serper', 'position': 4}, {'url': 'https://insurance.hexun.com/bxscpl/index.html', 'title': '评论与研究-保险频道-和讯网', 'snippet': '(11-05 16:55)诺亚新舟创始人黄敏：相比专科治疗，活力养老更需要精准医疗; (11-05 16:53)北京颐乐居董事长王慧楠：社区养老旨在让活力长者成为“老顽童”; (11-05 16:45) ...', 'source': 'serper', 'position': 5}], 'total_results': 5, 'search_type': 'streaming_web_search', 'message': 'Found 5 web results with streaming updates', 'search_progress': [], 'note': 'Results were streamed in real-time during search'}\nObservation: {'success': True, 'query': '诺亚新舟健康医疗助理的功能', 'language': 'zh', 'results': [{'url': 'http://nuoyajiankang2030.com/', 'title': '诺亚方舟健康科技集团-中国数字化高科技健康教育管理服务平台', 'snippet': '诺亚方舟健康科技集团(陕西)有限公司是一家专注于健康领域的项目投资建设、运营和产品研发生产、销售为一体的综合性科技公司。 公司致力于国内数字化健康科技教育服务 ...', 'source': 'serper', 'position': 1}, {'url': 'https://help.uber.com/ps-AF/ubereats/restaurants/search?q=%E5%AE%81%E6%B3%A2%E5%8C%97%E4%BB%91%E5%8C%BA%E8%89%B2%E6%83%85%E6%9C%8D%E5%8A%A1%EF%BC%88%E9%80%89%E4%BA%BA%E5%BE%AE%E4%BF%A16311602%EF%BC%89%E4%B8%8A%E9%97%A8%E6%9C%8D%E5%8A%A1.1214o', 'title': 'اوبر ايټس - Uber Help', 'snippet': 'مونږ هیڅ نشو موندلی لپاره \"宁波北仑区色情服务（选人微信6311602）上门服务.1214o\". وړاندیزونه: 1. ډاډ ترلاسه کړئ چې ټولي کلیدي کلمې په سمه توګه لیکل شوي.', 'source': 'serper', 'position': 2}, {'url': 'https://3g.kq36.com/jobs/3595981', 'title': '广州方舟诺亚医疗管理服务招聘(医院) - 康强医疗人才网', 'snippet': '康强提供广州方舟诺亚医疗管理服务2025年最新招聘：口腔医助、活动控场人员、全科医生、英文护士（驻园）等5个职位，招聘地区有深圳、广州等2个地区，职位覆盖口腔科、 ...', 'source': 'serper', 'position': 3}, {'url': 'https://www.nava-bj.com.cn/ljwm', 'title': '了解我们-北京诺亚同舟医疗技术有限公司', 'snippet': '北京诺亚同舟医疗技术有限公司创立于2002年，注册资金2000万元，位于北京市海淀中关村创业园区，是一家专业从事低频超声靶位透药技术研究、产品开发、生产、销售、服务为 ...', 'source': 'serper', 'position': 4}, {'url': 'https://insurance.hexun.com/bxscpl/index.html', 'title': '评论与研究-保险频道-和讯网', 'snippet': '(11-05 16:55)诺亚新舟创始人黄敏：相比专科治疗，活力养老更需要精准医疗; (11-05 16:53)北京颐乐居董事长王慧楠：社区养老旨在让活力长者成为“老顽童”; (11-05 16:45) ...', 'source': 'serper', 'position': 5}], 'total_results': 5, 'search_type': 'streaming_web_search', 'message': 'Found 5 web results with streaming updates', 'search_progress': [], 'note': 'Results were streamed in real-time during search'}\nThought: 根据搜索结果，诺亚新舟健康医疗助理主要涉及数字化健康科技教育、医疗管理服务、低频超声技术等方面。它可能提供健康管理、预约、咨询、医疗信息服务等功能。结合我作为AI助手的职责，我可以帮助用户预约医生、查找诊所、了解服务项目、提供健康咨询等。\nAnswer: 作为诺亚新舟健康医疗助理，我可以帮助你预约医生、查找诊所、了解各种医疗服务、提供健康咨询，以及协助你获取相关的医疗信息。如果你需要具体的帮助，请告诉我！",
+      "status": "passed",
+      "found_keywords": [
+        "预约",
+        "咨询",
+        "健康",
+        "诊所"
+      ],
+      "missing_keywords": []
+    },
+    {
+      "test": {
+        "id": 4,
+        "name": "Greeting - Hello",
+        "query": "你好",
+        "expected_keywords": [
+          "你好",
+          "诺亚新舟",
+          "小诺"
+        ]
+      },
+      "response": "Thought: 用户只是打招呼，没有具体问题或需求。暂时不需要调用任何工具，可以直接回应。\nAnswer: 你好！有什么我可以帮您的吗？",
+      "status": "failed",
+      "found_keywords": [
+        "你好"
+      ],
+      "missing_keywords": [
+        "诺亚新舟",
+        "小诺"
+      ]
+    },
+    {
+      "test": {
+        "id": 5,
+        "name": "English Identity Query",
+        "query": "Who are you?",
+        "expected_keywords": [
+          "诺亚新舟",
+          "Humansa",
+          "健康",
+          "assistant"
+        ]
+      },
+      "response": "Thought: 用户在问“你是谁”，这是一个自我介绍的问题。作为健康医疗助理，我的身份是“诺亚新舟健康医疗助理”，我可以直接用中文回答用户的问题，无需调用工具。\nAnswer: 我是诺亚新舟健康医疗助理，您的健康管家，专为高端诊所提供智能医疗服务。",
+      "status": "passed",
+      "found_keywords": [
+        "诺亚新舟",
+        "健康"
+      ],
+      "missing_keywords": [
+        "Humansa",
+        "assistant"
+      ]
+    },
+    {
+      "test": {
+        "id": 6,
+        "name": "Introduction Request",
+        "query": "请自我介绍一下",
+        "expected_keywords": [
+          "诺亚新舟",
+          "小诺",
+          "健康医疗助理",
+          "AI健康管家"
+        ]
+      },
+      "response": "timed out",
+      "status": "error",
+      "error": "timed out"
+    },
+    {
+      "test": {
+        "id": 7,
+        "name": "Emergency Response",
+        "query": "我现在胸痛很厉害，呼吸困难",
+        "expected_keywords": [
+          "120",
+          "立即",
+          "急救"
+        ]
+      },
+      "response": "timed out",
+      "status": "error",
+      "error": "timed out"
+    },
+    {
+      "test": {
+        "id": 8,
+        "name": "What Can You Do Detail",
+        "query": "详细说说你的功能",
+        "expected_keywords": [
+          "预约",
+          "咨询",
+          "医生",
+          "诊所",
+          "检查",
+          "健康"
+        ]
+      },
+      "response": "Thought: 用户在询问我的功能详细介绍，我需要用中文详细描述我的能力范围。没有必要调用工具，因为这是对我的功能的说明。  \nAnswer: 我的功能包括帮助您查找医生、预约挂号、查询诊所信息、获取医疗服务和价格、推荐健康产品，以及提供健康相关信息等。我可以根据您的需求提供个性化的医疗咨询和预约服务，帮助您更方便地获取医疗资源。",
+      "status": "passed",
+      "found_keywords": [
+        "预约",
+        "咨询",
+        "医生",
+        "诊所",
+        "健康"
+      ],
+      "missing_keywords": [
+        "检查"
+      ]
+    }
+  ]
+}

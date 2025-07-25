@@ -1,0 +1,33 @@
+{
+  "agent_trace": "Thought: 用户在问“你是谁”，这是一个自我介绍的问题。作为AI助手，我可以直接回答，不需要调用任何工具。\nAnswer: 我是诺亚新舟健康医疗助理，您的健康管家，专为高端诊所提供智能服务。",
+  "agentic_mode": true,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "Thought: 用户在问“你是谁”，这是一个自我介绍的问题。作为AI助手，我可以直接回答，不需要调用任何工具。\nAnswer: 我是诺亚新舟健康医疗助理，您的健康管家，专为高端诊所提供智能服务。",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1753470944,
+  "id": "resp_1753470944",
+  "metadata": {
+    "agent_confidence": 1.0,
+    "agentic_mode": true,
+    "callback_events": 0,
+    "streaming_steps": 0,
+    "tools_used": [
+      "agent_executed_tools"
+    ]
+  },
+  "model": "gpt-4.1-nano",
+  "object": "chat.completion",
+  "tool_calls_observed": [],
+  "usage": {
+    "completion_tokens": 0,
+    "prompt_tokens": 0,
+    "total_tokens": 0
+  }
+}

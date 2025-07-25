@@ -65,14 +65,22 @@ echo -e "\n${YELLOW}Step 2: Activating virtual environment...${NC}"
 source youwo-ml-venv/bin/activate
 echo -e "${GREEN}✅ Virtual environment activated${NC}"
 
-# Step 3: Start ML server
-echo -e "\n${YELLOW}Step 3: Starting ML server on port 6001...${NC}"
+# Step 3: Clean up port and start ML server
+echo -e "\n${YELLOW}Step 3: Cleaning up port 6001...${NC}"
 
-# Kill any existing process on port 6001
-lsof -ti:6001 | xargs kill -9 2>/dev/null || true
-sleep 2
+# Use dedicated cleanup script
+if [ -f "./kill_port_6001.sh" ]; then
+    ./kill_port_6001.sh
+else
+    # Fallback cleanup
+    lsof -ti:6001 | xargs kill -9 2>/dev/null || true
+    ps aux | grep -E "python.*main\.py.*6001" | grep -v grep | awk '{print $2}' | xargs kill -9 2>/dev/null || true
+    sleep 2
+fi
 
-ML_SERVER_PORT=6001 nohup python3 src/main.py > test_server.log 2>&1 &
+echo -e "\n${YELLOW}Starting ML server on port 6001...${NC}"
+
+ML_SERVER_PORT=6001 nohup python3 src/main.py --port 6001 > test_server.log 2>&1 &
 SERVER_PID=$!
 
 # Cleanup function
@@ -82,6 +90,8 @@ cleanup() {
         kill $SERVER_PID 2>/dev/null
         wait $SERVER_PID 2>/dev/null
     fi
+    # Extra cleanup for any lingering processes
+    lsof -ti:6001 | xargs kill -9 2>/dev/null || true
     echo -e "${GREEN}✅ Cleanup complete${NC}"
 }
 

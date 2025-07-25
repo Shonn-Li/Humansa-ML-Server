@@ -28,14 +28,22 @@ echo -e "\n${YELLOW}Step 2: Activating virtual environment...${NC}"
 source youwo-ml-venv/bin/activate
 echo -e "${GREEN}✅ Virtual environment activated${NC}"
 
-# Step 3: Start ML server
-echo -e "\n${YELLOW}Step 3: Starting ML server on port 6001...${NC}"
+# Step 3: Clean up port and start ML server
+echo -e "\n${YELLOW}Step 3: Cleaning up port 6001...${NC}"
 
-# Kill any existing process on port 6001
-lsof -ti:6001 | xargs kill -9 2>/dev/null || true
-sleep 2
+# Use dedicated cleanup script
+if [ -f "./kill_port_6001.sh" ]; then
+    ./kill_port_6001.sh
+else
+    # Fallback cleanup
+    lsof -ti:6001 | xargs kill -9 2>/dev/null || true
+    ps aux | grep -E "python.*main\.py.*6001" | grep -v grep | awk '{print $2}' | xargs kill -9 2>/dev/null || true
+    sleep 2
+fi
 
-ML_SERVER_PORT=6001 nohup python3 src/main.py > simple_test_server.log 2>&1 &
+echo -e "\n${YELLOW}Starting ML server on port 6001...${NC}"
+
+ML_SERVER_PORT=6001 nohup python3 src/main.py --port 6001 > simple_test_server.log 2>&1 &
 SERVER_PID=$!
 
 # Cleanup function
@@ -45,6 +53,8 @@ cleanup() {
         kill $SERVER_PID 2>/dev/null
         wait $SERVER_PID 2>/dev/null
     fi
+    # Extra cleanup for any lingering processes
+    lsof -ti:6001 | xargs kill -9 2>/dev/null || true
     echo -e "${GREEN}✅ Cleanup complete${NC}"
 }
 
@@ -73,25 +83,40 @@ fi
 # Step 4: Run 3 simple tests
 echo -e "\n${YELLOW}Step 4: Running 3 simple tests...${NC}"
 
-python3 - << 'PYTEST'
+# Create output file with timestamp
+OUTPUT_FILE="humansa_test_output_$(date +%Y%m%d_%H%M%S).md"
+echo "Test output will be saved to: $OUTPUT_FILE"
+
+python3 - "$OUTPUT_FILE" << 'PYTEST'
 import asyncio
 import json
 import aiohttp
 import time
 import sys
+import os
+
+# Get output file from command line argument
+output_file = sys.argv[1] if len(sys.argv) > 1 else "humansa_test_output.md"
 
 class SimpleHumansaTest:
-    def __init__(self):
+    def __init__(self, output_file):
         self.base_url = "http://localhost:6001"
         self.endpoint = f"{self.base_url}/v1-humansa/chat/completions"
+        self.output_file = output_file
+        self.output_content = []
+    
+    def log(self, text):
+        """Log to both console and markdown file."""
+        print(text)
+        self.output_content.append(text)
     
     async def test_query(self, test_name, query):
         """Run a single test query."""
-        print(f"\n{'='*60}")
-        print(f"TEST: {test_name}")
-        print(f"{'='*60}")
-        print(f"Query: {query}")
-        print("-"*40)
+        self.log(f"\n{'='*60}")
+        self.log(f"TEST: {test_name}")
+        self.log(f"{'='*60}")
+        self.log(f"Query: {query}")
+        self.log("-"*40)
         
         start_time = time.time()
         
@@ -114,47 +139,54 @@ class SimpleHumansaTest:
                     
                     # Check for error
                     if "error" in result:
-                        print(f"❌ ERROR: {result['error']}")
+                        self.log(f"❌ ERROR: {result['error']}")
                         return False
                     
                     # Check if we got a response
                     if "choices" in result and result["choices"]:
                         content = result["choices"][0]["message"]["content"]
-                        print(f"✅ Response: {content[:200]}{'...' if len(content) > 200 else ''}")
+                        self.log(f"✅ Response: {content[:200]}{'...' if len(content) > 200 else ''}")
                         
                         # Check for agent trace (shows tool usage)
                         if "agent_trace" in result:
                             trace = result["agent_trace"]
+                            self.log("\n**Agent Trace:**")
+                            self.log("```")
+                            self.log(trace[:500] + "..." if len(trace) > 500 else trace)
+                            self.log("```")
                             if "Action:" in trace:
-                                print(f"✅ Agent used tools (ReAct pattern detected)")
+                                self.log(f"✅ Agent used tools (ReAct pattern detected)")
                                 # Count tool calls
                                 tool_count = trace.count("Action:")
-                                print(f"   Tools called: {tool_count}")
+                                self.log(f"   Tools called: {tool_count}")
                             else:
-                                print("⚠️  No tool usage detected")
+                                self.log("⚠️  No tool usage detected")
                     else:
-                        print("❌ No response content")
+                        self.log("❌ No response content")
                         return False
                     
-                    print(f"⏱️  Response time: {duration:.2f}s")
+                    self.log(f"⏱️  Response time: {duration:.2f}s")
                     
                     # Check for database errors in trace
                     if "agent_trace" in result:
                         trace = result["agent_trace"]
                         if "connection to server at" in trace and "failed" in trace:
-                            print("❌ Database connection error detected!")
+                            self.log("❌ Database connection error detected!")
                             return False
                     
                     return True
                     
         except Exception as e:
-            print(f"❌ Exception: {e}")
+            self.log(f"❌ Exception: {e}")
             return False
     
     async def run_tests(self):
         """Run the 3 essential tests."""
-        print("\nRunning 3 Essential Humansa Tests...")
-        print("="*60)
+        self.log("# Humansa AI Agent V2 - Test Results\n")
+        self.log(f"**Date**: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+        self.log("## Test Execution\n")
+        self.log("Running 3 Essential Humansa Tests...")
+        self.log("="*60)
         
         tests = [
             ("Find Doctor", "我想找一个心脏科医生"),
@@ -169,29 +201,36 @@ class SimpleHumansaTest:
             await asyncio.sleep(1)
         
         # Summary
-        print("\n" + "="*60)
-        print("TEST SUMMARY")
-        print("="*60)
+        self.log("\n" + "="*60)
+        self.log("## TEST SUMMARY")
+        self.log("="*60)
         
         passed = sum(1 for _, success in results if success)
         total = len(results)
         
+        self.log("\n| Test Name | Status |")
+        self.log("|-----------|--------|")
         for test_name, success in results:
             status = "✅ PASS" if success else "❌ FAIL"
-            print(f"{test_name}: {status}")
+            self.log(f"| {test_name} | {status} |")
         
-        print(f"\nTotal: {passed}/{total} passed ({passed/total*100:.0f}%)")
+        self.log(f"\n**Total**: {passed}/{total} passed ({passed/total*100:.0f}%)")
         
         if passed == total:
-            print("\n🎉 All tests passed!")
+            self.log("\n🎉 **All tests passed!**")
         else:
-            print("\n❌ Some tests failed. Check the database connection and tool configuration.")
+            self.log("\n❌ **Some tests failed. Check the database connection and tool configuration.**")
+        
+        # Write to file
+        with open(self.output_file, 'w', encoding='utf-8') as f:
+            f.write('\n'.join(self.output_content))
+        print(f"\n📄 Full test report saved to: {self.output_file}")
         
         return passed == total
 
 # Run the tests
 async def main():
-    tester = SimpleHumansaTest()
+    tester = SimpleHumansaTest(output_file)
     success = await tester.run_tests()
     sys.exit(0 if success else 1)
 

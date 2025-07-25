@@ -32,7 +32,7 @@ class DatabaseMedicalTools:
                 c.phone as clinic_phone,
                 c.nearest_mrt
             FROM humansa_doctors d
-            JOIN humansa_clinics c ON d.clinic_id = c.clinic_id
+            JOIN humansa_clinic c ON d.clinic_id = c.clinic_id
             WHERE d.is_active = true
         """
         
@@ -115,7 +115,7 @@ class DatabaseMedicalTools:
             doctor = await conn.fetchrow("""
                 SELECT d.*, c.name as clinic_name
                 FROM humansa_doctors d
-                JOIN humansa_clinics c ON d.clinic_id = c.clinic_id
+                JOIN humansa_clinic c ON d.clinic_id = c.clinic_id
                 WHERE d.doctor_id = $1
             """, doctor_id)
             
@@ -196,7 +196,7 @@ class DatabaseMedicalTools:
                     SELECT s.*, d.name as doctor_name, d.specialty, c.name as clinic_name
                     FROM humansa_appointment_slots s
                     JOIN humansa_doctors d ON s.doctor_id = d.doctor_id
-                    JOIN humansa_clinics c ON d.clinic_id = c.clinic_id
+                    JOIN humansa_clinic c ON d.clinic_id = c.clinic_id
                     WHERE s.slot_id = $1 AND s.is_available = true
                     FOR UPDATE
                 """, slot_id)
@@ -266,7 +266,7 @@ class DatabaseMedicalTools:
                 c.phone as clinic_phone
             FROM humansa_appointments a
             JOIN humansa_doctors d ON a.doctor_id = d.doctor_id
-            JOIN humansa_clinics c ON a.clinic_id = c.clinic_id
+            JOIN humansa_clinic c ON a.clinic_id = c.clinic_id
             WHERE a.user_id = $1
         """
         
@@ -347,7 +347,7 @@ class DatabaseMedicalTools:
         """Get information about clinics."""
         query = """
             SELECT c.*, COUNT(d.doctor_id) as doctor_count
-            FROM humansa_clinics c
+            FROM humansa_clinic c
             LEFT JOIN humansa_doctors d ON c.clinic_id = d.clinic_id
             WHERE 1=1
         """

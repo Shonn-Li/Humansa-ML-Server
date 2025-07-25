@@ -673,12 +673,6 @@ class HumansaAgenticToolManager:
                 description="外部网络搜索新闻、研究、健康信息——不用于Humansa服务。查找诊所/医生/服务请用内部工具（find_doctor_info、find_clinic_info、search_services）。",
                 fn_schema=SearchArgs
             ),
-            FunctionTool.from_defaults(
-                fn=self.find_clinic_info_structured,
-                name="find_clinic_info",
-                description="按名称或地点查找诊所信息。诊所名称支持模糊匹配，城市/区域精确匹配。",
-                fn_schema=ClinicSearchArgs
-            )
         ])
 
         logger.info(

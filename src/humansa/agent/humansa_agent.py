@@ -88,12 +88,19 @@ class HumansaAgenticAgent:
 
             # Import our custom React system prompt and update the agent
             from ..prompts.humansa_react_system_header import get_humansa_react_system_prompt
+            from ..prompts.humansa_system_prompt_v2 import get_humansa_react_prompt_v2
 
-            # Get the custom system prompt template
+            # Get the v2 React prompt (streamlined version with enhanced identity)
+            react_system_prompt_v2 = get_humansa_react_prompt_v2()
+            
+            # Also get the original template for compatibility
             react_system_prompt = get_humansa_react_system_prompt()
 
-            # Update the agent's prompt using update_prompts method
-            self.agent.update_prompts({"react_header": react_system_prompt})
+            # Update the agent's prompts - use v2 as the main system prompt
+            self.agent.update_prompts({
+                "agent_worker:system_prompt": react_system_prompt_v2,
+                "react_header": react_system_prompt
+            })
 
             logger.info(
                 "🧠 ReAct agent initialized with Humansa-specific system prompt")

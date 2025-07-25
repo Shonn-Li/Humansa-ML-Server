@@ -1,0 +1,626 @@
+{
+  "timestamp": "20250725_090540",
+  "summary": {
+    "total_tests": 20,
+    "passed": 20,
+    "failed": 0,
+    "pass_rate": 100.0,
+    "average_response_time": 6.385064554214478
+  },
+  "detailed_results": [
+    {
+      "id": 1,
+      "name": "Find Cardiologist in Chinese",
+      "query": "我想找一个心脏科医生",
+      "success": true,
+      "duration": 14.690423011779785,
+      "tools_used": [
+        {
+          "tool": "find_doctor_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"specialty\": \"心内科\", \"city\": null, \"name\": null, \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': True, 'doctors': [], 'total_found': 0, 'source': 'database', 'search_type': 'general_fallback', 'search_criteria': {'name': None, 'specialty': '心内科', 'city': None}, 'message': 'No exact ma..."
+        },
+        {
+          "tool": "search_clinics",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"clinic_name\": null, \"city\": null, \"specialty\": \"心内科\", \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': False, 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  database \"test4\" does not exist\\n', 'clinics': [], 'total_found': 0, 'source': 'database'}"
+        }
+      ],
+      "response": "目前系统连接出现问题，无法直接查询医生信息。建议您可以联系当地的医院心脏科或专业医疗机构，获取相关医生的信息。需要我帮您提供一些常见的医院或诊所联系方式吗？",
+      "error": null
+    },
+    {
+      "id": 2,
+      "name": "Find Doctors by City",
+      "query": "深圳有哪些医生？",
+      "success": true,
+      "duration": 5.001596927642822,
+      "tools_used": [
+        {
+          "tool": "find_doctor_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"name\": null, \"specialty\": null, \"city\": \"深圳\", \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': True, 'doctors': [], 'total_found': 0, 'source': 'database', 'search_type': 'general_fallback', 'search_criteria': {'name': None, 'specialty': None, 'city': '深圳'}, 'message': 'No exact mat..."
+        },
+        {
+          "tool": "search_clinics",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"clinic_name\": null, \"city\": \"深圳\", \"specialty\": null, \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': False, 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  database \"test4\" does not exist\\n', 'clinics': [], 'total_found': 0, 'source': 'database'}"
+        }
+      ],
+      "response": "很抱歉，目前系统暂时无法提供深圳的医生信息。建议您稍后再试，或者直接联系当地的医疗机构获取相关医生信息。",
+      "error": null
+    },
+    {
+      "id": 3,
+      "name": "Find Specific Doctor Info",
+      "query": "张医生的信息",
+      "success": true,
+      "duration": 5.299889087677002,
+      "tools_used": [
+        {
+          "tool": "find_doctor_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"name\": \"张\", \"specialty\": null, \"city\": null, \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': True, 'doctors': [], 'total_found': 0, 'source': 'database', 'search_type': 'general_fallback', 'search_criteria': {'name': '张', 'specialty': None, 'city': None}, 'message': 'No exact matc..."
+        },
+        {
+          "tool": "find_doctor_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {'name': '张', 'specialty': None, 'city': None, 'language': 'zh'}",
+          "input": "",
+          "output": "{'success': True, 'doctors': [], 'total_found': 0, 'source': 'database', 'search_type': 'general_fallback', 'search_criteria': {'name': '张', 'specialty': None, 'city': None}, 'message': 'No exact matc..."
+        }
+      ],
+      "response": "很抱歉，目前没有找到关于“张”医生的相关信息。如果您需要，我可以帮您查找其他医生或提供其他帮助。",
+      "error": null
+    },
+    {
+      "id": 4,
+      "name": "Check Doctor Availability",
+      "query": "李医生下周有空吗？",
+      "success": true,
+      "duration": 7.907525300979614,
+      "tools_used": [
+        {
+          "tool": "find_doctor_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"name\": \"李\", \"specialty\": null, \"city\": null, \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': True, 'doctors': [], 'total_found': 0, 'source': 'database', 'search_type': 'general_fallback', 'search_criteria': {'name': '李', 'specialty': None, 'city': None}, 'message': 'No exact matc..."
+        },
+        {
+          "tool": "find_doctor_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"name\": \"李\", \"specialty\": null, \"city\": null, \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': True, 'doctors': [], 'total_found': 0, 'source': 'database', 'search_type': 'general_fallback', 'search_criteria': {'name': '李', 'specialty': None, 'city': None}, 'message': 'No exact matc..."
+        },
+        {
+          "tool": "search_clinics",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"clinic_name\": null, \"city\": null, \"specialty\": null, \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': False, 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  database \"test4\" does not exist\\n', 'clinics': [], 'total_found': 0, 'source': 'database'}"
+        }
+      ],
+      "response": "很抱歉，由于系统暂时无法访问医生信息，我无法确认李医生下周的空闲时间。建议您直接联系相关诊所或医院进行咨询。",
+      "error": null
+    },
+    {
+      "id": 5,
+      "name": "Multi-criteria Doctor Search",
+      "query": "北京的骨科医生",
+      "success": true,
+      "duration": 5.634237051010132,
+      "tools_used": [
+        {
+          "tool": "find_doctor_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"name\": null, \"specialty\": \"骨科\", \"city\": \"北京\", \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': True, 'doctors': [], 'total_found': 0, 'source': 'database', 'search_type': 'general_fallback', 'search_criteria': {'name': None, 'specialty': '骨科', 'city': '北京'}, 'message': 'No exact mat..."
+        },
+        {
+          "tool": "search_clinics",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"clinic_name\": null, \"city\": \"北京\", \"specialty\": \"骨科\", \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': False, 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  database \"test4\" does not exist\\n', 'clinics': [], 'total_found': 0, 'source': 'database'}"
+        }
+      ],
+      "response": "很抱歉，由于系统暂时无法连接数据库，无法提供北京的骨科医生信息。建议您可以通过当地的医院官网或医疗平台查询相关医生。",
+      "error": null
+    },
+    {
+      "id": 6,
+      "name": "Book Appointment with Details",
+      "query": "预约王医生，我叫李明，电话13800138000",
+      "success": true,
+      "duration": 11.83005976676941,
+      "tools_used": [
+        {
+          "tool": "find_doctor_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"name\": \"王\", \"specialty\": null, \"city\": null, \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': True, 'doctors': [], 'total_found': 0, 'source': 'database', 'search_type': 'general_fallback', 'search_criteria': {'name': '王', 'specialty': None, 'city': None}, 'message': 'No exact matc..."
+        },
+        {
+          "tool": "find_doctor_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"name\": \"王\", \"specialty\": null, \"city\": null, \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': True, 'doctors': [], 'total_found': 0, 'source': 'database', 'search_type': 'general_fallback', 'search_criteria': {'name': '王', 'specialty': None, 'city': None}, 'message': 'No exact matc..."
+        },
+        {
+          "tool": "find_doctor_availability",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"doctor_name\": \"王\", \"start_date\": \"2025-07-25\", \"end_date\": \"2025-07-25\", \"specialty\": null, \"days_ahead\": null}",
+          "input": "",
+          "output": "{'success': True, 'doctor_name': '王', 'date_range': '2025-07-25 to 2025-07-25', 'availability': [], 'total_slots': 0, 'doctor_found': False, 'suggested_doctors': [], 'source': 'database', 'search_meth..."
+        },
+        {
+          "tool": "find_doctor_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"name\": null, \"specialty\": null, \"city\": null, \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': True, 'doctors': [], 'total_found': 0, 'source': 'database', 'search_type': 'general_fallback', 'search_criteria': {'name': None, 'specialty': None, 'city': None}, 'message': 'No exact mat..."
+        },
+        {
+          "tool": "prepare_booking_confirmation",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"doctor_name\": \"王\", \"date_iso\": \"2025-07-25\", \"time_hhmm\": \"09:00\", \"patient_name\": \"李明\", \"phone\": \"13800138000\", \"service_type\": \"预约\"}",
+          "input": "",
+          "output": "{'success': False, 'error': 'Doctor 王 not found in system', 'source': 'database_validation'}"
+        },
+        {
+          "tool": "find_doctor_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {'name': None, 'specialty': None, 'city': None, 'language': 'zh'}",
+          "input": "",
+          "output": "{'success': True, 'doctors': [], 'total_found': 0, 'source': 'database', 'search_type': 'general_fallback', 'search_criteria': {'name': None, 'specialty': None, 'city': None}, 'message': 'No exact mat..."
+        }
+      ],
+      "response": "很抱歉，目前系统中没有找到王医生或其他医生的空闲时间。建议您直接联系诊所确认医生信息或预约事宜。",
+      "error": null
+    },
+    {
+      "id": 7,
+      "name": "Incomplete Booking Request",
+      "query": "帮我预约张医生",
+      "success": true,
+      "duration": 8.864660024642944,
+      "tools_used": [
+        {
+          "tool": "find_doctor_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"name\": \"张\", \"specialty\": null, \"city\": null, \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': True, 'doctors': [], 'total_found': 0, 'source': 'database', 'search_type': 'general_fallback', 'search_criteria': {'name': '张', 'specialty': None, 'city': None}, 'message': 'No exact matc..."
+        },
+        {
+          "tool": "find_doctor_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"name\": \"李\", \"specialty\": null, \"city\": null, \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': True, 'doctors': [], 'total_found': 0, 'source': 'database', 'search_type': 'general_fallback', 'search_criteria': {'name': '李', 'specialty': None, 'city': None}, 'message': 'No exact matc..."
+        },
+        {
+          "tool": "find_doctor_availability",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"doctor_name\": \"张\", \"start_date\": \"2025-07-25\", \"end_date\": \"2025-07-25\", \"specialty\": null}",
+          "input": "",
+          "output": "{'success': True, 'doctor_name': '张', 'date_range': '2025-07-25 to 2025-07-25', 'availability': [], 'total_slots': 0, 'doctor_found': False, 'suggested_doctors': [], 'source': 'database', 'search_meth..."
+        },
+        {
+          "tool": "find_doctor_availability",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {'doctor_name': '王', 'start_date': '2025-07-25', 'end_date': '2025-07-25'}",
+          "input": "",
+          "output": "{'success': True, 'doctor_name': '王', 'date_range': '2025-07-25 to 2025-07-25', 'availability': [], 'total_slots': 0, 'doctor_found': False, 'suggested_doctors': [], 'source': 'database', 'search_meth..."
+        }
+      ],
+      "response": "由于目前没有找到“张”或“王”医生的空闲时间，建议您稍后再试，或者告诉我您是否愿意预约其他医生或时间。",
+      "error": null
+    },
+    {
+      "id": 8,
+      "name": "Emergency Symptom Case",
+      "query": "胸痛很严重，需要看医生",
+      "success": true,
+      "duration": 6.490718126296997,
+      "tools_used": [
+        {
+          "tool": "find_doctor_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"name\": null, \"specialty\": \"心内科\", \"city\": null, \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': True, 'doctors': [], 'total_found': 0, 'source': 'database', 'search_type': 'general_fallback', 'search_criteria': {'name': None, 'specialty': '心内科', 'city': None}, 'message': 'No exact ma..."
+        },
+        {
+          "tool": "place_call",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"phone_number\": \"120\", \"purpose\": \"严重胸痛紧急救治\", \"urgency\": \"emergency\"}",
+          "input": "",
+          "output": "{'success': True, 'action': 'call_initiated', 'phone_number': '120', 'purpose': '严重胸痛紧急救治', 'urgency': 'emergency', 'call_id': 'call_20250725_090424', 'message': 'Initiating emergency call to 120 for:..."
+        }
+      ],
+      "response": "您的紧急情况已得到处理，请立即前往医院或等待救援人员到达。祝您早日康复！",
+      "error": null
+    },
+    {
+      "id": 9,
+      "name": "Appointment Confirmation",
+      "query": "确认我明天的预约",
+      "success": true,
+      "duration": 4.133630990982056,
+      "tools_used": [
+        {
+          "tool": "find_clinic_info if using a tool.",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {}",
+          "input": "",
+          "output": "{'success': False, 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  database \"test4\" does not exist\\n', 'clinics': [], 'total_found': 0, 'source': 'database'}"
+        }
+      ],
+      "response": "很抱歉，由于系统暂时无法查询到您的预约信息。请您确认预约时提供的具体信息，或者直接联系您的预约诊所进行确认。",
+      "error": null
+    },
+    {
+      "id": 10,
+      "name": "Cancel Appointment Inquiry",
+      "query": "如何取消预约？",
+      "success": true,
+      "duration": 9.491841077804565,
+      "tools_used": [
+        {
+          "tool": "prepare_booking_confirmation",
+          "input": "",
+          "output": "Error: Could not parse output. Please follow the thought-action-input format. Try again."
+        },
+        {
+          "tool": "find_clinic_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {}",
+          "input": "",
+          "output": "{'success': False, 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  database \"test4\" does not exist\\n', 'clinics': [], 'total_found': 0, 'source': 'database'}"
+        },
+        {
+          "tool": "search_clinics",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"clinic_name\": null, \"city\": null, \"specialty\": null, \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': False, 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  database \"test4\" does not exist\\n', 'clinics': [], 'total_found': 0, 'source': 'database'}"
+        }
+      ],
+      "response": "很抱歉，由于系统暂时无法访问预约信息，建议您直接联系您预约的诊所或医生，询问取消预约的具体流程和联系方式。",
+      "error": null
+    },
+    {
+      "id": 11,
+      "name": "Find Clinics by Location",
+      "query": "广州有哪些诊所？",
+      "success": true,
+      "duration": 5.261147737503052,
+      "tools_used": [
+        {
+          "tool": "find_clinic_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"city\": \"广州\"}",
+          "input": "",
+          "output": "{'success': False, 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  database \"test4\" does not exist\\n', 'clinics': [], 'total_found': 0, 'source': 'database'}"
+        }
+      ],
+      "response": "很抱歉，由于系统暂时无法连接数据库，无法提供广州诊所的详细信息。如果您需要，可以稍后再试或提供其他相关需求。",
+      "error": null
+    },
+    {
+      "id": 12,
+      "name": "Clinic Services Query",
+      "query": "深圳诊所提供什么服务？",
+      "success": true,
+      "duration": 5.456430196762085,
+      "tools_used": [
+        {
+          "tool": "search_clinics",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"city\": \"深圳\"}",
+          "input": "",
+          "output": "{'success': False, 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  database \"test4\" does not exist\\n', 'clinics': [], 'total_found': 0, 'source': 'database'}"
+        }
+      ],
+      "response": "很抱歉，目前系统无法连接数据库，无法提供深圳诊所的具体服务信息。建议您直接联系当地的诊所或医疗机构获取详细的服务内容。",
+      "error": null
+    },
+    {
+      "id": 13,
+      "name": "Service Pricing Query",
+      "query": "肝功能检查多少钱？",
+      "success": true,
+      "duration": 3.3817660808563232,
+      "tools_used": [
+        {
+          "tool": "get_pricing",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"service_type\": \"肝功能检查\"}",
+          "input": "",
+          "output": "{'success': True, 'service_type': '肝功能检查', 'clinic_name': None, 'pricing': {'services_found': False, 'services': [], 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  data..."
+        }
+      ],
+      "response": "很抱歉，由于系统内部数据库连接出现问题，暂时无法提供肝功能检查的具体价格。建议您直接咨询相关诊所或平台获取最新的价格信息。",
+      "error": null
+    },
+    {
+      "id": 14,
+      "name": "Compare Service Prices",
+      "query": "哪里的体检最便宜？",
+      "success": true,
+      "duration": 5.761554956436157,
+      "tools_used": [
+        {
+          "tool": "get_pricing",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"service_type\": \"体检\"}",
+          "input": "",
+          "output": "{'success': True, 'service_type': '体检', 'clinic_name': None, 'pricing': {'services_found': False, 'services': [], 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  databas..."
+        },
+        {
+          "tool": "get_pricing",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {'service_type': '体检'}",
+          "input": "",
+          "output": "{'success': True, 'service_type': '体检', 'clinic_name': None, 'pricing': {'services_found': False, 'services': [], 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  databas..."
+        }
+      ],
+      "response": "很抱歉，目前系统无法提供具体的体检价格信息。建议您可以直接联系当地的高端体检中心或医院的体检部门，获取最新的价格和优惠信息。",
+      "error": null
+    },
+    {
+      "id": 15,
+      "name": "Specific Medical Service",
+      "query": "核磁共振检查的信息",
+      "success": true,
+      "duration": 6.391838073730469,
+      "tools_used": [
+        {
+          "tool": "search_services",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"service_name\": \"核磁共振\"}",
+          "input": "",
+          "output": "{'success': False, 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  database \"test4\" does not exist\\n', 'services': [], 'total_found': 0, 'source': 'database'}"
+        }
+      ],
+      "response": "核磁共振（MRI）是一种无创的影像检查方法，主要用于诊断脑部、脊柱、关节、软组织等部位的疾病。它通过强磁场和无线电波生成身体内部的详细图像，帮助医生判断疾病情况。通常，核磁共振检查的价格因部位和医院等级不同而有所差异，一般在几百到几千元不等。建议您联系当地的高端医疗机构或专科诊所获取具体的价格和预约信息。",
+      "error": null
+    },
+    {
+      "id": 16,
+      "name": "Symptom Department Recommendation",
+      "query": "头痛应该看什么科？",
+      "success": true,
+      "duration": 3.882920980453491,
+      "tools_used": [
+        {
+          "tool": "search_services",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"service_name\": \"头痛\"}",
+          "input": "",
+          "output": "{'success': False, 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  database \"test4\" does not exist\\n', 'services': [], 'total_found': 0, 'source': 'database'}"
+        }
+      ],
+      "response": "头痛一般建议看神经科或神经内科。如果症状严重或持续不缓解，建议尽快就医以获得专业诊断和治疗。",
+      "error": null
+    },
+    {
+      "id": 17,
+      "name": "Clinic Operating Hours",
+      "query": "诊所的营业时间",
+      "success": true,
+      "duration": 6.747503995895386,
+      "tools_used": [
+        {
+          "tool": "find_clinic_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"clinic_name\": null, \"city\": null, \"specialty\": null, \"language\": \"zh\"}",
+          "input": "",
+          "output": "Error: HumansaAgenticToolManager.find_clinic_info_structured() got an unexpected keyword argument 'clinic_name'"
+        },
+        {
+          "tool": "search_clinics",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"clinic_name\": null, \"city\": null, \"specialty\": null, \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': False, 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  database \"test4\" does not exist\\n', 'clinics': [], 'total_found': 0, 'source': 'database'}"
+        },
+        {
+          "tool": "search_clinics",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {'clinic_name': None, 'city': None, 'specialty': None, 'language': 'zh'}",
+          "input": "",
+          "output": "{'success': False, 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  database \"test4\" does not exist\\n', 'clinics': [], 'total_found': 0, 'source': 'database'}"
+        }
+      ],
+      "response": "很抱歉，由于系统连接问题，我目前无法获取诊所的营业时间。请提供具体的诊所名称或所在城市，我可以帮您再次尝试查询。",
+      "error": null
+    },
+    {
+      "id": 18,
+      "name": "Health Product Recommendation",
+      "query": "推荐一些健康产品",
+      "success": true,
+      "duration": 3.1418309211730957,
+      "tools_used": [
+        {
+          "tool": "recommend_product",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"product_category\": \"健康产品\", \"reason\": \"用户需要健康相关产品的推荐\"}",
+          "input": "",
+          "output": "{'success': True, 'category': '健康产品', 'reason': '用户需要健康相关产品的推荐', 'price_range': None, 'recommended_products': ['General Health Products'], 'message': 'Recommended 1 products in 健康产品 category'}"
+        }
+      ],
+      "response": "已为您推荐了一些健康产品，主要包括“General Health Products”。如果您需要更具体的产品类型或详细信息，请告诉我！",
+      "error": null
+    },
+    {
+      "id": 19,
+      "name": "Simple Greeting",
+      "query": "你好",
+      "success": true,
+      "duration": 2.372670888900757,
+      "tools_used": [],
+      "response": "你好！有什么我可以帮您的吗？",
+      "error": null
+    },
+    {
+      "id": 20,
+      "name": "Complex Multi-part Query",
+      "query": "北京的心脏科医生下周的时间和收费标准",
+      "success": true,
+      "duration": 5.959045886993408,
+      "tools_used": [
+        {
+          "tool": "find_doctor_info",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"city\": \"北京\", \"specialty\": \"心脏科\", \"name\": null, \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': True, 'doctors': [], 'total_found': 0, 'source': 'database', 'search_type': 'general_fallback', 'search_criteria': {'name': None, 'specialty': '心脏科', 'city': '北京'}, 'message': 'No exact ma..."
+        },
+        {
+          "tool": "search_clinics",
+          "input": "",
+          "output": ""
+        },
+        {
+          "tool": "Input: {\"clinic_name\": null, \"city\": \"北京\", \"specialty\": \"心脏科\", \"language\": \"zh\"}",
+          "input": "",
+          "output": "{'success': False, 'error': 'connection to server at \"localhost\" (::1), port 5454 failed: FATAL:  database \"test4\" does not exist\\n', 'clinics': [], 'total_found': 0, 'source': 'database'}"
+        }
+      ],
+      "response": "目前系统连接出现问题，无法获取北京心脏科医生的具体时间和收费标准。建议稍后再试，或者您可以提供更具体的需求，我可以帮您提供一些常规建议或其他帮助。",
+      "error": null
+    }
+  ]
+}
