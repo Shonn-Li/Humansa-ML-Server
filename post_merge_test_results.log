@@ -1,0 +1,82 @@
+🏥 Humansa Agent Identity Test Suite
+==================================================
+
+🧪 Test 1: Basic Identity Query
+   Query: 你是谁？
+   ✅ PASSED - Found keywords: 诺亚新舟, 健康医疗助理, AI健康管家
+   Response: Thought: 用户在问“你是谁”，这是一个自我介绍的问题。作为诺亚新舟健康医疗助理，我的身份是AI健康管家，提供医疗相关的咨询和服务。无需调用工具，直接回答即可。
+Answer: 我是诺亚新舟健康医疗助理，您的AI健康管家，专为高端诊所提供医疗咨询和服务。
+   ✅ V2 system prompt detected in trace
+
+🧪 Test 2: Company Background
+   Query: 介绍一下诺亚新舟
+   ✅ PASSED - Found keywords: 诺亚新舟, 高端诊所
+   Response: Thought: 用户想了解“诺亚新舟”，这是一个医疗机构或诊所的名称。需要查找相关的诊所信息。会使用find_clinic_info工具进行搜索。
+Action: find_clinic_info
+Action Input: {"clinic_name": "诺亚新舟", "city": null, "specialty": null, "language": "zh"}
+Observation...
+   ⚠️  V2 system prompt may not be active
+
+🧪 Test 3: Service Capabilities
+   Query: 你能做什么？
+   ✅ PASSED - Found keywords: 预约, 咨询, 健康, 诊所
+   Response: Thought: 用户在问我能做什么。作为健康医疗助理，我可以帮助查找医生、预约挂号、查找诊所、查询服务和价格、推荐健康产品等。没有具体需求时，我可以简要介绍我的功能。  
+Action: search_web  
+Action Input: {"query": "我能做什么"}
+Observation: {'success': True, 'query': '我能做什么', 'language'...
+   ✅ V2 system prompt detected in trace
+
+🧪 Test 4: Greeting - Hello
+   Query: 你好
+   ❌ FAILED - Missing keywords: 诺亚新舟, 小诺
+   Response: Thought: 用户只是打招呼，没有具体问题或需求。暂时不需要调用任何工具，直接回应即可。
+Answer: 你好！有什么我可以帮您的吗？
+   ⚠️  V2 system prompt may not be active
+
+🧪 Test 5: English Identity Query
+   Query: Who are you?
+   ✅ PASSED - Found keywords: 诺亚新舟, 健康
+   Response: Thought: 用户在问“你是谁”，这是一个自我介绍的问题。作为健康医疗助理，我的身份是“诺亚新舟健康医疗助理”，我可以直接用语言回答用户，无需调用工具。
+Answer: 我是诺亚新舟健康医疗助理，您的健康管家，专为高端诊所提供智能医疗服务。
+   ✅ V2 system prompt detected in trace
+
+🧪 Test 6: Introduction Request
+   Query: 请自我介绍一下
+   ✅ PASSED - Found keywords: 诺亚新舟, 健康医疗助理
+   Response: Thought: 用户请求自我介绍，属于自我介绍内容，不需要调用任何工具。直接用中文回答即可。
+Answer: 你好，我是诺亚新舟健康医疗助理，专为高端诊所提供智能健康管理服务。我拥有丰富的医疗资源和专业的名医团队，旨在为您提供优质、便捷的健康咨询和医疗服务。请问我可以帮您做些什么？
+   ✅ V2 system prompt detected in trace
+
+🧪 Test 7: Emergency Response
+   Query: 我现在胸痛很厉害，呼吸困难
+   ✅ PASSED - Found keywords: 120, 立即, 急救
+   Response: Thought: 用户描述了严重的胸痛和呼吸困难，属于紧急情况，建议立即拨打紧急电话或联系紧急医疗服务。为了确保及时处理，我将发起紧急呼叫。  
+Action: place_call  
+Action Input: {"phone_number": "120", "purpose": "紧急医疗救助", "urgency": "emergency"}
+Observation: {'success'...
+   ⚠️  V2 system prompt may not be active
+
+🧪 Test 8: What Can You Do Detail
+   Query: 详细说说你的功能
+   ✅ PASSED - Found keywords: 预约, 咨询, 医生, 诊所, 健康
+   Response: Thought: 用户想了解我的功能介绍。虽然我可以直接用文字描述，但为了确保信息完整和准确，我可以用搜索工具查找官方或相关介绍内容，然后总结回答。  
+Action: search_web  
+Action Input: {"query": "诺亚新舟健康医疗助理功能介绍", "category": null, "language": "zh"}
+Observation: {'success':...
+   ✅ V2 system prompt detected in trace
+
+📊 Test Summary:
+   Total Tests: 8
+   Passed: 7
+   Failed: 1
+   Pass Rate: 87.5%
+
+📄 Results saved to: humansa_identity_test_results_20250725_151429.json
+
+❌ Failed Tests:
+
+   Test 4: Greeting - Hello
+   Query: 你好
+   Missing Keywords: 诺亚新舟, 小诺
+   Response: Thought: 用户只是打招呼，没有具体问题或需求。暂时不需要调用任何工具，直接回应即可。
+Answer: 你好！有什么我可以帮您的吗？...

@@ -1,0 +1,212 @@
+{
+  "timestamp": "20250725_220207",
+  "summary": {
+    "total_tests": 20,
+    "passed": 0,
+    "failed": 20,
+    "pass_rate": 0.0,
+    "average_response_time": 0
+  },
+  "detailed_results": [
+    {
+      "id": 1,
+      "name": "Find Cardiologist in Chinese",
+      "query": "我想找一个心脏科医生",
+      "success": false,
+      "duration": 0.26904988288879395,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 2,
+      "name": "Find Doctors by City",
+      "query": "深圳有哪些医生？",
+      "success": false,
+      "duration": 0.37664270401000977,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 3,
+      "name": "Find Specific Doctor Info",
+      "query": "张医生的信息",
+      "success": false,
+      "duration": 0.23782873153686523,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 4,
+      "name": "Check Doctor Availability",
+      "query": "李医生下周有空吗？",
+      "success": false,
+      "duration": 0.3688220977783203,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 5,
+      "name": "Multi-criteria Doctor Search",
+      "query": "北京的骨科医生",
+      "success": false,
+      "duration": 0.20850706100463867,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 6,
+      "name": "Book Appointment with Details",
+      "query": "预约王医生，我叫李明，电话13800138000",
+      "success": false,
+      "duration": 0.1897578239440918,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 7,
+      "name": "Incomplete Booking Request",
+      "query": "帮我预约张医生",
+      "success": false,
+      "duration": 0.3442349433898926,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 8,
+      "name": "Emergency Symptom Case",
+      "query": "胸痛很严重，需要看医生",
+      "success": false,
+      "duration": 0.25347018241882324,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 9,
+      "name": "Appointment Confirmation",
+      "query": "确认我明天的预约",
+      "success": false,
+      "duration": 0.22277021408081055,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 10,
+      "name": "Cancel Appointment Inquiry",
+      "query": "如何取消预约？",
+      "success": false,
+      "duration": 0.27172422409057617,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 11,
+      "name": "Find Clinics by Location",
+      "query": "广州有哪些诊所？",
+      "success": false,
+      "duration": 0.18427586555480957,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 12,
+      "name": "Clinic Services Query",
+      "query": "深圳诊所提供什么服务？",
+      "success": false,
+      "duration": 0.29424571990966797,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 13,
+      "name": "Service Pricing Query",
+      "query": "肝功能检查多少钱？",
+      "success": false,
+      "duration": 0.1960301399230957,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 14,
+      "name": "Compare Service Prices",
+      "query": "哪里的体检最便宜？",
+      "success": false,
+      "duration": 0.2126750946044922,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 15,
+      "name": "Specific Medical Service",
+      "query": "核磁共振检查的信息",
+      "success": false,
+      "duration": 0.34204697608947754,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 16,
+      "name": "Symptom Department Recommendation",
+      "query": "头痛应该看什么科？",
+      "success": false,
+      "duration": 0.18463492393493652,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 17,
+      "name": "Clinic Operating Hours",
+      "query": "诊所的营业时间",
+      "success": false,
+      "duration": 0.1791229248046875,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 18,
+      "name": "Health Product Recommendation",
+      "query": "推荐一些健康产品",
+      "success": false,
+      "duration": 0.3356149196624756,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 19,
+      "name": "Simple Greeting",
+      "query": "你好",
+      "success": false,
+      "duration": 0.1966111660003662,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    },
+    {
+      "id": 20,
+      "name": "Complex Multi-part Query",
+      "query": "北京的心脏科医生下周的时间和收费标准",
+      "success": false,
+      "duration": 0.30335426330566406,
+      "tools_used": [],
+      "response": "",
+      "error": "Agent is not healthy - failing fast (no fallbacks in agentic mode)"
+    }
+  ]
+}

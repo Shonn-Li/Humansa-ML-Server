@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 import sys
 import random
 
-BASE_URL = "http://localhost:5001"
+BASE_URL = "http://localhost:6001"
 
 # Test user profiles
 TEST_USERS = {

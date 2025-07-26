@@ -97,6 +97,11 @@ class HumansaAgenticAgent:
             react_system_prompt = get_humansa_react_system_prompt()
 
             # Update the agent's prompts - use v2 as the main system prompt
+            # Convert string to PromptTemplate if needed
+            from llama_index.core import PromptTemplate
+            if isinstance(react_system_prompt_v2, str):
+                react_system_prompt_v2 = PromptTemplate(react_system_prompt_v2)
+                
             self.agent.update_prompts({
                 "agent_worker:system_prompt": react_system_prompt_v2,
                 "react_header": react_system_prompt

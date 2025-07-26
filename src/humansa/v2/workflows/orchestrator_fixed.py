@@ -8,9 +8,9 @@ from llama_index.core.workflow import (
     Workflow,
     StartEvent,
     StopEvent,
-    step,
-    Event
+    step
 )
+from llama_index.core.workflow.events import Event
 from llama_index.core.llms import LLM
 from dataclasses import dataclass
 import asyncio

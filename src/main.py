@@ -22,6 +22,7 @@ import sys
 import json
 import logging
 import warnings
+import asyncpg
 from quart import Quart, jsonify, request, Response
 from quart_cors import cors
 from dotenv import load_dotenv
@@ -31,6 +32,15 @@ from dotenv import load_dotenv
 load_dotenv()
 # Then load .env.local (local overrides)
 load_dotenv('.env.local', override=True)
+
+# Override with environment variables if they exist
+# This allows test environments to override .env settings
+if os.getenv('ENVIRONMENT') == 'test':
+    # Test environment overrides - force override
+    os.environ['DB_PORT'] = '5456'
+    os.environ['DB_USER'] = 'youwo'
+    os.environ['DB_PASSWORD'] = 'youwo123'
+    os.environ['DB_NAME'] = 'youwoai'
 
 # CRITICAL: Add current directory to Python path for imports to work
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -746,21 +756,29 @@ def register_humansa_endpoints(app):
             from humansa.v2 import humansa_v2_bp, initialize_v2_system
             app.register_blueprint(humansa_v2_bp)
             
-            # Initialize v2 system on startup
+            # Register Mem0 API endpoints
+            from humansa.memory.api import mem0_bp
+            app.register_blueprint(mem0_bp)
+            logger.info("✅ Mem0 API endpoints registered")
+            
+            # Initialize Mem0 for Humansa on startup
             @app.before_serving
-            async def init_humansa_v2():
+            async def init_mem0():
                 try:
-                    # Get database pool from app context if available
-                    db_pool = getattr(app, 'db_pool', None)
-                    openai_key = os.getenv('OPENAI_API_KEY')
-                    
-                    if db_pool and openai_key:
-                        await initialize_v2_system(db_pool, openai_key)
-                        logger.info("✅ Humansa v2 system initialized")
-                    else:
-                        logger.warning("⚠️ Humansa v2 system not initialized - missing db_pool or API key")
+                    # Initialize Mem0 for Humansa
+                    try:
+                        from humansa.memory.mem0_manager import Mem0Manager
+                        mem0_manager = Mem0Manager.get_instance()
+                        if await mem0_manager.initialize():
+                            app.mem0_manager = mem0_manager
+                            logger.info("✅ Mem0 memory layer initialized for Humansa")
+                        else:
+                            logger.warning("⚠️ Mem0 initialization failed - memory features disabled")
+                    except Exception as mem0_error:
+                        logger.warning(f"⚠️ Mem0 not available: {mem0_error}")
+                        
                 except Exception as e:
-                    logger.error(f"❌ Failed to initialize Humansa v2: {e}")
+                    logger.error(f"❌ Failed to initialize Mem0: {e}")
                     
             logger.info("✅ Humansa v2 blueprint registered")
         except ImportError as e:
@@ -807,6 +825,53 @@ if not os.getenv('DEBUG_AZURE_WARNINGS'):
 # Create app instance
 app = create_app()
 
+# Create database pool for Humansa v2
+@app.before_serving
+async def create_db_pool():
+    """Create database connection pool for Humansa v2."""
+    try:
+        # Get database configuration from environment
+        db_host = os.getenv('DB_HOST', 'localhost')
+        db_port = int(os.getenv('DB_PORT', '5432'))
+        db_user = os.getenv('DB_USER', 'postgres')
+        db_password = os.getenv('DB_PASSWORD', '031203')
+        db_name = os.getenv('DB_NAME', 'test4')
+        
+        logger.info(f"🔄 Creating database pool: {db_user}@{db_host}:{db_port}/{db_name}")
+        logger.info(f"   Environment: {os.getenv('ENVIRONMENT', 'production')}")
+        
+        # Create the connection pool
+        app.db_pool = await asyncpg.create_pool(
+            host=db_host,
+            port=db_port,
+            user=db_user,
+            password=db_password,
+            database=db_name,
+            min_size=5,
+            max_size=20,
+            command_timeout=60
+        )
+        
+        logger.info("✅ Database pool created successfully")
+        
+        # Initialize Humansa v2 system now that db_pool is ready
+        openai_key = os.getenv('OPENAI_API_KEY')
+        if openai_key:
+            try:
+                from humansa.v2.api import initialize_v2_system
+                await initialize_v2_system(app.db_pool, openai_key)
+                logger.info("✅ Humansa v2 system initialized")
+            except Exception as v2_error:
+                logger.error(f"❌ Failed to initialize Humansa v2: {v2_error}")
+                import traceback
+                traceback.print_exc()
+        else:
+            logger.warning("⚠️ Humansa v2 system not initialized - missing API key")
+        
+    except Exception as e:
+        logger.error(f"❌ Failed to create database pool: {e}")
+        app.db_pool = None
+
 if __name__ == "__main__":
     # Get port from environment variable or command line argument
     import argparse
@@ -842,6 +907,18 @@ if __name__ == "__main__":
         "   - /v2/humansa/patient/profile - Manage patient profiles")
     logger.info(
         "   - /v2/humansa/conversation/history - Get conversation history")
+    logger.info("")
+    logger.info("✅ MEM0 MEMORY ENDPOINTS:")
+    logger.info(
+        "   - /v2/humansa/memory/add - Add conversation to memory")
+    logger.info(
+        "   - /v2/humansa/memory/search - Search user memories")
+    logger.info(
+        "   - /v2/humansa/memory/context/<user_id> - Get user context")
+    logger.info(
+        "   - /v2/humansa/memory/status - Check Mem0 status")
+    logger.info(
+        "   - /v2/humansa/memory/clear/<user_id> - Clear user memories")
     logger.info(
         "   - /humansa/response - Humansa conversations (used by backend)")
     logger.info(

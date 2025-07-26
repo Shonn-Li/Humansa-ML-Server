@@ -1,88 +1,142 @@
-# Humansa Documentation
+# Humansa V2 Documentation
 
-Welcome to the Humansa medical AI system documentation. This directory contains all documentation related to the Humansa V2 multi-agent medical consultation platform.
+## Overview
 
-## Directory Structure
+Humansa V2 is a multi-agent medical AI system with integrated memory capabilities powered by Mem0. This system provides personalized, context-aware medical consultations through intelligent agent orchestration.
 
-### 📁 [research/](./research/)
-Research documents, evaluations, and system design documentation.
+## Core Documentation
 
-- **[MEMORY_SYSTEMS_COMPARISON_RESEARCH.md](./research/MEMORY_SYSTEMS_COMPARISON_RESEARCH.md)** - Comprehensive comparison of state-of-the-art memory systems
-- **[HUMANZA_USER_PROFILE_MEMORY_SYSTEM_RECOMMENDATIONS.md](./research/HUMANZA_USER_PROFILE_MEMORY_SYSTEM_RECOMMENDATIONS.md)** - Recommendations for Humanza memory system
-- **[HUMANSA_V2_FLOW_DIAGRAM.md](./research/HUMANSA_V2_FLOW_DIAGRAM.md)** - System flow diagrams
-- **[HUMANSA_V2_SIMPLE_FLOW.md](./research/HUMANSA_V2_SIMPLE_FLOW.md)** - Simplified flow documentation
-- **HUMANSA_V2_*EVALUATION*.md** - Various evaluation reports
+### 📘 [HUMANSA_V2_IMPLEMENTATION.md](./HUMANSA_V2_IMPLEMENTATION.md)
+Complete implementation guide covering:
+- High-level architecture with visual diagrams
+- Abstract system design and information flow
+- User ID tracking and flow
+- Component interactions from abstract to concrete
+- Agent system design and selection logic
+- Memory integration with Mem0
+- API endpoint specifications
+- Detailed file structure and initialization sequence
 
-### 📁 [implementations/](./implementations/)
-Current implementation details, fixes, and improvements.
+### 📗 [HUMANSA_V2_TESTING.md](./HUMANSA_V2_TESTING.md)
+Comprehensive testing documentation including:
+- Two core test suites overview
+- Memory persistence testing (10 test cases)
+- API integration testing
+- Test data structure and flow
+- Running tests in different modes
+- Common issues and solutions
 
-- **[HUMANSA_WORKING_SOLUTION.md](./implementations/HUMANSA_WORKING_SOLUTION.md)** - Current working implementation
-- **[HUMANSA_IMPROVEMENTS.md](./implementations/HUMANSA_IMPROVEMENTS.md)** - Implemented improvements
-- **HUMANSA_FIXES_*.md** - Various bug fixes and solutions
+### 📙 [HUMANSA_V2_ORCHESTRATOR_FLOW.md](./HUMANSA_V2_ORCHESTRATOR_FLOW.md)
+Detailed orchestrator pattern analysis:
+- Current implementation reality (simple routing)
+- Ideal orchestrator pattern with iterative refinement
+- High-level conceptual architecture
+- Comparison of current vs ideal implementation
+- Recommendations for true orchestrator pattern
 
-### 📁 [to-be-implemented/](./to-be-implemented/)
-Future features and implementations waiting to be developed.
+## Quick Start
 
-- **[HUMANZA_MEMORY_IMPLEMENTATION_GUIDE.md](./to-be-implemented/HUMANZA_MEMORY_IMPLEMENTATION_GUIDE.md)** - Detailed implementation guide for enhanced memory system
+### 1. Start the System
+```bash
+# Start ML server (includes Humansa V2)
+python -m src.main
 
-### 📁 [guides/](./guides/)
-Testing guides, setup instructions, and operational documentation.
+# Or with test environment
+./run_humansa_test_environment.sh
+```
 
-- **HUMANSA_TEST_*.md** - Various testing guides and results
-- **humansa_test_output_*.md** - Test execution outputs
-- **Test environment setup and validation guides**
+### 2. Test Memory Integration
+```bash
+# Run complete test suite with environment
+./run_humansa_test_with_mem0.sh
 
-## Quick Links
+# Or run tests individually
+python test_mem0_humansa_integration.py
+python test_mem0_v2_integration.py
+```
 
-### For Developers
-1. Start with [HUMANSA_WORKING_SOLUTION.md](./implementations/HUMANSA_WORKING_SOLUTION.md) to understand current implementation
-2. Review [HUMANZA_MEMORY_IMPLEMENTATION_GUIDE.md](./to-be-implemented/HUMANZA_MEMORY_IMPLEMENTATION_GUIDE.md) for upcoming features
-3. Check testing guides in the [guides/](./guides/) directory
-
-### For Researchers
-1. Read [MEMORY_SYSTEMS_COMPARISON_RESEARCH.md](./research/MEMORY_SYSTEMS_COMPARISON_RESEARCH.md) for memory system analysis
-2. Review evaluation reports in [research/](./research/) directory
-3. Study flow diagrams for system architecture
-
-### For Operations
-1. Follow setup guides in [guides/](./guides/) directory
-2. Review test validation results
-3. Check implementation fixes documentation
+### 3. Use the API
+```bash
+# Chat with memory context
+curl -X POST http://localhost:5001/v2/humansa/chat \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": 123,
+    "messages": [{"role": "user", "content": "I have diabetes"}],
+    "stream": false
+  }'
+```
 
 ## Key Features
 
-### Current Implementation
-- Multi-agent medical consultation system
-- LlamaIndex-based architecture
-- PostgreSQL storage with patient profiles
-- Basic conversation history tracking
-- Tool-calling capabilities for medical queries
+### Current Implementation ✅
+- **Multi-Agent System**: 5 specialized medical agents
+- **Memory Layer**: Mem0 integration for persistent user context
+- **Smart Orchestration**: Automatic agent selection based on query
+- **User ID Tracking**: Namespaced format for multi-service support
+- **API Endpoints**: RESTful API with streaming support
+- **Test Coverage**: Comprehensive test suites with mock support
 
-### Proposed Memory Enhancement
-- Hierarchical memory system (short/mid/long-term)
-- Intelligent entity extraction
-- Temporal knowledge graphs
-- Advanced profile building
-- Semantic memory retrieval
+### Architecture Highlights
+- **LlamaIndex Workflows**: Event-driven agent orchestration
+- **PostgreSQL + pgvector**: Semantic memory storage
+- **Adapter Pattern**: Seamless Mem0 integration
+- **Singleton Pattern**: Efficient memory manager
+- **Context Management**: Unified context throughout workflow
 
-## Related Components
+## System Components
 
-- **Main Server**: `/src/humansa/`
-- **V2 Implementation**: `/src/humansa/v2/`
-- **Testing**: `/test/test_humansa_*.py`
-- **Configuration**: Various SQL and setup scripts
+```
+Humansa V2
+├── API Layer (Quart blueprints)
+├── Orchestrator (Workflow engine)
+├── Agent Pool
+│   ├── GeneralMedicalAgent
+│   ├── DiagnosisAgent
+│   ├── MedicationAgent
+│   ├── EmergencyTriageAgent
+│   └── AppointmentAgent
+├── Memory System
+│   ├── Mem0Manager (Singleton)
+│   └── Mem0MemoryManagerAdapter
+└── Context Manager
+```
+
+## User ID Strategy
+
+Format: `{service}_{environment}_{user_id}`
+
+Examples:
+- `humansa_prod_123` - Production user 123
+- `humansa_test_10001` - Test user 10001
+
+This enables future cross-service memory sharing while maintaining isolation.
+
+## Additional Resources
+
+### Research & Design
+- `research/` - Memory system comparisons and evaluations
+- `implementations/` - Implementation fixes and improvements
+- `guides/` - Operational guides and test results
+
+### External APIs
+- `external-apis/` - HIS AI integration documentation
+
+### Test Results
+- `test-results/` - Historical test execution results
 
 ## Contributing
 
-When adding new documentation:
-1. Place research and design docs in `research/`
-2. Implementation details go in `implementations/`
-3. Future features in `to-be-implemented/`
-4. Operational guides in `guides/`
-5. Update this README with new additions
+When updating Humansa V2:
+1. Update the implementation in `/src/humansa/v2/`
+2. Document changes in `HUMANSA_V2_IMPLEMENTATION.md`
+3. Add/update tests and document in `HUMANSA_V2_TESTING.md`
+4. Keep this README focused on the two core documents
 
-## Version History
+## Version
 
-- **V2**: Current multi-agent system with LlamaIndex
-- **V2 Enhanced** (Proposed): Advanced memory system with profile building
-- See individual documents for detailed version information
+**Current**: V2 with Mem0 Integration
+- Multi-agent medical consultation
+- Persistent memory with Mem0
+- Context-aware responses
+- Comprehensive test coverage

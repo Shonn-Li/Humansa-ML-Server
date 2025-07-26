@@ -1,5 +1,5 @@
 """
-Fixed Humansa Orchestrator - removing Context from step parameters
+Improved Humansa Orchestrator with Iterative Multi-Agent Pattern
 Based on LlamaIndex workflow best practices
 """
 
@@ -9,8 +9,9 @@ from llama_index.core.workflow import (
     StartEvent,
     StopEvent,
     step,
-    Event
+    Context
 )
+from llama_index.core.workflow.events import Event
 from llama_index.core.llms import LLM
 from dataclasses import dataclass
 import asyncio
@@ -47,40 +48,42 @@ class AgentSelectionEvent(Event):
 class AgentExecutionEvent(Event):
     """Result from agent execution."""
     agent_id: str
-    response: Dict[str, Any]
-    extracted_info: Dict[str, Any]
+    response: str
     confidence: float
+    extracted_info: Dict[str, Any]
+    needs_clarification: List[str]
+    metadata: Dict[str, Any]
 
 
 @dataclass
 class CompletenessEvaluationEvent(Event):
-    """Evaluation of information completeness."""
+    """Evaluation of response completeness."""
     iteration: int
     is_complete: bool
     confidence: float
-    collected_responses: List[Dict[str, Any]]
+    collected_responses: List[AgentExecutionEvent]
 
 
 @dataclass
 class RefinementEvent(Event):
-    """Request for refinement with specific gaps."""
+    """Request for additional information."""
     iteration: int
-    information_gaps: List[str]
+    gaps_to_fill: List[str]
     previous_agents: Set[str]
     context: Dict[str, Any]
 
 
-@dataclass  
+@dataclass
 class SynthesisEvent(Event):
     """Final synthesis request."""
-    all_responses: List[Dict[str, Any]]
+    all_responses: List[AgentExecutionEvent]
     iterations_used: int
     final_context: Dict[str, Any]
 
 
 class HumansaOrchestrator(Workflow):
     """
-    Fixed orchestrator implementing true iterative multi-agent pattern.
+    Improved orchestrator implementing true iterative multi-agent pattern.
     
     Key improvements:
     1. Iterative refinement until complete information
@@ -106,16 +109,8 @@ class HumansaOrchestrator(Workflow):
         self.max_iterations = max_iterations
         self.completeness_threshold = completeness_threshold
         
-        # Initialize workflow state
-        self._user_context = {}
-        self._query = ""
-        self._user_id = ""
-        self._iteration_count = 0
-        self._used_agents = set()
-        self._all_responses = []
-        
     @step
-    async def analyze_query(self, ev: StartEvent) -> QueryAnalysisEvent:
+    async def analyze_query(self, ctx: Context, ev: StartEvent) -> QueryAnalysisEvent:
         """
         Step 1: Analyze the query to understand intent and complexity.
         """
@@ -133,13 +128,19 @@ class HumansaOrchestrator(Workflow):
             logger.error(f"Error loading user context: {e}")
             user_context = {}
         
-        # Store in instance variables for access across steps
-        self._user_context = user_context
-        self._query = query
-        self._user_id = user_id
-        self._iteration_count = 0
-        self._used_agents = set()
-        self._all_responses = []
+        try:
+            # Store in workflow context for access across steps
+            logger.info("Setting context values...")
+            ctx.set("user_context", user_context)
+            ctx.set("query", query)
+            ctx.set("user_id", user_id)
+            ctx.set("iteration_count", 0)
+            ctx.set("used_agents", set())
+            ctx.set("all_responses", [])
+            logger.info("Context values set successfully")
+        except Exception as e:
+            logger.error(f"Error setting context: {e}")
+            raise
         
         # Use LLM to analyze query
         analysis_prompt = f"""
@@ -183,14 +184,18 @@ class HumansaOrchestrator(Workflow):
     @step
     async def select_agents(
         self, 
+        ctx: Context, 
         ev: Union[QueryAnalysisEvent, RefinementEvent]
     ) -> AgentSelectionEvent:
         """
         Step 2: Select appropriate agents based on current needs.
         Handles both initial selection and refinement selections.
         """
-        self._iteration_count += 1
-        iteration = self._iteration_count
+        iteration = ctx.get("iteration_count", 0) + 1
+        ctx.set("iteration_count", iteration)
+        
+        used_agents = ctx.get("used_agents", set())
+        all_responses = ctx.get("all_responses", [])
         
         if isinstance(ev, QueryAnalysisEvent):
             # Initial agent selection
@@ -206,31 +211,33 @@ class HumansaOrchestrator(Workflow):
             {self._get_agent_descriptions()}
             
             Select 1-3 agents that best match the requirements.
+            Consider which agents can work in parallel vs sequentially.
             
             Respond in JSON:
             {{
                 "selected_agents": ["agent_id1", "agent_id2"],
-                "selection_reason": "why these agents",
-                "information_gaps": ["what info we're seeking"]
+                "selection_reason": "...",
+                "information_gaps": ["what we need to know"]
             }}
             """
-        else:
-            # Refinement selection based on gaps
+        else:  # RefinementEvent
+            # Select additional agents to fill gaps
             selection_prompt = f"""
-            Select additional agents to fill information gaps.
+            We need additional information to complete the response.
             
-            Information Gaps: {ev.information_gaps}
-            Previously Used Agents: {list(ev.previous_agents)}
+            Information gaps: {ev.gaps_to_fill}
+            Previously used agents: {list(ev.previous_agents)}
             
             Available Agents:
             {self._get_agent_descriptions()}
             
-            Select agents that can fill the gaps without duplicating previous efforts.
+            Select agents that can provide the missing information.
+            Avoid agents already used unless they can provide new insights.
             
             Respond in JSON:
             {{
-                "selected_agents": ["agent_id"],
-                "selection_reason": "why these agents",
+                "selected_agents": ["agent_id1", "agent_id2"],
+                "selection_reason": "...",
                 "information_gaps": ["remaining gaps"]
             }}
             """
@@ -257,19 +264,21 @@ class HumansaOrchestrator(Workflow):
         
         # Update used agents
         for agent_id in selection["selected_agents"]:
-            self._used_agents.add(agent_id)
+            used_agents.add(agent_id)
+        ctx.set("used_agents", used_agents)
         
         return AgentSelectionEvent(
             iteration=iteration,
             selected_agents=selection["selected_agents"],
             selection_reason=selection["selection_reason"],
             information_gaps=selection["information_gaps"],
-            context=self._user_context
+            context=ctx.get("user_context", {})
         )
     
     @step
     async def execute_agents(
         self,
+        ctx: Context,
         ev: AgentSelectionEvent
     ) -> CompletenessEvaluationEvent:
         """
@@ -277,11 +286,12 @@ class HumansaOrchestrator(Workflow):
         """
         if not ev.selected_agents:
             # No agents selected, force completion
+            all_responses = ctx.get("all_responses", [])
             return CompletenessEvaluationEvent(
                 iteration=ev.iteration,
                 is_complete=True,  # Force completion
                 confidence=1.0,
-                collected_responses=self._all_responses
+                collected_responses=all_responses
             )
         
         # Execute agents in parallel
@@ -289,40 +299,51 @@ class HumansaOrchestrator(Workflow):
         for agent_id in ev.selected_agents:
             if agent_id in self.agents:
                 agent = self.agents[agent_id]
-                task = self._execute_agent(
+                task = self._execute_single_agent(
                     agent,
-                    self._query,
-                    self._user_context
+                    ctx.get("query"),
+                    ev.context
                 )
                 tasks.append(task)
         
-        # Wait for all agents to complete
-        agent_results = await asyncio.gather(*tasks, return_exceptions=True)
+        responses = await asyncio.gather(*tasks, return_exceptions=True)
         
-        # Process results
-        for result in agent_results:
-            if isinstance(result, Exception):
-                logger.error(f"Agent execution failed: {result}")
-            else:
-                self._all_responses.append(result.response)
+        # Process responses
+        execution_events = []
+        for i, response in enumerate(responses):
+            if isinstance(response, Exception):
+                logger.error(f"Agent execution failed: {response}")
+                continue
+            
+            execution_events.append(response)
+            
+        # Store responses in context
+        all_responses = ctx.get("all_responses", [])
+        all_responses.extend(execution_events)
+        ctx.set("all_responses", all_responses)
+        
+        # Send each event separately for proper workflow handling
+        for event in execution_events:
+            await ctx.send_event(event)
         
         # Return evaluation event
         return CompletenessEvaluationEvent(
             iteration=ev.iteration,
-            is_complete=False,  # Let evaluation step decide
-            confidence=0.0,  # Let evaluation step calculate
-            collected_responses=self._all_responses
+            is_complete=False,  # To be determined
+            confidence=0.0,
+            collected_responses=all_responses
         )
     
     @step
     async def evaluate_completeness(
         self,
+        ctx: Context,
         ev: CompletenessEvaluationEvent
     ) -> Union[RefinementEvent, SynthesisEvent]:
         """
         Step 4: Evaluate if we have complete information.
         """
-        iteration = self._iteration_count
+        iteration = ctx.get("iteration_count", 0)
         
         # Check iteration limit
         if iteration >= self.max_iterations:
@@ -330,14 +351,14 @@ class HumansaOrchestrator(Workflow):
             return SynthesisEvent(
                 all_responses=ev.collected_responses,
                 iterations_used=iteration,
-                final_context=self._user_context
+                final_context=ctx.get("user_context", {})
             )
         
         # Use LLM to evaluate completeness
         evaluation_prompt = f"""
         Evaluate if we have sufficient information to answer the query completely.
         
-        Original Query: {self._query}
+        Original Query: {ctx.get("query")}
         
         Collected Information:
         {self._format_responses(ev.collected_responses)}
@@ -366,10 +387,9 @@ class HumansaOrchestrator(Workflow):
             # Default to proceeding if parsing fails
             evaluation = {
                 "is_complete": True,
-                "confidence": 0.85,
+                "confidence": 0.7,
                 "missing_information": [],
-                "contradictions": [],
-                "evaluation_reason": "Sufficient information collected"
+                "contradictions": []
             }
         
         # Check if we should continue or synthesize
@@ -377,75 +397,74 @@ class HumansaOrchestrator(Workflow):
             return SynthesisEvent(
                 all_responses=ev.collected_responses,
                 iterations_used=iteration,
-                final_context=self._user_context
+                final_context=ctx.get("user_context", {})
             )
         else:
+            # Need more information
             return RefinementEvent(
                 iteration=iteration,
-                information_gaps=evaluation["missing_information"],
-                previous_agents=self._used_agents,
-                context=self._user_context
+                gaps_to_fill=evaluation["missing_information"],
+                previous_agents=ctx.get("used_agents", set()),
+                context=ctx.get("user_context", {})
             )
     
     @step
     async def synthesize_response(
         self,
-        ev: SynthesisEvent  
+        ctx: Context,
+        ev: SynthesisEvent
     ) -> StopEvent:
         """
-        Step 5: Synthesize final response from all collected information.
+        Step 5: Synthesize all agent responses into final answer.
         """
-        # Create comprehensive synthesis prompt
+        # Build comprehensive synthesis prompt
         synthesis_prompt = f"""
-        Synthesize a comprehensive response from multiple agent consultations.
+        Synthesize all expert responses into a comprehensive medical consultation response.
         
-        Original Query: {self._query}
+        Original Query: {ctx.get("query")}
+        Iterations Used: {ev.iterations_used}
         
-        Information from {len(ev.all_responses)} consultations:
+        Expert Responses:
         {self._format_responses(ev.all_responses)}
         
-        User Context:
+        Patient Context:
         {json.dumps(ev.final_context, indent=2)}
         
         Create a unified, coherent response that:
-        1. Directly answers the user's query
-        2. Integrates all relevant information
+        1. Addresses all aspects of the query
+        2. Integrates insights from all agents
         3. Resolves any contradictions
-        4. Provides clear recommendations
-        5. Acknowledges any limitations or uncertainties
-        
-        Format the response in a clear, professional manner suitable for medical communication.
+        4. Provides clear, actionable advice
+        5. Acknowledges any limitations or areas needing follow-up
         """
         
-        final_response = await self.router_llm.acomplete(synthesis_prompt)
+        response = await self.router_llm.acomplete(synthesis_prompt)
+        final_response = response.text
         
-        # Store conversation in memory
-        await self.memory_manager.add_conversation(
-            user_id=self._user_id,
-            query=self._query,
-            response=final_response.text,
+        # Update memory with the conversation
+        user_id = ctx.get("user_id")
+        await self.memory_manager.update_conversation(
+            user_id=user_id,
+            query=ctx.get("query"),
+            response=final_response,
             metadata={
                 "iterations": ev.iterations_used,
-                "agents_used": list(self._used_agents),
-                "confidence": self._all_responses[-1].get("confidence", 0.85) if self._all_responses else 0.85
+                "agents_used": list(ctx.get("used_agents", set())),
+                "confidence": ctx.get("final_confidence", 0.85)
             }
         )
         
         # Return final result
-        return StopEvent(
-            result={
-                "response": final_response.text,
-                "metadata": {
-                    "user_id": self._user_id,
-                    "orchestrator": "humansa_v2",
-                    "iterations": ev.iterations_used,
-                    "agents_consulted": list(self._used_agents),
-                    "confidence": 0.85
-                }
+        return StopEvent(result={
+            "response": final_response,
+            "metadata": {
+                "iterations": ev.iterations_used,
+                "agents_consulted": list(ctx.get("used_agents", set())),
+                "total_responses": len(ev.all_responses)
             }
-        )
+        })
     
-    async def _execute_agent(
+    async def _execute_single_agent(
         self,
         agent: BaseHumansaAgent,
         query: str,
@@ -479,53 +498,62 @@ class HumansaOrchestrator(Workflow):
                 "extracted_info": {{
                     "findings": ["..."],
                     "recommendations": ["..."],
-                    "clarifications_needed": ["..."],
-                    "confidence": 0.85
-                }}
+                    "medications": ["..."],
+                    "warnings": ["..."]
+                }},
+                "needs_clarification": ["..."],
+                "confidence": 0.8
             }}
             """
             
             extraction_response = await self.router_llm.acomplete(extraction_prompt)
             
             try:
-                extracted = json.loads(extraction_response.text)
+                extraction = json.loads(extraction_response.text)
             except:
-                extracted = {
-                    "extracted_info": {
-                        "findings": [full_response[:200]],
-                        "recommendations": [],
-                        "clarifications_needed": [],
-                        "confidence": 0.7
-                    }
+                extraction = {
+                    "extracted_info": {},
+                    "needs_clarification": [],
+                    "confidence": 0.7
                 }
             
             return AgentExecutionEvent(
                 agent_id=agent.agent_id,
-                response={"content": full_response},
-                extracted_info=extracted["extracted_info"],
-                confidence=extracted["extracted_info"].get("confidence", 0.7)
+                response=full_response,
+                confidence=extraction.get("confidence", 0.7),
+                extracted_info=extraction.get("extracted_info", {}),
+                needs_clarification=extraction.get("needs_clarification", []),
+                metadata={"agent_name": getattr(agent, "agent_name", agent.agent_id)}
             )
             
         except Exception as e:
-            logger.error(f"Agent {agent.agent_id} execution failed: {e}")
+            logger.error(f"Error executing agent {agent.agent_id}: {e}")
             return AgentExecutionEvent(
                 agent_id=agent.agent_id,
-                response={"error": str(e)},
+                response=f"Error: {str(e)}",
+                confidence=0.0,
                 extracted_info={},
-                confidence=0.0
+                needs_clarification=[],
+                metadata={"error": str(e)}
             )
     
     def _get_agent_descriptions(self) -> str:
         """Get formatted descriptions of available agents."""
         descriptions = []
         for agent_id, agent in self.agents.items():
-            desc = f"- {agent_id}: {getattr(agent, 'description', 'Medical specialist')}"
+            desc = f"- {agent_id}: {getattr(agent, 'description', 'Medical expert agent')}"
             descriptions.append(desc)
         return "\n".join(descriptions)
     
-    def _format_responses(self, responses: List[Dict[str, Any]]) -> str:
-        """Format agent responses for prompts."""
+    def _format_responses(self, responses: List[AgentExecutionEvent]) -> str:
+        """Format agent responses for LLM consumption."""
         formatted = []
-        for i, resp in enumerate(responses, 1):
-            formatted.append(f"Response {i}:\n{json.dumps(resp, indent=2)}")
-        return "\n\n".join(formatted)
+        for resp in responses:
+            formatted.append(f"""
+Agent: {resp.metadata.get('agent_name', resp.agent_id)}
+Response: {resp.response}
+Confidence: {resp.confidence}
+Key Info: {json.dumps(resp.extracted_info, indent=2)}
+Needs Clarification: {resp.needs_clarification}
+---""")
+        return "\n".join(formatted)

@@ -86,6 +86,17 @@ else
     exit 1
 fi
 
+# Step 7a: Setup Mem0 for memory management
+echo -e "\n${YELLOW}6a. Setting up Mem0 memory layer...${NC}"
+cd "$ROOT_DIR"
+./scripts/setup_mem0.sh
+
+if [ $? -eq 0 ]; then
+    echo -e "${GREEN}✅ Mem0 setup completed successfully!${NC}"
+else
+    echo -e "${YELLOW}⚠️  Mem0 setup failed (optional - tests can still run)${NC}"
+fi
+
 # Step 8: Skip PgAdmin for isolated environment
 echo -e "\n${YELLOW}7. Skipping PgAdmin (not needed for test environment)...${NC}"
 

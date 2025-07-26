@@ -6,8 +6,12 @@ from datetime import datetime
 from llama_index.llms.openai import OpenAI
 from llama_index.core.callbacks import CallbackManager
 from .memory.memory_manager import MemoryManager
+from .memory.mem0_integration import Mem0MemoryManagerAdapter
 from .context_manager import ContextManager
 from .workflows.orchestrator import HumansaOrchestrator
+from .workflows.orchestrator_simple_debug import HumansaOrchestratorDebug  # Temporary debug
+from .workflows.orchestrator_workaround import HumansaOrchestrator as HumansaOrchestratorFixed  # Workaround for event bug
+# from .workflows.simple_orchestrator import SimpleHumansaOrchestrator  # Fixed recursion issue
 from .workflows.appointment_workflow import AppointmentBookingWorkflow
 from .agents import (
     GeneralMedicalAgent,
@@ -36,8 +40,22 @@ async def initialize_v2_system(db_pool, openai_api_key: str):
     """Initialize the v2 Humansa system."""
     global memory_manager, orchestrator, appointment_workflow
     
-    # Initialize memory manager
-    memory_manager = MemoryManager(db_pool)
+    # Try to use Mem0 if available, otherwise fall back to basic memory manager
+    try:
+        from humansa.memory.mem0_manager import Mem0Manager
+        mem0_manager = Mem0Manager.get_instance()
+        if mem0_manager.initialized:
+            # Use Mem0 adapter
+            memory_manager = Mem0MemoryManagerAdapter(db_pool, mem0_manager)
+            logger.info("Using Mem0 memory layer for Humansa v2")
+        else:
+            # Fall back to basic memory manager
+            memory_manager = MemoryManager(db_pool)
+            logger.info("Using basic memory manager (Mem0 not available)")
+    except Exception as e:
+        logger.warning(f"Failed to initialize Mem0 adapter: {e}")
+        memory_manager = MemoryManager(db_pool)
+        
     await memory_manager.initialize_tables()
     
     # Initialize LLM
@@ -57,7 +75,10 @@ async def initialize_v2_system(db_pool, openai_api_key: str):
     ]
     
     # Initialize orchestrator
-    orchestrator = HumansaOrchestrator(
+    # TODO: Fix recursion issue in HumansaOrchestrator workflow
+    # Create the improved orchestrator (recursion issue fixed)
+    # Using workaround version due to llama-index-workflows bug
+    orchestrator = HumansaOrchestratorFixed(
         agents=agents,
         router_llm=llm,
         memory_manager=memory_manager
