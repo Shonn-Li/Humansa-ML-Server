@@ -2,6 +2,8 @@
 # Core web framework
 Quart==0.20.0
 quart-cors==0.7.0
+hypercorn==0.17.3
+uvloop==0.21.0  # Performance enhancement for asyncio
 
 # Core async and HTTP
 aiofiles==24.1.0

@@ -89,7 +89,7 @@ INFO:__main__:✅ Embedding endpoints registration completed
 INFO:__main__:🔄 Registering Humansa endpoints...
 INFO:__main__:✅ Humansa endpoints registered successfully
 INFO:__main__:=== YouWoAI ML Server Starting ===
-INFO:__main__:Server will be available at: http://0.0.0.0:5001
+INFO:__main__:Server will be available at: http://0.0.0.0:5005
 INFO:__main__:
 INFO:__main__:📋 V1 Endpoint Summary:
 INFO:__main__:✅ CHAT ENDPOINTS:
@@ -116,30 +116,167 @@ INFO:__main__:   - ✅ Link analyzer: Independent module
 INFO:__main__:   - ✅ Embeddings: New modular architecture
 INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
 INFO:__main__:
-WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:120> wait_for=<Future pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 18.866 seconds
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:120> wait_for=<Future pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.233 seconds
+[2025-07-25 21:59:46 -0700] [70707] [INFO] Running on http://0.0.0.0:5005 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:5005 (CTRL + C to quit)
+ERROR:__main__:🚨 UNHANDLED EXCEPTION: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+ERROR:__main__:Request method: GET
+ERROR:__main__:Request URL: http://localhost:5005/v1/status
+ERROR:__main__:Request data: None
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1500, in full_dispatch_request
+    result = await self.dispatch_request(request_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1591, in dispatch_request
+    self.raise_routing_exception(request_)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1578, in raise_routing_exception
+    raise request.routing_exception
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/ctx.py", line 73, in match_request
+    ) = self.url_adapter.match(  # type: ignore
+        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+        return_rule=True
+        ^^^^^^^^^^^^^^^^
+    )  # noqa
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
  * Serving Quart app 'main'
  * Debug mode: True
  * Please use an ASGI server (e.g. Hypercorn) directly in production
- * Running on http://0.0.0.0:5001 (CTRL + C to quit)
+ * Running on http://0.0.0.0:5005 (CTRL + C to quit)
+[2025-07-25 22:00:15 -0700] [70707] [INFO] 127.0.0.1:54279 GET /v1/status 1.1 500 207 7620
+INFO:__main__:=== MULTI-AGENT REQUEST ===
+INFO:__main__:Method: POST
+INFO:__main__:URL: http://localhost:5005/v1/multi-agent/response
+INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5005', 'User-Agent': 'curl/8.7.1', 'Accept': '*/*', 'Content-Type': 'application/json', 'Content-Length': '65'}
+INFO:__main__:Request Body: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "test"
+    }
+  ],
+  "model": "gpt-4.1"
+}
+INFO:__main__:========================
+INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:chat.config.system_prompts:SystemPromptManager initialized
+INFO:chat.provider.llm_provider:=== LLM Provider Initialization Debug ===
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_ENDPOINT: SET
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_CREDENTIAL: SET
+INFO:chat.provider.llm_provider:OPENAI_API_KEY: SET
+INFO:chat.provider.llm_provider:ANTHROPIC_API_KEY: SET
+INFO:chat.provider.llm_provider:GOOGLE_API_KEY: SET
+INFO:chat.provider.llm_provider:DEEPSEEK_API_KEY: SET
+INFO:chat.provider.llm_provider:XAI_API_KEY: SET
+INFO:chat.provider.llm_provider:===========================================
+INFO:chat.provider.llm_provider:✅ Azure AI Inference provider initialized (PRIMARY - NO MULTIMODAL)
+INFO:chat.provider.llm_provider:✅ Azure OpenAI provider initialized (ROUTER COMPATIBLE + MULTIMODAL)
+INFO:chat.provider.llm_provider:✅ OpenAI multimodal support enabled
+INFO:chat.provider.llm_provider:✅ OpenAI provider initialized
+INFO:chat.provider.llm_provider:✅ Anthropic provider initialized
+INFO:chat.provider.llm_provider:✅ Gemini provider initialized
+INFO:chat.provider.llm_provider:✅ DeepSeek provider initialized
+INFO:chat.provider.llm_provider:✅ xAI provider initialized
+INFO:chat.provider.llm_provider:=== Provider Initialization Complete ===
+INFO:chat.provider.llm_provider:Available providers: 7
+INFO:chat.provider.llm_provider:  azure_inference: 9 models
+INFO:chat.provider.llm_provider:  azure_openai: 6 models
+INFO:chat.provider.llm_provider:  openai: 12 models
+INFO:chat.provider.llm_provider:  anthropic: 4 models
+INFO:chat.provider.llm_provider:  gemini: 5 models
+INFO:chat.provider.llm_provider:  deepseek: 3 models
+INFO:chat.provider.llm_provider:  xai: 5 models
+INFO:chat.provider.llm_provider:=========================================
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.rag.rag_processor:IDResolver initialized
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
+INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.rag.rag_processor:UnifiedRAGSearcher initialized
+INFO:chat.rag.rag_processor:RAGProcessor initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:chat.citation.citation_engine:CitationEngine initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
+INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
+INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
+INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
+INFO:chat.provider.llm_provider:=== LLM Provider Initialization Debug ===
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_ENDPOINT: SET
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_CREDENTIAL: SET
+INFO:chat.provider.llm_provider:OPENAI_API_KEY: SET
+INFO:chat.provider.llm_provider:ANTHROPIC_API_KEY: SET
+INFO:chat.provider.llm_provider:GOOGLE_API_KEY: SET
+INFO:chat.provider.llm_provider:DEEPSEEK_API_KEY: SET
+INFO:chat.provider.llm_provider:XAI_API_KEY: SET
+INFO:chat.provider.llm_provider:===========================================
+INFO:chat.provider.llm_provider:✅ Azure AI Inference provider initialized (PRIMARY - NO MULTIMODAL)
+INFO:chat.provider.llm_provider:✅ Azure OpenAI provider initialized (ROUTER COMPATIBLE + MULTIMODAL)
+INFO:chat.provider.llm_provider:✅ OpenAI multimodal support enabled
+INFO:chat.provider.llm_provider:✅ OpenAI provider initialized
+INFO:chat.provider.llm_provider:✅ Anthropic provider initialized
+INFO:chat.provider.llm_provider:✅ Gemini provider initialized
+INFO:chat.provider.llm_provider:✅ DeepSeek provider initialized
+INFO:chat.provider.llm_provider:✅ xAI provider initialized
+INFO:chat.provider.llm_provider:=== Provider Initialization Complete ===
+INFO:chat.provider.llm_provider:Available providers: 7
+INFO:chat.provider.llm_provider:  azure_inference: 9 models
+INFO:chat.provider.llm_provider:  azure_openai: 6 models
+INFO:chat.provider.llm_provider:  openai: 12 models
+INFO:chat.provider.llm_provider:  anthropic: 4 models
+INFO:chat.provider.llm_provider:  gemini: 5 models
+INFO:chat.provider.llm_provider:  deepseek: 3 models
+INFO:chat.provider.llm_provider:  xai: 5 models
+INFO:chat.provider.llm_provider:=========================================
+INFO:chat.config.system_prompts:SystemPromptManager initialized
+INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
+INFO:__main__:📄 Starting multi-agent non-streaming response...
+ERROR:chat.endpoints.multi_agent_endpoint_v2:Error in non-streaming request: 'user_id'
 Traceback (most recent call last):
-  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/main.py", line 827, in <module>
-    app.run(host="0.0.0.0", port=port, debug=True)
-    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 878, in run
-    loop.run_until_complete(asyncio.gather(*tasks))
-    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 719, in run_until_complete
-    return future.result()
-           ~~~~~~~~~~~~~^^
-  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/hypercorn/asyncio/__init__.py", line 44, in serve
-    await worker_serve(
-        wrap_app(app, config.wsgi_max_body_size, mode), config, shutdown_trigger=shutdown_trigger
-    )
-  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/hypercorn/asyncio/run.py", line 91, in worker_serve
-    sockets = config.create_sockets()
-  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/hypercorn/config.py", line 206, in create_sockets
-    insecure_sockets = self._create_sockets(self.bind)
-  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/hypercorn/config.py", line 273, in _create_sockets
-    sock.bind(binding)
-    ~~~~~~~~~^^^^^^^^^
-OSError: [Errno 48] Address already in use
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/endpoints/multi_agent_endpoint_v2.py", line 221, in _handle_non_streaming_request
+    router_result = await self.agents["router"].run(request, context)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/agent/router_agent.py", line 46, in run
+    query, str(request["user_id"]), request["messages"][-3:], has_attachments
+               ~~~~~~~^^^^^^^^^^^
+KeyError: 'user_id'
+INFO:__main__:=== MULTI-AGENT RESPONSE ===
+INFO:__main__:Response type: <class 'dict'>
+INFO:__main__:Response keys: ['error']
+WARNING:__main__:⚠️ No choices found in response
+INFO:__main__:===========================
+[2025-07-25 22:00:26 -0700] [70707] [INFO] 127.0.0.1:54433 POST /v1/multi-agent/response 1.1 200 111 2614400
+WARNING:asyncio:Executing <Task finished name='Task-23' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 2.614 seconds
