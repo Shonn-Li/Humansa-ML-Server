@@ -47,6 +47,10 @@ class ContextSearchAgent(BaseAgent):
         user_id = request["user_id"]
         
         logger.info(f"🤖 Using agentic RAG processor for query: {original_query}")
+        if note_ids:
+            logger.info(f"📌 Explicit note IDs provided: {note_ids}")
+        if conversation_ids:
+            logger.info(f"📌 Explicit conversation IDs provided: {conversation_ids}")
         
         # Use the agentic processor for intelligent multi-step retrieval
         # IMPORTANT: Disabled conversation search to prevent self-referential context pollution

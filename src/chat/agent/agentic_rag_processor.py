@@ -88,6 +88,12 @@ class AgenticRAGProcessor:
             await self._handle_missing_embeddings_for_temporal(
                 user_id, understanding.temporal_filter or {"days_ago": 7}
             )
+        
+        # Step 1.6: If explicit note IDs are provided, ensure we get their content
+        if note_ids:
+            logger.info(f"📌 Processing explicit note IDs: {note_ids}")
+            # Override search strategies to prioritize getting content from these specific notes
+            understanding.search_strategies = ["explicit_notes", "semantic"]
         logger.info(f"📊 Query understanding: {understanding}")
         
         # Step 2: Perform multi-step retrieval
@@ -301,7 +307,11 @@ Respond with JSON:
         
         logger.info(f"🔍 Executing retrieval strategy: {strategy_type}")
         
-        if strategy_type == "recency":
+        if strategy_type == "explicit_notes":
+            results = await self._explicit_notes_search(
+                understanding, user_id, note_ids, conversation_ids
+            )
+        elif strategy_type == "recency":
             results = await self._recency_search(
                 understanding, user_id, note_ids, conversation_ids
             )
@@ -434,6 +444,90 @@ Respond with JSON:
                 
                 return results
     
+    async def _explicit_notes_search(
+        self,
+        understanding: QueryUnderstanding,
+        user_id: int,
+        note_ids: Optional[List[int]],
+        conversation_ids: Optional[List[int]]
+    ) -> List[ChunkResult]:
+        """Get all content from explicitly provided note IDs"""
+        
+        if not note_ids:
+            logger.warning("No explicit note IDs provided for explicit_notes_search")
+            return []
+        
+        logger.info(f"📌 Retrieving all content from explicit notes: {note_ids}")
+        
+        # Get all chunks from these specific notes
+        with self.postgres.get_connection() as conn:
+            with conn.cursor() as cursor:
+                cursor.execute("""
+                    SELECT 
+                        e.type_id,
+                        e.type,
+                        e.chunk_text,
+                        1.0 as similarity,  -- Max similarity for explicit notes
+                        e.section_id,
+                        n."noteTitle" as title,
+                        n."createDate"
+                    FROM embedding_v1 e
+                    INNER JOIN note_v1 n ON e.type_id = n.id AND e.type = 'note'
+                    WHERE e.type_id = ANY(%s)
+                    AND e.type = 'note'
+                    AND n."ownerId" = %s
+                    ORDER BY e.type_id, e.section_id
+                """, (note_ids, user_id))
+                
+                results = []
+                for row in cursor.fetchall():
+                    chunk = ChunkResult(
+                        type_id=row[0],
+                        type=row[1],
+                        chunk_text=row[2],
+                        similarity=row[3],
+                        section_id=row[4],
+                        metadata={"title": row[5], "created": str(row[6])} if row[5] else None
+                    )
+                    results.append(chunk)
+                
+                logger.info(f"✅ Retrieved {len(results)} chunks from explicit notes")
+                
+                # If no embeddings found, try to get content directly
+                if len(results) == 0 and len(note_ids) > 0:
+                    logger.warning("No embeddings found for explicit notes, getting content directly")
+                    cursor.execute("""
+                        SELECT 
+                            n.id,
+                            'note' as type,
+                            n."noteTextContent",
+                            1.0 as similarity,
+                            0 as section_id,
+                            n."noteTitle",
+                            n."createDate"
+                        FROM note_v1 n
+                        WHERE n.id = ANY(%s)
+                        AND n."ownerId" = %s
+                        AND n."noteTextContent" IS NOT NULL
+                        AND n."noteTextContent" != ''
+                    """, (note_ids, user_id))
+                    
+                    for row in cursor.fetchall():
+                        if row[2]:  # If note has content
+                            chunk = ChunkResult(
+                                type_id=row[0],
+                                type=row[1],
+                                chunk_text=row[2],
+                                similarity=row[3],
+                                section_id=row[4],
+                                metadata={"title": row[5], "created": str(row[6])} if row[5] else None
+                            )
+                            results.append(chunk)
+                    
+                    logger.info(f"✅ Retrieved {len(results)} notes with direct content")
+                
+                return results
+    
     async def _handle_missing_embeddings_for_temporal(
         self,
         user_id: int,
@@ -563,8 +657,14 @@ Respond with JSON:
     ) -> List[ChunkResult]:
         """Perform keyword-based search"""
         
-        # Use key concepts for keyword search
-        query = " ".join(understanding.key_concepts)
+        # Use key concepts for keyword search, or original query if no concepts
+        query = " ".join(understanding.key_concepts) if understanding.key_concepts else understanding.original_query
+        
+        # If we have explicit note IDs and no key concepts, just get ALL content from those notes
+        if note_ids and not understanding.key_concepts:
+            logger.info(f"📌 Explicit note IDs with no key concepts - retrieving all content from notes: {note_ids}")
+            # Use a wildcard or very common word to match everything
+            query = "the"  # This should match most English content
         
         results = await self.hybrid_search.hybrid_search(
             query=query,
