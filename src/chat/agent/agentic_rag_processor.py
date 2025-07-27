@@ -239,8 +239,8 @@ Respond with JSON:
 """
         
         try:
-            llm_info = self.llm_selector.get_llm_and_provider(model="gpt-4-mini")
-            llm = llm_info["llm"]
+            provider_info = self.llm_selector.get_provider(model="gpt-4-mini")
+            llm = provider_info["llm"]
             from llama_index.core.llms import ChatMessage
             messages = [ChatMessage(role="user", content=prompt)]
             response = await llm.achat(messages, temperature=0.1)
@@ -471,8 +471,8 @@ Return as JSON: {{"terms": ["term1", "term2", ...]}}
 """
             
             try:
-                llm_info = self.llm_selector.get_llm_and_provider(model="gpt-4-mini")
-                llm = llm_info["llm"]
+                provider_info = self.llm_selector.get_provider(model="gpt-4-mini")
+                llm = provider_info["llm"]
                 from llama_index.core.llms import ChatMessage
                 messages = [ChatMessage(role="user", content=prompt)]
                 response = await llm.achat(messages, temperature=0.3)

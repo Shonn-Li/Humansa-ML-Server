@@ -9,6 +9,9 @@ non-streaming modes.
 from typing import Dict, Any, List, AsyncGenerator, Tuple
 import logging
 import re
+import os
+import json
+from datetime import datetime
 
 from .base import BaseAgent
 from ..provider.llm_provider import LLMProviderSelector
@@ -28,12 +31,83 @@ class ResponseAgent(BaseAgent):
         self.system_prompt_manager = SystemPromptManager()
         self.supports_streaming = True
         self.citation_pattern = re.compile(r'\[(\d+)\]')
+        
+        # Create debug logs directory
+        self.debug_dir = "debug_logs"
+        os.makedirs(self.debug_dir, exist_ok=True)
+    
+    def _save_debug_context(self, context: Dict[str, Any], combined_context: str, sources: List[Dict[str, Any]], 
+                           user_id: int, conversation_id: int, request: Dict[str, Any]) -> str:
+        """Save context to timestamped file for debugging"""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"{self.debug_dir}/context_{user_id}_{conversation_id}_{timestamp}.json"
+        
+        debug_data = {
+            "timestamp": timestamp,
+            "user_id": user_id,
+            "conversation_id": conversation_id,
+            "request": {
+                "messages": request.get("messages", []),
+                "model": request.get("model"),
+                "enable_rag": request.get("enable_rag"),
+                "enable_citations": request.get("enable_citations"),
+                "enable_web_search": request.get("enable_web_search")
+            },
+            "context_agents": list(context.keys()),
+            "combined_context_length": len(combined_context),
+            "combined_context_preview": combined_context[:1000] + "..." if len(combined_context) > 1000 else combined_context,
+            "sources": sources,
+            "sources_count": len(sources),
+            "context_search_found": "context_search_agent" in context,
+            "web_search_found": "web_search_agent" in context,
+            "attachment_found": "attachment_agent" in context,
+            "full_context": {
+                "context_search": context.get("context_search_agent", {}),
+                "web_search": context.get("web_search_agent", {}),
+                "attachment": context.get("attachment_agent", {}),
+                "router": context.get("router_agent", {})
+            },
+            "combined_context_full": combined_context
+        }
+        
+        try:
+            with open(filename, 'w', encoding='utf-8') as f:
+                json.dump(debug_data, f, indent=2, ensure_ascii=False)
+            logger.info(f"💾 Debug context saved to: {filename}")
+        except Exception as e:
+            logger.error(f"Failed to save debug context: {e}")
+        
+        return filename
     
     async def run(self, request: Dict[str, Any], context: Dict[str, Any]) -> Dict[str, Any]:
         """Generate the final response with optional citations (non-streaming)"""
         
         # Build combined context and sources
         combined_context, sources = self._build_combined_context_with_sources(context)
+        
+        # Save debug context
+        user_id = request.get("user_id", 0)
+        conversation_id = request.get("conversation_id", 0)
+        debug_file = self._save_debug_context(context, combined_context, sources, user_id, conversation_id, request)
+        
+        # Log critical information
+        logger.info(f"🎯 RESPONSE AGENT - User {user_id}, Conversation {conversation_id}")
+        logger.info(f"📊 Context Summary:")
+        logger.info(f"  - Combined context length: {len(combined_context)} chars")
+        logger.info(f"  - Sources found: {len(sources)}")
+        logger.info(f"  - Context agents: {list(context.keys())}")
+        logger.info(f"  - Has RAG context: {'context_search_agent' in context}")
+        logger.info(f"  - Has web search: {'web_search_agent' in context}")
+        logger.info(f"  - Debug log: {debug_file}")
+        
+        # Validate context
+        if not combined_context and request.get("enable_rag", False):
+            logger.warning("⚠️ WARNING: RAG was enabled but no context found!")
+            logger.warning(f"  - Context search result: {context.get('context_search_agent', {}).get('status', 'N/A')}")
+            if 'context_search_agent' in context:
+                search_meta = context['context_search_agent'].get('metadata', {})
+                logger.warning(f"  - Total chunks searched: {search_meta.get('total_chunks', 0)}")
+                logger.warning(f"  - Note IDs searched: {search_meta.get('note_ids', [])}")
         
         # Check if citations should be enabled
         enable_citations = self._should_enable_citations(request, sources)
@@ -72,6 +146,30 @@ class ResponseAgent(BaseAgent):
         
         # Build combined context and sources
         combined_context, sources = self._build_combined_context_with_sources(context)
+        
+        # Save debug context
+        user_id = request.get("user_id", 0)
+        conversation_id = request.get("conversation_id", 0)
+        debug_file = self._save_debug_context(context, combined_context, sources, user_id, conversation_id, request)
+        
+        # Log critical information
+        logger.info(f"🎯 RESPONSE AGENT STREAM - User {user_id}, Conversation {conversation_id}")
+        logger.info(f"📊 Context Summary:")
+        logger.info(f"  - Combined context length: {len(combined_context)} chars")
+        logger.info(f"  - Sources found: {len(sources)}")
+        logger.info(f"  - Context agents: {list(context.keys())}")
+        logger.info(f"  - Has RAG context: {'context_search_agent' in context}")
+        logger.info(f"  - Has web search: {'web_search_agent' in context}")
+        logger.info(f"  - Debug log: {debug_file}")
+        
+        # Validate context
+        if not combined_context and request.get("enable_rag", False):
+            logger.warning("⚠️ WARNING: RAG was enabled but no context found!")
+            logger.warning(f"  - Context search result: {context.get('context_search_agent', {}).get('status', 'N/A')}")
+            if 'context_search_agent' in context:
+                search_meta = context['context_search_agent'].get('metadata', {})
+                logger.warning(f"  - Total chunks searched: {search_meta.get('total_chunks', 0)}")
+                logger.warning(f"  - Note IDs searched: {search_meta.get('note_ids', [])}")
         
         # Check if citations should be enabled
         enable_citations = self._should_enable_citations(request, sources)
