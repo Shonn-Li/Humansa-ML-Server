@@ -41,6 +41,10 @@ class RouterAgent(BaseAgent):
         attachments = request.get("attachments", [])
         has_attachments = bool(attachments and len(attachments) > 0)
         
+        # Check if explicit note_ids or folder_ids are provided
+        has_explicit_note_ids = bool(request.get("note_ids"))
+        has_explicit_folder_ids = bool(request.get("folder_ids"))
+        
         # Route the query with attachment information
         router_decision = await self.router.route_query(
             query, str(request["user_id"]), request["messages"][-3:], has_attachments
@@ -64,10 +68,15 @@ class RouterAgent(BaseAgent):
         note_id_pattern = r'note\s*(?:id\s*)?(\d+)'
         conversation_id_pattern = r'conversation\s*(?:id\s*)?(\d+)'
         
-        if (router_decision.selected_tool in ["knowledge_base_notes", "knowledge_base_conversations", "knowledge_base_full"] or
-            any(keyword in query_lower for keyword in context_keywords) or
-            re.search(note_id_pattern, query_lower) or
-            re.search(conversation_id_pattern, query_lower)):
+        # ALWAYS enable context search if explicit note_ids or folder_ids are provided
+        if has_explicit_note_ids or has_explicit_folder_ids:
+            logger.info(f"🎯 Explicit IDs provided - enabling context search (note_ids: {has_explicit_note_ids}, folder_ids: {has_explicit_folder_ids})")
+            if "context_search" not in enabled_agents:
+                enabled_agents.append("context_search")
+        elif (router_decision.selected_tool in ["knowledge_base_notes", "knowledge_base_conversations", "knowledge_base_full"] or
+              any(keyword in query_lower for keyword in context_keywords) or
+              re.search(note_id_pattern, query_lower) or
+              re.search(conversation_id_pattern, query_lower)):
             if "context_search" not in enabled_agents:
                 enabled_agents.append("context_search")
         
@@ -97,5 +106,8 @@ class RouterAgent(BaseAgent):
             "condensed_query": condensed_query,  # Add condensed query
             "enabled_agents": enabled_agents,
             "model": request.get("model", "gpt-4.1-nano"),
-            "search_type": router_decision.search_type if hasattr(router_decision, 'search_type') else "knowledge_base"
+            "search_type": router_decision.search_type if hasattr(router_decision, 'search_type') else "knowledge_base",
+            "has_explicit_ids": has_explicit_note_ids or has_explicit_folder_ids,
+            "explicit_note_ids": request.get("note_ids") if has_explicit_note_ids else None,
+            "explicit_folder_ids": request.get("folder_ids") if has_explicit_folder_ids else None
         }
