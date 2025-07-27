@@ -897,25 +897,33 @@ class MultiAgentChatEndpointV2:
 
         # Stream annotation events for each citation found
         for annotation in annotations:
+            # Include note_id and conversation_id directly from annotation
+            annotation_data = {
+                "type": annotation.get("type", "url_citation"),
+                "start_index": annotation["start_index"],
+                "end_index": annotation["end_index"],
+                "text": annotation["text"],
+                "url": annotation.get("url", ""),
+                "title": annotation.get("title", ""),
+                "source_type": annotation.get("source_type", "web"),
+            }
+            
+            # Include note_id and conversation_id if present
+            if annotation.get("note_id"):
+                annotation_data["note_id"] = annotation["note_id"]
+            if annotation.get("conversation_id"):
+                annotation_data["conversation_id"] = annotation["conversation_id"]
+            
+            # Add metadata for additional information
+            annotation_data["metadata"] = {
+                "source_type": annotation.get("source_type", "web"),
+            }
+            
             yield create_event("response.output_text.annotation.added",
                              item_id=message_id,
                              output_index=current_output_index,
                              content_index=0,
-                             annotation={
-                                 "type": annotation["type"],
-                                 "start_index": annotation["start_index"],
-                                 "end_index": annotation["end_index"],
-                                 "text": annotation["text"],
-                                 "url": annotation.get("url", ""),
-                                 "title": annotation.get("title", ""),
-                                 # Custom fields for our RAG nodes
-                                 "metadata": {
-                                     "source_id": next((s["source_id"] for s in sources if s.get("url") == annotation.get("url")), None),
-                                     "source_type": next((s["type"] for s in sources if s.get("url") == annotation.get("url")), "unknown"),
-                                     "note_id": next((s["metadata"].get("note_id") for s in sources if s.get("url") == annotation.get("url")), None),
-                                     "node_id": next((s["metadata"].get("node_id") for s in sources if s.get("url") == annotation.get("url")), None),
-                                 }
-                             })
+                             annotation=annotation_data)
 
         # Complete output text
         yield create_event("response.output_text.done",

@@ -77,11 +77,18 @@ class CitationPositionTracker:
                 source = sources[source_idx]
                 
                 # Create annotation with full source metadata
+                # Generate URL for notes if not present
+                url = source.get('url', '')
+                if not url and source.get('note_id'):
+                    url = f"note://{source.get('note_id')}"
+                elif not url and source.get('conversation_id'):
+                    url = f"conversation://{source.get('conversation_id')}"
+                
                 annotation = CitationAnnotation(
                     start_index=start_pos,
                     end_index=end_pos,
                     text=citation_text,
-                    url=source.get('url', ''),
+                    url=url,
                     title=source.get('title', f'Source {citation_num}'),
                     note_id=source.get('note_id'),
                     conversation_id=source.get('conversation_id'),
@@ -160,11 +167,18 @@ class CitationPositionTracker:
             source_text = f"{citation_marker} {source.get('title', 'Untitled')}\n"
             
             # Create annotation for this citation with full metadata
+            # Generate URL for notes if not present
+            url = source.get('url', '')
+            if not url and source.get('note_id'):
+                url = f"note://{source.get('note_id')}"
+            elif not url and source.get('conversation_id'):
+                url = f"conversation://{source.get('conversation_id')}"
+            
             annotation = CitationAnnotation(
                 start_index=citation_start,
                 end_index=citation_start + len(citation_marker),
                 text=citation_marker,
-                url=source.get('url', ''),
+                url=url,
                 title=source.get('title', f'Source {citation_num}'),
                 note_id=source.get('note_id'),
                 conversation_id=source.get('conversation_id'),
