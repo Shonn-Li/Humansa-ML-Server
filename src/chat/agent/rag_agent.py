@@ -49,12 +49,14 @@ class RAGAgent(BaseAgent):
                 "content": chunk.chunk_text,
                 "note_id": chunk.type_id,  # This is the note ID
                 "node_id": chunk.section_id,
-                "title": f"Note {chunk.type_id}",  # Default title, can be improved
+                "title": f"Note {chunk.type_id}",  # Default title
                 "score": getattr(chunk, 'distance', 0.0) if hasattr(chunk, 'distance') else 0.0
             }
             
-            # Add conversation-specific info if available
-            if hasattr(chunk, 'note_title') and chunk.note_title:
+            # Get title from metadata if available
+            if hasattr(chunk, 'metadata') and chunk.metadata and 'title' in chunk.metadata:
+                source["title"] = chunk.metadata["title"] or f"Note {chunk.type_id}"
+            elif hasattr(chunk, 'note_title') and chunk.note_title:
                 source["title"] = chunk.note_title
             
             sources.append(source)

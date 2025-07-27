@@ -129,17 +129,25 @@ class ContextSearchAgent(BaseAgent):
             if is_conversation:
                 conversation_id = chunk.type_id
                 source["conversation_id"] = conversation_id
-                source["title"] = f"Conversation {conversation_id}"
+                # Get title from metadata if available
+                if hasattr(chunk, 'metadata') and chunk.metadata and 'title' in chunk.metadata:
+                    source["title"] = chunk.metadata["title"] or f"Conversation {conversation_id}"
+                else:
+                    source["title"] = f"Conversation {conversation_id}"
                 found_conversation_ids.add(conversation_id)
             else:
                 note_id = chunk.type_id
                 source["note_id"] = note_id
-                source["title"] = f"Note {note_id}"
+                # Get title from metadata if available
+                if hasattr(chunk, 'metadata') and chunk.metadata and 'title' in chunk.metadata:
+                    source["title"] = chunk.metadata["title"] or f"Note {note_id}"
+                elif hasattr(chunk, 'note_title') and chunk.note_title:
+                    source["title"] = chunk.note_title
+                else:
+                    source["title"] = f"Note {note_id}"
                 found_note_ids.add(note_id)
                 
-                # Add note-specific metadata if available
-                if hasattr(chunk, 'note_title') and chunk.note_title:
-                    source["title"] = chunk.note_title
+                # Add folder_id if available
                 if hasattr(chunk, 'folder_id'):
                     source["folder_id"] = chunk.folder_id
             
