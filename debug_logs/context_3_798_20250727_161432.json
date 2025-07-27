@@ -1,0 +1,66 @@
+{
+  "timestamp": "20250727_161432",
+  "user_id": 3,
+  "conversation_id": 798,
+  "request": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "hell"
+      }
+    ],
+    "model": "grok-3-mini",
+    "enable_rag": true,
+    "enable_citations": true,
+    "enable_web_search": true
+  },
+  "context_agents": [
+    "router_agent",
+    "last_message_id",
+    "last_message_output_index"
+  ],
+  "combined_context_length": 0,
+  "combined_context_preview": "",
+  "sources": [],
+  "sources_count": 0,
+  "context_search_found": false,
+  "web_search_found": false,
+  "attachment_found": false,
+  "full_context": {
+    "context_search": {},
+    "web_search": {},
+    "attachment": {},
+    "router": {
+      "router_decision": {
+        "selected_tool": "no_context",
+        "search_type": "none",
+        "confidence": 0.9,
+        "reasoning": "The query 'hell' appears to be a general or incomplete question not requiring specific user data.",
+        "query_classification": "general_question"
+      },
+      "original_query": "hell",
+      "condensed_query": "hell",
+      "enabled_agents": [
+        "response"
+      ],
+      "model": "grok-3-mini",
+      "search_type": "none",
+      "has_explicit_ids": false,
+      "explicit_note_ids": null,
+      "explicit_folder_ids": null
+    }
+  },
+  "combined_context_full": "",
+  "llamaindex_messages": [
+    {
+      "role": "system",
+      "content": "You are **YouWoAI**, an AI study assistant.\n\n**Current Date**: 2025-07-27\n\nYour role: help the user learn faster and answer questions.\n• Any prior conversation notes, file‑search snippets, file attachments, or web‑search results will appear as **additional system messages** in this chat. Use them when relevant.\n",
+      "content_length": 313
+    },
+    {
+      "role": "user",
+      "content": "hell",
+      "content_length": 4
+    }
+  ]
+}

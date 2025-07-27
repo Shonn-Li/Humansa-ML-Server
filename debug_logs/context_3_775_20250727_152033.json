@@ -1,0 +1,112 @@
+{
+  "timestamp": "20250727_152033",
+  "user_id": 3,
+  "conversation_id": 775,
+  "request": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Summarize my recent notes and highlight the key points"
+      }
+    ],
+    "model": "gpt-4.1-nano",
+    "enable_rag": true,
+    "enable_citations": true,
+    "enable_web_search": true
+  },
+  "context_agents": [
+    "router_agent",
+    "context_search_agent",
+    "web_search_agent",
+    "last_message_id",
+    "last_message_output_index"
+  ],
+  "combined_context_length": 998,
+  "combined_context_preview": "[1] AI Text Summarizer - One-Click Summarization (Ad-Free) - QuillBot:\nQuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.\n\n[2] Free AI-powered Summarizing Tool | No Sign-up Required:\nUse our free AI-powered summarizing tool and summary generator to quickly condense articles, papers, or documents into concise summaries.\n\n[3] Highly Efficient Prompt for Summarizing — GPT-4 : r/ChatGPTPro:\nFormat the summary in paragraph form for easy understanding. Conclude your notes with [End of Notes, Message #X] to indicate completion, where ...\n\n[4] SMMRY | Summarize Any Text in Seconds | Smmry.com:\nTransform long content into clear summaries instantly. Our AI text summarizer helps you extract key insights from articles, documents & reports.\n\n[5] AI Summarizer:\nOur AI Summarizer is a free summary generator that can instantly summarize any text, articles and essays with the best key points.",
+  "sources": [
+    {
+      "source_id": "web_1",
+      "type": "web_search",
+      "title": "AI Text Summarizer - One-Click Summarization (Ad-Free) - QuillBot",
+      "content": "QuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.",
+      "url": "https://quillbot.com/summarize",
+      "metadata": {
+        "search_engine": "google"
+      }
+    },
+    {
+      "source_id": "web_2",
+      "type": "web_search",
+      "title": "Free AI-powered Summarizing Tool | No Sign-up Required",
+      "content": "Use our free AI-powered summarizing tool and summary generator to quickly condense articles, papers, or documents into concise summaries.",
+      "url": "https://www.grammarly.com/ai/ai-writing-tools/summarizing-tool",
+      "metadata": {
+        "search_engine": "google"
+      }
+    },
+    {
+      "source_id": "web_3",
+      "type": "web_search",
+      "title": "Highly Efficient Prompt for Summarizing — GPT-4 : r/ChatGPTPro",
+      "content": "Format the summary in paragraph form for easy understanding. Conclude your notes with [End of Notes, Message #X] to indicate completion, where ...",
+      "url": "https://www.reddit.com/r/ChatGPTPro/comments/13n55w7/highly_efficient_prompt_for_summarizing_gpt4/",
+      "metadata": {
+        "search_engine": "google"
+      }
+    },
+    {
+      "source_id": "web_4",
+      "type": "web_search",
+      "title": "SMMRY | Summarize Any Text in Seconds | Smmry.com",
+      "content": "Transform long content into clear summaries instantly. Our AI text summarizer helps you extract key insights from articles, documents & reports.",
+      "url": "https://smmry.com/",
+      "metadata": {
+        "search_engine": "google"
+      }
+    },
+    {
+      "source_id": "web_5",
+      "type": "web_search",
+      "title": "AI Summarizer",
+      "content": "Our AI Summarizer is a free summary generator that can instantly summarize any text, articles and essays with the best key points.",
+      "url": "https://www.summarizer.org/",
+      "metadata": {
+        "search_engine": "google"
+      }
+    }
+  ],
+  "sources_count": 5,
+  "context_search_found": true,
+  "web_search_found": true,
+  "attachment_found": false,
+  "full_context": {
+    "context_search": {
+      "status": "completed",
+      "understanding": {
+        "intent": "summarize",
+        "temporal_filter": {
+          "days_ago": 7
+        },
+        "key_concepts": []
+      },
+      "retrieval_steps": [
+        {
+          "strategy": "recency",
+          "query": "Summarize my recent notes and highlight the key points",
+          "results_count": 0
+        },
+        {
+          "strategy": "temporal",
+          "query": "Summarize my recent notes and highlight the key points",
+          "results_count": 0
+        }
+      ],
+      "context": "",
+      "sources": [],
+      "total_results": 0,
+      "search_summary": "Found 0 relevant chunks from 0 sources using 2 retrieval strategies"
+    },
+    "web_search": {
+      "status": "success",
+      "results": [
+        

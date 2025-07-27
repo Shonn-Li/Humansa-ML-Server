@@ -1,0 +1,63 @@
+{
+  "timestamp": "20250727_155154",
+  "user_id": 3,
+  "conversation_id": 788,
+  "request": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "summarize"
+      }
+    ],
+    "model": "grok-3-mini",
+    "enable_rag": true,
+    "enable_citations": true,
+    "enable_web_search": true
+  },
+  "context_agents": [
+    "router_agent",
+    "last_message_id",
+    "last_message_output_index"
+  ],
+  "combined_context_length": 0,
+  "combined_context_preview": "",
+  "sources": [],
+  "sources_count": 0,
+  "context_search_found": false,
+  "web_search_found": false,
+  "attachment_found": false,
+  "full_context": {
+    "context_search": {},
+    "web_search": {},
+    "attachment": {},
+    "router": {
+      "router_decision": {
+        "selected_tool": "no_context",
+        "search_type": "none",
+        "confidence": 0.8,
+        "reasoning": "The user provided only the word 'summarize' without additional context, indicating a general request that doesn't require specific user data.",
+        "query_classification": "general_request"
+      },
+      "original_query": "summarize",
+      "condensed_query": "summarize",
+      "enabled_agents": [
+        "response"
+      ],
+      "model": "grok-3-mini",
+      "search_type": "none"
+    }
+  },
+  "combined_context_full": "",
+  "llamaindex_messages": [
+    {
+      "role": "system",
+      "content": "You are **YouWoAI**, an AI study assistant.\n\n**Current Date**: 2025-07-27\n\nYour role: help the user learn faster and answer questions.\n• Any prior conversation notes, file‑search snippets, file attachments, or web‑search results will appear as **additional system messages** in this chat. Use them when relevant.\n",
+      "content_length": 313
+    },
+    {
+      "role": "user",
+      "content": "summarize",
+      "content_length": 9
+    }
+  ]
+}

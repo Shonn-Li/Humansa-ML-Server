@@ -42,8 +42,15 @@ class ContextSearchAgent(BaseAgent):
         original_query = router_result.get("original_query", request["messages"][-1]["content"])
         
         # Extract any specific IDs from the request if provided
+        # ALSO check router result for detected explicit IDs
         note_ids = request.get("note_ids", None)
         conversation_ids = request.get("conversation_ids", None)
+        
+        # If router detected explicit IDs, use those too
+        if not note_ids and router_result.get("explicit_note_ids"):
+            note_ids = router_result.get("explicit_note_ids")
+            logger.info(f"📍 Using explicit note IDs detected by router: {note_ids}")
+        
         user_id = request["user_id"]
         
         logger.info(f"🤖 Using agentic RAG processor for query: {original_query}")

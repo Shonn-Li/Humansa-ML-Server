@@ -1,0 +1,51 @@
+{
+  "timestamp": "20250727_134351",
+  "user_id": 3,
+  "conversation_id": 555,
+  "request": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "summerize"
+      }
+    ],
+    "model": "grok-3-mini",
+    "enable_rag": true,
+    "enable_citations": true,
+    "enable_web_search": true
+  },
+  "context_agents": [
+    "router_agent",
+    "last_message_id",
+    "last_message_output_index"
+  ],
+  "combined_context_length": 0,
+  "combined_context_preview": "",
+  "sources": [],
+  "sources_count": 0,
+  "context_search_found": false,
+  "web_search_found": false,
+  "attachment_found": false,
+  "full_context": {
+    "context_search": {},
+    "web_search": {},
+    "attachment": {},
+    "router": {
+      "router_decision": {
+        "selected_tool": "no_context",
+        "search_type": "none",
+        "confidence": 0.8,
+        "reasoning": "The query 'summerize' appears to be a typo or a general request for a summary, but lacks specific context or content to summarize.",
+        "query_classification": "general_request"
+      },
+      "original_query": "summerize",
+      "condensed_query": "summerize",
+      "enabled_agents": [
+        "response"
+      ],
+      "model": "grok-3-mini",
+      "search_type": "none"
+    }
+  },
+  "combined_context_full": ""
+}
