@@ -37,7 +37,7 @@ class ResponseAgent(BaseAgent):
         os.makedirs(self.debug_dir, exist_ok=True)
     
     def _save_debug_context(self, context: Dict[str, Any], combined_context: str, sources: List[Dict[str, Any]], 
-                           user_id: int, conversation_id: int, request: Dict[str, Any]) -> str:
+                           user_id: int, conversation_id: int, request: Dict[str, Any], messages: List[ChatMessage] = None) -> str:
         """Save context to timestamped file for debugging"""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"{self.debug_dir}/context_{user_id}_{conversation_id}_{timestamp}.json"
@@ -67,7 +67,14 @@ class ResponseAgent(BaseAgent):
                 "attachment": context.get("attachment_agent", {}),
                 "router": context.get("router_agent", {})
             },
-            "combined_context_full": combined_context
+            "combined_context_full": combined_context,
+            "llamaindex_messages": [
+                {
+                    "role": msg.role,
+                    "content": msg.content,
+                    "content_length": len(msg.content)
+                } for msg in (messages or [])
+            ] if messages else None
         }
         
         try:
@@ -85,10 +92,18 @@ class ResponseAgent(BaseAgent):
         # Build combined context and sources
         combined_context, sources = self._build_combined_context_with_sources(context)
         
-        # Save debug context
+        # Get user and conversation IDs
         user_id = request.get("user_id", 0)
         conversation_id = request.get("conversation_id", 0)
-        debug_file = self._save_debug_context(context, combined_context, sources, user_id, conversation_id, request)
+        
+        # Check if citations should be enabled
+        enable_citations = self._should_enable_citations(request, sources)
+        
+        # Prepare messages
+        messages = self._prepare_messages(request, combined_context, sources, enable_citations)
+        
+        # Save debug context with messages
+        debug_file = self._save_debug_context(context, combined_context, sources, user_id, conversation_id, request, messages)
         
         # Log critical information
         logger.info(f"🎯 RESPONSE AGENT - User {user_id}, Conversation {conversation_id}")
@@ -108,12 +123,6 @@ class ResponseAgent(BaseAgent):
                 search_meta = context['context_search_agent'].get('metadata', {})
                 logger.warning(f"  - Total chunks searched: {search_meta.get('total_chunks', 0)}")
                 logger.warning(f"  - Note IDs searched: {search_meta.get('note_ids', [])}")
-        
-        # Check if citations should be enabled
-        enable_citations = self._should_enable_citations(request, sources)
-        
-        # Prepare messages
-        messages = self._prepare_messages(request, combined_context, sources, enable_citations)
         
         # Get LLM provider
         model = request.get("model", "gpt-4.1-nano")
@@ -147,10 +156,18 @@ class ResponseAgent(BaseAgent):
         # Build combined context and sources
         combined_context, sources = self._build_combined_context_with_sources(context)
         
-        # Save debug context
+        # Get user and conversation IDs
         user_id = request.get("user_id", 0)
         conversation_id = request.get("conversation_id", 0)
-        debug_file = self._save_debug_context(context, combined_context, sources, user_id, conversation_id, request)
+        
+        # Check if citations should be enabled
+        enable_citations = self._should_enable_citations(request, sources)
+        
+        # Prepare messages
+        messages = self._prepare_messages(request, combined_context, sources, enable_citations)
+        
+        # Save debug context with messages
+        debug_file = self._save_debug_context(context, combined_context, sources, user_id, conversation_id, request, messages)
         
         # Log critical information
         logger.info(f"🎯 RESPONSE AGENT STREAM - User {user_id}, Conversation {conversation_id}")
@@ -170,12 +187,6 @@ class ResponseAgent(BaseAgent):
                 search_meta = context['context_search_agent'].get('metadata', {})
                 logger.warning(f"  - Total chunks searched: {search_meta.get('total_chunks', 0)}")
                 logger.warning(f"  - Note IDs searched: {search_meta.get('note_ids', [])}")
-        
-        # Check if citations should be enabled
-        enable_citations = self._should_enable_citations(request, sources)
-        
-        # Prepare messages
-        messages = self._prepare_messages(request, combined_context, sources, enable_citations)
         
         # Get LLM provider
         model = request.get("model", "gpt-4.1-nano")
@@ -367,6 +378,16 @@ Example: According to the documentation [1], the feature works by processing dat
         # Add conversation history
         for msg in request["messages"]:
             messages.append(ChatMessage(role=msg["role"], content=msg["content"]))
+        
+        # Log the exact messages being sent to LlamaIndex
+        logger.info("📝 MESSAGES SENT TO LLAMAINDEX:")
+        for i, msg in enumerate(messages):
+            logger.info(f"  Message {i+1} ({msg.role}):")
+            # Log first 200 chars of each message
+            content_preview = msg.content[:200] + "..." if len(msg.content) > 200 else msg.content
+            logger.info(f"    {content_preview}")
+        logger.info(f"  Total messages: {len(messages)}")
+        logger.info(f"  Total chars: {sum(len(m.content) for m in messages)}")
         
         return messages
     
