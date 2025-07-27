@@ -24,10 +24,13 @@ logger = logging.getLogger(__name__)
 
 
 class DecimalEncoder(json.JSONEncoder):
-    """Custom JSON encoder that handles Decimal types"""
+    """Custom JSON encoder that handles Decimal types and WebSearchResult objects"""
     def default(self, obj):
         if isinstance(obj, Decimal):
             return float(obj)
+        # Handle WebSearchResult objects
+        if hasattr(obj, '__dict__'):
+            return obj.__dict__
         return super(DecimalEncoder, self).default(obj)
 
 

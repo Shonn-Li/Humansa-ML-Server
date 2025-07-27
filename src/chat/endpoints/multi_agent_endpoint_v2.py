@@ -509,9 +509,11 @@ class MultiAgentChatEndpointV2:
                                         item_data["total_sources"] = len(sources)
                                         item_data["sources_truncated"] = True
                                         item_data["results_summary"] = f"Found {len(sources)} relevant sources (showing first 10)"
+                                        logger.info(f"📄 Truncated sources from {len(sources)} to 10 for streaming")
                                     else:
                                         item_data["sources"] = sources
                                         item_data["results_summary"] = f"Found {len(sources)} relevant sources from your notes"
+                                        logger.info(f"📄 Including all {len(sources)} sources in streaming")
                                 elif "results" in result:
                                     item_data["results"] = result["results"]
                                 

@@ -847,6 +847,17 @@ Return as JSON: {{"terms": ["term1", "term2", ...]}}
         for chunk in all_results[:15]:  # Limit to top 15 chunks
             context_parts.append(chunk.chunk_text)
         
+        # Limit sources for recency/temporal searches to prevent overwhelming results
+        limited_sources = sources
+        sources_truncated = False
+        total_sources = len(sources)
+        
+        # For recency searches with many sources, limit to most recent
+        if understanding.intent in ["organize", "summarize"] and len(sources) > 10:
+            limited_sources = sources[:10]
+            sources_truncated = True
+            logger.info(f"📄 Limiting sources from {len(sources)} to 10 for {understanding.intent} intent")
+        
         return {
             "status": "completed",
             "understanding": {
@@ -863,7 +874,9 @@ Return as JSON: {{"terms": ["term1", "term2", ...]}}
                 for step in retrieval_steps
             ],
             "context": "\n\n---\n\n".join(context_parts),
-            "sources": sources,
+            "sources": limited_sources,
+            "total_sources": total_sources,
+            "sources_truncated": sources_truncated,
             "total_results": len(all_results),
-            "search_summary": f"Found {len(all_results)} relevant chunks from {len(sources)} sources using {len(retrieval_steps)} retrieval strategies"
+            "search_summary": f"Found {len(all_results)} relevant chunks from {total_sources} sources using {len(retrieval_steps)} retrieval strategies"
         }
