@@ -225,14 +225,13 @@ class PostgresManager:
                 f"Targeted search results: {len(resolved_notes)} notes, {len(resolved_conversations)} conversations")
 
         else:
-            # Full context search: get all user's notes and conversations
+            # Full context search: get all user's notes only (conversations disabled)
             logger.info(
-                "🌍 Full context search: Getting all user notes and conversations")
+                "🌍 Full context search: Getting all user notes (conversations disabled)")
             resolved_notes = self.resolve_note_ids(user_id)  # All user notes
-            resolved_conversations = self.resolve_conversation_ids(
-                user_id, None)  # All user conversations
+            resolved_conversations = []  # Disabled to prevent context pollution
             logger.info(
-                f"Full context search results: {len(resolved_notes)} notes, {len(resolved_conversations)} conversations")
+                f"Full context search results: {len(resolved_notes)} notes, 0 conversations (disabled)")
 
         return ResolvedIDs(
             notes=resolved_notes,

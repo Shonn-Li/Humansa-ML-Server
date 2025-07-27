@@ -154,15 +154,15 @@ Example response:
         
         try:
             # Use a fast model for query understanding
-            provider = self.llm_selector.get_provider_for_model("gpt-4-mini")
-            response = await provider.chat_completion(
-                messages=[{"role": "user", "content": prompt}],
-                model="gpt-4-mini",
-                temperature=0.1
-            )
+            # Fixed: Use get_llm_and_provider which returns both llm and provider
+            llm_info = self.llm_selector.get_llm_and_provider(model="gpt-4-mini")
+            llm = llm_info["llm"]
+            from llama_index.core.llms import ChatMessage
+            messages = [ChatMessage(role="user", content=prompt)]
+            response = await llm.achat(messages, temperature=0.1)
             
-            # Parse JSON response
-            content = response.choices[0].message.content
+            # Parse JSON response from llama_index format
+            content = response.message.content
             # Extract JSON from markdown if wrapped
             if "```json" in content:
                 content = content.split("```json")[1].split("```")[0]
@@ -239,14 +239,13 @@ Respond with JSON:
 """
         
         try:
-            provider = self.llm_selector.get_provider_for_model("gpt-4-mini")
-            response = await provider.chat_completion(
-                messages=[{"role": "user", "content": prompt}],
-                model="gpt-4-mini",
-                temperature=0.1
-            )
+            llm_info = self.llm_selector.get_llm_and_provider(model="gpt-4-mini")
+            llm = llm_info["llm"]
+            from llama_index.core.llms import ChatMessage
+            messages = [ChatMessage(role="user", content=prompt)]
+            response = await llm.achat(messages, temperature=0.1)
             
-            content = response.choices[0].message.content
+            content = response.message.content
             if "```json" in content:
                 content = content.split("```json")[1].split("```")[0]
             elif "```" in content:
@@ -338,9 +337,9 @@ Respond with JSON:
             query=understanding.original_query,
             user_id=user_id,
             query_embedding=embedding,
-            search_type="mixed",
+            search_type="notes",
             note_ids=temporal_note_ids,
-            conversation_ids=conversation_ids,
+            conversation_ids=None,  # Disabled to prevent context pollution
             top_k=10
         )
         
@@ -410,9 +409,9 @@ Respond with JSON:
             query=query,
             user_id=user_id,
             query_embedding=None,  # Pure keyword search
-            search_type="keyword",
+            search_type="notes",
             note_ids=note_ids,
-            conversation_ids=conversation_ids,
+            conversation_ids=None,  # Disabled to prevent context pollution
             top_k=10
         )
         
@@ -436,9 +435,9 @@ Respond with JSON:
             query=understanding.original_query,
             user_id=user_id,
             query_embedding=embedding,
-            search_type="semantic",
+            search_type="notes",
             note_ids=note_ids,
-            conversation_ids=conversation_ids,
+            conversation_ids=None,  # Disabled to prevent context pollution
             top_k=10
         )
         
@@ -472,14 +471,13 @@ Return as JSON: {{"terms": ["term1", "term2", ...]}}
 """
             
             try:
-                provider = self.llm_selector.get_provider_for_model("gpt-4-mini")
-                response = await provider.chat_completion(
-                    messages=[{"role": "user", "content": prompt}],
-                    model="gpt-4-mini",
-                    temperature=0.3
-                )
+                llm_info = self.llm_selector.get_llm_and_provider(model="gpt-4-mini")
+                llm = llm_info["llm"]
+                from llama_index.core.llms import ChatMessage
+                messages = [ChatMessage(role="user", content=prompt)]
+                response = await llm.achat(messages, temperature=0.3)
                 
-                content = response.choices[0].message.content
+                content = response.message.content
                 if "```json" in content:
                     content = content.split("```json")[1].split("```")[0]
                 elif "```" in content:
@@ -496,9 +494,9 @@ Return as JSON: {{"terms": ["term1", "term2", ...]}}
                     query=expanded_query,
                     user_id=user_id,
                     query_embedding=embedding,
-                    search_type="mixed",
+                    search_type="notes",
                     note_ids=note_ids,
-                    conversation_ids=conversation_ids,
+                    conversation_ids=None,  # Disabled to prevent context pollution
                     top_k=10
                 )
                 
@@ -539,15 +537,36 @@ Return as JSON: {{"terms": ["term1", "term2", ...]}}
         sources = []
         seen_sources = set()
         
+        # Collect all unique note and conversation IDs
+        note_ids = set()
+        conversation_ids = set()
+        for chunk in all_results:
+            if chunk.type == "note":
+                note_ids.add(chunk.type_id)
+            elif chunk.type == "conversation":
+                conversation_ids.add(chunk.type_id)
+        
+        # Batch fetch titles
+        note_titles = {}
+        if note_ids:
+            note_titles = self.postgres.get_note_titles_batch(list(note_ids))
+        
         for chunk in all_results:
             source_key = f"{chunk.type}_{chunk.type_id}"
             if source_key not in seen_sources:
                 seen_sources.add(source_key)
                 
+                # Get title from batch results or metadata
+                title = None
+                if chunk.type == "note" and chunk.type_id in note_titles:
+                    title = note_titles[chunk.type_id]
+                elif chunk.metadata and isinstance(chunk.metadata, dict):
+                    title = chunk.metadata.get("title")
+                
                 source = {
                     "type": chunk.type,
                     "type_id": chunk.type_id,
-                    "title": chunk.metadata.get("title") if chunk.metadata else None,
+                    "title": title,
                     "chunks": []
                 }
                 

@@ -268,14 +268,15 @@ class HybridSearchEngine:
             
             keyword_results.extend(keyword_notes)
         
-        if search_type in ["conversations", "mixed"]:
-            keyword_convs = self.keyword_search_conversations(query, user_id, limit=top_k * 2)
-            
-            # Filter by specific IDs if provided
-            if conversation_ids:
-                keyword_convs = [r for r in keyword_convs if r['type_id'] in conversation_ids]
-                
-            keyword_results.extend(keyword_convs)
+        # DISABLED: Conversation search to prevent context pollution
+        # if search_type in ["conversations", "mixed"]:
+        #     keyword_convs = self.keyword_search_conversations(query, user_id, limit=top_k * 2)
+        #     
+        #     # Filter by specific IDs if provided
+        #     if conversation_ids:
+        #         keyword_convs = [r for r in keyword_convs if r['type_id'] in conversation_ids]
+        #         
+        #     keyword_results.extend(keyword_convs)
         
         # Perform vector search if embedding provided
         vector_results = []

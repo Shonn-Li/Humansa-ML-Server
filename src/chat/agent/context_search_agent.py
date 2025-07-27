@@ -49,12 +49,13 @@ class ContextSearchAgent(BaseAgent):
         logger.info(f"🤖 Using agentic RAG processor for query: {original_query}")
         
         # Use the agentic processor for intelligent multi-step retrieval
+        # IMPORTANT: Disabled conversation search to prevent self-referential context pollution
         try:
             agentic_result = await self.agentic_processor.process_query(
                 query=original_query,
                 user_id=user_id,
                 note_ids=note_ids,
-                conversation_ids=conversation_ids,
+                conversation_ids=None,  # Disabled to prevent context pollution
                 max_steps=3
             )
             
@@ -76,13 +77,14 @@ class ContextSearchAgent(BaseAgent):
             query_embedding = None
         
         # Perform hybrid search
+        # IMPORTANT: Disabled conversation search to prevent self-referential context pollution
         hybrid_results = await self.hybrid_search.hybrid_search(
             query=condensed_query,
             user_id=user_id,
             query_embedding=query_embedding,
-            search_type=search_type,
+            search_type="notes" if search_type == "mixed" else search_type,  # Force notes-only search
             note_ids=note_ids,
-            conversation_ids=conversation_ids,
+            conversation_ids=None,  # Disabled to prevent context pollution
             top_k=20
         )
         
@@ -94,13 +96,14 @@ class ContextSearchAgent(BaseAgent):
         
         # Fallback to pure RAG if hybrid search fails
         logger.info("Falling back to pure RAG search")
+        # IMPORTANT: Disabled conversation search to prevent self-referential context pollution
         rag_result = await self.rag_processor.process_rag_request(
             messages=request["messages"],
             user_id=user_id,
             custom_query=condensed_query,
-            search_type=search_type,
+            search_type="notes" if search_type == "mixed" else search_type,  # Force notes-only search
             note_ids=note_ids,
-            conversation_ids=conversation_ids
+            conversation_ids=None  # Disabled to prevent context pollution
         )
         
         # Build structured results with proper metadata
@@ -110,6 +113,17 @@ class ContextSearchAgent(BaseAgent):
         # Track unique note and conversation IDs
         found_note_ids = set()
         found_conversation_ids = set()
+        
+        # Collect all unique note IDs for batch title fetching
+        note_ids_to_fetch = set()
+        for chunk in rag_result.chunks[:10]:
+            if not (hasattr(chunk, 'is_conversation') and chunk.is_conversation):
+                note_ids_to_fetch.add(chunk.type_id)
+        
+        # Batch fetch titles
+        note_titles = {}
+        if note_ids_to_fetch:
+            note_titles = self.postgres.get_note_titles_batch(list(note_ids_to_fetch))
         
         for i, chunk in enumerate(rag_result.chunks[:10]):  # Limit sources for response
             context_parts.append(chunk.chunk_text)
@@ -129,22 +143,31 @@ class ContextSearchAgent(BaseAgent):
             if is_conversation:
                 conversation_id = chunk.type_id
                 source["conversation_id"] = conversation_id
-                # Get title from metadata if available
-                if hasattr(chunk, 'metadata') and chunk.metadata and 'title' in chunk.metadata:
-                    source["title"] = chunk.metadata["title"] or f"Conversation {conversation_id}"
-                else:
-                    source["title"] = f"Conversation {conversation_id}"
+                # Get title from various possible locations
+                title = None
+                # First try direct title attribute (HybridSearchResult)
+                if hasattr(chunk, 'title') and chunk.title:
+                    title = chunk.title
+                # Then try metadata (ChunkResult from agentic processor)
+                elif hasattr(chunk, 'metadata') and chunk.metadata and isinstance(chunk.metadata, dict):
+                    title = chunk.metadata.get('title') or chunk.metadata.get('noteTitle')
+                
+                source["title"] = title or f"Conversation {conversation_id}"
                 found_conversation_ids.add(conversation_id)
             else:
                 note_id = chunk.type_id
                 source["note_id"] = note_id
-                # Get title from metadata if available
-                if hasattr(chunk, 'metadata') and chunk.metadata and 'title' in chunk.metadata:
-                    source["title"] = chunk.metadata["title"] or f"Note {note_id}"
-                elif hasattr(chunk, 'note_title') and chunk.note_title:
-                    source["title"] = chunk.note_title
-                else:
-                    source["title"] = f"Note {note_id}"
+                # Get title from batch fetched titles or various possible locations
+                title = note_titles.get(note_id)
+                if not title:
+                    # First try direct title attribute (HybridSearchResult)
+                    if hasattr(chunk, 'title') and chunk.title:
+                        title = chunk.title
+                    # Then try metadata (ChunkResult from agentic processor)
+                    elif hasattr(chunk, 'metadata') and chunk.metadata and isinstance(chunk.metadata, dict):
+                        title = chunk.metadata.get('title') or chunk.metadata.get('noteTitle')
+                
+                source["title"] = title if title and title != "Note" else "Untitled Note"
                 found_note_ids.add(note_id)
                 
                 # Add folder_id if available
@@ -187,6 +210,17 @@ class ContextSearchAgent(BaseAgent):
         found_note_ids = set()
         found_conversation_ids = set()
         
+        # Collect all unique note IDs for batch title fetching
+        note_ids_to_fetch = set()
+        for result in hybrid_results[:10]:
+            if result.type == "note":
+                note_ids_to_fetch.add(result.type_id)
+        
+        # Batch fetch titles
+        note_titles = {}
+        if note_ids_to_fetch:
+            note_titles = self.postgres.get_note_titles_batch(list(note_ids_to_fetch))
+        
         for i, result in enumerate(hybrid_results[:10]):  # Limit sources
             context_parts.append(result.chunk_text)
             
@@ -205,7 +239,9 @@ class ContextSearchAgent(BaseAgent):
                 found_conversation_ids.add(result.type_id)
             else:
                 source["note_id"] = result.type_id
-                source["title"] = result.title or f"Note {result.type_id}"
+                # Use batch fetched title or fallback to result title
+                title = note_titles.get(result.type_id) or result.title
+                source["title"] = title if title and title != "Note" else "Untitled Note"
                 found_note_ids.add(result.type_id)
             
             # Add snippet if available

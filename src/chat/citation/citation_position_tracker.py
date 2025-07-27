@@ -20,10 +20,13 @@ class CitationAnnotation:
     text: str = ""  # The citation marker text e.g. "[1]"
     url: str = ""
     title: str = ""
+    note_id: Optional[int] = None
+    conversation_id: Optional[int] = None
+    source_type: str = "web"  # "web", "note", or "conversation"
     
     def to_dict(self) -> Dict:
         """Convert to OpenAI Response API format"""
-        return {
+        result = {
             "type": self.type,
             "start_index": self.start_index,
             "end_index": self.end_index,
@@ -31,6 +34,14 @@ class CitationAnnotation:
             "url": self.url,
             "title": self.title
         }
+        # Include additional fields if present
+        if self.note_id is not None:
+            result["note_id"] = self.note_id
+        if self.conversation_id is not None:
+            result["conversation_id"] = self.conversation_id
+        if self.source_type:
+            result["source_type"] = self.source_type
+        return result
 
 
 class CitationPositionTracker:
@@ -65,13 +76,16 @@ class CitationPositionTracker:
             if 0 <= source_idx < len(sources):
                 source = sources[source_idx]
                 
-                # Create annotation
+                # Create annotation with full source metadata
                 annotation = CitationAnnotation(
                     start_index=start_pos,
                     end_index=end_pos,
                     text=citation_text,
-                    url=source.get('url', f'https://example.com/source{citation_num}'),
-                    title=source.get('title', f'Source {citation_num}')
+                    url=source.get('url', ''),
+                    title=source.get('title', f'Source {citation_num}'),
+                    note_id=source.get('note_id'),
+                    conversation_id=source.get('conversation_id'),
+                    source_type=source.get('type', 'web' if source.get('url', '').startswith('http') else 'note')
                 )
                 annotations.append(annotation)
                 
@@ -145,13 +159,16 @@ class CitationPositionTracker:
             citation_marker = f"[{citation_num}]"
             source_text = f"{citation_marker} {source.get('title', 'Untitled')}\n"
             
-            # Create annotation for this citation
+            # Create annotation for this citation with full metadata
             annotation = CitationAnnotation(
                 start_index=citation_start,
                 end_index=citation_start + len(citation_marker),
                 text=citation_marker,
-                url=source.get('url', f'https://example.com/source{citation_num}'),
-                title=source.get('title', f'Source {citation_num}')
+                url=source.get('url', ''),
+                title=source.get('title', f'Source {citation_num}'),
+                note_id=source.get('note_id'),
+                conversation_id=source.get('conversation_id'),
+                source_type=source.get('type', 'web' if source.get('url', '').startswith('http') else 'note')
             )
             annotations.append(annotation)
             
