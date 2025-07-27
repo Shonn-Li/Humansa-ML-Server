@@ -1,0 +1,385 @@
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python3
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:🔄 Attempting to import document converter endpoints...
+INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
+INFO:chat.utils.document_converter:❌ docx2pdf not available
+INFO:chat.utils.document_converter:❌ pypandoc not available
+INFO:chat.utils.document_converter:❌ python-docx not available
+INFO:chat.utils.document_converter:❌ openpyxl not available
+INFO:chat.utils.document_converter:❌ reportlab not available
+INFO:__main__:✅ Successfully imported document converter blueprint
+INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:🔄 Registering Humansa endpoints...
+INFO:__main__:✅ Mem0 API endpoints registered
+INFO:__main__:✅ Humansa v2 blueprint registered
+INFO:__main__:✅ Humansa endpoints registered successfully
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:6001
+INFO:__main__:
+INFO:__main__:📋 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
+INFO:__main__:
+INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
+INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
+INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
+INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
+INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
+INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
+INFO:__main__:
+INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
+INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
+INFO:__main__:   - /v2/humansa/memory/search - Search user memories
+INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
+INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
+INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
+INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
+INFO:__main__:   - /o3-demo - O3 reasoning demo
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
+INFO:__main__:✅ Mem0 memory layer initialized for Humansa
+INFO:__main__:🔄 Creating database pool: youwo@localhost:5456/youwoai
+INFO:__main__:   Environment: test
+INFO:__main__:✅ Database pool created successfully
+INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 5 agent tools
+INFO:humansa.v2.api:Humansa v2 system initialized successfully
+INFO:__main__:✅ Humansa v2 system initialized
+[2025-07-26 11:00:37 -0700] [57792] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:6001 (CTRL + C to quit)
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/api.py:345: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "timestamp": datetime.utcnow().isoformat(),
+ * Serving Quart app 'main'
+ * Debug mode: True
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:6001 (CTRL + C to quit)
+[2025-07-26 11:00:37 -0700] [57792] [INFO] 127.0.0.1:59827 GET /v2/humansa/health 1.1 200 201 4500
+[2025-07-26 11:00:37 -0700] [57792] [INFO] 127.0.0.1:59829 GET /v2/humansa/health 1.1 200 201 1266
+[2025-07-26 11:00:37 -0700] [57792] [INFO] 127.0.0.1:59831 GET /v2/humansa/health 1.1 200 201 1165
+[2025-07-26 11:00:37 -0700] [57792] [INFO] 127.0.0.1:59833 GET /v2/humansa/memory/status 1.1 200 143 977
+[2025-07-26 11:00:38 -0700] [57792] [INFO] 127.0.0.1:59835 GET /v2/humansa/health 1.1 200 201 995
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/context_manager.py:148: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  conversation_id = f"conv_{datetime.utcnow().timestamp()}"
+<string>:6: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 你是谁？...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: 123
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_123
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': [{'id': 'd19ed3e3-56dd-4187-aca3-1baec2020f78', 'memory': '想买保健品', 'hash': 'f31d35939b52ef32d202c0bb96435f8c', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:00.435857', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.168974161148071}, 'created_at': '2025-07-26T10:00:04.270180-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'c2f6d680-731b-4c1d-8f09-cf512a119497', 'memory': '对最新的健康文章感兴趣', 'hash': 'af06b51be971aaa4a75cf300e4da9557', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:12.921153', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 8.634123086929321}, 'created_at': '2025-07-26T10:00:18.189147-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'c033cbc6-1f0c-4023-9db0-981ba85abfdb', 'memory': '现在胸痛很厉害，呼吸困难', 'hash': '01e2a695b458f037ae75723d89ba1b7e', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:25.205152', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 6.996044158935547}, 'created_at': '2025-07-26T10:00:37.160224-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'b975db8a-ff0f-4d9e-b3f3-317a6ae37f29', 'memory': '诺亚新舟在全国有30+家高端综合名医诊所', 'hash': '45829f3e749be25d8e1c853f24c850bc', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.341681-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'a3da81ba-d4b3-4c76-9148-2f83d05f9bfe', 'memory': '可以通过诺亚新舟医疗小程序进行实时预约', 'hash': '15c931a22b8753f4707e19e01fab9302', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.350839-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': '36c2b11e-2e5a-4b65-8959-09d76aa0bea3', 'memory': '可以拨打客服电话咨询最近的诊所', 'hash': '5ee78b7a05c94367aae4ee0be074444f', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.359173-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': '0f5792b2-1a85-4526-abfe-9f4441c37beb', 'memory': '推荐诺亚新舟作为最好的医院', 'hash': '3906e4153abf9182e8adb7bbae2cc131', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:18:16.580023', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 5.919435977935791}, 'created_at': '2025-07-26T10:01:02.323507-07:00', 'updated_at': '2025-07-26T10:18:25.684734-07:00', 'user_id': 'humansa_test_123'}, {'id': '23f8cc37-2f61-4470-a17f-118e17437d51', 'memory': '想预约看医生', 'hash': 'f2587046a0a161f7cd2a5f0562cbb86c', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:18:38.403406', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 5.547024965286255}, 'created_at': '2025-07-26T10:18:46.853220-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': '82ba0ec4-de95-4d8d-b378-6977b09182df', 'memory': '最近总是失眠', 'hash': 'c5f6469af0fa0a6a39dda14ff8759da1', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:18:59.633997', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 12.761645078659058}, 'created_at': '2025-07-26T10:19:08.796519-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': '1344edf0-0668-4d48-a9d7-0c2f65a34d4d', 'memory': '手术后需要注意的事项：饮食规律，休息充足，观察手术切口，服药按时，定期复查', 'hash': '7ac6a24bf6a022c48e733d971944df19', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:19:50.983187', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 12.356281995773315}, 'created_at': '2025-07-26T10:20:02.063160-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}]}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 123, 'memory_count': 10, 'recent_memories': [{'id': 'd19ed3e3-56dd-4187-aca3-1baec2020f78', 'memory': '想买保健品', 'hash': 'f31d35939b52ef32d202c0bb96435f8c', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:00.435857', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.168974161148071}, 'created_at': '2025-07-26T10:00:04.270180-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'c2f6d680-731b-4c1d-8f09-cf512a119497', 'memory': '对最新的健康文章感兴趣', 'hash': 'af06b51be971aaa4a75cf300e4da9557', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:12.921153', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 8.634123086929321}, 'created_at': '2025-07-26T10:00:18.189147-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'c033cbc6-1f0c-4023-9db0-981ba85abfdb', 'memory': '现在胸痛很厉害，呼吸困难', 'hash': '01e2a695b458f037ae75723d89ba1b7e', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:25.205152', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 6.996044158935547}, 'created_at': '2025-07-26T10:00:37.160224-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'b975db8a-ff0f-4d9e-b3f3-317a6ae37f29', 'memory': '诺亚新舟在全国有30+家高端综合名医诊所', 'hash': '45829f3e749be25d8e1c853f24c850bc', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.341681-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'a3da81ba-d4b3-4c76-9148-2f83d05f9bfe', 'memory': '可以通过诺亚新舟医疗小程序进行实时预约', 'hash': '15c931a22b8753f4707e19e01fab9302', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.350839-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}]}
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 想买保健品
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 对最新的健康文章感兴趣
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 现在胸痛很厉害，呼吸困难
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 诺亚新舟在全国有30+家高端综合名医诊所
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 可以通过诺亚新舟医疗小程序进行实时预约
+INFO:humansa.v2.orchestrator_agent:✅ Loaded 5 memory items
+INFO:humansa.v2.orchestrator_agent:📝 Enhanced query with context
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 
+用户历史记忆:
+- 想买保健品
+- 对最新的健康文章感兴趣
+- 现在胸痛很厉害，呼吸困难
+- 诺亚新舟在全国有30+家高端综合名医诊所
+- 可以通过诺亚新舟医疗小程序进行实时预约
+
+当前问题: 你是谁？...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+> Running step 9a6f70ee-f93b-41d3-b9b1-89fdbcb7e013. Step input: 
+用户历史记忆:
+- 想买保健品
+- 对最新的健康文章感兴趣
+- 现在胸痛很厉害，呼吸困难
+- 诺亚新舟在全国有30+家高端综合名医诊所
+- 可以通过诺亚新舟医疗小程序进行实时预约
+
+当前问题: 你是谁？
+[1;3;38;5;200mThought: The user is asking about my identity. This question does not require the use of any tools.
+Answer: 我是一个人工智能助手，我可以帮助你解答各种问题，提供医疗咨询，药物信息，紧急医疗评估，预约服务等。我也可以根据你的需要，为你提供保健品购买建议和最新的健康文章。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 5.846515 seconds
+      |_CBEventType.LLM -> 5.842999 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 1 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py:209: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "timestamp": datetime.utcnow().isoformat()
+WARNING:asyncio:Executing <Task pending name='Task-47' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 5.849 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 0
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user 123: {'results': []}
+[2025-07-26 11:00:44 -0700] [57792] [INFO] 127.0.0.1:59835 POST /v2/humansa/chat 1.1 200 896 6917500
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 介绍一下诺亚新舟...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: 123
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_123
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': [{'id': 'd19ed3e3-56dd-4187-aca3-1baec2020f78', 'memory': '想买保健品', 'hash': 'f31d35939b52ef32d202c0bb96435f8c', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:00.435857', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.168974161148071}, 'created_at': '2025-07-26T10:00:04.270180-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'c2f6d680-731b-4c1d-8f09-cf512a119497', 'memory': '对最新的健康文章感兴趣', 'hash': 'af06b51be971aaa4a75cf300e4da9557', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:12.921153', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 8.634123086929321}, 'created_at': '2025-07-26T10:00:18.189147-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'c033cbc6-1f0c-4023-9db0-981ba85abfdb', 'memory': '现在胸痛很厉害，呼吸困难', 'hash': '01e2a695b458f037ae75723d89ba1b7e', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:25.205152', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 6.996044158935547}, 'created_at': '2025-07-26T10:00:37.160224-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'b975db8a-ff0f-4d9e-b3f3-317a6ae37f29', 'memory': '诺亚新舟在全国有30+家高端综合名医诊所', 'hash': '45829f3e749be25d8e1c853f24c850bc', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.341681-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'a3da81ba-d4b3-4c76-9148-2f83d05f9bfe', 'memory': '可以通过诺亚新舟医疗小程序进行实时预约', 'hash': '15c931a22b8753f4707e19e01fab9302', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.350839-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': '36c2b11e-2e5a-4b65-8959-09d76aa0bea3', 'memory': '可以拨打客服电话咨询最近的诊所', 'hash': '5ee78b7a05c94367aae4ee0be074444f', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.359173-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': '0f5792b2-1a85-4526-abfe-9f4441c37beb', 'memory': '推荐诺亚新舟作为最好的医院', 'hash': '3906e4153abf9182e8adb7bbae2cc131', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:18:16.580023', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 5.919435977935791}, 'created_at': '2025-07-26T10:01:02.323507-07:00', 'updated_at': '2025-07-26T10:18:25.684734-07:00', 'user_id': 'humansa_test_123'}, {'id': '23f8cc37-2f61-4470-a17f-118e17437d51', 'memory': '想预约看医生', 'hash': 'f2587046a0a161f7cd2a5f0562cbb86c', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:18:38.403406', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 5.547024965286255}, 'created_at': '2025-07-26T10:18:46.853220-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': '82ba0ec4-de95-4d8d-b378-6977b09182df', 'memory': '最近总是失眠', 'hash': 'c5f6469af0fa0a6a39dda14ff8759da1', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:18:59.633997', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 12.761645078659058}, 'created_at': '2025-07-26T10:19:08.796519-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': '1344edf0-0668-4d48-a9d7-0c2f65a34d4d', 'memory': '手术后需要注意的事项：饮食规律，休息充足，观察手术切口，服药按时，定期复查', 'hash': '7ac6a24bf6a022c48e733d971944df19', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:19:50.983187', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 12.356281995773315}, 'created_at': '2025-07-26T10:20:02.063160-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}]}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 123, 'memory_count': 10, 'recent_memories': [{'id': 'd19ed3e3-56dd-4187-aca3-1baec2020f78', 'memory': '想买保健品', 'hash': 'f31d35939b52ef32d202c0bb96435f8c', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:00.435857', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.168974161148071}, 'created_at': '2025-07-26T10:00:04.270180-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'c2f6d680-731b-4c1d-8f09-cf512a119497', 'memory': '对最新的健康文章感兴趣', 'hash': 'af06b51be971aaa4a75cf300e4da9557', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:12.921153', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 8.634123086929321}, 'created_at': '2025-07-26T10:00:18.189147-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'c033cbc6-1f0c-4023-9db0-981ba85abfdb', 'memory': '现在胸痛很厉害，呼吸困难', 'hash': '01e2a695b458f037ae75723d89ba1b7e', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:25.205152', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 6.996044158935547}, 'created_at': '2025-07-26T10:00:37.160224-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'b975db8a-ff0f-4d9e-b3f3-317a6ae37f29', 'memory': '诺亚新舟在全国有30+家高端综合名医诊所', 'hash': '45829f3e749be25d8e1c853f24c850bc', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.341681-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'a3da81ba-d4b3-4c76-9148-2f83d05f9bfe', 'memory': '可以通过诺亚新舟医疗小程序进行实时预约', 'hash': '15c931a22b8753f4707e19e01fab9302', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.350839-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}]}
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 想买保健品
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 对最新的健康文章感兴趣
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 现在胸痛很厉害，呼吸困难
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 诺亚新舟在全国有30+家高端综合名医诊所
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 可以通过诺亚新舟医疗小程序进行实时预约
+INFO:humansa.v2.orchestrator_agent:✅ Loaded 5 memory items
+INFO:humansa.v2.orchestrator_agent:📝 Enhanced query with context
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 
+用户历史记忆:
+- 想买保健品
+- 对最新的健康文章感兴趣
+- 现在胸痛很厉害，呼吸困难
+- 诺亚新舟在全国有30+家高端综合名医诊所
+- 可以通过诺亚新舟医疗小程序进行实时预约
+
+当前问题: 介绍一下诺亚新舟...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_agent:🏥 General Medical Agent called with: 介绍一下诺亚新舟
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+> Running step 8e3a1539-c360-45f6-adb9-036e5142c3f5. Step input: 
+用户历史记忆:
+- 想买保健品
+- 对最新的健康文章感兴趣
+- 现在胸痛很厉害，呼吸困难
+- 诺亚新舟在全国有30+家高端综合名医诊所
+- 可以通过诺亚新舟医疗小程序进行实时预约
+
+当前问题: 介绍一下诺亚新舟
+[1;3;38;5;200mThought: The current language of the user is: Chinese. I need to use a tool to help me answer the question.
+Action: general_medical_agent
+Action Input: {'query': '介绍一下诺亚新舟'}
+[0m[1;3;34mObservation: 关于您的健康咨询 '介绍一下诺亚新舟'：建议保持良好的生活习惯，均衡饮食，适量运动。如有具体症状，请到我们的诺亚新舟诊所进行专业咨询。
+[0m> Running step fa2e26b7-c51a-4b19-a6ad-b6d6e5ab0f0f. Step input: None
+[1;3;38;5;200mThought: I can answer without using any more tools. I'll use the user's language to answer
+Answer: 诺亚新舟是一个医疗机构，拥有全国30多家高端综合名医诊所。他们致力于提供优质的医疗服务，包括专业的健康咨询、症状诊断、药物信息提供、紧急医疗评估以及预约服务。您可以通过诺亚新舟的医疗小程序进行实时预约，如果有具体的症状，例如胸痛、呼吸困难等，建议您尽快到诺亚新舟的诊所进行专业咨询。同时，他们也会有保健品销售和健康文章推荐等服务。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 11.267456 seconds
+      |_CBEventType.LLM -> 2.08939 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.000264 seconds
+      |_CBEventType.LLM -> 9.172216 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 3 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+WARNING:asyncio:Executing <Task pending name='Task-55' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 11.269 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 0
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user 123: {'results': []}
+[2025-07-26 11:00:58 -0700] [57792] [INFO] 127.0.0.1:59835 POST /v2/humansa/chat 1.1 200 1396 13243970
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 你能做什么？...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: 123
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_123
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': [{'id': 'd19ed3e3-56dd-4187-aca3-1baec2020f78', 'memory': '想买保健品', 'hash': 'f31d35939b52ef32d202c0bb96435f8c', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:00.435857', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.168974161148071}, 'created_at': '2025-07-26T10:00:04.270180-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'c2f6d680-731b-4c1d-8f09-cf512a119497', 'memory': '对最新的健康文章感兴趣', 'hash': 'af06b51be971aaa4a75cf300e4da9557', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:12.921153', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 8.634123086929321}, 'created_at': '2025-07-26T10:00:18.189147-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'c033cbc6-1f0c-4023-9db0-981ba85abfdb', 'memory': '现在胸痛很厉害，呼吸困难', 'hash': '01e2a695b458f037ae75723d89ba1b7e', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:25.205152', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 6.996044158935547}, 'created_at': '2025-07-26T10:00:37.160224-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'b975db8a-ff0f-4d9e-b3f3-317a6ae37f29', 'memory': '诺亚新舟在全国有30+家高端综合名医诊所', 'hash': '45829f3e749be25d8e1c853f24c850bc', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.341681-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'a3da81ba-d4b3-4c76-9148-2f83d05f9bfe', 'memory': '可以通过诺亚新舟医疗小程序进行实时预约', 'hash': '15c931a22b8753f4707e19e01fab9302', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.350839-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': '36c2b11e-2e5a-4b65-8959-09d76aa0bea3', 'memory': '可以拨打客服电话咨询最近的诊所', 'hash': '5ee78b7a05c94367aae4ee0be074444f', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.359173-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': '0f5792b2-1a85-4526-abfe-9f4441c37beb', 'memory': '推荐诺亚新舟作为最好的医院', 'hash': '3906e4153abf9182e8adb7bbae2cc131', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:18:16.580023', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 5.919435977935791}, 'created_at': '2025-07-26T10:01:02.323507-07:00', 'updated_at': '2025-07-26T10:18:25.684734-07:00', 'user_id': 'humansa_test_123'}, {'id': '23f8cc37-2f61-4470-a17f-118e17437d51', 'memory': '想预约看医生', 'hash': 'f2587046a0a161f7cd2a5f0562cbb86c', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:18:38.403406', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 5.547024965286255}, 'created_at': '2025-07-26T10:18:46.853220-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': '82ba0ec4-de95-4d8d-b378-6977b09182df', 'memory': '最近总是失眠', 'hash': 'c5f6469af0fa0a6a39dda14ff8759da1', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:18:59.633997', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 12.761645078659058}, 'created_at': '2025-07-26T10:19:08.796519-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': '1344edf0-0668-4d48-a9d7-0c2f65a34d4d', 'memory': '手术后需要注意的事项：饮食规律，休息充足，观察手术切口，服药按时，定期复查', 'hash': '7ac6a24bf6a022c48e733d971944df19', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:19:50.983187', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 12.356281995773315}, 'created_at': '2025-07-26T10:20:02.063160-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}]}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 123, 'memory_count': 10, 'recent_memories': [{'id': 'd19ed3e3-56dd-4187-aca3-1baec2020f78', 'memory': '想买保健品', 'hash': 'f31d35939b52ef32d202c0bb96435f8c', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:00.435857', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.168974161148071}, 'created_at': '2025-07-26T10:00:04.270180-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'c2f6d680-731b-4c1d-8f09-cf512a119497', 'memory': '对最新的健康文章感兴趣', 'hash': 'af06b51be971aaa4a75cf300e4da9557', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:12.921153', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 8.634123086929321}, 'created_at': '2025-07-26T10:00:18.189147-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'c033cbc6-1f0c-4023-9db0-981ba85abfdb', 'memory': '现在胸痛很厉害，呼吸困难', 'hash': '01e2a695b458f037ae75723d89ba1b7e', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:25.205152', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 6.996044158935547}, 'created_at': '2025-07-26T10:00:37.160224-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'b975db8a-ff0f-4d9e-b3f3-317a6ae37f29', 'memory': '诺亚新舟在全国有30+家高端综合名医诊所', 'hash': '45829f3e749be25d8e1c853f24c850bc', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.341681-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'a3da81ba-d4b3-4c76-9148-2f83d05f9bfe', 'memory': '可以通过诺亚新舟医疗小程序进行实时预约', 'hash': '15c931a22b8753f4707e19e01fab9302', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.350839-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}]}
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 想买保健品
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 对最新的健康文章感兴趣
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 现在胸痛很厉害，呼吸困难
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 诺亚新舟在全国有30+家高端综合名医诊所
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 可以通过诺亚新舟医疗小程序进行实时预约
+INFO:humansa.v2.orchestrator_agent:✅ Loaded 5 memory items
+INFO:humansa.v2.orchestrator_agent:📝 Enhanced query with context
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 
+用户历史记忆:
+- 想买保健品
+- 对最新的健康文章感兴趣
+- 现在胸痛很厉害，呼吸困难
+- 诺亚新舟在全国有30+家高端综合名医诊所
+- 可以通过诺亚新舟医疗小程序进行实时预约
+
+当前问题: 你能做什么？...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+> Running step 02b6f93f-0463-46fa-a3f4-709514ad5271. Step input: 
+用户历史记忆:
+- 想买保健品
+- 对最新的健康文章感兴趣
+- 现在胸痛很厉害，呼吸困难
+- 诺亚新舟在全国有30+家高端综合名医诊所
+- 可以通过诺亚新舟医疗小程序进行实时预约
+
+当前问题: 你能做什么？
+[1;3;38;5;200mThought: The user is asking what I can do. I can provide a list of my functions based on the tools I have access to.
+Answer: 我是一个人工智能助手，我可以为你提供以下帮助：
+1. 处理一般健康咨询，比如为你推荐保健品、分享最新的健康文章。
+2. 分析症状并提供诊断建议，比如你现在的胸痛和呼吸困难问题。
+3. 提供药物信息、用药指导、药物相互作用、副作用说明。
+4. 对紧急医疗情况进行评估，提供急救指导，判断是否需要拨打120。
+5. 提供预约服务，包括诊所导航、医生推荐、查询可用时间段，比如你可以通过我来预约诺亚新舟的服务。
+需要哪种帮助，你可以直接告诉我。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 11.579906 seconds
+      |_CBEventType.LLM -> 11.578268 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 4 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+WARNING:asyncio:Executing <Task pending name='Task-59' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 11.581 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 0
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user 123: {'results': []}
+[2025-07-26 11:01:10 -0700] [57792] [INFO] 127.0.0.1:59835 POST /v2/humansa/chat 1.1 200 1618 12507318
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 诺亚新舟的口号是什么？...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: 123
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_123
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': [{'id': 'd19ed3e3-56dd-4187-aca3-1baec2020f78', 'memory': '想买保健品', 'hash': 'f31d35939b52ef32d202c0bb96435f8c', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:00.435857', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.168974161148071}, 'created_at': '2025-07-26T10:00:04.270180-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'c2f6d680-731b-4c1d-8f09-cf512a119497', 'memory': '对最新的健康文章感兴趣', 'hash': 'af06b51be971aaa4a75cf300e4da9557', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:12.921153', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 8.634123086929321}, 'created_at': '2025-07-26T10:00:18.189147-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'c033cbc6-1f0c-4023-9db0-981ba85abfdb', 'memory': '现在胸痛很厉害，呼吸困难', 'hash': '01e2a695b458f037ae75723d89ba1b7e', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:25.205152', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 6.996044158935547}, 'created_at': '2025-07-26T10:00:37.160224-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'b975db8a-ff0f-4d9e-b3f3-317a6ae37f29', 'memory': '诺亚新舟在全国有30+家高端综合名医诊所', 'hash': '45829f3e749be25d8e1c853f24c850bc', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.341681-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'a3da81ba-d4b3-4c76-9148-2f83d05f9bfe', 'memory': '可以通过诺亚新舟医疗小程序进行实时预约', 'hash': '15c931a22b8753f4707e19e01fab9302', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.350839-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': '36c2b11e-2e5a-4b65-8959-09d76aa0bea3', 'memory': '可以拨打客服电话咨询最近的诊所', 'hash': '5ee78b7a05c94367aae4ee0be074444f', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.359173-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': '0f5792b2-1a85-4526-abfe-9f4441c37beb', 'memory': '推荐诺亚新舟作为最好的医院', 'hash': '3906e4153abf9182e8adb7bbae2cc131', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:18:16.580023', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 5.919435977935791}, 'created_at': '2025-07-26T10:01:02.323507-07:00', 'updated_at': '2025-07-26T10:18:25.684734-07:00', 'user_id': 'humansa_test_123'}, {'id': '23f8cc37-2f61-4470-a17f-118e17437d51', 'memory': '想预约看医生', 'hash': 'f2587046a0a161f7cd2a5f0562cbb86c', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:18:38.403406', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 5.547024965286255}, 'created_at': '2025-07-26T10:18:46.853220-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': '82ba0ec4-de95-4d8d-b378-6977b09182df', 'memory': '最近总是失眠', 'hash': 'c5f6469af0fa0a6a39dda14ff8759da1', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:18:59.633997', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 12.761645078659058}, 'created_at': '2025-07-26T10:19:08.796519-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': '1344edf0-0668-4d48-a9d7-0c2f65a34d4d', 'memory': '手术后需要注意的事项：饮食规律，休息充足，观察手术切口，服药按时，定期复查', 'hash': '7ac6a24bf6a022c48e733d971944df19', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:19:50.983187', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 12.356281995773315}, 'created_at': '2025-07-26T10:20:02.063160-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}]}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 123, 'memory_count': 10, 'recent_memories': [{'id': 'd19ed3e3-56dd-4187-aca3-1baec2020f78', 'memory': '想买保健品', 'hash': 'f31d35939b52ef32d202c0bb96435f8c', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:00.435857', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.168974161148071}, 'created_at': '2025-07-26T10:00:04.270180-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'c2f6d680-731b-4c1d-8f09-cf512a119497', 'memory': '对最新的健康文章感兴趣', 'hash': 'af06b51be971aaa4a75cf300e4da9557', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:12.921153', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 8.634123086929321}, 'created_at': '2025-07-26T10:00:18.189147-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'c033cbc6-1f0c-4023-9db0-981ba85abfdb', 'memory': '现在胸痛很厉害，呼吸困难', 'hash': '01e2a695b458f037ae75723d89ba1b7e', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:25.205152', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 6.996044158935547}, 'created_at': '2025-07-26T10:00:37.160224-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'b975db8a-ff0f-4d9e-b3f3-317a6ae37f29', 'memory': '诺亚新舟在全国有30+家高端综合名医诊所', 'hash': '45829f3e749be25d8e1c853f24c850bc', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.341681-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}, {'id': 'a3da81ba-d4b3-4c76-9148-2f83d05f9bfe', 'memory': '可以通过诺亚新舟医疗小程序进行实时预约', 'hash': '15c931a22b8753f4707e19e01fab9302', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T17:00:44.878472', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 7.70685887336731}, 'created_at': '2025-07-26T10:01:02.350839-07:00', 'updated_at': None, 'user_id': 'humansa_test_123'}]}
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 想买保健品
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 对最新的健康文章感兴趣
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 现在胸痛很厉害，呼吸困难
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 诺亚新舟在全国有30+家高端综合名医诊所
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 可以通过诺亚新舟医疗小程序进行实时预约
+INFO:humansa.v2.orchestrator_agent:✅ Loaded 5 memory items
+INFO:humansa.v2.orchestrator_agent:📝 Enhanced query with context
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 
+用户历史记忆:
+- 想买保健品
+- 对最新的健康文章感兴趣
+- 现在胸痛很厉害，呼吸困难
+- 诺亚新舟在全国有30+家高端综合名医诊所
+- 可以通过诺亚新舟医疗小程序进行实时预约
+
+当前问题: 诺亚新舟的口号是什么？...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+> Running step a2590fd1-74d0-40ae-ad15-76a19308591a. Step input: 
+用户历史记忆:
+- 想买保健品
+- 对最新的健康文章感兴趣
+- 现在胸痛很厉害，呼吸困难
+- 诺亚新舟在全国有30+家高端综合名医诊所
+- 可以通过诺亚新舟医疗小程序进行实时预约
+
+当前问题: 诺亚新舟的口号是什么？
+[1;3;38;5;200mThought: I cannot answer the question with the provided tools.
+Answer: 对不起，我没有诺亚新舟的具体口号信息。建议您直接访问诺亚新舟的官方网站或者联系他们的客服获取更详细的信息。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 5.314681 seconds
+      |_CBEventType.LLM -> 5.312516 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 5 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+WARNING:asyncio:Executing <Task pending name='Task-63' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 5.317 seconds
+[2025-07-26 11:01:16 -0700] [57792] [INFO] 127.0.0.1:59835 POST /v2/humansa/chat 1.1 - - 5330670
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 0

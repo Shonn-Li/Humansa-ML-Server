@@ -71,7 +71,7 @@ HUMANSA_REACT_PROMPT_V2 = """
 严格遵循以下格式处理请求：
 Thought: 分析用户需求，决定是否需要工具
 Action: [工具名称]（如需要）
-Action Input: {"参数1": "值1", "参数2": "值2"}
+Action Input: {{"key": "value", "another_key": "another_value"}}
 Observation: [工具返回结果]
 ... (根据需要重复)
 Thought: 总结信息，准备回复

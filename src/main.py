@@ -36,11 +36,16 @@ load_dotenv('.env.local', override=True)
 # Override with environment variables if they exist
 # This allows test environments to override .env settings
 if os.getenv('ENVIRONMENT') == 'test':
-    # Test environment overrides - force override
-    os.environ['DB_PORT'] = '5456'
-    os.environ['DB_USER'] = 'youwo'
-    os.environ['DB_PASSWORD'] = 'youwo123'
-    os.environ['DB_NAME'] = 'youwoai'
+    # Test environment overrides - use test database settings
+    # Only set if not already set by environment
+    if not os.getenv('DB_PORT'):
+        os.environ['DB_PORT'] = '5454'
+    if not os.getenv('DB_USER'):
+        os.environ['DB_USER'] = 'postgres'
+    if not os.getenv('DB_PASSWORD'):
+        os.environ['DB_PASSWORD'] = '12931'
+    if not os.getenv('DB_NAME'):
+        os.environ['DB_NAME'] = 'youwoai_test'
 
 # CRITICAL: Add current directory to Python path for imports to work
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -831,11 +836,12 @@ async def create_db_pool():
     """Create database connection pool for Humansa v2."""
     try:
         # Get database configuration from environment
+        is_test = os.getenv('ENVIRONMENT') == 'test'
         db_host = os.getenv('DB_HOST', 'localhost')
-        db_port = int(os.getenv('DB_PORT', '5432'))
+        db_port = int(os.getenv('DB_PORT', '5454' if is_test else '5432'))
         db_user = os.getenv('DB_USER', 'postgres')
-        db_password = os.getenv('DB_PASSWORD', '031203')
-        db_name = os.getenv('DB_NAME', 'test4')
+        db_password = os.getenv('DB_PASSWORD', '12931')
+        db_name = os.getenv('DB_NAME', 'youwoai_test' if is_test else 'youwoai')
         
         logger.info(f"🔄 Creating database pool: {db_user}@{db_host}:{db_port}/{db_name}")
         logger.info(f"   Environment: {os.getenv('ENVIRONMENT', 'production')}")
@@ -855,18 +861,21 @@ async def create_db_pool():
         logger.info("✅ Database pool created successfully")
         
         # Initialize Humansa v2 system now that db_pool is ready
+        # Check for Azure OpenAI key first, then fall back to OpenAI
+        azure_key = os.getenv('AZURE_OPENAI_API_KEY') or os.getenv('AZURE_INFERENCE_CREDENTIAL')
         openai_key = os.getenv('OPENAI_API_KEY')
-        if openai_key:
+        
+        if azure_key or openai_key:
             try:
                 from humansa.v2.api import initialize_v2_system
-                await initialize_v2_system(app.db_pool, openai_key)
-                logger.info("✅ Humansa v2 system initialized")
+                await initialize_v2_system(app.db_pool)  # API key is now read from env in the function
+                logger.info("✅ Humansa v2 system initialized with Azure OpenAI")
             except Exception as v2_error:
                 logger.error(f"❌ Failed to initialize Humansa v2: {v2_error}")
                 import traceback
                 traceback.print_exc()
         else:
-            logger.warning("⚠️ Humansa v2 system not initialized - missing API key")
+            logger.warning("⚠️ Humansa v2 system not initialized - missing Azure OpenAI or OpenAI API key")
         
     except Exception as e:
         logger.error(f"❌ Failed to create database pool: {e}")

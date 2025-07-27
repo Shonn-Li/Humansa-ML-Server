@@ -4,6 +4,7 @@ from .diagnosis_agent import DiagnosisAgent
 from .medication_agent import MedicationAgent
 from .emergency_triage_agent import EmergencyTriageAgent
 from .appointment_agent import AppointmentAgent
+from .product_agent import ProductAgent
 
 __all__ = [
     "BaseHumansaAgent",
@@ -11,5 +12,6 @@ __all__ = [
     "DiagnosisAgent",
     "MedicationAgent",
     "EmergencyTriageAgent",
-    "AppointmentAgent"
+    "AppointmentAgent",
+    "ProductAgent"
 ]

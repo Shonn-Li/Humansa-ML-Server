@@ -1,0 +1,181 @@
+{
+  "timestamp": "20250726_153515",
+  "total_tests": 10,
+  "passed": 8,
+  "failed": 2,
+  "success_rate": 0.8,
+  "average_quality_score": 52.6,
+  "category_stats": {
+    "Identity": {
+      "total": 5,
+      "passed": 4
+    },
+    "Doctor Search": {
+      "total": 2,
+      "passed": 2
+    },
+    "Medical": {
+      "total": 1,
+      "passed": 1
+    },
+    "Memory": {
+      "total": 2,
+      "passed": 1
+    }
+  },
+  "detailed_results": [
+    {
+      "id": 1,
+      "name": "Chinese Identity Query",
+      "category": "Identity",
+      "query": "你是谁？",
+      "success": true,
+      "quality_score": 100,
+      "quality_notes": [
+        "✓ Correctly identified as 诺亚新舟/小诺",
+        "✓ Mentioned role as health assistant",
+        "✓ Offered help/service"
+      ],
+      "response_time": 13.674283981323242,
+      "missing_keywords": [],
+      "error": null,
+      "response_preview": "🤔 正在思考...\n\n\n💭 **思考**: The current language of the user is Chinese. The user is asking about my identity, so I need to use the \"general_medical_agent\" tool to provide an appropriate response.\n🔧 **行动**: general_medical_agent\n📥 **输入参数**: {'query': '你是谁'}\n📊 **观察结果**: 我是诺亚新舟健康医疗助理（小诺），您的AI健康管家。\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\n我是诺亚新舟健康医疗助理（小诺），您的AI健康管家。\n\n诺亚新舟以\"以爱行舟，亲近相守\"为口号，拥有500多位三甲主任级名医专家，在全国开设了30+家高端综合名医诊所。\n\n我可以为您提供以下服务：\n• 健康"
+    },
+    {
+      "id": 2,
+      "name": "English Identity Query",
+      "category": "Identity",
+      "query": "Who are you?",
+      "success": true,
+      "quality_score": 80,
+      "quality_notes": [
+        "✓ Correctly identified in English",
+        "✓ Provided detailed response"
+      ],
+      "response_time": 5.979898929595947,
+      "missing_keywords": [],
+      "error": null,
+      "response_preview": "🤔 正在思考...\n\n\n💭 **思考**: The current language of the user is: English. I need to use a tool to help me answer the question.\n🔧 **行动**: general_medical_agent\n📥 **输入参数**: {'query': 'Who are you?'}\n📊 **观察结果**: I am Humansa Health Medical Assistant (Xiao Nuo), your AI health companion.\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\nI am Humansa Health Medical Assistant, your AI health companion. Humansa is a premium healthcare provider with over"
+    },
+    {
+      "id": 3,
+      "name": "Chinese Greeting",
+      "category": "Identity",
+      "query": "你好",
+      "success": true,
+      "quality_score": 100,
+      "quality_notes": [
+        "✓ Returned greeting",
+        "✓ Self-introduced",
+        "✓ Offered assistance"
+      ],
+      "response_time": 8.16875696182251,
+      "missing_keywords": [],
+      "error": null,
+      "response_preview": "🤔 正在思考...\n\n\n💭 **思考**: The current language of the user is: Chinese. I need to use a tool to help me answer the question.\n🔧 **行动**: general_medical_agent\n📥 **输入参数**: {'query': '你好'}\n📊 **观察结果**: 你好！我是诺亚新舟健康医疗助理（小诺），您的AI健康管家。\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer.\n\n✅ **最终回答**:\n你好！我是诺亚新舟健康医疗助理（小诺），您的AI健康管家。很高兴为您服务！我可以帮助您：• 健康咨询与症状分析• 预约诺亚新舟诊所的医生• 解读体检报告• 推荐健康产品• 提供就医指导。有什么可以帮助您的吗？\n"
+    },
+    {
+      "id": 4,
+      "name": "Company Introduction",
+      "category": "Identity",
+      "query": "介绍一下诺亚新舟",
+      "success": false,
+      "quality_score": 0,
+      "quality_notes": [],
+      "response_time": 30.0,
+      "missing_keywords": [],
+      "error": "Request timeout (30s)",
+      "response_preview": ""
+    },
+    {
+      "id": 5,
+      "name": "Service Capabilities",
+      "category": "Identity",
+      "query": "你能做什么？",
+      "success": true,
+      "quality_score": 0,
+      "quality_notes": [],
+      "response_time": 7.813107967376709,
+      "missing_keywords": [],
+      "error": null,
+      "response_preview": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n作为您的AI健康管家，我可以提供以下服务：\n\n1. 健康咨询与分诊：根据您的症状，我可以提供初次科室或检查建议。\n2. 实时预约：我可以帮助您查询医生的可用时间，并协助您完成预约。\n3. 检查项目下单：我可以帮助您对比各诊所的检查项目，并指导您如何在商城下单。\n4. 诊所导航：我可以提供诊所的地址、电话、营业时间等信息，以及如何到达诊所的交通指南。\n5. 体检报告解读：我可以帮助您理解体检报告的内容，并根据报告推荐相应的健康管理方案。\n\n有什么可以帮助您的吗？\n"
+    },
+    {
+      "id": 6,
+      "name": "Find Cardiologist",
+      "category": "Doctor Search",
+      "query": "我想找一个心脏科医生",
+      "success": true,
+      "quality_score": 0,
+      "quality_notes": [],
+      "response_time": 16.796524047851562,
+      "missing_keywords": [],
+      "error": null,
+      "response_preview": "🤔 正在思考...\n\n\n💭 **思考**: The user wants to find a cardiologist. I need to use the appointment agent tool to help them find a cardiologist.\n🔧 **行动**: appointment_agent\n📥 **输入参数**: {'request': 'find a cardiologist'}\n📊 **观察结果**: 关于您的预约需求：\n\n💭 **思考**: I need more information to make a suitable appointment for the user.\n\n✅ **最终回答**:\n为了帮助您预约心脏科医生，我需要更多的信息，比如您所在的城市和偏好的就诊时间。您也可以通过诺亚新舟医疗小程序或者拨打我们的客服电话进行预约。\n"
+    },
+    {
+      "id": 7,
+      "name": "Find Doctors by City",
+      "category": "Doctor Search",
+      "query": "深圳有哪些医生？",
+      "success": true,
+      "quality_score": 0,
+      "quality_notes": [],
+      "response_time": 16.96098303794861,
+      "missing_keywords": [],
+      "error": null,
+      "response_preview": "🤔 正在思考...\n\n\n💭 **思考**: The current language of the user is: Chinese. I need to use a tool to help me answer the question.\n🔧 **行动**: appointment_agent\n📥 **输入参数**: {'request': '深圳的医生'}\n📊 **观察结果**: 关于您的预约需求：\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\n诺亚新舟在全国有30+家高端综合名医诊所，其中在深圳也有多个诊所，提供各科室的医生服务。您可以通过诺亚新舟医疗小程序实时查看医生余号并在线选择时间段进行预约，也可以在工作时间内拨打我们的客服电话进行预约。为了帮您更好地预约，请告诉我您需要看哪个科室的医生，您偏好的就诊时间，以及您所在的城市。\n"
+    },
+    {
+      "id": 8,
+      "name": "Emergency Case",
+      "category": "Medical",
+      "query": "我现在胸痛很厉害，呼吸困难",
+      "success": true,
+      "quality_score": 100,
+      "quality_notes": [
+        "✓ Correctly recommended calling 120",
+        "✓ Emphasized urgency",
+        "✓ Mentioned emergency department"
+      ],
+      "response_time": 13.774888038635254,
+      "missing_keywords": [],
+      "error": null,
+      "response_preview": "🤔 正在思考...\n\n\n💭 **思考**: The user is experiencing severe chest pain and difficulty breathing, which are symptoms of a potential emergency medical situation. I need to use the emergency_triage_agent tool to assess the user's condition and provide appropriate advice.\n🔧 **行动**: emergency_triage_agent\n📥 **输入参数**: {'situation': '我现在胸痛很厉害，呼吸困难'}\n📊 **观察结果**: ⚠️ 紧急情况：根据您描述的症状，这是紧急医疗情况！请立即拨打120急救电话，或前往最近的医院急诊科。在等待救援时，请保持冷静，尽量保持呼吸通畅。\n\n💭 **思考**: The tool has determined this is an emergency situation. I need t"
+    },
+    {
+      "id": 9,
+      "name": "Store Personal Info",
+      "category": "Memory",
+      "query": "我叫张三，住在北京，今年45岁",
+      "success": true,
+      "quality_score": 80,
+      "quality_notes": [
+        "✓ Acknowledged information storage"
+      ],
+      "response_time": 18.55436682701111,
+      "missing_keywords": [
+        "记录"
+      ],
+      "error": null,
+      "response_preview": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n您好，张先生。感谢您提供这些信息。如有任何健康相关的问题，我会尽力提供帮助。如果您有任何不适，请尽快告诉我，我会提供相应的建议。\n"
+    },
+    {
+      "id": 10,
+      "name": "Recall Personal Info",
+      "category": "Memory",
+      "query": "你知道我的基本信息吗？",
+      "success": false,
+      "quality_score": 66,
+      "quality_notes": [
+        "✓ Recalled: location, age"
+      ],
+      "response_time": 12.925132036209106,
+      "missing_keywords": [
+        "张三"
+      ],
+      "error": null,
+      "response_preview": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n是的，我知道您的基本信息。您叫张先生，住在北京，今年45岁。请问有什么我可以帮助您的吗？\n"
+    }
+  ]
+}

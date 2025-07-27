@@ -1098,29 +1098,138 @@ class HumansaAgenticToolManager:
 
     def recommend_product_structured(self, product_category: str, reason: str,
                                      price_range: Optional[str] = None) -> Dict[str, Any]:
-        """Recommend products using structured arguments - NO heuristic extraction."""
+        """Recommend products using structured arguments - REAL DATABASE VERSION."""
         logger.info(
             f"🛍️ recommend_product_structured called with: category={product_category}")
 
         try:
-            # Mock product recommendations
-            products = {
-                "supplements": ["Vitamin D3", "Omega-3", "Multivitamin"],
-                "equipment": ["Blood Pressure Monitor", "Thermometer", "Pulse Oximeter"],
-                "skincare": ["Medical Grade Moisturizer", "Sunscreen SPF 50", "Gentle Cleanser"]
+            # Parse price range if provided
+            min_price = None
+            max_price = None
+            if price_range:
+                # Parse ranges like "100-500" or "under 500" or "over 1000"
+                if "-" in price_range:
+                    parts = price_range.replace("元", "").split("-")
+                    try:
+                        min_price = float(parts[0])
+                        max_price = float(parts[1]) if len(parts) > 1 else None
+                    except:
+                        pass
+                elif "以下" in price_range or "under" in price_range.lower():
+                    try:
+                        max_price = float(price_range.replace("以下", "").replace("under", "").replace("元", "").strip())
+                    except:
+                        pass
+                elif "以上" in price_range or "over" in price_range.lower():
+                    try:
+                        min_price = float(price_range.replace("以上", "").replace("over", "").replace("元", "").strip())
+                    except:
+                        pass
+            
+            # Map user-friendly categories to database categories
+            category_mapping = {
+                "保健品": "营养保健",
+                "营养品": "营养保健",
+                "维生素": "营养保健",
+                "vitamin": "营养保健",
+                "vitamin d": "营养保健",
+                "supplements": "营养保健",
+                "health supplements": "营养保健",
+                "health care": "营养保健",  # Added for English agent responses
+                "医疗器械": "医疗器械",
+                "设备": "医疗器械",
+                "equipment": "医疗器械",
+                "护肤": "护肤美容",
+                "美容": "护肤美容",
+                "skincare": "护肤美容",
+                "中医": "中医养生",
+                "养生": "中医养生",
+                "母婴": "母婴健康",
+                "孕妇": "母婴健康",
+                "婴儿": "母婴健康"
             }
-
-            category_products = products.get(product_category.lower(), [
-                                             "General Health Products"])
-
-            return {
-                "success": True,
-                "category": product_category,
-                "reason": reason,
-                "price_range": price_range,
-                "recommended_products": category_products,
-                "message": f"Recommended {len(category_products)} products in {product_category} category"
-            }
+            
+            # Get the database category
+            db_category = category_mapping.get(product_category.lower(), "营养保健")  # Default to 营养保健
+            logger.info(f"🛍️ Mapped category '{product_category}' to '{db_category}'")
+            
+            # Query products from database
+            logger.info(f"🛍️ Searching products with category='{db_category}', min_price={min_price}, max_price={max_price}")
+            products = db.search_products(
+                category=db_category,
+                min_price=min_price,
+                max_price=max_price,
+                reason=reason,
+                limit=5
+            )
+            
+            logger.info(f"🛍️ Found {len(products) if products else 0} products")
+            if not products:
+                logger.info(f"🛍️ No products found. Checking if db is None: {db is None}")
+            
+            if products:
+                # Format product recommendations
+                recommendations = []
+                for product in products:
+                    rec = {
+                        "product_id": product.get("product_id"),
+                        "name": product.get("name"),
+                        "price": float(product.get("price", 0)),
+                        "original_price": float(product.get("original_price", 0)) if product.get("original_price") else None,
+                        "discount_tag": product.get("discount_tag"),
+                        "description": product.get("description"),
+                        "benefits": product.get("benefits"),
+                        "suitable_for": product.get("suitable_for")
+                    }
+                    recommendations.append(rec)
+                
+                # Also check for relevant packages
+                packages = db.search_product_packages(
+                    category=db_category,
+                    min_price=min_price,
+                    max_price=max_price,
+                    limit=3
+                )
+                
+                package_recs = []
+                if packages:
+                    for pkg in packages:
+                        pkg_rec = {
+                            "package_id": pkg.get("package_id"),
+                            "name": pkg.get("name"),
+                            "price": float(pkg.get("price", 0)),
+                            "original_price": float(pkg.get("original_price", 0)) if pkg.get("original_price") else None,
+                            "discount_percentage": pkg.get("discount_percentage"),
+                            "description": pkg.get("description"),
+                            "includes": pkg.get("includes")
+                        }
+                        package_recs.append(pkg_rec)
+                
+                return {
+                    "success": True,
+                    "category": product_category,
+                    "reason": reason,
+                    "price_range": price_range,
+                    "recommended_products": recommendations,
+                    "recommended_packages": package_recs,
+                    "total_products": len(recommendations),
+                    "total_packages": len(package_recs),
+                    "message": f"为您推荐了 {len(recommendations)} 个产品" + (f"和 {len(package_recs)} 个套餐" if package_recs else ""),
+                    "shop_link": "健康商城：#小程序://诺亚新舟医疗/t5ZpOWu0UyRtEFl"
+                }
+            else:
+                # No products found, provide general recommendation
+                return {
+                    "success": True,
+                    "category": product_category,
+                    "reason": reason,
+                    "price_range": price_range,
+                    "recommended_products": [],
+                    "recommended_packages": [],
+                    "message": f"暂时没有找到符合条件的{product_category}产品，建议您访问我们的健康商城查看更多选择",
+                    "shop_link": "健康商城：#小程序://诺亚新舟医疗/t5ZpOWu0UyRtEFl"
+                }
+                
         except Exception as e:
             logger.error(f"❌ recommend_product_structured failed: {e}")
             return {"error": str(e), "success": False}

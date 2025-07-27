@@ -1,0 +1,405 @@
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python3
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:🔄 Attempting to import document converter endpoints...
+INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
+INFO:chat.utils.document_converter:❌ docx2pdf not available
+INFO:chat.utils.document_converter:❌ pypandoc not available
+INFO:chat.utils.document_converter:❌ python-docx not available
+INFO:chat.utils.document_converter:❌ openpyxl not available
+INFO:chat.utils.document_converter:❌ reportlab not available
+INFO:__main__:✅ Successfully imported document converter blueprint
+INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:🔄 Registering Humansa endpoints...
+INFO:__main__:✅ Mem0 API endpoints registered
+INFO:__main__:✅ Humansa v2 blueprint registered
+INFO:__main__:✅ Humansa endpoints registered successfully
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:6001
+INFO:__main__:
+INFO:__main__:📋 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
+INFO:__main__:
+INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
+INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
+INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
+INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
+INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
+INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
+INFO:__main__:
+INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
+INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
+INFO:__main__:   - /v2/humansa/memory/search - Search user memories
+INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
+INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
+INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
+INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
+INFO:__main__:   - /o3-demo - O3 reasoning demo
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_prod' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
+INFO:__main__:✅ Mem0 memory layer initialized for Humansa
+INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
+INFO:__main__:   Environment: production
+INFO:__main__:✅ Database pool created successfully
+INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 5 agent tools
+INFO:humansa.v2.api:Humansa v2 system initialized successfully
+INFO:__main__:✅ Humansa v2 system initialized
+[2025-07-26 10:01:27 -0700] [40416] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:6001 (CTRL + C to quit)
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/context_manager.py:148: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  conversation_id = f"conv_{datetime.utcnow().timestamp()}"
+<string>:6: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 你是谁？...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: 123
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_prod_123
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 123, 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 你是谁？...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+ * Serving Quart app 'main'
+ * Debug mode: True
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:6001 (CTRL + C to quit)
+> Running step 45f64835-d2f2-4806-a3e7-25b9af3d03df. Step input: 你是谁？
+[1;3;38;5;200mThought: 这个问题是询问我是什么，这不需要使用任何工具。
+Answer: 我是一个人工智能助手，设计用来帮助回答各种问题，提供信息和帮助。我可以帮助回答医疗问题，提供药物信息，应急处理建议，以及预约服务等。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 5.87048 seconds
+      |_CBEventType.LLM -> 5.867636 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 1 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py:209: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "timestamp": datetime.utcnow().isoformat()
+WARNING:asyncio:Executing <Task pending name='Task-15' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 5.872 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 0
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user 123: {'results': []}
+[2025-07-26 10:01:42 -0700] [40416] [INFO] 127.0.0.1:56244 POST /v2/humansa/chat 1.1 200 812 7181566
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 我现在胸痛很厉害，呼吸困难...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: 456
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_prod_456
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': [{'id': '6bac5e19-5c94-4eb5-9c07-e8b25c538fe4', 'memory': '现在胸痛很厉害，呼吸困难', 'hash': '01e2a695b458f037ae75723d89ba1b7e', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T16:55:14.592478', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 8.757889986038208}, 'created_at': '2025-07-26T09:55:18.941346-07:00', 'updated_at': None, 'user_id': 'humansa_prod_456'}]}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 456, 'memory_count': 1, 'recent_memories': [{'id': '6bac5e19-5c94-4eb5-9c07-e8b25c538fe4', 'memory': '现在胸痛很厉害，呼吸困难', 'hash': '01e2a695b458f037ae75723d89ba1b7e', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T16:55:14.592478', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 8.757889986038208}, 'created_at': '2025-07-26T09:55:18.941346-07:00', 'updated_at': None, 'user_id': 'humansa_prod_456'}]}
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 现在胸痛很厉害，呼吸困难
+INFO:humansa.v2.orchestrator_agent:✅ Loaded 1 memory items
+INFO:humansa.v2.orchestrator_agent:📝 Enhanced query with context
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 
+用户历史记忆:
+- 现在胸痛很厉害，呼吸困难
+
+当前问题: 我现在胸痛很厉害，呼吸困难...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_agent:🚨 Emergency Triage Agent called with situation: 胸痛很厉害，呼吸困难
+WARNING:humansa.v2.orchestrator_agent:⚠️ EMERGENCY DETECTED: 胸痛很厉害，呼吸困难
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+> Running step f44b0b42-4e5f-4f4d-af3b-0116abb50ef3. Step input: 
+用户历史记忆:
+- 现在胸痛很厉害，呼吸困难
+
+当前问题: 我现在胸痛很厉害，呼吸困难
+[1;3;38;5;200mThought: 这是一个紧急的医疗情况。用户可能需要立即的医疗帮助。我应该使用emergency_triage_agent工具来评估情况并提供急救建议。
+Action: emergency_triage_agent
+Action Input: {'situation': '胸痛很厉害，呼吸困难'}
+[0m[1;3;34mObservation: ⚠️ 紧急情况：根据您描述的 '胸痛很厉害，呼吸困难'，这是紧急医疗情况！请立即拨打120急救电话，或前往最近的医院急诊科。在等待救援时，请保持冷静。
+[0m> Running step 9de896e5-967f-47f7-901d-4baf08084c49. Step input: None
+[1;3;38;5;200mThought: 我可以在不使用任何其他工具的情况下回答这个问题。我将使用用户的语言来回答。
+Answer: ⚠️ 这是一个紧急医疗情况！根据你的症状 '胸痛很厉害，呼吸困难'，请你立刻拨打120或者去最近的急诊室。在等待救援的时候，请尽量保持冷静。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 10.492241 seconds
+      |_CBEventType.LLM -> 3.724092 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.000233 seconds
+      |_CBEventType.LLM -> 6.759778 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 3 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+WARNING:asyncio:Executing <Task pending name='Task-19' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 10.494 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 1
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:{'id': '0', 'text': '现在胸痛很厉害，呼吸困难', 'event': 'NONE'}
+INFO:mem0.memory.main:NOOP for Memory.
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user 456: {'results': []}
+[2025-07-26 10:01:59 -0700] [40416] [INFO] 127.0.0.1:56244 POST /v2/humansa/chat 1.1 200 801 17294048
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 0
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:{'id': '0', 'text': '对青霉素过敏', 'event': 'ADD'}
+INFO:mem0.vector_stores.pgvector:Inserting 1 vectors into collection mem0_humansa_prod_memories
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user 483316: {'results': [{'id': '929021c8-77bd-4eaf-bb7e-3d9cd9468fe8', 'memory': '对青霉素过敏', 'event': 'ADD'}]}
+[2025-07-26 10:02:04 -0700] [40416] [INFO] 127.0.0.1:56244 POST /v2/humansa/memory/add 1.1 200 44 4221240
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 我可以吃什么抗生素？...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: 10001
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_prod_10001
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 10001, 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 我可以吃什么抗生素？...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_agent:💊 Medication Agent called with query: 什么抗生素可以用于胸痛和呼吸困难
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+> Running step b8270079-0aee-47d8-ba0d-1f86e2e09bb2. Step input: 我可以吃什么抗生素？
+[1;3;38;5;200mThought: The user is asking for advice on what antibiotics to take. This seems to be a task for the medication_agent tool.
+Action: medication_agent
+Action Input: {'query': '什么抗生素可以用于胸痛和呼吸困难'}
+[0m[1;3;34mObservation: 关于您的用药咨询 '什么抗生素可以用于胸痛和呼吸困难'：用药需要在医生指导下进行。请携带您的用药记录到诺亚新舟诊所，我们的专业医生会为您提供个性化的用药指导。
+[0m> Running step 9a73d8df-f8d7-4714-b9dd-7a7e8bcab74f. Step input: None
+[1;3;38;5;200mThought: I can answer without using any more tools. I'll use the user's language to answer
+Answer: 你的症状可能表明一个紧急医疗情况，你应该立刻寻求医疗援助。对于你的用药问题，抗生素通常用于治疗由细菌引起的感染。然而，胸痛和呼吸困难可能由许多原因引起，包括一些可能严重的病状如心脏病。你应该在医生指导下使用任何药物，包括抗生素。请立即寻找医疗帮助，并向医生描述你的症状。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 9.153227 seconds
+      |_CBEventType.LLM -> 2.246265 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.000133 seconds
+      |_CBEventType.LLM -> 6.903351 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 5 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+WARNING:asyncio:Executing <Task pending name='Task-27' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 9.155 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 0
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user 10001: {'results': []}
+[2025-07-26 10:02:15 -0700] [40416] [INFO] 127.0.0.1:56244 POST /v2/humansa/chat 1.1 200 1228 10042474
+[2025-07-26 10:02:15 -0700] [40416] [INFO] 127.0.0.1:56244 GET /v2/humansa/memory/status 1.1 200 143 813
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 我有糖尿病，想预约内分泌科医生，请推荐合适的检查项目...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: 789
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_prod_789
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': [{'id': '3f6465d6-7d82-4ab0-ab6e-65b8a7657222', 'memory': '有糖尿病', 'hash': 'c8aa31920b67d73d5efeb73d198f3c1d', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T16:55:44.484679', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 11.342980146408081}, 'created_at': '2025-07-26T09:55:50.826030-07:00', 'updated_at': None, 'user_id': 'humansa_prod_789'}, {'id': '4cccb57d-591e-4c8e-b299-7117390b5f42', 'memory': '想预约内分泌科医生', 'hash': 'bde13b3786d71518c3e591fd9cb97b23', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T16:55:44.484679', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 11.342980146408081}, 'created_at': '2025-07-26T09:55:50.839472-07:00', 'updated_at': None, 'user_id': 'humansa_prod_789'}]}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 789, 'memory_count': 2, 'recent_memories': [{'id': '3f6465d6-7d82-4ab0-ab6e-65b8a7657222', 'memory': '有糖尿病', 'hash': 'c8aa31920b67d73d5efeb73d198f3c1d', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T16:55:44.484679', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 11.342980146408081}, 'created_at': '2025-07-26T09:55:50.826030-07:00', 'updated_at': None, 'user_id': 'humansa_prod_789'}, {'id': '4cccb57d-591e-4c8e-b299-7117390b5f42', 'memory': '想预约内分泌科医生', 'hash': 'bde13b3786d71518c3e591fd9cb97b23', 'metadata': {'source': 'humansa', 'timestamp': '2025-07-26T16:55:44.484679', 'orchestrator': 'v2_pattern2', 'conversation_id': None, 'processing_time': 11.342980146408081}, 'created_at': '2025-07-26T09:55:50.839472-07:00', 'updated_at': None, 'user_id': 'humansa_prod_789'}]}
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 有糖尿病
+INFO:humansa.v2.orchestrator_agent:  📝 Memory: 想预约内分泌科医生
+INFO:humansa.v2.orchestrator_agent:✅ Loaded 2 memory items
+INFO:humansa.v2.orchestrator_agent:📝 Enhanced query with context
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 
+用户历史记忆:
+- 有糖尿病
+- 想预约内分泌科医生
+
+当前问题: 我有糖尿病，想预约内分泌科医生，请推荐合适的检查项目...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_agent:📅 Appointment Agent called with request: 预约内分泌科医生
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_agent:🏥 General Medical Agent called with: 糖尿病患者需要做哪些检查
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+> Running step bce12f04-3f7e-48f9-827e-26901947fbda. Step input: 
+用户历史记忆:
+- 有糖尿病
+- 想预约内分泌科医生
+
+当前问题: 我有糖尿病，想预约内分泌科医生，请推荐合适的检查项目
+[1;3;38;5;200mThought: The current language of the user is: Chinese. I need to use a tool to help me answer the question.
+Action: appointment_agent
+Action Input: {'request': '预约内分泌科医生'}
+[0m[1;3;34mObservation: 关于您的预约需求 '预约内分泌科医生'：诺亚新舟在全国有30+家高端综合名医诊所。您可以通过诺亚新舟医疗小程序进行实时预约，或拨打客服电话咨询最近的诊所。
+[0m> Running step 0000b80d-85a7-41b5-87b3-fead07beafe0. Step input: None
+[1;3;38;5;200mThought: The current language of the user is: Chinese. I need to use a tool to help me answer the question.
+Action: general_medical_agent
+Action Input: {'query': '糖尿病患者需要做哪些检查'}
+[0m[1;3;34mObservation: 关于您的健康咨询 '糖尿病患者需要做哪些检查'：建议保持良好的生活习惯，均衡饮食，适量运动。如有具体症状，请到我们的诺亚新舟诊所进行专业咨询。
+[0m> Running step 359cc470-c0fc-4a1a-ae21-975e4f973d71. Step input: None
+[1;3;38;5;200mThought: I can answer without using any more tools. I'll use the user's language to answer
+Answer: 您可以预约内分泌科医生进行专业咨询，关于糖尿病的检查项目，一般包括但不限于：血糖监测、糖化血红蛋白测定、尿液检查、血脂检查、眼底检查等。请注意，这只是一般性建议，具体的医疗建议请在医生的指导下进行。同时，保持良好的生活习惯，均衡饮食，适量运动也对糖尿病的控制非常重要。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 14.082522 seconds
+      |_CBEventType.LLM -> 1.818812 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.000144 seconds
+      |_CBEventType.LLM -> 2.992011 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.000478 seconds
+      |_CBEventType.LLM -> 9.262988 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 8 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 6:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 7:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 8:
+WARNING:asyncio:Executing <Task pending name='Task-35' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 14.086 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 2
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:{'id': '0', 'text': '有糖尿病', 'event': 'NONE'}
+INFO:mem0.memory.main:NOOP for Memory.
+INFO:mem0.memory.main:{'id': '1', 'text': '想预约内分泌科医生', 'event': 'NONE'}
+INFO:mem0.memory.main:NOOP for Memory.
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user 789: {'results': []}
+[2025-07-26 10:02:34 -0700] [40416] [INFO] 127.0.0.1:56244 POST /v2/humansa/chat 1.1 200 1220 19493549
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 你好...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: 999
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_prod_999
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 999, 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 你好...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+> Running step c337c146-0ed6-435f-8c22-8009c4a44f1b. Step input: 你好
+[1;3;38;5;200mThought: (Implicit) I can answer without any more tools!
+Answer: 你好！请问有什么我可以帮助你的吗？
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 1.113501 seconds
+      |_CBEventType.LLM -> 1.111864 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 9 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 6:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 7:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 8:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 9:
+WARNING:asyncio:Executing <Task pending name='Task-39' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 1.115 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 0
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user 999: {'results': []}
+[2025-07-26 10:02:36 -0700] [40416] [INFO] 127.0.0.1:56244 POST /v2/humansa/chat 1.1 200 518 2075170

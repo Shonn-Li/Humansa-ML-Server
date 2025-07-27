@@ -1,8 +1,22 @@
-# Humansa V2 Documentation
+# Humansa AI Medical Assistant Documentation
 
 ## Overview
 
-Humansa V2 is a multi-agent medical AI system with integrated memory capabilities powered by Mem0. This system provides personalized, context-aware medical consultations through intelligent agent orchestration.
+Humansa is a multi-agent medical AI system with integrated memory capabilities powered by Mem0. The system provides personalized, context-aware medical consultations through intelligent agent orchestration.
+
+## Architecture
+
+### V1 (Enhanced with Multi-Agent Orchestrator)
+- **Endpoint**: `/v1-humansa/chat/completions`
+- **Features**: Tool-calling interface with multi-agent analysis
+- **Agent**: HumansaAgent with integrated multi-agent orchestrator
+- **Memory**: Optional Mem0 integration
+
+### V2 (LlamaIndex Orchestrator Pattern)
+- **Endpoint**: `/v2/humansa/chat`
+- **Features**: Pattern 2 orchestrator with sub-agents as tools
+- **Agents**: 5 specialized medical agents coordinated by orchestrator
+- **Memory**: Full Mem0 integration with context persistence
 
 ## Core Documentation
 
@@ -36,29 +50,27 @@ Detailed orchestrator pattern analysis:
 
 ## Quick Start
 
-### 1. Start the System
+### Test Environment
 ```bash
-# Start ML server (includes Humansa V2)
-python -m src.main
-
-# Or with test environment
+# V1 Testing (20 test cases)
 ./run_humansa_test_environment.sh
+
+# V2 Testing (30 test cases including Mem0)
+./run_humansa_test_environment_v2.sh
 ```
 
-### 2. Test Memory Integration
+### Manual Testing
 ```bash
-# Run complete test suite with environment
-./run_humansa_test_with_mem0.sh
+# Test V1 endpoint
+curl -X POST http://localhost:6001/v1-humansa/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "messages": [{"role": "user", "content": "你是谁？"}],
+    "stream": false
+  }'
 
-# Or run tests individually
-python test_mem0_humansa_integration.py
-python test_mem0_v2_integration.py
-```
-
-### 3. Use the API
-```bash
-# Chat with memory context
-curl -X POST http://localhost:5001/v2/humansa/chat \
+# Test V2 endpoint with memory
+curl -X POST http://localhost:6001/v2/humansa/chat \
   -H "Content-Type: application/json" \
   -d '{
     "user_id": 123,
@@ -125,18 +137,35 @@ This enables future cross-service memory sharing while maintaining isolation.
 ### Test Results
 - `test-results/` - Historical test execution results
 
-## Contributing
+## Testing
 
-When updating Humansa V2:
-1. Update the implementation in `/src/humansa/v2/`
-2. Document changes in `HUMANSA_V2_IMPLEMENTATION.md`
-3. Add/update tests and document in `HUMANSA_V2_TESTING.md`
-4. Keep this README focused on the two core documents
+### Identity Test Cases (Core 20)
+1. Basic identity queries in Chinese/English
+2. Company background and services
+3. Emergency response protocols
+4. Appointment booking flows
+5. Medical consultation capabilities
+6. And more...
 
-## Version
+### Mem0 Test Cases (Additional 10)
+1. Memory persistence across sessions
+2. Context recall in responses
+3. Medical history tracking
+4. Preference learning
+5. Cross-agent memory sharing
+6. And more...
 
-**Current**: V2 with Mem0 Integration
-- Multi-agent medical consultation
-- Persistent memory with Mem0
-- Context-aware responses
-- Comprehensive test coverage
+## Environment Variables
+
+Required:
+- `OPENAI_API_KEY`
+- `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`
+
+Optional:
+- `MEM0_API_KEY` (for cloud Mem0)
+- `ENVIRONMENT` (test/production)
+
+## Version History
+
+- **V1**: Original tool-calling agent with multi-agent enhancement
+- **V2**: LlamaIndex orchestrator pattern with full Mem0 integration

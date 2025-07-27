@@ -1,0 +1,685 @@
+{
+  "timestamp": "20250726_111708",
+  "total_tests": 30,
+  "passed": 0,
+  "failed": 30,
+  "success_rate": 0.0,
+  "enhanced_logging": true,
+  "results": [
+    {
+      "test_id": 1,
+      "test_name": "Basic Identity Query",
+      "passed": false,
+      "response_time": 0.003810882568359375,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "诺亚新舟",
+        "小诺",
+        "健康医疗助理",
+        "AI健康管家"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 2,
+      "test_name": "Company Background",
+      "passed": false,
+      "response_time": 0.00750279426574707,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "以爱行舟",
+        "亲近相守",
+        "500多位",
+        "三甲主任级",
+        "名医专家",
+        "30+家",
+        "高端综合名医诊所"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 3,
+      "test_name": "Service Capabilities",
+      "passed": false,
+      "response_time": 0.0036139488220214844,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "健康咨询",
+        "实时预约",
+        "检查项目",
+        "诊所导航",
+        "体检报告"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 4,
+      "test_name": "Brand Slogan",
+      "passed": false,
+      "response_time": 0.0046041011810302734,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "以爱行舟",
+        "亲近相守"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 5,
+      "test_name": "English Identity Query",
+      "passed": false,
+      "response_time": 0.003772735595703125,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "Humansa",
+        "health",
+        "assistant",
+        "medical"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 6,
+      "test_name": "Service Scope",
+      "passed": false,
+      "response_time": 0.003117799758911133,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "500",
+        "三甲",
+        "30+",
+        "诊所"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 7,
+      "test_name": "Health Mall Reference",
+      "passed": false,
+      "response_time": 0.001973867416381836,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "健康商城",
+        "诺亚新舟医疗",
+        "小程序"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 8,
+      "test_name": "Article Reference",
+      "passed": false,
+      "response_time": 0.004360198974609375,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "mp.weixin.qq.com",
+        "最新文章"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 9,
+      "test_name": "Emergency Response",
+      "passed": false,
+      "response_time": 0.005987882614135742,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "120",
+        "立即",
+        "急救"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 10,
+      "test_name": "Self-Owned Clinics Only",
+      "passed": false,
+      "response_time": 0.00518488883972168,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "诊所",
+        "诺亚新舟",
+        "预约"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 11,
+      "test_name": "Greeting - Hello",
+      "passed": false,
+      "response_time": 0.008706092834472656,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "你好",
+        "诺亚新舟",
+        "小诺",
+        "健康"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 12,
+      "test_name": "Greeting - Hi",
+      "passed": false,
+      "response_time": 0.0036079883575439453,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "你好",
+        "诺亚新舟",
+        "小诺",
+        "健康"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 13,
+      "test_name": "Booking Request",
+      "passed": false,
+      "response_time": 0.0027577877044677734,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "预约",
+        "诊所",
+        "时间",
+        "医生"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 14,
+      "test_name": "Health Consultation",
+      "passed": false,
+      "response_time": 0.0031828880310058594,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "睡眠",
+        "建议",
+        "医生",
+        "诊所"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 15,
+      "test_name": "Check-up Query",
+      "passed": false,
+      "response_time": 0.002856016159057617,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "体检",
+        "检查",
+        "套餐",
+        "预约"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 16,
+      "test_name": "Doctor Specialties",
+      "passed": false,
+      "response_time": 0.003017902374267578,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "内科",
+        "外科",
+        "儿科",
+        "专科"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 17,
+      "test_name": "Location Query",
+      "passed": false,
+      "response_time": 0.004241943359375,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "诊所",
+        "地址",
+        "导航",
+        "位置"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 18,
+      "test_name": "Insurance Query",
+      "passed": false,
+      "response_time": 0.005095958709716797,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "医保",
+        "保险",
+        "支付",
+        "费用"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 19,
+      "test_name": "Report Interpretation",
+      "passed": false,
+      "response_time": 0.003226757049560547,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "报告",
+        "解读",
+        "医生",
+        "咨询"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 20,
+      "test_name": "Follow-up Care",
+      "passed": false,
+      "response_time": 0.006457090377807617,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "术后",
+        "恢复",
+        "注意事项",
+        "复查"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 21,
+      "test_name": "Memory Persistence - Allergy",
+      "passed": false,
+      "response_time": 0.0039980411529541016,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "花生",
+        "过敏"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 22,
+      "test_name": "Memory Persistence - Medical History",
+      "passed": false,
+      "response_time": 0.004837751388549805,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "高血压",
+        "降压药"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 23,
+      "test_name": "Preference Learning - Appointment",
+      "passed": false,
+      "response_time": 0.003364086151123047,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "周末",
+        "上午"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 24,
+      "test_name": "Cross-Session Continuity",
+      "passed": false,
+      "response_time": 0.005299091339111328,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "膝盖",
+        "疼痛",
+        "之前",
+        "上次"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 25,
+      "test_name": "Family Member Tracking",
+      "passed": false,
+      "response_time": 0.004062175750732422,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "女儿",
+        "5岁",
+        "儿童"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 26,
+      "test_name": "Medication Tracking",
+      "passed": false,
+      "response_time": 0.006902217864990234,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "阿司匹林",
+        "二甲双胍",
+        "药物"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 27,
+      "test_name": "Doctor Preference",
+      "passed": false,
+      "response_time": 0.0039577484130859375,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "李医生",
+        "偏好"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 28,
+      "test_name": "Health Goal Tracking",
+      "passed": false,
+      "response_time": 0.004180908203125,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "减重",
+        "10公斤",
+        "目标"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 29,
+      "test_name": "Insurance Information",
+      "passed": false,
+      "response_time": 0.002595663070678711,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "平安",
+        "高端医疗险",
+        "保险"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 30,
+      "test_name": "Complex Context Recall",
+      "passed": false,
+      "response_time": 0.006764888763427734,
+      "response": "Error: 'async for' requires an object with __aiter__ method, got coroutine",
+      "found_keywords": [],
+      "missing_keywords": [
+        "糖尿病",
+        "心脏",
+        "家族",
+        "预防"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    }
+  ]
+}

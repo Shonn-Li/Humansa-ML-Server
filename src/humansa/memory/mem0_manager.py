@@ -40,7 +40,7 @@ class Mem0Manager:
         # Azure OpenAI configuration
         azure_key = os.getenv("AZURE_OPENAI_API_KEY")
         azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
-        azure_deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT_GPT4", "gpt-4")
+        azure_deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT_GPT4", "gpt-4.1")
         azure_embedding = os.getenv("AZURE_OPENAI_DEPLOYMENT_EMBEDDING", "text-embedding-ada-002")
         
         # Use OpenAI if Azure not configured
@@ -186,7 +186,9 @@ class Mem0Manager:
     async def add_conversation(
         self,
         user_id: int,
-        messages: List[Dict[str, str]],
+        query: str = None,
+        response: str = None,
+        messages: List[Dict[str, str]] = None,
         conversation_id: Optional[str] = None,
         metadata: Optional[Dict[str, Any]] = None
     ) -> bool:
@@ -207,23 +209,36 @@ class Mem0Manager:
                 "timestamp": datetime.utcnow().isoformat()
             })
             
+            # Format the conversation for Mem0
+            if query and response:
+                # Single Q&A format
+                memory_text = f"User: {query}\nAssistant: {response}"
+            elif messages:
+                # Full conversation format
+                memory_text = "\n".join([f"{msg['role'].capitalize()}: {msg['content']}" for msg in messages])
+            else:
+                logger.warning("No conversation content provided")
+                return False
+            
             # Mem0 operations are synchronous, so we run in thread
             import asyncio
             loop = asyncio.get_event_loop()
-            await loop.run_in_executor(
+            result = await loop.run_in_executor(
                 None,
                 lambda: self.memory.add(
-                    messages,
+                    memory_text,
                     user_id=memory_user_id,
                     metadata=metadata
                 )
             )
             
-            logger.debug(f"Added conversation to memory for user {user_id}")
+            logger.info(f"✅ Added conversation to memory for user {user_id}: {result}")
             return True
             
         except Exception as e:
             logger.error(f"Failed to add conversation to memory: {e}")
+            import traceback
+            traceback.print_exc()
             return False
     
     async def search_memories(
@@ -263,6 +278,7 @@ class Mem0Manager:
             
         try:
             memory_user_id = self.get_memory_user_id(user_id)
+            logger.info(f"🔍 Getting context for memory_user_id: {memory_user_id}")
             
             import asyncio
             loop = asyncio.get_event_loop()
@@ -270,6 +286,14 @@ class Mem0Manager:
                 None,
                 lambda: self.memory.get_all(user_id=memory_user_id)
             )
+            
+            logger.info(f"📚 Retrieved memories: {all_memories}")
+            
+            # Extract memories from results format
+            if isinstance(all_memories, dict) and 'results' in all_memories:
+                all_memories = all_memories['results']
+            elif not isinstance(all_memories, list):
+                all_memories = []
             
             return {
                 "user_id": user_id,
@@ -279,6 +303,8 @@ class Mem0Manager:
             
         except Exception as e:
             logger.error(f"Failed to get user context: {e}")
+            import traceback
+            traceback.print_exc()
             return {"user_id": user_id, "memories": []}
 
 

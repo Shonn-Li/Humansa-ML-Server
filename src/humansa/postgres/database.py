@@ -18,12 +18,18 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 # Database configuration - same pattern as main chat system
+# Check if we're in test environment and use appropriate database
+is_test = os.getenv("ENVIRONMENT") == "test"
+
+# For test environment with Docker, use explicit localhost
+test_host = "127.0.0.1" if is_test else "localhost"
+
 DB_CONFIG = {
-    "host": os.getenv("DB_HOST", "localhost"),
-    "port": int(os.getenv("DB_PORT", 5432)),
-    "user": os.getenv("DB_USER", "youwo"),
-    "password": os.getenv("DB_PASSWORD", "youwo123"),
-    "dbname": os.getenv("DB_NAME", "youwoai"),
+    "host": os.getenv("HUMANSA_DB_HOST", os.getenv("DB_HOST", test_host)),
+    "port": int(os.getenv("HUMANSA_DB_PORT", os.getenv("DB_PORT", 5454 if is_test else 5432))),
+    "user": os.getenv("HUMANSA_DB_USER", os.getenv("DB_USER", "postgres" if is_test else "youwo")),
+    "password": os.getenv("HUMANSA_DB_PASSWORD", os.getenv("DB_PASSWORD", "12931" if is_test else "youwo123")),
+    "dbname": os.getenv("HUMANSA_DB_NAME", os.getenv("DB_NAME", "youwoai_test" if is_test else "youwoai")),
 }
 
 
@@ -61,7 +67,7 @@ class HumansaDatabase:
                                d.expertise, d.bio, d.registration_fee,
                                c.name as clinic_name, c.address, c.phone
                         FROM humansa_doctor d
-                        LEFT JOIN humansa_clinics c ON d.clinic_code = c.clinic_code
+                        LEFT JOIN humansa_clinic c ON d.clinic_code = c.clinic_code
                         WHERE d.name = %s
                     """
                     cursor.execute(exact_query, (doctor_name,))
@@ -77,7 +83,7 @@ class HumansaDatabase:
                                d.expertise, d.bio, d.registration_fee,
                                c.name as clinic_name, c.address, c.phone
                         FROM humansa_doctor d
-                        LEFT JOIN humansa_clinics c ON d.clinic_code = c.clinic_code
+                        LEFT JOIN humansa_clinic c ON d.clinic_code = c.clinic_code
                         WHERE d.name ILIKE %s
                         ORDER BY d.name
                         LIMIT 1
@@ -128,7 +134,7 @@ class HumansaDatabase:
                                    d.name as doctor_name, c.name as clinic_name
                             FROM humansa_schedule s
                             LEFT JOIN humansa_doctor d ON s.doctor_code = d.doctor_code
-                            LEFT JOIN humansa_clinics c ON s.clinic_code = c.clinic_code
+                            LEFT JOIN humansa_clinic c ON s.clinic_code = c.clinic_code
                             WHERE d.name = %s AND s.shift_date = %s AND s.remaining_slots > 0
                             ORDER BY s.start_time
                         """
@@ -141,7 +147,7 @@ class HumansaDatabase:
                                    d.name as doctor_name, c.name as clinic_name
                             FROM humansa_schedule s
                             LEFT JOIN humansa_doctor d ON s.doctor_code = d.doctor_code
-                            LEFT JOIN humansa_clinics c ON s.clinic_code = c.clinic_code
+                            LEFT JOIN humansa_clinic c ON s.clinic_code = c.clinic_code
                             WHERE d.name = %s AND s.shift_date >= CURRENT_DATE AND s.remaining_slots > 0
                             ORDER BY s.shift_date, s.start_time
                         """
@@ -162,7 +168,7 @@ class HumansaDatabase:
                         SELECT ms.clinic_code, ms.service_name, 
                                ms.price, ms.description, c.name as clinic_name
                         FROM humansa_medical_service ms
-                        LEFT JOIN humansa_clinics c ON ms.clinic_code = c.clinic_code
+                        LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
                         WHERE c.name = %s
                         ORDER BY ms.service_name
                     """
@@ -183,7 +189,7 @@ class HumansaDatabase:
                             SELECT ms.clinic_code, ms.service_name, 
                                    ms.price, ms.description, c.name as clinic_name
                             FROM humansa_medical_service ms
-                            LEFT JOIN humansa_clinics c ON ms.clinic_code = c.clinic_code
+                            LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
                             WHERE ms.service_name ILIKE %s
                             ORDER BY c.name, ms.service_name
                         """
@@ -193,7 +199,7 @@ class HumansaDatabase:
                             SELECT ms.clinic_code, ms.service_name, 
                                    ms.price, ms.description, c.name as clinic_name
                             FROM humansa_medical_service ms
-                            LEFT JOIN humansa_clinics c ON ms.clinic_code = c.clinic_code
+                            LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
                             ORDER BY c.name, ms.service_name
                         """
                         cursor.execute(query)
@@ -211,7 +217,7 @@ class HumansaDatabase:
                 with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                     query = """
                         SELECT clinic_code, name, address, phone
-                        FROM humansa_clinics
+                        FROM humansa_clinic
                         ORDER BY name
                     """
                     cursor.execute(query)
@@ -241,7 +247,7 @@ class HumansaDatabase:
                     # First try exact match
                     exact_query = """
                         SELECT clinic_code, name, address, phone
-                        FROM humansa_clinics
+                        FROM humansa_clinic
                         WHERE name = %s
                     """
                     cursor.execute(exact_query, (clinic_name,))
@@ -254,7 +260,7 @@ class HumansaDatabase:
                     # If no exact match, try fuzzy matching with ILIKE
                     fuzzy_query = """
                         SELECT clinic_code, name, address, phone
-                        FROM humansa_clinics
+                        FROM humansa_clinic
                         WHERE name ILIKE %s
                         ORDER BY name
                         LIMIT 1
@@ -303,7 +309,7 @@ class HumansaDatabase:
                                    d.expertise, d.bio, d.registration_fee,
                                    c.name as clinic_name, c.address, c.phone
                             FROM humansa_doctor d
-                            LEFT JOIN humansa_clinics c ON d.clinic_code = c.clinic_code
+                            LEFT JOIN humansa_clinic c ON d.clinic_code = c.clinic_code
                             WHERE {' AND '.join(conditions)}
                             ORDER BY d.name
                             LIMIT %s
@@ -319,7 +325,7 @@ class HumansaDatabase:
                                    d.expertise, d.bio, d.registration_fee,
                                    c.name as clinic_name, c.address, c.phone
                             FROM humansa_doctor d
-                            LEFT JOIN humansa_clinics c ON d.clinic_code = c.clinic_code
+                            LEFT JOIN humansa_clinic c ON d.clinic_code = c.clinic_code
                             ORDER BY d.name
                             LIMIT %s
                         """
@@ -470,7 +476,7 @@ class HumansaDatabase:
                         SELECT DISTINCT d.doctor_code, d.name, d.title, d.expertise, 
                                c.name as clinic_name, COUNT(s.shift_date) as available_slots
                         FROM humansa_doctor d
-                        LEFT JOIN humansa_clinics c ON d.clinic_code = c.clinic_code
+                        LEFT JOIN humansa_clinic c ON d.clinic_code = c.clinic_code
                         LEFT JOIN humansa_schedule s ON d.doctor_code = s.doctor_code
                         WHERE s.shift_date BETWEEN %s AND %s
                         AND s.remaining_slots > 0
@@ -515,7 +521,7 @@ class HumansaDatabase:
                         SELECT DISTINCT c.clinic_code, c.name, c.address, c.phone,
                                COUNT(DISTINCT d.doctor_code) as doctor_count,
                                STRING_AGG(DISTINCT d.expertise, ', ') as specialties
-                        FROM humansa_clinics c
+                        FROM humansa_clinic c
                         LEFT JOIN humansa_doctor d ON c.clinic_code = d.clinic_code
                         WHERE {where_clause}
                         GROUP BY c.clinic_code, c.name, c.address, c.phone
@@ -544,7 +550,7 @@ class HumansaDatabase:
                         # No matches, return all clinics
                         fallback_query = """
                             SELECT clinic_code, name, address, phone
-                            FROM humansa_clinics
+                            FROM humansa_clinic
                             ORDER BY name
                             LIMIT %s
                         """
@@ -597,7 +603,7 @@ class HumansaDatabase:
                         SELECT ms.clinic_code, ms.service_name, ms.price, 
                                ms.description, c.name as clinic_name
                         FROM humansa_medical_service ms
-                        LEFT JOIN humansa_clinics c ON ms.clinic_code = c.clinic_code
+                        LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
                         WHERE {where_clause}
                         ORDER BY ms.service_name
                         LIMIT %s
@@ -626,7 +632,7 @@ class HumansaDatabase:
                             SELECT ms.clinic_code, ms.service_name, ms.price, 
                                    ms.description, c.name as clinic_name
                             FROM humansa_medical_service ms
-                            LEFT JOIN humansa_clinics c ON ms.clinic_code = c.clinic_code
+                            LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
                             ORDER BY ms.service_name
                             LIMIT %s
                         """
@@ -674,7 +680,7 @@ class HumansaDatabase:
                         SELECT ms.clinic_code, ms.service_name, ms.price, 
                                ms.description, c.name as clinic_name, c.address
                         FROM humansa_medical_service ms
-                        LEFT JOIN humansa_clinics c ON ms.clinic_code = c.clinic_code
+                        LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
                         WHERE {where_clause}
                         ORDER BY ms.price
                         LIMIT %s
@@ -724,6 +730,96 @@ class HumansaDatabase:
                 "error": str(e),
                 "search_method": "error"
             }
+
+    def search_products(self, category=None, min_price=None, max_price=None, reason=None, limit=10):
+        """Search for products with filters."""
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+                    # Build query with filters
+                    query = """
+                        SELECT p.*, c.name as category_name
+                        FROM humansa_products p
+                        LEFT JOIN humansa_product_category c ON p.category_id = c.category_id
+                        WHERE 1=1
+                    """
+                    params = []
+                    
+                    if category:
+                        # Search in category name only
+                        query += " AND c.name ILIKE %s"
+                        params.append(f'%{category}%')
+                    
+                    if min_price is not None:
+                        query += " AND p.price >= %s"
+                        params.append(min_price)
+                    
+                    if max_price is not None:
+                        query += " AND p.price <= %s"
+                        params.append(max_price)
+                    
+                    # Skip generic reasons that shouldn't filter results
+                    generic_reasons = [
+                        '用户请求', '用户咨询', '用户查询', 'user request', 'user query',
+                        'User requested', 'The user', 'user expressed', 'user is looking',
+                        'user wants', 'user needs', 'customer request'
+                    ]
+                    if reason and not any(generic in reason.lower() for generic in [r.lower() for r in generic_reasons]):
+                        # Only search in description, benefits, suitable_for if reason is specific
+                        query += " AND (p.description ILIKE %s OR p.benefits ILIKE %s OR p.suitable_for ILIKE %s)"
+                        params.extend([f'%{reason}%', f'%{reason}%', f'%{reason}%'])
+                    
+                    # Order by featured and price
+                    query += " ORDER BY p.is_featured DESC, p.price ASC LIMIT %s"
+                    params.append(limit)
+                    
+                    logger.info(f"🔍 Executing product search query with params: {params}")
+                    cursor.execute(query, params)
+                    products = cursor.fetchall()
+                    logger.info(f"📦 Found {len(products)} products from database")
+                    
+                    return [dict(product) for product in products]
+                    
+        except Exception as e:
+            logger.error(f"Error searching products: {e}")
+            return []
+    
+    def search_product_packages(self, category=None, min_price=None, max_price=None, limit=5):
+        """Search for product packages with filters."""
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+                    # Build query with filters
+                    query = """
+                        SELECT * FROM humansa_product_packages
+                        WHERE 1=1
+                    """
+                    params = []
+                    
+                    if category:
+                        query += " AND category ILIKE %s"
+                        params.append(f'%{category}%')
+                    
+                    if min_price is not None:
+                        query += " AND price >= %s"
+                        params.append(min_price)
+                    
+                    if max_price is not None:
+                        query += " AND price <= %s"
+                        params.append(max_price)
+                    
+                    # Order by discount and price
+                    query += " ORDER BY discount_percentage DESC NULLS LAST, price ASC LIMIT %s"
+                    params.append(limit)
+                    
+                    cursor.execute(query, params)
+                    packages = cursor.fetchall()
+                    
+                    return [dict(package) for package in packages]
+                    
+        except Exception as e:
+            logger.error(f"Error searching product packages: {e}")
+            return []
 
 
 # Global database instance

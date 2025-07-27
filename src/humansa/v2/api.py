@@ -1,25 +1,18 @@
 from quart import Blueprint, request, jsonify, Response
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 import json
 import asyncio
+import time
+import os
 from datetime import datetime
-from llama_index.llms.openai import OpenAI
+# from llama_index.llms.openai import OpenAI  # Commented out - using Azure OpenAI instead
+from llama_index.llms.azure_openai import AzureOpenAI
 from llama_index.core.callbacks import CallbackManager
 from .memory.memory_manager import MemoryManager
 from .memory.mem0_integration import Mem0MemoryManagerAdapter
 from .context_manager import ContextManager
-from .workflows.orchestrator import HumansaOrchestrator
-from .workflows.orchestrator_simple_debug import HumansaOrchestratorDebug  # Temporary debug
-from .workflows.orchestrator_workaround import HumansaOrchestrator as HumansaOrchestratorFixed  # Workaround for event bug
-# from .workflows.simple_orchestrator import SimpleHumansaOrchestrator  # Fixed recursion issue
+from .orchestrator_agent import HumansaOrchestratorAgent
 from .workflows.appointment_workflow import AppointmentBookingWorkflow
-from .agents import (
-    GeneralMedicalAgent,
-    DiagnosisAgent,
-    MedicationAgent,
-    EmergencyTriageAgent,
-    AppointmentAgent
-)
 from chat.streaming.sse_formatter import SSEFormatter
 import logging
 
@@ -31,12 +24,12 @@ humansa_v2_bp = Blueprint('humansa_v2', __name__)
 # Global instances (would be initialized properly in production)
 memory_manager: Optional[MemoryManager] = None
 context_manager = ContextManager()
-orchestrator: Optional[HumansaOrchestrator] = None
+orchestrator: Optional[HumansaOrchestratorAgent] = None
 appointment_workflow: Optional[AppointmentBookingWorkflow] = None
 sse_formatter = SSEFormatter()
 
 
-async def initialize_v2_system(db_pool, openai_api_key: str):
+async def initialize_v2_system(db_pool, openai_api_key: str = None):
     """Initialize the v2 Humansa system."""
     global memory_manager, orchestrator, appointment_workflow
     
@@ -58,30 +51,42 @@ async def initialize_v2_system(db_pool, openai_api_key: str):
         
     await memory_manager.initialize_tables()
     
-    # Initialize LLM
-    llm = OpenAI(
-        model="gpt-4",
-        api_key=openai_api_key,
-        temperature=0.7
+    # Initialize LLM with Azure OpenAI
+    # Using GPT-4o as requested (not GPT-4)
+    azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT", "https://youwoai-dev-resource.openai.azure.com/")
+    azure_api_key = os.getenv("AZURE_OPENAI_API_KEY") or os.getenv("AZURE_INFERENCE_CREDENTIAL")
+    
+    if not azure_api_key:
+        raise ValueError("AZURE_OPENAI_API_KEY or AZURE_INFERENCE_CREDENTIAL must be set")
+    
+    llm = AzureOpenAI(
+        model="gpt-4.1",  # Using GPT-4.1 as requested
+        deployment_name="gpt-4.1",  # Azure deployment name
+        api_key=azure_api_key,
+        azure_endpoint=azure_endpoint,
+        api_version="2024-02-15-preview",
+        temperature=0.7,
+        max_tokens=4096  # Increase from default to handle longer responses
     )
     
-    # Initialize agents
-    agents = [
-        GeneralMedicalAgent(llm=llm),
-        DiagnosisAgent(llm=llm),
-        MedicationAgent(llm=llm),
-        EmergencyTriageAgent(llm=llm),
-        AppointmentAgent(llm=llm)
-    ]
+    # Create database config for tools
+    db_config = {
+        'host': db_pool.host if hasattr(db_pool, 'host') else None,
+        'port': db_pool.port if hasattr(db_pool, 'port') else None,
+        'database': db_pool.database if hasattr(db_pool, 'database') else None,
+        'user': db_pool.user if hasattr(db_pool, 'user') else None,
+        'password': db_pool.password if hasattr(db_pool, 'password') else None
+    }
     
-    # Initialize orchestrator
-    # TODO: Fix recursion issue in HumansaOrchestrator workflow
-    # Create the improved orchestrator (recursion issue fixed)
-    # Using workaround version due to llama-index-workflows bug
-    orchestrator = HumansaOrchestratorFixed(
-        agents=agents,
-        router_llm=llm,
-        memory_manager=memory_manager
+    # Initialize orchestrator with Pattern 2 (sub-agents as tools)
+    # Now using REAL database tools!
+    orchestrator = HumansaOrchestratorAgent(
+        llm=llm,
+        agents=None,  # Using tools instead of agent classes
+        memory_manager=memory_manager,
+        debug=True,  # Enable debug logging for agent flow visibility
+        use_real_tools=True,  # Enable real database tools
+        db_config=db_config  # Pass database config for tools
     )
     
     # Initialize appointment workflow
@@ -120,7 +125,7 @@ async def chat_endpoint():
         
         if stream:
             return Response(
-                stream_chat_response(user_id, user_message, context),
+                stream_chat_response(user_id, user_message, messages),
                 mimetype="text/event-stream",
                 headers={
                     "Cache-Control": "no-cache",
@@ -128,9 +133,11 @@ async def chat_endpoint():
                 }
             )
         else:
-            result = await orchestrator.run(
+            result = await orchestrator.process_query(
                 query=user_message,
-                user_id=user_id
+                user_id=user_id,
+                messages=messages,
+                stream=False
             )
             return jsonify(result)
             
@@ -240,6 +247,119 @@ async def conversation_history():
         return jsonify({"error": str(e)}), 500
 
 
+@humansa_v2_bp.route('/v2/humansa/memory/status', methods=['GET'])
+async def memory_status():
+    """Check Mem0 initialization status."""
+    try:
+        if memory_manager and hasattr(memory_manager, 'mem0_manager'):
+            # It's using Mem0
+            mem0 = memory_manager.mem0_manager
+            return jsonify({
+                "initialized": mem0.initialized,
+                "type": "mem0",
+                "config": {
+                    "vector_store": mem0.config.get("vector_store", {}).get("provider", "unknown"),
+                    "embedding_model": mem0.config.get("embedder", {}).get("config", {}).get("model", "unknown")
+                }
+            })
+        elif memory_manager:
+            return jsonify({
+                "initialized": True,
+                "type": "basic",
+                "config": {}
+            })
+        else:
+            return jsonify({
+                "initialized": False,
+                "type": None,
+                "config": {}
+            })
+    except Exception as e:
+        logger.error(f"Error checking memory status: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@humansa_v2_bp.route('/v2/humansa/memory/add', methods=['POST'])
+async def add_memory():
+    """Add memory directly."""
+    try:
+        data = await request.get_json()
+        user_id = data.get('user_id')
+        messages = data.get('messages', [])
+        metadata = data.get('metadata', {})
+        
+        if not user_id or not messages:
+            return jsonify({"error": "user_id and messages required"}), 400
+            
+        # Extract conversation from messages
+        if len(messages) >= 2:
+            query = messages[-2].get('content', '') if messages[-2].get('role') == 'user' else ''
+            response = messages[-1].get('content', '') if messages[-1].get('role') == 'assistant' else ''
+            
+            await memory_manager.add_conversation(
+                user_id=str(user_id),
+                query=query,
+                response=response,
+                metadata=metadata
+            )
+            
+            return jsonify({"status": "added", "user_id": user_id})
+        else:
+            return jsonify({"error": "Need at least 2 messages"}), 400
+            
+    except Exception as e:
+        logger.error(f"Error adding memory: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@humansa_v2_bp.route('/v2/humansa/memory/search', methods=['POST'])
+async def search_memory():
+    """Search user memories."""
+    try:
+        data = await request.get_json()
+        user_id = data.get('user_id')
+        query = data.get('query', '')
+        
+        if not user_id:
+            return jsonify({"error": "user_id required"}), 400
+            
+        # Search memories
+        if memory_manager and hasattr(memory_manager, 'search_memories'):
+            results = await memory_manager.search_memories(
+                user_id=str(user_id),
+                query=query,
+                limit=10
+            )
+            return jsonify({
+                "user_id": user_id,
+                "query": query,
+                "count": len(results),
+                "results": results
+            })
+        else:
+            # Basic search in conversation history
+            history = await memory_manager.get_conversation_history(
+                user_id=str(user_id),
+                limit=20
+            )
+            # Simple text search
+            results = []
+            for conv in history:
+                if query.lower() in conv.get('query', '').lower() or query.lower() in conv.get('response', '').lower():
+                    results.append(conv)
+            
+            return jsonify({
+                "user_id": user_id,
+                "query": query,
+                "count": len(results),
+                "results": results[:10]
+            })
+            
+    except Exception as e:
+        logger.error(f"Error searching memory: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
 @humansa_v2_bp.route('/v2/humansa/health', methods=['GET'])
 async def health_check():
     """Health check endpoint."""
@@ -255,57 +375,41 @@ async def health_check():
     })
 
 
-async def stream_chat_response(user_id: str, query: str, context):
-    """Stream chat responses using SSE."""
+async def stream_chat_response(user_id: str, query: str, messages: List[Dict]):
+    """Stream chat responses in OpenAI format."""
     try:
-        # Send initial connection message
-        yield sse_formatter.format_sse({
-            "type": "connection",
-            "message": "Connected to Humansa v2"
-        })
-        
-        # Process through orchestrator
-        response_parts = []
-        async for event in orchestrator.arun(
+        # Process through orchestrator with streaming
+        # Note: orchestrator._process_streaming is an async generator
+        async for chunk in orchestrator._process_streaming(
             query=query,
-            user_id=user_id
+            user_id=user_id,
+            messages=messages
         ):
-            if isinstance(event, dict):
-                # Handle different event types
-                if event.get("type") == "agent_response":
-                    content = event.get("content", "")
-                    response_parts.append(content)
-                    
-                    yield sse_formatter.format_sse({
-                        "type": "content",
-                        "content": content,
-                        "agent": event.get("agent_id")
-                    })
-                elif event.get("type") == "tool_call":
-                    yield sse_formatter.format_sse({
-                        "type": "tool_call",
-                        "tool": event.get("tool_name"),
-                        "agent": event.get("agent_id")
-                    })
-                elif event.get("type") == "citation":
-                    yield sse_formatter.format_sse({
-                        "type": "citation",
-                        "citation": event.get("citation")
-                    })
+            # Convert to SSE format
+            yield f"data: {json.dumps(chunk)}\n\n"
         
-        # Send completion message
-        yield sse_formatter.format_sse({
-            "type": "done",
-            "message": "Response complete",
-            "full_response": "".join(response_parts)
-        })
+        # Send final done message
+        yield "data: [DONE]\n\n"
         
     except Exception as e:
         logger.error(f"Error in stream_chat_response: {e}")
-        yield sse_formatter.format_sse({
-            "type": "error",
-            "error": str(e)
-        })
+        import traceback
+        traceback.print_exc()
+        error_chunk = {
+            "id": f"chatcmpl-{int(time.time())}",
+            "object": "chat.completion.chunk",
+            "created": int(time.time()),
+            "model": "gpt-4.1",
+            "choices": [{
+                "index": 0,
+                "delta": {
+                    "content": f"Error: {str(e)}"
+                },
+                "finish_reason": "stop"
+            }]
+        }
+        yield f"data: {json.dumps(error_chunk)}\n\n"
+        yield "data: [DONE]\n\n"
 
 
 # Export blueprint and initialization function

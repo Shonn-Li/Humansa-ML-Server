@@ -1,0 +1,396 @@
+[94m
+================================================================================[0m
+[1m[94m  Humansa V2 - 30 Comprehensive Test Cases[0m
+[94m================================================================================[0m
+Total test cases: 30
+[92m
+✅ V2 Health Check: healthy[0m
+[94m
+================================================================================[0m
+[1m[94m  Category: Identity[0m
+[94m================================================================================[0m
+
+📋 Test 1: Chinese Identity Query
+   Query: 你是谁？
+[91m   ❌ FAILED[0m
+   Missing: 诺亚新舟, 小诺, 健康医疗助理
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: The current language of the user is: Chinese. The user在问我的身份，不需要工具。
+
+✅ **最终回答**:
+我是你的智能健康助手，可以帮你预约医生、查询医疗服务、解答健康相关的问题。如果你有任何需求，欢迎随时告诉我！
+...
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 2: English Identity Query
+   Query: Who are you?
+[91m   ❌ FAILED[0m
+   Missing: Humansa
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: (Implicit) I can answer without any more tools!
+
+✅ **最终回答**:
+I am your intelligent health assistant. I can help you book doctor appointments, find medical services, answer health...
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 3: Chinese Greeting
+   Query: 你好
+[91m   ❌ FAILED[0m
+   Missing: 小诺, 帮助
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: (Implicit) I can answer without any more tools!
+
+✅ **最终回答**:
+你好！有什么我可以帮您的吗？无论是预约医生、查询医疗服务，还是健康方面的问题，都可以随时告诉我。
+...
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 4: Company Introduction
+   Query: 介绍一下诺亚新舟
+[91m   ❌ FAILED[0m
+   Missing: 以爱行舟, 亲近相守, 500多位, 30+家
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: 用户想了解“诺亚新舟”的相关信息，这可能不是Humansa内部的服务，需要进行外部网络搜索获取详细资料。
+🔧 **行动**: search_web
+📥 **输入参数**: {'query': '诺亚新舟 介绍', 'language': 'zh'}
+📊 **观察结果**: {'success': True, 'query': '诺亚新舟 介绍', 'la...
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 5: Service Capabilities
+   Query: 你能做什么？
+[91m   ❌ FAILED[0m
+   Missing: 实时预约, 检查项目, 诊所导航, 体检报告
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: 用户想了解我的功能，需要进行简要介绍。
+
+✅ **最终回答**:
+作为您的智能健康助手，我可以为您提供以下服务：
+
+1. 医生和医疗服务预约：帮您查找并预约各科医生，包括内科、外科、儿科、中医等。
+2. 查询医生、诊所和医疗服务信息：为您提供医生、诊所、医疗服务的详细介绍、价格和位置等信息。
+3. 健康咨询：解答常见健康问题，提供疾病预防、慢病管理、健康...
+[96m   💭 Agent thoughts displayed[0m
+[94m
+================================================================================[0m
+[1m[94m  Category: Doctor Search[0m
+[94m================================================================================[0m
+
+📋 Test 6: Find Cardiologist
+   Query: 我想找一个心脏科医生
+[91m   ❌ FAILED[0m
+   Missing: 预约
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: 用户需要查找一位心脏科医生。我需要使用工具查找相关医生信息。
+🔧 **行动**: find_doctor_info
+📥 **输入参数**: {'specialty': '心脏科', 'language': 'zh'}
+📊 **观察结果**: {'success': True, 'doctors': [], 'total_found': 0, 'sourc...
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 7: Find Doctors by City
+   Query: 深圳有哪些医生？
+[91m   ❌ FAILED[0m
+   Missing: 诊所
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: 用户想了解深圳的医生信息，我需要用工具查询深圳可用医生列表。
+🔧 **行动**: find_doctor_info
+📥 **输入参数**: {'city': '深圳', 'language': 'zh'}
+📊 **观察结果**: {'success': True, 'doctors': [], 'total_found': 0, 'source': 'd...
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 8: Specific Doctor Info
+   Query: 张医生的信息
+[92m   ✅ PASSED (1.97s)[0m
+   Found: 张, 医生, 专科
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 9: Doctor Availability
+   Query: 李医生下周有空吗？
+[91m   ❌ FAILED[0m
+   Missing: 李医生, 预约
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: 用户想查询“李”医生下周的可用时间，我需要先查找符合条件的“李”医生信息，然后查询其下周的出诊时间。
+🔧 **行动**: find_doctor_availability
+📥 **输入参数**: {'doctor_name': '李', 'days_ahead': 7}
+📊 **观察结果**: {'success': True, 'doctor_name...
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 10: Multi-criteria Search
+   Query: 北京的骨科医生，要有20年以上经验
+[92m   ✅ PASSED (2.35s)[0m
+   Found: 北京, 骨科, 经验
+[96m   💭 Agent thoughts displayed[0m
+[94m
+================================================================================[0m
+[1m[94m  Category: Appointment[0m
+[94m================================================================================[0m
+
+📋 Test 11: Complete Booking Request
+   Query: 预约王医生，我叫李明，电话13800138000，想看下周二下午
+[91m   ❌ FAILED[0m
+   Missing: 确认
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: 用户想预约“王”医生，下周二下午，患者信息已齐全，需要先查询王医生下周二下午的可用时段。
+🔧 **行动**: find_doctor_availability
+📥 **输入参数**: {'doctor_name': '王', 'days_ahead': 7}
+📊 **观察结果**: {'success': True, 'doctor_name': '王'...
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 12: Incomplete Booking
+   Query: 帮我预约张医生
+[91m   ❌ FAILED[0m
+   Missing: 姓名, 电话, 时间
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: (Implicit) I can answer without any more tools!
+
+✅ **最终回答**:
+很抱歉，目前没有“张”医生的可预约信息，也没有可推荐的相似医生。如果您需要其他专科或医生的帮助，请告诉我详细需求，我会尽力为您查找与预约。
+...
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 13: Follow-up Info
+   Query: 我叫王芳，电话15900159000
+[91m   ❌ FAILED[0m
+   Missing: 时间
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: (Implicit) I can answer without any more tools!
+
+✅ **最终回答**:
+感谢您提供姓名和电话。请问您需要预约哪位医生？如果有具体的专科或城市需求，也请一并告知，我会为您查找合适的医生并安排预约。
+...
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 14: Appointment Modification
+   Query: 改一下我明天的预约，改到后天同一时间
+[91m   ❌ FAILED[0m
+   Missing: 确认
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: (Implicit) I can answer without any more tools!
+
+✅ **最终回答**:
+请您提供以下信息，方便我为您更改预约：
+
+1. 您原本预约的医生姓名
+2. 原预约的具体时间（明天的几点）
+3. 预约的服务类型（如体检、问诊等）
+
+有了这些信息后，我会帮您查询医生后天的可用时间，并协助修改预约。
+...
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 15: Appointment Cancellation
+   Query: 取消我下周三的预约
+[91m   ❌ FAILED[0m
+   Missing: 政策
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: (Implicit) I can answer without any more tools!
+
+✅ **最终回答**:
+抱歉，目前系统中没有查询到您的预约信息，因此无法直接为您取消下周三的预约。  
+请您提供以下信息，以便我帮您操作：
+
+1. 您预约的医生姓名
+2. 预约的具体时间（下周三几点）
+3. 预约的服务类型（如体检、问诊等）
+
+有了这些信息后...
+[96m   💭 Agent thoughts displayed[0m
+[94m
+================================================================================[0m
+[1m[94m  Category: Clinic Services[0m
+[94m================================================================================[0m
+
+📋 Test 16: Clinic Locations
+   Query: 广州有哪些诊所？
+[91m   ❌ FAILED[0m
+   Missing: 地址
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: 用户想了解广州的诊所信息。我需要使用“search_clinics”工具，按城市筛选广州的诊所列表。
+🔧 **行动**: search_clinics
+📥 **输入参数**: {'city': '广州', 'language': 'zh'}
+📊 **观察结果**: {'success': False, 'error': 'relation "humans...
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 17: Service Availability
+   Query: 深圳诊所提供什么服务？
+[91m   ❌ FAILED[0m
+   Missing: 检查
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: 用户想了解深圳诊所可以提供的服务类型，我需要查询深圳的相关医疗服务信息。
+🔧 **行动**: search_services
+📥 **输入参数**: {'clinic_name': '深圳', 'language': 'zh'}
+📊 **观察结果**: {'success': False, 'error': 'relation "humansa_clin...
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 18: Service Pricing
+   Query: 肝功能检查多少钱？
+[91m   ❌ FAILED[0m
+   Missing: 费用
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: 用户想了解肝功能检查的价格，需要查询相关的服务价格信息。
+🔧 **行动**: get_pricing
+📥 **输入参数**: {'service_type': '肝功能检查'}
+📊 **观察结果**: {'success': True, 'service_type': '肝功能检查', 'clinic_name': None, 'pricing': {'...
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 19: Price Comparison
+   Query: 哪里的体检套餐最便宜？
+[92m   ✅ PASSED (3.67s)[0m
+   Found: 体检, 价格, 比较
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 20: Service Details
+   Query: 核磁共振检查需要准备什么？
+[92m   ✅ PASSED (4.27s)[0m
+   Found: 核磁共振, 准备, 注意
+[96m   💭 Agent thoughts displayed[0m
+[94m
+================================================================================[0m
+[1m[94m  Category: Medical[0m
+[94m================================================================================[0m
+
+📋 Test 21: Symptom Analysis
+   Query: 最近总是失眠，还头痛
+[92m   ✅ PASSED (3.51s)[0m
+   Found: 失眠, 头痛, 建议
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 22: Emergency Case
+   Query: 我现在胸痛很厉害，呼吸困难
+[92m   ✅ PASSED (2.99s)[0m
+   Found: 120, 急救, 立即
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 23: Medication Query
+   Query: 阿司匹林和华法林能一起吃吗？
+[92m   ✅ PASSED (3.97s)[0m
+   Found: 药物, 相互作用, 医生
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 24: Health Product
+   Query: 我想买保健品
+[91m   ❌ FAILED[0m
+   Missing: 健康商城, 小程序
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: (Implicit) I can answer without any more tools!
+
+✅ **最终回答**:
+请问您关注哪方面的保健品呢？例如：
+
+- 增强免疫力
+- 改善睡眠
+- 补钙补铁
+- 保护肝脏
+- 养护心脑血管
+- 关节健康
+- 控糖控脂
+
+也可以告诉我您的年龄、性别或具体需求，这样我可以为您推荐更合适的保健品及产品信息。
+...
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 25: Department Recommendation
+   Query: 头晕应该看什么科？
+[92m   ✅ PASSED (4.75s)[0m
+   Found: 神经, 内科, 建议
+[96m   💭 Agent thoughts displayed[0m
+[94m
+================================================================================[0m
+[1m[94m  Category: Memory[0m
+[94m================================================================================[0m
+
+📋 Test 26: Store Personal Info
+   Query: 我叫张三，住在北京，今年45岁
+[91m   ❌ FAILED[0m
+   Missing: 记录
+   Response: 🤔 正在思考...
+
+
+💭 **思考**: (Implicit) I can answer without any more tools!
+
+✅ **最终回答**:
+感谢您提供信息，张三先生，请问您有什么健康需求需要我帮忙吗？例如：
+
+- 预约北京的某专科医生
+- 查询北京诊所或医院信息
+- 了解体检、健康管理服务
+- 咨询疾病或健康问题
+
+请告诉我您的具体需求，我会为您提供详细帮助！
+...
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 27: Store Medical History
+   Query: 我对花生和海鲜过敏，有高血压，每天吃降压药
+[92m   ✅ PASSED (4.63s)[0m
+   Found: 过敏, 高血压, 记录
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 28: Recall Personal Info
+   Query: 你知道我的基本信息吗？
+[92m   ✅ PASSED (2.27s)[0m
+   Found: 张三, 北京, 45岁
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 29: Recall Medical History
+   Query: 我有什么过敏史和慢性病？
+[92m   ✅ PASSED (1.30s)[0m
+   Found: 花生, 海鲜, 高血压
+[96m   💭 Agent thoughts displayed[0m
+
+📋 Test 30: Complex Memory Query
+   Query: 根据我的情况，推荐合适的医生
+[92m   ✅ PASSED (6.65s)[0m
+   Found: 高血压, 内科, 医生
+[96m   💭 Agent thoughts displayed[0m
+[94m
+================================================================================[0m
+[1m[94m  TEST SUMMARY[0m
+[94m================================================================================[0m
+
+Overall: 12/30 passed (40.0%)
+
+By Category:
+  ❌ Identity: 0/5 (0.0%)
+  ❌ Doctor Search: 2/5 (40.0%)
+  ❌ Appointment: 0/5 (0.0%)
+  ❌ Clinic Services: 2/5 (40.0%)
+  ⚠️ Medical: 4/5 (80.0%)
+  ⚠️ Memory: 4/5 (80.0%)
+
+Results saved to: humansa_v2_test_results_30cases_20250726_220840.json
+[91m
+❌ CRITICAL: Only 12/30 tests passed[0m

@@ -92,11 +92,31 @@ class HumansaChatEndpoint:
         # Initialize AGENTIC tool manager
         self.tool_manager = HumansaAgenticToolManager(db_config)
 
-        # Initialize AGENTIC agent
+        # Initialize memory manager (Mem0 if available)
+        self.memory_manager = None
+        try:
+            # Try to use Mem0 if available
+            from humansa.memory.mem0_manager import Mem0Manager
+            from humansa.v2.memory.mem0_integration import Mem0MemoryManagerAdapter
+            
+            mem0 = Mem0Manager.get_instance()
+            if mem0.initialized:
+                # Create a mock db_pool for compatibility
+                class MockDBPool:
+                    pass
+                self.memory_manager = Mem0MemoryManagerAdapter(MockDBPool(), mem0)
+                logger.info("✅ Mem0 memory manager initialized for V1")
+            else:
+                logger.info("ℹ️ Mem0 not available, continuing without memory")
+        except Exception as e:
+            logger.warning(f"Failed to initialize memory manager: {e}")
+
+        # Initialize AGENTIC agent with memory support
         self.agent = HumansaAgenticAgent(
             llm=self.tool_manager.llm,
             tools=self.tool_manager.get_llamaindex_tools(),
-            callback_manager=self.tool_manager.callback_manager
+            callback_manager=self.tool_manager.callback_manager,
+            memory_manager=self.memory_manager
         )
 
         logger.info("🤖 HumansaChatEndpoint initialized - FULLY AGENTIC")

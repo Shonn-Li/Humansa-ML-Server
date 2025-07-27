@@ -22,6 +22,9 @@ python test_doctor_tools.py  # For Humansa agent testing
 # Docker operations
 ./cleanup-docker.sh  # Clean up Docker resources
 docker-compose -f docker-compose.local.yml up  # Local development
+
+# Humansa V2 Testing with Enhanced Logging
+./run_humansa_test_environment_v2_enhanced.sh  # Run V2 tests with full process visibility
 ```
 
 ## High-Level Architecture
@@ -68,6 +71,30 @@ Comprehensive test environment in `test_environment/`:
 3. **Token Management**: Count tokens before processing (`src/chat/token/`)
 4. **Async Operations**: Everything is async using Quart's async/await
 5. **Citation System**: Automatic citation generation with position tracking
+
+### Humansa V2 Enhanced Logging and Streaming
+
+The V2 system now supports enhanced logging and true streaming to show:
+- Complete thinking process of each agent (Thought → Action → Observation → Answer)
+- Which agents are called and their execution order
+- Each agent's reasoning and tool calls
+- Mem0 integration status and loaded memory data
+- Full untruncated responses
+
+**Streaming Format**:
+When streaming is enabled (`"stream": true`), the response includes:
+- 🤔 正在思考... (Processing indicator)
+- 💭 **思考**: (Agent's reasoning process)
+- 🔧 **行动**: (Tool/agent being called)
+- 📊 **观察结果**: (Results from tool calls)
+- ✅ **最终回答**: (Final response to user)
+
+Enable enhanced logging:
+1. **Environment Variable**: `export HUMANSA_ENHANCED_LOGGING=true`
+2. **Request Parameter**: Include `"debug": true` in API requests
+3. **Test Script**: Use `./run_humansa_test_environment_v2_enhanced.sh`
+
+**Important**: The streaming implementation uses LlamaIndex's native `stream_chat` method which provides the complete ReAct reasoning chain, NOT fake streaming.
 
 ### Environment Variables
 

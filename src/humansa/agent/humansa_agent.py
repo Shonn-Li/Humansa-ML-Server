@@ -43,8 +43,8 @@ class HumansaAgenticAgent:
     """
 
     def __init__(self, llm: Optional[LLM] = None, tools: Optional[List[BaseTool]] = None,
-                 callback_manager: Optional[CallbackManager] = None):
-        """Initialize the fully agentic agent."""
+                 callback_manager: Optional[CallbackManager] = None, memory_manager=None):
+        """Initialize the fully agentic agent with multi-agent orchestrator."""
         self.llm = llm
         self.tools = tools or []
         # Filter out search_web tool to prevent external searches
@@ -56,6 +56,21 @@ class HumansaAgenticAgent:
         self.callback_manager = callback_manager
         self.agent = None
         self.memory = None
+        self.memory_manager = memory_manager
+        self.orchestrator = None
+
+        # Initialize multi-agent orchestrator
+        try:
+            from .multi_agent_orchestrator import MultiAgentOrchestrator
+            self.orchestrator = MultiAgentOrchestrator(
+                llm=self.llm,
+                tools=self.tools,
+                memory_manager=self.memory_manager
+            )
+            logger.info("🎭 Multi-agent orchestrator initialized")
+        except Exception as e:
+            logger.warning(f"Failed to initialize orchestrator: {e}")
+            self.orchestrator = None
 
         # Initialize ReAct agent if LlamaIndex is available
         if LLAMAINDEX_AVAILABLE and self.llm and self.tools:
@@ -88,22 +103,30 @@ class HumansaAgenticAgent:
 
             # Import our custom React system prompt and update the agent
             from ..prompts.humansa_react_system_header import get_humansa_react_system_prompt
-            from ..prompts.humansa_system_prompt_v2 import get_humansa_react_prompt_v2
+            from ..prompts.humansa_system_prompt_v2 import get_humansa_react_prompt_v2, get_humansa_system_prompt_v2
+            from datetime import datetime
 
             # Get the v2 React prompt (streamlined version with enhanced identity)
             react_system_prompt_v2 = get_humansa_react_prompt_v2()
             
+            # Get the full system prompt with current date
+            current_date = datetime.now().strftime('%Y-%m-%d')
+            full_system_prompt = get_humansa_system_prompt_v2(current_date)
+            
+            # Combine both prompts - system context + react format
+            combined_prompt = f"{full_system_prompt}\n\n{react_system_prompt_v2}"
+            
             # Also get the original template for compatibility
             react_system_prompt = get_humansa_react_system_prompt()
 
-            # Update the agent's prompts - use v2 as the main system prompt
+            # Update the agent's prompts - use combined prompt as the main system prompt
             # Convert string to PromptTemplate if needed
             from llama_index.core import PromptTemplate
-            if isinstance(react_system_prompt_v2, str):
-                react_system_prompt_v2 = PromptTemplate(react_system_prompt_v2)
+            if isinstance(combined_prompt, str):
+                combined_prompt = PromptTemplate(combined_prompt)
                 
             self.agent.update_prompts({
-                "agent_worker:system_prompt": react_system_prompt_v2,
+                "agent_worker:system_prompt": combined_prompt,
                 "react_header": react_system_prompt
             })
 
@@ -142,10 +165,10 @@ class HumansaAgenticAgent:
     async def execute_with_tools(self, query: str, conversation_history: List[Dict],
                                  context_results: List, user_id: str) -> Dict[str, Any]:
         """
-        Execute query with full agentic tool calling.
+        Execute query with full agentic tool calling enhanced by multi-agent orchestration.
 
         The LLM agent decides which tools to call and with what arguments.
-        NO heuristic tool selection or argument extraction.
+        Multi-agent orchestrator provides enhanced analysis and recommendations.
 
         Args:
             query: The user query
@@ -167,17 +190,58 @@ class HumansaAgenticAgent:
                 raise RuntimeError(
                     "Agent is not healthy - cannot execute in agentic mode")
 
-            # Prepare enhanced query with context
-            enhanced_query = self._prepare_enhanced_query(
-                query, conversation_history, context_results, user_id
-            )
+            # Build context dict
+            context = {
+                "conversation_history": conversation_history,
+                "context_results": context_results,
+                "user_id": user_id
+            }
+
+            # Phase 1: Multi-agent orchestration (if available)
+            orchestrator_guidance = None
+            if self.orchestrator:
+                try:
+                    logger.info("🎭 Phase 1: Multi-agent analysis")
+                    
+                    # Enhance context with memory
+                    context = await self.orchestrator.enhance_with_memory(query, user_id, context)
+                    
+                    # Analyze query with orchestrator
+                    analysis = await self.orchestrator.analyze_query(query, context)
+                    logger.info(f"📊 Query analysis: {analysis}")
+                    
+                    # Route to specialized agents
+                    agent_responses = await self.orchestrator.route_to_agents(query, analysis, context)
+                    logger.info(f"🤝 Collected {len(agent_responses)} agent responses")
+                    
+                    # Get tool recommendations from orchestrator
+                    tool_names = [tool.metadata.name if hasattr(tool, 'metadata') else str(tool) 
+                                 for tool in self.tools]
+                    orchestrator_guidance = await self.orchestrator.synthesize_for_tools(
+                        query, agent_responses, tool_names
+                    )
+                    logger.info("✅ Orchestrator guidance prepared")
+                    
+                except Exception as e:
+                    logger.warning(f"Orchestrator failed, continuing with standard agent: {e}")
+                    orchestrator_guidance = None
+
+            # Prepare enhanced query with orchestrator guidance
+            if orchestrator_guidance:
+                enhanced_query = self._prepare_enhanced_query_with_orchestrator(
+                    query, conversation_history, context_results, user_id, orchestrator_guidance
+                )
+            else:
+                enhanced_query = self._prepare_enhanced_query(
+                    query, conversation_history, context_results, user_id
+                )
 
             logger.info(
                 f"📝 Enhanced query prepared: {enhanced_query}")
 
-            # Execute with ReAct agent - LLM decides all tool calls
+            # Phase 2: Execute with ReAct agent - LLM decides all tool calls
             logger.info(
-                "🤖 Executing with ReAct agent - LLM controls all tool selection")
+                "🤖 Phase 2: Executing with ReAct agent - LLM controls all tool selection")
             agent_response = await self._execute_with_react_agent(enhanced_query)
 
             # Extract tool calls from callback manager and build complete reasoning chain
@@ -279,6 +343,42 @@ Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 
 Please process this query using the appropriate tools. Call tools with structured arguments only."""
 
+        return enhanced_query
+
+    def _prepare_enhanced_query_with_orchestrator(self, query: str, conversation_history: List[Dict],
+                                                  context_results: List, user_id: str,
+                                                  orchestrator_guidance: Dict[str, Any]) -> str:
+        """Prepare enhanced query with multi-agent orchestrator guidance."""
+        # Start with standard enhanced query
+        base_query = self._prepare_enhanced_query(query, conversation_history, context_results, user_id)
+        
+        # Add orchestrator insights
+        synthesis = orchestrator_guidance.get("synthesis", "")
+        recommended_tools = orchestrator_guidance.get("recommended_tools", [])
+        agent_insights = orchestrator_guidance.get("agent_responses", [])
+        
+        orchestrator_section = "\n\n🎭 Multi-Agent Analysis:"
+        
+        # Add synthesis
+        if synthesis:
+            orchestrator_section += f"\n{synthesis}"
+        
+        # Add tool recommendations
+        if recommended_tools:
+            orchestrator_section += f"\n\nRecommended tools to consider: {', '.join(recommended_tools)}"
+        
+        # Add key insights from specialized agents
+        if agent_insights:
+            orchestrator_section += "\n\nSpecialized agent insights:"
+            for insight in agent_insights[:2]:  # Limit to top 2 to avoid token overflow
+                agent_name = insight.get("agent", "unknown")
+                response = insight.get("response", "")[:200]  # Truncate
+                orchestrator_section += f"\n- {agent_name}: {response}"
+        
+        # Combine with base query
+        enhanced_query = base_query + orchestrator_section + \
+            "\n\nPlease leverage these insights while maintaining your tool-calling autonomy."
+        
         return enhanced_query
 
     async def _execute_with_react_agent(self, enhanced_query: str) -> str:
