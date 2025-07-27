@@ -518,7 +518,7 @@ class PostgresManager:
         with self.get_connection() as conn:
             with conn.cursor() as cursor:
                 cursor.execute("""
-                    SELECT id, noteTitle
+                    SELECT id, "noteTitle"
                     FROM note_v1 
                     WHERE id = ANY(%s)
                 """, (note_ids,))
