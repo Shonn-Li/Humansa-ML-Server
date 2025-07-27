@@ -18,6 +18,7 @@ V1 ENDPOINTS:
 import io
 import warnings
 import os
+from decimal import Decimal
 import sys
 import json
 import logging
@@ -40,6 +41,14 @@ if current_dir not in sys.path:
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+class DecimalEncoder(json.JSONEncoder):
+    """Custom JSON encoder that handles Decimal types"""
+    def default(self, obj):
+        if isinstance(obj, Decimal):
+            # Convert Decimal to float for JSON serialization
+            return float(obj)
+        return super(DecimalEncoder, self).default(obj)
 
 # Reduce Azure logging verbosity - only show essential request info
 azure_loggers = [
@@ -241,12 +250,12 @@ def register_chat_endpoints(app):
                                     truncated_chunk = truncate_dict(
                                         chunk, max_length=200)
                                     logger.info(
-                                        f"📦 Stream chunk {chunk_count}: {json.dumps(truncated_chunk)}")
+                                        f"📦 Stream chunk {chunk_count}: {json.dumps(truncated_chunk, cls=DecimalEncoder)}")
                                 elif chunk_count == 4:
                                     logger.info(
                                         f"📦 ... (logging first 3 chunks only, total so far: {chunk_count})")
 
-                                yield f"data: {json.dumps(chunk)}\n\n"
+                                yield f"data: {json.dumps(chunk, cls=DecimalEncoder)}\n\n"
 
                             logger.info(
                                 f"✅ Streaming complete: {chunk_count} chunks sent")
@@ -254,14 +263,14 @@ def register_chat_endpoints(app):
                         else:
                             # It's a dict response (likely an error)
                             logger.warning(f"⚠️ Got non-streaming response in streaming mode: {stream_response}")
-                            yield f"data: {json.dumps(stream_response)}\n\n"
+                            yield f"data: {json.dumps(stream_response, cls=DecimalEncoder)}\n\n"
                     except Exception as stream_error:
                         logger.error(f"❌ Streaming error: {stream_error}")
                         import traceback
                         traceback.print_exc()
                         error_chunk = {"error": str(
                             stream_error), "status": "error"}
-                        yield f"data: {json.dumps(error_chunk)}\n\n"
+                        yield f"data: {json.dumps(error_chunk, cls=DecimalEncoder)}\n\n"
 
                 return Response(generate_stream(), mimetype='text/event-stream')
             else:
@@ -356,12 +365,12 @@ def register_chat_endpoints(app):
                                     truncated_chunk = truncate_dict(
                                         chunk, max_length=200)
                                     logger.info(
-                                        f"📦 Multi-agent stream chunk {chunk_count}: {json.dumps(truncated_chunk)}")
+                                        f"📦 Multi-agent stream chunk {chunk_count}: {json.dumps(truncated_chunk, cls=DecimalEncoder)}")
                                 elif chunk_count == 4:
                                     logger.info(
                                         f"📦 ... (logging first 3 chunks only, total so far: {chunk_count})")
 
-                                yield f"data: {json.dumps(chunk)}\n\n"
+                                yield f"data: {json.dumps(chunk, cls=DecimalEncoder)}\n\n"
 
                             logger.info(
                                 f"✅ Multi-agent streaming complete: {chunk_count} chunks sent")
@@ -369,7 +378,7 @@ def register_chat_endpoints(app):
                         else:
                             # It's a dict response (likely an error)
                             logger.warning(f"⚠️ Got non-streaming response in multi-agent streaming mode: {stream_response}")
-                            yield f"data: {json.dumps(stream_response)}\n\n"
+                            yield f"data: {json.dumps(stream_response, cls=DecimalEncoder)}\n\n"
                     except Exception as stream_error:
                         logger.error(
                             f"❌ Multi-agent streaming error: {stream_error}")
@@ -377,7 +386,7 @@ def register_chat_endpoints(app):
                         traceback.print_exc()
                         error_chunk = {"error": str(
                             stream_error), "status": "error"}
-                        yield f"data: {json.dumps(error_chunk)}\n\n"
+                        yield f"data: {json.dumps(error_chunk, cls=DecimalEncoder)}\n\n"
 
                 return Response(generate_stream(), mimetype='text/event-stream')
             else:

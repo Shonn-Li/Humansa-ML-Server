@@ -292,13 +292,39 @@ class ResponseAgent(BaseAgent):
         if "context_search_agent" in context:
             context_sources = context["context_search_agent"].get("sources", [])
             for source in context_sources:
-                # Format source content
-                source_content = source.get("content", "")[:500]
-                context_parts.append(f"[{source_counter}] Knowledge Base:\n{source_content}")
+                # Handle both direct content and nested chunks structure
+                source_content = ""
+                
+                # Check if source has direct content field (old format)
+                if "content" in source and source["content"]:
+                    source_content = source["content"][:500]
+                # Check if source has chunks field (agentic processor format)
+                elif "chunks" in source and isinstance(source["chunks"], list) and source["chunks"]:
+                    # Combine content from all chunks
+                    chunk_texts = []
+                    for chunk in source["chunks"][:3]:  # Limit to first 3 chunks per source
+                        if isinstance(chunk, dict) and "content" in chunk:
+                            chunk_texts.append(chunk["content"])
+                    source_content = "\n".join(chunk_texts)[:500]
+                
+                # Only add non-empty content
+                if source_content:
+                    # Format based on source type
+                    source_type = source.get("type", "note")
+                    source_title = source.get("title", "")
+                    
+                    if source_type == "note":
+                        context_header = f"[{source_counter}] Note: {source_title}"
+                    elif source_type == "conversation":
+                        context_header = f"[{source_counter}] Conversation: {source_title}"
+                    else:
+                        context_header = f"[{source_counter}] {source_type.capitalize()}: {source_title}"
+                    
+                    context_parts.append(f"{context_header}\n{source_content}")
                 
                 # Add context search source with proper metadata
                 source_type = source.get("type", "note")
-                source_id = source.get("note_id") or source.get("conversation_id")
+                source_id = source.get("type_id") or source.get("note_id") or source.get("conversation_id")
                 
                 all_sources.append({
                     "source_id": f"context_{source_counter}",
@@ -307,11 +333,11 @@ class ResponseAgent(BaseAgent):
                     "content": source_content,
                     "url": f"youwo://{source_type}/{source_id}" if source_id else "",
                     "metadata": {
-                        "note_id": source.get("note_id"),
-                        "conversation_id": source.get("conversation_id"),
+                        "note_id": source.get("note_id") or (source.get("type_id") if source_type == "note" else None),
+                        "conversation_id": source.get("conversation_id") or (source.get("type_id") if source_type == "conversation" else None),
                         "node_id": source.get("node_id"),
-                        "chunk_id": source.get("chunk_id"),
-                        "score": source.get("score", 0.0),
+                        "chunk_id": source.get("chunk_id") or (source["chunks"][0].get("section_id") if "chunks" in source and source["chunks"] else None),
+                        "score": source.get("score", source["chunks"][0].get("score", 0.0) if "chunks" in source and source["chunks"] else 0.0),
                         "type": source_type
                     }
                 })
@@ -354,30 +380,37 @@ class ResponseAgent(BaseAgent):
         )
         messages.append(ChatMessage(role="system", content=system_prompt))
         
-        # Add context with citation instructions if enabled
+        # Add conversation history EXCEPT the last user message
+        for msg in request["messages"][:-1]:
+            messages.append(ChatMessage(role=msg["role"], content=msg["content"]))
+        
+        # Get the last user message
+        last_user_message = request["messages"][-1]["content"] if request["messages"] else ""
+        
+        # Construct enhanced user message with context
         if combined_context:
-            context_message = f"Context for answering the user's question:\n\n{combined_context}"
+            # Build the user message with context
+            enhanced_user_message = f"Context from your notes and documents:\n\n{combined_context}"
             
             # Add citation instructions if enabled and we have sources
             if enable_citations and sources:
-                context_message += """\n\nCITATION INSTRUCTIONS:
-1. You MUST cite sources using numbered brackets like [1], [2], etc.
-2. Place citations immediately after the relevant statement or fact.
-3. You can cite multiple sources for one statement like [1, 3].
-4. Only cite sources that directly support your statement.
-5. Every factual claim from the provided sources must have a citation.
-6. Do NOT use markdown links or any other citation format.
+                enhanced_user_message += """\n\nCITATION INSTRUCTIONS:
+- Cite sources using numbered brackets like [1], [2], etc.
+- Place citations immediately after relevant statements
+- You can cite multiple sources like [1, 3]
+- Only cite sources that directly support your statement
+- Every factual claim from the provided sources must have a citation
 
-Example: According to the documentation [1], the feature works by processing data [2, 3]."""
+"""
             
-            messages.append(ChatMessage(
-                role="system",
-                content=context_message
-            ))
-        
-        # Add conversation history
-        for msg in request["messages"]:
-            messages.append(ChatMessage(role=msg["role"], content=msg["content"]))
+            # Add the actual user question
+            enhanced_user_message += f"\nUser Question: {last_user_message}"
+            
+            # Add as single user message
+            messages.append(ChatMessage(role="user", content=enhanced_user_message))
+        else:
+            # No context, just add the user message as-is
+            messages.append(ChatMessage(role="user", content=last_user_message))
         
         # Log the exact messages being sent to LlamaIndex
         logger.info("📝 MESSAGES SENT TO LLAMAINDEX:")

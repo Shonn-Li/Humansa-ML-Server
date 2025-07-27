@@ -866,6 +866,12 @@ class MultiAgentChatEndpointV2:
                     # Citation annotations
                     annotations = chunk.get("annotations", [])
                     sources = chunk.get("sources", [])
+                    
+                    # Stream sources data as a separate event
+                    if sources:
+                        yield create_event("response.sources",
+                                         sources=sources,
+                                         output_index=current_output_index)
                 
                 elif chunk_type == "success":
                     # Final success chunk with metadata
@@ -883,6 +889,12 @@ class MultiAgentChatEndpointV2:
             final_response = response_result.get("response", "")
             annotations = response_result.get("annotations", [])
             sources = response_result.get("sources", [])
+            
+            # Stream sources if available
+            if sources:
+                yield create_event("response.sources",
+                                 sources=sources,
+                                 output_index=current_output_index)
             
             # Simulate streaming
             chunk_size = 20

@@ -62,6 +62,9 @@ class AgenticRAGProcessor:
         self.hybrid_search = hybrid_search
         self.embedder = EmbeddingProviderSelector().get_embedding_client()
         self.llm_selector = LLMProviderSelector()
+        # Import embedding manager for auto-embedding
+        from ..embedding.embedding_manager import embedding_manager
+        self.embedding_manager = embedding_manager
         
     async def process_query(
         self,
@@ -78,6 +81,13 @@ class AgenticRAGProcessor:
         
         # Step 1: Understand the query
         understanding = await self._understand_query(query)
+        
+        # Step 1.5: Handle missing embeddings for temporal/recency searches
+        if understanding.intent == "summarize" or understanding.temporal_filter:
+            # For temporal queries, we need to check and embed recent notes
+            await self._handle_missing_embeddings_for_temporal(
+                user_id, understanding.temporal_filter or {"days_ago": 7}
+            )
         logger.info(f"📊 Query understanding: {understanding}")
         
         # Step 2: Perform multi-step retrieval
@@ -141,22 +151,32 @@ Please provide a JSON response with:
    - If "recent" is mentioned, assume last 7 days
    - Format as: {{"days_ago": number}} or {{"start_date": "YYYY-MM-DD", "end_date": "YYYY-MM-DD"}}
 3. key_concepts: List of main concepts/keywords to search for
-4. search_strategies: Ordered list of strategies to try (temporal, keyword, semantic, expand_query)
+   - IMPORTANT: For summarize intent, DO NOT include words like "summarize", "summary", etc.
+   - Only include the actual topics/subjects to search for
+   - If no specific topics mentioned (e.g., "summarize my recent notes"), return empty array []
+4. search_strategies: Ordered list of strategies to try (temporal, keyword, semantic, expand_query, recency)
+   - Use "recency" for fetching most recent notes without semantic search
 
-Example response:
+Example responses:
 {{
   "intent": "summarize",
   "temporal_filter": {{"days_ago": 7}},
-  "key_concepts": ["meeting notes", "action items", "decisions"],
+  "key_concepts": [],  // Empty because no specific topic mentioned
+  "search_strategies": ["recency", "temporal"]
+}}
+
+{{
+  "intent": "summarize", 
+  "temporal_filter": {{"days_ago": 7}},
+  "key_concepts": ["project updates", "deadlines"],  // Specific topics to find
   "search_strategies": ["temporal", "keyword", "semantic"]
 }}
 """
         
         try:
             # Use a fast model for query understanding
-            # Fixed: Use get_llm_and_provider which returns both llm and provider
-            llm_info = self.llm_selector.get_llm_and_provider(model="gpt-4-mini")
-            llm = llm_info["llm"]
+            provider_info = self.llm_selector.get_provider(model="gpt-4-mini")
+            llm = provider_info["llm"]
             from llama_index.core.llms import ChatMessage
             messages = [ChatMessage(role="user", content=prompt)]
             response = await llm.achat(messages, temperature=0.1)
@@ -281,7 +301,11 @@ Respond with JSON:
         
         logger.info(f"🔍 Executing retrieval strategy: {strategy_type}")
         
-        if strategy_type == "temporal":
+        if strategy_type == "recency":
+            results = await self._recency_search(
+                understanding, user_id, note_ids, conversation_ids
+            )
+        elif strategy_type == "temporal":
             results = await self._temporal_search(
                 understanding, user_id, note_ids, conversation_ids
             )
@@ -305,6 +329,143 @@ Respond with JSON:
             results=results,
             evaluation=None
         )
+    
+    async def _recency_search(
+        self,
+        understanding: QueryUnderstanding,
+        user_id: int,
+        note_ids: Optional[List[int]],
+        conversation_ids: Optional[List[int]]
+    ) -> List[ChunkResult]:
+        """Fetch most recent notes without semantic search - for summary intents"""
+        
+        # Get temporal filter or default to last 7 days
+        temporal_filter = understanding.temporal_filter or {"days_ago": 7}
+        
+        # Get notes within the time range
+        temporal_note_ids = await self._get_temporal_notes(
+            user_id, temporal_filter, note_ids
+        )
+        
+        if not temporal_note_ids:
+            logger.info("No notes found in temporal range")
+            return []
+        
+        logger.info(f"Found {len(temporal_note_ids)} notes in recency search")
+        
+        # For recency search, we want to get ALL chunks from these notes
+        # without filtering by semantic similarity
+        with self.postgres.get_connection() as conn:
+            with conn.cursor() as cursor:
+                # First check if these notes have embeddings
+                cursor.execute("""
+                    SELECT COUNT(DISTINCT e.type_id) 
+                    FROM embedding_v1 e 
+                    WHERE e.type_id = ANY(%s) AND e.type = 'note'
+                """, (temporal_note_ids,))
+                embedded_count = cursor.fetchone()[0]
+                logger.info(f"Found {embedded_count} notes with embeddings out of {len(temporal_note_ids)} temporal notes")
+                
+                # Get all chunks from the temporal notes
+                cursor.execute("""
+                    SELECT 
+                        e.type_id,
+                        e.type,
+                        e.chunk_text,
+                        1.0 as similarity,  -- Max similarity since it's recency-based
+                        e.section_id,
+                        n."noteTitle" as title,
+                        n."createDate"
+                    FROM embedding_v1 e
+                    INNER JOIN note_v1 n ON e.type_id = n.id AND e.type = 'note'
+                    WHERE e.type_id = ANY(%s)
+                    AND e.type = 'note'
+                    ORDER BY n."createDate" DESC, e.section_id ASC
+                    LIMIT %s
+                """, (temporal_note_ids, 50))  # Get up to 50 chunks
+                
+                results = []
+                for row in cursor.fetchall():
+                    chunk = ChunkResult(
+                        type_id=row[0],
+                        type=row[1],
+                        chunk_text=row[2],
+                        similarity=row[3],
+                        section_id=row[4],
+                        metadata={"title": row[5], "created": str(row[6])} if row[5] else None
+                    )
+                    results.append(chunk)
+                
+                logger.info(f"Recency search returned {len(results)} chunks")
+                
+                # If no embeddings found, try to get note content directly as fallback
+                if len(results) == 0 and len(temporal_note_ids) > 0:
+                    logger.warning(f"No embeddings found for temporal notes, falling back to direct note content")
+                    cursor.execute("""
+                        SELECT 
+                            n.id,
+                            'note' as type,
+                            n."noteTextContent",
+                            1.0 as similarity,
+                            0 as section_id,
+                            n."noteTitle",
+                            n."createDate"
+                        FROM note_v1 n
+                        WHERE n.id = ANY(%s)
+                        AND n."noteTextContent" IS NOT NULL
+                        AND n."noteTextContent" != ''
+                        ORDER BY n."createDate" DESC
+                        LIMIT 20
+                    """, (temporal_note_ids[:20],))  # Limit to 20 most recent notes
+                    
+                    for row in cursor.fetchall():
+                        if row[2]:  # If note has content
+                            chunk = ChunkResult(
+                                type_id=row[0],
+                                type=row[1],
+                                chunk_text=row[2][:1000],  # Limit text length
+                                similarity=row[3],
+                                section_id=row[4],
+                                metadata={"title": row[5], "created": str(row[6])} if row[5] else None
+                            )
+                            results.append(chunk)
+                    
+                    logger.info(f"Fallback: Got {len(results)} notes with direct content")
+                
+                return results
+    
+    async def _handle_missing_embeddings_for_temporal(
+        self,
+        user_id: int,
+        temporal_filter: Dict[str, Any]
+    ) -> None:
+        """Check and embed missing notes for temporal queries"""
+        try:
+            # Get notes within temporal range
+            temporal_note_ids = await self._get_temporal_notes(user_id, temporal_filter, None)
+            
+            if not temporal_note_ids:
+                return
+            
+            logger.info(f"Checking embeddings for {len(temporal_note_ids)} temporal notes")
+            
+            # Check which notes are missing embeddings
+            missing_note_ids = await self.rag_processor._check_missing_embeddings_async('note', temporal_note_ids)
+            
+            if missing_note_ids:
+                logger.warning(f"⚠️ Found {len(missing_note_ids)} temporal notes without embeddings")
+                logger.info("⏳ Creating embeddings for temporal notes...")
+                
+                # Create embeddings synchronously for temporal queries
+                await self.rag_processor._create_embeddings_sync_async('note', missing_note_ids)
+                
+                logger.info(f"✅ Created embeddings for {len(missing_note_ids)} temporal notes")
+            else:
+                logger.info(f"✅ All {len(temporal_note_ids)} temporal notes have embeddings")
+                
+        except Exception as e:
+            logger.error(f"Error handling missing embeddings: {e}")
+            # Don't fail the whole query if embedding check fails
     
     async def _temporal_search(
         self,
