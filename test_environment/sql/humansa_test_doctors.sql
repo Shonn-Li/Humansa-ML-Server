@@ -5,6 +5,13 @@
 DELETE FROM humansa_schedule WHERE doctor_code LIKE 'TEST_%';
 DELETE FROM humansa_doctor WHERE doctor_code LIKE 'TEST_%';
 
+-- Add test clinics first if they don't exist
+INSERT INTO humansa_clinic (clinic_code, name, address, phone, city, operating_hours) VALUES
+('CLINIC001', '北京和睦家诊所', '北京市朝阳区将台路2号', '010-59277000', '北京', '周一至周日 8:00-20:00'),
+('CLINIC002', '深圳和睦家诊所', '深圳市福田区海田路1033号', '0755-86686888', '深圳', '周一至周日 8:00-20:00'),
+('CLINIC003', '广州和睦家诊所', '广州市天河区林和西路161号', '020-38681888', '广州', '周一至周日 8:00-20:00')
+ON CONFLICT (clinic_code) DO NOTHING;
+
 -- Add test doctors
 INSERT INTO humansa_doctor (doctor_code, name, title, specialty, expertise, experience_years, clinic_code, rating, bio, registration_fee) VALUES
 -- Cardiologists (心脏科)
@@ -39,22 +46,22 @@ BEGIN
             sched_date := CURRENT_DATE + i;
             
             -- Morning shift (9:00-12:00)
-            INSERT INTO humansa_schedule (doctor_code, clinic_code, schedule_date, start_time, end_time, is_available)
+            INSERT INTO humansa_schedule (doctor_code, clinic_code, shift_date, start_time, end_time, remaining_slots)
             VALUES (doc_code, 
                     (SELECT clinic_code FROM humansa_doctor WHERE doctor_code = doc_code),
                     sched_date,
                     '09:00:00',
                     '12:00:00',
-                    true);
+                    10);
                     
             -- Afternoon shift (14:00-17:00)
-            INSERT INTO humansa_schedule (doctor_code, clinic_code, schedule_date, start_time, end_time, is_available)
+            INSERT INTO humansa_schedule (doctor_code, clinic_code, shift_date, start_time, end_time, remaining_slots)
             VALUES (doc_code,
                     (SELECT clinic_code FROM humansa_doctor WHERE doctor_code = doc_code),
                     sched_date,
                     '14:00:00',
                     '17:00:00',
-                    true);
+                    10);
         END LOOP;
     END LOOP;
 END $$;
