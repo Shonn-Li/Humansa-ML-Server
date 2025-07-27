@@ -497,16 +497,31 @@ class MultiAgentChatEndpointV2:
                             
                             # Include search results if available
                             if result and isinstance(result, dict):
+                                # Add both sources and a summary of what was found
                                 if "sources" in result:
                                     item_data["sources"] = result["sources"]
+                                    # Add a results summary for the client
+                                    item_data["results_summary"] = f"Found {len(result['sources'])} relevant sources from your notes"
                                 elif "results" in result:
                                     item_data["results"] = result["results"]
+                                
+                                # Include metadata if available
+                                if "metadata" in result:
+                                    item_data["metadata"] = result["metadata"]
                             
                             yield create_event("response.output_item.done",
                                              sequence_number=sequence,
                                              output_index=current_output_index - 1,
                                              item=item_data)
                             sequence += 1
+                            
+                            # Also stream the sources as a separate event for client compatibility
+                            if result and isinstance(result, dict) and "sources" in result and result["sources"]:
+                                yield create_event("response.context_search.sources",
+                                                 sequence_number=sequence,
+                                                 sources=result["sources"],
+                                                 metadata=result.get("metadata", {}))
+                                sequence += 1
                             # Note: We only incremented current_output_index once above (tool call only)
                         elif agent_name == "attachment":
                             # Use file_search_call for attachments
@@ -542,6 +557,8 @@ class MultiAgentChatEndpointV2:
                                     item_data["results"] = result["results"]
                                 elif "sources" in result:
                                     item_data["sources"] = result["sources"]
+                                    # Add a results summary for the client
+                                    item_data["results_summary"] = f"Processed {len(result['sources'])} attachments"
                             
                             yield create_event("response.output_item.done",
                                              sequence_number=sequence,
