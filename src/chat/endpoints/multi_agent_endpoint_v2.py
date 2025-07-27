@@ -499,9 +499,19 @@ class MultiAgentChatEndpointV2:
                             if result and isinstance(result, dict):
                                 # Add both sources and a summary of what was found
                                 if "sources" in result:
-                                    item_data["sources"] = result["sources"]
-                                    # Add a results summary for the client
-                                    item_data["results_summary"] = f"Found {len(result['sources'])} relevant sources from your notes"
+                                    # Limit sources to prevent overly large payloads
+                                    sources = result["sources"]
+                                    logger.info(f"📊 Context search found {len(sources)} sources")
+                                    
+                                    # If too many sources, include a subset and indicate more are available
+                                    if len(sources) > 10:
+                                        item_data["sources"] = sources[:10]
+                                        item_data["total_sources"] = len(sources)
+                                        item_data["sources_truncated"] = True
+                                        item_data["results_summary"] = f"Found {len(sources)} relevant sources (showing first 10)"
+                                    else:
+                                        item_data["sources"] = sources
+                                        item_data["results_summary"] = f"Found {len(sources)} relevant sources from your notes"
                                 elif "results" in result:
                                     item_data["results"] = result["results"]
                                 
@@ -517,10 +527,14 @@ class MultiAgentChatEndpointV2:
                             
                             # Also stream the sources as a separate event for client compatibility
                             if result and isinstance(result, dict) and "sources" in result and result["sources"]:
+                                # Use the same truncated sources if applicable
+                                sources_to_stream = item_data.get("sources", result["sources"])
                                 yield create_event("response.context_search.sources",
                                                  sequence_number=sequence,
-                                                 sources=result["sources"],
-                                                 metadata=result.get("metadata", {}))
+                                                 sources=sources_to_stream,
+                                                 metadata=result.get("metadata", {}),
+                                                 total_sources=item_data.get("total_sources"),
+                                                 sources_truncated=item_data.get("sources_truncated", False))
                                 sequence += 1
                             # Note: We only incremented current_output_index once above (tool call only)
                         elif agent_name == "attachment":

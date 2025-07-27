@@ -12,6 +12,7 @@ import re
 import os
 import json
 from datetime import datetime
+from decimal import Decimal
 
 from .base import BaseAgent
 from ..provider.llm_provider import LLMProviderSelector
@@ -20,6 +21,14 @@ from ..citation.citation_position_tracker import citation_position_tracker
 from llama_index.core.llms import ChatMessage
 
 logger = logging.getLogger(__name__)
+
+
+class DecimalEncoder(json.JSONEncoder):
+    """Custom JSON encoder that handles Decimal types"""
+    def default(self, obj):
+        if isinstance(obj, Decimal):
+            return float(obj)
+        return super(DecimalEncoder, self).default(obj)
 
 
 class ResponseAgent(BaseAgent):
@@ -79,7 +88,7 @@ class ResponseAgent(BaseAgent):
         
         try:
             with open(filename, 'w', encoding='utf-8') as f:
-                json.dump(debug_data, f, indent=2, ensure_ascii=False)
+                json.dump(debug_data, f, indent=2, ensure_ascii=False, cls=DecimalEncoder)
             logger.info(f"💾 Debug context saved to: {filename}")
         except Exception as e:
             logger.error(f"Failed to save debug context: {e}")
