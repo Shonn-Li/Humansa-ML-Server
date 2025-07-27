@@ -1,0 +1,2009 @@
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:🔄 Attempting to import document converter endpoints...
+INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
+INFO:chat.utils.document_converter:❌ docx2pdf not available
+INFO:chat.utils.document_converter:❌ pypandoc not available
+INFO:chat.utils.document_converter:❌ python-docx not available
+INFO:chat.utils.document_converter:❌ openpyxl not available
+INFO:chat.utils.document_converter:❌ reportlab not available
+INFO:__main__:✅ Successfully imported document converter blueprint
+INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:🔄 Registering Humansa endpoints...
+INFO:humansa.postgres.database:HumansaDatabase initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:__main__:✅ Mem0 API endpoints registered
+INFO:__main__:✅ Humansa v2 blueprint registered
+INFO:__main__:✅ Humansa endpoints registered successfully
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:5001
+INFO:__main__:
+INFO:__main__:📋 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
+INFO:__main__:
+INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
+INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
+INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
+INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
+INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
+INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
+INFO:__main__:
+INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
+INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
+INFO:__main__:   - /v2/humansa/memory/search - Search user memories
+INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
+INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
+INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
+INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
+INFO:__main__:   - /o3-demo - O3 reasoning demo
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
+INFO:__main__:✅ Mem0 memory layer initialized for Humansa
+INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
+INFO:__main__:   Environment: test
+INFO:__main__:✅ Database pool created successfully
+INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.tools.humansa_tools:✅ Created 11 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 11 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 11 real database tools
+INFO:humansa.v2.api:Humansa v2 system initialized successfully
+INFO:__main__:✅ Humansa v2 system initialized with Azure OpenAI
+[2025-07-27 07:43:07 -0700] [99330] [INFO] Running on http://0.0.0.0:5001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:5001 (CTRL + C to quit)
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/context_manager.py:148: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  conversation_id = f"conv_{datetime.utcnow().timestamp()}"
+<string>:6: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 帮我预约明天上午的骨科...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_12
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_12
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_12', 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 帮我预约明天上午的骨科...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🔍 find_doctor_info_structured called with: name=None, specialty=骨科, city=None
+INFO:humansa.postgres.database:📋 Using fallback: returned 5 general doctors
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:📅 find_doctor_availability_structured called with: doctor=刘骨科, range=2025-07-27 to 2025-07-28
+INFO:humansa.postgres.database:✅ Found doctor by exact match: 刘骨科
+ERROR:humansa.postgres.database:Database connection error: column "remaining_slots" does not exist
+LINE 2: ...         SELECT shift_date, start_time, end_time, remaining_...
+                                                             ^
+
+ERROR:humansa.postgres.database:Error in availability range search with fallback: column "remaining_slots" does not exist
+LINE 2: ...         SELECT shift_date, start_time, end_time, remaining_...
+                                                             ^
+
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:📅 find_doctor_availability_structured called with: doctor=骨, range=2025-07-27 to 2025-07-28
+INFO:humansa.postgres.database:✅ Found doctor by fuzzy match: 刘骨科 (searched for: 骨)
+ERROR:humansa.postgres.database:Database connection error: column "remaining_slots" does not exist
+LINE 2: ...         SELECT shift_date, start_time, end_time, remaining_...
+                                                             ^
+
+ERROR:humansa.postgres.database:Error in availability range search with fallback: column "remaining_slots" does not exist
+LINE 2: ...         SELECT shift_date, start_time, end_time, remaining_...
+                                                             ^
+
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+ * Serving Quart app 'main'
+ * Debug mode: True
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:5001 (CTRL + C to quit)
+> Running step 528172d7-eedb-4b40-959e-a56f37da7688. Step input: 帮我预约明天上午的骨科
+[1;3;38;5;200mThought: 用户需要预约明天上午的骨科，但未指定城市和医生，也未提供患者姓名和电话。我需要先查找明天上午骨科有空的医生，再获取用户的个人信息以便预约。
+Action: find_doctor_info
+Action Input: {'specialty': '骨科', 'language': 'zh'}
+[0m[1;3;34mObservation: {'success': True, 'doctors': [{'doctor_code': 'TEST_006', 'clinic_code': 'CLINIC002', 'name': '刘骨科', 'title': '主任医师', 'expertise': '关节置换、骨折治疗', 'bio': '骨科专家，北京协和医学院毕业，20年以上经验', 'registration_fee': Decimal('350.00'), 'clinic_name': '诺亚新舟北京医疗中心', 'address': '北京市朝阳区建国路456号', 'phone': '010-66666666'}, {'doctor_code': 'TEST_010', 'clinic_code': 'CLINIC003', 'name': '周中医', 'title': '副主任医师', 'expertise': '中医内科、慢病调理', 'bio': '中医内科专家，南京中医药大学毕业', 'registration_fee': Decimal('180.00'), 'clinic_name': '诺亚新舟广州诊所', 'address': '广州市天河区体育西路789号', 'phone': '020-99999999'}, {'doctor_code': 'TEST_009', 'clinic_code': 'CLINIC001', 'name': '孙儿科', 'title': '主治医师', 'expertise': '儿童常见病、生长发育', 'bio': '儿科专家，上海交通大学医学院毕业', 'registration_fee': Decimal('150.00'), 'clinic_name': '诺亚新舟深圳健康中心', 'address': '深圳市福田区福华路123号', 'phone': '0755-88888888'}, {'doctor_code': 'TEST_005', 'clinic_code': 'CLINIC002', 'name': '张医生', 'title': '主任医师', 'expertise': '中医调理、针灸推拿', 'bio': '中医专家，广州中医药大学博士，擅长中医调理', 'registration_fee': Decimal('250.00'), 'clinic_name': '诺亚新舟北京医疗中心', 'address': '北京市朝阳区建国路456号', 'phone': '010-66666666'}, {'doctor_code': 'TEST_001', 'clinic_code': 'CLINIC001', 'name': '张心远', 'title': '主任医师', 'expertise': '冠心病、心律失常、高血压', 'bio': '资深心脏病专家，北京大学医学部毕业，擅长心血管疾病诊治', 'registration_fee': Decimal('300.00'), 'clinic_name': '诺亚新舟深圳健康中心', 'address': '深圳市福田区福华路123号', 'phone': '0755-88888888'}], 'total_found': 5, 'source': 'database', 'search_type': 'fuzzy_match_or_fallback', 'message': 'Found 5 doctor(s) matching your criteria'}
+[0m> Running step 784f4337-4ca1-41d6-a259-9a26ce48078e. Step input: None
+[1;3;38;5;200mThought: 有一位专攻骨科的医生“刘骨科”在北京，擅长关节置换、骨折治疗。接下来需要查询他明天上午的可用时间段，以便预约。
+Action: find_doctor_availability
+Action Input: {'doctor_name': '刘骨科', 'start_date': None, 'end_date': None, 'days_ahead': 1, 'specialty': '骨科'}
+[0m[1;3;34mObservation: {'success': True, 'doctor_name': '刘骨科', 'date_range': '2025-07-27 to 2025-07-28', 'availability': [], 'total_slots': 0, 'doctor_found': False, 'suggested_doctors': [], 'source': 'database', 'search_method': 'suggestion', 'message': "Doctor '刘骨科' not found. Here are similar available doctors with slots in the requested time range."}
+[0m> Running step 6f1fe805-6fb6-4cd8-9c42-a035484c2f84. Step input: None
+[1;3;38;5;200mThought: 查询结果显示“刘骨科”医生明天（7月28日）上午没有可用号源，也没有推荐其他骨科医生。需要为用户查找明天上午骨科相关的其他可预约医生。
+Action: find_doctor_availability
+Action Input: {'doctor_name': '骨', 'days_ahead': 1, 'specialty': '骨科'}
+[0m[1;3;34mObservation: {'success': True, 'doctor_name': '骨', 'date_range': '2025-07-27 to 2025-07-28', 'availability': [], 'total_slots': 0, 'doctor_found': False, 'suggested_doctors': [], 'source': 'database', 'search_method': 'suggestion', 'message': "Doctor '骨' not found. Here are similar available doctors with slots in the requested time range."}
+[0m> Running step bde69665-4793-4167-a9c5-435724217b5b. Step input: None
+[1;3;38;5;200mThought: 明天上午骨科没有可预约医生或号源。可以为用户推荐其他时间或其他专科医生，或者帮助预约骨科的下一个可用时间。需要向用户确认是否调整预约需求。
+Answer: 很抱歉，明天上午骨科暂无可预约的医生。您是否考虑更换其他时间，或需要预约其他专科？也可以帮您查询骨科下一个可用的预约时间，请问您的需求如何调整？
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 7.491726 seconds
+      |_CBEventType.LLM -> 2.464077 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.0132 seconds
+      |_CBEventType.LLM -> 2.095419 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.030354 seconds
+      |_CBEventType.LLM -> 1.141137 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.025176 seconds
+      |_CBEventType.LLM -> 1.705816 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 4 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py:209: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "timestamp": datetime.utcnow().isoformat()
+WARNING:asyncio:Executing <Task pending name='Task-15' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 7.494 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+ERROR:humansa.memory.mem0_manager:Failed to add conversation to memory: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 226, in add_conversation
+    result = await loop.run_in_executor(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 228, in <lambda>
+    lambda: self.memory.add(
+            ~~~~~~~~~~~~~~~^
+        memory_text,
+        ^^^^^^^^^^^^
+        user_id=memory_user_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        metadata=metadata
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 263, in add
+    vector_store_result = future1.result()
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 329, in _add_to_vector_store
+    response = self.llm.generate_response(
+        messages=[
+    ...<3 lines>...
+        response_format={"type": "json_object"},
+    )
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/llms/openai.py", line 123, in generate_response
+    response = self.client.chat.completions.create(**params)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1087, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<43 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1256, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+[2025-07-27 07:43:26 -0700] [99330] [INFO] 127.0.0.1:64900 POST /v2/humansa/chat 1.1 200 857 7696330
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 帮我预约明天上午的骨科...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_12
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_12
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_12', 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 帮我预约明天上午的骨科...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🔍 find_doctor_info_structured called with: name=None, specialty=骨科, city=None
+INFO:humansa.postgres.database:📋 Using fallback: returned 5 general doctors
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:📅 find_doctor_availability_structured called with: doctor=刘骨科, range=2024-06-07 to 2024-06-07
+INFO:humansa.postgres.database:✅ Found doctor by exact match: 刘骨科
+ERROR:humansa.postgres.database:Database connection error: column "remaining_slots" does not exist
+LINE 2: ...         SELECT shift_date, start_time, end_time, remaining_...
+                                                             ^
+
+ERROR:humansa.postgres.database:Error in availability range search with fallback: column "remaining_slots" does not exist
+LINE 2: ...         SELECT shift_date, start_time, end_time, remaining_...
+                                                             ^
+
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step 566c133c-beb0-47b8-9bf0-4d7126fd8c44. Step input: 帮我预约明天上午的骨科
+[1;3;38;5;200mThought: 用户需要预约明天上午的骨科医生，我需要先查找骨科医生并查询明天的可用时间。
+Action: find_doctor_info
+Action Input: {'specialty': '骨科', 'language': 'zh'}
+[0m[1;3;34mObservation: {'success': True, 'doctors': [{'doctor_code': 'TEST_006', 'clinic_code': 'CLINIC002', 'name': '刘骨科', 'title': '主任医师', 'expertise': '关节置换、骨折治疗', 'bio': '骨科专家，北京协和医学院毕业，20年以上经验', 'registration_fee': Decimal('350.00'), 'clinic_name': '诺亚新舟北京医疗中心', 'address': '北京市朝阳区建国路456号', 'phone': '010-66666666'}, {'doctor_code': 'TEST_010', 'clinic_code': 'CLINIC003', 'name': '周中医', 'title': '副主任医师', 'expertise': '中医内科、慢病调理', 'bio': '中医内科专家，南京中医药大学毕业', 'registration_fee': Decimal('180.00'), 'clinic_name': '诺亚新舟广州诊所', 'address': '广州市天河区体育西路789号', 'phone': '020-99999999'}, {'doctor_code': 'TEST_009', 'clinic_code': 'CLINIC001', 'name': '孙儿科', 'title': '主治医师', 'expertise': '儿童常见病、生长发育', 'bio': '儿科专家，上海交通大学医学院毕业', 'registration_fee': Decimal('150.00'), 'clinic_name': '诺亚新舟深圳健康中心', 'address': '深圳市福田区福华路123号', 'phone': '0755-88888888'}, {'doctor_code': 'TEST_005', 'clinic_code': 'CLINIC002', 'name': '张医生', 'title': '主任医师', 'expertise': '中医调理、针灸推拿', 'bio': '中医专家，广州中医药大学博士，擅长中医调理', 'registration_fee': Decimal('250.00'), 'clinic_name': '诺亚新舟北京医疗中心', 'address': '北京市朝阳区建国路456号', 'phone': '010-66666666'}, {'doctor_code': 'TEST_001', 'clinic_code': 'CLINIC001', 'name': '张心远', 'title': '主任医师', 'expertise': '冠心病、心律失常、高血压', 'bio': '资深心脏病专家，北京大学医学部毕业，擅长心血管疾病诊治', 'registration_fee': Decimal('300.00'), 'clinic_name': '诺亚新舟深圳健康中心', 'address': '深圳市福田区福华路123号', 'phone': '0755-88888888'}], 'total_found': 5, 'source': 'database', 'search_type': 'fuzzy_match_or_fallback', 'message': 'Found 5 doctor(s) matching your criteria'}
+[0m> Running step c0c5a36e-c20b-47e1-a481-45e68a311c94. Step input: None
+[1;3;38;5;200mThought: 找到一位骨科医生“刘骨科”，需要查询他明天上午的可用时间。
+Action: find_doctor_availability
+Action Input: {'doctor_name': '刘骨科', 'start_date': '2024-06-07', 'end_date': '2024-06-07'}
+[0m[1;3;34mObservation: {'success': True, 'doctor_name': '刘骨科', 'date_range': '2024-06-07 to 2024-06-07', 'availability': [], 'total_slots': 0, 'doctor_found': False, 'suggested_doctors': [], 'source': 'database', 'search_method': 'suggestion', 'message': "Doctor '刘骨科' not found. Here are similar available doctors with slots in the requested time range."}
+[0m> Running step 91784fc0-12fb-4ab2-9518-4e81a7af6bff. Step input: None
+[1;3;38;5;200mThought: 明天上午骨科医生“刘骨科”没有可用时段，且没有其他骨科医生推荐。需要告知用户这个情况，并询问是否调整预约时间或其他选择。
+Answer: 很抱歉，明天上午骨科暂无可预约的医生时段。如果您方便，可以考虑更换其他日期，或者需要预约其他专科吗？如有其他需求请告知，我可以为您继续查询。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 5.108464 seconds
+      |_CBEventType.LLM -> 2.294263 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.027295 seconds
+      |_CBEventType.LLM -> 0.863508 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.024676 seconds
+      |_CBEventType.LLM -> 1.887775 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 7 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 6:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 7:
+WARNING:asyncio:Executing <Task pending name='Task-26' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 5.111 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+ERROR:humansa.memory.mem0_manager:Failed to add conversation to memory: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 226, in add_conversation
+    result = await loop.run_in_executor(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 228, in <lambda>
+    lambda: self.memory.add(
+            ~~~~~~~~~~~~~~~^
+        memory_text,
+        ^^^^^^^^^^^^
+        user_id=memory_user_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        metadata=metadata
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 263, in add
+    vector_store_result = future1.result()
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 329, in _add_to_vector_store
+    response = self.llm.generate_response(
+        messages=[
+    ...<3 lines>...
+        response_format={"type": "json_object"},
+    )
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/llms/openai.py", line 123, in generate_response
+    response = self.client.chat.completions.create(**params)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1087, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<43 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1256, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+[2025-07-27 07:44:05 -0700] [99330] [INFO] 127.0.0.1:65506 POST /v2/humansa/chat 1.1 200 845 5283884
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 我想预约张三医生...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_11
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_11
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_11', 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 我想预约张三医生...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🔍 find_doctor_info_structured called with: name=张三, specialty=None, city=None
+INFO:humansa.postgres.database:📋 Using fallback: returned 5 general doctors
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:📅 find_doctor_availability_structured called with: doctor=刘骨科, range=2025-07-27 to 2025-08-03
+INFO:humansa.postgres.database:✅ Found doctor by exact match: 刘骨科
+ERROR:humansa.postgres.database:Database connection error: column "remaining_slots" does not exist
+LINE 2: ...         SELECT shift_date, start_time, end_time, remaining_...
+                                                             ^
+
+ERROR:humansa.postgres.database:Error in availability range search with fallback: column "remaining_slots" does not exist
+LINE 2: ...         SELECT shift_date, start_time, end_time, remaining_...
+                                                             ^
+
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🔍 find_doctor_info_structured called with: name=None, specialty=骨科, city=None
+INFO:humansa.postgres.database:📋 Using fallback: returned 5 general doctors
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step 2229356d-8cf7-45c2-862b-0efe13125952. Step input: 我想预约张三医生
+[1;3;38;5;200mThought: 用户想预约“张三”医生，但需要先查询该医生的详细信息和专科，确认其可预约情况。
+Action: find_doctor_info
+Action Input: {'name': '张三', 'language': 'zh'}
+[0m[1;3;34mObservation: {'success': True, 'doctors': [{'doctor_code': 'TEST_006', 'clinic_code': 'CLINIC002', 'name': '刘骨科', 'title': '主任医师', 'expertise': '关节置换、骨折治疗', 'bio': '骨科专家，北京协和医学院毕业，20年以上经验', 'registration_fee': Decimal('350.00'), 'clinic_name': '诺亚新舟北京医疗中心', 'address': '北京市朝阳区建国路456号', 'phone': '010-66666666'}, {'doctor_code': 'TEST_010', 'clinic_code': 'CLINIC003', 'name': '周中医', 'title': '副主任医师', 'expertise': '中医内科、慢病调理', 'bio': '中医内科专家，南京中医药大学毕业', 'registration_fee': Decimal('180.00'), 'clinic_name': '诺亚新舟广州诊所', 'address': '广州市天河区体育西路789号', 'phone': '020-99999999'}, {'doctor_code': 'TEST_009', 'clinic_code': 'CLINIC001', 'name': '孙儿科', 'title': '主治医师', 'expertise': '儿童常见病、生长发育', 'bio': '儿科专家，上海交通大学医学院毕业', 'registration_fee': Decimal('150.00'), 'clinic_name': '诺亚新舟深圳健康中心', 'address': '深圳市福田区福华路123号', 'phone': '0755-88888888'}, {'doctor_code': 'TEST_005', 'clinic_code': 'CLINIC002', 'name': '张医生', 'title': '主任医师', 'expertise': '中医调理、针灸推拿', 'bio': '中医专家，广州中医药大学博士，擅长中医调理', 'registration_fee': Decimal('250.00'), 'clinic_name': '诺亚新舟北京医疗中心', 'address': '北京市朝阳区建国路456号', 'phone': '010-66666666'}, {'doctor_code': 'TEST_001', 'clinic_code': 'CLINIC001', 'name': '张心远', 'title': '主任医师', 'expertise': '冠心病、心律失常、高血压', 'bio': '资深心脏病专家，北京大学医学部毕业，擅长心血管疾病诊治', 'registration_fee': Decimal('300.00'), 'clinic_name': '诺亚新舟深圳健康中心', 'address': '深圳市福田区福华路123号', 'phone': '0755-88888888'}], 'total_found': 5, 'source': 'database', 'search_type': 'fuzzy_match_or_fallback', 'message': 'Found 5 doctor(s) matching your criteria'}
+[0m> Running step c859651c-c595-450e-a51e-5bd09c22b0d8. Step input: None
+[1;3;38;5;200mThought: “张三”医生没有精确匹配，系统为您找到了部分相似医生。其中有“张医生”（中医调理、针灸推拿）、“张心远”（心血管）、“刘骨科”（骨科）等。用户需求为骨科，可推荐“刘骨科”主任医师。
+Action: find_doctor_availability
+Action Input: {'doctor_name': '刘骨科', 'days_ahead': 7}
+[0m[1;3;34mObservation: {'success': True, 'doctor_name': '刘骨科', 'date_range': '2025-07-27 to 2025-08-03', 'availability': [], 'total_slots': 0, 'doctor_found': False, 'suggested_doctors': [], 'source': 'database', 'search_method': 'suggestion', 'message': "Doctor '刘骨科' not found. Here are similar available doctors with slots in the requested time range."}
+[0m> Running step ff0007a5-140e-487c-a8da-fbb08b176374. Step input: None
+[1;3;38;5;200mThought: “刘骨科”医生在接下来一周内暂无可预约时段，并且系统未推荐其他可预约骨科医生。需要为用户进一步查找骨科其他医生的可用预约时间。
+Action: find_doctor_info
+Action Input: {'specialty': '骨科', 'language': 'zh'}
+[0m[1;3;34mObservation: {'success': True, 'doctors': [{'doctor_code': 'TEST_006', 'clinic_code': 'CLINIC002', 'name': '刘骨科', 'title': '主任医师', 'expertise': '关节置换、骨折治疗', 'bio': '骨科专家，北京协和医学院毕业，20年以上经验', 'registration_fee': Decimal('350.00'), 'clinic_name': '诺亚新舟北京医疗中心', 'address': '北京市朝阳区建国路456号', 'phone': '010-66666666'}, {'doctor_code': 'TEST_010', 'clinic_code': 'CLINIC003', 'name': '周中医', 'title': '副主任医师', 'expertise': '中医内科、慢病调理', 'bio': '中医内科专家，南京中医药大学毕业', 'registration_fee': Decimal('180.00'), 'clinic_name': '诺亚新舟广州诊所', 'address': '广州市天河区体育西路789号', 'phone': '020-99999999'}, {'doctor_code': 'TEST_009', 'clinic_code': 'CLINIC001', 'name': '孙儿科', 'title': '主治医师', 'expertise': '儿童常见病、生长发育', 'bio': '儿科专家，上海交通大学医学院毕业', 'registration_fee': Decimal('150.00'), 'clinic_name': '诺亚新舟深圳健康中心', 'address': '深圳市福田区福华路123号', 'phone': '0755-88888888'}, {'doctor_code': 'TEST_005', 'clinic_code': 'CLINIC002', 'name': '张医生', 'title': '主任医师', 'expertise': '中医调理、针灸推拿', 'bio': '中医专家，广州中医药大学博士，擅长中医调理', 'registration_fee': Decimal('250.00'), 'clinic_name': '诺亚新舟北京医疗中心', 'address': '北京市朝阳区建国路456号', 'phone': '010-66666666'}, {'doctor_code': 'TEST_001', 'clinic_code': 'CLINIC001', 'name': '张心远', 'title': '主任医师', 'expertise': '冠心病、心律失常、高血压', 'bio': '资深心脏病专家，北京大学医学部毕业，擅长心血管疾病诊治', 'registration_fee': Decimal('300.00'), 'clinic_name': '诺亚新舟深圳健康中心', 'address': '深圳市福田区福华路123号', 'phone': '0755-88888888'}], 'total_found': 5, 'source': 'database', 'search_type': 'fuzzy_match_or_fallback', 'message': 'Found 5 doctor(s) matching your criteria'}
+[0m> Running step b2c0a54f-7769-410d-837d-bd22f4fa932d. Step input: None
+[1;3;38;5;200mThought: 查询结果中，骨科医生仅有“刘骨科”，但他暂无可预约时段。其余医生不属于骨科。需要告知用户目前骨科暂无可预约医生，并询问是否预约其他专科或更换时间。
+Answer: 很抱歉，目前骨科暂无可预约的医生时段。如果您需要，可以选择其他专科医生，或者更换日期后我为您继续查询。请问您有什么其他需求吗？
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 5.800576 seconds
+      |_CBEventType.LLM -> 0.762426 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.024401 seconds
+      |_CBEventType.LLM -> 1.767792 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.024521 seconds
+      |_CBEventType.LLM -> 1.319848 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.014968 seconds
+      |_CBEventType.LLM -> 1.870056 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 11 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 6:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 7:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 8:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 9:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 10:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 11:
+WARNING:asyncio:Executing <Task pending name='Task-35' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 5.803 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+ERROR:humansa.memory.mem0_manager:Failed to add conversation to memory: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 226, in add_conversation
+    result = await loop.run_in_executor(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 228, in <lambda>
+    lambda: self.memory.add(
+            ~~~~~~~~~~~~~~~^
+        memory_text,
+        ^^^^^^^^^^^^
+        user_id=memory_user_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        metadata=metadata
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 263, in add
+    vector_store_result = future1.result()
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 329, in _add_to_vector_store
+    response = self.llm.generate_response(
+        messages=[
+    ...<3 lines>...
+        response_format={"type": "json_object"},
+    )
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/llms/openai.py", line 123, in generate_response
+    response = self.client.chat.completions.create(**params)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1087, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<43 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1256, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+[2025-07-27 07:44:11 -0700] [99330] [INFO] 127.0.0.1:49231 POST /v2/humansa/chat 1.1 200 803 5920808
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 我想找个心脏科医生...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_6
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_6
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_6', 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 我想找个心脏科医生...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🔍 find_doctor_info_structured called with: name=None, specialty=心脏科, city=None
+INFO:humansa.postgres.database:📋 Using fallback: returned 5 general doctors
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:📅 find_doctor_availability_structured called with: doctor=张心远, range=2025-07-27 to 2025-08-03
+INFO:humansa.postgres.database:✅ Found doctor by exact match: 张心远
+ERROR:humansa.postgres.database:Database connection error: column "remaining_slots" does not exist
+LINE 2: ...         SELECT shift_date, start_time, end_time, remaining_...
+                                                             ^
+
+ERROR:humansa.postgres.database:Error in availability range search with fallback: column "remaining_slots" does not exist
+LINE 2: ...         SELECT shift_date, start_time, end_time, remaining_...
+                                                             ^
+
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step 77db3833-078f-4466-85f3-723b7012fe54. Step input: 我想找个心脏科医生
+[1;3;38;5;200mThought: 用户想找心脏科医生，需要查询心脏科相关医生信息。
+Action: find_doctor_info
+Action Input: {'specialty': '心脏科', 'language': 'zh'}
+[0m[1;3;34mObservation: {'success': True, 'doctors': [{'doctor_code': 'TEST_006', 'clinic_code': 'CLINIC002', 'name': '刘骨科', 'title': '主任医师', 'expertise': '关节置换、骨折治疗', 'bio': '骨科专家，北京协和医学院毕业，20年以上经验', 'registration_fee': Decimal('350.00'), 'clinic_name': '诺亚新舟北京医疗中心', 'address': '北京市朝阳区建国路456号', 'phone': '010-66666666'}, {'doctor_code': 'TEST_010', 'clinic_code': 'CLINIC003', 'name': '周中医', 'title': '副主任医师', 'expertise': '中医内科、慢病调理', 'bio': '中医内科专家，南京中医药大学毕业', 'registration_fee': Decimal('180.00'), 'clinic_name': '诺亚新舟广州诊所', 'address': '广州市天河区体育西路789号', 'phone': '020-99999999'}, {'doctor_code': 'TEST_009', 'clinic_code': 'CLINIC001', 'name': '孙儿科', 'title': '主治医师', 'expertise': '儿童常见病、生长发育', 'bio': '儿科专家，上海交通大学医学院毕业', 'registration_fee': Decimal('150.00'), 'clinic_name': '诺亚新舟深圳健康中心', 'address': '深圳市福田区福华路123号', 'phone': '0755-88888888'}, {'doctor_code': 'TEST_005', 'clinic_code': 'CLINIC002', 'name': '张医生', 'title': '主任医师', 'expertise': '中医调理、针灸推拿', 'bio': '中医专家，广州中医药大学博士，擅长中医调理', 'registration_fee': Decimal('250.00'), 'clinic_name': '诺亚新舟北京医疗中心', 'address': '北京市朝阳区建国路456号', 'phone': '010-66666666'}, {'doctor_code': 'TEST_001', 'clinic_code': 'CLINIC001', 'name': '张心远', 'title': '主任医师', 'expertise': '冠心病、心律失常、高血压', 'bio': '资深心脏病专家，北京大学医学部毕业，擅长心血管疾病诊治', 'registration_fee': Decimal('300.00'), 'clinic_name': '诺亚新舟深圳健康中心', 'address': '深圳市福田区福华路123号', 'phone': '0755-88888888'}], 'total_found': 5, 'source': 'database', 'search_type': 'fuzzy_match_or_fallback', 'message': 'Found 5 doctor(s) matching your criteria'}
+[0m> Running step 3e7c786f-a7d8-4292-b1b6-b33acbd81c7b. Step input: None
+[1;3;38;5;200mThought: 已找到一位心脏科医生张心远，可以为用户查询该医生的可预约时间。
+Action: find_doctor_availability
+Action Input: {'doctor_name': '张心远', 'days_ahead': 7}
+[0m[1;3;34mObservation: {'success': True, 'doctor_name': '张心远', 'date_range': '2025-07-27 to 2025-08-03', 'availability': [], 'total_slots': 0, 'doctor_found': False, 'suggested_doctors': [], 'source': 'database', 'search_method': 'suggestion', 'message': "Doctor '张心远' not found. Here are similar available doctors with slots in the requested time range."}
+[0m> Running step ca8135ff-20f6-4367-9b27-8cd934a2777e. Step input: None
+[1;3;38;5;200mThought: 查询“张心远”医生时，系统显示该医生在未来7天内暂无可预约时段，且暂无类似医生推荐。需要告知用户当前心脏科暂无可预约时段。
+Answer: 很抱歉，目前心脏科医生（如张心远）在未来一周暂无可预约时段。如您有其他专科或时间需求，欢迎告知，我可以为您继续查询。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 3.327593 seconds
+      |_CBEventType.LLM -> 1.027418 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.021502 seconds
+      |_CBEventType.LLM -> 0.708095 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.024183 seconds
+      |_CBEventType.LLM -> 1.535918 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 14 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 6:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 7:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 8:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 9:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 10:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 11:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 12:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 13:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 14:
+WARNING:asyncio:Executing <Task pending name='Task-46' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 3.330 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+ERROR:humansa.memory.mem0_manager:Failed to add conversation to memory: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 226, in add_conversation
+    result = await loop.run_in_executor(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 228, in <lambda>
+    lambda: self.memory.add(
+            ~~~~~~~~~~~~~~~^
+        memory_text,
+        ^^^^^^^^^^^^
+        user_id=memory_user_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        metadata=metadata
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 263, in add
+    vector_store_result = future1.result()
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 329, in _add_to_vector_store
+    response = self.llm.generate_response(
+        messages=[
+    ...<3 lines>...
+        response_format={"type": "json_object"},
+    )
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/llms/openai.py", line 123, in generate_response
+    response = self.client.chat.completions.create(**params)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1087, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<43 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1256, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+[2025-07-27 07:44:14 -0700] [99330] [INFO] 127.0.0.1:49304 POST /v2/humansa/chat 1.1 200 772 3402459
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 张三医生在吗？...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_7
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_7
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_7', 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 张三医生在吗？...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🔍 find_doctor_info_structured called with: name=张三, specialty=None, city=None
+INFO:humansa.postgres.database:📋 Using fallback: returned 5 general doctors
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step 42648aef-5d4f-4d01-8ad6-38939ce95b26. Step input: 张三医生在吗？
+[1;3;38;5;200mThought: 用户想了解“张三”医生的信息，我需要查询医生信息以确认是否有此医生及相关专科。
+Action: find_doctor_info
+Action Input: {'name': '张三', 'language': 'zh'}
+[0m[1;3;34mObservation: {'success': True, 'doctors': [{'doctor_code': 'TEST_006', 'clinic_code': 'CLINIC002', 'name': '刘骨科', 'title': '主任医师', 'expertise': '关节置换、骨折治疗', 'bio': '骨科专家，北京协和医学院毕业，20年以上经验', 'registration_fee': Decimal('350.00'), 'clinic_name': '诺亚新舟北京医疗中心', 'address': '北京市朝阳区建国路456号', 'phone': '010-66666666'}, {'doctor_code': 'TEST_010', 'clinic_code': 'CLINIC003', 'name': '周中医', 'title': '副主任医师', 'expertise': '中医内科、慢病调理', 'bio': '中医内科专家，南京中医药大学毕业', 'registration_fee': Decimal('180.00'), 'clinic_name': '诺亚新舟广州诊所', 'address': '广州市天河区体育西路789号', 'phone': '020-99999999'}, {'doctor_code': 'TEST_009', 'clinic_code': 'CLINIC001', 'name': '孙儿科', 'title': '主治医师', 'expertise': '儿童常见病、生长发育', 'bio': '儿科专家，上海交通大学医学院毕业', 'registration_fee': Decimal('150.00'), 'clinic_name': '诺亚新舟深圳健康中心', 'address': '深圳市福田区福华路123号', 'phone': '0755-88888888'}, {'doctor_code': 'TEST_005', 'clinic_code': 'CLINIC002', 'name': '张医生', 'title': '主任医师', 'expertise': '中医调理、针灸推拿', 'bio': '中医专家，广州中医药大学博士，擅长中医调理', 'registration_fee': Decimal('250.00'), 'clinic_name': '诺亚新舟北京医疗中心', 'address': '北京市朝阳区建国路456号', 'phone': '010-66666666'}, {'doctor_code': 'TEST_001', 'clinic_code': 'CLINIC001', 'name': '张心远', 'title': '主任医师', 'expertise': '冠心病、心律失常、高血压', 'bio': '资深心脏病专家，北京大学医学部毕业，擅长心血管疾病诊治', 'registration_fee': Decimal('300.00'), 'clinic_name': '诺亚新舟深圳健康中心', 'address': '深圳市福田区福华路123号', 'phone': '0755-88888888'}], 'total_found': 5, 'source': 'database', 'search_type': 'fuzzy_match_or_fallback', 'message': 'Found 5 doctor(s) matching your criteria'}
+[0m> Running step 5974a742-f143-441a-a1ee-445137d11710. Step input: None
+[1;3;38;5;200mThought: “张三”医生未找到，但有相似医生如“张心远”（心脏科）和“张医生”（中医调理）。针对之前用户提到心脏科和骨科需求，可以重点推荐张心远医生。
+Answer: 未找到名为“张三”的医生。但为您推荐几位相关医生：
+1. 张心远（心脏科，主任医师，擅长冠心病、心律失常、高血压，深圳市福田区福华路123号，挂号费300元）
+2. 张医生（中医调理，主任医师，北京市朝阳区建国路456号，挂号费250元）
+如需预约张心远医生（心脏科）或其他医生，请告知所需专科及城市，我可继续为您安排。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 3.667635 seconds
+      |_CBEventType.LLM -> 1.135223 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.013 seconds
+      |_CBEventType.LLM -> 2.513891 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 16 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 6:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 7:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 8:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 9:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 10:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 11:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 12:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 13:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 14:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 15:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 16:
+WARNING:asyncio:Executing <Task pending name='Task-55' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 3.670 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+ERROR:humansa.memory.mem0_manager:Failed to add conversation to memory: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 226, in add_conversation
+    result = await loop.run_in_executor(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 228, in <lambda>
+    lambda: self.memory.add(
+            ~~~~~~~~~~~~~~~^
+        memory_text,
+        ^^^^^^^^^^^^
+        user_id=memory_user_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        metadata=metadata
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 263, in add
+    vector_store_result = future1.result()
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 329, in _add_to_vector_store
+    response = self.llm.generate_response(
+        messages=[
+    ...<3 lines>...
+        response_format={"type": "json_object"},
+    )
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/llms/openai.py", line 123, in generate_response
+    response = self.client.chat.completions.create(**params)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1087, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<43 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1256, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+[2025-07-27 07:44:18 -0700] [99330] [INFO] 127.0.0.1:49395 POST /v2/humansa/chat 1.1 200 1284 3773802
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 北京有哪些医生？...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_8
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_8
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_8', 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 北京有哪些医生？...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🔍 find_doctor_info_structured called with: name=None, specialty=None, city=北京
+INFO:humansa.postgres.database:🎯 Found 4 doctors matching search criteria
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step 4420f609-3575-4044-8a83-b98f0a25ffe0. Step input: 北京有哪些医生？
+[1;3;38;5;200mThought: 用户想了解北京的医生信息，需要查询北京地区的医生列表。
+Action: find_doctor_info
+Action Input: {'city': '北京', 'language': 'zh'}
+[0m[1;3;34mObservation: {'success': True, 'doctors': [{'doctor_code': 'TEST_006', 'clinic_code': 'CLINIC002', 'name': '刘骨科', 'title': '主任医师', 'expertise': '关节置换、骨折治疗', 'bio': '骨科专家，北京协和医学院毕业，20年以上经验', 'registration_fee': Decimal('350.00'), 'clinic_name': '诺亚新舟北京医疗中心', 'address': '北京市朝阳区建国路456号', 'phone': '010-66666666'}, {'doctor_code': 'TEST_005', 'clinic_code': 'CLINIC002', 'name': '张医生', 'title': '主任医师', 'expertise': '中医调理、针灸推拿', 'bio': '中医专家，广州中医药大学博士，擅长中医调理', 'registration_fee': Decimal('250.00'), 'clinic_name': '诺亚新舟北京医疗中心', 'address': '北京市朝阳区建国路456号', 'phone': '010-66666666'}, {'doctor_code': 'TEST_002', 'clinic_code': 'CLINIC002', 'name': '王心明', 'title': '副主任医师', 'expertise': '心脏介入手术、心肌病', 'bio': '心脏介入专家，复旦大学医学院博士', 'registration_fee': Decimal('200.00'), 'clinic_name': '诺亚新舟北京医疗中心', 'address': '北京市朝阳区建国路456号', 'phone': '010-66666666'}, {'doctor_code': 'TEST_007', 'clinic_code': 'CLINIC002', 'name': '陈骨医', 'title': '主任医师', 'expertise': '脊柱外科、运动损伤', 'bio': '脊柱外科专家，首都医科大学博士，20年以上经验', 'registration_fee': Decimal('300.00'), 'clinic_name': '诺亚新舟北京医疗中心', 'address': '北京市朝阳区建国路456号', 'phone': '010-66666666'}], 'total_found': 4, 'source': 'database', 'search_type': 'fuzzy_match_or_fallback', 'message': 'Found 4 doctor(s) matching your criteria'}
+[0m> Running step c34751b1-d7ac-44f3-bdf0-746609139a62. Step input: None
+[1;3;38;5;200mThought: 我已经获得了北京地区的医生信息，能够直接回答用户问题。
+Answer: 北京可预约的医生有：
+1. 刘骨科（骨科，主任医师，擅长关节置换、骨折治疗，挂号费350元）
+2. 张医生（中医调理，主任医师，擅长中医调理、针灸推拿，挂号费250元）
+3. 王心明（心脏科，副主任医师，擅长心脏介入手术、心肌病，挂号费200元）
+4. 陈骨医（骨科，主任医师，擅长脊柱外科、运动损伤，挂号费300元）
+
+他们均在“诺亚新舟北京医疗中心”（北京市朝阳区建国路456号）出诊。如需预约某位医生，请告知医生姓名及期望时间。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 3.335228 seconds
+      |_CBEventType.LLM -> 1.600987 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.012466 seconds
+      |_CBEventType.LLM -> 1.715573 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 18 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 6:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 7:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 8:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 9:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 10:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 11:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 12:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 13:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 14:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 15:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 16:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 17:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 18:
+WARNING:asyncio:Executing <Task pending name='Task-64' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 3.337 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+ERROR:humansa.memory.mem0_manager:Failed to add conversation to memory: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 226, in add_conversation
+    result = await loop.run_in_executor(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 228, in <lambda>
+    lambda: self.memory.add(
+            ~~~~~~~~~~~~~~~^
+        memory_text,
+        ^^^^^^^^^^^^
+        user_id=memory_user_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        metadata=metadata
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 263, in add
+    vector_store_result = future1.result()
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 329, in _add_to_vector_store
+    response = self.llm.generate_response(
+        messages=[
+    ...<3 lines>...
+        response_format={"type": "json_object"},
+    )
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/llms/openai.py", line 123, in generate_response
+    response = self.client.chat.completions.create(**params)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1087, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<43 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1256, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+[2025-07-27 07:44:22 -0700] [99330] [INFO] 127.0.0.1:49450 POST /v2/humansa/chat 1.1 200 1569 3420904
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 离我最近的诊所在哪？...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_16
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_16
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_16', 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 离我最近的诊所在哪？...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step 9e6387c5-0ec1-4ae3-8471-1c1b318f9c45. Step input: 离我最近的诊所在哪？
+[1;3;38;5;200mThought: (Implicit) I can answer without any more tools!
+Answer: 为了帮您查找离您最近的诊所，请提供您所在的城市或具体位置（如区、街道），这样我可以为您匹配最便捷的诊所地址。请问您目前所在的位置是？
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 0.934938 seconds
+      |_CBEventType.LLM -> 0.931982 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 19 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 6:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 7:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 8:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 9:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 10:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 11:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 12:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 13:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 14:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 15:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 16:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 17:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 18:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 19:
+WARNING:asyncio:Executing <Task pending name='Task-73' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.936 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+ERROR:humansa.memory.mem0_manager:Failed to add conversation to memory: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 226, in add_conversation
+    result = await loop.run_in_executor(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 228, in <lambda>
+    lambda: self.memory.add(
+            ~~~~~~~~~~~~~~~^
+        memory_text,
+        ^^^^^^^^^^^^
+        user_id=memory_user_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        metadata=metadata
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 263, in add
+    vector_store_result = future1.result()
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 329, in _add_to_vector_store
+    response = self.llm.generate_response(
+        messages=[
+    ...<3 lines>...
+        response_format={"type": "json_object"},
+    )
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/llms/openai.py", line 123, in generate_response
+    response = self.client.chat.completions.create(**params)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1087, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<43 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1256, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+[2025-07-27 07:44:23 -0700] [99330] [INFO] 127.0.0.1:49472 POST /v2/humansa/chat 1.1 200 821 983434
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 血常规多少钱？...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_17
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_17
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_17', 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 血常规多少钱？...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:💰 get_pricing_structured called with: service=血常规, clinic=None
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step 59b4c9ec-0bff-481d-8671-327477a1e1e8. Step input: 血常规多少钱？
+[1;3;38;5;200mThought: 用户咨询血常规的价格，需要查询相关服务费用。
+Action: get_pricing
+Action Input: {'service_type': '血常规'}
+[0m[1;3;34mObservation: {'success': True, 'service_type': '血常规', 'clinic_name': None, 'pricing': {'services_found': True, 'services': [], 'total_found': 0, 'search_method': 'fallback', 'message': 'No services matched your criteria. Here are our available services.'}, 'total_services': 5, 'source': 'database', 'message': 'Found 5 service(s) with pricing information'}
+[0m> Running step bdcdde90-32db-49c0-9803-14c988f63bf5. Step input: None
+[1;3;38;5;200mThought: 当前没有查到“血常规”具体价格，但系统提供了其他相关可用服务。我可以为您列出这些相关检查项目，您可选择需要的服务，或者告诉我是否需要指定诊所查询。
+Answer: 很抱歉，目前未查到“血常规”具体价格。系统有其他相关检查服务可供选择，您是否需要我为您详细推荐相关体检或化验项目？如需指定诊所查询，也请告知具体诊所名称。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 3.024249 seconds
+      |_CBEventType.LLM -> 0.571769 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.014361 seconds
+      |_CBEventType.LLM -> 2.43155 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 21 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 6:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 7:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 8:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 9:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 10:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 11:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 12:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 13:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 14:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 15:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 16:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 17:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 18:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 19:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 20:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 21:
+WARNING:asyncio:Executing <Task pending name='Task-80' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 3.028 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+ERROR:humansa.memory.mem0_manager:Failed to add conversation to memory: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 226, in add_conversation
+    result = await loop.run_in_executor(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 228, in <lambda>
+    lambda: self.memory.add(
+            ~~~~~~~~~~~~~~~^
+        memory_text,
+        ^^^^^^^^^^^^
+        user_id=memory_user_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        metadata=metadata
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 263, in add
+    vector_store_result = future1.result()
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 329, in _add_to_vector_store
+    response = self.llm.generate_response(
+        messages=[
+    ...<3 lines>...
+        response_format={"type": "json_object"},
+    )
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/llms/openai.py", line 123, in generate_response
+    response = self.client.chat.completions.create(**params)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1087, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<43 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1256, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+[2025-07-27 07:44:26 -0700] [99330] [INFO] 127.0.0.1:49502 POST /v2/humansa/chat 1.1 200 887 3100324
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 我最近总是失眠怎么办？...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_21
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_21
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_21', 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 我最近总是失眠怎么办？...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step 181099b3-1a0a-4716-8ac0-251ee3db4cc8. Step input: 我最近总是失眠怎么办？
+[1;3;38;5;200mThought: 用户咨询失眠问题，属于健康咨询类需求。可以提供一些基础建议，并推荐专业医生或服务帮助诊断和治疗。
+Answer: 失眠常见原因包括压力大、情绪波动、作息不规律、环境影响等。建议您：
+1. 保持规律的作息时间，避免熬夜；
+2. 睡前减少使用电子产品，放松身心；
+3. 晚餐避免过饱或摄入咖啡因；
+4. 可以尝试深呼吸、冥想等放松技巧。
+
+如果失眠持续或影响到日常生活，建议您尽快咨询专业医生，排除心理或身体疾病的可能。您是否需要预约睡眠管理、心理咨询或神经内科医生？如需预约，请告知所在城市，我可以为您推荐合适的医生和服务。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 3.453686 seconds
+      |_CBEventType.LLM -> 3.449887 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 22 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 6:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 7:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 8:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 9:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 10:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 11:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 12:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 13:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 14:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 15:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 16:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 17:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 18:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 19:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 20:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 21:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 22:
+WARNING:asyncio:Executing <Task pending name='Task-89' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 3.456 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+ERROR:humansa.memory.mem0_manager:Failed to add conversation to memory: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 226, in add_conversation
+    result = await loop.run_in_executor(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 228, in <lambda>
+    lambda: self.memory.add(
+            ~~~~~~~~~~~~~~~^
+        memory_text,
+        ^^^^^^^^^^^^
+        user_id=memory_user_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        metadata=metadata
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 263, in add
+    vector_store_result = future1.result()
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 329, in _add_to_vector_store
+    response = self.llm.generate_response(
+        messages=[
+    ...<3 lines>...
+        response_format={"type": "json_object"},
+    )
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/llms/openai.py", line 123, in generate_response
+    response = self.client.chat.completions.create(**params)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1087, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<43 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1256, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+[2025-07-27 07:44:29 -0700] [99330] [INFO] 127.0.0.1:49587 POST /v2/humansa/chat 1.1 200 1567 3546004
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 孩子发烧39度该怎么处理？...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_22
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_22
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_22', 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 孩子发烧39度该怎么处理？...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step a0e3d662-ff1e-4735-9d00-3ed96cd26f0f. Step input: 孩子发烧39度该怎么处理？
+[1;3;38;5;200mThought: 用户关心孩子高烧（39度）的处理办法，需要提供医学建议，并判断是否需要就医。
+Answer: 孩子发烧到39度，属于高热。建议您：
+1. 让孩子多喝温水，保持室内通风；
+2. 可用温水擦拭身体，帮助物理降温（避免用酒精擦浴）；
+3. 如孩子精神尚可，可使用对乙酰氨基酚或布洛芬等退烧药（请严格按照说明书剂量，或遵医嘱）；
+4. 观察孩子有无抽搐、呼吸急促、持续嗜睡、皮疹、反复呕吐等异常表现。
+
+如出现以下情况，建议立即就医：
+- 发烧超过3天不退
+- 高热伴有抽搐、意识不清、呼吸困难
+- 精神状态明显变差或无法进食饮水
+- 年龄3个月以下婴儿高烧
+
+如果您需要预约儿科医生或紧急咨询，请告知所在城市，我可以为您安排合适的医生或发起电话医疗咨询。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 4.70107 seconds
+      |_CBEventType.LLM -> 4.697585 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 23 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 6:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 7:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 8:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 9:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 10:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 11:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 12:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 13:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 14:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 15:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 16:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 17:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 18:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 19:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 20:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 21:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 22:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 23:
+WARNING:asyncio:Executing <Task pending name='Task-98' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 4.703 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+ERROR:humansa.memory.mem0_manager:Failed to add conversation to memory: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 226, in add_conversation
+    result = await loop.run_in_executor(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 228, in <lambda>
+    lambda: self.memory.add(
+            ~~~~~~~~~~~~~~~^
+        memory_text,
+        ^^^^^^^^^^^^
+        user_id=memory_user_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        metadata=metadata
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 263, in add
+    vector_store_result = future1.result()
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 329, in _add_to_vector_store
+    response = self.llm.generate_response(
+        messages=[
+    ...<3 lines>...
+        response_format={"type": "json_object"},
+    )
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/llms/openai.py", line 123, in generate_response
+    response = self.client.chat.completions.create(**params)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1087, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<43 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1256, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+[2025-07-27 07:44:34 -0700] [99330] [INFO] 127.0.0.1:49643 POST /v2/humansa/chat 1.1 200 1921 4754608
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 你们有什么保健品推荐吗？...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_31
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_31
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_31', 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 你们有什么保健品推荐吗？...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🛍️ recommend_product_structured called with: category=保健品
+INFO:humansa.tools.humansa_tools:🛍️ Mapped category '保健品' to '营养保健'
+INFO:humansa.tools.humansa_tools:🛍️ Searching products with category='营养保健', min_price=None, max_price=None
+INFO:humansa.postgres.database:🔍 Executing product search query with params: ['%营养保健%', '%用户希望获得健康管理相关的保健品推荐%', '%用户希望获得健康管理相关的保健品推荐%', '%用户希望获得健康管理相关的保健品推荐%', 5]
+INFO:humansa.postgres.database:📦 Found 0 products from database
+INFO:humansa.tools.humansa_tools:🛍️ Found 0 products
+INFO:humansa.tools.humansa_tools:🛍️ No products found. Checking if db is None: False
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step d1ca3949-e4d2-470b-ba1d-a317118616db. Step input: 你们有什么保健品推荐吗？
+[1;3;38;5;200mThought: 用户想要保健品推荐，需要根据健康需求推荐相关产品。
+Action: recommend_product
+Action Input: {'product_category': '保健品', 'reason': '用户希望获得健康管理相关的保健品推荐'}
+[0m[1;3;34mObservation: {'success': True, 'category': '保健品', 'reason': '用户希望获得健康管理相关的保健品推荐', 'price_range': None, 'recommended_products': [], 'recommended_packages': [], 'message': '暂时没有找到符合条件的保健品产品，建议您访问我们的健康商城查看更多选择', 'shop_link': '健康商城：#小程序://诺亚新舟医疗/t5ZpOWu0UyRtEFl'}
+[0m> Running step b6f4ba26-9b8c-40a4-be01-def4ba5e385f. Step input: None
+[1;3;38;5;200mThought: 我已经获取到相关信息。目前系统暂无具体保健品推荐，但有健康商城可供选择。
+Answer: 很抱歉，当前暂无具体保健品产品推荐。建议您访问我们的健康商城查看更多保健品和健康相关产品选择。如有具体健康需求或目标（如免疫力提升、睡眠改善、儿童成长等），也可以告知，我将为您定向推荐合适产品。  
+健康商城入口：#小程序://诺亚新舟医疗/t5ZpOWu0UyRtEFl
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 2.737918 seconds
+      |_CBEventType.LLM -> 0.968492 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.029043 seconds
+      |_CBEventType.LLM -> 1.733974 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 25 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 6:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 7:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 8:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 9:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 10:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 11:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 12:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 13:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 14:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 15:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 16:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 17:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 18:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 19:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 20:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 21:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 22:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 23:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 24:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 25:
+WARNING:asyncio:Executing <Task pending name='Task-106' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 2.740 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+ERROR:humansa.memory.mem0_manager:Failed to add conversation to memory: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 226, in add_conversation
+    result = await loop.run_in_executor(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 228, in <lambda>
+    lambda: self.memory.add(
+            ~~~~~~~~~~~~~~~^
+        memory_text,
+        ^^^^^^^^^^^^
+        user_id=memory_user_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        metadata=metadata
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 263, in add
+    vector_store_result = future1.result()
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 329, in _add_to_vector_store
+    response = self.llm.generate_response(
+        messages=[
+    ...<3 lines>...
+        response_format={"type": "json_object"},
+    )
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/llms/openai.py", line 123, in generate_response
+    response = self.client.chat.completions.create(**params)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1087, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<43 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1256, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+[2025-07-27 07:44:37 -0700] [99330] [INFO] 127.0.0.1:49711 POST /v2/humansa/chat 1.1 200 1127 2820518
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 我想买维生素D，有什么推荐？...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_32
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_32
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_32', 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 我想买维生素D，有什么推荐？...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🛍️ recommend_product_structured called with: category=维生素D
+INFO:humansa.tools.humansa_tools:🛍️ Mapped category '维生素D' to '营养保健'
+INFO:humansa.tools.humansa_tools:🛍️ Searching products with category='营养保健', min_price=None, max_price=None
+INFO:humansa.postgres.database:🔍 Executing product search query with params: ['%营养保健%', '%用户有补充维生素D的需求，适合补钙、骨骼健康和免疫力提升。%', '%用户有补充维生素D的需求，适合补钙、骨骼健康和免疫力提升。%', '%用户有补充维生素D的需求，适合补钙、骨骼健康和免疫力提升。%', 5]
+INFO:humansa.postgres.database:📦 Found 0 products from database
+INFO:humansa.tools.humansa_tools:🛍️ Found 0 products
+INFO:humansa.tools.humansa_tools:🛍️ No products found. Checking if db is None: False
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step e00ac09f-7bf6-4716-94da-eaf579ce46b3. Step input: 我想买维生素D，有什么推荐？
+[1;3;38;5;200mThought: 用户想购买维生素D类保健品，我需要为其推荐相关产品。
+Action: recommend_product
+Action Input: {'product_category': '维生素D', 'reason': '用户有补充维生素D的需求，适合补钙、骨骼健康和免疫力提升。'}
+[0m[1;3;34mObservation: {'success': True, 'category': '维生素D', 'reason': '用户有补充维生素D的需求，适合补钙、骨骼健康和免疫力提升。', 'price_range': None, 'recommended_products': [], 'recommended_packages': [], 'message': '暂时没有找到符合条件的维生素D产品，建议您访问我们的健康商城查看更多选择', 'shop_link': '健康商城：#小程序://诺亚新舟医疗/t5ZpOWu0UyRtEFl'}
+[0m> Running step 19bbc3a1-40ad-46f1-b094-10d10db0ca6d. Step input: None
+[1;3;38;5;200mThought: 当前系统中未检索到具体的维生素D产品，但有健康商城可供用户自主选择。
+Answer: 很抱歉，目前暂无维生素D相关保健品的具体推荐。建议您前往我们的健康商城查看更多产品选择，链接如下：  
+健康商城：#小程序://诺亚新舟医疗/t5ZpOWu0UyRtEFl  
+如有其他健康需求，也欢迎随时咨询！
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 2.435736 seconds
+      |_CBEventType.LLM -> 1.021439 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.023724 seconds
+      |_CBEventType.LLM -> 1.383499 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 27 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 6:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 7:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 8:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 9:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 10:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 11:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 12:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 13:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 14:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 15:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 16:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 17:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 18:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 19:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 20:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 21:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 22:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 23:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 24:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 25:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 26:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 27:
+WARNING:asyncio:Executing <Task pending name='Task-114' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 2.438 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+ERROR:humansa.memory.mem0_manager:Failed to add conversation to memory: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 226, in add_conversation
+    result = await loop.run_in_executor(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 228, in <lambda>
+    lambda: self.memory.add(
+            ~~~~~~~~~~~~~~~^
+        memory_text,
+        ^^^^^^^^^^^^
+        user_id=memory_user_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        metadata=metadata
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 263, in add
+    vector_store_result = future1.result()
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 329, in _add_to_vector_store
+    response = self.llm.generate_response(
+        messages=[
+    ...<3 lines>...
+        response_format={"type": "json_object"},
+    )
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/llms/openai.py", line 123, in generate_response
+    response = self.client.chat.completions.create(**params)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1087, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<43 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1256, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+[2025-07-27 07:44:40 -0700] [99330] [INFO] 127.0.0.1:49739 POST /v2/humansa/chat 1.1 200 928 2571343
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 我叫张三，住在北京，今年45岁...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_26
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_26
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_26', 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 我叫张三，住在北京，今年45岁...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step f1d7a7ec-a862-4a6a-99d6-637cc211c82c. Step input: 我叫张三，住在北京，今年45岁
+[1;3;38;5;200mThought: (Implicit) I can answer without any more tools!
+Answer: 感谢您的信息。如果您需要预约医生、体检或健康咨询，请告诉我您的具体需求（如：科室、医生、日期等），我可以为您安排北京的合适医疗服务。如需推荐健康产品或了解相关服务，也可以随时告知您的关注重点。请问您现在有什么具体健康需求吗？
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 1.746697 seconds
+      |_CBEventType.LLM -> 1.742569 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 28 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 6:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 7:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 8:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 9:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 10:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 11:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 12:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 13:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 14:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 15:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 16:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 17:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 18:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 19:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 20:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 21:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 22:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 23:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 24:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 25:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 26:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 27:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 28:
+WARNING:asyncio:Executing <Task pending name='Task-122' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 1.749 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+ERROR:humansa.memory.mem0_manager:Failed to add conversation to memory: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 226, in add_conversation
+    result = await loop.run_in_executor(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 228, in <lambda>
+    lambda: self.memory.add(
+            ~~~~~~~~~~~~~~~^
+        memory_text,
+        ^^^^^^^^^^^^
+        user_id=memory_user_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        metadata=metadata
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 263, in add
+    vector_store_result = future1.result()
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 329, in _add_to_vector_store
+    response = self.llm.generate_response(
+        messages=[
+    ...<3 lines>...
+        response_format={"type": "json_object"},
+    )
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/llms/openai.py", line 123, in generate_response
+    response = self.client.chat.completions.create(**params)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1087, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<43 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1256, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+[2025-07-27 07:44:41 -0700] [99330] [INFO] 127.0.0.1:49792 POST /v2/humansa/chat 1.1 200 1097 1887982
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: 你知道我的基本信息吗？...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_26
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_26
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_26', 'memory_count': 0, 'recent_memories': []}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: 你知道我的基本信息吗？...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step 8247f1ed-e24b-4ae1-b243-4cdec492648a. Step input: 你知道我的基本信息吗？
+[1;3;38;5;200mThought: 用户已经告知自己叫张三，住在北京，今年45岁。我已记录这些信息，可以在后续预约或健康咨询中使用。
+Answer: 您的信息我已记录：您叫张三，住在北京，今年45岁。如需预约医生、体检或健康咨询，无需重复提供这些基本信息，直接告知需求即可。我会为您安排最合适的服务。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 1.58301 seconds
+      |_CBEventType.LLM -> 1.579773 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 29 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 6:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 7:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 8:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 9:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 10:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 11:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 12:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 13:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 14:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 15:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 16:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 17:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 18:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 19:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 20:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 21:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 22:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 23:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 24:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 25:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 26:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 27:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 28:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 29:
+WARNING:asyncio:Executing <Task pending name='Task-129' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 1.585 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+ERROR:humansa.memory.mem0_manager:Failed to add conversation to memory: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 226, in add_conversation
+    result = await loop.run_in_executor(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py", line 228, in <lambda>
+    lambda: self.memory.add(
+            ~~~~~~~~~~~~~~~^
+        memory_text,
+        ^^^^^^^^^^^^
+        user_id=memory_user_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        metadata=metadata
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 263, in add
+    vector_store_result = future1.result()
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/memory/main.py", line 329, in _add_to_vector_store
+    response = self.llm.generate_response(
+        messages=[
+    ...<3 lines>...
+        response_format={"type": "json_object"},
+    )
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/mem0/llms/openai.py", line 123, in generate_response
+    response = self.client.chat.completions.create(**params)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1087, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<43 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1256, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/openai/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.PermissionDeniedError: Error code: 403 - {'error': {'message': 'Project `proj_9TLjn0ib8efFQIHe6aWEzCv5` does not have access to model `gpt-4-turbo-preview`', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+[2025-07-27 07:44:43 -0700] [99330] [INFO] 127.0.0.1:49798 POST /v2/humansa/chat 1.1 200 865 1693015
