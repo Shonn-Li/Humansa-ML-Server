@@ -1,0 +1,104 @@
+{
+  "timestamp": "20250727_173704",
+  "user_id": 3,
+  "conversation_id": 826,
+  "request": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "whats this image about?"
+      }
+    ],
+    "model": "gpt-4.1",
+    "enable_rag": true,
+    "enable_citations": true,
+    "enable_web_search": true
+  },
+  "context_agents": [
+    "router_agent",
+    "attachment_agent",
+    "last_message_id",
+    "last_message_output_index"
+  ],
+  "combined_context_length": 131,
+  "combined_context_preview": "[1] Attachment Content:\n[ATTACHMENT] 3_a1d231e8f5194e85b796ff09ab733a8a.jpg - image\nThe image contains the following text:\n\n\"OUWO\"\n",
+  "sources": [
+    {
+      "source_id": "attachment_2",
+      "type": "attachment",
+      "title": "Attachment: Logo.png",
+      "content": "[ATTACHMENT] 3_a1d231e8f5194e85b796ff09ab733a8a.jpg - image\nThe image contains the following text:\n\n\"OUWO\"\n",
+      "url": "https://youwoai-image-storage.s3.us-west-1.amazonaws.com/3_a1d231e8f5194e85b796ff09ab733a8a.jpg",
+      "metadata": {
+        "filename": "Logo.png",
+        "file_type": "png",
+        "file_id": "file_0"
+      }
+    }
+  ],
+  "sources_count": 1,
+  "context_search_found": false,
+  "web_search_found": false,
+  "attachment_found": true,
+  "full_context": {
+    "context_search": {},
+    "web_search": {},
+    "attachment": {
+      "status": "success",
+      "context": "[ATTACHMENT] 3_a1d231e8f5194e85b796ff09ab733a8a.jpg - image\nThe image contains the following text:\n\n\"OUWO\"\n",
+      "sources": [
+        {
+          "file_id": "file_0",
+          "filename": "Logo.png",
+          "url": "https://youwoai-image-storage.s3.us-west-1.amazonaws.com/3_a1d231e8f5194e85b796ff09ab733a8a.jpg",
+          "type": "file_attachment",
+          "file_type": "png",
+          "title": "Attachment: Logo.png",
+          "content": "Content from Logo.png"
+        }
+      ],
+      "metadata": {
+        "attachment_count": 1,
+        "context_length": 107,
+        "file_types": [
+          "png"
+        ],
+        "chunk_count": 0,
+        "image_chunk_count": 1
+      }
+    },
+    "router": {
+      "router_decision": {
+        "selected_tool": "attachments",
+        "search_type": "attachments",
+        "confidence": 0.95,
+        "reasoning": "Attachments present in request",
+        "query_classification": "attachment_priority"
+      },
+      "original_query": "whats this image about?",
+      "condensed_query": "whats this image about?",
+      "enabled_agents": [
+        "response",
+        "attachment"
+      ],
+      "model": "gpt-4.1",
+      "search_type": "attachments",
+      "has_explicit_ids": false,
+      "explicit_note_ids": null,
+      "explicit_folder_ids": null
+    }
+  },
+  "combined_context_full": "[1] Attachment Content:\n[ATTACHMENT] 3_a1d231e8f5194e85b796ff09ab733a8a.jpg - image\nThe image contains the following text:\n\n\"OUWO\"\n",
+  "llamaindex_messages": [
+    {
+      "role": "system",
+      "content": "You are **YouWoAI**, an AI study assistant.\n\n**Current Date**: 2025-07-27\n\nYour role: help the user learn faster and answer questions.\n• Any prior conversation notes, file‑search snippets, file attachments, or web‑search results will appear as **additional system messages** in this chat. Use them when relevant.\n",
+      "content_length": 313
+    },
+    {
+      "role": "user",
+      "content": "Context from your notes and documents:\n\n[1] Attachment Content:\n[ATTACHMENT] 3_a1d231e8f5194e85b796ff09ab733a8a.jpg - image\nThe image contains the following text:\n\n\"OUWO\"\n\n\nCITATION INSTRUCTIONS:\n- Cite sources using numbered brackets like [1], [2], etc.\n- Place citations immediately after relevant statements\n- You can cite multiple sources like [1, 3]\n- Only cite sources that directly support your statement\n- Every factual claim from the provided sources must have a citation\n\n\nUser Question: whats this image about?",
+      "content_length": 521
+    }
+  ]
+}

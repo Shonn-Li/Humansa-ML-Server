@@ -768,14 +768,22 @@ class MultiAgentChatEndpointV2:
                                })
             sequence += 1
 
-            # Stream final response events
+            # Stream final response events with citations
+            response_completed_data = {
+                "id": response_id,
+                "status": "completed",
+                "done": True
+            }
+            
+            # Include citations/annotations if available from response agent
+            response_agent_result = context.get("response_agent", {})
+            citations = response_agent_result.get("annotations", [])
+            if citations:
+                response_completed_data["citations"] = citations
+                
             yield create_event("response.completed",
                                sequence_number=sequence,
-                               response={
-                                   "id": response_id,
-                                   "status": "completed",
-                                   "done": True
-                               })
+                               response=response_completed_data)
             sequence += 1
 
             yield create_event("response.done",
