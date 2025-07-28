@@ -15,6 +15,7 @@ from abc import ABC, abstractmethod
 from typing import Dict, Any, List, Optional, Union, AsyncGenerator
 from dataclasses import dataclass, asdict
 from enum import Enum
+from decimal import Decimal
 
 # Import existing infrastructure
 from ..router.intelligent_router import IntelligentRouter, RouterDecision
@@ -42,6 +43,16 @@ from ..agent import (
 )
 
 logger = logging.getLogger(__name__)
+
+
+class DecimalEncoder(json.JSONEncoder):
+    """Custom JSON encoder that handles Decimal types"""
+    def default(self, obj):
+        if isinstance(obj, Decimal):
+            return float(obj)
+        if hasattr(obj, '__dict__'):
+            return obj.__dict__
+        return super(DecimalEncoder, self).default(obj)
 
 
 class StreamingChunk:
