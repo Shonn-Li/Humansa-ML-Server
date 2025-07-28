@@ -52,10 +52,28 @@ class AttachmentAgent(BaseAgent):
         sources = []
         file_types = set()
         
-        for i, attachment_url in enumerate(attachments):
-            # Extract filename from URL
-            filename = attachment_url.split('/')[-1].split('?')[0]
-            file_extension = filename.split('.')[-1].lower() if '.' in filename else 'unknown'
+        for i, attachment in enumerate(attachments):
+            # Handle both string URLs and dictionary format
+            if isinstance(attachment, str):
+                # Legacy format: just URL string
+                attachment_url = attachment
+                filename = attachment_url.split('/')[-1].split('?')[0]
+                file_extension = filename.split('.')[-1].lower() if '.' in filename else 'unknown'
+            else:
+                # New format: dictionary with type, url, filename
+                attachment_url = attachment.get('url', '')
+                filename = attachment.get('filename', '')
+                # Extract extension from filename or use type
+                if '.' in filename:
+                    file_extension = filename.split('.')[-1].lower()
+                else:
+                    # Try to extract from MIME type
+                    mime_type = attachment.get('type', '')
+                    if '/' in mime_type:
+                        file_extension = mime_type.split('/')[-1].split('.')[-1]
+                    else:
+                        file_extension = 'unknown'
+            
             file_types.add(file_extension)
             
             source = {
