@@ -52,40 +52,52 @@ class AttachmentAgent(BaseAgent):
         sources = []
         file_types = set()
         
+        logger.info(f"Processing {len(attachments)} attachments for sources")
         for i, attachment in enumerate(attachments):
-            # Handle both string URLs and dictionary format
-            if isinstance(attachment, str):
-                # Legacy format: just URL string
-                attachment_url = attachment
-                filename = attachment_url.split('/')[-1].split('?')[0]
-                file_extension = filename.split('.')[-1].lower() if '.' in filename else 'unknown'
-            else:
-                # New format: dictionary with type, url, filename
-                attachment_url = attachment.get('url', '')
-                filename = attachment.get('filename', '')
-                # Extract extension from filename or use type
-                if '.' in filename:
-                    file_extension = filename.split('.')[-1].lower()
-                else:
-                    # Try to extract from MIME type
-                    mime_type = attachment.get('type', '')
-                    if '/' in mime_type:
-                        file_extension = mime_type.split('/')[-1].split('.')[-1]
+            try:
+                logger.info(f"Attachment {i}: type={type(attachment)}, value={attachment}")
+                
+                # Handle both string URLs and dictionary format
+                if isinstance(attachment, str):
+                    # Legacy format: just URL string
+                    attachment_url = attachment
+                    filename = attachment_url.split('/')[-1].split('?')[0]
+                    file_extension = filename.split('.')[-1].lower() if '.' in filename else 'unknown'
+                elif isinstance(attachment, dict):
+                    # New format: dictionary with type, url, filename
+                    attachment_url = attachment.get('url', '')
+                    filename = attachment.get('filename', '')
+                    # Extract extension from filename or use type
+                    if '.' in filename:
+                        file_extension = filename.split('.')[-1].lower()
                     else:
-                        file_extension = 'unknown'
-            
-            file_types.add(file_extension)
-            
-            source = {
-                "file_id": f"file_{i}",
-                "filename": filename,
-                "url": attachment_url,
-                "type": "file_attachment",
-                "file_type": file_extension,
-                "title": f"Attachment: {filename}",
-                "content": f"Content from {filename}"  # Preview
-            }
-            sources.append(source)
+                        # Try to extract from MIME type
+                        mime_type = attachment.get('type', '')
+                        if '/' in mime_type:
+                            file_extension = mime_type.split('/')[-1].split('.')[-1]
+                        else:
+                            file_extension = 'unknown'
+                else:
+                    logger.error(f"Unexpected attachment type: {type(attachment)}")
+                    continue
+                
+                file_types.add(file_extension)
+                
+                source = {
+                    "file_id": f"file_{i}",
+                    "filename": filename,
+                    "url": attachment_url,
+                    "type": "file_attachment",
+                    "file_type": file_extension,
+                    "title": f"Attachment: {filename}",
+                    "content": f"Content from {filename}"  # Preview
+                }
+                sources.append(source)
+                
+            except Exception as e:
+                logger.error(f"Error processing attachment {i}: {e}")
+                logger.error(f"Attachment data: {attachment}")
+                continue
         
         return {
             "status": "success",
