@@ -145,10 +145,11 @@ class ResponseAgent(BaseAgent):
         response = await llm.achat(messages)
         response_text = response.message.content
         
-        # Extract citation annotations if citations are enabled
+        # Extract or inject citation annotations if citations are enabled
         annotations = []
         if enable_citations and sources:
-            _, annotations = citation_position_tracker.extract_citations_with_positions(response_text, sources)
+            # Use inject_citations_into_text which will add citations if not present
+            response_text, annotations = citation_position_tracker.inject_citations_into_text(response_text, sources)
         
         return {
             "status": "success",
@@ -241,9 +242,20 @@ class ResponseAgent(BaseAgent):
                                     "metadata": {"agent": "response", "model": model}
                                 }
             
-            # Extract and yield citation annotations if enabled
+            # Extract or inject citation annotations if enabled
             if enable_citations and sources:
-                _, annotations = citation_position_tracker.extract_citations_with_positions(accumulated_response, sources)
+                # Use inject_citations_into_text which will add citations if not present
+                final_response_with_citations, annotations = citation_position_tracker.inject_citations_into_text(accumulated_response, sources)
+                
+                # If citations were injected, stream the additional citation text
+                if final_response_with_citations != accumulated_response:
+                    citation_text = final_response_with_citations[len(accumulated_response):]
+                    yield {
+                        "type": "response_chunk",
+                        "content": citation_text,
+                        "metadata": {"agent": "response", "model": model}
+                    }
+                    accumulated_response = final_response_with_citations
                 
                 # Yield annotation data
                 yield {
