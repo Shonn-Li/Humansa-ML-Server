@@ -400,7 +400,7 @@ Respond with JSON:
                         type_id=row[0],
                         type=row[1],
                         chunk_text=row[2],
-                        similarity=row[3],
+                        similarity=float(row[3]),  # Ensure float
                         section_id=row[4],
                         metadata={"title": row[5], "created": str(row[6])} if row[5] else None
                     )
@@ -438,7 +438,7 @@ Respond with JSON:
                                 type_id=row[0],
                                 type=row[1],
                                 chunk_text=row[2][:1000],  # Limit text length
-                                similarity=row[3],
+                                similarity=float(row[3]),  # Ensure float
                                 section_id=row[4],
                                 metadata={"title": row[5], "created": str(row[6])} if row[5] else None
                             )
@@ -489,7 +489,7 @@ Respond with JSON:
                         type_id=row[0],
                         type=row[1],
                         chunk_text=row[2],
-                        similarity=row[3],
+                        similarity=float(row[3]),  # Ensure float
                         section_id=row[4],
                         metadata={"title": row[5], "created": str(row[6])} if row[5] else None
                     )
@@ -522,7 +522,7 @@ Respond with JSON:
                                 type_id=row[0],
                                 type=row[1],
                                 chunk_text=row[2],
-                                similarity=row[3],
+                                similarity=float(row[3]),  # Ensure float
                                 section_id=row[4],
                                 metadata={"title": row[5], "created": str(row[6])} if row[5] else None
                             )
@@ -841,7 +841,7 @@ Return as JSON: {{"terms": ["term1", "term2", ...]}}
                         source["chunks"].append({
                             "content": c.chunk_text,
                             "section_id": c.section_id,
-                            "score": getattr(c, "similarity", 0.0)
+                            "score": float(getattr(c, "similarity", 0.0))  # Ensure it's a float
                         })
                 
                 sources.append(source)

@@ -506,6 +506,10 @@ class MultiAgentChatEndpointV2:
                                     # Log source structure for debugging
                                     if sources:
                                         logger.info(f"🔍 First source structure: type={sources[0].get('type')}, has_chunks={bool(sources[0].get('chunks'))}, chunk_count={len(sources[0].get('chunks', []))}")
+                                        # Calculate total size of sources
+                                        import sys
+                                        total_size = sys.getsizeof(json.dumps(sources[:10], cls=DecimalEncoder))
+                                        logger.info(f"📏 Total size of sources (first 10): {total_size} bytes")
                                     
                                     # If too many sources, include a subset and indicate more are available
                                     if len(sources) > 10:
@@ -526,11 +530,13 @@ class MultiAgentChatEndpointV2:
                                     item_data["metadata"] = result["metadata"]
                             
                             try:
+                                logger.info(f"📤 Yielding response.output_item.done with sources: {bool(item_data.get('sources'))}, source count: {len(item_data.get('sources', []))}")
                                 yield create_event("response.output_item.done",
                                                  sequence_number=sequence,
                                                  output_index=current_output_index - 1,
                                                  item=item_data)
                                 sequence += 1
+                                logger.info(f"✅ Successfully yielded response.output_item.done")
                             except Exception as e:
                                 logger.error(f"❌ Failed to serialize context search result: {e}")
                                 logger.error(f"Item data keys: {list(item_data.keys())}")
@@ -551,13 +557,20 @@ class MultiAgentChatEndpointV2:
                             if result and isinstance(result, dict) and "sources" in result and result["sources"]:
                                 # Use the same truncated sources if applicable
                                 sources_to_stream = item_data.get("sources", result["sources"])
-                                yield create_event("response.context_search.sources",
-                                                 sequence_number=sequence,
-                                                 sources=sources_to_stream,
-                                                 metadata=result.get("metadata", {}),
-                                                 total_sources=item_data.get("total_sources"),
-                                                 sources_truncated=item_data.get("sources_truncated", False))
-                                sequence += 1
+                                logger.info(f"📤 Streaming sources event with {len(sources_to_stream)} sources")
+                                try:
+                                    yield create_event("response.context_search.sources",
+                                                     sequence_number=sequence,
+                                                     sources=sources_to_stream,
+                                                     metadata=result.get("metadata", {}),
+                                                     total_sources=item_data.get("total_sources"),
+                                                     sources_truncated=item_data.get("sources_truncated", False))
+                                    sequence += 1
+                                    logger.info(f"✅ Successfully streamed sources event")
+                                except Exception as e:
+                                    logger.error(f"❌ Failed to stream sources event: {e}")
+                            else:
+                                logger.warning(f"⚠️ Not streaming sources - result type: {type(result)}, has sources: {'sources' in result if isinstance(result, dict) else False}, sources count: {len(result.get('sources', [])) if isinstance(result, dict) else 0}")
                             # Note: We only incremented current_output_index once above (tool call only)
                         elif agent_name == "attachment":
                             # Use file_search_call for attachments
