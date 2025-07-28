@@ -381,7 +381,7 @@ Respond with JSON:
                     SELECT 
                         e.type_id,
                         e.type,
-                        e.chunk_text,
+                        SUBSTRING(e.chunk_text, 1, 500) as chunk_text,  -- Limit chunk size for streaming
                         1.0 as similarity,  -- Max similarity since it's recency-based
                         e.section_id,
                         n."noteTitle" as title,
@@ -437,7 +437,7 @@ Respond with JSON:
                             chunk = ChunkResult(
                                 type_id=row[0],
                                 type=row[1],
-                                chunk_text=row[2][:1000],  # Limit text length
+                                chunk_text=row[2][:500],  # Limit text length for streaming
                                 similarity=float(row[3]),  # Ensure float
                                 section_id=row[4],
                                 metadata={"title": row[5], "created": str(row[6])} if row[5] else None
@@ -470,7 +470,7 @@ Respond with JSON:
                     SELECT 
                         e.type_id,
                         e.type,
-                        e.chunk_text,
+                        SUBSTRING(e.chunk_text, 1, 500) as chunk_text,  -- Limit chunk size for streaming
                         1.0 as similarity,  -- Max similarity for explicit notes
                         e.section_id,
                         n."noteTitle" as title,
