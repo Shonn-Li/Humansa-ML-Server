@@ -408,6 +408,10 @@ Respond with JSON:
                 
                 logger.info(f"Recency search returned {len(results)} chunks")
                 
+                # Log first few results for debugging
+                for i, result in enumerate(results[:3]):
+                    logger.info(f"  Result {i}: type_id={result.type_id}, has_metadata={result.metadata is not None}, chunk_text_len={len(result.chunk_text)}")
+                
                 # If no embeddings found, try to get note content directly as fallback
                 if len(results) == 0 and len(temporal_note_ids) > 0:
                     logger.warning(f"No embeddings found for temporal notes, falling back to direct note content")
@@ -857,6 +861,11 @@ Return as JSON: {{"terms": ["term1", "term2", ...]}}
             limited_sources = sources[:10]
             sources_truncated = True
             logger.info(f"📄 Limiting sources from {len(sources)} to 10 for {understanding.intent} intent")
+        
+        # Log source details for debugging
+        logger.info(f"📊 Formatting results - Total sources: {len(sources)}, Limited sources: {len(limited_sources)}")
+        if limited_sources:
+            logger.info(f"  First source: type={limited_sources[0].get('type')}, type_id={limited_sources[0].get('type_id')}, has_chunks={bool(limited_sources[0].get('chunks'))}")
         
         return {
             "status": "completed",

@@ -503,6 +503,10 @@ class MultiAgentChatEndpointV2:
                                     sources = result["sources"]
                                     logger.info(f"📊 Context search found {len(sources)} sources")
                                     
+                                    # Log source structure for debugging
+                                    if sources:
+                                        logger.info(f"🔍 First source structure: type={sources[0].get('type')}, has_chunks={bool(sources[0].get('chunks'))}, chunk_count={len(sources[0].get('chunks', []))}")
+                                    
                                     # If too many sources, include a subset and indicate more are available
                                     if len(sources) > 10:
                                         item_data["sources"] = sources[:10]
@@ -521,11 +525,27 @@ class MultiAgentChatEndpointV2:
                                 if "metadata" in result:
                                     item_data["metadata"] = result["metadata"]
                             
-                            yield create_event("response.output_item.done",
-                                             sequence_number=sequence,
-                                             output_index=current_output_index - 1,
-                                             item=item_data)
-                            sequence += 1
+                            try:
+                                yield create_event("response.output_item.done",
+                                                 sequence_number=sequence,
+                                                 output_index=current_output_index - 1,
+                                                 item=item_data)
+                                sequence += 1
+                            except Exception as e:
+                                logger.error(f"❌ Failed to serialize context search result: {e}")
+                                logger.error(f"Item data keys: {list(item_data.keys())}")
+                                # Yield a simplified version without sources
+                                simplified_item = {
+                                    "id": agent_id,
+                                    "type": "context_search_call",
+                                    "status": "completed",
+                                    "error": "Failed to serialize sources"
+                                }
+                                yield create_event("response.output_item.done",
+                                                 sequence_number=sequence,
+                                                 output_index=current_output_index - 1,
+                                                 item=simplified_item)
+                                sequence += 1
                             
                             # Also stream the sources as a separate event for client compatibility
                             if result and isinstance(result, dict) and "sources" in result and result["sources"]:
