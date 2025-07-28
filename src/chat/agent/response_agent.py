@@ -245,6 +245,8 @@ class ResponseAgent(BaseAgent):
             if enable_citations and sources:
                 _, annotations = citation_position_tracker.extract_citations_with_positions(accumulated_response, sources)
                 
+                logger.info(f"📚 Extracted {len(annotations)} annotations from response")
+                
                 # Yield annotation data
                 yield {
                     "type": "annotations",
@@ -254,6 +256,7 @@ class ResponseAgent(BaseAgent):
             
             # Final result
             yield {
+                "type": "success",
                 "status": "success",
                 "response": accumulated_response,
                 "metadata": {

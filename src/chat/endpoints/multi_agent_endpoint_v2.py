@@ -965,8 +965,10 @@ class MultiAgentChatEndpointV2:
         # Check if we have streaming support
         if hasattr(self.agents["response"], "stream"):
             # Use actual streaming for real-time reasoning
+            logger.info("🌊 Using streaming response agent")
             async for chunk in self.agents["response"].stream(request, context):
                 chunk_type = chunk.get("type", "")
+                logger.debug(f"📦 Response agent chunk type: {chunk_type}")
 
                 if chunk_type == "response_chunk":
                     # Regular content chunk
@@ -1016,8 +1018,9 @@ class MultiAgentChatEndpointV2:
                                            annotations=annotations,
                                            output_index=current_output_index)
 
-                elif chunk_type == "success":
+                elif chunk_type == "success" or chunk.get("status") == "success":
                     # Final success chunk with metadata
+                    logger.info("✅ Received success chunk from response agent")
                     final_response = chunk.get(
                         "response", accumulated_response)
                     context["response_agent"] = chunk
@@ -1033,11 +1036,23 @@ class MultiAgentChatEndpointV2:
             final_response = response_result.get("response", "")
             annotations = response_result.get("annotations", [])
             sources = response_result.get("sources", [])
+            
+            logger.info(f"📚 Non-streaming response - annotations: {len(annotations)}, sources: {len(sources)}")
 
+            # Store annotations in context
+            if annotations:
+                context["annotations"] = annotations
+            
             # Stream sources if available
             if sources:
                 yield create_event("response.sources",
                                    sources=sources,
+                                   output_index=current_output_index)
+            
+            # Stream annotations if available
+            if annotations:
+                yield create_event("response.annotations",
+                                   annotations=annotations,
                                    output_index=current_output_index)
 
             # Simulate streaming
