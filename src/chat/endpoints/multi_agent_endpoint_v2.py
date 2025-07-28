@@ -777,9 +777,15 @@ class MultiAgentChatEndpointV2:
             
             # Include citations/annotations if available from response agent
             response_agent_result = context.get("response_agent", {})
-            citations = response_agent_result.get("annotations", [])
+            # Check for annotations in the context (set during streaming)
+            citations = context.get("annotations", [])
+            if not citations:
+                # Fallback to response agent result
+                citations = response_agent_result.get("annotations", [])
+            
             if citations:
                 response_completed_data["citations"] = citations
+                logger.info(f"📚 Including {len(citations)} citations in response.completed event")
                 
             yield create_event("response.completed",
                                sequence_number=sequence,
@@ -992,11 +998,22 @@ class MultiAgentChatEndpointV2:
                     # Citation annotations
                     annotations = chunk.get("annotations", [])
                     sources = chunk.get("sources", [])
+                    
+                    logger.info(f"📚 Received annotations from response agent: {len(annotations)} annotations")
+                    
+                    # Store annotations in context for later use
+                    context["annotations"] = annotations
 
                     # Stream sources data as a separate event
                     if sources:
                         yield create_event("response.sources",
                                            sources=sources,
+                                           output_index=current_output_index)
+                    
+                    # Stream annotations as a separate event for frontend
+                    if annotations:
+                        yield create_event("response.annotations",
+                                           annotations=annotations,
                                            output_index=current_output_index)
 
                 elif chunk_type == "success":
