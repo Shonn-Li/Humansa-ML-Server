@@ -13,6 +13,7 @@ from .memory.mem0_integration import Mem0MemoryManagerAdapter
 from .context_manager import ContextManager
 from .orchestrator_agent import HumansaOrchestratorAgent
 from .workflows.appointment_workflow import AppointmentBookingWorkflow
+from .mock_appointment_api import mock_appointment_system
 from chat.streaming.sse_formatter import SSEFormatter
 import logging
 
@@ -37,6 +38,16 @@ async def initialize_v2_system(db_pool, openai_api_key: str = None):
     try:
         from humansa.memory.mem0_manager import Mem0Manager
         mem0_manager = Mem0Manager.get_instance()
+        
+        # Initialize Mem0 if not already initialized
+        if not mem0_manager.initialized:
+            logger.info("Initializing Mem0 manager...")
+            init_success = await mem0_manager.initialize()
+            if init_success:
+                logger.info("✅ Mem0 manager initialized successfully")
+            else:
+                logger.warning("❌ Mem0 manager initialization failed")
+        
         if mem0_manager.initialized:
             # Use Mem0 adapter
             memory_manager = Mem0MemoryManagerAdapter(db_pool, mem0_manager)
@@ -47,6 +58,8 @@ async def initialize_v2_system(db_pool, openai_api_key: str = None):
             logger.info("Using basic memory manager (Mem0 not available)")
     except Exception as e:
         logger.warning(f"Failed to initialize Mem0 adapter: {e}")
+        import traceback
+        traceback.print_exc()
         memory_manager = MemoryManager(db_pool)
         
     await memory_manager.initialize_tables()
@@ -154,14 +167,8 @@ async def search_appointments():
         user_id = data.get('user_id', 'anonymous')
         search_criteria = data.get('search_criteria', {})
         
-        # Get user context for preferences
-        user_context = await memory_manager.get_user_context(user_id)
-        
-        result = await appointment_workflow.run(
-            user_id=user_id,
-            search_criteria=search_criteria,
-            context=user_context
-        )
+        # Use mock appointment system directly
+        result = await mock_appointment_system.search_appointments(search_criteria)
         
         return jsonify(result)
         
@@ -182,18 +189,61 @@ async def book_appointment():
         if not user_id or not slot_id:
             return jsonify({"error": "Missing required fields"}), 400
         
-        # Create booking through workflow
-        result = await appointment_workflow.run(
-            user_id=user_id,
-            action="book",
-            slot_id=slot_id,
-            patient_info=patient_info
-        )
+        # Use mock appointment system
+        result = await mock_appointment_system.book_appointment(slot_id, patient_info)
         
         return jsonify(result)
         
     except Exception as e:
         logger.error(f"Error in appointment booking: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@humansa_v2_bp.route('/v2/humansa/appointment/<appointment_id>', methods=['GET'])
+async def get_appointment(appointment_id: str):
+    """Get appointment details."""
+    try:
+        result = await mock_appointment_system.get_appointment(appointment_id)
+        
+        if result.get("success"):
+            return jsonify(result)
+        else:
+            return jsonify(result), 404
+            
+    except Exception as e:
+        logger.error(f"Error getting appointment: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@humansa_v2_bp.route('/v2/humansa/appointment/<appointment_id>/cancel', methods=['POST'])
+async def cancel_appointment(appointment_id: str):
+    """Cancel an appointment."""
+    try:
+        result = await mock_appointment_system.cancel_appointment(appointment_id)
+        
+        return jsonify(result)
+        
+    except Exception as e:
+        logger.error(f"Error cancelling appointment: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@humansa_v2_bp.route('/v2/humansa/appointment/<appointment_id>/reschedule', methods=['POST'])
+async def reschedule_appointment(appointment_id: str):
+    """Reschedule an appointment."""
+    try:
+        data = await request.get_json()
+        new_slot_id = data.get('new_slot_id')
+        
+        if not new_slot_id:
+            return jsonify({"error": "new_slot_id is required"}), 400
+        
+        result = await mock_appointment_system.reschedule_appointment(appointment_id, new_slot_id)
+        
+        return jsonify(result)
+        
+    except Exception as e:
+        logger.error(f"Error rescheduling appointment: {e}")
         return jsonify({"error": str(e)}), 500
 
 
@@ -245,6 +295,31 @@ async def conversation_history():
     except Exception as e:
         logger.error(f"Error getting conversation history: {e}")
         return jsonify({"error": str(e)}), 500
+
+
+@humansa_v2_bp.route('/v2/humansa/memory/context/<user_id>', methods=['GET'])
+async def get_memory_context(user_id: str):
+    """Get memory context for a user."""
+    try:
+        # Get user context from memory manager
+        context = await memory_manager.get_user_context(user_id)
+        
+        # Return the context wrapped properly
+        return jsonify({
+            "user_id": user_id,
+            "context": context
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting memory context: {e}")
+        return jsonify({
+            "user_id": user_id,
+            "context": {
+                "memory_count": 0,
+                "recent_memories": [],
+                "user_id": user_id
+            }
+        })
 
 
 @humansa_v2_bp.route('/v2/humansa/memory/status', methods=['GET'])

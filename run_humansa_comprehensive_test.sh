@@ -1,5 +1,5 @@
 #!/bin/bash
-# Comprehensive Humansa test with 20 test cases - VERIFIED WORKING
+# Comprehensive HUMANSA test with 20 test cases - VERIFIED WORKING
 
 echo "============================================"
 echo "HUMANSA AI AGENT V2 - COMPREHENSIVE TEST"
@@ -227,7 +227,7 @@ async def run_all_tests():
     print(f"   Time: {total_time:.1f}s")
     
     if pass_rate >= 90:
-        print(f"\n🎉 SUCCESS! Agent meets Humansa requirements (≥90% pass rate)")
+        print(f"\n🎉 SUCCESS! Agent meets HUMANSA requirements (≥90% pass rate)")
     else:
         print(f"\n⚠️  IMPROVEMENT NEEDED: Agent at {pass_rate:.1f}% (requires ≥90%)")
     

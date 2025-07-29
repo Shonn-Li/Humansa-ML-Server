@@ -1,5 +1,5 @@
 #!/bin/bash
-# Enhanced Humansa AI Agent V2 Test Environment with Detailed Logging
+# Enhanced HUMANSA AI Agent V2 Test Environment with Detailed Logging
 
 echo "============================================"
 echo "HUMANSA AI AGENT V2 - ENHANCED TEST ENVIRONMENT"
@@ -31,21 +31,22 @@ fi
 # Environment variables for test
 export ENVIRONMENT=test
 export DB_HOST=localhost
-export DB_PORT=5456
+export DB_PORT=5454
 export DB_USER=postgres
-export DB_PASSWORD=youwo123
-export DB_NAME=youwoai
+export DB_PASSWORD=12931
+export DB_NAME=test4
 export ML_SERVER_PORT=6001
 export HUMANSA_ENHANCED_LOGGING=true  # Enable enhanced logging
 
 # Step 1: Check PostgreSQL test database
 echo -e "\n${YELLOW}Step 1: Checking PostgreSQL test database...${NC}"
-if pg_isready -h localhost -p 5456 -U postgres > /dev/null 2>&1; then
-    echo -e "${GREEN}✅ PostgreSQL test database is running on port 5456${NC}"
+if pg_isready -h localhost -p 5454 -U postgres > /dev/null 2>&1; then
+    echo -e "${GREEN}✅ PostgreSQL test database is running on port 5454${NC}"
 else
-    echo -e "${RED}❌ PostgreSQL test database is not running on port 5456${NC}"
+    echo -e "${RED}❌ PostgreSQL test database is not running on port 5454${NC}"
     echo "Please start the test database first with:"
-    echo "cd test_environment && docker-compose up -d"
+    echo "docker ps | grep youwoai_test_db"
+    echo "If not running: cd test_environment && docker-compose up -d"
     exit 1
 fi
 
@@ -77,7 +78,7 @@ if lsof -i :6001 > /dev/null 2>&1; then
 fi
 
 # Step 4: Start the ML server with V2 enabled
-echo -e "\n${YELLOW}Step 4: Starting ML server with Enhanced Humansa V2...${NC}"
+echo -e "\n${YELLOW}Step 4: Starting ML server with Enhanced HUMANSA V2...${NC}"
 echo "Server will run on port 6001 (test environment)"
 echo -e "${CYAN}Enhanced logging is ENABLED${NC}"
 
@@ -115,9 +116,9 @@ curl -s http://localhost:6001/v2/humansa/memory/status | python3 -m json.tool
 echo -e "\n${YELLOW}Step 6: Running comprehensive V2 tests with enhanced logging (30 test cases)...${NC}"
 
 # Create enhanced V2 test script
-cat > test_humansa_v2_comprehensive_enhanced.py << 'TESTSCRIPT'
+cat > test_HUMANSA_v2_comprehensive_enhanced.py << 'TESTSCRIPT'
 #!/usr/bin/env python3
-"""Enhanced Humansa V2 Test Suite with Detailed Logging - 30 Test Cases"""
+"""Enhanced HUMANSA V2 Test Suite with Detailed Logging - 30 Test Cases"""
 
 import asyncio
 import aiohttp
@@ -187,7 +188,7 @@ IDENTITY_TEST_CASES = [
         "id": 5,
         "name": "English Identity Query",
         "query": "Who are you?",
-        "expected_keywords": ["Humansa", "health", "assistant", "medical"],
+        "expected_keywords": ["HUMANSA", "health", "assistant", "medical"],
         "description": "Agent should respond in English when asked in English"
     },
     {
@@ -656,7 +657,7 @@ async def test_v2_endpoint_enhanced(session, test_case):
 
 async def run_all_tests():
     """Run all test cases with enhanced logging"""
-    print_section("Running Enhanced Humansa V2 Comprehensive Test Suite")
+    print_section("Running Enhanced HUMANSA V2 Comprehensive Test Suite")
     print(f"Total test cases: {len(ALL_TEST_CASES)}")
     print(f"- Identity tests: {len(IDENTITY_TEST_CASES)}")
     print(f"- Mem0 tests: {len(MEM0_TEST_CASES)}")
@@ -772,11 +773,11 @@ if __name__ == "__main__":
 TESTSCRIPT
 
 # Make test script executable
-chmod +x test_humansa_v2_comprehensive_enhanced.py
+chmod +x test_HUMANSA_v2_comprehensive_enhanced.py
 
 # Run the enhanced tests
 echo -e "\n${CYAN}Running enhanced tests with full process logging...${NC}"
-python3 test_humansa_v2_comprehensive_enhanced.py
+python3 test_HUMANSA_v2_comprehensive_enhanced.py
 
 # Step 7: Show server logs
 echo -e "\n${YELLOW}Step 7: Server logs (last 50 lines):${NC}"
@@ -786,11 +787,11 @@ tail -n 50 server_v2_enhanced.log
 echo -e "\n${YELLOW}Step 8: Test completed. Cleaning up...${NC}"
 echo "Server is still running on PID $SERVER_PID"
 echo "To stop the server, run: kill $SERVER_PID"
-echo -e "\n${GREEN}✅ Enhanced Humansa V2 test environment completed!${NC}"
+echo -e "\n${GREEN}✅ Enhanced HUMANSA V2 test environment completed!${NC}"
 
 # Provide summary
 echo -e "\n${BLUE}Summary:${NC}"
-echo "- Test database: PostgreSQL on port 5456"
+echo "- Test database: PostgreSQL on port 5454 (database: test4)"
 echo "- ML Server: Running on port 6001"
 echo "- Endpoint: http://localhost:6001/v2/humansa/chat"
 echo "- Memory endpoints: /v2/humansa/memory/status, /add, /search"

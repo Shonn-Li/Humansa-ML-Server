@@ -38,8 +38,8 @@ class Mem0Manager:
         mem0_schema = os.getenv("MEM0_SCHEMA", f"mem0_humansa_{environment}")
         
         # Azure OpenAI configuration
-        azure_key = os.getenv("AZURE_OPENAI_API_KEY")
-        azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+        azure_key = os.getenv("AZURE_OPENAI_API_KEY") or os.getenv("AZURE_INFERENCE_CREDENTIAL")
+        azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT", "https://youwoai-dev-resource.openai.azure.com/")
         azure_deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT_GPT4", "gpt-4.1")
         azure_embedding = os.getenv("AZURE_OPENAI_DEPLOYMENT_EMBEDDING", "text-embedding-ada-002")
         
@@ -61,31 +61,15 @@ class Mem0Manager:
         }
         
         # Configure LLM provider
-        if azure_key and azure_endpoint:
-            config["llm"] = {
-                "provider": "azure_openai",
-                "config": {
-                    "api_key": azure_key,
-                    "azure_endpoint": azure_endpoint,
-                    "azure_deployment": azure_deployment,
-                    "api_version": "2024-02-01"
-                }
-            }
-            config["embedder"] = {
-                "provider": "azure_openai",
-                "config": {
-                    "api_key": azure_key,
-                    "azure_endpoint": azure_endpoint,
-                    "azure_deployment": azure_embedding,
-                    "api_version": "2024-02-01"
-                }
-            }
-        elif openai_key:
+        # For now, skip Azure and use OpenAI directly if available
+        # Azure configuration seems to have compatibility issues with Mem0
+        if openai_key:
+            logger.info("Configuring Mem0 with OpenAI - model: gpt-4o-mini")
             config["llm"] = {
                 "provider": "openai",
                 "config": {
                     "api_key": openai_key,
-                    "model": "gpt-4-turbo-preview"
+                    "model": "gpt-4o-mini"  # Use a model this project has access to
                 }
             }
             config["embedder"] = {
@@ -178,14 +162,14 @@ class Mem0Manager:
             logger.warning(f"Could not ensure schema exists: {e}")
             # Not critical - Mem0 might create it anyway
     
-    def get_memory_user_id(self, user_id: int, context: str = "humansa") -> str:
+    def get_memory_user_id(self, user_id: str, context: str = "humansa") -> str:
         """Generate consistent memory user ID"""
         environment = os.getenv("ENVIRONMENT", "prod")
         return f"{context}_{environment}_{user_id}"
     
     async def add_conversation(
         self,
-        user_id: int,
+        user_id: str,
         query: str = None,
         response: str = None,
         messages: List[Dict[str, str]] = None,
@@ -243,7 +227,7 @@ class Mem0Manager:
     
     async def search_memories(
         self,
-        user_id: int,
+        user_id: str,
         query: str,
         limit: int = 10
     ) -> List[Dict[str, Any]]:
@@ -271,7 +255,7 @@ class Mem0Manager:
             logger.error(f"Failed to search memories: {e}")
             return []
     
-    async def get_user_context(self, user_id: int) -> Dict[str, Any]:
+    async def get_user_context(self, user_id: str) -> Dict[str, Any]:
         """Get user context from memories"""
         if not self.initialized:
             return {"user_id": user_id, "memories": []}
@@ -305,7 +289,11 @@ class Mem0Manager:
             logger.error(f"Failed to get user context: {e}")
             import traceback
             traceback.print_exc()
-            return {"user_id": user_id, "memories": []}
+            return {
+                "user_id": user_id, 
+                "memory_count": 0,
+                "recent_memories": []
+            }
 
 
 # Import datetime if not already imported

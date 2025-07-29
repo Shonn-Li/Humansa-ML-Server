@@ -4,7 +4,7 @@ This version supports the enhanced orchestrator for better test visibility
 """
 
 from quart import Blueprint, request, jsonify, Response
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional, List, AsyncGenerator
 import json
 import asyncio
 import time
@@ -35,7 +35,8 @@ appointment_workflow: Optional[AppointmentBookingWorkflow] = None
 sse_formatter = SSEFormatter()
 
 # Check if enhanced logging is enabled via environment variable
-ENABLE_ENHANCED_LOGGING = os.getenv('HUMANSA_ENHANCED_LOGGING', 'false').lower() == 'true'
+# Default to true for better visibility of agent thinking process
+ENABLE_ENHANCED_LOGGING = os.getenv('HUMANSA_ENHANCED_LOGGING', 'true').lower() == 'true'
 
 
 async def initialize_v2_enhanced_system(db_pool, openai_api_key: str):

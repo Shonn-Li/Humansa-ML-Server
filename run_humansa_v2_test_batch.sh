@@ -1,5 +1,5 @@
 #!/bin/bash
-# Humansa V2 - Run 30 tests in batches to avoid timeout
+# HUMANSA V2 - Run 30 tests in batches to avoid timeout
 
 echo "============================================"
 echo "HUMANSA AI AGENT V2 - BATCH TEST RUNNER"
@@ -28,15 +28,15 @@ fi
 # Environment variables for test
 export ENVIRONMENT=test
 export DB_HOST=localhost
-export DB_PORT=5456
+export DB_PORT=5454
 export DB_USER=postgres
-export DB_PASSWORD=youwo123
-export DB_NAME=youwoai
+export DB_PASSWORD=12931
+export DB_NAME=test4
 export ML_SERVER_PORT=6001
 export HUMANSA_ENHANCED_LOGGING=true
 
 # Check PostgreSQL
-if ! pg_isready -h localhost -p 5456 -U postgres > /dev/null 2>&1; then
+if ! pg_isready -h localhost -p 5454 -U postgres > /dev/null 2>&1; then
     echo -e "${RED}❌ PostgreSQL test database is not running${NC}"
     exit 1
 fi

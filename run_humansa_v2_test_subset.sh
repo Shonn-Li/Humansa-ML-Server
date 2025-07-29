@@ -1,5 +1,5 @@
 #!/bin/bash
-# Humansa V2 - Subset Test (First 10 cases)
+# HUMANSA V2 - Subset Test (First 10 cases)
 # Quick validation before full 30-case run
 
 echo "============================================"
@@ -32,19 +32,19 @@ fi
 # Environment variables for test
 export ENVIRONMENT=test
 export DB_HOST=localhost
-export DB_PORT=5456
+export DB_PORT=5454
 export DB_USER=postgres
-export DB_PASSWORD=youwo123
-export DB_NAME=youwoai
+export DB_PASSWORD=12931
+export DB_NAME=test4
 export ML_SERVER_PORT=6001
 export HUMANSA_ENHANCED_LOGGING=true
 
 # Step 1: Check PostgreSQL test database
 echo -e "\n${YELLOW}Step 1: Checking PostgreSQL test database...${NC}"
-if pg_isready -h localhost -p 5456 -U postgres > /dev/null 2>&1; then
-    echo -e "${GREEN}✅ PostgreSQL test database is running on port 5456${NC}"
+if pg_isready -h localhost -p 5454 -U postgres > /dev/null 2>&1; then
+    echo -e "${GREEN}✅ PostgreSQL test database is running on port 5454${NC}"
 else
-    echo -e "${RED}❌ PostgreSQL test database is not running on port 5456${NC}"
+    echo -e "${RED}❌ PostgreSQL test database is not running on port 5454${NC}"
     echo "Please start the test database first with:"
     echo "cd test_environment && docker-compose up -d"
     exit 1
@@ -59,7 +59,7 @@ if lsof -i :6001 > /dev/null 2>&1; then
 fi
 
 # Step 3: Start the ML server with V2 enabled
-echo -e "\n${YELLOW}Step 3: Starting ML server with Humansa V2...${NC}"
+echo -e "\n${YELLOW}Step 3: Starting ML server with HUMANSA V2...${NC}"
 echo "Server will run on port 6001 (test environment)"
 
 # Start server in background
@@ -88,9 +88,9 @@ fi
 echo -e "\n${YELLOW}Step 4: Running subset of test cases (10 cases)...${NC}"
 
 # Create subset test script
-cat > test_humansa_v2_subset.py << 'TESTSCRIPT'
+cat > test_HUMANSA_v2_subset.py << 'TESTSCRIPT'
 #!/usr/bin/env python3
-"""Humansa V2 - Subset of 10 Test Cases for Quick Validation"""
+"""HUMANSA V2 - Subset of 10 Test Cases for Quick Validation"""
 
 import asyncio
 import aiohttp
@@ -140,7 +140,7 @@ TEST_CASES = [
         "category": "Identity",
         "name": "English Identity Query",
         "query": "Who are you?",
-        "expected_keywords": ["Humansa", "Health", "Medical", "Assistant"],
+        "expected_keywords": ["HUMANSA", "Health", "Medical", "Assistant"],
         "user_id": 123
     },
     {
@@ -335,7 +335,7 @@ def analyze_response_quality(test_case, response):
                 notes.append("✓ Offered help/service")
                 
         elif test_case['id'] == 2:  # English identity
-            if "Humansa" in response and "Health" in response:
+            if "HUMANSA" in response and "Health" in response:
                 quality_score += 50
                 notes.append("✓ Correctly identified in English")
             if response.count('\n') > 3:  # Check for structured response
@@ -401,7 +401,7 @@ def analyze_response_quality(test_case, response):
 
 async def run_subset_tests():
     """Run subset of test cases"""
-    print_section("Humansa V2 - Subset Test (10 Cases)")
+    print_section("HUMANSA V2 - Subset Test (10 Cases)")
     print(f"Total test cases: {len(TEST_CASES)}")
     
     async with aiohttp.ClientSession() as session:
@@ -536,10 +536,10 @@ if __name__ == "__main__":
 TESTSCRIPT
 
 # Make test script executable
-chmod +x test_humansa_v2_subset.py
+chmod +x test_HUMANSA_v2_subset.py
 
 # Run the tests
-python3 test_humansa_v2_subset.py
+python3 test_HUMANSA_v2_subset.py
 
 # Step 5: Show server logs
 echo -e "\n${YELLOW}Step 5: Server logs (last 30 lines):${NC}"
@@ -548,11 +548,11 @@ tail -n 30 server_v2_subset_test.log
 # Step 6: Cleanup
 echo -e "\n${YELLOW}Step 6: Test completed. Cleaning up...${NC}"
 kill $SERVER_PID 2>/dev/null || true
-echo -e "\n${GREEN}✅ Humansa V2 subset test completed!${NC}"
+echo -e "\n${GREEN}✅ HUMANSA V2 subset test completed!${NC}"
 
 # Provide summary
 echo -e "\n${BLUE}Summary:${NC}"
-echo "- Test database: PostgreSQL on port 5456"
+echo "- Test database: PostgreSQL on port 5454"
 echo "- ML Server: Ran on port 6001"
 echo "- Test results: humansa_v2_subset_results_*.json"
 echo "- Server logs: server_v2_subset_test.log"

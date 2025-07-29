@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Enhanced Humansa V2 Test with Comprehensive Logging
+Enhanced HUMANSA V2 Test with Comprehensive Logging
 This test script provides detailed logging of the entire V2 process including:
 - Thinking process
 - Agents called and their order
@@ -318,7 +318,7 @@ async def run_enhanced_tests():
     """Run all tests with enhanced logging"""
     print_colored("""
 ╔═══════════════════════════════════════════════════════════════╗
-║     Humansa V2 Enhanced Test Suite with Full Logging         ║
+║     HUMANSA V2 Enhanced Test Suite with Full Logging         ║
 ║                                                               ║
 ║  This test will show:                                         ║
 ║  • Complete thinking process                                  ║
@@ -351,7 +351,7 @@ async def run_enhanced_tests():
     
     # Save detailed results
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"humansa_v2_enhanced_test_logs_{timestamp}.json"
+    filename = f"HUMANSA_v2_enhanced_test_logs_{timestamp}.json"
     
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump({

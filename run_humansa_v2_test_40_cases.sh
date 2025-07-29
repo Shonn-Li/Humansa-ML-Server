@@ -1,5 +1,5 @@
 #!/bin/bash
-# Humansa V2 - 40 Comprehensive Test Cases (Including Products)
+# HUMANSA V2 - 40 Comprehensive Test Cases (Including Products)
 # Based on V2_TEST_CASES.md with product tests
 
 echo "============================================"
@@ -58,9 +58,9 @@ for script in *.sql; do
     PGPASSWORD=12931 psql -h localhost -p 5454 -U postgres -d test4 -f "$script" > /dev/null 2>&1
 done
 
-# Also load our Humansa test data
+# Also load our HUMANSA test data
 if [ -f "humansa_test_doctors.sql" ]; then
-    echo "Loading Humansa test doctors..."
+    echo "Loading HUMANSA test doctors..."
     PGPASSWORD=12931 psql -h localhost -p 5454 -U postgres -d test4 -f "humansa_test_doctors.sql" > /dev/null 2>&1
 fi
 
@@ -145,7 +145,7 @@ test_api() {
 }
 
 # Initialize results file
-echo "# Humansa V2 - 40 Test Cases Results" > "$RESULTS_FILE"
+echo "# HUMANSA V2 - 40 Test Cases Results" > "$RESULTS_FILE"
 echo "Date: $(date)" >> "$RESULTS_FILE"
 echo "Environment: Test (Port 5454)" >> "$RESULTS_FILE"
 

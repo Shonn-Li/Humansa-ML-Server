@@ -1,6 +1,6 @@
-# Humansa Test Environment
+# HUMANSA Test Environment
 
-A completely isolated test environment for the Humansa medical AI system, separate from the main YouWoAI ML Server test environment.
+Test environment configuration for the HUMANSA medical AI system.
 
 ## Overview
 
@@ -51,11 +51,11 @@ humansa_test_environment/
 ## Database Configuration
 
 - **Host**: localhost
-- **Port**: 5456 (different from main test environment's 5454)
-- **Database**: youwoai
-- **User**: youwo
-- **Password**: youwo123
-- **Container**: humansa_test_postgres
+- **Port**: 5454 (shared test container)
+- **Database**: test4 (HUMANSA-specific database)
+- **User**: postgres
+- **Password**: 12931
+- **Container**: youwoai_test_db
 
 ## Test Data
 
@@ -99,20 +99,20 @@ cd humansa_test_environment
 python tests/test_connection.py
 ```
 
-### Run Humansa V2 Tests
+### Run HUMANSA V2 Tests
 ```bash
 # From project root
 source youwo-ml-venv/bin/activate
-export DB_PORT=5456
-python test_humansa_v2_comprehensive.py
+export DB_PORT=5454 DB_NAME=test4 DB_PASSWORD=12931
+python test_HUMANSA_v2_comprehensive.py
 ```
 
-### Start ML Server with Humansa Database
+### Start ML Server with HUMANSA Database
 ```bash
 # From project root
 source youwo-ml-venv/bin/activate
-export DB_PORT=5456
-python -m src.main
+export DB_PORT=5454 DB_NAME=test4 DB_PASSWORD=12931
+python -m src.main --port 6001
 ```
 
 ## API Endpoints
@@ -149,22 +149,21 @@ Edit `src/humansa/v2/test_data.py` to modify:
 
 Then run `./scripts/reset_data.sh` to apply changes.
 
-## Independence from Main Test Environment
+## Shared Test Infrastructure
 
-This environment is completely independent:
-- Different port (5456 vs 5454)
-- Different container names
-- Separate Docker volumes
-- No shared resources
-- Can run simultaneously with main test environment
+This environment uses shared test infrastructure:
+- Shared PostgreSQL container on port 5454
+- HUMANSA uses database `test4`
+- YouWoAI general tests use database `youwoai_test`
+- Both share the same container but have separate databases
 
 ## Troubleshooting
 
-### Port Already in Use
-If port 5456 is already in use:
-1. Check for existing containers: `docker ps`
-2. Stop conflicting containers: `docker stop <container>`
-3. Or modify port in `docker/docker-compose.yml`
+### Container Not Running
+If the test database is not running:
+1. Check for existing containers: `docker ps | grep youwoai_test_db`
+2. Start the container: `cd test_environment && docker-compose up -d`
+3. Verify connection: `PGPASSWORD=12931 psql -h localhost -p 5454 -U postgres -d test4 -c 'SELECT 1;'`
 
 ### Import Errors
 If you see import errors when running scripts:

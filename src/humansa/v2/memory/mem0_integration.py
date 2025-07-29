@@ -39,7 +39,7 @@ class Mem0MemoryManagerAdapter:
                 logger.warning("Mem0 initialization failed - falling back to basic memory")
         self._initialized = True
         
-    async def get_patient_memory(self, patient_id: int) -> Dict[str, Any]:
+    async def get_patient_memory(self, patient_id: str) -> Dict[str, Any]:
         """Get patient memory using Mem0."""
         if not self.mem0_manager.initialized:
             return {"memories": [], "summary": "No memory available"}
@@ -84,7 +84,7 @@ class Mem0MemoryManagerAdapter:
             
     async def update_patient_memory(
         self,
-        patient_id: int,
+        patient_id: str,
         interaction_data: Dict[str, Any]
     ) -> bool:
         """Update patient memory with new interaction data."""
@@ -136,7 +136,7 @@ class Mem0MemoryManagerAdapter:
             logger.error(f"Error updating patient memory in Mem0: {e}")
             return False
             
-    async def get_user_context(self, user_id: int) -> Dict[str, Any]:
+    async def get_user_context(self, user_id: str) -> Dict[str, Any]:
         """Get user context from Mem0."""
         if not self.mem0_manager.initialized:
             return {"user_id": user_id}
@@ -150,7 +150,7 @@ class Mem0MemoryManagerAdapter:
             
     async def search_memories(
         self,
-        user_id: int,
+        user_id: str,
         query: str,
         limit: int = 10
     ) -> List[Dict[str, Any]]:
@@ -169,7 +169,7 @@ class Mem0MemoryManagerAdapter:
             logger.error(f"Error searching memories in Mem0: {e}")
             return []
             
-    async def get_or_create_patient_profile(self, user_id: int) -> Dict[str, Any]:
+    async def get_or_create_patient_profile(self, user_id: str) -> Dict[str, Any]:
         """Get or create patient profile - uses Mem0 context."""
         context = await self.get_user_context(user_id)
         
@@ -185,7 +185,7 @@ class Mem0MemoryManagerAdapter:
         
     async def update_patient_profile(
         self,
-        user_id: int,
+        user_id: str,
         profile_data: Optional[Dict] = None,
         medical_history: Optional[Dict] = None,
         preferences: Optional[Dict] = None
@@ -257,7 +257,7 @@ class Mem0MemoryManagerAdapter:
             
     async def get_conversation_history(
         self,
-        user_id: int,
+        user_id: str,
         limit: int = 10
     ) -> List[Dict[str, Any]]:
         """Get conversation history from Mem0 memories."""
@@ -284,7 +284,7 @@ class Mem0MemoryManagerAdapter:
             
     async def update_conversation(
         self,
-        user_id: int,
+        user_id: str,
         query: str,
         response: str,
         metadata: Optional[Dict[str, Any]] = None
@@ -319,27 +319,13 @@ class Mem0MemoryManagerAdapter:
         response: str,
         metadata: Optional[Dict[str, Any]] = None
     ) -> bool:
-        """Add conversation - alias for update_conversation with string user_id."""
-        # Convert string user_id to int if needed
-        try:
-            if isinstance(user_id, str):
-                # Try to extract numeric part from user_id like "test_user_123"
-                if "_" in user_id:
-                    user_id_int = int(user_id.split("_")[-1])
-                else:
-                    user_id_int = hash(user_id) % 1000000  # Generate consistent int from string
-            else:
-                user_id_int = int(user_id)
-            
-            return await self.update_conversation(
-                user_id=user_id_int,
-                query=query,
-                response=response,
-                metadata=metadata
-            )
-        except Exception as e:
-            logger.error(f"Error in add_conversation: {e}")
-            return False
+        """Add conversation - passes string user_id directly."""
+        return await self.update_conversation(
+            user_id=user_id,
+            query=query,
+            response=response,
+            metadata=metadata
+        )
             
     async def _get_all_memories_async(self, memory_user_id: str) -> List[Dict[str, Any]]:
         """Get all memories asynchronously."""

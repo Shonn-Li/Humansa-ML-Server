@@ -46,9 +46,16 @@ class DatabaseMedicalTools:
             params.append(f"%{specialty}%")
             
         if name:
+            # Use scoring for name relevance: exact > prefix > contains
             param_count += 1
-            conditions.append(f"LOWER(d.name) LIKE LOWER(${param_count})")
-            params.append(f"%{name}%")
+            name_param = f"${param_count}"
+            # Score exact matches higher, then prefix matches, then substring matches
+            conditions.append(f"""(
+                LOWER(d.name) = LOWER({name_param}) OR  -- Exact match
+                LOWER(d.name) LIKE LOWER({name_param} || '%') OR  -- Prefix match
+                LOWER(d.name) LIKE LOWER('%' || {name_param} || '%')  -- Contains match
+            )""")
+            params.append(name)
             
         if location:
             param_count += 1
@@ -68,7 +75,19 @@ class DatabaseMedicalTools:
         if conditions:
             query += " AND " + " AND ".join(conditions)
             
-        query += " ORDER BY d.rating DESC, d.years_experience DESC"
+        # Order by name relevance first if searching by name
+        if name:
+            # Find the parameter index for name
+            name_param_idx = next(i for i, p in enumerate(params, 1) if p == name)
+            query += f""" ORDER BY 
+                CASE 
+                    WHEN LOWER(d.name) = LOWER(${name_param_idx}) THEN 1  -- Exact match
+                    WHEN LOWER(d.name) LIKE LOWER(${name_param_idx} || '%') THEN 2  -- Prefix match
+                    ELSE 3  -- Contains match
+                END,
+                d.rating DESC, d.years_experience DESC"""
+        else:
+            query += " ORDER BY d.rating DESC, d.years_experience DESC"
         
         async with self.db_pool.acquire() as conn:
             rows = await conn.fetch(query, *params)
@@ -339,6 +358,130 @@ class DatabaseMedicalTools:
             "appointment_id": appointment_id
         }
     
+    async def search_services(
+        self,
+        service_name: Optional[str] = None,
+        specialty: Optional[str] = None,
+        clinic_name: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
+        """Search for medical services based on criteria."""
+        # First try humansa_medical_service table
+        query = """
+            SELECT 
+                ms.service_code,
+                ms.service_name as name,
+                ms.service_type,
+                ms.department,
+                ms.description,
+                ms.price,
+                ms.price_range_min,
+                ms.price_range_max,
+                ms.duration_minutes,
+                c.name as clinic_name,
+                c.address as clinic_address
+            FROM humansa_medical_service ms
+            LEFT JOIN humansa_clinics c ON ms.clinic_code = c.clinic_code
+            WHERE 1=1
+        """
+        
+        conditions = []
+        params = []
+        param_count = 0
+        
+        if service_name:
+            param_count += 1
+            conditions.append(f"LOWER(ms.service_name) LIKE LOWER(${param_count})")
+            params.append(f"%{service_name}%")
+            
+        if specialty:
+            param_count += 1
+            conditions.append(f"LOWER(ms.department) LIKE LOWER(${param_count})")
+            params.append(f"%{specialty}%")
+            
+        if clinic_name:
+            param_count += 1
+            conditions.append(f"LOWER(c.name) LIKE LOWER(${param_count})")
+            params.append(f"%{clinic_name}%")
+        
+        if conditions:
+            query += " AND " + " AND ".join(conditions)
+            
+        query += " ORDER BY ms.service_name"
+        
+        async with self.db_pool.acquire() as conn:
+            # First try humansa_medical_service
+            try:
+                rows = await conn.fetch(query, *params)
+                if rows:
+                    results = []
+                    for row in rows:
+                        results.append({
+                            "service_code": row['service_code'],
+                            "name": row['name'],
+                            "type": row['service_type'],
+                            "department": row['department'],
+                            "description": row['description'],
+                            "price": float(row['price']) if row['price'] else None,
+                            "price_range": {
+                                "min": float(row['price_range_min']) if row['price_range_min'] else None,
+                                "max": float(row['price_range_max']) if row['price_range_max'] else None
+                            },
+                            "duration_minutes": row['duration_minutes'],
+                            "clinic_name": row['clinic_name'],
+                            "clinic_address": row['clinic_address']
+                        })
+                    return results
+            except Exception as e:
+                # If table doesn't exist or error, continue to fallback
+                pass
+            
+            # Fallback to humansa_service table
+            fallback_query = """
+                SELECT 
+                    service_id,
+                    name,
+                    department,
+                    price,
+                    description,
+                    tags
+                FROM humansa_service
+                WHERE 1=1
+            """
+            
+            conditions = []
+            params = []
+            param_count = 0
+            
+            if service_name:
+                param_count += 1
+                conditions.append(f"LOWER(name) LIKE LOWER(${param_count})")
+                params.append(f"%{service_name}%")
+                
+            if specialty:
+                param_count += 1
+                conditions.append(f"LOWER(department) LIKE LOWER(${param_count})")
+                params.append(f"%{specialty}%")
+            
+            if conditions:
+                fallback_query += " AND " + " AND ".join(conditions)
+                
+            fallback_query += " ORDER BY name"
+            
+            rows = await conn.fetch(fallback_query, *params)
+            
+        results = []
+        for row in rows:
+            results.append({
+                "service_id": row['service_id'],
+                "name": row['name'],
+                "department": row['department'],
+                "price": float(row['price']) if row['price'] else None,
+                "description": row['description'],
+                "tags": row['tags'].split(',') if row['tags'] else []
+            })
+            
+        return results
+    
     async def get_clinic_info(
         self,
         clinic_name: Optional[str] = None,
@@ -437,6 +580,19 @@ async def book_appointment_slot(**kwargs):
     
     tools = DatabaseMedicalTools(_db_pool)
     return await tools.book_appointment_slot(**kwargs)
+
+async def search_services(**kwargs):
+    """Search medical services using database."""
+    if not _db_pool:
+        # Fallback to test data if no DB
+        from ..test_data import SERVICES
+        service_name = kwargs.get('service_name', '')
+        if service_name:
+            return [s for s in SERVICES if service_name.lower() in s['name'].lower()]
+        return SERVICES[:5]  # Return first 5 services if no filter
+    
+    tools = DatabaseMedicalTools(_db_pool)
+    return await tools.search_services(**kwargs)
 
 async def get_clinic_info(**kwargs):
     """Get clinic info using database."""

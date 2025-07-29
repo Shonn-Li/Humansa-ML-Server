@@ -18,6 +18,16 @@ Humansa is a multi-agent medical AI system with integrated memory capabilities p
 - **Agents**: 5 specialized medical agents coordinated by orchestrator
 - **Memory**: Full Mem0 integration with context persistence
 
+## Test Environment
+
+⚠️ **CRITICAL**: All Humansa tests use a COMPLETELY ISOLATED test environment. See [HUMANSA_TEST_ENVIRONMENT.md](./HUMANSA_TEST_ENVIRONMENT.md) for details.
+
+Key points:
+- ML Server: Port **6001** (NOT 5001!)
+- PostgreSQL: Port **5454** (isolated Docker container)
+- Database: **test4** with password **12931**
+- Completely independent from production
+
 ## Core Documentation
 
 ### 📘 [HUMANSA_V2_IMPLEMENTATION.md](./HUMANSA_V2_IMPLEMENTATION.md)

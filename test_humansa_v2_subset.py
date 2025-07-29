@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Humansa V2 - Subset of 10 Test Cases for Quick Validation"""
+"""HUMANSA V2 - Subset of 10 Test Cases for Quick Validation"""
 
 import asyncio
 import aiohttp
@@ -310,7 +310,7 @@ def analyze_response_quality(test_case, response):
 
 async def run_subset_tests():
     """Run subset of test cases"""
-    print_section("Humansa V2 - Subset Test (10 Cases)")
+    print_section("HUMANSA V2 - Subset Test (10 Cases)")
     print(f"Total test cases: {len(TEST_CASES)}")
     
     async with aiohttp.ClientSession() as session:
@@ -395,7 +395,7 @@ async def run_subset_tests():
         
         # Save results
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"humansa_v2_subset_results_{timestamp}.json"
+        filename = f"HUMANSA_v2_subset_results_{timestamp}.json"
         
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump({

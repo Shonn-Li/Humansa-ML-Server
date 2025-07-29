@@ -20,6 +20,7 @@ import os
 from datetime import datetime, date, timedelta
 from pydantic import BaseModel, Field, validator
 from dotenv import load_dotenv
+from ..utils.date_parser import ChineseDateParser
 
 # Load environment variables
 load_dotenv()
@@ -610,7 +611,7 @@ class HumansaAgenticToolManager:
             FunctionTool.from_defaults(
                 fn=self.find_doctor_availability_structured,
                 name="find_doctor_availability",
-                description="查询Humansa医生在灵活日期范围（最多30天）内的可用时间。必须提供doctor_name参数——如需按城市/专科查找医生请先用find_doctor_info。返回可预约时段及医生信息（含挂号费）。支持'下周'、'本月'等请求。医生姓名模糊匹配。始终返回有用结果——如未找到医生，将推荐有空档的相似医生及价格。医生姓名仅填写真实中文姓氏或姓名（如'张'、'王'、'李明'），不要包含头衔。",
+                description="查询Humansa医生在灵活日期范围（最多30天）内的可用时间。必须提供doctor_name参数——如需按城市/专科查找医生请先用find_doctor_info。返回可预约时段及医生信息（含挂号费）。日期处理：'明天'用days_ahead=1，'后天'用days_ahead=2，'下周'用days_ahead=7，'本周'用days_ahead=0-6，'下个月'用days_ahead=30。医生姓名模糊匹配。始终返回有用结果——如未找到医生，将推荐有空档的相似医生及价格。医生姓名仅填写真实中文姓氏或姓名（如'张'、'王'、'李明'），不要包含头衔。",
                 fn_schema=DoctorAvailabilityArgs
             ),
             FunctionTool.from_defaults(
@@ -674,6 +675,55 @@ class HumansaAgenticToolManager:
                 fn_schema=SearchArgs
             ),
         ])
+
+        # Add appointment management tools if available
+        try:
+            from .appointment_management_tools import (
+                collect_appointment_info_tool,
+                book_appointment_tool,
+                get_appointment_history_tool,
+                reschedule_appointment_tool,
+                cancel_appointment_tool
+            )
+            
+            # Initialize memory manager if needed
+            if not hasattr(self, 'memory_manager'):
+                from humansa.memory.mem0_manager import Mem0Manager
+                self.memory_manager = Mem0Manager()
+            
+            appointment_tools = [
+                FunctionTool.from_defaults(
+                    fn=collect_appointment_info_tool(db, self.memory_manager),
+                    name="collect_appointment_info",
+                    description="分析预约请求中缺失的信息，逐步收集所需信息。当用户想预约但信息不完整时使用此工具。它会识别需要哪些信息（城市、科室、日期、时间、姓名、电话）并引导对话收集。"
+                ),
+                FunctionTool.from_defaults(
+                    fn=book_appointment_tool(db, self.memory_manager),
+                    name="confirm_appointment_booking",
+                    description="在收集完所有必要信息后，执行实际的预约确认和登记。需要医生代码、患者姓名、电话、日期和时间。创建预约记录并返回预约确认号。"
+                ),
+                FunctionTool.from_defaults(
+                    fn=get_appointment_history_tool(db, self.memory_manager),
+                    name="get_appointment_history",
+                    description="查询患者的预约历史记录。通过手机号或患者ID查找所有预约（已完成、待就诊、已取消）。"
+                ),
+                FunctionTool.from_defaults(
+                    fn=reschedule_appointment_tool(db, self.memory_manager),
+                    name="reschedule_appointment",
+                    description="修改现有预约的日期或时间。需要预约号或手机号，以及新的日期时间。"
+                ),
+                FunctionTool.from_defaults(
+                    fn=cancel_appointment_tool(db, self.memory_manager),
+                    name="cancel_appointment",
+                    description="取消现有预约。通过预约号或手机号取消，可提供取消原因。"
+                ),
+            ]
+            
+            tools.extend(appointment_tools)
+            logger.info(f"✅ Added {len(appointment_tools)} appointment management tools")
+            
+        except ImportError as e:
+            logger.warning(f"⚠️ Appointment management tools not available: {e}")
 
         logger.info(
             f"✅ Created {len(tools)} LlamaIndex FunctionTools with Pydantic schemas")

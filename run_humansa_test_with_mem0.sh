@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run Humansa Test Environment with Mem0 Integration Test
+# Run HUMANSA Test Environment with Mem0 Integration Test
 # This script starts the test environment and automatically runs Mem0 tests
 
 set -e
@@ -12,12 +12,12 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 echo -e "${GREEN}================================================${NC}"
-echo -e "${GREEN}Humansa Test Environment with Mem0 Testing${NC}"
+echo -e "${GREEN}HUMANSA Test Environment with Mem0 Testing${NC}"
 echo -e "${GREEN}================================================${NC}"
 
 # Step 1: Start the test environment
-echo -e "\n${YELLOW}Step 1: Starting Humansa test environment...${NC}"
-./run_humansa_test_environment.sh
+echo -e "\n${YELLOW}Step 1: Starting HUMANSA test environment...${NC}"
+./run_HUMANSA_test_environment.sh
 
 # Wait for services to be fully ready
 echo -e "\n${YELLOW}Waiting for services to stabilize...${NC}"
@@ -29,13 +29,13 @@ if curl -s http://localhost:6001/health > /dev/null; then
     echo -e "${GREEN}✓ ML Server is healthy on port 6001${NC}"
 else
     echo -e "${RED}✗ ML Server is not responding on port 6001${NC}"
-    echo -e "${YELLOW}Please ensure the test environment is running with ./run_humansa_test_environment.sh${NC}"
+    echo -e "${YELLOW}Please ensure the test environment is running with ./run_HUMANSA_test_environment.sh${NC}"
     # Don't exit, continue with existing server
 fi
 
 # Step 3: Check database connectivity
 echo -e "\n${YELLOW}Step 3: Verifying database connectivity...${NC}"
-PGPASSWORD=youwo123 psql -h localhost -p 5456 -U youwo -d youwoai -c "SELECT 1;" > /dev/null
+PGPASSWORD=12931 psql -h localhost -p 5454 -U postgres -d test4 -c "SELECT 1;" > /dev/null
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}✓ Database is accessible${NC}"
 else
@@ -45,7 +45,7 @@ fi
 
 # Step 4: Check if Mem0 schema exists
 echo -e "\n${YELLOW}Step 4: Checking Mem0 schema...${NC}"
-SCHEMA_EXISTS=$(PGPASSWORD=youwo123 psql -h localhost -p 5456 -U youwo -d youwoai -t -c "SELECT schema_name FROM information_schema.schemata WHERE schema_name = 'mem0_test';" | xargs)
+SCHEMA_EXISTS=$(PGPASSWORD=12931 psql -h localhost -p 5454 -U postgres -d test4 -t -c "SELECT schema_name FROM information_schema.schemata WHERE schema_name = 'mem0_test';" | xargs)
 if [ "$SCHEMA_EXISTS" = "mem0_test" ]; then
     echo -e "${GREEN}✓ Mem0 test schema exists${NC}"
 else
@@ -67,10 +67,10 @@ echo -e "${YELLOW}This will test all 10 memory scenarios...${NC}\n"
 
 # Set environment variables for test
 export DB_HOST=localhost
-export DB_PORT=5456
-export DB_USER=youwo
-export DB_PASSWORD=youwo123
-export DB_NAME=youwoai
+export DB_PORT=5454
+export DB_USER=postgres
+export DB_PASSWORD=12931
+export DB_NAME=test4
 export ENVIRONMENT=test
 
 # Run the tests
@@ -95,7 +95,7 @@ echo -e "${YELLOW}Adding test memory via API...${NC}"
 RESPONSE=$(curl -s -X POST http://localhost:6001/v2/humansa/memory/add \
   -H "Content-Type: application/json" \
   -d '{
-    "user_id": 10001,
+    "user_id": "test_user_10001",
     "messages": [
       {"role": "user", "content": "I prefer Dr. Chen for cardiology appointments"},
       {"role": "assistant", "content": "I have noted your preference for Dr. Chen for cardiology appointments."}
@@ -114,7 +114,7 @@ echo -e "${YELLOW}Retrieving memories via API...${NC}"
 SEARCH_RESPONSE=$(curl -s -X POST http://localhost:6001/v2/humansa/memory/search \
   -H "Content-Type: application/json" \
   -d '{
-    "user_id": 10001,
+    "user_id": "test_user_10001",
     "query": "doctor preference"
   }')
 
@@ -131,4 +131,4 @@ echo -e "\nYou can now:"
 echo -e "  - Access the ML server at: http://localhost:6001"
 echo -e "  - View test results in: mem0_test_results_*.json"
 echo -e "  - Run additional tests with: python test_mem0_humansa_integration.py"
-echo -e "\nTo stop the environment: docker-compose -f humansa_test_environment/docker-compose.yml down"
+echo -e "\nTo stop the environment: docker-compose -f HUMANSA_test_environment/docker-compose.yml down"

@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 import json
 import logging
+from ..mock_appointment_api import mock_appointment_system
 
 logger = logging.getLogger(__name__)
 
@@ -233,34 +234,15 @@ class AppointmentBookingWorkflow(Workflow):
         return StopEvent(result=result)
     
     async def _search_slots_in_db(self, criteria: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """Search for available slots in database."""
-        # Mock implementation - would query real database
-        slots = []
-        base_date = datetime.now()
+        """Search for available slots using mock appointment system."""
+        # Use the mock appointment system
+        result = await mock_appointment_system.search_appointments(criteria)
         
-        for i in range(7):  # Next 7 days
-            date = base_date + timedelta(days=i+1)
-            if date.weekday() < 5:  # Weekdays only
-                slots.extend([
-                    {
-                        "slot_id": f"slot_{date.strftime('%Y%m%d')}_0900",
-                        "doctor_id": criteria.get("doctor_id", "dr_001"),
-                        "date": date.strftime("%Y-%m-%d"),
-                        "time": "09:00",
-                        "type": "in-person",
-                        "available": True
-                    },
-                    {
-                        "slot_id": f"slot_{date.strftime('%Y%m%d')}_1400",
-                        "doctor_id": criteria.get("doctor_id", "dr_001"),
-                        "date": date.strftime("%Y-%m-%d"),
-                        "time": "14:00",
-                        "type": "telemedicine",
-                        "available": True
-                    }
-                ])
-        
-        return slots
+        if result.get("success"):
+            return result.get("slots", [])
+        else:
+            logger.error(f"Failed to search appointments: {result.get('error')}")
+            return []
     
     def _expand_search_criteria(self, criteria: Dict[str, Any]) -> Dict[str, Any]:
         """Expand search criteria if no slots found."""

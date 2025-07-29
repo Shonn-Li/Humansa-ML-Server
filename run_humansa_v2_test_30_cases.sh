@@ -1,5 +1,5 @@
 #!/bin/bash
-# Humansa V2 - 30 Comprehensive Test Cases
+# HUMANSA V2 - 30 Comprehensive Test Cases
 # Based on V2_TEST_CASES.md
 
 echo "============================================"
@@ -32,19 +32,19 @@ fi
 # Environment variables for test
 export ENVIRONMENT=test
 export DB_HOST=localhost
-export DB_PORT=5456
+export DB_PORT=5454
 export DB_USER=postgres
-export DB_PASSWORD=youwo123
-export DB_NAME=youwoai
+export DB_PASSWORD=12931
+export DB_NAME=test4
 export ML_SERVER_PORT=6001
 export HUMANSA_ENHANCED_LOGGING=true
 
 # Step 1: Check PostgreSQL test database
 echo -e "\n${YELLOW}Step 1: Checking PostgreSQL test database...${NC}"
-if pg_isready -h localhost -p 5456 -U postgres > /dev/null 2>&1; then
-    echo -e "${GREEN}✅ PostgreSQL test database is running on port 5456${NC}"
+if pg_isready -h localhost -p 5454 -U postgres > /dev/null 2>&1; then
+    echo -e "${GREEN}✅ PostgreSQL test database is running on port 5454${NC}"
 else
-    echo -e "${RED}❌ PostgreSQL test database is not running on port 5456${NC}"
+    echo -e "${RED}❌ PostgreSQL test database is not running on port 5454${NC}"
     echo "Please start the test database first with:"
     echo "cd test_environment && docker-compose up -d"
     exit 1
@@ -66,7 +66,7 @@ if lsof -i :6001 > /dev/null 2>&1; then
 fi
 
 # Step 4: Start the ML server with V2 enabled
-echo -e "\n${YELLOW}Step 4: Starting ML server with Humansa V2...${NC}"
+echo -e "\n${YELLOW}Step 4: Starting ML server with HUMANSA V2...${NC}"
 echo "Server will run on port 6001 (test environment)"
 
 # Start server in background
@@ -95,9 +95,9 @@ fi
 echo -e "\n${YELLOW}Step 5: Running 30 comprehensive test cases...${NC}"
 
 # Create test script
-cat > test_humansa_v2_30_cases.py << 'TESTSCRIPT'
+cat > test_HUMANSA_v2_30_cases.py << 'TESTSCRIPT'
 #!/usr/bin/env python3
-"""Humansa V2 - 30 Comprehensive Test Cases Implementation"""
+"""HUMANSA V2 - 30 Comprehensive Test Cases Implementation"""
 
 import asyncio
 import aiohttp
@@ -148,7 +148,7 @@ TEST_CASES = [
         "category": "Identity",
         "name": "English Identity Query",
         "query": "Who are you?",
-        "expected_keywords": ["Humansa", "Health", "Medical", "Assistant"],
+        "expected_keywords": ["HUMANSA", "Health", "Medical", "Assistant"],
         "user_id": 123
     },
     {
@@ -475,7 +475,7 @@ async def test_endpoint(session, test_case, stream=True):
 
 async def run_all_tests():
     """Run all 30 test cases"""
-    print_section("Humansa V2 - 30 Comprehensive Test Cases")
+    print_section("HUMANSA V2 - 30 Comprehensive Test Cases")
     print(f"Total test cases: {len(TEST_CASES)}")
     
     async with aiohttp.ClientSession() as session:
@@ -595,10 +595,10 @@ if __name__ == "__main__":
 TESTSCRIPT
 
 # Make test script executable
-chmod +x test_humansa_v2_30_cases.py
+chmod +x test_HUMANSA_v2_30_cases.py
 
 # Run the tests
-python3 test_humansa_v2_30_cases.py
+python3 test_HUMANSA_v2_30_cases.py
 
 # Step 6: Show server logs
 echo -e "\n${YELLOW}Step 6: Server logs (last 50 lines):${NC}"
@@ -608,11 +608,11 @@ tail -n 50 server_v2_test_30.log
 echo -e "\n${YELLOW}Step 7: Test completed. Cleaning up...${NC}"
 echo "Server is still running on PID $SERVER_PID"
 echo "To stop the server, run: kill $SERVER_PID"
-echo -e "\n${GREEN}✅ Humansa V2 30-case test completed!${NC}"
+echo -e "\n${GREEN}✅ HUMANSA V2 30-case test completed!${NC}"
 
 # Provide summary
 echo -e "\n${BLUE}Summary:${NC}"
-echo "- Test database: PostgreSQL on port 5456"
+echo "- Test database: PostgreSQL on port 5454"
 echo "- ML Server: Running on port 6001"
 echo "- Endpoint: http://localhost:6001/v2/humansa/chat"
 echo "- Server logs: server_v2_test_30.log"

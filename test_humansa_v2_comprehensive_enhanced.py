@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Enhanced Humansa V2 Test Suite with Detailed Logging - 30 Test Cases"""
+"""Enhanced HUMANSA V2 Test Suite with Detailed Logging - 30 Test Cases"""
 
 import asyncio
 import aiohttp
@@ -363,9 +363,10 @@ async def test_v2_endpoint_enhanced(session, test_case):
             await asyncio.sleep(0.5)
         
         # Prepare request data with debug flag
-        user_id = test_case.get('setup', {}).get('user_id', 123)
+        # Use string user IDs for proper memory persistence
+        user_id = test_case.get('setup', {}).get('user_id', 'test_user_humansa_v2_001')
         request_data = {
-            "user_id": user_id,
+            "user_id": str(user_id),  # Ensure user_id is always a string
             "messages": [{"role": "user", "content": test_case['query']}],
             "stream": True,  # Enable streaming for detailed output
             "debug": True    # Enable debug mode for enhanced logging
@@ -538,7 +539,7 @@ async def test_v2_endpoint_enhanced(session, test_case):
 
 async def run_all_tests():
     """Run all test cases with enhanced logging"""
-    print_section("Running Enhanced Humansa V2 Comprehensive Test Suite")
+    print_section("Running Enhanced HUMANSA V2 Comprehensive Test Suite")
     print(f"Total test cases: {len(ALL_TEST_CASES)}")
     print(f"- Identity tests: {len(IDENTITY_TEST_CASES)}")
     print(f"- Mem0 tests: {len(MEM0_TEST_CASES)}")
@@ -609,7 +610,7 @@ async def run_all_tests():
         
         # Save results with debug info
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"humansa_v2_enhanced_test_results_{timestamp}.json"
+        filename = f"HUMANSA_v2_enhanced_test_results_{timestamp}.json"
         
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump({

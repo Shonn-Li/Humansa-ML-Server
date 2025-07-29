@@ -101,8 +101,8 @@ async def search_memories():
         return jsonify({"error": str(e)}), 500
 
 
-@mem0_bp.route('/v2/humansa/memory/context/<int:user_id>', methods=['GET'])
-async def get_user_context(user_id: int):
+@mem0_bp.route('/v2/humansa/memory/context/<user_id>', methods=['GET'])
+async def get_user_context(user_id: str):
     """Get user context from memories."""
     try:
         # Get Mem0 manager
@@ -168,8 +168,8 @@ async def memory_status():
         }), 500
 
 
-@mem0_bp.route('/v2/humansa/memory/clear/<int:user_id>', methods=['DELETE'])
-async def clear_user_memories(user_id: int):
+@mem0_bp.route('/v2/humansa/memory/clear/<user_id>', methods=['DELETE'])
+async def clear_user_memories(user_id: str):
     """Clear all memories for a user (use with caution)."""
     try:
         # Get Mem0 manager

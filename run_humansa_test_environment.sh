@@ -1,5 +1,5 @@
 #!/bin/bash
-# Comprehensive Humansa AI Agent V2 Test Environment with Detailed Output
+# Comprehensive HUMANSA AI Agent V2 Test Environment with Detailed Output
 
 echo "============================================"
 echo "HUMANSA AI AGENT V2 - TEST ENVIRONMENT"
@@ -16,8 +16,8 @@ NC='\033[0m'
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$SCRIPT_DIR"
 
-# Step 1: Apply Humansa agent improvements
-echo -e "\n${YELLOW}Step 1: Applying Humansa agent improvements...${NC}"
+# Step 1: Apply HUMANSA agent improvements
+echo -e "\n${YELLOW}Step 1: Applying HUMANSA agent improvements...${NC}"
 
 # Check if agent already has search_web filter
 if grep -q "Filter out search_web tool" src/humansa/agent/humansa_agent.py; then
@@ -83,10 +83,10 @@ echo -e "\n${YELLOW}Starting ML server on port 6001...${NC}"
 # Export database configuration for test environment
 export ENVIRONMENT=test
 export DB_HOST=localhost
-export DB_PORT=5456
-export DB_USER=youwo
-export DB_PASSWORD=youwo123
-export DB_NAME=youwoai
+export DB_PORT=5454
+export DB_USER=postgres
+export DB_PASSWORD=12931
+export DB_NAME=test4
 export ML_SERVER_PORT=6001
 
 ENVIRONMENT=test ML_SERVER_PORT=6001 nohup python3 src/main.py --port 6001 > test_server.log 2>&1 &
@@ -127,7 +127,7 @@ if [ $WAITED -eq $MAX_WAIT ]; then
 fi
 
 # Step 4: Run comprehensive tests with detailed output
-echo -e "\n${YELLOW}Step 4: Running comprehensive Humansa tests...${NC}"
+echo -e "\n${YELLOW}Step 4: Running comprehensive HUMANSA tests...${NC}"
 
 python3 - << 'PYTEST'
 import asyncio
@@ -146,7 +146,7 @@ except ImportError:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "aiohttp"])
     import aiohttp
 
-class HumansaTestRunner:
+class HUMANSATestRunner:
     def __init__(self, base_url):
         self.base_url = base_url
         self.endpoint = f"{base_url}/v1-humansa/chat/completions"
@@ -500,7 +500,7 @@ class HumansaTestRunner:
         # Pass rate evaluation
         print(f"\n📈 Evaluation:")
         if pass_rate >= 90:
-            print(f"   🎉 EXCELLENT! Agent meets Humansa requirements (≥90% pass rate)")
+            print(f"   🎉 EXCELLENT! Agent meets HUMANSA requirements (≥90% pass rate)")
         elif pass_rate >= 80:
             print(f"   ✅ GOOD! Agent is performing well ({pass_rate:.1f}%)")
         elif pass_rate >= 70:
@@ -529,7 +529,7 @@ class HumansaTestRunner:
 
 # Run the tests
 async def main():
-    runner = HumansaTestRunner("http://localhost:6001")
+    runner = HUMANSATestRunner("http://localhost:6001")
     await runner.run_all_tests()
 
 if __name__ == "__main__":

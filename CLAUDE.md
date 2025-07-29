@@ -23,8 +23,34 @@ python test_doctor_tools.py  # For Humansa agent testing
 ./cleanup-docker.sh  # Clean up Docker resources
 docker-compose -f docker-compose.local.yml up  # Local development
 
-# Humansa V2 Testing with Enhanced Logging
-./run_humansa_test_environment_v2_enhanced.sh  # Run V2 tests with full process visibility
+# TEST ENVIRONMENT (CRITICAL - READ CAREFULLY!)
+#
+# ⚠️ UNIFIED TEST ENVIRONMENT - ACTUAL CONFIGURATION ⚠️
+# The ACTUAL running test environment (verified on 2025-07-28):
+#    - Container Name: youwoai_test_db (NOT humansa_test_postgres)
+#    - ML Server: Port 6001 (test instance)
+#    - PostgreSQL: Port 5454 (Docker container)
+#    - Database: test4 (primary), youwoai_test (also available)
+#    - Password: 12931 (NOT 031203 from docker-compose.yml!)
+#    - User: postgres
+#
+# 🚨 IMPORTANT DISCREPANCIES:
+# - docker-compose.yml shows password "031203" but actual is "12931"
+# - Some scripts expect port 5456 but actual is 5454
+# - Configuration is defined in: test_environment/unified_test_config.py
+#
+# To verify test database:
+# PGPASSWORD=12931 psql -h localhost -p 5454 -U postgres -d test4 -c "SELECT 1;"
+#
+# To check running container:
+# docker ps | grep youwoai_test_db
+#
+# Run tests with:
+# ./run_final_tests.sh  # Uses correct configuration
+
+# HUMANSA V2 Testing with Enhanced Logging
+./run_HUMANSA_test_environment_v2_enhanced.sh  # Run V2 tests with full process visibility
+./run_HUMANSA_v2_test_40_cases_enhanced.sh     # Run 40 comprehensive test cases
 ```
 
 ## High-Level Architecture
@@ -59,10 +85,34 @@ PostgreSQL with pgvector extension for embeddings:
 
 ### Testing
 
-Comprehensive test environment in `test_environment/`:
-- Isolated PostgreSQL instance
-- Pre-populated test data
-- Integration tests for all major features
+Comprehensive test environment with UNIFIED configuration:
+
+**Test Database (ACTUAL)**:
+- **Container**: youwoai_test_db (running on port 5454)
+- **Password**: 12931 (NOT 031203 as docker-compose suggests!)
+- **Databases**: test4 (primary), youwoai_test (secondary)
+- **Configuration**: See `test_environment/unified_test_config.py`
+
+**Test ML Server**:
+- **Port**: 6001 (dedicated test instance)
+- **Environment**: ENVIRONMENT=test
+
+**Important Notes**:
+- The actual password differs from docker-compose.yml
+- All test scripts should use unified_test_config.py
+- User IDs must be strings (e.g., "test_user_10001")
+
+To verify test environment:
+```bash
+# Check if test database is running
+docker ps | grep youwoai_test_db
+
+# Test database connection
+PGPASSWORD=12931 psql -h localhost -p 5454 -U postgres -d test4 -c "SELECT 1;"
+
+# Run all tests with correct configuration
+./run_final_tests.sh
+```
 
 ### Important Patterns
 

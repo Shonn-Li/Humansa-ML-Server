@@ -29,7 +29,7 @@ DB_CONFIG = {
     "port": int(os.getenv("HUMANSA_DB_PORT", os.getenv("DB_PORT", 5454 if is_test else 5432))),
     "user": os.getenv("HUMANSA_DB_USER", os.getenv("DB_USER", "postgres" if is_test else "youwo")),
     "password": os.getenv("HUMANSA_DB_PASSWORD", os.getenv("DB_PASSWORD", "12931" if is_test else "youwo123")),
-    "dbname": os.getenv("HUMANSA_DB_NAME", os.getenv("DB_NAME", "youwoai_test" if is_test else "youwoai")),
+    "dbname": os.getenv("HUMANSA_DB_NAME", os.getenv("DB_NAME", "test4" if is_test else "youwoai")),
 }
 
 
@@ -63,8 +63,8 @@ class HumansaDatabase:
                 with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                     # First try exact match
                     exact_query = """
-                        SELECT d.doctor_code, d.clinic_code, d.name, d.title, 
-                               d.expertise, d.bio, d.registration_fee,
+                        SELECT d.doctor_code, d.clinic_id, d.name, d.title, 
+                               d.specialty as expertise, d.qualifications as bio, d.consultation_fee as registration_fee,
                                c.name as clinic_name, c.address, c.phone
                         FROM humansa_doctor d
                         LEFT JOIN humansa_clinic c ON d.clinic_code = c.clinic_code
@@ -79,8 +79,8 @@ class HumansaDatabase:
 
                     # If no exact match, try fuzzy matching with ILIKE
                     fuzzy_query = """
-                        SELECT d.doctor_code, d.clinic_code, d.name, d.title, 
-                               d.expertise, d.bio, d.registration_fee,
+                        SELECT d.doctor_code, d.clinic_id, d.name, d.title, 
+                               d.specialty as expertise, d.qualifications as bio, d.consultation_fee as registration_fee,
                                c.name as clinic_name, c.address, c.phone
                         FROM humansa_doctor d
                         LEFT JOIN humansa_clinic c ON d.clinic_code = c.clinic_code
@@ -129,11 +129,11 @@ class HumansaDatabase:
                             search_date = date_str
 
                         query = """
-                            SELECT s.doctor_code, s.shift_date, s.start_time, s.end_time, 
+                            SELECT s.doctor_id, s.shift_date, s.start_time, s.end_time, 
                                    s.remaining_slots, s.clinic_code,
                                    d.name as doctor_name, c.name as clinic_name
                             FROM humansa_schedule s
-                            LEFT JOIN humansa_doctor d ON s.doctor_code = d.doctor_code
+                            LEFT JOIN humansa_doctor d ON s.doctor_id = d.doctor_id
                             LEFT JOIN humansa_clinic c ON s.clinic_code = c.clinic_code
                             WHERE d.name = %s AND s.shift_date = %s AND s.remaining_slots > 0
                             ORDER BY s.start_time
@@ -142,11 +142,11 @@ class HumansaDatabase:
                     else:
                         # Get all future availability for the doctor
                         query = """
-                            SELECT s.doctor_code, s.shift_date, s.start_time, s.end_time, 
+                            SELECT s.doctor_id, s.shift_date, s.start_time, s.end_time, 
                                    s.remaining_slots, s.clinic_code,
                                    d.name as doctor_name, c.name as clinic_name
                             FROM humansa_schedule s
-                            LEFT JOIN humansa_doctor d ON s.doctor_code = d.doctor_code
+                            LEFT JOIN humansa_doctor d ON s.doctor_id = d.doctor_id
                             LEFT JOIN humansa_clinic c ON s.clinic_code = c.clinic_code
                             WHERE d.name = %s AND s.shift_date >= CURRENT_DATE AND s.remaining_slots > 0
                             ORDER BY s.shift_date, s.start_time
@@ -165,12 +165,12 @@ class HumansaDatabase:
             with self.get_connection() as conn:
                 with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                     query = """
-                        SELECT ms.clinic_code, ms.service_name, 
+                        SELECT ms.service_code, ms.name as service_name, 
                                ms.price, ms.description, c.name as clinic_name
                         FROM humansa_medical_service ms
-                        LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
+                        JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
                         WHERE c.name = %s
-                        ORDER BY ms.service_name
+                        ORDER BY ms.name
                     """
                     cursor.execute(query, (clinic_name,))
                     rows = cursor.fetchall()
@@ -186,21 +186,25 @@ class HumansaDatabase:
                 with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                     if service_name:
                         query = """
-                            SELECT ms.clinic_code, ms.service_name, 
-                                   ms.price, ms.description, c.name as clinic_name
+                            SELECT ms.service_code, ms.name as service_name, 
+                                   ms.price, ms.description, 
+                                   STRING_AGG(c.name, ', ') as clinic_names
                             FROM humansa_medical_service ms
                             LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
-                            WHERE ms.service_name ILIKE %s
-                            ORDER BY c.name, ms.service_name
+                            WHERE ms.name ILIKE %s
+                            GROUP BY ms.service_code, ms.name, ms.price, ms.description
+                            ORDER BY ms.name
                         """
                         cursor.execute(query, (f"%{service_name}%",))
                     else:
                         query = """
-                            SELECT ms.clinic_code, ms.service_name, 
-                                   ms.price, ms.description, c.name as clinic_name
+                            SELECT ms.service_code, ms.name as service_name, 
+                                   ms.price, ms.description,
+                                   STRING_AGG(c.name, ', ') as clinic_names
                             FROM humansa_medical_service ms
                             LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
-                            ORDER BY c.name, ms.service_name
+                            GROUP BY ms.service_code, ms.name, ms.price, ms.description
+                            ORDER BY ms.name
                         """
                         cursor.execute(query)
 
@@ -216,7 +220,7 @@ class HumansaDatabase:
             with self.get_connection() as conn:
                 with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                     query = """
-                        SELECT clinic_code, name, address, phone
+                        SELECT id, name, address, phone
                         FROM humansa_clinic
                         ORDER BY name
                     """
@@ -246,7 +250,7 @@ class HumansaDatabase:
                 with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                     # First try exact match
                     exact_query = """
-                        SELECT clinic_code, name, address, phone
+                        SELECT id, name, address, phone
                         FROM humansa_clinic
                         WHERE name = %s
                     """
@@ -259,7 +263,7 @@ class HumansaDatabase:
 
                     # If no exact match, try fuzzy matching with ILIKE
                     fuzzy_query = """
-                        SELECT clinic_code, name, address, phone
+                        SELECT id, name, address, phone
                         FROM humansa_clinic
                         WHERE name ILIKE %s
                         ORDER BY name
@@ -296,18 +300,18 @@ class HumansaDatabase:
                         params.append(f"%{name}%")
 
                     if specialty:
-                        conditions.append("d.expertise ILIKE %s")
+                        conditions.append("d.specialty ILIKE %s")
                         params.append(f"%{specialty}%")
 
                     if city:
-                        conditions.append("c.address ILIKE %s")
+                        conditions.append("c.city ILIKE %s")
                         params.append(f"%{city}%")
 
                     if conditions:
                         specific_query = f"""
-                            SELECT d.doctor_code, d.clinic_code, d.name, d.title, 
-                                   d.expertise, d.bio, d.registration_fee,
-                                   c.name as clinic_name, c.address, c.phone
+                            SELECT d.doctor_id, d.clinic_code, d.name, d.specialty, 
+                                   d.expertise, d.qualifications, d.consultation_fee,
+                                   c.name as clinic_name, c.address, c.phone, c.city
                             FROM humansa_doctor d
                             LEFT JOIN humansa_clinic c ON d.clinic_code = c.clinic_code
                             WHERE {' AND '.join(conditions)}
@@ -321,9 +325,9 @@ class HumansaDatabase:
                     # If no specific results, get general fallback
                     if not results:
                         fallback_query = """
-                            SELECT d.doctor_code, d.clinic_code, d.name, d.title, 
-                                   d.expertise, d.bio, d.registration_fee,
-                                   c.name as clinic_name, c.address, c.phone
+                            SELECT d.doctor_id, d.clinic_code, d.name, d.specialty, 
+                                   d.expertise, d.qualifications, d.consultation_fee,
+                                   c.name as clinic_name, c.address, c.phone, c.city
                             FROM humansa_doctor d
                             LEFT JOIN humansa_clinic c ON d.clinic_code = c.clinic_code
                             ORDER BY d.name
@@ -340,6 +344,10 @@ class HumansaDatabase:
                     return results
         except Exception as e:
             logger.error(f"Error searching doctors: {e}")
+            # Return empty list with proper error handling
+            # Don't expose database errors to users
+            import traceback
+            traceback.print_exc()
             return []
 
     def find_doctor_availability_with_fallback(self, doctor_name: str, date_str: Optional[str] = None) -> Dict[str, Any]:
@@ -507,11 +515,11 @@ class HumansaDatabase:
                         params.append(f"%{clinic_name}%")
 
                     if city:
-                        conditions.append("c.address ILIKE %s")
+                        conditions.append("c.city ILIKE %s")
                         params.append(f"%{city}%")
 
                     if specialty:
-                        conditions.append("d.expertise ILIKE %s")
+                        conditions.append("d.specialty ILIKE %s")
                         params.append(f"%{specialty}%")
 
                     where_clause = " AND ".join(
@@ -519,8 +527,8 @@ class HumansaDatabase:
 
                     query = f"""
                         SELECT DISTINCT c.clinic_code, c.name, c.address, c.phone,
-                               COUNT(DISTINCT d.doctor_code) as doctor_count,
-                               STRING_AGG(DISTINCT d.expertise, ', ') as specialties
+                               COUNT(DISTINCT d.doctor_id) as doctor_count,
+                               STRING_AGG(DISTINCT d.specialty, ', ') as specialties
                         FROM humansa_clinic c
                         LEFT JOIN humansa_doctor d ON c.clinic_code = d.clinic_code
                         WHERE {where_clause}
@@ -585,7 +593,7 @@ class HumansaDatabase:
                     params = []
 
                     if service_name:
-                        conditions.append("ms.service_name ILIKE %s")
+                        conditions.append("ms.name ILIKE %s")
                         params.append(f"%{service_name}%")
 
                     if specialty:
@@ -600,12 +608,13 @@ class HumansaDatabase:
                         conditions) if conditions else "1=1"
 
                     query = f"""
-                        SELECT ms.clinic_code, ms.service_name, ms.price, 
-                               ms.description, c.name as clinic_name
+                        SELECT ms.service_code, ms.name as service_name, ms.price, 
+                               ms.description, STRING_AGG(c.name, ', ') as clinic_names
                         FROM humansa_medical_service ms
                         LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
                         WHERE {where_clause}
-                        ORDER BY ms.service_name
+                        GROUP BY ms.service_code, ms.name, ms.price, ms.description
+                        ORDER BY ms.name
                         LIMIT %s
                     """
                     params.append(limit)
@@ -629,11 +638,12 @@ class HumansaDatabase:
                     else:
                         # No matches, return popular services
                         fallback_query = """
-                            SELECT ms.clinic_code, ms.service_name, ms.price, 
-                                   ms.description, c.name as clinic_name
+                            SELECT ms.service_code, ms.name as service_name, ms.price, 
+                                   ms.description, STRING_AGG(c.name, ', ') as clinic_names
                             FROM humansa_medical_service ms
                             LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
-                            ORDER BY ms.service_name
+                            GROUP BY ms.service_code, ms.name, ms.price, ms.description
+                            ORDER BY ms.name
                             LIMIT %s
                         """
                         cursor.execute(fallback_query, (limit,))
@@ -663,7 +673,7 @@ class HumansaDatabase:
             with self.get_connection() as conn:
                 with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                     # Build dynamic query based on available filters
-                    conditions = ["ms.service_name ILIKE %s"]
+                    conditions = ["ms.name ILIKE %s"]
                     params = [f"%{service_type}%"]
 
                     if clinic_name:
@@ -677,11 +687,12 @@ class HumansaDatabase:
                     where_clause = " AND ".join(conditions)
 
                     query = f"""
-                        SELECT ms.clinic_code, ms.service_name, ms.price, 
-                               ms.description, c.name as clinic_name, c.address
+                        SELECT ms.service_code, ms.name as service_name, ms.price, 
+                               ms.description, STRING_AGG(c.name || ' - ' || c.address, '; ') as clinic_info
                         FROM humansa_medical_service ms
                         LEFT JOIN humansa_clinic c ON ms.clinic_code = c.clinic_code
                         WHERE {where_clause}
+                        GROUP BY ms.service_code, ms.name, ms.price, ms.description
                         ORDER BY ms.price
                         LIMIT %s
                     """
@@ -746,8 +757,9 @@ class HumansaDatabase:
                     params = []
                     
                     if category:
-                        # Search in category name only
-                        query += " AND c.name ILIKE %s"
+                        # Search in category name or product name
+                        query += " AND (c.name ILIKE %s OR p.name ILIKE %s)"
+                        params.append(f'%{category}%')
                         params.append(f'%{category}%')
                     
                     if min_price is not None:
@@ -820,6 +832,192 @@ class HumansaDatabase:
         except Exception as e:
             logger.error(f"Error searching product packages: {e}")
             return []
+    
+    # Patient Management Functions
+    def get_patient_by_phone(self, phone):
+        """Get patient by phone number"""
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+                    query = "SELECT * FROM humansa_patient WHERE phone = %s"
+                    cursor.execute(query, (phone,))
+                    return cursor.fetchone()
+        except Exception as e:
+            logger.error(f"Error getting patient by phone: {e}")
+            return None
+    
+    def create_patient(self, patient_id, phone, name, address=None, email=None):
+        """Create new patient record"""
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor() as cursor:
+                    query = """
+                        INSERT INTO humansa_patient (patient_id, phone, name, address, email)
+                        VALUES (%s, %s, %s, %s, %s)
+                        ON CONFLICT (patient_id) DO NOTHING
+                    """
+                    cursor.execute(query, (patient_id, phone, name, address, email))
+                    conn.commit()
+                    return True
+        except Exception as e:
+            logger.error(f"Error creating patient: {e}")
+            return False
+    
+    def check_appointment_slot(self, doctor_code, appointment_date, appointment_time):
+        """Check if appointment slot is available"""
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+                    # Find the schedule for this doctor on this date
+                    query = """
+                        SELECT s.*, d.name as doctor_name, c.name as clinic_name
+                        FROM humansa_schedule s
+                        JOIN humansa_doctor d ON s.doctor_code = d.doctor_code
+                        JOIN humansa_clinic c ON s.clinic_id = c.id
+                        WHERE s.doctor_code = %s 
+                        AND s.shift_date = %s
+                        AND s.start_time <= %s::time
+                        AND s.end_time > %s::time
+                        AND s.remaining_slots > 0
+                    """
+                    cursor.execute(query, (doctor_code, appointment_date, appointment_time, appointment_time))
+                    schedule = cursor.fetchone()
+                    
+                    if schedule:
+                        return {
+                            'available': True,
+                            'schedule_id': schedule['schedule_id'],
+                            'doctor_name': schedule['doctor_name'],
+                            'clinic_name': schedule['clinic_name'],
+                            'remaining_slots': schedule['remaining_slots']
+                        }
+                    return {'available': False}
+        except Exception as e:
+            logger.error(f"Error checking appointment slot: {e}")
+            return {'available': False}
+    
+    def create_appointment(self, patient_id, doctor_code, schedule_id, appointment_date, appointment_time):
+        """Create new appointment"""
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor() as cursor:
+                    # Insert appointment
+                    query = """
+                        INSERT INTO humansa_appointment_history 
+                        (patient_id, doctor_code, schedule_id, appointment_date, appointment_time, status)
+                        VALUES (%s, %s, %s, %s, %s, 'confirmed')
+                        RETURNING appointment_id
+                    """
+                    cursor.execute(query, (patient_id, doctor_code, schedule_id, appointment_date, appointment_time))
+                    result = cursor.fetchone()
+                    
+                    if result:
+                        appointment_id = result[0]
+                        
+                        # Update remaining slots
+                        update_query = """
+                            UPDATE humansa_schedule 
+                            SET remaining_slots = remaining_slots - 1
+                            WHERE schedule_id = %s
+                        """
+                        cursor.execute(update_query, (schedule_id,))
+                        conn.commit()
+                        return appointment_id
+                    return None
+        except Exception as e:
+            logger.error(f"Error creating appointment: {e}")
+            return None
+    
+    def get_patient_appointments(self, phone=None, patient_id=None):
+        """Get patient appointments"""
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+                    if phone:
+                        query = """
+                            SELECT ah.*, d.name as doctor_name, d.specialty, c.name as clinic_name
+                            FROM humansa_appointment_history ah
+                            JOIN humansa_patient p ON ah.patient_id = p.patient_id
+                            JOIN humansa_doctor d ON ah.doctor_code = d.doctor_code
+                            LEFT JOIN humansa_clinic c ON d.clinic_code = c.clinic_code
+                            WHERE p.phone = %s
+                            ORDER BY ah.appointment_date DESC, ah.appointment_time DESC
+                        """
+                        cursor.execute(query, (phone,))
+                    else:
+                        query = """
+                            SELECT ah.*, d.name as doctor_name, d.specialty, c.name as clinic_name
+                            FROM humansa_appointment_history ah
+                            JOIN humansa_doctor d ON ah.doctor_code = d.doctor_code
+                            LEFT JOIN humansa_clinic c ON d.clinic_code = c.clinic_code
+                            WHERE ah.patient_id = %s
+                            ORDER BY ah.appointment_date DESC, ah.appointment_time DESC
+                        """
+                        cursor.execute(query, (patient_id,))
+                    
+                    appointments = cursor.fetchall()
+                    return [dict(apt) for apt in appointments]
+        except Exception as e:
+            logger.error(f"Error getting patient appointments: {e}")
+            return []
+    
+    def reschedule_appointment(self, appointment_id, new_date, new_time):
+        """Reschedule an appointment"""
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor() as cursor:
+                    # Update appointment
+                    query = """
+                        UPDATE humansa_appointment_history
+                        SET appointment_date = %s, appointment_time = %s
+                        WHERE appointment_id = %s AND status = 'confirmed'
+                    """
+                    cursor.execute(query, (new_date, new_time, appointment_id))
+                    conn.commit()
+                    return cursor.rowcount > 0
+        except Exception as e:
+            logger.error(f"Error rescheduling appointment: {e}")
+            return False
+    
+    def cancel_appointment(self, appointment_id, reason='Patient requested'):
+        """Cancel an appointment"""
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+                    # Get appointment details first
+                    get_query = """
+                        SELECT schedule_id FROM humansa_appointment_history
+                        WHERE appointment_id = %s AND status = 'confirmed'
+                    """
+                    cursor.execute(get_query, (appointment_id,))
+                    appointment = cursor.fetchone()
+                    
+                    if appointment:
+                        # Update appointment status
+                        update_query = """
+                            UPDATE humansa_appointment_history
+                            SET status = 'cancelled', 
+                                cancellation_time = CURRENT_TIMESTAMP,
+                                cancellation_reason = %s
+                            WHERE appointment_id = %s
+                        """
+                        cursor.execute(update_query, (reason, appointment_id))
+                        
+                        # Restore slot if schedule_id exists
+                        if appointment['schedule_id']:
+                            restore_query = """
+                                UPDATE humansa_schedule
+                                SET remaining_slots = remaining_slots + 1
+                                WHERE schedule_id = %s
+                            """
+                            cursor.execute(restore_query, (appointment['schedule_id'],))
+                        
+                        conn.commit()
+                        return True
+                    return False
+        except Exception as e:
+            logger.error(f"Error cancelling appointment: {e}")
+            return False
 
 
 # Global database instance

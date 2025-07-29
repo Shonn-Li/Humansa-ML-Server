@@ -21,7 +21,7 @@ import asyncio
 
 # Agent imports will be simplified for now
 from .memory.memory_manager import MemoryManager
-from humansa.prompts.humansa_system_prompt_v2 import get_humansa_system_prompt_v2
+from humansa.prompts.humansa_system_prompt_v2 import get_humansa_system_prompt_v2, HUMANSA_REACT_PROMPT_V2
 
 logger = logging.getLogger(__name__)
 
@@ -138,37 +138,10 @@ class HumansaOrchestratorAgentEnhanced:
         # Create tools from agent functions
         self.tools = self._create_agent_tools()
         
-        # Get system prompt
+        # Get system prompt with React format
         current_date = datetime.now().strftime('%Y-%m-%d')
-        system_prompt = get_humansa_system_prompt_v2(current_date)
-        
-        # Add orchestrator-specific instructions
-        orchestrator_prompt = f"""{system_prompt}
-
-## 重要：作为编排器的特殊指令
-
-你是诺亚新舟健康医疗助理（小诺），一个医疗AI编排器，负责协调多个专业代理来回答用户的问题。
-当用户询问你的身份时，你必须回答你是"诺亚新舟健康医疗助理"或"小诺"。
-
-### 可用的专业代理工具：
-1. **general_medical_agent** - 处理一般健康咨询、健康建议、基础医疗知识
-2. **diagnosis_agent** - 处理症状分析、疾病诊断建议、体征评估
-3. **medication_agent** - 处理药物信息、用药指导、药物相互作用
-4. **emergency_triage_agent** - 处理紧急情况评估、急救指导、120建议
-5. **appointment_agent** - 处理预约服务、诊所导航、医生推荐
-6. **memory_search_agent** - 搜索用户历史记录和偏好
-
-### 编排策略：
-1. 分析用户查询，确定需要哪些专业代理
-2. 可以调用多个代理来获得全面的答案
-3. 综合所有代理的响应，提供连贯的回答
-4. 始终保持诺亚新舟健康医疗助理的身份
-
-### 响应格式：
-- 直接回答用户，不要提及内部代理
-- 保持专业、友好的语气
-- 整合所有信息为一个连贯的响应
-"""
+        # Use the REACT prompt which includes proper identity
+        orchestrator_prompt = HUMANSA_REACT_PROMPT_V2.format(current_date=current_date)
         
         # Create orchestrator agent
         self.orchestrator = ReActAgent.from_tools(

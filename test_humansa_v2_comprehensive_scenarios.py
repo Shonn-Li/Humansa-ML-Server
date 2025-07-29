@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Comprehensive test suite for Humansa V2 multi-agent system.
+Comprehensive test suite for HUMANSA V2 multi-agent system.
 Tests 20 real-world scenarios covering appointment booking, diagnosis, and product recommendations.
 Includes detailed agent workflow logging.
 """
@@ -337,7 +337,7 @@ class HumansaV2Tester:
     
     def run_all_tests(self):
         """Run all 20 test scenarios."""
-        print("🏥 Humansa V2 Comprehensive Test Suite")
+        print("🏥 HUMANSA V2 Comprehensive Test Suite")
         print("=" * 60)
         print(f"Testing 20 real-world medical scenarios")
         print(f"Start time: {self.start_time.strftime('%Y-%m-%d %H:%M:%S')}\n")

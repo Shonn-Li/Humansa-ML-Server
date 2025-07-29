@@ -1,10 +1,10 @@
-# YouWoAI Test Environment
+# Humansa Test Environment
 
-This directory contains a complete, isolated test environment for YouWoAI with a PostgreSQL database running on port 5456.
+This directory contains the test environment configuration for Humansa AI Agent tests.
 
 ## Features
 
-- **Isolated PostgreSQL instance** with pgvector extension on port 5456
+- **Test PostgreSQL instance** with pgvector extension on port 5454
 - **Complete test dataset** including:
   - 1 test user with full configuration
   - 2 folders (June-ML, Startup)
@@ -32,17 +32,18 @@ This directory contains a complete, isolated test environment for YouWoAI with a
 #    - Verify everything works
 
 # 3. Connect to the test database
-PGPASSWORD=12931 psql -h localhost -p 5454 -U postgres -d youwoai_test
+PGPASSWORD=12931 psql -h localhost -p 5454 -U postgres -d test4
 ```
 
 ## Configuration
 
 ### Database Connection
 - **Host**: localhost
-- **Port**: 5454 (different from production 5432)
-- **Database**: youwoai_test
+- **Port**: 5454
+- **Database**: test4 (for Humansa tests)
 - **Username**: postgres
 - **Password**: 12931
+- **Container**: youwoai_test_db
 
 ### Environment Variables
 All production API keys are preserved in `.env.test`, only the database port is changed to 5454.
@@ -87,7 +88,7 @@ docker-compose up -d
 docker-compose logs -f postgres-test
 
 # Connect to database
-PGPASSWORD=12931 psql -h localhost -p 5454 -U postgres -d youwoai_test
+PGPASSWORD=12931 psql -h localhost -p 5454 -U postgres -d test4
 
 # Verify setup
 python3 scripts/verify_setup.py

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Humansa V2 - 40 Comprehensive Test Cases with Enhanced Logging
+# HUMANSA V2 - 40 Comprehensive Test Cases with Enhanced Logging
 # Shows full agent thinking, tool calls, memory context, and responses
 
 echo "============================================"
@@ -37,7 +37,7 @@ export DB_PORT=5454
 export DB_USER=postgres
 export DB_PASSWORD=12931
 export DB_NAME=test4
-export ML_SERVER_PORT=5001
+export ML_SERVER_PORT=6001
 export HUMANSA_ENHANCED_LOGGING=true
 
 # Step 1: Check PostgreSQL test database
@@ -51,19 +51,36 @@ else
     exit 1
 fi
 
-# Step 2: Run SQL scripts to populate test data
+# Step 2: Run SQL scripts to populate test data in specific order
 echo -e "\n${YELLOW}Step 2: Populating test database...${NC}"
 cd test_environment/sql
-for script in *.sql; do
-    echo "Running $script..."
-    PGPASSWORD=12931 psql -h localhost -p 5454 -U postgres -d test4 -f "$script" > /dev/null 2>&1
-done
 
-# Also load our Humansa test data
-if [ -f "humansa_test_doctors.sql" ]; then
-    echo "Loading Humansa test doctors..."
-    PGPASSWORD=12931 psql -h localhost -p 5454 -U postgres -d test4 -f "humansa_test_doctors.sql" > /dev/null 2>&1
-fi
+# Define SQL files in specific order
+SQL_FILES=(
+    "01_extensions.sql"
+    "02_create_tables.sql"
+    "03_test_data.sql"
+    "04_embeddings_simple.sql"
+    "05_test_conversations.sql"
+    "06_humansa_test_data.sql"
+    "07_humansa_his_alignment.sql"
+    "08_appointment_management.sql"
+    "create_missing_tables.sql"
+    "fix_doctor_table_schema.sql"
+    "create_product_tables.sql"
+    "fix_medical_service_schema.sql"
+    "insert_comprehensive_test_data.sql"
+    "insert_product_test_data.sql"
+    "fix_product_categories.sql"
+)
+
+# Run each SQL file in order
+for sql_file in "${SQL_FILES[@]}"; do
+    if [ -f "$sql_file" ]; then
+        echo "Running $sql_file..."
+        PGPASSWORD=12931 psql -h localhost -p 5454 -U postgres -d test4 -f "$sql_file" > /dev/null 2>&1
+    fi
+done
 
 cd ../..
 echo -e "${GREEN}✅ Test data populated${NC}"
@@ -71,19 +88,19 @@ echo -e "${GREEN}✅ Test data populated${NC}"
 # Step 3: Start the ML server with enhanced logging
 echo -e "\n${YELLOW}Step 3: Starting ML server on port ${ML_SERVER_PORT} with enhanced logging...${NC}"
 # Kill any existing server on port 5001
-lsof -ti:${ML_SERVER_PORT} | xargs -r kill -9 2>/dev/null
+lsof -ti:${ML_SERVER_PORT} | xargs kill -9 2>/dev/null || true
 sleep 2
 
 # Start server with enhanced logging for V2
 export HUMANSA_ENHANCED_LOGGING=true
-python -m src.main > server_enhanced.log 2>&1 &
+python -m src.main --port 6001 > server_enhanced.log 2>&1 &
 SERVER_PID=$!
 echo "Server PID: $SERVER_PID"
 
 # Wait for server to start
 echo "Waiting for server to start..."
 for i in {1..30}; do
-    if curl -s http://localhost:${ML_SERVER_PORT}/health > /dev/null; then
+    if curl -s http://localhost:${ML_SERVER_PORT}/api/debug/health > /dev/null 2>&1; then
         echo -e "${GREEN}✅ Server is ready${NC}"
         break
     fi
@@ -194,12 +211,12 @@ EOF
 }
 
 # Initialize results files
-echo "# Humansa V2 - 40 Test Cases Results" > "$RESULTS_FILE"
+echo "# HUMANSA V2 - 40 Test Cases Results" > "$RESULTS_FILE"
 echo "Date: $(date)" >> "$RESULTS_FILE"
 echo "Environment: Test (Port 5454)" >> "$RESULTS_FILE"
 echo "Mode: Enhanced Logging with Process Flow" >> "$RESULTS_FILE"
 
-echo "# Humansa V2 - Process Flow Log" > "$PROCESS_LOG"
+echo "# HUMANSA V2 - Process Flow Log" > "$PROCESS_LOG"
 echo "Date: $(date)" >> "$PROCESS_LOG"
 echo "This log shows the complete agent thinking process, tool calls, and memory context" >> "$PROCESS_LOG"
 

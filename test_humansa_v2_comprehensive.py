@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Comprehensive Humansa V2 Test Suite - 30 Test Cases"""
+"""Comprehensive HUMANSA V2 Test Suite - 30 Test Cases"""
 
 import asyncio
 import aiohttp
@@ -415,7 +415,7 @@ async def test_v2_endpoint(session, test_case):
 async def run_all_tests():
     """Run all test cases"""
     print(f"\n{'='*80}")
-    print(f"Running Humansa V2 Comprehensive Test Suite")
+    print(f"Running HUMANSA V2 Comprehensive Test Suite")
     print(f"Total test cases: {len(ALL_TEST_CASES)}")
     print(f"- Identity tests: {len(IDENTITY_TEST_CASES)}")
     print(f"- Mem0 tests: {len(MEM0_TEST_CASES)}")
@@ -475,7 +475,7 @@ async def run_all_tests():
         
         # Save results
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"humansa_v2_test_results_{timestamp}.json"
+        filename = f"HUMANSA_v2_test_results_{timestamp}.json"
         
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump({

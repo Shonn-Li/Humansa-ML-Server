@@ -1,5 +1,5 @@
 #!/bin/bash
-# Verified working Humansa test runner
+# Verified working HUMANSA test runner
 
 echo "============================================"
 echo "HUMANSA AI AGENT V2 - VERIFIED TEST RUNNER"
