@@ -124,7 +124,7 @@ Instructions:
 1. Add citations as [1], [2], [3] etc. inline where appropriate (NOT as markdown links)
 2. Only cite sources that are actually referenced in the content
 3. Keep the same information and tone as the original
-4. Add a "Sources:" section at the end listing the cited sources
+4. DO NOT add a "Sources:" section - only add inline citations
 5. IMPORTANT: Use ONLY the format [1], [2], etc. Do NOT use [Source 1] or [text](url)
 
 Rewritten response with proper numbered citations:"""
@@ -141,19 +141,20 @@ Rewritten response with proper numbered citations:"""
                     if f"[{i}]" in cited_response:
                         cited_indices.append(i)
                 
-                # Build source mapping
+                # Build source mapping - keep track of which sources were cited
                 source_mapping = {}
-                used_sources = []
                 for idx in cited_indices:
                     source = citation_sources[idx - 1]
                     source_mapping[f"[{idx}]"] = source.source_id
-                    used_sources.append(source)
                 
+                # Important: Return ALL sources in their original order, not just used ones
+                # This ensures citation numbers stay consistent
                 citation_dict = {
                     "response": cited_response,
-                    "sources": [asdict(s) for s in used_sources],
+                    "sources": [asdict(s) for s in citation_sources],  # All sources, not just used
                     "source_mapping": source_mapping,
-                    "total_sources": len(used_sources)
+                    "total_sources": len(citation_sources),
+                    "cited_indices": cited_indices  # Track which were actually cited
                 }
             except Exception as e:
                 logger.error(f"Citation generation failed: {e}")

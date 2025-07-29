@@ -153,8 +153,7 @@ class ResponseAgent(BaseAgent):
         return {
             "status": "success",
             "response": response_text,
-            "annotations": [ann.to_dict() for ann in annotations],
-            "sources": sources if enable_citations else [],
+            "annotations": annotations,  # Now includes all sources with citation positions
             "metadata": {
                 "model": request.get("model", "gpt-4.1-nano"),
                 "context_used": bool(combined_context),
@@ -247,11 +246,10 @@ class ResponseAgent(BaseAgent):
                 
                 logger.info(f"📚 Extracted {len(annotations)} annotations from response")
                 
-                # Yield annotation data
+                # Yield annotation data - annotations now include all sources
                 yield {
                     "type": "annotations",
-                    "annotations": [ann.to_dict() for ann in annotations],
-                    "sources": sources
+                    "annotations": annotations  # Already in dict format from new method
                 }
             
             # Final result
@@ -339,14 +337,16 @@ class ResponseAgent(BaseAgent):
                 
                 # Add context search source with proper metadata
                 source_type = source.get("type", "note")
-                source_id = source.get("type_id") or source.get("note_id") or source.get("conversation_id")
+                # Get the type_id from the source - prioritize type_id field, then note_id/conversation_id
+                type_id = source.get("type_id") or source.get("note_id") or source.get("conversation_id")
                 
                 all_sources.append({
                     "source_id": f"context_{source_counter}",
-                    "type": "context_search",
+                    "type": source_type,  # Use actual type (note/conversation) instead of "context_search"
+                    "type_id": type_id,
                     "title": source.get("title", f"{source_type.capitalize()} {source_counter}"),
                     "content": source_content,
-                    "url": f"youwo://{source_type}/{source_id}" if source_id else "",
+                    "url": f"youwo://{source_type}/{type_id}" if type_id else "",
                     "metadata": {
                         "note_id": source.get("note_id") or (source.get("type_id") if source_type == "note" else None),
                         "conversation_id": source.get("conversation_id") or (source.get("type_id") if source_type == "conversation" else None),
@@ -372,7 +372,8 @@ class ResponseAgent(BaseAgent):
                 # Add web source
                 all_sources.append({
                     "source_id": f"web_{source_counter}",
-                    "type": "web_search",
+                    "type": "web",  # Use "web" instead of "web_search"
+                    "type_id": None,  # Web sources don't have type_id
                     "title": title,
                     "content": snippet,
                     "url": url,

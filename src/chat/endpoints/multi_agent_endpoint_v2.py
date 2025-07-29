@@ -11,6 +11,7 @@ import json
 import logging
 import time
 import uuid
+import traceback
 from abc import ABC, abstractmethod
 from typing import Dict, Any, List, Optional, Union, AsyncGenerator
 from dataclasses import dataclass, asdict
@@ -787,6 +788,9 @@ class MultiAgentChatEndpointV2:
                 response_completed_data["citations"] = citations
                 logger.info(f"📚 Including {len(citations)} citations in response.completed event")
                 
+            # Debug log the complete event
+            logger.info(f"🎯 Sending response.completed with data: {json.dumps(response_completed_data, cls=DecimalEncoder)[:500]}")
+            
             yield create_event("response.completed",
                                sequence_number=sequence,
                                response=response_completed_data)
@@ -801,12 +805,19 @@ class MultiAgentChatEndpointV2:
 
         except Exception as e:
             logger.error(f"Error in streaming request: {e}", exc_info=True)
+            # Provide more detailed error information
+            error_message = str(e) if str(e) else "An unknown error occurred during streaming"
             yield {
                 "type": "error",
                 "error": {
-                    "message": str(e),
-                    "type": "internal_error",
-                    "code": "streaming_error"
+                    "message": error_message,
+                    "type": type(e).__name__,
+                    "code": "streaming_error",
+                    "details": {
+                        "error_class": type(e).__name__,
+                        "error_str": str(e),
+                        "traceback": traceback.format_exc() if logger.level <= logging.DEBUG else None
+                    }
                 }
             }
 
@@ -1051,6 +1062,11 @@ class MultiAgentChatEndpointV2:
             
             # Stream annotations if available
             if annotations:
+                # Log annotations to verify type_id is included
+                logger.info(f"📚 Streaming {len(annotations)} annotations with type_id check:")
+                for i, ann in enumerate(annotations[:3]):  # Log first 3 annotations
+                    logger.info(f"  Annotation {i}: type={ann.get('type')}, type_id={ann.get('type_id')}, title={ann.get('title')}")
+                
                 yield create_event("response.annotations",
                                    annotations=annotations,
                                    output_index=current_output_index)
@@ -1066,35 +1082,44 @@ class MultiAgentChatEndpointV2:
                                    delta=chunk)
                 await asyncio.sleep(0.05)
 
-        # Stream annotation events for each citation found
+        # Stream annotation events for each citation position found
+        # New structure: annotations contain all sources with citation_positions array
         for annotation in annotations:
-            # Include note_id and conversation_id directly from annotation
-            annotation_data = {
-                "type": annotation.get("type", "url_citation"),
-                "start_index": annotation["start_index"],
-                "end_index": annotation["end_index"],
-                "text": annotation["text"],
-                "url": annotation.get("url", ""),
-                "title": annotation.get("title", ""),
-                "source_type": annotation.get("source_type", "web"),
-            }
+            # Skip sources that weren't actually cited
+            citation_positions = annotation.get("citation_positions", [])
+            if not citation_positions:
+                continue
+                
+            # Stream an event for each citation position of this source
+            for position in citation_positions:
+                annotation_data = {
+                    "type": annotation.get("type", "url_citation"),
+                    "start_index": position.get("start_index", 0),
+                    "end_index": position.get("end_index", 0),
+                    "text": position.get("text", ""),
+                    "url": annotation.get("url", ""),
+                    "title": annotation.get("title", ""),
+                    "source_type": annotation.get("type", "web"),
+                    "type_id": annotation.get("type_id"),
+                }
 
-            # Include note_id and conversation_id if present
-            if annotation.get("note_id"):
-                annotation_data["note_id"] = annotation["note_id"]
-            if annotation.get("conversation_id"):
-                annotation_data["conversation_id"] = annotation["conversation_id"]
+                # Include note_id and conversation_id if present
+                if annotation.get("note_id"):
+                    annotation_data["note_id"] = annotation["note_id"]
+                if annotation.get("conversation_id"):
+                    annotation_data["conversation_id"] = annotation["conversation_id"]
 
-            # Add metadata for additional information
-            annotation_data["metadata"] = {
-                "source_type": annotation.get("source_type", "web"),
-            }
+                # Add metadata for additional information
+                annotation_data["metadata"] = {
+                    "source_type": annotation.get("type", "web"),
+                    "type_id": annotation.get("type_id"),
+                }
 
-            yield create_event("response.output_text.annotation.added",
-                               item_id=message_id,
-                               output_index=current_output_index,
-                               content_index=0,
-                               annotation=annotation_data)
+                yield create_event("response.output_text.annotation.added",
+                                   item_id=message_id,
+                                   output_index=current_output_index,
+                                   content_index=0,
+                                   annotation=annotation_data)
 
         # Complete output text
         yield create_event("response.output_text.done",
@@ -1196,23 +1221,45 @@ class MultiAgentChatEndpointV2:
         # Note: The actual code output will be included in the response message
 
     async def _generate_title(self, messages: List[Dict[str, Any]], response: str) -> str:
-        """Generate a title for the conversation"""
+        """Generate a title for the conversation using the title generator service"""
         try:
-            # Get the first user message
-            user_message = ""
-            for msg in messages:
-                if msg["role"] == "user":
-                    user_message = msg["content"]
-                    break
-
-            if not user_message:
-                return "New Conversation"
-
-            # Truncate if too long
-            if len(user_message) > 100:
-                return user_message[:97] + "..."
-
-            return user_message
+            # Import the title generator
+            from ..title.title_generator import title_generator
+            
+            # Add the response to messages for context
+            messages_with_response = messages.copy()
+            messages_with_response.append({
+                "role": "assistant",
+                "content": response
+            })
+            
+            # Get an LLM instance for title generation
+            provider_info = self.llm_provider_manager.get_provider(None, "gpt-4.1-nano")
+            llm = provider_info["llm"]
+            
+            # Generate the title using the proper service
+            generated_title = await title_generator.generate_conversation_title(
+                messages_with_response, 
+                llm
+            )
+            
+            if generated_title:
+                logger.info(f"🏷️ Generated unique title: '{generated_title}'")
+                return generated_title
+            else:
+                # Fallback to user message if generation fails
+                user_message = ""
+                for msg in messages:
+                    if msg["role"] == "user":
+                        user_message = msg["content"]
+                        break
+                
+                if user_message and len(user_message) > 100:
+                    return user_message[:97] + "..."
+                elif user_message:
+                    return user_message
+                else:
+                    return "New Conversation"
 
         except Exception as e:
             logger.error(f"Error generating title: {e}")
