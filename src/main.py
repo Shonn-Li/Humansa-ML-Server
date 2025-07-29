@@ -761,6 +761,16 @@ def register_humansa_endpoints(app):
             from humansa.v2 import humansa_v2_bp, initialize_v2_system
             app.register_blueprint(humansa_v2_bp)
             
+            # Register Humansa v2 conversation API
+            from humansa.v2.api_conversation import humansa_v2_conversation_bp
+            app.register_blueprint(humansa_v2_conversation_bp)
+            logger.info("✅ Humansa V2 Conversation API endpoints registered")
+            
+            # Register Humansa v2 Responses API (OpenAI-style)
+            from humansa.v2.api_responses import humansa_v2_responses_bp
+            app.register_blueprint(humansa_v2_responses_bp)
+            logger.info("✅ Humansa V2 Responses API endpoints registered")
+            
             # Register Mem0 API endpoints
             from humansa.memory.api import mem0_bp
             app.register_blueprint(mem0_bp)
@@ -870,6 +880,16 @@ async def create_db_pool():
                 from humansa.v2.api import initialize_v2_system
                 await initialize_v2_system(app.db_pool)  # API key is now read from env in the function
                 logger.info("✅ Humansa v2 system initialized with Azure OpenAI")
+                
+                # Initialize Humansa v2 conversation API
+                from humansa.v2.api_conversation import initialize_v2_conversation_system
+                await initialize_v2_conversation_system(app.db_pool, openai_key or azure_key)
+                logger.info("✅ Humansa v2 conversation API initialized")
+                
+                # Initialize Humansa v2 Responses API
+                from humansa.v2.api_responses import initialize_v2_responses_system
+                await initialize_v2_responses_system(app.db_pool, openai_key or azure_key)
+                logger.info("✅ Humansa v2 Responses API initialized")
             except Exception as v2_error:
                 logger.error(f"❌ Failed to initialize Humansa v2: {v2_error}")
                 import traceback
