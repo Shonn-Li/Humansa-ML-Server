@@ -1,5 +1,5 @@
 """
-Citation Engine - Core citation functionality using existing context chunks
+Citation Engine - Core citation functionality using context chunks
 
 This module provides citation capabilities without additional embeddings,
 using the context chunks from RAG, file attachments, and web search.
@@ -8,6 +8,9 @@ using the context chunks from RAG, file attachments, and web search.
 import logging
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
+
+from ..rag.rag_processor import RAGContext
+from ..websearch.web_search_processor import WebSearchContext
 
 logger = logging.getLogger(__name__)
 
@@ -31,6 +34,17 @@ class CitationResult:
     source_mapping: Dict[str, str]  # Maps citation IDs to source IDs
     total_sources: int
 
+    def to_dict(self) -> Dict[str, Any]:
+        """Return a serializable representation of the citation result."""
+        from dataclasses import asdict
+
+        return {
+            "response": self.response,
+            "sources": [asdict(src) for src in self.sources],
+            "source_mapping": self.source_mapping,
+            "total_sources": self.total_sources,
+        }
+
 
 class CitationEngine:
     """Core citation engine using existing context chunks"""
@@ -38,28 +52,29 @@ class CitationEngine:
     def __init__(self):
         logger.info("CitationEngine initialized")
 
-    def generate_citation_response(self,
-                                   query: str,
-                                   rag_context=None,
-                                   attachment_context=None,
-                                   websearch_context=None,
-                                   llm=None) -> CitationResult:
+    def generate_citation_response(self, query: str,
+                                 rag_context: Optional[RAGContext],
+                                 attachment_context: Optional[Dict[str, Any]],
+                                 websearch_context: Optional[WebSearchContext],
+                                 model_name: str = "gpt-4.1-nano",
+                                 llm=None) -> CitationResult:
         """
-        Generate response with citations using existing context chunks
-
-        Args:
-            query: User's question
-            rag_context: RAG context with chunks
-            attachment_context: File attachment context
-            websearch_context: Web search context  
-            llm: LLM provider for generation
-
-        Returns:
-            CitationResult with response and source citations
+        Generate a response with citations based on provided context.
         """
-        logger.info("🔍 Generating citation response...")
+        logger.info(f"Generating citation response for query: '{query}'")
 
-        # Extract all sources from contexts
+        # Get an LLM instance if not provided
+        if llm is None:
+            from ..provider.llm_provider import LLMProviderSelector
+            llm_selector = LLMProviderSelector()
+            provider_info = llm_selector.get_provider(model=model_name)
+            llm = provider_info["llm"]
+
+        if not llm:
+            raise ValueError(
+                f"CitationEngine: Could not get LLM provider for model {model_name}")
+
+        # Extract all sources from the different contexts
         sources = self._extract_all_sources(
             rag_context, attachment_context, websearch_context)
 
@@ -104,9 +119,14 @@ class CitationEngine:
                 chunk.type_id for chunk in rag_context.chunks if chunk.type == "note"]
             note_titles = {}
             if note_ids:
-                from ..postgres.db_manager import PostgresManager
-                postgres = PostgresManager()
-                note_titles = postgres.get_note_titles_batch(note_ids)
+                try:
+                    from ..postgres.db_manager import PostgresManager
+                    postgres = PostgresManager()
+                    note_titles = postgres.get_note_titles_batch(note_ids)
+                except Exception as e:
+                    logger.warning(
+                        f"Failed to fetch note titles from database: {e}")
+                    note_titles = {}
 
             for i, chunk in enumerate(rag_context.chunks):
                 # Use note title for notes, keep conversation ID for conversations

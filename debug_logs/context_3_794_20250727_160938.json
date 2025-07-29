@@ -1,0 +1,37 @@
+{
+  "timestamp": "20250727_160938",
+  "user_id": 3,
+  "conversation_id": 794,
+  "request": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "what did this talk abut?"
+      }
+    ],
+    "model": "grok-3-mini",
+    "enable_rag": true,
+    "enable_citations": true,
+    "enable_web_search": true
+  },
+  "context_agents": [
+    "router_agent",
+    "context_search_agent",
+    "last_message_id",
+    "last_message_output_index"
+  ],
+  "combined_context_length": 540,
+  "combined_context_preview": "[1] Note: Commercial Invoice PO5195.pdf\n商业发票（日期：2013-07-01，参考号：PO5195）记录了香港旭金属制品厂（广东省东莞市大朗镇水口工业区中信路179号，邮编523785）向新西兰收货方 Espial Marketing Ltd（收件人 TONI CASSIN，地址：Unit 5, 24 Bishop Dunn Place, Manukau, Auckland 2013）发运货物的核心信息。货物需在2013-08-05前签收，运输方式注明为“Freight on Board”（FOB），并附备注“DI from China（FOB Ho…）”，订单与编号 PO5193 合并处理且要求打带固定。\n\n发票列出三项商品，均产自中国，海关编码为 7326.90.8588：\n1. A23 “For the Birds”主题陈列架，数量 36 件，金额 661.97 美元；  \n2. A27 “Petals and Paradise”柜台陈列架，数量 36 件，金额 661.97 美元；  \n3. A35 “Wild Kingdom”主题陈列架，数量 24 件，单价与金额均标 0.00 美元（已另行发运，文中提示“A35’",
+  "sources": [
+    {
+      "source_id": "context_1",
+      "type": "context_search",
+      "title": "Commercial Invoice PO5195.pdf",
+      "content": "商业发票（日期：2013-07-01，参考号：PO5195）记录了香港旭金属制品厂（广东省东莞市大朗镇水口工业区中信路179号，邮编523785）向新西兰收货方 Espial Marketing Ltd（收件人 TONI CASSIN，地址：Unit 5, 24 Bishop Dunn Place, Manukau, Auckland 2013）发运货物的核心信息。货物需在2013-08-05前签收，运输方式注明为“Freight on Board”（FOB），并附备注“DI from China（FOB Ho…）”，订单与编号 PO5193 合并处理且要求打带固定。\n\n发票列出三项商品，均产自中国，海关编码为 7326.90.8588：\n1. A23 “For the Birds”主题陈列架，数量 36 件，金额 661.97 美元；  \n2. A27 “Petals and Paradise”柜台陈列架，数量 36 件，金额 661.97 美元；  \n3. A35 “Wild Kingdom”主题陈列架，数量 24 件，单价与金额均标 0.00 美元（已另行发运，文中提示“A35’",
+      "url": "youwo://note/7487",
+      "metadata": {
+        "note_id": 7487,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": 0,
+        "score": 

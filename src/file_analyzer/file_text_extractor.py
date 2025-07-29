@@ -300,7 +300,7 @@ class FileTextExtractor:
             
             # Initialize Azure GPT-4o mini model
             azure_model = AzureAICompletionsModel(
-                model="gpt-4o-mini",
+                model="gpt-4.1-nano",
                 azure_ai_token=os.getenv("AZURE_AI_TOKEN"),
                 azure_ai_endpoint=os.getenv("AZURE_AI_ENDPOINT")
             )

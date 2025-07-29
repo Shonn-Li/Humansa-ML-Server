@@ -17,10 +17,11 @@ class TitleGenerator:
     Generate concise conversation titles for chat sessions
 
     Features:
-    - Maximum 5 words, 20 characters
+    - Generate natural, descriptive titles
     - Extract key context from first and last user messages
     - Use low temperature for consistent, focused titles
-    - Clean title formatting (no quotes, proper length limits)
+    - Clean title formatting (no quotes)
+    - No artificial length restrictions
     """
 
     def __init__(self):
@@ -29,7 +30,7 @@ class TitleGenerator:
 
     async def generate_conversation_title(self, messages: List[Dict[str, Any]], llm: LLM) -> Optional[str]:
         """
-        Generate a concise title for the conversation (max 5 words, ~20 chars)
+        Generate a descriptive title for the conversation
 
         Args:
             messages: List of chat messages in OpenAI format
@@ -76,17 +77,18 @@ class TitleGenerator:
 {context}
 
 Requirements:
-- Maximum 5 words
-- Maximum 20 characters
-- No punctuation
+- Be concise but complete
 - Capture the main topic/intent
-- Be specific, not generic
+- Be specific and descriptive
+- Use natural phrasing
+- No unnecessary punctuation
 
 Examples:
-- "AI Trends 2024"
-- "Python Error Fix"
-- "Recipe Ideas"
-- "Travel Planning"
+- "Recent Notes Summary Analysis"
+- "Python Fibonacci Function Help"
+- "Tokyo Travel Recommendations"
+- "Chinese Document Translation"
+- "Budget Planning Strategies"
 
 Title:"""
 
@@ -102,13 +104,7 @@ Title:"""
                 # Clean up the title
                 title = title.replace('"', '').replace("'", "").strip()
 
-                # Ensure it meets requirements
-                words = title.split()
-                if len(words) > 5:
-                    title = " ".join(words[:5])
-
-                if len(title) > 20:
-                    title = title[:20].strip()
+                # No truncation - let the title be as long as needed
 
                 # Restore original temperature
                 llm.temperature = original_temp

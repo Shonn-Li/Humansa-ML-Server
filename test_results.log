@@ -1,0 +1,75 @@
+[21:51:34] Starting ML server detailed test...
+Make sure the ML server is running on port 5001
+Make sure the test database is running on port 5454
+
+[21:51:34] Testing ML Server Multi-Agent Endpoint
+================================================================================
+URL: http://localhost:5001/v1/multi-agent/response
+Request: {
+  "messages": [
+    {
+      "role": "user",
+      "content": "What information do you have about AI or machine learning in my notes?"
+    }
+  ],
+  "model": "openai/gpt-4o-mini",
+  "stream": true,
+  "user_id": 10001
+}
+================================================================================
+
+[21:51:36] Response status: 200
+
+[21:51:36] Streaming response:
+--------------------------------------------------------------------------------
+
+[21:51:36] Event: response.created
+
+[21:51:36] Event: response.in_progress
+
+[21:51:36] 📦 OUTPUT ITEM ADDED:
+  Type: reasoning
+  ID: router_2d1d5f08
+  Status: None
+
+[21:51:36] Event: response.reasoning_part.added
+
+[21:51:36] Event: response.reasoning_text.done
+
+[21:51:36] Event: response.reasoning_part.done
+
+[21:51:37] Event: response.reasoning_part.added
+
+[21:51:37] Event: response.reasoning_text.done
+
+[21:51:37] Event: response.reasoning_part.done
+
+[21:51:37] ✅ OUTPUT ITEM DONE:
+  Type: reasoning
+  ID: router_2d1d5f08
+  Status: None
+
+[21:51:37] 📦 OUTPUT ITEM ADDED:
+  Type: context_search_call
+  ID: cs_639d54dc
+  Status: in_progress
+
+[21:51:38] Event: error
+
+[21:51:38] Stream completed
+
+================================================================================
+
+[21:51:38] Event Summary:
+  error: 1
+  response.created: 1
+  response.in_progress: 1
+  response.output_item.added: 2
+  response.output_item.done: 1
+  response.reasoning_part.added: 2
+  response.reasoning_part.done: 2
+  response.reasoning_text.delta: 10
+  response.reasoning_text.done: 2
+
+[21:51:38] Final Status:
+  ❌ ISSUE: No search results found in output_item.done events

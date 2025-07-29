@@ -11,11 +11,26 @@ This is an **enhanced** machine learning inference server built with [Quart](htt
 - **⚡ Streaming Responses**: Real-time response streaming
 - **📝 Note Context**: Integration with YouWoAI note system
 - **🔗 Link Analysis**: YouTube, Bilibili, web content analysis
+- **🎯 OpenAI Alternative Path**: Use `openai=true` parameter for native OpenAI Responses API with LlamaIndex
 
 ## One liner startup
 
 ```bash
 lsof -ti tcp:5002 | xargs -r kill -9 && python3 -m venv youwo-ml-venv && source youwo-ml-venv/bin/activate && python -m src.main
+```
+
+```bash
+# Restart the ML server on port 5001
+lsof -ti tcp:5001 | xargs -r kill -9 && \
+source /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/bin/activate && \
+python /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/main.py
+```
+
+```bash
+# Restart the ML server on port 5001
+lsof -ti tcp:5001 | xargs -r kill -9 && \
+source /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/bin/activate && \
+python /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/main.py
 ```
 
 ## 🔧 Setup (Local Development)
@@ -126,6 +141,19 @@ curl -X POST http://localhost:5001/v1/chat \
   }'
 ```
 
+### Chat with OpenAI Alternative Path
+
+```bash
+curl -X POST http://localhost:5001/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "messages": [{"role": "user", "content": "Hello!"}],
+    "model": "gpt-4o-mini",
+    "openai": true,
+    "stream": true
+  }'
+```
+
 ### Streaming Response
 
 ```bash
@@ -182,6 +210,15 @@ python test_enhanced_api.py
 
 # Quick startup validation
 python test_startup.py
+
+# Test OpenAI streaming handler (alternative path)
+python test_openai_streaming_handler.py
+
+# Test OpenAI integration with main API
+python test_openai_integration.py
+
+# Test doctor tools (Humansa agentic)
+python test_doctor_tools.py
 ```
 
 ### Adding New Providers

@@ -1,0 +1,85 @@
+{
+  "timestamp": "20250727_140530",
+  "user_id": 10001,
+  "conversation_id": 0,
+  "request": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Search my notes for PARL"
+      }
+    ],
+    "model": "gpt-4.1-nano",
+    "enable_rag": null,
+    "enable_citations": true,
+    "enable_web_search": null
+  },
+  "context_agents": [
+    "router_agent",
+    "context_search_agent",
+    "last_message_id",
+    "last_message_output_index"
+  ],
+  "combined_context_length": 0,
+  "combined_context_preview": "",
+  "sources": [],
+  "sources_count": 0,
+  "context_search_found": true,
+  "web_search_found": false,
+  "attachment_found": false,
+  "full_context": {
+    "context_search": {
+      "status": "completed",
+      "understanding": {
+        "intent": "search",
+        "temporal_filter": null,
+        "key_concepts": [
+          "PARL"
+        ]
+      },
+      "retrieval_steps": [
+        {
+          "strategy": "keyword",
+          "query": "Search my notes for PARL",
+          "results_count": 0
+        }
+      ],
+      "context": "",
+      "sources": [],
+      "total_results": 0,
+      "search_summary": "Found 0 relevant chunks from 0 sources using 1 retrieval strategies"
+    },
+    "web_search": {},
+    "attachment": {},
+    "router": {
+      "router_decision": {
+        "selected_tool": "knowledge_base_notes",
+        "search_type": "notes",
+        "confidence": 0.9,
+        "reasoning": "User is asking to search their notes for a specific term 'PARL'",
+        "query_classification": "notes_query"
+      },
+      "original_query": "Search my notes for PARL",
+      "condensed_query": "Search my notes for PARL",
+      "enabled_agents": [
+        "response",
+        "context_search"
+      ],
+      "model": "gpt-4.1-nano",
+      "search_type": "notes"
+    }
+  },
+  "combined_context_full": "",
+  "llamaindex_messages": [
+    {
+      "role": "system",
+      "content": "You are **YouWoAI**, an AI study assistant.\n\n**Current Date**: 2025-07-27\n\nYour role: help the user learn faster and answer questions.\n• Any prior conversation notes, file‑search snippets, file attachments, or web‑search results will appear as **additional system messages** in this chat. Use them when relevant.\n",
+      "content_length": 313
+    },
+    {
+      "role": "user",
+      "content": "Search my notes for PARL",
+      "content_length": 24
+    }
+  ]
+}

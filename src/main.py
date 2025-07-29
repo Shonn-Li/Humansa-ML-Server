@@ -18,6 +18,7 @@ V1 ENDPOINTS:
 import io
 import warnings
 import os
+from decimal import Decimal
 import sys
 import json
 import logging
@@ -40,6 +41,14 @@ if current_dir not in sys.path:
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+class DecimalEncoder(json.JSONEncoder):
+    """Custom JSON encoder that handles Decimal types"""
+    def default(self, obj):
+        if isinstance(obj, Decimal):
+            # Convert Decimal to float for JSON serialization
+            return float(obj)
+        return super(DecimalEncoder, self).default(obj)
 
 # Reduce Azure logging verbosity - only show essential request info
 azure_loggers = [
@@ -164,7 +173,7 @@ def create_app():
         return jsonify({
             "status": "healthy",
             "service": "ml-server",
-            "port": 5001,
+            "port": int(os.getenv('ML_SERVER_PORT', '5001')),
             "timestamp": str(__import__('datetime').datetime.now())
         })
 
@@ -182,6 +191,7 @@ def create_app():
     register_chat_endpoints(app)
     register_preserved_endpoints(app)
     register_embedding_endpoints(app)
+    register_humansa_endpoints(app)
 
     return app
 
@@ -228,32 +238,39 @@ def register_chat_endpoints(app):
                     chunk_count = 0
                     try:
                         # Get the streaming response from handle_chat_request
+                        # Note: When streaming, handle_chat_request returns a generator directly
                         stream_response = await modular_chat_endpoint.handle_chat_request(request_data)
 
-                        # The stream_response should be an async generator
-                        async for chunk in stream_response:
-                            chunk_count += 1
-                            if chunk_count <= 3:  # Log first 3 chunks
-                                truncated_chunk = truncate_dict(
-                                    chunk, max_length=200)
-                                logger.info(
-                                    f"📦 Stream chunk {chunk_count}: {json.dumps(truncated_chunk)}")
-                            elif chunk_count == 4:
-                                logger.info(
-                                    f"📦 ... (logging first 3 chunks only, total so far: {chunk_count})")
+                        # Check if it's a generator or a dict (error response)
+                        if hasattr(stream_response, '__aiter__'):
+                            # It's an async generator, iterate over it
+                            async for chunk in stream_response:
+                                chunk_count += 1
+                                if chunk_count <= 3:  # Log first 3 chunks
+                                    truncated_chunk = truncate_dict(
+                                        chunk, max_length=200)
+                                    logger.info(
+                                        f"📦 Stream chunk {chunk_count}: {json.dumps(truncated_chunk, cls=DecimalEncoder)}")
+                                elif chunk_count == 4:
+                                    logger.info(
+                                        f"📦 ... (logging first 3 chunks only, total so far: {chunk_count})")
 
-                            yield f"data: {json.dumps(chunk)}\n\n"
+                                yield f"data: {json.dumps(chunk, cls=DecimalEncoder)}\n\n"
 
-                        logger.info(
-                            f"✅ Streaming complete: {chunk_count} chunks sent")
-                        yield "data: [DONE]\n\n"
+                            logger.info(
+                                f"✅ Streaming complete: {chunk_count} chunks sent")
+                            yield "data: [DONE]\n\n"
+                        else:
+                            # It's a dict response (likely an error)
+                            logger.warning(f"⚠️ Got non-streaming response in streaming mode: {stream_response}")
+                            yield f"data: {json.dumps(stream_response, cls=DecimalEncoder)}\n\n"
                     except Exception as stream_error:
                         logger.error(f"❌ Streaming error: {stream_error}")
                         import traceback
                         traceback.print_exc()
                         error_chunk = {"error": str(
                             stream_error), "status": "error"}
-                        yield f"data: {json.dumps(error_chunk)}\n\n"
+                        yield f"data: {json.dumps(error_chunk, cls=DecimalEncoder)}\n\n"
 
                 return Response(generate_stream(), mimetype='text/event-stream')
             else:
@@ -285,53 +302,27 @@ def register_chat_endpoints(app):
                     else:
                         logger.warning("⚠️ No choices found in response")
 
-                truncated_response = truncate_dict(response, max_length=200)
-                logger.info(
-                    f"Response (truncated): {json.dumps(truncated_response, indent=2)}")
-                logger.info(f"====================")
-
-                # Ensure valid response format
-                if not isinstance(response, dict):
-                    logger.error(f"❌ Invalid response type: {type(response)}")
-                    return jsonify({
-                        "error": "Invalid response format from modular endpoint",
-                        "status": "error"
-                    }), 500
-
+                logger.info("===================")
                 return jsonify(response)
 
-        except ImportError as import_error:
-            logger.error(
-                f"❌ Import error for modular_chat_endpoint: {import_error}")
-            logger.error(f"Current working directory: {os.getcwd()}")
-            logger.error(f"Python path: {os.sys.path}")
-            return jsonify({
-                "error": f"Chat module import failed: {str(import_error)}",
-                "status": "error",
-                "debug_info": {
-                    "cwd": os.getcwd(),
-                    "python_path": os.sys.path[:3]  # First 3 entries
-                }
-            }), 500
         except Exception as e:
             logger.error(f"❌ Chat endpoint error: {e}")
-            logger.error(f"Request data: {request_data}")
             import traceback
             traceback.print_exc()
             return jsonify({
-                "error": f"Chat processing failed: {str(e)}",
+                "error": str(e),
                 "status": "error",
-                "request_data": request_data
+                "type": "unhandled_exception"
             }), 500
 
-    @app.route("/v1-humansa/chat/completions", methods=["POST"])
-    async def v1_humansa_chat_completions():
-        """Humansa AI-Agent chat endpoint with tool calling capabilities"""
+    @app.route("/v1/multi-agent/response", methods=["POST"])
+    async def v1_multi_agent_response():
+        """Multi-agent workflow endpoint with autonomous agents"""
         # Add comprehensive request logging
         request_data = None
         try:
             request_data = await request.get_json()
-            logger.info(f"=== HUMANSA AI-AGENT REQUEST ===")
+            logger.info(f"=== MULTI-AGENT REQUEST ===")
             logger.info(f"Method: {request.method}")
             logger.info(f"URL: {request.url}")
             logger.info(f"Headers: {dict(request.headers)}")
@@ -340,336 +331,105 @@ def register_chat_endpoints(app):
             truncated_data = truncate_dict(request_data, max_length=200)
             logger.info(
                 f"Request Body: {json.dumps(truncated_data, indent=2)}")
-            logger.info(f"==========================")
+            logger.info(f"========================")
 
         except Exception as e:
-            logger.error(f"Failed to parse Humansa request JSON: {e}")
+            logger.error(f"Failed to parse request JSON: {e}")
             return jsonify({
                 "error": "Invalid JSON in request body",
                 "status": "error"
             }), 400
 
         try:
-            # Import the Humansa chat endpoint
-            logger.info("🤖 Attempting to import HumansaChatEndpoint...")
-            from humansa.endpoints.humansa_chat_endpoint import HumansaChatEndpoint
-            logger.info("✅ Successfully imported HumansaChatEndpoint")
-
-            # Create endpoint instance
-            humansa_endpoint = HumansaChatEndpoint()
+            # Import the multi-agent endpoint with better error handling
+            logger.info("🔄 Attempting to import multi_agent_endpoint_v2...")
+            from chat.endpoints.multi_agent_endpoint_v2 import multi_agent_endpoint_v2 as multi_agent_endpoint
+            logger.info("✅ Successfully imported multi_agent_endpoint_v2 with streaming support")
 
             if request_data.get('stream'):
                 # Return streaming response
-                logger.info("🌊 Starting Humansa streaming response...")
+                logger.info("🌊 Starting multi-agent streaming response...")
 
-                async def generate_humansa_stream():
+                async def generate_stream():
+                    chunk_count = 0
                     try:
-                        # The handle_chat_request method returns the appropriate response format
-                        response = await humansa_endpoint.handle_chat_request(request_data)
-                        # For streaming, the response should be a generator or async iterator
-                        if hasattr(response, '__aiter__'):
-                            async for chunk in response:
-                                # Chunk from Humansa endpoint is a Dict event, need to format as SSE
-                                yield f"data: {json.dumps(chunk)}\n\n"
+                        # Get the streaming response from handle_request
+                        stream_response = await multi_agent_endpoint.handle_request(request_data)
+
+                        # Check if it's a generator or a dict (error response)
+                        if hasattr(stream_response, '__aiter__'):
+                            # It's an async generator, iterate over it
+                            async for chunk in stream_response:
+                                chunk_count += 1
+                                if chunk_count <= 3:  # Log first 3 chunks
+                                    truncated_chunk = truncate_dict(
+                                        chunk, max_length=200)
+                                    logger.info(
+                                        f"📦 Multi-agent stream chunk {chunk_count}: {json.dumps(truncated_chunk, cls=DecimalEncoder)}")
+                                elif chunk_count == 4:
+                                    logger.info(
+                                        f"📦 ... (logging first 3 chunks only, total so far: {chunk_count})")
+
+                                yield f"data: {json.dumps(chunk, cls=DecimalEncoder)}\n\n"
+
+                            logger.info(
+                                f"✅ Multi-agent streaming complete: {chunk_count} chunks sent")
+                            yield "data: [DONE]\n\n"
                         else:
-                            # If it's not a generator, yield the response as a single chunk
-                            yield f"data: {json.dumps(response)}\n\n"
-                        yield "data: [DONE]\n\n"
-                    except Exception as e:
-                        logger.error(f"❌ Humansa streaming error: {e}")
-                        error_chunk = {
-                            "error": f"Humansa streaming failed: {str(e)}",
-                            "status": "error"
-                        }
-                        yield f"data: {json.dumps(error_chunk)}\n\n"
-                        yield "data: [DONE]\n\n"
+                            # It's a dict response (likely an error)
+                            logger.warning(f"⚠️ Got non-streaming response in multi-agent streaming mode: {stream_response}")
+                            yield f"data: {json.dumps(stream_response, cls=DecimalEncoder)}\n\n"
+                    except Exception as stream_error:
+                        logger.error(
+                            f"❌ Multi-agent streaming error: {stream_error}")
+                        import traceback
+                        traceback.print_exc()
+                        error_chunk = {"error": str(
+                            stream_error), "status": "error"}
+                        yield f"data: {json.dumps(error_chunk, cls=DecimalEncoder)}\n\n"
 
-                response = Response(
-                    generate_humansa_stream(),
-                    mimetype='text/plain',
-                    headers={
-                        'Cache-Control': 'no-cache',
-                        'Connection': 'keep-alive',
-                        'Content-Type': 'text/event-stream'
-                    }
-                )
-                logger.info(
-                    "🌊 Humansa streaming response created and returning...")
-                return response
-
+                return Response(generate_stream(), mimetype='text/event-stream')
             else:
-                # Non-streaming response
-                logger.info("📝 Processing Humansa non-streaming request...")
-                response = await humansa_endpoint.handle_chat_request(request_data)
+                # Return standard response
+                logger.info("📄 Starting multi-agent non-streaming response...")
+                response = await multi_agent_endpoint.handle_request(request_data)
 
-                logger.info(f"=== HUMANSA RESPONSE ===")
-                # Log response with truncation
-                truncated_response = truncate_dict(response, max_length=200)
-                logger.info(
-                    f"Response (truncated): {json.dumps(truncated_response, indent=2)}")
-                logger.info(f"========================")
+                # Validate and log response
+                logger.info(f"=== MULTI-AGENT RESPONSE ===")
+                logger.info(f"Response type: {type(response)}")
+                if isinstance(response, dict):
+                    logger.info(f"Response keys: {list(response.keys())}")
+                    if 'choices' in response and response['choices']:
+                        first_choice = response['choices'][0] if response['choices'] else {
+                        }
+                        if 'message' in first_choice and 'content' in first_choice['message']:
+                            content = first_choice['message']['content']
+                            content_length = len(
+                                str(content)) if content else 0
+                            logger.info(
+                                f"Content length: {content_length} characters")
+                            truncated_content = content[:200] + \
+                                f"... (truncated from {content_length} chars)" if content_length > 200 else content
+                            logger.info(
+                                f"Content preview: {truncated_content}")
+                        else:
+                            logger.warning(
+                                "⚠️ No content found in first choice message")
+                    else:
+                        logger.warning("⚠️ No choices found in response")
 
-                # Ensure valid response format
-                if not isinstance(response, dict):
-                    logger.error(
-                        f"❌ Invalid Humansa response type: {type(response)}")
-                    return jsonify({
-                        "error": "Invalid response format from Humansa endpoint",
-                        "status": "error"
-                    }), 500
-
+                logger.info("===========================")
                 return jsonify(response)
 
-        except ImportError as import_error:
-            logger.error(
-                f"❌ Import error for HumansaChatEndpoint: {import_error}")
-            logger.error(f"Current working directory: {os.getcwd()}")
-            logger.error(f"Python path: {os.sys.path}")
-            return jsonify({
-                "error": f"Humansa module import failed: {str(import_error)}",
-                "status": "error",
-                "debug_info": {
-                    "cwd": os.getcwd(),
-                    "python_path": os.sys.path[:3]  # First 3 entries
-                }
-            }), 500
         except Exception as e:
-            logger.error(f"❌ Humansa endpoint error: {e}")
-            logger.error(f"Request data: {request_data}")
+            logger.error(f"❌ Multi-agent endpoint error: {e}")
             import traceback
             traceback.print_exc()
             return jsonify({
-                "error": f"Humansa processing failed: {str(e)}",
+                "error": str(e),
                 "status": "error",
-                "request_data": request_data
+                "type": "unhandled_exception"
             }), 500
-
-    @app.route("/humansa/response", methods=["POST"])
-    async def humansa_response():
-        """Humansa AI-Agent response endpoint with custom event streaming format"""
-        # Add comprehensive request logging
-        request_data = None
-        try:
-            request_data = await request.get_json()
-            logger.info(f"=== HUMANSA RESPONSE REQUEST ===")
-            logger.info(f"Method: {request.method}")
-            logger.info(f"URL: {request.url}")
-            logger.info(f"Headers: {dict(request.headers)}")
-
-            # Truncate request data for logging
-            truncated_data = truncate_dict(request_data, max_length=200)
-            logger.info(
-                f"Request Body: {json.dumps(truncated_data, indent=2)}")
-            logger.info(f"==========================")
-
-        except Exception as e:
-            logger.error(f"Failed to parse Humansa response request JSON: {e}")
-            return jsonify({
-                "error": "Invalid JSON in request body",
-                "status": "error"
-            }), 400
-
-        try:
-            # Import the Humansa chat endpoint
-            logger.info("🤖 Attempting to import HumansaChatEndpoint...")
-            from humansa.endpoints.humansa_chat_endpoint import HumansaChatEndpoint
-            logger.info("✅ Successfully imported HumansaChatEndpoint")
-
-            # Create endpoint instance
-            humansa_endpoint = HumansaChatEndpoint()
-
-            # Use Humansa endpoint with O3 demo toggle based on request data
-            demo_result = await humansa_endpoint.handle_chat_request(request_data)
-
-            if request_data.get('stream', True):  # Default to streaming
-                # Return streaming response from Humansa endpoint
-                logger.info("🌊 Starting Humansa streaming response...")
-
-                # Check if it's already a streaming response
-                if hasattr(demo_result, '__aiter__'):
-                    # Check if result is from O3 demo (already properly formatted) or regular Humansa (needs formatting)
-                    use_o3_demo = request_data.get('use_o3_demo', False)
-
-                    if use_o3_demo:
-                        # O3 demo returns properly formatted SSE data - yield directly
-                        async def stream_o3_response():
-                            async for chunk in demo_result:
-                                yield chunk
-
-                        response = Response(
-                            stream_o3_response(),
-                            headers={
-                                'Cache-Control': 'no-cache',
-                                'Connection': 'keep-alive',
-                                'Content-Type': 'text/event-stream'
-                            }
-                        )
-                        logger.info(
-                            "🌊 O3 demo streaming response created and returning...")
-                        return response
-                    else:
-                        # Regular Humansa returns Dict events that need SSE formatting
-                        async def stream_humansa_response():
-                            async for chunk in demo_result:
-                                yield f"data: {json.dumps(chunk)}\n\n"
-                            yield "data: [DONE]\n\n"
-
-                        response = Response(
-                            stream_humansa_response(),
-                            headers={
-                                'Cache-Control': 'no-cache',
-                                'Connection': 'keep-alive',
-                                'Content-Type': 'text/event-stream'
-                            }
-                        )
-                        logger.info(
-                            "🌊 Humansa streaming response created and returning...")
-                        return response
-                else:
-                    # If demo_result is not streaming, convert to JSON response
-                    logger.info(
-                        "📝 Converting non-streaming Humansa result to JSON response...")
-                    return jsonify(demo_result)
-
-            else:
-                # Non-streaming response from Humansa endpoint
-                logger.info("📝 Processing Humansa non-streaming response...")
-
-                logger.info(f"=== HUMANSA RESPONSE ===")
-                # Log response with truncation
-                truncated_response = truncate_dict(demo_result, max_length=200)
-                logger.info(
-                    f"Response (truncated): {json.dumps(truncated_response, indent=2)}")
-                logger.info(f"========================")
-
-                # Ensure valid response format
-                if not isinstance(demo_result, dict):
-                    logger.error(
-                        f"❌ Invalid Humansa response type: {type(demo_result)}")
-                    return jsonify({
-                        "error": "Invalid response format from Humansa endpoint",
-                        "status": "error"
-                    }), 500
-
-                return jsonify(demo_result)
-
-        except ImportError as import_error:
-            logger.error(
-                f"❌ Import error for HumansaChatEndpoint: {import_error}")
-            logger.error(f"Current working directory: {os.getcwd()}")
-            logger.error(f"Python path: {os.sys.path}")
-            return jsonify({
-                "error": f"Humansa module import failed: {str(import_error)}",
-                "status": "error",
-                "debug_info": {
-                    "cwd": os.getcwd(),
-                    "python_path": os.sys.path[:3]  # First 3 entries
-                }
-            }), 500
-        except Exception as e:
-            logger.error(f"❌ Humansa endpoint error: {e}")
-            logger.error(f"Request data: {request_data}")
-            import traceback
-            traceback.print_exc()
-            return jsonify({
-                "error": f"Humansa processing failed: {str(e)}",
-                "status": "error",
-                "request_data": request_data
-            }), 500
-
-    @app.route("/humansa/o3-demo", methods=["POST"])
-    async def humansa_o3_demo():
-        """OpenAI O3 Demo Endpoint - Direct API forwarding with Humansa system prompt"""
-        request_data = None
-        try:
-            request_data = await request.get_json()
-            logger.info(f"=== O3 DEMO REQUEST ===")
-            logger.info(f"Method: {request.method}")
-            logger.info(f"URL: {request.url}")
-            logger.info(f"Headers: {dict(request.headers)}")
-            logger.info(f"Messages: {len(request_data.get('messages', []))}")
-            logger.info(f"Stream: {request_data.get('stream', False)}")
-            logger.info(f"=====================")
-
-            # Import O3 demo endpoint
-            from humansa.endpoints.o3_demo_endpoint import o3_demo_endpoint
-
-            # Handle the O3 demo request
-            result = await o3_demo_endpoint.handle_demo_request(request_data)
-
-            # Check if it's a streaming response
-            if hasattr(result, '__aiter__'):
-                # Streaming response - return as SSE
-                response = Response(
-                    result,
-                    headers={
-                        'Cache-Control': 'no-cache',
-                        'Connection': 'keep-alive',
-                        'Content-Type': 'text/event-stream'
-                    }
-                )
-                logger.info(
-                    "🌊 O3 demo streaming response created and returning...")
-                return response
-            else:
-                # Non-streaming response
-                logger.info("📝 O3 demo non-streaming response")
-                return jsonify(result)
-
-        except ImportError as import_error:
-            logger.error(f"❌ O3 demo import error: {import_error}")
-            return jsonify({
-                "error": f"O3 demo module import failed: {str(import_error)}",
-                "status": "error"
-            }), 500
-        except Exception as e:
-            logger.error(f"❌ O3 demo endpoint error: {e}")
-            import traceback
-            traceback.print_exc()
-            return jsonify({
-                "error": f"O3 demo processing failed: {str(e)}",
-                "status": "error",
-                "request_data": request_data
-            }), 500
-
-    # =============================================
-    # CONVERSATION TITLE GENERATION ENDPOINTS
-    # =============================================
-
-    # Import title endpoints from the dedicated module
-    try:
-        from chat.title.title_endpoints import (
-            generate_conversation_title_endpoint,
-            generate_conversation_titles_batch_endpoint,
-            migrate_conversation_titles_endpoint,
-            title_health_check_endpoint
-        )
-
-        app.add_url_rule("/v1/conversation/generate-title", "generate_conversation_title",
-                         generate_conversation_title_endpoint, methods=["POST"])
-        app.add_url_rule("/v1/conversation/generate-titles-batch", "generate_conversation_titles_batch",
-                         generate_conversation_titles_batch_endpoint, methods=["POST"])
-        app.add_url_rule("/v1/conversation/migrate-titles", "migrate_conversation_titles",
-                         migrate_conversation_titles_endpoint, methods=["POST"])
-        app.add_url_rule("/v1/conversation/title-health", "title_health_check",
-                         title_health_check_endpoint, methods=["GET"])
-
-        logger.info("✅ Conversation title endpoints registered successfully")
-
-    except ImportError as e:
-        logger.error(f"❌ Failed to import conversation title endpoints: {e}")
-        # Fallback endpoints that return error messages
-
-        @app.route("/v1/conversation/generate-title", methods=["POST"])
-        @app.route("/v1/conversation/generate-titles-batch", methods=["POST"])
-        @app.route("/v1/conversation/migrate-titles", methods=["POST"])
-        @app.route("/v1/conversation/title-health", methods=["GET"])
-        async def title_endpoints_unavailable():
-            return jsonify({
-                "error": "Conversation title endpoints not available",
-                "reason": str(e),
-                "status": "error"
-            }), 503
 
 
 def register_preserved_endpoints(app):
@@ -864,6 +624,18 @@ def register_embedding_endpoints(app):
     except ImportError as e:
         logger.error(f"❌ File analyzer endpoints import failed: {e}")
 
+    # Document Converter Endpoints
+    try:
+        logger.info("🔄 Attempting to import document converter endpoints...")
+        from chat.endpoints.document_converter_endpoint import document_converter_bp
+        logger.info("✅ Successfully imported document converter blueprint")
+        
+        app.register_blueprint(document_converter_bp)
+        logger.info("✅ Document converter endpoints registered successfully")
+        
+    except ImportError as e:
+        logger.error(f"❌ Document converter endpoints import failed: {e}")
+
     # V1 Conversation Embedding Endpoint (called by backend)
     @app.route("/v1/embeddings/conversation", methods=["POST"])
     async def v1_conversation_embeddings():
@@ -897,6 +669,92 @@ def register_embedding_endpoints(app):
             return jsonify({"error": str(e), "status": "error"}), 500
 
     logger.info("✅ Embedding endpoints registration completed")
+
+
+def register_humansa_endpoints(app):
+    """Register Humansa-specific endpoints."""
+    
+    # Import Humansa endpoints
+    try:
+        logger.info("🔄 Registering Humansa endpoints...")
+        
+        # V1 Humansa Chat Completions endpoint
+        @app.route("/v1-humansa/chat/completions", methods=["POST"])
+        async def v1_humansa_chat_completions():
+            """Humansa AI-Agent chat endpoint with tool calling"""
+            try:
+                from humansa.endpoints.humansa_chat_endpoint import HumansaChatEndpoint
+                endpoint = HumansaChatEndpoint()
+                request_data = await request.get_json()
+                
+                if request_data.get("stream", False):
+                    async def generate():
+                        async for chunk in endpoint.handle_chat_request(request_data):
+                            yield chunk
+                    return Response(generate(), mimetype="text/event-stream")
+                else:
+                    result = await endpoint.handle_chat_request(request_data)
+                    return jsonify(result)
+                    
+            except Exception as e:
+                logger.error(f"❌ Humansa chat error: {e}")
+                import traceback
+                traceback.print_exc()
+                return jsonify({"error": str(e), "status": "error"}), 500
+        
+        # Humansa Response endpoint (used by backend)
+        @app.route("/humansa/response", methods=["POST"])
+        async def humansa_response():
+            """Humansa response endpoint - used by backend for Humansa conversations"""
+            try:
+                from humansa.endpoints.humansa_chat_endpoint import HumansaChatEndpoint
+                endpoint = HumansaChatEndpoint()
+                request_data = await request.get_json()
+                
+                if request_data.get("stream", False):
+                    async def generate():
+                        async for chunk in endpoint.handle_chat_request(request_data):
+                            yield chunk
+                    return Response(generate(), mimetype="text/event-stream")
+                else:
+                    result = await endpoint.handle_chat_request(request_data)
+                    return jsonify(result)
+                    
+            except Exception as e:
+                logger.error(f"❌ Humansa conversations error: {e}")
+                import traceback
+                traceback.print_exc()
+                return jsonify({"error": str(e), "status": "error"}), 500
+                
+        # O3 Demo endpoint
+        @app.route("/o3-demo", methods=["POST"])
+        async def o3_demo():
+            """O3 Demo endpoint"""
+            try:
+                from humansa.endpoints.o3_demo_endpoint import O3DemoEndpoint
+                endpoint = O3DemoEndpoint()
+                request_data = await request.get_json()
+                
+                if request_data.get("stream", False):
+                    async def generate():
+                        async for chunk in endpoint.handle_request(request_data):
+                            yield chunk
+                    return Response(generate(), mimetype="text/event-stream")
+                else:
+                    result = await endpoint.handle_request(request_data)
+                    return jsonify(result)
+                    
+            except Exception as e:
+                logger.error(f"❌ O3 demo error: {e}")
+                import traceback
+                traceback.print_exc()
+                return jsonify({"error": str(e), "status": "error"}), 500
+                
+        logger.info("✅ Humansa endpoints registered successfully")
+        
+    except ImportError as e:
+        logger.error(f"❌ Failed to import Humansa endpoints: {e}")
+        logger.error("Humansa endpoints will not be available")
 
 
 # Additional cleanup for stderr warnings
@@ -934,15 +792,30 @@ if not os.getenv('DEBUG_AZURE_WARNINGS'):
 app = create_app()
 
 if __name__ == "__main__":
+    # Get port from environment variable or command line argument
+    import argparse
+    parser = argparse.ArgumentParser(description='YouWoAI ML Server')
+    parser.add_argument('--port', type=int, default=int(os.getenv('ML_SERVER_PORT', '5001')),
+                        help='Port to run the server on (default: 5001 or ML_SERVER_PORT env var)')
+    args = parser.parse_args()
+    
+    port = args.port
+    
     logger.info("=== YouWoAI ML Server Starting ===")
-    logger.info("Server will be available at: http://0.0.0.0:5001")
+    logger.info(f"Server will be available at: http://0.0.0.0:{port}")
     logger.info("")
     logger.info("📋 V1 Endpoint Summary:")
     logger.info("✅ CHAT ENDPOINTS:")
     logger.info(
         "   - /v1/chat/completions - Modular chat with citations & streaming")
     logger.info(
-        "   - /v1-humansa/chat/completions - AI-Agent chat with tool calling")
+        "   - /v1/multi-agent/response - Multi-agent workflow")
+    logger.info(
+        "   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (legacy)")
+    logger.info(
+        "   - /humansa/response - Humansa conversations (used by backend)")
+    logger.info(
+        "   - /o3-demo - O3 reasoning demo")
     logger.info("   - /v1/status - System status")
     logger.info("")
     logger.info("✅ PRESERVED ENDPOINTS:")
@@ -963,13 +836,4 @@ if __name__ == "__main__":
     logger.info("   - ✅ Citations: Streaming & non-streaming support")
     logger.info("")
 
-    # Allow port customization via environment variable (for local development only)
-    # Support dynamic DIGIT configuration
-    digit = os.environ.get('DIGIT')
-    if digit:
-        port = int(f"500{digit}")
-    else:
-        port = int(os.environ.get('PORT', 5001))
-
-    logger.info(f"🚀 Starting ML server on port {port}")
     app.run(host="0.0.0.0", port=port, debug=True)

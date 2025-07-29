@@ -2,6 +2,8 @@
 # Core web framework
 Quart==0.20.0
 quart-cors==0.7.0
+hypercorn==0.17.3
+uvloop==0.21.0  # Performance enhancement for asyncio
 
 # Core async and HTTP
 aiofiles==24.1.0
@@ -46,6 +48,17 @@ python-pptx>=0.6.21
 
 # Note: Using lightweight python-pptx instead of LlamaIndex PptxReader 
 # to avoid downloading 1GB+ ML models in production
+
+# Document to PDF conversion libraries
+# Using LibreOffice through unoconv for best quality conversion
+unoconv>=0.10.0
+# Alternative lightweight conversions
+python-docx>=1.1.0  # For reading Word documents
+openpyxl>=3.1.0  # For reading Excel files
+reportlab>=4.0.0  # For creating PDFs programmatically
+# Optional: If LibreOffice is not available, use these as fallback
+pypandoc>=1.13  # Universal document converter (requires pandoc installed)
+docx2pdf>=0.1.8  # Simple Word to PDF (Windows/macOS only)
 
 # Video/Content analysis
 youtube-transcript-api>=1.1.0

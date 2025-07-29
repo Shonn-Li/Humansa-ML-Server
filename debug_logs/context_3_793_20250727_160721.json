@@ -1,0 +1,88 @@
+{
+  "timestamp": "20250727_160721",
+  "user_id": 3,
+  "conversation_id": 793,
+  "request": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "what did this talk about?"
+      }
+    ],
+    "model": "grok-3-mini",
+    "enable_rag": true,
+    "enable_citations": true,
+    "enable_web_search": true
+  },
+  "context_agents": [
+    "router_agent",
+    "context_search_agent",
+    "last_message_id",
+    "last_message_output_index"
+  ],
+  "combined_context_length": 0,
+  "combined_context_preview": "",
+  "sources": [],
+  "sources_count": 0,
+  "context_search_found": true,
+  "web_search_found": false,
+  "attachment_found": false,
+  "full_context": {
+    "context_search": {
+      "status": "completed",
+      "understanding": {
+        "intent": "question",
+        "temporal_filter": null,
+        "key_concepts": []
+      },
+      "retrieval_steps": [
+        {
+          "strategy": "keyword",
+          "query": "what did this talk about?",
+          "results_count": 0
+        }
+      ],
+      "context": "",
+      "sources": [],
+      "total_results": 0,
+      "search_summary": "Found 0 relevant chunks from 0 sources using 1 retrieval strategies"
+    },
+    "web_search": {},
+    "attachment": {},
+    "router": {
+      "router_decision": {
+        "selected_tool": "knowledge_base_conversations",
+        "search_type": "conversations",
+        "confidence": 0.8,
+        "reasoning": "The user is asking about a previous conversation or discussion, which is stored in chat history.",
+        "query_classification": "conversation_query"
+      },
+      "original_query": "what did this talk about?",
+      "condensed_query": "what did this talk about?",
+      "enabled_agents": [
+        "response",
+        "context_search"
+      ],
+      "model": "grok-3-mini",
+      "search_type": "conversations",
+      "has_explicit_ids": true,
+      "explicit_note_ids": [
+        7487
+      ],
+      "explicit_folder_ids": null
+    }
+  },
+  "combined_context_full": "",
+  "llamaindex_messages": [
+    {
+      "role": "system",
+      "content": "You are **YouWoAI**, an AI study assistant.\n\n**Current Date**: 2025-07-27\n\nYour role: help the user learn faster and answer questions.\n• Any prior conversation notes, file‑search snippets, file attachments, or web‑search results will appear as **additional system messages** in this chat. Use them when relevant.\n",
+      "content_length": 313
+    },
+    {
+      "role": "user",
+      "content": "what did this talk about?",
+      "content_length": 25
+    }
+  ]
+}

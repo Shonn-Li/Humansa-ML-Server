@@ -146,7 +146,7 @@ class LLMProviderSelector:
                         # Available Azure models from your deployment
                         "gpt-4.1-nano", "gpt-4.1",  # OpenAI models
                         # GPT-4o models (vision models but not working via AI Inference)
-                        "gpt-4o-mini", "gpt-4o",
+                        "gpt-4.1-nano", "gpt-4o",
                         "DeepSeek-R1", "DeepSeek-V3-0324",  # DeepSeek models
                         "grok-3", "grok-3-mini",  # xAI models
                         "o4-mini"  # OpenAI o4 model
@@ -167,9 +167,9 @@ class LLMProviderSelector:
                     azure_endpoint="https://youwoai-dev-resource.openai.azure.com/",
                     api_key=os.getenv("AZURE_INFERENCE_CREDENTIAL"),
                     api_version="2024-02-15-preview",
-                    model="gpt-4o-mini",  # Default model for vision
+                    model="gpt-4.1-nano",  # Default model for vision
                     # Required: deployment name (same as model for Azure)
-                    engine="gpt-4o-mini",
+                    engine="gpt-4.1-nano",
                     temperature=0.7,
                     callback_manager=CallbackManager([self.token_counter])
                 )
@@ -178,7 +178,7 @@ class LLMProviderSelector:
                     provider=LLMProvider.AZURE_OPENAI,
                     llm_instance=azure_openai_llm,
                     supported_models=[
-                        "gpt-4.1-nano", "gpt-4.1", "gpt-4o-mini", "gpt-4o",
+                        "gpt-4.1-nano", "gpt-4.1", "gpt-4.1-nano", "gpt-4o",
                         "gpt-4-turbo", "gpt-3.5-turbo"
                     ],
                     is_available=True,
@@ -202,7 +202,7 @@ class LLMProviderSelector:
                     provider=LLMProvider.OPENAI,
                     llm_instance=openai_llm,
                     supported_models=[
-                        "gpt-4.1-nano", "gpt-4o-mini", "gpt-4o", "gpt-3.5-turbo",
+                        "gpt-4.1-nano", "gpt-4.1-nano", "gpt-4o", "gpt-3.5-turbo",
                         "gpt-4-turbo", "gpt-4.1", "gpt-4.1-mini", "o3", "o4-mini",
                         "gpt-4", "o1-mini", "o1-preview"
                     ],
@@ -758,7 +758,7 @@ class LLMProviderSelector:
 
         Args:
             requested_provider: The provider to force (e.g., "azure_openai")
-            requested_model: The model to use (e.g., "gpt-4o-mini")
+            requested_model: The model to use (e.g., "gpt-4.1-nano")
 
         Returns:
             Tuple of (provider_enum, llm_instance)

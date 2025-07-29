@@ -32,6 +32,7 @@ DB_CONFIG = {
 }
 
 
+
 @dataclass
 class ResolvedIDs:
     """Container for resolved IDs"""
@@ -85,12 +86,12 @@ class PostgresManager:
             with conn.cursor() as cursor:
                 # Case 1: Specific note IDs provided
                 if note_ids:
-                    cursor.execute("""
+                    cursor.execute(f"""
                         SELECT id 
                         FROM note_v1 
                         WHERE "ownerId" = %s 
                         AND id = ANY(%s)
-                        AND completed = true
+                        AND "deletedAt" IS NULL
                         ORDER BY id DESC
                     """, (user_id, note_ids))
 
@@ -108,13 +109,13 @@ class PostgresManager:
 
                 # Case 2: Folder IDs provided
                 elif folder_ids:
-                    cursor.execute("""
+                    cursor.execute(f"""
                         SELECT DISTINCT n.id 
                         FROM note_v1 n
                         INNER JOIN folder_v1 f ON n."folderId" = f.id
                         WHERE f."ownerId" = %s 
                         AND f.id = ANY(%s)
-                        AND n.completed = true
+                        AND n."deletedAt" IS NULL
                         ORDER BY n.id DESC
                     """, (user_id, folder_ids))
 
@@ -126,11 +127,11 @@ class PostgresManager:
 
                 # Case 3: All user notes
                 else:
-                    cursor.execute("""
+                    cursor.execute(f"""
                         SELECT id 
                         FROM note_v1 
                         WHERE "ownerId" = %s 
-                        AND completed = true
+                        AND "deletedAt" IS NULL
                         ORDER BY id DESC
                     """, (user_id,))
 
@@ -224,14 +225,13 @@ class PostgresManager:
                 f"Targeted search results: {len(resolved_notes)} notes, {len(resolved_conversations)} conversations")
 
         else:
-            # Full context search: get all user's notes and conversations
+            # Full context search: get all user's notes only (conversations disabled)
             logger.info(
-                "🌍 Full context search: Getting all user notes and conversations")
+                "🌍 Full context search: Getting all user notes (conversations disabled)")
             resolved_notes = self.resolve_note_ids(user_id)  # All user notes
-            resolved_conversations = self.resolve_conversation_ids(
-                user_id, None)  # All user conversations
+            resolved_conversations = []  # Disabled to prevent context pollution
             logger.info(
-                f"Full context search results: {len(resolved_notes)} notes, {len(resolved_conversations)} conversations")
+                f"Full context search results: {len(resolved_notes)} notes, 0 conversations (disabled)")
 
         return ResolvedIDs(
             notes=resolved_notes,
@@ -509,6 +509,38 @@ class PostgresManager:
                         return prompt_content["currentPromptContent"].get("content", "")
 
                 return ""
+
+    def get_note_titles_batch(self, note_ids: List[int]) -> Dict[int, str]:
+        """Get titles for multiple notes"""
+        if not note_ids:
+            return {}
+            
+        with self.get_connection() as conn:
+            with conn.cursor() as cursor:
+                cursor.execute("""
+                    SELECT id, "noteTitle"
+                    FROM note_v1 
+                    WHERE id = ANY(%s)
+                """, (note_ids,))
+
+                results = cursor.fetchall()
+                return {row[0]: row[1] or f"Note {row[0]}" for row in results}
+
+    def get_conversation_titles_batch(self, conversation_ids: List[int]) -> Dict[int, str]:
+        """Get titles for multiple conversations"""
+        if not conversation_ids:
+            return {}
+            
+        with self.get_connection() as conn:
+            with conn.cursor() as cursor:
+                cursor.execute("""
+                    SELECT id, title
+                    FROM conversation_v1 
+                    WHERE id = ANY(%s)
+                """, (conversation_ids,))
+
+                results = cursor.fetchall()
+                return {row[0]: row[1] or f"Conversation {row[0]}" for row in results}
 
     def health_check(self) -> bool:
         """Simple database health check"""
