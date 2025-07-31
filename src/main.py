@@ -878,8 +878,10 @@ async def create_db_pool():
         if azure_key or openai_key:
             try:
                 from humansa.v2.api import initialize_v2_system
-                await initialize_v2_system(app.db_pool)  # API key is now read from env in the function
-                logger.info("✅ Humansa v2 system initialized with Azure OpenAI")
+                use_subagent = os.getenv('HUMANSA_USE_SUBAGENT_ARCHITECTURE', '').lower() == 'true'
+                await initialize_v2_system(app.db_pool, use_subagent_architecture=use_subagent)
+                arch_type = "Sub-Agent Architecture" if use_subagent else "Consolidated Tools"
+                logger.info(f"✅ Humansa v2 system initialized with {arch_type}")
                 
                 # Initialize Humansa v2 conversation API
                 # Temporarily disabled due to initialization issues

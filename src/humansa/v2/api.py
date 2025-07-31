@@ -30,8 +30,14 @@ appointment_workflow: Optional[AppointmentBookingWorkflow] = None
 sse_formatter = SSEFormatter()
 
 
-async def initialize_v2_system(db_pool, openai_api_key: str = None):
-    """Initialize the v2 Humansa system."""
+async def initialize_v2_system(db_pool, openai_api_key: str = None, use_subagent_architecture: bool = False):
+    """Initialize the v2 Humansa system.
+    
+    Args:
+        db_pool: Database connection pool
+        openai_api_key: OpenAI API key (optional)
+        use_subagent_architecture: Use new sub-agent architecture (default: False)
+    """
     global memory_manager, orchestrator, appointment_workflow
     
     # Try to use Mem0 if available, otherwise fall back to basic memory manager
@@ -91,16 +97,28 @@ async def initialize_v2_system(db_pool, openai_api_key: str = None):
         'password': db_pool.password if hasattr(db_pool, 'password') else None
     }
     
-    # Initialize orchestrator with Pattern 2 (sub-agents as tools)
-    # Now using REAL database tools!
-    orchestrator = HumansaOrchestratorAgent(
-        llm=llm,
-        agents=None,  # Using tools instead of agent classes
-        memory_manager=memory_manager,
-        debug=True,  # Enable debug logging for agent flow visibility
-        use_real_tools=True,  # Enable real database tools
-        db_config=db_config  # Pass database config for tools
-    )
+    # Initialize orchestrator - choose between architectures
+    if use_subagent_architecture:
+        # Use new sub-agent architecture
+        logger.info("🚀 Initializing HUMANSA V2 with Sub-Agent Architecture")
+        from .orchestrator_agent_subagent import create_subagent_orchestrator
+        orchestrator = create_subagent_orchestrator(
+            llm=llm,
+            memory_manager=memory_manager,
+            debug=True,
+            db_config=db_config
+        )
+    else:
+        # Use existing consolidated tools architecture
+        logger.info("📦 Initializing HUMANSA V2 with Consolidated Tools")
+        orchestrator = HumansaOrchestratorAgent(
+            llm=llm,
+            agents=None,  # Using tools instead of agent classes
+            memory_manager=memory_manager,
+            debug=True,  # Enable debug logging for agent flow visibility
+            use_real_tools=True,  # Enable real database tools
+            db_config=db_config  # Pass database config for tools
+        )
     
     # Initialize appointment workflow
     appointment_workflow = AppointmentBookingWorkflow(db_pool=db_pool)

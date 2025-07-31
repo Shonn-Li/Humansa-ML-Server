@@ -48,13 +48,15 @@ class ProductAgent:
         
         # Check for product-related keywords
         product_keywords = ['产品', '保健品', '维生素', '血压计', '血糖仪', '护肤', '美容', 
-                           '中医', '养生', '母婴', '孕妇', '营养品', '购买', '推荐']
+                           '中医', '养生', '母婴', '孕妇', '营养品', '购买', '推荐', '商城',
+                           '价格', '优惠', '折扣', '套餐']
         
         is_product_query = any(keyword in query.lower() for keyword in product_keywords)
         
         if not is_product_query:
             # Check if asking about specific health issues that might need products
-            health_keywords = ['失眠', '疲劳', '免疫力', '皮肤', '血压', '血糖', '记忆力', '关节']
+            health_keywords = ['失眠', '疲劳', '免疫力', '皮肤', '血压', '血糖', '记忆力', '关节',
+                             '美白', '抗衰', '补钙', '补铁', '增强体质']
             is_health_query = any(keyword in query.lower() for keyword in health_keywords)
             
             if not is_health_query:
