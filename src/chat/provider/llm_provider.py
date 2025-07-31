@@ -146,8 +146,8 @@ class LLMProviderSelector:
                         # Available Azure models from your deployment
                         "gpt-4.1-nano", "gpt-4.1",  # OpenAI models
                         # GPT-4o models (vision models but not working via AI Inference)
-                        "gpt-4.1-nano", "gpt-4o",
-                        "DeepSeek-R1", "DeepSeek-V3-0324",  # DeepSeek models
+                        "gpt-4o-mini", "gpt-4o",
+                        "DeepSeek-R1-0528", "DeepSeek-V3-0324",  # Updated DeepSeek models
                         "grok-3", "grok-3-mini",  # xAI models
                         "o4-mini"  # OpenAI o4 model
                     ],
@@ -313,7 +313,8 @@ class LLMProviderSelector:
                     provider=LLMProvider.XAI,
                     llm_instance=xai_llm,
                     supported_models=[
-                        "grok-3-mini", "grok-3", "grok-2-vision-1212", "grok-2-image-1212",
+                        "grok-3-mini", "grok-3", "grok-4",  # Add grok-4
+                        "grok-2-vision-1212", "grok-2-image-1212",
                         "grok-beta"  # Legacy support
                     ],
                     is_available=True
