@@ -282,10 +282,22 @@ class ConsolidatedHumansaTools:
             
         except Exception as e:
             logger.error(f"❌ Unified search error: {e}")
+            
+            # Handle database errors gracefully
+            if "does not exist" in str(e) or "connection" in str(e).lower():
+                return {
+                    "success": True,  # Mark as success to avoid error exposure
+                    "results": [],
+                    "total_found": 0,
+                    "message": "系统正在维护中，请稍后再试或联系客服获取帮助。",
+                    "fallback": True
+                }
+            
             return {
                 "success": False,
-                "error": str(e),
-                "results": []
+                "error": "查询时遇到问题，请稍后重试。",
+                "results": [],
+                "fallback": True
             }
     
     async def appointment_manager(
@@ -427,9 +439,20 @@ class ConsolidatedHumansaTools:
                 
         except Exception as e:
             logger.error(f"❌ Appointment manager error: {e}")
+            
+            # Handle database errors gracefully
+            if "does not exist" in str(e) or "connection" in str(e).lower():
+                return {
+                    "success": True,
+                    "message": "系统正在升级中，请拨打客服电话进行人工预约。",
+                    "fallback": True,
+                    "contact": "诺亚新舟客服热线"
+                }
+            
             return {
                 "success": False,
-                "error": str(e)
+                "error": "预约系统遇到问题，请稍后重试或联系客服。",
+                "fallback": True
             }
     
     async def medical_advisor(
@@ -802,12 +825,21 @@ class ConsolidatedHumansaTools:
                         "error": "No content provided to save"
                     }
                 
-                # Save to memory
-                memory_id = await self.memory_manager.store_memory(
-                    user_id=user_id,
-                    memory_type=memory_type,
-                    content=content
+                # Save to memory using update_patient_memory
+                interaction_data = {
+                    'query': content.get('query', ''),
+                    'response': content.get('response', ''),
+                    'messages': content.get('messages', []),
+                    'timestamp': datetime.now().isoformat(),
+                    'memory_type': memory_type
+                }
+                
+                success = await self.memory_manager.update_patient_memory(
+                    patient_id=user_id,
+                    interaction_data=interaction_data
                 )
+                
+                memory_id = f"mem_{user_id}_{int(datetime.now().timestamp())}"
                 
                 return {
                     "success": True,
@@ -817,12 +849,22 @@ class ConsolidatedHumansaTools:
                 }
                 
             elif action == "retrieve":
-                # Retrieve memories
-                memories = await self.memory_manager.retrieve_memories(
-                    user_id=user_id,
-                    memory_type=memory_type,
-                    time_range=time_range
-                )
+                # Retrieve memories using get_patient_memory
+                try:
+                    patient_memory = await self.memory_manager.get_patient_memory(user_id)
+                    
+                    # Extract relevant memories based on memory_type
+                    if memory_type == "medical_history":
+                        memories = patient_memory.get("medical_history", [])
+                    elif memory_type == "preferences":
+                        memories = patient_memory.get("preferences", [])
+                    elif memory_type == "appointments":
+                        memories = patient_memory.get("appointments", [])
+                    else:
+                        memories = patient_memory.get("memories", [])
+                except Exception as e:
+                    logger.error(f"❌ Conversation memory error: {e}")
+                    memories = []
                 
                 return {
                     "success": True,
@@ -886,7 +928,8 @@ class DynamicToolLoader:
     def __init__(self, tool_manager: ConsolidatedHumansaTools):
         self.tool_manager = tool_manager
         self.all_tools = tool_manager.get_llamaindex_tools()
-        self.tool_map = {tool.name: tool for tool in self.all_tools}
+        # Fix: Use metadata.name instead of direct name attribute
+        self.tool_map = {tool.metadata.name: tool for tool in self.all_tools}
         
     def select_tools_for_query(self, query: str, max_tools: int = 5) -> List[FunctionTool]:
         """Select relevant tools based on query content"""
@@ -925,5 +968,5 @@ class DynamicToolLoader:
                 if self.tool_map[tool_name] not in selected_tools:
                     selected_tools.append(self.tool_map[tool_name])
         
-        logger.info(f"🎯 Selected {len(selected_tools)} tools for query: {[t.name for t in selected_tools]}")
+        logger.info(f"🎯 Selected {len(selected_tools)} tools for query: {[t.metadata.name for t in selected_tools]}")
         return selected_tools

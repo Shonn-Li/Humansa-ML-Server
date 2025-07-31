@@ -1,7 +1,7 @@
 # Humansa V2 Current State Documentation
 
 ## Overview
-This document describes the current state of the Humansa V2 implementation and test environment as of the latest fixes.
+This document describes the current state of the Humansa V2 implementation with OpenAI Responses API integration, including the transparent orchestrator and enhanced tool visibility.
 
 ## Architecture Flow
 
@@ -52,6 +52,19 @@ This document describes the current state of the Humansa V2 implementation and t
 │                   V2 System Components                       │
 │                                                              │
 │  ┌─────────────────────────────────────────────────────┐   │
+│  │              Response API Layer                      │   │
+│  │  • ResponseManager (state management)               │   │
+│  │  • ResponseFormatter (format conversion)            │   │
+│  │  • TransparentOrchestrator (tool visibility)        │   │
+│  │  • Event-based streaming support                    │   │
+│  │  • Endpoints:                                       │   │
+│  │    - /v2/humansa/responses/create                  │   │
+│  │    - /v2/humansa/responses/stream                  │   │
+│  │    - /v2/humansa/responses/<id>                    │   │
+│  │    - /v2/humansa/responses/conversations/<id>/tree │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                              │
+│  ┌─────────────────────────────────────────────────────┐   │
 │  │                Memory Manager                         │   │
 │  │  • Mem0Manager (if available)                       │   │
 │  │  • Falls back to MemoryManager                      │   │
@@ -63,11 +76,13 @@ This document describes the current state of the Humansa V2 implementation and t
 │  └─────────────────────────────────────────────────────┘   │
 │                                                              │
 │  ┌─────────────────────────────────────────────────────┐   │
-│  │              Orchestrator Agent                      │   │
-│  │  • HumansaOrchestratorAgent                        │   │
+│  │              Orchestrator Agents                     │   │
+│  │  • HumansaOrchestratorAgentTransparent             │   │
+│  │    - Captures all tool calls and reasoning         │   │
+│  │    - Returns full output array                     │   │
+│  │  • HumansaOrchestratorAgentConsolidated            │   │
+│  │    - 7 core tools with dynamic loading             │   │
 │  │  • Uses Azure OpenAI (GPT-4.1)                     │   │
-│  │  • Pattern 2: Sub-agents as tools                  │   │
-│  │  • Real database tools enabled                     │   │
 │  └─────────────────────────────────────────────────────┘   │
 │                                                              │
 │  ┌─────────────────────────────────────────────────────┐   │
@@ -99,40 +114,74 @@ This document describes the current state of the Humansa V2 implementation and t
 │                                                              │
 │  For each test case:                                         │
 │  1. Check memory context: GET /v2/humansa/memory/context    │
-│  2. Send chat request: POST /v2/humansa/chat               │
+│  2. Send response request: POST /v2/humansa/responses/create│
+│     • model: "gpt-4-turbo"                                 │
+│     • input: "user query"                                  │
 │     • user_id: "test_user_X"                               │
-│     • messages: [{"role": "user", "content": "..."}]       │
-│     • stream: true                                          │
-│     • debug: true                                           │
-│  3. Process streaming response                              │
-│  4. Log results                                             │
+│     • previous_response_id: "resp_xyz" (if continuing)     │
+│  3. Process response with full output array:               │
+│     • Text items (reasoning/response)                      │
+│     • Tool use items (invocations)                         │
+│     • Tool result items (outputs)                          │
+│  4. For streaming: POST /v2/humansa/responses/stream       │
+│     • Events: response.created, output_item.delta, etc.    │
+│  5. Log results with tool transparency                     │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## Current Issues
+## Current Features
 
-### 1. Memory Context (FIXED)
-- **Previous Issue**: Memory endpoints expected integer user_ids but tests use strings
-- **Fix Applied**: Changed routes from `<int:user_id>` to `<user_id>`
-- **Status**: ✅ Fixed, needs server restart
+### 1. OpenAI Responses API Integration ✅
+- **Status**: ✅ Implemented
+- **Features**:
+  - Full reasoning chain visibility in output array
+  - Tool use and tool result items exposed
+  - Event-based streaming format
+  - Response forking and chaining support
+  - Token usage breakdown (reasoning vs tool tokens)
 
-### 2. Database Schema
+### 2. Transparent Orchestrator ✅
 - **Status**: ✅ Working
-- **Tables**: 
-  - Core tables: humansa_clinic, humansa_patient, humansa_medical_service
-  - Duplicate tables exist (humansa_clinic vs humansa_clinics)
-  - Test data loaded with doctors, clinics, schedules
+- **Components**:
+  - HumansaOrchestratorAgentTransparent with ToolCallCapture
+  - Captures all LlamaIndex agent reasoning steps
+  - Converts to proper OpenAI format
 
-### 3. V2 Orchestrator
-- **Status**: ⚠️ Partially Working
-- **Issue**: Sometimes returns None, causing streaming errors
-- **Uses**: Real database tools from V1 implementation
+### 3. Consolidated Tools ✅
+- **Status**: ✅ Implemented
+- **Tools**: 7 core functions with dynamic loading
+  - unified_search, appointment_manager, medical_advisor
+  - product_recommender, information_lookup, emergency_handler
+  - conversation_memory
 
-### 4. Test Cases Status
-Based on the output shown:
-- Test #1 (你好): ✅ Working - Basic greeting
-- Test #2 (你是谁？): Needs identity system prompt
-- Test #12 (Appointment): Needs multi-step conversation support
+### 4. Response Management ✅
+- **Status**: ✅ Working
+- **Features**:
+  - Stateful conversation management
+  - Response chaining with previous_response_id
+  - Conversation forking for parallel exploration
+  - Context compression for long conversations
+
+## Response API Format
+
+Each response includes:
+
+```json
+{
+  "id": "resp_abc123",
+  "output": [
+    {"type": "text", "text": "Let me search..."},
+    {"type": "tool_use", "tool_use": {...}},
+    {"type": "tool_result", "tool_result": {...}},
+    {"type": "text", "text": "Based on results..."}
+  ],
+  "usage": {
+    "total_tokens": 350,
+    "reasoning_tokens": 150,
+    "tool_tokens": 100
+  }
+}
+```
 
 ## Database Tables
 
@@ -166,12 +215,19 @@ HUMANSA_ENHANCED_LOGGING=true
 
 ## Key Files
 
+### Response API Layer
+1. **Response API**: `src/humansa/v2/api_responses.py`
+2. **Response Manager**: `src/humansa/v2/response_manager.py`
+3. **Response Formatter**: `src/humansa/v2/response_formatter.py`
+4. **Transparent Orchestrator**: `src/humansa/v2/orchestrator_agent_transparent.py`
+5. **Consolidated Tools**: `src/humansa/tools/consolidated_tools.py`
+
+### Core V2 System
 1. **Test Script**: `run_humansa_v2_test_40_cases_enhanced.sh`
 2. **V2 API**: `src/humansa/v2/api.py`
-3. **V2 Orchestrator**: `src/humansa/v2/orchestrator_agent.py`
-4. **Memory Manager**: `src/humansa/memory/mem0_manager.py`
-5. **V1 Tools**: `src/humansa/tools/humansa_tools.py`
-6. **Appointment Tools**: `src/humansa/tools/appointment_management_tools.py`
+3. **Memory Manager**: `src/humansa/memory/mem0_manager.py`
+4. **Conversation Manager**: `src/humansa/v2/conversation_manager.py`
+5. **Context Compressor**: `src/humansa/v2/context_compressor.py`
 
 ## How to Run
 
@@ -181,8 +237,9 @@ HUMANSA_ENHANCED_LOGGING=true
 
 ## Next Steps
 
-1. Apply memory endpoint fixes (restart required)
-2. Add Humansa identity to system prompt
-3. Ensure V2 orchestrator initialization is stable
-4. Clean up duplicate tables
-5. Test appointment flow (Test #12)
+1. Update test scripts to use Response API endpoints
+2. Migrate existing tests to validate output array format
+3. Add tests for response forking scenarios
+4. Implement multi-turn conversation tests with Response API
+5. Document streaming event format for client implementations
+6. Performance optimization for tool-heavy queries

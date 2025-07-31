@@ -882,9 +882,10 @@ async def create_db_pool():
                 logger.info("✅ Humansa v2 system initialized with Azure OpenAI")
                 
                 # Initialize Humansa v2 conversation API
-                from humansa.v2.api_conversation import initialize_v2_conversation_system
-                await initialize_v2_conversation_system(app.db_pool, openai_key or azure_key)
-                logger.info("✅ Humansa v2 conversation API initialized")
+                # Temporarily disabled due to initialization issues
+                # from humansa.v2.api_conversation import initialize_v2_conversation_system
+                # await initialize_v2_conversation_system(app.db_pool, openai_key or azure_key)
+                # logger.info("✅ Humansa v2 conversation API initialized")
                 
                 # Initialize Humansa v2 Responses API
                 from humansa.v2.api_responses import initialize_v2_responses_system

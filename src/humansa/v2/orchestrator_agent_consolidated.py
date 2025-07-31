@@ -5,7 +5,7 @@ Uses 7 core tools with dynamic loading based on query context
 
 import os
 import logging
-from typing import List, Dict, Any, Optional, AsyncGenerator
+from typing import List, Dict, Any, Optional, Tuple, AsyncGenerator
 from datetime import datetime
 import asyncio
 import json
@@ -101,7 +101,7 @@ class HumansaOrchestratorAgentConsolidated:
             # Just return search and memory tools for base
             all_tools = self.tool_manager.get_llamaindex_tools()
             base_tool_names = ['unified_search', 'conversation_memory']
-            return [t for t in all_tools if t.name in base_tool_names]
+            return [t for t in all_tools if t.metadata.name in base_tool_names]
         else:
             # Fallback to simple tools
             return self._create_simple_tools()
@@ -119,12 +119,12 @@ class HumansaOrchestratorAgentConsolidated:
             )
         ]
     
-    def _create_agent_for_query(self, query: str) -> ReActAgent:
-        """Create an agent with dynamically selected tools based on query"""
+    def _create_agent_for_query(self, query: str) -> Tuple[ReActAgent, List[FunctionTool]]:
+        """Create an agent with dynamically selected tools based on query, returns agent and selected tools"""
         if self.use_real_tools and self.dynamic_loader:
             # Select tools based on query context
             selected_tools = self.dynamic_loader.select_tools_for_query(query)
-            logger.info(f"🎯 Selected {len(selected_tools)} tools for query: {[t.name for t in selected_tools]}")
+            logger.info(f"🎯 Selected {len(selected_tools)} tools for query: {[t.metadata.name for t in selected_tools]}")
         else:
             selected_tools = self._get_base_tools()
         
@@ -136,7 +136,7 @@ class HumansaOrchestratorAgentConsolidated:
         orchestrator_prompt = HUMANSA_REACT_PROMPT_V2.format(current_date=current_date)
         
         # Create agent with selected tools
-        return ReActAgent.from_tools(
+        agent = ReActAgent.from_tools(
             tools=selected_tools,
             llm=self.llm,
             verbose=self.debug,
@@ -144,6 +144,7 @@ class HumansaOrchestratorAgentConsolidated:
             callback_manager=self.callback_manager,
             max_iterations=10
         )
+        return agent, selected_tools
     
     async def process_query(
         self,
@@ -157,7 +158,7 @@ class HumansaOrchestratorAgentConsolidated:
         logger.info(f"🎯 Processing query with consolidated tools: {query[:100]}...")
         
         # Create agent with tools selected for this specific query
-        agent = self._create_agent_for_query(query)
+        agent, selected_tools = self._create_agent_for_query(query)
         
         # Load relevant memories if available
         context = ""
@@ -210,7 +211,7 @@ class HumansaOrchestratorAgentConsolidated:
                     "tools_used": list(set(tools_used)),
                     "tool_selection_strategy": "dynamic",
                     "total_tools_available": 7,
-                    "tools_loaded": len(agent.tools)
+                    "tools_loaded": len(selected_tools)
                 }
                 
         except Exception as e:

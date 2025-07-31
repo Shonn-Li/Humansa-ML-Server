@@ -1,9 +1,10 @@
-INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/bin/python
-INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server
-INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src
-INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13']
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
 INFO:__main__:🔄 Registering embedding endpoints...
 INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
 INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
 INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
 INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
@@ -15,57 +16,46 @@ INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding
 INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
 INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
 INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
 INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
 INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
 INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
 INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
 INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
 INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
 INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
 INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
 INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
 INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
 INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
 INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
 INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
 INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
 INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
 INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
 INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
 INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
 INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
 INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
 INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
 INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
 INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
 INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
 INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
 INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
 INFO:__main__:✅ Successfully imported URL embedding endpoints
@@ -87,15 +77,37 @@ INFO:__main__:✅ Successfully imported document converter blueprint
 INFO:__main__:✅ Document converter endpoints registered successfully
 INFO:__main__:✅ Embedding endpoints registration completed
 INFO:__main__:🔄 Registering Humansa endpoints...
+INFO:humansa.postgres.database:HumansaDatabase initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:__main__:✅ Humansa V2 Conversation API endpoints registered
+INFO:__main__:✅ Humansa V2 Responses API endpoints registered
+INFO:__main__:✅ Mem0 API endpoints registered
+INFO:__main__:✅ Humansa v2 blueprint registered
 INFO:__main__:✅ Humansa endpoints registered successfully
 INFO:__main__:=== YouWoAI ML Server Starting ===
 INFO:__main__:Server will be available at: http://0.0.0.0:5001
 INFO:__main__:
-INFO:__main__:📋 V1 Endpoint Summary:
+INFO:__main__:📋 Endpoint Summary:
 INFO:__main__:✅ CHAT ENDPOINTS:
 INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
 INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
-INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (legacy)
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
+INFO:__main__:
+INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
+INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
+INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
+INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
+INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
+INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
+INFO:__main__:
+INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
+INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
+INFO:__main__:   - /v2/humansa/memory/search - Search user memories
+INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
+INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
+INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
 INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
 INFO:__main__:   - /o3-demo - O3 reasoning demo
 INFO:__main__:   - /v1/status - System status
@@ -116,994 +128,205 @@ INFO:__main__:   - ✅ Link analyzer: Independent module
 INFO:__main__:   - ✅ Embeddings: New modular architecture
 INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
 INFO:__main__:
-WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:120> wait_for=<Future pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.344 seconds
-[2025-07-22 23:18:47 -0700] [80378] [INFO] Running on http://0.0.0.0:5001 (CTRL + C to quit)
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_prod' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
+INFO:__main__:✅ Mem0 memory layer initialized for Humansa
+INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
+INFO:__main__:   Environment: production
+INFO:__main__:✅ Database pool created successfully
+INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+INFO:humansa.v2.api:Humansa v2 system initialized successfully
+INFO:__main__:✅ Humansa v2 system initialized with Azure OpenAI
+INFO:humansa.v2.api_responses:✅ Using Mem0 for memory management
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent_enhanced:Initialized Enhanced HumansaOrchestratorAgent with 6 agent tools
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ Initialized consolidated tools (7 core functions)
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ HumansaOrchestratorAgentConsolidated initialized with dynamic tool loading
+INFO:humansa.v2.api_responses:✅ Consolidated orchestrator initialized (7 tools with dynamic loading)
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_transparent:✅ Initialized transparent orchestrator with tool capture
+INFO:humansa.v2.orchestrator_agent_transparent:✅ HumansaOrchestratorAgentTransparent initialized
+INFO:humansa.v2.api_responses:✅ Transparent orchestrator initialized (captures tool calls)
+INFO:humansa.v2.api_responses:✅ Responses API orchestrators initialized successfully
+INFO:__main__:✅ Humansa v2 Responses API initialized
+[2025-07-29 22:50:40 -0700] [22663] [INFO] Running on http://0.0.0.0:5001 (CTRL + C to quit)
 INFO:hypercorn.error:Running on http://0.0.0.0:5001 (CTRL + C to quit)
-INFO:__main__:=== MULTI-AGENT REQUEST ===
-INFO:__main__:Method: POST
-INFO:__main__:URL: http://localhost:5001/v1/multi-agent/response
-INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json', 'User-Agent': 'axios/1.9.0', 'Content-Length': '310', 'Accept-Encoding': 'gzip, compress, deflate, br', 'Sentry-Trace': '60e54acec449dd5d706765a92bf2b53f-55bd7f2ce32129df-1', 'Baggage': 'sentry-environment=production,sentry-public_key=b2ebd8366c9889368c0181a4776bf2f1,sentry-trace_id=60e54acec449dd5d706765a92bf2b53f,sentry-sample_rate=1,sentry-transaction=POST%20%2Fconversation%2Fuser%2F1,sentry-sampled=true', 'Host': 'localhost:5001', 'Connection': 'keep-alive'}
-INFO:__main__:Request Body: {
-  "messages": [
-    {
-      "role": "user",
-      "content": "Summarize my recent notes and highlight the key points"
-    }
-  ],
-  "model": "gpt-4.1-nano",
-  "user_id": 1,
-  "conversation_id": 573,
-  "enable_rag": true,
-  "enable_citations": true,
-  "enable_web_search": true,
-  "enable_title_generation": true,
-  "stream": true,
-  "completion_type": "system",
-  "attachments": []
-}
-INFO:__main__:========================
-INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
-INFO:chat.postgres.db_manager:PostgresManager initialized
-INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
-INFO:chat.websearch.web_search_processor:Web search cache table initialized
-INFO:chat.config.system_prompts:SystemPromptManager initialized
-INFO:chat.provider.llm_provider:=== LLM Provider Initialization Debug ===
-INFO:chat.provider.llm_provider:AZURE_INFERENCE_ENDPOINT: SET
-INFO:chat.provider.llm_provider:AZURE_INFERENCE_CREDENTIAL: SET
-INFO:chat.provider.llm_provider:OPENAI_API_KEY: SET
-INFO:chat.provider.llm_provider:ANTHROPIC_API_KEY: SET
-INFO:chat.provider.llm_provider:GOOGLE_API_KEY: SET
-INFO:chat.provider.llm_provider:DEEPSEEK_API_KEY: SET
-INFO:chat.provider.llm_provider:XAI_API_KEY: SET
-INFO:chat.provider.llm_provider:===========================================
-INFO:chat.provider.llm_provider:✅ Azure AI Inference provider initialized (PRIMARY - NO MULTIMODAL)
-INFO:chat.provider.llm_provider:✅ Azure OpenAI provider initialized (ROUTER COMPATIBLE + MULTIMODAL)
-INFO:chat.provider.llm_provider:✅ OpenAI multimodal support enabled
-INFO:chat.provider.llm_provider:✅ OpenAI provider initialized
-INFO:chat.provider.llm_provider:✅ Anthropic provider initialized
-INFO:chat.provider.llm_provider:✅ Gemini provider initialized
-INFO:chat.provider.llm_provider:✅ DeepSeek provider initialized
-INFO:chat.provider.llm_provider:✅ xAI provider initialized
-INFO:chat.provider.llm_provider:=== Provider Initialization Complete ===
-INFO:chat.provider.llm_provider:Available providers: 7
-INFO:chat.provider.llm_provider:  azure_inference: 9 models
-INFO:chat.provider.llm_provider:  azure_openai: 6 models
-INFO:chat.provider.llm_provider:  openai: 12 models
-INFO:chat.provider.llm_provider:  anthropic: 4 models
-INFO:chat.provider.llm_provider:  gemini: 5 models
-INFO:chat.provider.llm_provider:  deepseek: 3 models
-INFO:chat.provider.llm_provider:  xai: 5 models
-INFO:chat.provider.llm_provider:=========================================
-INFO:chat.postgres.db_manager:PostgresManager initialized
-INFO:chat.rag.rag_processor:IDResolver initialized
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
-INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
-INFO:chat.rag.rag_processor:UnifiedRAGSearcher initialized
-INFO:chat.rag.rag_processor:RAGProcessor initialized
-INFO:chat.postgres.db_manager:PostgresManager initialized
-INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
-INFO:chat.websearch.web_search_processor:Web search cache table initialized
-INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
-INFO:chat.citation.citation_engine:CitationEngine initialized
-INFO:chat.postgres.db_manager:PostgresManager initialized
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
-INFO:chat.config.system_prompts:SystemPromptManager initialized
-INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
-INFO:__main__:🌊 Starting multi-agent streaming response...
-INFO:__main__:📦 Multi-agent stream chunk 1: {"type": "response.created", "response": {"id": "resp_fe73b9b1", "object": "response", "created_at": 1753251716, "status": "in_progress", "model": "gpt-4.1-nano", "output": []}}
-INFO:__main__:📦 Multi-agent stream chunk 2: {"type": "response.in_progress", "response": {"id": "resp_fe73b9b1", "status": "in_progress"}}
-INFO:__main__:📦 Multi-agent stream chunk 3: {"type": "response.output_item.added", "output_index": 0, "item": {"id": "router_060c7142", "type": "reasoning", "content": []}}
-INFO:__main__:📦 ... (logging first 3 chunks only, total so far: 4)
-WARNING:asyncio:Executing <Task pending name='Task-11' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:117> wait_for=<Future pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 1.789 seconds
-WARNING:asyncio:Executing <Task pending name='Task-11' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:117> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.187 seconds
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 你是谁？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
 INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-INFO:chat.router.intelligent_router:LLM selected tool 1: knowledge_base_notes
-INFO:chat.router.intelligent_router:LLM routing successful: knowledge_base_notes
-INFO:chat.search.hybrid_search:Keyword search found 0 notes for query: Summarize my recent notes and highlight the key points
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
-INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
-INFO:chat.rag.rag_processor:UnifiedRAGSearcher initialized
-INFO:chat.postgres.db_manager:🌍 Full context search: Getting all user notes and conversations
-INFO:chat.postgres.db_manager:Resolved 0 total user notes
-INFO:chat.postgres.db_manager:Resolved 0 total user conversations
-INFO:chat.postgres.db_manager:Full context search results: 0 notes, 0 conversations
-WARNING:chat.rag.rag_processor:No IDs provided for RAG search
-INFO:chat.search.hybrid_search:Hybrid search combined 0 keyword and 0 vector results into 0 hybrid results
-INFO:chat.agent.context_search_agent:Falling back to pure RAG search
-INFO:chat.rag.rag_processor:=== STARTING RAG REQUEST ===
-INFO:chat.rag.rag_processor:Using custom query for RAG: Summarize my recent notes and highlight the key points...
-INFO:chat.rag.rag_processor:=== PARALLEL: QUERY EMBEDDING + ID RESOLUTION ===
-WARNING:asyncio:Executing <Task pending name='Task-11' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:117> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:765> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.912 seconds
-INFO:chat.rag.rag_processor:🔄 Embedding query: Summarize my recent notes and highlight the key points...
-INFO:chat.rag.rag_processor:🔄 Resolving IDs for user 1...
-INFO:chat.rag.rag_processor:=== ID RESOLUTION WITH CORRECTED SCOPED SEARCH ===
-INFO:chat.rag.rag_processor:User: 1
-INFO:chat.rag.rag_processor:Note IDs: None
-INFO:chat.rag.rag_processor:Folder IDs: None
-INFO:chat.rag.rag_processor:Conversation IDs: None
-INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Getting all user content
-INFO:chat.postgres.db_manager:Resolved 0 total user notes
-INFO:chat.postgres.db_manager:Resolved 0 total user conversations
-INFO:chat.rag.rag_processor:=== RESOLVED WITH CORRECTED LOGIC ===
-INFO:chat.rag.rag_processor:Notes: 0
-INFO:chat.rag.rag_processor:Conversations: 0
-INFO:chat.rag.rag_processor:Search type: FULL CONTEXT
-INFO:chat.rag.rag_processor:==================
-INFO:chat.rag.rag_processor:✅ ID resolution completed: 0 notes, 0 conversations
-INFO:chat.rag.rag_processor:✅ Query embedding completed
-INFO:chat.rag.rag_processor:=== EMBEDDING CHECKS (AFTER ID RESOLUTION) ===
-INFO:chat.rag.rag_processor:🔍 CHECKING EMBEDDINGS FOR RESOLVED IDs...
-INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Using background embedding for missing embeddings
-INFO:chat.rag.rag_processor:=== NOTES SEARCH ===
-WARNING:chat.postgres.db_manager:No note IDs to search - returning empty results
-INFO:chat.rag.rag_processor:Found 0 relevant chunks using notes search
-INFO:chat.rag.rag_processor:=== RAG CONTEXT SUMMARY ===
-INFO:chat.rag.rag_processor:Query: Summarize my recent notes and highlight the key po...
-INFO:chat.rag.rag_processor:Total chunks: 0
-INFO:chat.rag.rag_processor:Used notes: 0
-INFO:chat.rag.rag_processor:Used conversations: 0
-INFO:chat.rag.rag_processor:===========================
-INFO:chat.websearch.web_search_processor:🔍 Web search request: 'Summarize my recent notes and highlight the key points...' (5 results)
-INFO:chat.websearch.web_search_processor:❌ Cache miss for query: Summarize my recent notes and highlight the key po... - performing search
-INFO:chat.websearch.web_search_processor:🔍 Using Serper API for search: Summarize my recent notes and highlight the key po...
-INFO:chat.websearch.web_search_processor:✅ Serper API returned 5 results
-INFO:chat.websearch.web_search_processor:💾 Cached search results for 2 hours
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.endpoints.multi_agent_endpoint_v2:Iteration evaluation raw response: {
-    "needs_iteration": false,
-    "reason": "Response is complete and accurate",
-    "suggested_agents": []
-}...
-INFO:__main__:✅ Multi-agent streaming complete: 68 chunks sent
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_f3f1de13_1753854657 for user: test_user
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_f3f1de13_1753854657 (5 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_f3f1de13_1753854657 (81 tokens)
+INFO:humansa.v2.response_manager:Created response resp_233b8e5d2150_1753854657 for conversation conv_test_user_f3f1de13_1753854657
  * Serving Quart app 'main'
  * Debug mode: True
  * Please use an ASGI server (e.g. Hypercorn) directly in production
  * Running on http://0.0.0.0:5001 (CTRL + C to quit)
-[2025-07-22 23:22:03 -0700] [80378] [INFO] 127.0.0.1:50172 POST /v1/multi-agent/response 1.1 200 - 8755671
-INFO:__main__:🔄 Conversation embedding request: {'conversation_id': 573, 'messages': [{'id': 1, 'role': 'user', 'content': 'Summarize my recent notes and highlight the key points'}, {'id': 2, 'role': 'assistant', 'content': "I can help with that. Please upload your recent notes or provide the text you'd like summarized, and I will generate a concise summary highlighting the key points for you."}], 'incremental': False}
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
-INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
-INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
-INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
-INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
-WARNING:asyncio:Executing <Task pending name='Task-24' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:765> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.601 seconds
-WARNING:chat.embedding.conversation_embedder:No messages found for conversation 573
-INFO:chat.postgres.embedding_operations:Marked conversation 573 to skip embedding
-[2025-07-22 23:22:04 -0700] [80378] [INFO] 127.0.0.1:50303 POST /v1/embeddings/conversation 1.1 200 100 627663
-INFO:__main__:=== MULTI-AGENT REQUEST ===
-INFO:__main__:Method: POST
-INFO:__main__:URL: http://localhost:5001/v1/multi-agent/response
-INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json', 'User-Agent': 'axios/1.9.0', 'Content-Length': '310', 'Accept-Encoding': 'gzip, compress, deflate, br', 'Sentry-Trace': 'f2748e05c73be5cf10dc724baeaabcf2-0d35c35343fe2865-1', 'Baggage': 'sentry-environment=production,sentry-public_key=b2ebd8366c9889368c0181a4776bf2f1,sentry-trace_id=f2748e05c73be5cf10dc724baeaabcf2,sentry-sample_rate=1,sentry-transaction=POST%20%2Fconversation%2Fuser%2F1,sentry-sampled=true', 'Host': 'localhost:5001', 'Connection': 'keep-alive'}
-INFO:__main__:Request Body: {
-  "messages": [
-    {
-      "role": "user",
-      "content": "Summarize my recent notes and highlight the key points"
-    }
-  ],
-  "model": "gpt-4.1-nano",
-  "user_id": 1,
-  "conversation_id": 574,
-  "enable_rag": true,
-  "enable_citations": true,
-  "enable_web_search": true,
-  "enable_title_generation": true,
-  "stream": true,
-  "completion_type": "system",
-  "attachments": []
-}
-INFO:__main__:========================
-INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
-INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
-INFO:__main__:🌊 Starting multi-agent streaming response...
-INFO:__main__:📦 Multi-agent stream chunk 1: {"type": "response.created", "response": {"id": "resp_7d39abbb", "object": "response", "created_at": 1753251776, "status": "in_progress", "model": "gpt-4.1-nano", "output": []}}
-INFO:__main__:📦 Multi-agent stream chunk 2: {"type": "response.in_progress", "response": {"id": "resp_7d39abbb", "status": "in_progress"}}
-INFO:__main__:📦 Multi-agent stream chunk 3: {"type": "response.output_item.added", "output_index": 0, "item": {"id": "router_a45f39af", "type": "reasoning", "content": []}}
-INFO:__main__:📦 ... (logging first 3 chunks only, total so far: 4)
+[2025-07-29 22:50:57 -0700] [22663] [INFO] 127.0.0.1:61853 POST /v2/humansa/responses/stream 1.1 200 - 1574495
+WARNING:asyncio:Executing <Task finished name='Task-15' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 1.573 seconds
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 你是谁？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
 INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-INFO:chat.router.intelligent_router:LLM selected tool 1: knowledge_base_notes
-INFO:chat.router.intelligent_router:LLM routing successful: knowledge_base_notes
-INFO:chat.search.hybrid_search:Keyword search found 0 notes for query: Summarize my recent notes and highlight the key points
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
-INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
-INFO:chat.rag.rag_processor:UnifiedRAGSearcher initialized
-INFO:chat.postgres.db_manager:🌍 Full context search: Getting all user notes and conversations
-INFO:chat.postgres.db_manager:Resolved 0 total user notes
-INFO:chat.postgres.db_manager:Resolved 0 total user conversations
-INFO:chat.postgres.db_manager:Full context search results: 0 notes, 0 conversations
-WARNING:chat.rag.rag_processor:No IDs provided for RAG search
-INFO:chat.search.hybrid_search:Hybrid search combined 0 keyword and 0 vector results into 0 hybrid results
-INFO:chat.agent.context_search_agent:Falling back to pure RAG search
-INFO:chat.rag.rag_processor:=== STARTING RAG REQUEST ===
-INFO:chat.rag.rag_processor:Using custom query for RAG: Summarize my recent notes and highlight the key points...
-INFO:chat.rag.rag_processor:=== PARALLEL: QUERY EMBEDDING + ID RESOLUTION ===
-WARNING:asyncio:Executing <Task pending name='Task-34' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:117> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:765> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 2.005 seconds
-INFO:chat.rag.rag_processor:🔄 Embedding query: Summarize my recent notes and highlight the key points...
-INFO:chat.rag.rag_processor:🔄 Resolving IDs for user 1...
-INFO:chat.rag.rag_processor:=== ID RESOLUTION WITH CORRECTED SCOPED SEARCH ===
-INFO:chat.rag.rag_processor:User: 1
-INFO:chat.rag.rag_processor:Note IDs: None
-INFO:chat.rag.rag_processor:Folder IDs: None
-INFO:chat.rag.rag_processor:Conversation IDs: None
-INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Getting all user content
-INFO:chat.postgres.db_manager:Resolved 0 total user notes
-INFO:chat.postgres.db_manager:Resolved 0 total user conversations
-INFO:chat.rag.rag_processor:=== RESOLVED WITH CORRECTED LOGIC ===
-INFO:chat.rag.rag_processor:Notes: 0
-INFO:chat.rag.rag_processor:Conversations: 0
-INFO:chat.rag.rag_processor:Search type: FULL CONTEXT
-INFO:chat.rag.rag_processor:==================
-INFO:chat.rag.rag_processor:✅ ID resolution completed: 0 notes, 0 conversations
-INFO:chat.rag.rag_processor:✅ Query embedding completed
-INFO:chat.rag.rag_processor:=== EMBEDDING CHECKS (AFTER ID RESOLUTION) ===
-INFO:chat.rag.rag_processor:🔍 CHECKING EMBEDDINGS FOR RESOLVED IDs...
-INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Using background embedding for missing embeddings
-INFO:chat.rag.rag_processor:=== NOTES SEARCH ===
-WARNING:chat.postgres.db_manager:No note IDs to search - returning empty results
-INFO:chat.rag.rag_processor:Found 0 relevant chunks using notes search
-INFO:chat.rag.rag_processor:=== RAG CONTEXT SUMMARY ===
-INFO:chat.rag.rag_processor:Query: Summarize my recent notes and highlight the key po...
-INFO:chat.rag.rag_processor:Total chunks: 0
-INFO:chat.rag.rag_processor:Used notes: 0
-INFO:chat.rag.rag_processor:Used conversations: 0
-INFO:chat.rag.rag_processor:===========================
-INFO:chat.websearch.web_search_processor:🔍 Web search request: 'Summarize my recent notes and highlight the key points...' (5 results)
-INFO:chat.websearch.web_search_processor:❌ Cache miss for query: Summarize my recent notes and highlight the key po... - performing search
-INFO:chat.websearch.web_search_processor:🔍 Using Serper API for search: Summarize my recent notes and highlight the key po...
-INFO:chat.websearch.web_search_processor:✅ Serper API returned 5 results
-INFO:chat.websearch.web_search_processor:💾 Cached search results for 2 hours
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.endpoints.multi_agent_endpoint_v2:Iteration evaluation raw response: {
-    "needs_iteration": true,
-    "reason": "Response does not provide a summary or highlights without user-provided notes; it only prompts for input.",
-    "suggested_agents": ["rag"]
-}...
-INFO:chat.endpoints.multi_agent_endpoint_v2:Iteration 1 triggered: Response does not provide a summary or highlights without user-provided notes; it only prompts for input.
-INFO:chat.endpoints.multi_agent_endpoint_v2:Re-running response agent with updated context
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:__main__:✅ Multi-agent streaming complete: 72 chunks sent
-[2025-07-22 23:23:06 -0700] [80378] [INFO] 127.0.0.1:58693 POST /v1/multi-agent/response 1.1 200 - 9661545
-INFO:__main__:🔄 Conversation embedding request: {'conversation_id': 574, 'messages': [{'id': 1, 'role': 'user', 'content': 'Summarize my recent notes and highlight the key points'}, {'id': 2, 'role': 'assistant', 'content': 'Of course! Please provide your recent notes, and I will summarize them and highlight the key points for you.'}], 'incremental': False}
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
-INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
-INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
-INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
-INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
-WARNING:asyncio:Executing <Task pending name='Task-49' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:765> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.803 seconds
-WARNING:chat.embedding.conversation_embedder:No messages found for conversation 574
-INFO:chat.postgres.embedding_operations:Marked conversation 574 to skip embedding
-[2025-07-22 23:23:07 -0700] [80378] [INFO] 127.0.0.1:58794 POST /v1/embeddings/conversation 1.1 200 100 828130
-INFO:__main__:=== MULTI-AGENT REQUEST ===
-INFO:__main__:Method: POST
-INFO:__main__:URL: http://localhost:5001/v1/multi-agent/response
-INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json', 'User-Agent': 'axios/1.9.0', 'Content-Length': '310', 'Accept-Encoding': 'gzip, compress, deflate, br', 'Sentry-Trace': '9c8e49f9d7bb6e6d16561cba27f729cc-e511b729bad3efc3-1', 'Baggage': 'sentry-environment=production,sentry-public_key=b2ebd8366c9889368c0181a4776bf2f1,sentry-trace_id=9c8e49f9d7bb6e6d16561cba27f729cc,sentry-sample_rate=1,sentry-transaction=POST%20%2Fconversation%2Fuser%2F1,sentry-sampled=true', 'Host': 'localhost:5001', 'Connection': 'keep-alive'}
-INFO:__main__:Request Body: {
-  "messages": [
-    {
-      "role": "user",
-      "content": "Analyze my notes and provide insights on common themes"
-    }
-  ],
-  "model": "gpt-4.1-nano",
-  "user_id": 1,
-  "conversation_id": 575,
-  "enable_rag": true,
-  "enable_citations": true,
-  "enable_web_search": true,
-  "enable_title_generation": true,
-  "stream": true,
-  "completion_type": "system",
-  "attachments": []
-}
-INFO:__main__:========================
-INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
-INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
-INFO:__main__:🌊 Starting multi-agent streaming response...
-INFO:__main__:📦 Multi-agent stream chunk 1: {"type": "response.created", "response": {"id": "resp_9e21835b", "object": "response", "created_at": 1753252032, "status": "in_progress", "model": "gpt-4.1-nano", "output": []}}
-INFO:__main__:📦 Multi-agent stream chunk 2: {"type": "response.in_progress", "response": {"id": "resp_9e21835b", "status": "in_progress"}}
-INFO:__main__:📦 Multi-agent stream chunk 3: {"type": "response.output_item.added", "output_index": 0, "item": {"id": "router_c0a7f7e4", "type": "reasoning", "content": []}}
-INFO:__main__:📦 ... (logging first 3 chunks only, total so far: 4)
-INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-INFO:chat.router.intelligent_router:LLM selected tool 1: knowledge_base_notes
-INFO:chat.router.intelligent_router:LLM routing successful: knowledge_base_notes
-INFO:chat.search.hybrid_search:Keyword search found 0 notes for query: Analyze my notes and provide insights on common themes
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
-INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
-INFO:chat.rag.rag_processor:UnifiedRAGSearcher initialized
-INFO:chat.postgres.db_manager:🌍 Full context search: Getting all user notes and conversations
-INFO:chat.postgres.db_manager:Resolved 0 total user notes
-INFO:chat.postgres.db_manager:Resolved 0 total user conversations
-INFO:chat.postgres.db_manager:Full context search results: 0 notes, 0 conversations
-WARNING:chat.rag.rag_processor:No IDs provided for RAG search
-INFO:chat.search.hybrid_search:Hybrid search combined 0 keyword and 0 vector results into 0 hybrid results
-INFO:chat.agent.context_search_agent:Falling back to pure RAG search
-INFO:chat.rag.rag_processor:=== STARTING RAG REQUEST ===
-INFO:chat.rag.rag_processor:Using custom query for RAG: Analyze my notes and provide insights on common themes...
-INFO:chat.rag.rag_processor:=== PARALLEL: QUERY EMBEDDING + ID RESOLUTION ===
-WARNING:asyncio:Executing <Task pending name='Task-59' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:117> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:765> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 1.656 seconds
-INFO:chat.rag.rag_processor:🔄 Embedding query: Analyze my notes and provide insights on common themes...
-INFO:chat.rag.rag_processor:🔄 Resolving IDs for user 1...
-INFO:chat.rag.rag_processor:=== ID RESOLUTION WITH CORRECTED SCOPED SEARCH ===
-INFO:chat.rag.rag_processor:User: 1
-INFO:chat.rag.rag_processor:Note IDs: None
-INFO:chat.rag.rag_processor:Folder IDs: None
-INFO:chat.rag.rag_processor:Conversation IDs: None
-INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Getting all user content
-INFO:chat.postgres.db_manager:Resolved 0 total user notes
-INFO:chat.postgres.db_manager:Resolved 0 total user conversations
-INFO:chat.rag.rag_processor:=== RESOLVED WITH CORRECTED LOGIC ===
-INFO:chat.rag.rag_processor:Notes: 0
-INFO:chat.rag.rag_processor:Conversations: 0
-INFO:chat.rag.rag_processor:Search type: FULL CONTEXT
-INFO:chat.rag.rag_processor:==================
-INFO:chat.rag.rag_processor:✅ ID resolution completed: 0 notes, 0 conversations
-INFO:chat.rag.rag_processor:✅ Query embedding completed
-INFO:chat.rag.rag_processor:=== EMBEDDING CHECKS (AFTER ID RESOLUTION) ===
-INFO:chat.rag.rag_processor:🔍 CHECKING EMBEDDINGS FOR RESOLVED IDs...
-INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Using background embedding for missing embeddings
-INFO:chat.rag.rag_processor:=== NOTES SEARCH ===
-WARNING:chat.postgres.db_manager:No note IDs to search - returning empty results
-INFO:chat.rag.rag_processor:Found 0 relevant chunks using notes search
-INFO:chat.rag.rag_processor:=== RAG CONTEXT SUMMARY ===
-INFO:chat.rag.rag_processor:Query: Analyze my notes and provide insights on common th...
-INFO:chat.rag.rag_processor:Total chunks: 0
-INFO:chat.rag.rag_processor:Used notes: 0
-INFO:chat.rag.rag_processor:Used conversations: 0
-INFO:chat.rag.rag_processor:===========================
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.endpoints.multi_agent_endpoint_v2:Iteration evaluation raw response: {
-    "needs_iteration": false,
-    "reason": "Response is complete and accurate",
-    "suggested_agents": []
-}...
-INFO:__main__:✅ Multi-agent streaming complete: 61 chunks sent
-[2025-07-22 23:27:18 -0700] [80378] [INFO] 127.0.0.1:53644 POST /v1/multi-agent/response 1.1 200 - 6853967
-INFO:__main__:🔄 Conversation embedding request: {'conversation_id': 575, 'messages': [{'id': 1, 'role': 'user', 'content': 'Analyze my notes and provide insights on common themes'}, {'id': 2, 'role': 'assistant', 'content': "Absolutely! Please upload your notes or share the content you'd like me to analyze. Once I have the material, I can identify common themes and provide insights."}], 'incremental': False}
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
-INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
-INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
-INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
-INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
-WARNING:asyncio:Executing <Task pending name='Task-72' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:765> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.641 seconds
-WARNING:chat.embedding.conversation_embedder:No messages found for conversation 575
-INFO:chat.postgres.embedding_operations:Marked conversation 575 to skip embedding
-[2025-07-22 23:27:19 -0700] [80378] [INFO] 127.0.0.1:53716 POST /v1/embeddings/conversation 1.1 200 100 668087
-INFO:__main__:=== MULTI-AGENT REQUEST ===
-INFO:__main__:Method: POST
-INFO:__main__:URL: http://localhost:5001/v1/multi-agent/response
-INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json', 'User-Agent': 'axios/1.9.0', 'Content-Length': '310', 'Accept-Encoding': 'gzip, compress, deflate, br', 'Sentry-Trace': '90adc08d19a1d5739a9438275a3293b2-83ffb1e449dd919e-1', 'Baggage': 'sentry-environment=production,sentry-public_key=b2ebd8366c9889368c0181a4776bf2f1,sentry-trace_id=90adc08d19a1d5739a9438275a3293b2,sentry-sample_rate=1,sentry-transaction=POST%20%2Fconversation%2Fuser%2F1,sentry-sampled=true', 'Host': 'localhost:5001', 'Connection': 'keep-alive'}
-INFO:__main__:Request Body: {
-  "messages": [
-    {
-      "role": "user",
-      "content": "Summarize my recent notes and highlight the key points"
-    }
-  ],
-  "model": "gpt-4.1-nano",
-  "user_id": 1,
-  "conversation_id": 576,
-  "enable_rag": true,
-  "enable_citations": true,
-  "enable_web_search": true,
-  "enable_title_generation": true,
-  "stream": true,
-  "completion_type": "system",
-  "attachments": []
-}
-INFO:__main__:========================
-INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
-INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
-INFO:__main__:🌊 Starting multi-agent streaming response...
-INFO:__main__:📦 Multi-agent stream chunk 1: {"type": "response.created", "response": {"id": "resp_cb35367e", "object": "response", "created_at": 1753252661, "status": "in_progress", "model": "gpt-4.1-nano", "output": []}}
-INFO:__main__:📦 Multi-agent stream chunk 2: {"type": "response.in_progress", "response": {"id": "resp_cb35367e", "status": "in_progress"}}
-INFO:__main__:📦 Multi-agent stream chunk 3: {"type": "response.output_item.added", "output_index": 0, "item": {"id": "router_0472fb59", "type": "reasoning", "content": []}}
-INFO:__main__:📦 ... (logging first 3 chunks only, total so far: 4)
-INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-INFO:chat.router.intelligent_router:LLM selected tool 1: knowledge_base_notes
-INFO:chat.router.intelligent_router:LLM routing successful: knowledge_base_notes
-INFO:chat.search.hybrid_search:Keyword search found 0 notes for query: Summarize my recent notes and highlight the key points
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
-INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
-INFO:chat.rag.rag_processor:UnifiedRAGSearcher initialized
-INFO:chat.postgres.db_manager:🌍 Full context search: Getting all user notes and conversations
-INFO:chat.postgres.db_manager:Resolved 0 total user notes
-INFO:chat.postgres.db_manager:Resolved 0 total user conversations
-INFO:chat.postgres.db_manager:Full context search results: 0 notes, 0 conversations
-WARNING:chat.rag.rag_processor:No IDs provided for RAG search
-INFO:chat.search.hybrid_search:Hybrid search combined 0 keyword and 0 vector results into 0 hybrid results
-INFO:chat.agent.context_search_agent:Falling back to pure RAG search
-INFO:chat.rag.rag_processor:=== STARTING RAG REQUEST ===
-INFO:chat.rag.rag_processor:Using custom query for RAG: Summarize my recent notes and highlight the key points...
-INFO:chat.rag.rag_processor:=== PARALLEL: QUERY EMBEDDING + ID RESOLUTION ===
-WARNING:asyncio:Executing <Task pending name='Task-82' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:117> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:765> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 1.543 seconds
-INFO:chat.rag.rag_processor:🔄 Embedding query: Summarize my recent notes and highlight the key points...
-INFO:chat.rag.rag_processor:🔄 Resolving IDs for user 1...
-INFO:chat.rag.rag_processor:=== ID RESOLUTION WITH CORRECTED SCOPED SEARCH ===
-INFO:chat.rag.rag_processor:User: 1
-INFO:chat.rag.rag_processor:Note IDs: None
-INFO:chat.rag.rag_processor:Folder IDs: None
-INFO:chat.rag.rag_processor:Conversation IDs: None
-INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Getting all user content
-INFO:chat.postgres.db_manager:Resolved 0 total user notes
-INFO:chat.postgres.db_manager:Resolved 0 total user conversations
-INFO:chat.rag.rag_processor:=== RESOLVED WITH CORRECTED LOGIC ===
-INFO:chat.rag.rag_processor:Notes: 0
-INFO:chat.rag.rag_processor:Conversations: 0
-INFO:chat.rag.rag_processor:Search type: FULL CONTEXT
-INFO:chat.rag.rag_processor:==================
-INFO:chat.rag.rag_processor:✅ ID resolution completed: 0 notes, 0 conversations
-INFO:chat.rag.rag_processor:✅ Query embedding completed
-INFO:chat.rag.rag_processor:=== EMBEDDING CHECKS (AFTER ID RESOLUTION) ===
-INFO:chat.rag.rag_processor:🔍 CHECKING EMBEDDINGS FOR RESOLVED IDs...
-INFO:chat.rag.rag_processor:🌐 FULL CONTEXT SEARCH: Using background embedding for missing embeddings
-INFO:chat.rag.rag_processor:=== NOTES SEARCH ===
-WARNING:chat.postgres.db_manager:No note IDs to search - returning empty results
-INFO:chat.rag.rag_processor:Found 0 relevant chunks using notes search
-INFO:chat.rag.rag_processor:=== RAG CONTEXT SUMMARY ===
-INFO:chat.rag.rag_processor:Query: Summarize my recent notes and highlight the key po...
-INFO:chat.rag.rag_processor:Total chunks: 0
-INFO:chat.rag.rag_processor:Used notes: 0
-INFO:chat.rag.rag_processor:Used conversations: 0
-INFO:chat.rag.rag_processor:===========================
-INFO:chat.websearch.web_search_processor:🔍 Web search request: 'Summarize my recent notes and highlight the key points...' (5 results)
-INFO:chat.websearch.web_search_processor:❌ Cache miss for query: Summarize my recent notes and highlight the key po... - performing search
-INFO:chat.websearch.web_search_processor:🔍 Using Serper API for search: Summarize my recent notes and highlight the key po...
-INFO:chat.websearch.web_search_processor:✅ Serper API returned 5 results
-INFO:chat.websearch.web_search_processor:💾 Cached search results for 2 hours
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.endpoints.multi_agent_endpoint_v2:Iteration evaluation raw response: {
-    "needs_iteration": false,
-    "reason": "Response is complete and accurate",
-    "suggested_agents": []
-}...
-INFO:__main__:✅ Multi-agent streaming complete: 66 chunks sent
-[2025-07-22 23:37:48 -0700] [80378] [INFO] 127.0.0.1:60477 POST /v1/multi-agent/response 1.1 200 - 7728643
-INFO:__main__:🔄 Conversation embedding request: {'conversation_id': 576, 'messages': [{'id': 1, 'role': 'user', 'content': 'Summarize my recent notes and highlight the key points'}, {'id': 2, 'role': 'assistant', 'content': "Sure! Please upload your recent notes or provide the text you'd like summarized, and I'll help you extract the key points."}], 'incremental': False}
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
-INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
-INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
-INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
-INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
-WARNING:asyncio:Executing <Task pending name='Task-95' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:765> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.663 seconds
-WARNING:chat.embedding.conversation_embedder:No messages found for conversation 576
-INFO:chat.postgres.embedding_operations:Marked conversation 576 to skip embedding
-[2025-07-22 23:37:49 -0700] [80378] [INFO] 127.0.0.1:60539 POST /v1/embeddings/conversation 1.1 200 100 687878
-INFO:__main__:=== MULTI-AGENT REQUEST ===
-INFO:__main__:Method: POST
-INFO:__main__:URL: http://localhost:5001/v1/multi-agent/response
-INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5001', 'User-Agent': 'curl/8.7.1', 'Accept': '*/*', 'Content-Type': 'application/json', 'Content-Length': '147'}
-INFO:__main__:Request Body: {
-  "messages": [
-    {
-      "role": "user",
-      "content": "Tell me about AI startups"
-    }
-  ],
-  "user_id": 10001,
-  "enable_rag": true,
-  "stream": false
-}
-INFO:__main__:========================
-INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
-INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
-INFO:__main__:📄 Starting multi-agent non-streaming response...
-INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-INFO:chat.router.intelligent_router:LLM selected tool 5: web_search
-INFO:chat.router.intelligent_router:LLM routing successful: web_search
-INFO:chat.websearch.web_search_processor:🔍 Web search request: 'Tell me about AI startups...' (5 results)
-INFO:chat.websearch.web_search_processor:❌ Cache miss for query: Tell me about AI startups... - performing search
-INFO:chat.websearch.web_search_processor:🔍 Using Serper API for search: Tell me about AI startups...
-INFO:chat.websearch.web_search_processor:✅ Serper API returned 5 results
-INFO:chat.websearch.web_search_processor:💾 Cached search results for 24 hours
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.citation.citation_position_tracker:📍 Found citation [2] at position 624-627
-INFO:chat.citation.citation_position_tracker:📍 Found citation [4] at position 1072-1075
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.endpoints.multi_agent_endpoint_v2:Iteration evaluation raw response: {
-    "needs_iteration": false,
-    "reason": "Response is complete and accurate",
-    "suggested_agents": []
-}...
-INFO:__main__:=== MULTI-AGENT RESPONSE ===
-INFO:__main__:Response type: <class 'dict'>
-INFO:__main__:Response keys: ['id', 'object', 'created', 'model', 'choices', 'usage', 'metadata']
-INFO:__main__:Content length: 1224 characters
-INFO:__main__:Content preview: AI startups are companies that develop and deploy artificial intelligence technologies to solve various problems across different industries. These startups are often at the forefront of innovation, c... (truncated from 1224 chars)
-INFO:__main__:===========================
-[2025-07-22 23:42:26 -0700] [80378] [INFO] 127.0.0.1:62929 POST /v1/multi-agent/response 1.1 200 11846 5926885
-INFO:__main__:=== MULTI-AGENT REQUEST ===
-INFO:__main__:Method: POST
-INFO:__main__:URL: http://localhost:5001/v1/multi-agent/response
-INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5001', 'User-Agent': 'curl/8.7.1', 'Accept': '*/*', 'Content-Type': 'application/json', 'Content-Length': '150'}
-INFO:__main__:Request Body: {
-  "messages": [
-    {
-      "role": "user",
-      "content": "What did I write about Zepto"
-    }
-  ],
-  "user_id": 10001,
-  "enable_rag": true,
-  "stream": false
-}
-INFO:__main__:========================
-INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
-INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
-INFO:__main__:📄 Starting multi-agent non-streaming response...
-INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-INFO:chat.router.intelligent_router:LLM selected tool 1: knowledge_base_notes
-INFO:chat.router.intelligent_router:LLM routing successful: knowledge_base_notes
-INFO:chat.search.hybrid_search:Keyword search found 0 notes for query: What did I write about Zepto
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
-INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
-INFO:chat.rag.rag_processor:UnifiedRAGSearcher initialized
-INFO:chat.postgres.db_manager:🌍 Full context search: Getting all user notes and conversations
-INFO:chat.postgres.db_manager:Resolved 9 total user notes
-INFO:chat.postgres.db_manager:Resolved 9 total user conversations
-INFO:chat.postgres.db_manager:Full context search results: 9 notes, 9 conversations
-INFO:chat.rag.rag_processor:=== RAG SEARCH (NOTES) ===
-INFO:chat.rag.rag_processor:Query: What did I write about Zepto...
-INFO:chat.rag.rag_processor:Searching 9 notes, 9 conversations
-INFO:chat.postgres.db_manager:Notes-only vector search - notes: 9
-INFO:chat.postgres.db_manager:Notes-only vector search found 40 relevant chunks
-INFO:chat.rag.rag_processor:Found 40 relevant chunks using notes search
-INFO:chat.rag.rag_processor:  1. note:10005 (sim: 0.372)
-INFO:chat.rag.rag_processor:  2. note:10005 (sim: 0.337)
-INFO:chat.rag.rag_processor:  3. note:10004 (sim: 0.325)
-INFO:chat.rag.rag_processor:  4. note:10005 (sim: 0.319)
-INFO:chat.rag.rag_processor:  5. note:10005 (sim: 0.303)
-INFO:chat.search.hybrid_search:Hybrid search combined 0 keyword and 40 vector results into 7 hybrid results
-INFO:chat.agent.context_search_agent:Hybrid search returned 7 results
-WARNING:asyncio:Executing <Task finished name='Task-119' coro=<ContextSearchAgent.run() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/agent/context_search_agent.py:31> result={'context': 'W., Kivlicha...r as it were.', 'metadata': {'context_length': 23094, 'conversation_ids': [], 'note_ids': [10001, 10002, 10003, 10004, 10005, 10006, ...], 'search_method': 'keyword+vector', ...}, 'sources': [{'chunk_id': 29, 'content': 'W., Kivlicha...  ICLR , 2020', 'hybrid_score': 0.006896551724137931, 'keyword_score': 0, ...}, {'chunk_id': 7, 'content': 'I think the ... like sort of', 'hybrid_score': 0.006521739130434782, 'keyword_score': 0, ...}, {'chunk_id': 1, 'content': '--- Page 1 ---', 'hybrid_score': 0.0062499999999999995, 'keyword_score': 0, ...}, {'chunk_id': 5, 'content': 'So the speed...are engine is', 'hybrid_score': 0.006185567010309278, 'keyword_score': 0, ...}, {'chunk_id': 37, 'content': 'Blue are PPO...- Page 24 ---', 'hybrid_score': 0.006122448979591836, 'keyword_score': 0, ...}, {'chunk_id': 0, 'content': 'In this in-d...ital economy.', 'hybrid_score': 0.006060606060606061, 'keyword_score': 0, ...}, ...], 'status': 'success'} created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 1.735 seconds
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.citation.citation_position_tracker:📍 Found citation [6] at position 478-481
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.endpoints.multi_agent_endpoint_v2:Iteration evaluation raw response: {
-    "needs_iteration": true,
-    "reason": "Response contains inaccuracies: Zepto was co-founded by Aaditya Suresh and Jay Krishnan, not Audit Polycha. Also, the claim that Zepto's origins were a re...
-INFO:chat.endpoints.multi_agent_endpoint_v2:Iteration 1 triggered: Response contains inaccuracies: Zepto was co-founded by Aaditya Suresh and Jay Krishnan, not Audit Polycha. Also, the claim that Zepto's origins were a response to user needs during the pandemic starting as a WhatsApp group is not well-supported. Additional details about founders, accurate founding story, and recent updates could improve the answer.
-INFO:chat.endpoints.multi_agent_endpoint_v2:Running iteration 1 with agents: ['rag', 'web_search']
-INFO:chat.endpoints.multi_agent_endpoint_v2:Running web_search agent in iteration 1
-INFO:chat.websearch.web_search_processor:🔍 Web search request: 'What did I write about Zepto...' (5 results)
-INFO:chat.websearch.web_search_processor:❌ Cache miss for query: What did I write about Zepto... - performing search
-INFO:chat.websearch.web_search_processor:🔍 Using Serper API for search: What did I write about Zepto...
-INFO:chat.websearch.web_search_processor:✅ Serper API returned 5 results
-INFO:chat.websearch.web_search_processor:💾 Cached search results for 24 hours
-INFO:chat.endpoints.multi_agent_endpoint_v2:Re-running response agent with updated context
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.endpoints.multi_agent_endpoint_v2:Iteration evaluation raw response: {
-    "needs_iteration": false,
-    "reason": "Response is complete and accurate",
-    "suggested_agents": []
-}...
-INFO:__main__:=== MULTI-AGENT RESPONSE ===
-INFO:__main__:Response type: <class 'dict'>
-INFO:__main__:Response keys: ['id', 'object', 'created', 'model', 'choices', 'usage', 'metadata']
-INFO:__main__:Content length: 517 characters
-INFO:__main__:Content preview: You wrote that Zepto is a startup based in Mumbai that offers a 10-minute grocery delivery service. The owners of Zepto are Aadit Palicha and Kaivalya Vohra. The company was launched during the pandem... (truncated from 517 chars)
-INFO:__main__:===========================
-[2025-07-22 23:42:46 -0700] [80378] [INFO] 127.0.0.1:63145 POST /v1/multi-agent/response 1.1 200 60232 9915770
-INFO:__main__:=== MULTI-AGENT REQUEST ===
-INFO:__main__:Method: POST
-INFO:__main__:URL: http://localhost:5001/v1/multi-agent/response
-INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5001', 'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '129', 'Content-Type': 'application/json'}
-INFO:__main__:Request Body: {
-  "messages": [
-    {
-      "role": "user",
-      "content": "What did I write about Zepto"
-    }
-  ],
-  "user_id": 10001,
-  "enable_rag": true,
-  "stream": true
-}
-INFO:__main__:========================
-INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
-INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
-INFO:__main__:🌊 Starting multi-agent streaming response...
-INFO:__main__:📦 Multi-agent stream chunk 1: {"type": "response.created", "response": {"id": "resp_c453ceca", "object": "response", "created_at": 1753252985, "status": "in_progress", "model": "gpt-4.1-nano", "output": []}}
-INFO:__main__:📦 Multi-agent stream chunk 2: {"type": "response.in_progress", "response": {"id": "resp_c453ceca", "status": "in_progress"}}
-INFO:__main__:📦 Multi-agent stream chunk 3: {"type": "response.output_item.added", "output_index": 0, "item": {"id": "router_15612185", "type": "reasoning", "content": []}}
-INFO:__main__:📦 ... (logging first 3 chunks only, total so far: 4)
-INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-INFO:chat.router.intelligent_router:LLM selected tool 1: knowledge_base_notes
-INFO:chat.router.intelligent_router:LLM routing successful: knowledge_base_notes
-INFO:chat.search.hybrid_search:Keyword search found 0 notes for query: What did I write about Zepto
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
-INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
-INFO:chat.rag.rag_processor:UnifiedRAGSearcher initialized
-INFO:chat.postgres.db_manager:🌍 Full context search: Getting all user notes and conversations
-INFO:chat.postgres.db_manager:Resolved 9 total user notes
-INFO:chat.postgres.db_manager:Resolved 9 total user conversations
-INFO:chat.postgres.db_manager:Full context search results: 9 notes, 9 conversations
-INFO:chat.rag.rag_processor:=== RAG SEARCH (NOTES) ===
-INFO:chat.rag.rag_processor:Query: What did I write about Zepto...
-INFO:chat.rag.rag_processor:Searching 9 notes, 9 conversations
-INFO:chat.postgres.db_manager:Notes-only vector search - notes: 9
-INFO:chat.postgres.db_manager:Notes-only vector search found 40 relevant chunks
-INFO:chat.rag.rag_processor:Found 40 relevant chunks using notes search
-INFO:chat.rag.rag_processor:  1. note:10005 (sim: 0.372)
-INFO:chat.rag.rag_processor:  2. note:10005 (sim: 0.337)
-INFO:chat.rag.rag_processor:  3. note:10004 (sim: 0.325)
-INFO:chat.rag.rag_processor:  4. note:10005 (sim: 0.319)
-INFO:chat.rag.rag_processor:  5. note:10005 (sim: 0.303)
-INFO:chat.search.hybrid_search:Hybrid search combined 0 keyword and 40 vector results into 7 hybrid results
-INFO:chat.agent.context_search_agent:Hybrid search returned 7 results
-WARNING:asyncio:Executing <Task pending name='Task-135' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:117> wait_for=<Future pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 1.208 seconds
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.endpoints.multi_agent_endpoint_v2:Iteration evaluation raw response: {
-    "needs_iteration": true,
-    "reason": "Response contains inaccuracies, notably the incorrect co-founder name 'Audit Polycha', and may lack additional context or recent updates about Zepto's act...
-INFO:chat.endpoints.multi_agent_endpoint_v2:Iteration 1 triggered: Response contains inaccuracies, notably the incorrect co-founder name 'Audit Polycha', and may lack additional context or recent updates about Zepto's activities and history.
-INFO:chat.endpoints.multi_agent_endpoint_v2:Running web_search agent in iteration 1
-INFO:chat.websearch.web_search_processor:🔍 Web search request: 'What did I write about Zepto...' (5 results)
-INFO:chat.websearch.web_search_processor:✅ Cache hit for query: What did I write about Zepto...
-INFO:chat.endpoints.multi_agent_endpoint_v2:Re-running response agent with updated context
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:__main__:✅ Multi-agent streaming complete: 82 chunks sent
-[2025-07-22 23:43:14 -0700] [80378] [INFO] 127.0.0.1:63493 POST /v1/multi-agent/response 1.1 200 - 8707506
-INFO:__main__:=== MULTI-AGENT REQUEST ===
-INFO:__main__:Method: POST
-INFO:__main__:URL: http://localhost:5001/v1/multi-agent/response
-INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5001', 'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '129', 'Content-Type': 'application/json'}
-INFO:__main__:Request Body: {
-  "messages": [
-    {
-      "role": "user",
-      "content": "What did I write about Zepto"
-    }
-  ],
-  "user_id": 10001,
-  "enable_rag": true,
-  "stream": true
-}
-INFO:__main__:========================
-INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
-INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
-INFO:__main__:🌊 Starting multi-agent streaming response...
-INFO:__main__:📦 Multi-agent stream chunk 1: {"type": "response.created", "response": {"id": "resp_d9068e16", "object": "response", "created_at": 1753253126, "status": "in_progress", "model": "gpt-4.1-nano", "output": []}}
-INFO:__main__:📦 Multi-agent stream chunk 2: {"type": "response.in_progress", "response": {"id": "resp_d9068e16", "status": "in_progress"}}
-INFO:__main__:📦 Multi-agent stream chunk 3: {"type": "response.output_item.added", "output_index": 0, "item": {"id": "router_18ace52e", "type": "reasoning", "content": []}}
-INFO:__main__:📦 ... (logging first 3 chunks only, total so far: 4)
-WARNING:asyncio:Executing <Task pending name='Task-149' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:117> wait_for=<Future pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.216 seconds
-WARNING:asyncio:Executing <Task pending name='Task-149' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:117> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.133 seconds
-INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-INFO:chat.router.intelligent_router:LLM selected tool 1: knowledge_base_notes
-INFO:chat.router.intelligent_router:LLM routing successful: knowledge_base_notes
-INFO:chat.search.hybrid_search:Keyword search found 0 notes for query: What did I write about Zepto
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
-INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
-INFO:chat.rag.rag_processor:UnifiedRAGSearcher initialized
-INFO:chat.postgres.db_manager:🌍 Full context search: Getting all user notes and conversations
-INFO:chat.postgres.db_manager:Resolved 9 total user notes
-INFO:chat.postgres.db_manager:Resolved 9 total user conversations
-INFO:chat.postgres.db_manager:Full context search results: 9 notes, 9 conversations
-INFO:chat.rag.rag_processor:=== RAG SEARCH (NOTES) ===
-INFO:chat.rag.rag_processor:Query: What did I write about Zepto...
-INFO:chat.rag.rag_processor:Searching 9 notes, 9 conversations
-INFO:chat.postgres.db_manager:Notes-only vector search - notes: 9
-INFO:chat.postgres.db_manager:Notes-only vector search found 40 relevant chunks
-INFO:chat.rag.rag_processor:Found 40 relevant chunks using notes search
-INFO:chat.rag.rag_processor:  1. note:10005 (sim: 0.372)
-INFO:chat.rag.rag_processor:  2. note:10005 (sim: 0.337)
-INFO:chat.rag.rag_processor:  3. note:10004 (sim: 0.325)
-INFO:chat.rag.rag_processor:  4. note:10005 (sim: 0.319)
-INFO:chat.rag.rag_processor:  5. note:10005 (sim: 0.303)
-INFO:chat.search.hybrid_search:Hybrid search combined 0 keyword and 40 vector results into 7 hybrid results
-INFO:chat.agent.context_search_agent:Hybrid search returned 7 results
-WARNING:asyncio:Executing <Task pending name='Task-149' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:117> wait_for=<Future pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 2.889 seconds
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-WARNING:asyncio:Executing <Task pending name='Task-149' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:117> wait_for=<Future pending cb=[shield.<locals>._outer_done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:975, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.117 seconds
-INFO:chat.citation.citation_position_tracker:📍 Found citation [6] at position 458-461
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.endpoints.multi_agent_endpoint_v2:Iteration evaluation raw response: {
-    "needs_iteration": true,
-    "reason": "Response contains inaccuracies (e.g., founder name, company origins) and lacks citation details; more accurate and comprehensive information is needed.",
-...
-INFO:chat.endpoints.multi_agent_endpoint_v2:Iteration 1 triggered: Response contains inaccuracies (e.g., founder name, company origins) and lacks citation details; more accurate and comprehensive information is needed.
-INFO:chat.endpoints.multi_agent_endpoint_v2:Running web_search agent in iteration 1
-INFO:chat.websearch.web_search_processor:🔍 Web search request: 'What did I write about Zepto...' (5 results)
-INFO:chat.websearch.web_search_processor:✅ Cache hit for query: What did I write about Zepto...
-INFO:chat.endpoints.multi_agent_endpoint_v2:Re-running response agent with updated context
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.citation.citation_position_tracker:📍 Found citation [8] at position 322-325
-INFO:chat.citation.citation_position_tracker:📍 Found citation [9] at position 458-461
-INFO:chat.citation.citation_position_tracker:📍 Found citation [12] at position 691-695
-INFO:__main__:✅ Multi-agent streaming complete: 85 chunks sent
-[2025-07-22 23:45:40 -0700] [80378] [INFO] 127.0.0.1:64785 POST /v1/multi-agent/response 1.1 200 - 14376859
-WARNING:asyncio:Executing <Handle _SelectorSocketTransport._call_connection_lost(TimeoutError(...wn timed out')) created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/selector_events.py:898> took 0.407 seconds
-INFO:__main__:=== MULTI-AGENT REQUEST ===
-INFO:__main__:Method: POST
-INFO:__main__:URL: http://localhost:5001/v1/multi-agent/response
-INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5001', 'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '129', 'Content-Type': 'application/json'}
-INFO:__main__:Request Body: {
-  "messages": [
-    {
-      "role": "user",
-      "content": "What did I write about Zepto"
-    }
-  ],
-  "user_id": 10001,
-  "enable_rag": true,
-  "stream": true
-}
-INFO:__main__:========================
-INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
-INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
-INFO:__main__:🌊 Starting multi-agent streaming response...
-INFO:__main__:📦 Multi-agent stream chunk 1: {"type": "response.created", "response": {"id": "resp_301706cf", "object": "response", "created_at": 1753282007, "status": "in_progress", "model": "gpt-4.1-nano", "output": []}}
-INFO:__main__:📦 Multi-agent stream chunk 2: {"type": "response.in_progress", "response": {"id": "resp_301706cf", "status": "in_progress"}}
-INFO:__main__:📦 Multi-agent stream chunk 3: {"type": "response.output_item.added", "output_index": 0, "item": {"id": "router_74b7f090", "type": "reasoning", "content": []}}
-INFO:__main__:📦 ... (logging first 3 chunks only, total so far: 4)
-WARNING:asyncio:Executing <Task pending name='Task-163' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:117> wait_for=<Future pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.114 seconds
-WARNING:asyncio:Executing <Task pending name='Task-163' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:117> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.146 seconds
-INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-INFO:chat.router.intelligent_router:LLM selected tool 1: knowledge_base_notes
-INFO:chat.router.intelligent_router:LLM routing successful: knowledge_base_notes
-INFO:chat.search.hybrid_search:Keyword search found 0 notes for query: What did I write about Zepto
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
-INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
-INFO:chat.rag.rag_processor:UnifiedRAGSearcher initialized
-INFO:chat.postgres.db_manager:🌍 Full context search: Getting all user notes and conversations
-INFO:chat.postgres.db_manager:Resolved 9 total user notes
-INFO:chat.postgres.db_manager:Resolved 9 total user conversations
-INFO:chat.postgres.db_manager:Full context search results: 9 notes, 9 conversations
-INFO:chat.rag.rag_processor:=== RAG SEARCH (NOTES) ===
-INFO:chat.rag.rag_processor:Query: What did I write about Zepto...
-INFO:chat.rag.rag_processor:Searching 9 notes, 9 conversations
-INFO:chat.postgres.db_manager:Notes-only vector search - notes: 9
-INFO:chat.postgres.db_manager:Notes-only vector search found 40 relevant chunks
-INFO:chat.rag.rag_processor:Found 40 relevant chunks using notes search
-INFO:chat.rag.rag_processor:  1. note:10005 (sim: 0.372)
-INFO:chat.rag.rag_processor:  2. note:10005 (sim: 0.337)
-INFO:chat.rag.rag_processor:  3. note:10004 (sim: 0.325)
-INFO:chat.rag.rag_processor:  4. note:10005 (sim: 0.319)
-INFO:chat.rag.rag_processor:  5. note:10005 (sim: 0.303)
-INFO:chat.search.hybrid_search:Hybrid search combined 0 keyword and 40 vector results into 7 hybrid results
-INFO:chat.agent.context_search_agent:Hybrid search returned 7 results
-WARNING:asyncio:Executing <Task pending name='Task-163' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:117> wait_for=<Future pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 2.959 seconds
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:chat.citation.citation_position_tracker:📍 Found citation [6] at position 434-437
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-WARNING:asyncio:Executing <Task pending name='Task-163' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:117> wait_for=<Future pending cb=[shield.<locals>._outer_done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:975, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.134 seconds
-INFO:chat.endpoints.multi_agent_endpoint_v2:Iteration evaluation raw response: {
-    "needs_iteration": true,
-    "reason": "Response contains inaccuracies such as the incorrect co-founder name and some missing details about Zepto's background and growth metrics; additional cont...
-INFO:chat.endpoints.multi_agent_endpoint_v2:Iteration 1 triggered: Response contains inaccuracies such as the incorrect co-founder name and some missing details about Zepto's background and growth metrics; additional context and verification are needed.
-INFO:chat.endpoints.multi_agent_endpoint_v2:Running web_search agent in iteration 1
-INFO:chat.websearch.web_search_processor:🔍 Web search request: 'What did I write about Zepto...' (5 results)
-INFO:chat.websearch.web_search_processor:✅ Cache hit for query: What did I write about Zepto...
-INFO:chat.endpoints.multi_agent_endpoint_v2:Re-running response agent with updated context
-INFO:chat.provider.llm_provider:Provider selection - requested_provider: None, requested_model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:Searching for provider supporting model: gpt-4.1-nano
-INFO:chat.provider.llm_provider:🎯 Found Azure match for gpt-4.1-nano
-INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
-INFO:chat.provider.llm_provider:✅ Selected Azure (prioritized): azure_inference with gpt-4.1-nano
-INFO:__main__:✅ Multi-agent streaming complete: 83 chunks sent
-[2025-07-23 07:46:59 -0700] [80378] [INFO] 127.0.0.1:63246 POST /v1/multi-agent/response 1.1 200 - 12596801
-WARNING:asyncio:Executing <Task finished name='Task-2' coro=<observe_changes() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:105> result=None created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 5.669 seconds
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_3915c78f_1753854666 for user: test_user
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_3915c78f_1753854666 (5 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_3915c78f_1753854666 (65 tokens)
+INFO:humansa.v2.response_manager:Created response resp_d72652d842c7_1753854666 for conversation conv_test_user_3915c78f_1753854666
+[2025-07-29 22:51:06 -0700] [22663] [INFO] 127.0.0.1:58190 POST /v2/humansa/responses/stream 1.1 200 - 1261774
+WARNING:asyncio:Executing <Task finished name='Task-23' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 1.261 seconds
+ERROR:__main__:🚨 UNHANDLED EXCEPTION: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+ERROR:__main__:Request method: HEAD
+ERROR:__main__:Request URL: http://localhost:5001/
+ERROR:__main__:Request data: None
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1500, in full_dispatch_request
+    result = await self.dispatch_request(request_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1591, in dispatch_request
+    self.raise_routing_exception(request_)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1578, in raise_routing_exception
+    raise request.routing_exception
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/ctx.py", line 73, in match_request
+    ) = self.url_adapter.match(  # type: ignore
+        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+        return_rule=True
+        ^^^^^^^^^^^^^^^^
+    )  # noqa
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+[2025-07-29 22:56:34 -0700] [22663] [INFO] 127.0.0.1:56195 HEAD / 1.1 500 207 10858
+ERROR:__main__:🚨 UNHANDLED EXCEPTION: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+ERROR:__main__:Request method: HEAD
+ERROR:__main__:Request URL: http://192.168.1.87:5001/
+ERROR:__main__:Request data: None
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1500, in full_dispatch_request
+    result = await self.dispatch_request(request_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1591, in dispatch_request
+    self.raise_routing_exception(request_)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1578, in raise_routing_exception
+    raise request.routing_exception
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/ctx.py", line 73, in match_request
+    ) = self.url_adapter.match(  # type: ignore
+        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+        return_rule=True
+        ^^^^^^^^^^^^^^^^
+    )  # noqa
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+[2025-07-29 22:56:40 -0700] [22663] [INFO] 192.168.1.87:65056 HEAD / 1.1 500 207 1558

@@ -16,20 +16,21 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class Response:
-    """Represents a single response in a conversation"""
+    """Represents a single response in a conversation with full reasoning chain"""
     id: str
     conversation_id: str
     user_id: str
     model: str
     created: int
     input: str
-    output: List[Dict[str, Any]]
+    output: List[Dict[str, Any]]  # Array of output items (text, tool_use, tool_result)
     previous_response_id: Optional[str] = None
     metadata: Dict[str, Any] = field(default_factory=dict)
     tools_used: List[str] = field(default_factory=list)
     token_usage: Dict[str, int] = field(default_factory=dict)
     
     def to_dict(self) -> Dict[str, Any]:
+        """Convert to OpenAI Responses API format"""
         return {
             "id": self.id,
             "object": "response",
@@ -38,10 +39,13 @@ class Response:
             "conversation_id": self.conversation_id,
             "previous_response_id": self.previous_response_id,
             "input": self.input,
-            "output": self.output,
-            "metadata": self.metadata,
-            "tools_used": self.tools_used,
-            "usage": self.token_usage
+            "output": self.output,  # Full reasoning chain with tool calls
+            "usage": {
+                **self.token_usage,
+                "reasoning_tokens": self.metadata.get("reasoning_tokens", 0),
+                "tool_tokens": self.metadata.get("tool_tokens", 0)
+            },
+            "metadata": self.metadata
         }
 
 

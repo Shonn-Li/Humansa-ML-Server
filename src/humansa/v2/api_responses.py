@@ -19,6 +19,9 @@ from .context_manager import ContextManager
 from .orchestrator_agent import HumansaOrchestratorAgent
 from .orchestrator_agent_enhanced import HumansaOrchestratorAgentEnhanced
 from .orchestrator_agent_consolidated import HumansaOrchestratorAgentConsolidated
+from .orchestrator_agent_transparent import HumansaOrchestratorAgentTransparent
+from .response_formatter import ResponseFormatter
+from .response_agent import HumansaResponseAgent
 from chat.streaming.sse_formatter import SSEFormatter
 import logging
 import os
@@ -37,6 +40,9 @@ context_manager = ContextManager()
 orchestrator: Optional[HumansaOrchestratorAgent] = None
 enhanced_orchestrator: Optional[HumansaOrchestratorAgentEnhanced] = None
 consolidated_orchestrator: Optional[HumansaOrchestratorAgentConsolidated] = None
+transparent_orchestrator: Optional[HumansaOrchestratorAgentTransparent] = None
+response_formatter = ResponseFormatter()
+response_agent = HumansaResponseAgent()
 sse_formatter = SSEFormatter()
 
 # Check if enhanced logging is enabled
@@ -47,13 +53,13 @@ USE_CONSOLIDATED_TOOLS = os.getenv('HUMANSA_USE_CONSOLIDATED_TOOLS', 'true').low
 
 async def initialize_v2_responses_system(db_pool, openai_api_key: str):
     """Initialize the responses-based v2 Humansa system."""
-    global memory_manager, orchestrator, enhanced_orchestrator, consolidated_orchestrator
-    global context_compressor, conversation_manager, response_manager
+    global memory_manager, orchestrator, enhanced_orchestrator, consolidated_orchestrator, transparent_orchestrator
+    global context_compressor, conversation_manager, response_manager, response_formatter
     
     # Initialize LLM
     llm = OpenAI(
         api_key=openai_api_key,
-        model="gpt-4-turbo-preview",
+        model="gpt-4.1",  # Use gpt-4.1 - the latest model from ChatGPT
         temperature=0.7
     )
     
@@ -68,15 +74,31 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
     try:
         from humansa.memory.mem0_manager import Mem0Manager
         mem0_manager = Mem0Manager.get_instance()
+        
+        # Initialize Mem0 if not already initialized
+        if not mem0_manager.initialized:
+            logger.info("Initializing Mem0 manager...")
+            init_success = await mem0_manager.initialize()
+            if init_success:
+                logger.info("✅ Mem0 manager initialized successfully")
+            else:
+                logger.warning("⚠️ Mem0 initialization failed")
+        
         if mem0_manager.initialized:
-            memory_manager = Mem0MemoryManagerAdapter(mem0_manager)
+            # Use Mem0 adapter WITH db_pool parameter
+            memory_manager = Mem0MemoryManagerAdapter(db_pool, mem0_manager)
             logger.info("✅ Using Mem0 for memory management")
         else:
+            # Fall back to basic memory manager
             memory_manager = MemoryManager(db_pool)
             logger.info("✅ Using basic memory manager (Mem0 not initialized)")
     except ImportError:
         memory_manager = MemoryManager(db_pool)
         logger.info("✅ Using basic memory manager")
+    
+    # Initialize memory tables
+    await memory_manager.initialize_tables()
+    logger.info("✅ Memory tables initialized")
     
     # Initialize orchestrators
     try:
@@ -98,14 +120,7 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
             llm=llm,
             memory_manager=memory_manager,
             debug=True,
-            use_real_tools=True,
-            db_config={
-                'host': os.getenv('DB_HOST', 'localhost'),
-                'port': int(os.getenv('DB_PORT', '5432')),
-                'database': os.getenv('DB_NAME', 'postgres'),
-                'user': os.getenv('DB_USER', 'postgres'),
-                'password': os.getenv('DB_PASSWORD', '')
-            }
+            enable_enhanced_logging=True
         )
         
         # Initialize consolidated orchestrator if enabled
@@ -124,6 +139,25 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
                 }
             )
             logger.info("✅ Consolidated orchestrator initialized (7 tools with dynamic loading)")
+        
+        # Initialize transparent orchestrator for proper response format
+        transparent_orchestrator = HumansaOrchestratorAgentTransparent(
+            llm=llm,
+            memory_manager=memory_manager,
+            debug=False,
+            use_real_tools=True,
+            db_config={
+                'host': os.getenv('DB_HOST', 'localhost'),
+                'port': int(os.getenv('DB_PORT', '5432')),
+                'database': os.getenv('DB_NAME', 'postgres'),
+                'user': os.getenv('DB_USER', 'postgres'),
+                'password': os.getenv('DB_PASSWORD', '')
+            }
+        )
+        logger.info("✅ Transparent orchestrator initialized (captures tool calls)")
+        
+        # Initialize response formatter
+        response_formatter = ResponseFormatter()
         
         logger.info("✅ Responses API orchestrators initialized successfully")
     except Exception as e:
@@ -202,77 +236,119 @@ async def create_response():
         
         logger.info(f"Processing response with {len(context_messages)} context messages ({token_count} tokens)")
         
-        # Determine which orchestrator to use
-        use_consolidated = USE_CONSOLIDATED_TOOLS and consolidated_orchestrator is not None
-        use_enhanced = ENABLE_ENHANCED_LOGGING or data.get('debug', False)
-        
-        if use_consolidated:
-            current_orchestrator = consolidated_orchestrator
-            logger.info("🎯 Using consolidated orchestrator with dynamic tool loading")
-        elif use_enhanced:
-            current_orchestrator = enhanced_orchestrator
-        else:
-            current_orchestrator = orchestrator
+        # Always use transparent orchestrator for proper response format
+        if not transparent_orchestrator:
+            logger.error("Transparent orchestrator not initialized")
+            return jsonify({"error": "Service not available"}), 503
         
         # Track start time
         start_time = time.time()
         
-        # Process through orchestrator
-        result = await current_orchestrator.process_query(
+        # Process through transparent orchestrator to get full reasoning chain
+        result = await transparent_orchestrator.process_query_with_transparency(
             query=input_text,
             user_id=user_id,
             messages=context_messages,
             stream=False
         )
         
-        # Extract response content and metadata
-        response_content = result.get('response', '')
-        tools_used = result.get('tools_used', [])
+        # Apply response agent post-processing to ensure brand consistency
+        result = response_agent.process_response(
+            raw_response=result,
+            query=input_text,
+            user_id=user_id,
+            context_messages=context_messages
+        )
         
-        # Calculate token usage
-        prompt_tokens = token_count + len(input_text) // 4  # Approximate
-        completion_tokens = len(response_content) // 4  # Approximate
-        total_tokens = prompt_tokens + completion_tokens
+        # Extract output array and metadata
+        output = result.get('output', [])
+        usage = result.get('usage', {})
+        response_metadata = result.get('metadata', {})
         
-        # Create output format
-        output = [{
-            "type": "text",
-            "text": response_content
-        }]
+        # Extract tools used from output
+        tools_used = []
+        for item in output:
+            if item.get('type') == 'tool_use':
+                tool_name = item.get('tool_use', {}).get('name', '')
+                if tool_name and tool_name not in tools_used:
+                    tools_used.append(tool_name)
         
-        # Add tool outputs if any
-        if result.get('tool_outputs'):
-            for tool_output in result['tool_outputs']:
-                output.append({
-                    "type": "tool_output",
-                    "tool": tool_output.get('tool'),
-                    "output": tool_output.get('output')
-                })
-        
-        # Create response record
+        # Create response record with full output array
         response = response_manager.create_response(
             user_id=user_id,
             model=model,
             input_text=input_text,
-            output=output,
+            output=output,  # Full reasoning chain with tool calls
             previous_response_id=previous_response_id,
             metadata={
                 **metadata,
-                "processing_time": time.time() - start_time,
-                "enhanced_logging": use_enhanced
+                **response_metadata,
+                "processing_time": time.time() - start_time
             },
             tools_used=tools_used,
-            token_usage={
-                "prompt_tokens": prompt_tokens,
-                "completion_tokens": completion_tokens,
-                "total_tokens": total_tokens
-            }
+            token_usage=usage
         )
         
         return jsonify(response.to_dict())
         
     except Exception as e:
         logger.error(f"Error creating response: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@humansa_v2_responses_bp.route('/v2/humansa/responses/stream', methods=['POST'])
+async def create_streaming_response():
+    """
+    Create a new response with streaming - OpenAI Responses API style
+    
+    Request body:
+    {
+        "model": "gpt-4-turbo",
+        "input": "你好",
+        "user_id": "user123",
+        "previous_response_id": "resp_abc123",  # Optional
+        "metadata": {}  # Optional
+    }
+    
+    Response: Event stream with format:
+    - response.created
+    - response.output_item.delta  
+    - response.output_item.done
+    - response.done
+    """
+    try:
+        data = await request.get_json()
+        model = data.get('model', 'gpt-4-turbo')
+        input_text = data.get('input', '')
+        user_id = data.get('user_id')
+        previous_response_id = data.get('previous_response_id')
+        metadata = data.get('metadata', {})
+        
+        if not input_text:
+            return jsonify({"error": "Input is required"}), 400
+        
+        # Handle user_id for new conversations
+        if not previous_response_id and not user_id:
+            user_id = f'anonymous_{uuid.uuid4().hex[:8]}'
+        
+        # Stream response using event-based format
+        return Response(
+            stream_event_generator(
+                input_text=input_text,
+                previous_response_id=previous_response_id,
+                user_id=user_id,
+                model=model,
+                metadata=metadata
+            ),
+            mimetype="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache",
+                "X-Accel-Buffering": "no"
+            }
+        )
+        
+    except Exception as e:
+        logger.error(f"Error creating streaming response: {e}")
         return jsonify({"error": str(e)}), 500
 
 
@@ -341,9 +417,9 @@ async def stream_response_continuation(response_id: str):
         if not input_text:
             return jsonify({"error": "Input is required"}), 400
         
-        # Stream response
+        # Stream response using event-based format
         return Response(
-            stream_response_generator(
+            stream_event_generator(
                 input_text=input_text,
                 previous_response_id=response_id,
                 user_id=previous_response.user_id,
@@ -362,14 +438,14 @@ async def stream_response_continuation(response_id: str):
         return jsonify({"error": str(e)}), 500
 
 
-async def stream_response_generator(
+async def stream_event_generator(
     input_text: str,
     previous_response_id: Optional[str],
     user_id: str,
     model: str,
     metadata: Dict[str, Any]
 ) -> AsyncGenerator[str, None]:
-    """Generate streaming response"""
+    """Generate event-based streaming response in OpenAI format"""
     try:
         # Get context
         if previous_response_id:
@@ -381,52 +457,49 @@ async def stream_response_generator(
             context_messages = []
             token_count = 0
         
-        # Determine orchestrator
-        use_consolidated = USE_CONSOLIDATED_TOOLS and consolidated_orchestrator is not None
-        use_enhanced = ENABLE_ENHANCED_LOGGING or metadata.get('debug', False)
+        # Always use transparent orchestrator for proper format
+        if not transparent_orchestrator:
+            logger.error("Transparent orchestrator not initialized")
+            yield f"data: {json.dumps({'error': 'Service not available'})}\n\n"
+            yield "data: [DONE]\n\n"
+            return
         
-        if use_consolidated:
-            current_orchestrator = consolidated_orchestrator
-        elif use_enhanced:
-            current_orchestrator = enhanced_orchestrator
-        else:
-            current_orchestrator = orchestrator
-        
-        # Track response content
-        full_response = ""
-        tools_used = []
+        # Track start time
         start_time = time.time()
         
-        # Stream through orchestrator
-        async for chunk in current_orchestrator.process_query(
+        # Stream through transparent orchestrator with proper event format
+        event_count = 0
+        response_data = None
+        
+        async for event in transparent_orchestrator.stream_query_with_transparency(
             query=input_text,
             user_id=user_id,
-            messages=context_messages,
-            stream=True
+            messages=context_messages
         ):
-            yield f"data: {json.dumps(chunk)}\n\n"
+            # Apply response agent processing to final event
+            if event.get('event') == 'response.done':
+                event = response_agent.process_streaming_event(event, input_text)
             
-            # Accumulate content
-            if 'choices' in chunk and chunk['choices']:
-                delta = chunk['choices'][0].get('delta', {})
-                if 'content' in delta:
-                    full_response += delta['content']
-                
-                # Track tool usage
-                if 'tool_calls' in delta:
-                    for tool_call in delta['tool_calls']:
-                        tools_used.append(tool_call.get('function', {}).get('name', ''))
+            # Convert event to SSE format
+            yield f"data: {json.dumps(event)}\n\n"
+            event_count += 1
+            
+            # Capture final response data
+            if event.get('event') == 'response.done':
+                response_data = event.get('data', {})
         
         # Create response record after streaming completes
-        if full_response:
-            output = [{
-                "type": "text",
-                "text": full_response
-            }]
+        if response_data:
+            output = response_data.get('output', [])
+            usage = response_data.get('usage', {})
             
-            # Calculate token usage
-            prompt_tokens = token_count + len(input_text) // 4
-            completion_tokens = len(full_response) // 4
+            # Extract tools used
+            tools_used = []
+            for item in output:
+                if item.get('type') == 'tool_use':
+                    tool_name = item.get('tool_use', {}).get('name', '')
+                    if tool_name and tool_name not in tools_used:
+                        tools_used.append(tool_name)
             
             response = response_manager.create_response(
                 user_id=user_id,
@@ -437,19 +510,15 @@ async def stream_response_generator(
                 metadata={
                     **metadata,
                     "processing_time": time.time() - start_time,
-                    "enhanced_logging": use_enhanced,
-                    "streamed": True
+                    "streamed": True,
+                    "event_count": event_count
                 },
-                tools_used=list(set(tools_used)),
-                token_usage={
-                    "prompt_tokens": prompt_tokens,
-                    "completion_tokens": completion_tokens,
-                    "total_tokens": prompt_tokens + completion_tokens
-                }
+                tools_used=tools_used,
+                token_usage=usage
             )
             
-            # Send final response metadata
-            yield f"data: {json.dumps({'response_id': response.id, 'conversation_id': response.conversation_id})}\n\n"
+            # Send response metadata as final event
+            yield f"data: {json.dumps({'event': 'response.metadata', 'data': {'response_id': response.id, 'conversation_id': response.conversation_id}})}\n\n"
         
         yield "data: [DONE]\n\n"
         

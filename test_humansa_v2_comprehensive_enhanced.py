@@ -372,13 +372,23 @@ async def test_v2_endpoint_enhanced(session, test_case):
             "debug": True    # Enable debug mode for enhanced logging
         }
         
-        # Make request
+        # Make request using Response API
         start_time = time.time()
         full_response = ""
+        tools_used = []
         
+        # Create response using Response API
+        response_data = {
+            "model": "gpt-4-turbo",
+            "input": test_case['query'],
+            "user_id": str(user_id),
+            "metadata": {"test_id": test_case['id'], "debug": True}
+        }
+        
+        # Use streaming endpoint for detailed output
         async with session.post(
-            f"{BASE_URL}/v2/humansa/chat",
-            json=request_data,
+            f"{BASE_URL}/v2/humansa/responses/stream",
+            json=response_data,
             timeout=aiohttp.ClientTimeout(total=30)
         ) as response:
             
@@ -412,10 +422,63 @@ async def test_v2_endpoint_enhanced(session, test_case):
                         try:
                             data = json.loads(data_str)
                             
-                            # Handle debug events
-                            if data.get('object') == 'debug.event' or data.get('debug'):
+                            # Handle Response API events
+                            event_type = data.get('event', '')
+                            event_data = data.get('data', {})
+                            
+                            if event_type == 'response.created':
+                                print_colored(f"    📝 Response ID: {event_data.get('id', 'N/A')}", Colors.BLUE)
+                            
+                            elif event_type == 'response.output_item.delta':
+                                item = event_data.get('item', {})
+                                if item.get('type') == 'text':
+                                    text = item.get('text', '')
+                                    full_response += text
+                                    if len(text) > 50:
+                                        print_colored(f"    ✍️  {text[:50]}...", Colors.ENDC)
+                            
+                            elif event_type == 'response.output_item.done':
+                                item = event_data.get('item', {})
+                                item_type = item.get('type', '')
+                                
+                                if item_type == 'text':
+                                    text = item.get('text', '')
+                                    if 'thinking' in text.lower() or '思考' in text:
+                                        print_colored(f"    💭 Thinking: {text[:100]}...", Colors.CYAN)
+                                        thinking_steps.append(text)
+                                
+                                elif item_type == 'tool_use':
+                                    tool_info = item.get('tool_use', {})
+                                    tool_name = tool_info.get('name', 'unknown')
+                                    tool_input = tool_info.get('input', {})
+                                    print_colored(f"    🔧 Tool Use: {tool_name}", Colors.BLUE)
+                                    print_colored(f"       Input: {json.dumps(tool_input, ensure_ascii=False)[:100]}...", Colors.BLUE)
+                                    tool_calls.append({"tool": tool_name, "input": tool_input})
+                                    tools_used.append(tool_name)
+                                
+                                elif item_type == 'tool_result':
+                                    result_info = item.get('tool_result', {})
+                                    output = result_info.get('output', '')
+                                    print_colored(f"    📊 Tool Result: {str(output)[:100]}...", Colors.GREEN)
+                            
+                            elif event_type == 'response.done':
+                                # Extract final response text from output array
+                                output_array = event_data.get('output', [])
+                                for output_item in output_array:
+                                    if output_item.get('type') == 'text':
+                                        # Get the last text item as the final response
+                                        text = output_item.get('text', '')
+                                        if text and not ('thinking' in text.lower() or '思考' in text):
+                                            full_response = text
+                                
+                                # Get usage information
+                                usage = event_data.get('usage', {})
+                                print_colored(f"    📈 Tokens - Total: {usage.get('total_tokens', 0)}, Reasoning: {usage.get('reasoning_tokens', 0)}, Tool: {usage.get('tool_tokens', 0)}", Colors.CYAN)
+                            
+                            # Legacy debug event handling (if any)
+                            elif data.get('object') == 'debug.event' or data.get('debug'):
                                 event = data.get('debug', data.get('event', data))
-                                event_type = event.get('type', 'unknown')
+                                debug_event_type = event.get('type', 'unknown')
                                 
                                 if event_type == 'thinking_start' or event_type == 'thinking_end':
                                     thought = event.get('thought', event.get('content', ''))
@@ -435,8 +498,8 @@ async def test_v2_endpoint_enhanced(session, test_case):
                                     if result:
                                         print_colored(f"    📊 Tool Result: {str(result)[:100]}...", Colors.GREEN)
                                 
-                                elif event_type in ['memory', 'mem0_check', 'memory_context']:
-                                    print_colored(f"    🧠 Mem0 Event: {event_type}", Colors.MAGENTA)
+                                if debug_event_type in ['memory', 'mem0_check', 'memory_context']:
+                                    print_colored(f"    🧠 Mem0 Event: {debug_event_type}", Colors.MAGENTA)
                                     mem0_events.append(event)
                                 
                                 elif 'agent' in str(event).lower():
@@ -446,7 +509,7 @@ async def test_v2_endpoint_enhanced(session, test_case):
                                 
                                 debug_events.append(event)
                             
-                            # Handle regular content
+                            # Handle regular content (legacy)
                             elif 'choices' in data:
                                 for choice in data.get('choices', []):
                                     delta = choice.get('delta', {})
@@ -497,6 +560,7 @@ async def test_v2_endpoint_enhanced(session, test_case):
             debug_info = {
                 "agent_calls": agent_calls,
                 "tool_calls": tool_calls,
+                "tools_used": list(set(tools_used)),  # Unique tools used
                 "thinking_steps": len(thinking_steps),
                 "mem0_events": len(mem0_events),
                 "total_debug_events": len(debug_events)
@@ -595,6 +659,9 @@ async def run_all_tests():
                 print_colored(f"\n  🔍 Debug Info:", Colors.CYAN)
                 print(f"     Agents called: {len(debug_info.get('agent_calls', []))}")
                 print(f"     Tools called: {len(debug_info.get('tool_calls', []))}")
+                tools_used = debug_info.get('tools_used', [])
+                if tools_used:
+                    print(f"     Tools used: {', '.join(tools_used)}")
                 print(f"     Thinking steps: {debug_info.get('thinking_steps', 0)}")
                 print(f"     Mem0 events: {debug_info.get('mem0_events', 0)}")
             
@@ -642,8 +709,10 @@ async def run_all_tests():
                     debug_info = result.get('debug_info', {})
                     if debug_info and debug_info.get('agent_calls'):
                         print(f"  Agents used: {', '.join(debug_info['agent_calls'])}")
+                    if debug_info and debug_info.get('tools_used'):
+                        print(f"  Tools used: {', '.join(debug_info['tools_used'])}")
                     if debug_info and debug_info.get('tool_calls'):
-                        print(f"  Tools used: {[t['tool'] for t in debug_info['tool_calls']]}")
+                        print(f"  Tool calls: {len(debug_info['tool_calls'])}")
 
 
 if __name__ == "__main__":

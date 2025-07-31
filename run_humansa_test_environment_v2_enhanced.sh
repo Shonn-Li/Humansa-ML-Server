@@ -113,10 +113,17 @@ echo -e "\n${BLUE}Memory Status:${NC}"
 curl -s http://localhost:6001/v2/humansa/memory/status | python3 -m json.tool
 
 # Step 6: Run comprehensive V2 tests with enhanced logging
-echo -e "\n${YELLOW}Step 6: Running comprehensive V2 tests with enhanced logging (30 test cases)...${NC}"
+echo -e "\n${YELLOW}Step 6: Running comprehensive V2 tests with enhanced logging using Response API (30 test cases)...${NC}"
 
-# Create enhanced V2 test script
-cat > test_HUMANSA_v2_comprehensive_enhanced.py << 'TESTSCRIPT'
+# Skip creating test script - use existing one
+# The test script has been updated to use Response API endpoints
+if [[ ! -f test_HUMANSA_v2_comprehensive_enhanced.py ]]; then
+    echo -e "${RED}❌ test_HUMANSA_v2_comprehensive_enhanced.py not found!${NC}"
+    exit 1
+fi
+
+# Skip to line 773 content
+cat > /dev/null << 'TESTSCRIPT'
 #!/usr/bin/env python3
 """Enhanced HUMANSA V2 Test Suite with Detailed Logging - 30 Test Cases"""
 
@@ -772,11 +779,11 @@ if __name__ == "__main__":
     asyncio.run(run_all_tests())
 TESTSCRIPT
 
-# Make test script executable
-chmod +x test_HUMANSA_v2_comprehensive_enhanced.py
+# Don't need to create or chmod - using existing file
 
 # Run the enhanced tests
-echo -e "\n${CYAN}Running enhanced tests with full process logging...${NC}"
+echo -e "\n${CYAN}Running enhanced tests with Response API and full transparency...${NC}"
+echo -e "${YELLOW}Using Response API endpoints for complete tool visibility${NC}"
 python3 test_HUMANSA_v2_comprehensive_enhanced.py
 
 # Step 7: Show server logs
@@ -793,11 +800,13 @@ echo -e "\n${GREEN}✅ Enhanced HUMANSA V2 test environment completed!${NC}"
 echo -e "\n${BLUE}Summary:${NC}"
 echo "- Test database: PostgreSQL on port 5454 (database: test4)"
 echo "- ML Server: Running on port 6001"
-echo "- Endpoint: http://localhost:6001/v2/humansa/chat"
+echo "- Response API endpoints:"
+echo "  - Create: http://localhost:6001/v2/humansa/responses/create"
+echo "  - Stream: http://localhost:6001/v2/humansa/responses/stream"
 echo "- Memory endpoints: /v2/humansa/memory/status, /add, /search"
-echo "- Enhanced logging: ENABLED"
+echo "- Enhanced logging: ENABLED with full tool transparency"
 echo "- Server logs: server_v2_enhanced.log"
-echo "- Test results: humansa_v2_enhanced_test_results_*.json"
+echo "- Test results: HUMANSA_v2_enhanced_test_results_*.json"
 echo -e "\n${YELLOW}Note: Remember to kill the server process when done!${NC}"
 
 # Optional: Auto-cleanup after tests

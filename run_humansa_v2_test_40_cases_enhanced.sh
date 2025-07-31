@@ -114,7 +114,7 @@ TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 RESULTS_FILE="${TEST_RESULTS_DIR}/results_${TIMESTAMP}.md"
 PROCESS_LOG="${TEST_RESULTS_DIR}/process_log_${TIMESTAMP}.md"
 
-# Function to test API with enhanced process logging
+# Function to test API with Response API and enhanced process logging
 test_api_enhanced() {
     local test_num=$1
     local user_id=$2
@@ -152,19 +152,20 @@ test_api_enhanced() {
     echo -e "\n#### Agent Processing:" >> "$PROCESS_LOG"
     echo '```' >> "$PROCESS_LOG"
     
-    # Create request payload
+    # Create request payload for Response API
     request_payload=$(cat <<EOF
 {
+    "model": "gpt-4-turbo",
+    "input": "${query}",
     "user_id": "${user_id}",
-    "messages": [{"role": "user", "content": "${query}"}],
-    "stream": true,
-    "debug": true
+    "metadata": {"test_id": ${test_num}, "debug": true}
 }
 EOF
 )
     
-    # Stream the response and capture all steps
+    # Stream the response using Response API and capture all steps
     echo -e "${GREEN}Agent Response:${NC}"
+    echo -e "${YELLOW}🔍 Showing tool calls and reasoning...${NC}"
     
     # Use curl with -N flag for no buffering
     full_response=""
@@ -180,16 +181,53 @@ EOF
             
             # Parse JSON chunk
             if [[ ! -z "$data" ]]; then
-                # Extract content from streaming response
-                content=$(echo "$data" | jq -r '.choices[0].delta.content // empty' 2>/dev/null)
-                if [[ ! -z "$content" ]]; then
-                    echo -ne "$content"
-                    full_response+="$content"
-                    echo -n "$content" >> "$PROCESS_LOG"
+                # Parse Response API events
+                event_type=$(echo "$data" | jq -r '.event // empty' 2>/dev/null)
+                
+                if [[ $event_type == "response.created" ]]; then
+                    response_id=$(echo "$data" | jq -r '.data.id // empty' 2>/dev/null)
+                    echo -e "${BLUE}📝 Response ID: ${response_id}${NC}"
+                    echo "Response ID: ${response_id}" >> "$PROCESS_LOG"
+                    
+                elif [[ $event_type == "response.output_item.done" ]]; then
+                    item=$(echo "$data" | jq -r '.data.item // empty' 2>/dev/null)
+                    item_type=$(echo "$item" | jq -r '.type // empty' 2>/dev/null)
+                    
+                    if [[ $item_type == "text" ]]; then
+                        text=$(echo "$item" | jq -r '.text // empty' 2>/dev/null)
+                        # Check if it's thinking or final response
+                        if [[ $text == *"思考"* ]] || [[ $text == *"Thought"* ]]; then
+                            echo -e "${CYAN}💭 Thinking: ${text:0:100}...${NC}"
+                            echo "💭 Thinking: ${text}" >> "$PROCESS_LOG"
+                        else
+                            full_response="$text"
+                            echo -e "${GREEN}$text${NC}"
+                            echo "$text" >> "$PROCESS_LOG"
+                        fi
+                        
+                    elif [[ $item_type == "tool_use" ]]; then
+                        tool_name=$(echo "$item" | jq -r '.tool_use.name // empty' 2>/dev/null)
+                        tool_input=$(echo "$item" | jq -r '.tool_use.input // empty' 2>/dev/null)
+                        echo -e "${BLUE}🔧 Tool Use: ${tool_name}${NC}"
+                        echo -e "${BLUE}   Input: ${tool_input}${NC}"
+                        echo "🔧 Tool Use: ${tool_name}" >> "$PROCESS_LOG"
+                        echo "   Input: ${tool_input}" >> "$PROCESS_LOG"
+                        
+                    elif [[ $item_type == "tool_result" ]]; then
+                        tool_output=$(echo "$item" | jq -r '.tool_result.output // empty' 2>/dev/null)
+                        echo -e "${MAGENTA}📊 Tool Result: ${tool_output:0:100}...${NC}"
+                        echo "📊 Tool Result: ${tool_output}" >> "$PROCESS_LOG"
+                    fi
+                    
+                elif [[ $event_type == "response.done" ]]; then
+                    usage=$(echo "$data" | jq -r '.data.usage // empty' 2>/dev/null)
+                    total_tokens=$(echo "$usage" | jq -r '.total_tokens // 0' 2>/dev/null)
+                    echo -e "${CYAN}📈 Tokens used: ${total_tokens}${NC}"
+                    echo "📈 Tokens used: ${total_tokens}" >> "$PROCESS_LOG"
                 fi
             fi
         fi
-    done < <(curl -sN -X POST "http://localhost:${ML_SERVER_PORT}/v2/humansa/chat" \
+    done < <(curl -sN -X POST "http://localhost:${ML_SERVER_PORT}/v2/humansa/responses/stream" \
         -H "Content-Type: application/json" \
         -d "$request_payload")
     

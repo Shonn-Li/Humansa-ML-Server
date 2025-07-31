@@ -1,0 +1,615 @@
+[94m
+================================================================================[0m
+[1m[94m  Running Enhanced HUMANSA V2 Comprehensive Test Suite[0m
+[94m================================================================================[0m
+Total test cases: 30
+- Identity tests: 20
+- Mem0 tests: 10
+[96mEnhanced logging is ENABLED - showing full process details[0m
+[92m
+✅ V2 Health Check: healthy[0m
+   Components: {'appointment_workflow': True, 'memory_manager': True, 'orchestrator': True}
+[94m
+================================================================================[0m
+[1m[94m  Test 1/30: Basic Identity Query[0m
+[94m================================================================================[0m
+  Query: 你是谁？
+  Description: Agent should identify itself as 诺亚新舟健康医疗助理/小诺
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_5dc58c8f5236_1753901498[0m
+[96m    📈 Tokens - Total: 62, Reasoning: 0, Tool: 0[0m
+[92m
+  📝 Full Response:[0m
+[92m    我是诺亚新舟健康医疗助理小诺，您的AI健康管家。诺亚新舟（Humansa）以'以爱行舟，亲近相守'为理念，拥有500多位三甲主任级名医专家，30+家高端综合名医诊所。我可以帮助您查询医生、预约挂号、了解医疗服务等。有什么可以帮助您的吗？
+
+如需人工协助预约，请联系诺亚新舟客服。[0m
+[92m
+  ✅ PASSED (Response time: 0.00s)[0m
+[92m  Found keywords: 诺亚新舟, 小诺, 健康医疗助理, AI健康管家[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 0
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 2/30: Company Background[0m
+[94m================================================================================[0m
+  Query: 介绍一下诺亚新舟
+  Description: Agent should provide accurate company background
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_ad4e6bdf0fbe_1753901499[0m
+[96m    📈 Tokens - Total: 0, Reasoning: 0, Tool: 0[0m
+[92m
+  📝 Full Response:[0m
+[92m    错误：Reached max iterations.
+
+诺亚新舟的理念是：以爱行舟，亲近相守
+500多位三甲主任级名医专家，30+家高端综合名医诊所[0m
+[92m
+  ✅ PASSED (Response time: 7.09s)[0m
+[92m  Found keywords: 以爱行舟, 亲近相守, 500多位, 三甲主任级, 名医专家, 30+家, 高端综合名医诊所[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 0
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 3/30: Service Capabilities[0m
+[94m================================================================================[0m
+  Query: 你能做什么？
+  Description: Agent should list its service capabilities
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_4a1beed164eb_1753901508[0m
+[96m    📈 Tokens - Total: 67, Reasoning: 67, Tool: 0[0m
+[92m
+  📝 Full Response:[0m
+[92m    作为诺亚新舟健康医疗助理小诺，我可以为您提供以下服务：
+
+1. **健康咨询与分诊**：根据症状提供初步科室/检查建议
+2. **实时预约**：查询医生余号，协助完成预约
+3. **检查项目下单**：对比各诊所项目，跳转商城下单
+4. **诊所导航**：提供地址、电话、营业时间、交通指引
+5. **后续管理**：体检报告解读、慢病管理方案推荐
+
+诺亚新舟拥有500多位三甲主任级名医专家，30+家高端综合名医诊所，致力于为您提供优质的医疗健康服务。[0m
+[92m
+  ✅ PASSED (Response time: 2.52s)[0m
+[92m  Found keywords: 健康咨询, 实时预约, 检查项目, 诊所导航, 体检报告[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 0
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 4/30: Brand Slogan[0m
+[94m================================================================================[0m
+  Query: 诺亚新舟的口号是什么？
+  Description: Agent should know the company slogan
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_3c4b83ba0428_1753901511[0m
+[94m    🔧 Tool Use: unknown[0m
+[94m       Input: {}...[0m
+[92m    📊 Tool Result: ...[0m
+[94m    🔧 Tool Use: unknown[0m
+[94m       Input: {}...[0m
+[92m    📊 Tool Result: ...[0m
+[96m    📈 Tokens - Total: 118, Reasoning: 40, Tool: 78[0m
+[92m
+  📝 Full Response:[0m
+[92m     很抱歉，目前未能查到诺亚新舟的官方口号。如需进一步了解，可以直接联系诺亚新舟（电话：021-20000000，地址：上海市浦东新区陆家嘴金融区，邮箱：info@humansa.com）获取详细信息。
+
+诺亚新舟的理念是：以爱行舟，亲近相守
+500多位三甲主任级名医专家，30+家高端综合名医诊所[0m
+[92m
+  ✅ PASSED (Response time: 5.67s)[0m
+[92m  Found keywords: 以爱行舟, 亲近相守[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 2
+     Tools used: unknown
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 5/30: English Identity Query[0m
+[94m================================================================================[0m
+  Query: Who are you?
+  Description: Agent should respond in English when asked in English
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_00cedc5ac0e5_1753901518[0m
+[96m    📈 Tokens - Total: 64, Reasoning: 0, Tool: 0[0m
+[92m
+  📝 Full Response:[0m
+[92m    我是诺亚新舟健康医疗助理小诺，您的AI健康管家。诺亚新舟（Humansa）以'以爱行舟，亲近相守'为理念，拥有500多位三甲主任级名医专家，30+家高端综合名医诊所。我可以帮助您查询医生、预约挂号、了解医疗服务等。有什么可以帮助您的吗？
+
+如需人工协助预约，请联系诺亚新舟客服。[0m
+[91m
+  ❌ FAILED[0m
+[93m  Missing keywords: health, assistant, medical[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 0
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 6/30: Service Scope[0m
+[94m================================================================================[0m
+  Query: 你们有多少医生？多少诊所？
+  Description: Agent should know the scale of services
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_d0bf863682a0_1753901519[0m
+[94m    🔧 Tool Use: unknown[0m
+[94m       Input: {}...[0m
+[92m    📊 Tool Result: ...[0m
+[94m    🔧 Tool Use: unknown[0m
+[94m       Input: {}...[0m
+[92m    📊 Tool Result: ...[0m
+[96m    📈 Tokens - Total: 95, Reasoning: 17, Tool: 78[0m
+[92m
+  📝 Full Response:[0m
+[92m     目前我们有1位医生和1家诊所。如需详细信息或具体医生、诊所的介绍，请随时告知！
+
+作为您的诺亚新舟健康医疗助理小诺，我随时准备为您提供更多帮助。[0m
+[91m
+  ❌ FAILED[0m
+[93m  Missing keywords: 500, 三甲, 30+[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 2
+     Tools used: unknown
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 7/30: Health Mall Reference[0m
+[94m================================================================================[0m
+  Query: 我想买保健品
+  Description: Agent should recommend the health mall for products
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_ef989991bad6_1753901527[0m
+[94m    🔧 Tool Use: unknown[0m
+[94m       Input: {}...[0m
+[92m    📊 Tool Result: ...[0m
+[96m    📈 Tokens - Total: 105, Reasoning: 66, Tool: 39[0m
+[92m
+  📝 Full Response:[0m
+[92m    
+ 为您推荐了以下保健品：
+
+1. 综合维生素片（￥168）：增强免疫力，补充营养，适合亚健康和营养不良人群。
+2. 褪黑素片（￥98）：改善睡眠，调节生物钟，适合失眠或时差人群。
+3. 电子血压计（￥299）：监测血压，心率检测，适合高血压或心脏病患者。
+
+如需根据具体健康需求或预算进一步筛选，请告知您的需求！
+
+推荐您访问诺亚新舟健康商城：
+📱 #小程序://诺亚新舟医疗/t5ZpOWu0UyRtEFl
+
+以爱行舟，亲近相守[0m
+[92m
+  ✅ PASSED (Response time: 4.85s)[0m
+[92m  Found keywords: 健康商城, 诺亚新舟医疗, 小程序[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 1
+     Tools used: unknown
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 8/30: Article Reference[0m
+[94m================================================================================[0m
+  Query: 有什么最新的健康文章推荐吗？
+  Description: Agent should provide the latest article link
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_7c74bcbf7dff_1753901533[0m
+[94m    🔧 Tool Use: unknown[0m
+[94m       Input: {}...[0m
+[92m    📊 Tool Result: ...[0m
+[96m    📈 Tokens - Total: 99, Reasoning: 60, Tool: 39[0m
+[92m
+  📝 Full Response:[0m
+[92m     很抱歉，目前没有检索到最新的健康文章推荐。如果您有关注的健康主题或具体问题，我可以为您提供相关的健康建议或服务信息。同时，建议您关注权威健康科普平台，如中国疾控中心、健康中国等，获取最新的健康资讯。如有特定健康领域感兴趣，也可以告诉我，我为您进一步查找。
+
+作为您的诺亚新舟健康医疗助理小诺，我随时准备为您提供更多帮助。[0m
+[91m
+  ❌ FAILED[0m
+[93m  Missing keywords: mp.weixin.qq.com, 最新文章[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 1
+     Tools used: unknown
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 9/30: Emergency Response[0m
+[94m================================================================================[0m
+  Query: 我现在胸痛很厉害，呼吸困难
+  Description: Agent should recommend calling 120 for emergencies
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_adc0a8e8b75f_1753901539[0m
+[94m    🔧 Tool Use: unknown[0m
+[94m       Input: {}...[0m
+[92m    📊 Tool Result: ...[0m
+[96m    📈 Tokens - Total: 70, Reasoning: 31, Tool: 39[0m
+[92m
+  📝 Full Response:[0m
+[92m    ⚠️ 紧急情况提醒：
+ 您目前胸痛很厉害且呼吸困难，属于严重的紧急情况。建议您立即前往最近的急诊科，或直接拨打120急救电话，尽快就医。不要自行等待或延误处理！
+
+请立即拨打120急救电话！
+
+如需诺亚新舟的医疗服务支持，我们的医生随时准备为您提供后续帮助。[0m
+[92m
+  ✅ PASSED (Response time: 4.40s)[0m
+[92m  Found keywords: 120, 立即, 急救[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 1
+     Tools used: unknown
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 10/30: Self-Owned Clinics Only[0m
+[94m================================================================================[0m
+  Query: 推荐一个最好的医院给我
+  Description: Agent should only recommend self-owned clinics
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_5439c2aa7b02_1753901545[0m
+[94m    🔧 Tool Use: unknown[0m
+[94m       Input: {}...[0m
+[92m    📊 Tool Result: ...[0m
+[96m    📈 Tokens - Total: 129, Reasoning: 90, Tool: 39[0m
+[92m
+  📝 Full Response:[0m
+[92m     为您推荐中国最知名的几家医院，您可以根据所在城市和科室需求选择：
+
+1. 北京协和医院（北京市东城区帅府园1号，电话：010-69156114，儿科、泌尿科、骨科等）
+2. 深圳市人民医院（深圳市罗湖区东门北路1017号，电话：0755-25533018，内分泌科、妇科、眼科等）
+3. 广州中山医院（广州市越秀区中山二路106号，电话：020-87755766，心内科、耳鼻喉科等）
+
+如有特定城市或专科需求，请告知，我可以为您进一步精准推荐。
+
+作为您的诺亚新舟健康医疗助理小诺，我随时准备为您提供更多帮助。[0m
+[91m
+  ❌ FAILED[0m
+[93m  Missing keywords: 诊所, 预约[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 1
+     Tools used: unknown
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 11/30: Greeting - Hello[0m
+[94m================================================================================[0m
+  Query: 你好
+  Description: Should respond with friendly greeting and identity
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_f51913943028_1753901551[0m
+[96m    📈 Tokens - Total: 5, Reasoning: 5, Tool: 0[0m
+[92m
+  📝 Full Response:[0m
+[92m    您好！我是诺亚新舟健康医疗助理小诺，您的AI健康管家。
+你好！有什么可以帮您的吗？
+有什么可以帮助您的吗？[0m
+[92m
+  ✅ PASSED (Response time: 2.14s)[0m
+[92m  Found keywords: 你好, 诺亚新舟, 小诺, 健康[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 0
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 12/30: Greeting - Hi[0m
+[94m================================================================================[0m
+  Query: Hi
+  Description: Should respond with friendly greeting and identity
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_d6c602dae1a5_1753901554[0m
+[96m    📈 Tokens - Total: 8, Reasoning: 8, Tool: 0[0m
+[92m
+  📝 Full Response:[0m
+[92m    您好！我是诺亚新舟健康医疗助理小诺，您的AI健康管家。
+Hello! How can I assist you today?
+有什么可以帮助您的吗？[0m
+[91m
+  ❌ FAILED[0m
+[93m  Missing keywords: 你好[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 0
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 13/30: Booking Request[0m
+[94m================================================================================[0m
+  Query: 我想预约看医生
+  Description: Should guide user through booking process
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_913ed9ba0ee7_1753901556[0m
+[96m    📈 Tokens - Total: 22, Reasoning: 22, Tool: 0[0m
+[92m
+  📝 Full Response:[0m
+[92m     请问您想预约哪一科的医生？或者有什么具体症状需要就诊？这样我可以帮您更快地预约到合适的医生。
+
+作为您的诺亚新舟健康医疗助理小诺，我随时准备为您提供更多帮助。
+
+如需人工协助预约，请联系诺亚新舟客服。[0m
+[91m
+  ❌ FAILED[0m
+[93m  Missing keywords: 诊所, 时间[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 0
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 14/30: Health Consultation[0m
+[94m================================================================================[0m
+  Query: 最近总是失眠怎么办？
+  Description: Should provide health advice and suggest consultation
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_b733bd663315_1753901559[0m
+[94m    🔧 Tool Use: unknown[0m
+[94m       Input: {}...[0m
+[92m    📊 Tool Result: ...[0m
+[96m    📈 Tokens - Total: 117, Reasoning: 78, Tool: 39[0m
+[92m
+  📝 Full Response:[0m
+[92m     您好，针对您最近总是失眠的情况，建议您可以预约神经内科门诊进行详细检查，以便找出失眠的原因并获得针对性的治疗建议。如果失眠已经影响到日常生活，或者伴有其他症状（如情绪异常、头痛等），建议尽快就医。同时，您也可以尝试规律作息、避免睡前使用电子产品、减少咖啡因摄入，有助于改善睡眠。如果需要，我可以帮您查询附近的神经内科医生并协助预约。
+
+作为您的诺亚新舟健康医疗助理小诺，我随时准备为您提供更多帮助。
+
+如需人工协助预约，请联系诺亚新舟客服。[0m
+[91m
+  ❌ FAILED[0m
+[93m  Missing keywords: 诊所[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 1
+     Tools used: unknown
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 15/30: Check-up Query[0m
+[94m================================================================================[0m
+  Query: 你们提供体检服务吗？
+  Description: Should explain check-up services
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_9dd8e32b8ae6_1753901565[0m
+[94m    🔧 Tool Use: unknown[0m
+[94m       Input: {}...[0m
+[92m    📊 Tool Result: ...[0m
+[94m    🔧 Tool Use: unknown[0m
+[94m       Input: {}...[0m
+[92m    📊 Tool Result: ...[0m
+[96m    📈 Tokens - Total: 113, Reasoning: 35, Tool: 78[0m
+[92m
+  📝 Full Response:[0m
+[92m    作为诺亚新舟健康医疗助理小诺，我可以为您提供以下服务：
+
+1. **健康咨询与分诊**：根据症状提供初步科室/检查建议
+2. **实时预约**：查询医生余号，协助完成预约
+3. **检查项目下单**：对比各诊所项目，跳转商城下单
+4. **诊所导航**：提供地址、电话、营业时间、交通指引
+5. **后续管理**：体检报告解读、慢病管理方案推荐
+
+诺亚新舟拥有500多位三甲主任级名医专家，30+家高端综合名医诊所，致力于为您提供优质的医疗健康服务。[0m
+[91m
+  ❌ FAILED[0m
+[93m  Missing keywords: 套餐[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 2
+     Tools used: unknown
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 16/30: Doctor Specialties[0m
+[94m================================================================================[0m
+  Query: 你们有哪些科室的医生？
+  Description: Should list available specialties
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_3d9df64a6323_1753901573[0m
+[94m    🔧 Tool Use: unknown[0m
+[94m       Input: {}...[0m
+[92m    📊 Tool Result: ...[0m
+[94m    🔧 Tool Use: unknown[0m
+[94m       Input: {}...[0m
+[92m    📊 Tool Result: ...[0m
+[96m    📈 Tokens - Total: 113, Reasoning: 35, Tool: 78[0m
+[92m
+  📝 Full Response:[0m
+[92m     我们目前有以下科室的医生：妇科、神经外科、耳鼻喉科、心内科、骨科、内分泌科、儿科、妇产科、内科。如需了解某一科室医生详情或预约，可以告诉我您的具体需求。
+
+作为您的诺亚新舟健康医疗助理小诺，我随时准备为您提供更多帮助。
+
+如需人工协助预约，请联系诺亚新舟客服。[0m
+[91m
+  ❌ FAILED[0m
+[93m  Missing keywords: 专科[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 2
+     Tools used: unknown
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 17/30: Location Query[0m
+[94m================================================================================[0m
+  Query: 最近的诊所在哪里？
+  Description: Should help with clinic locations
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_97d54eb980e7_1753901580[0m
+[94m    🔧 Tool Use: unknown[0m
+[94m       Input: {}...[0m
+[92m    📊 Tool Result: ...[0m
+[96m    📈 Tokens - Total: 111, Reasoning: 72, Tool: 39[0m
+[92m
+  📝 Full Response:[0m
+[92m     附近可选择的诊所有以下几个：
+
+1. 北京诊所
+   地址：北京市朝阳区国贸CBD中心
+   电话：010-10000000
+
+2. 重庆诊所
+   地址：重庆市渝中区解放碑商务区
+   电话：023-10000001
+
+3. 武汉诊所
+   地址：武汉市武昌区中南路金融街
+   电话：027-11000000
+
+如需进一步筛选城市或有其他需求，请告知您所在的城市或具体位置！
+
+作为您的诺亚新舟健康医疗助理小诺，我随时准备为您提供更多帮助。[0m
+[91m
+  ❌ FAILED[0m
+[93m  Missing keywords: 导航[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 1
+     Tools used: unknown
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 18/30: Insurance Query[0m
+[94m================================================================================[0m
+  Query: 你们接受医保吗？
+  Description: Should explain payment options
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_05eabb1301e2_1753901585[0m
+[94m    🔧 Tool Use: unknown[0m
+[94m       Input: {}...[0m
+[92m    📊 Tool Result: ...[0m
+[96m    📈 Tokens - Total: 70, Reasoning: 31, Tool: 39[0m
+[92m
+  📝 Full Response:[0m
+[92m     我们支持基本医保和商业保险，部分项目可以使用医保结算，具体以实际情况为准。如有具体项目需要了解，欢迎随时咨询。商业保险也支持直付服务。
+
+作为您的诺亚新舟健康医疗助理小诺，我随时准备为您提供更多帮助。[0m
+[91m
+  ❌ FAILED[0m
+[93m  Missing keywords: 支付, 费用[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 1
+     Tools used: unknown
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 19/30: Report Interpretation[0m
+[94m================================================================================[0m
+  Query: 能帮我看看这个检查报告吗？
+  Description: Should offer report interpretation service
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_bbe0f2c5eb7a_1753901593[0m
+[96m    📈 Tokens - Total: 19, Reasoning: 19, Tool: 0[0m
+[92m
+  📝 Full Response:[0m
+[92m     请您上传检查报告的图片或将报告的具体内容粘贴到这里，这样我才能帮您进行解读和建议。
+
+作为您的诺亚新舟健康医疗助理小诺，我随时准备为您提供更多帮助。[0m
+[91m
+  ❌ FAILED[0m
+[93m  Missing keywords: 医生, 咨询[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 0
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 20/30: Follow-up Care[0m
+[94m================================================================================[0m
+  Query: 手术后需要注意什么？
+  Description: Should provide post-operative care advice
+[96m
+  📡 Streaming response:[0m
+[94m    📝 Response ID: resp_6317516d3e2f_1753901597[0m
+[94m    🔧 Tool Use: unknown[0m
+[94m       Input: {}...[0m
+[92m    📊 Tool Result: ...[0m
+[96m    📈 Tokens - Total: 183, Reasoning: 144, Tool: 39[0m
+[92m
+  📝 Full Response:[0m
+[92m     手术后一般需要注意以下几点：
+
+1. 休息与恢复：遵照医生建议卧床或适度活动，避免剧烈运动和提重物。
+2. 饮食调整：根据医生建议选择易消化、营养丰富的饮食，避免刺激性食物和饮酒。
+3. 伤口护理：保持伤口清洁干燥，按医嘱换药，观察有无红肿、渗液、疼痛或发热等感染迹象。
+4. 按时服药：严格按照医生指示服药，不能随意停药或更改剂量。
+5. 复诊随访：按时到医院复查，及时反馈任何不适或异常情况。
+6. 预防血栓：如果医生有特别交代，适量活动下肢，必要时穿戴弹力袜等。
+7. 关注异常信号：如出现持续高热、剧烈疼痛、伤口大量渗血、呼吸困难等情况，需及时就医。
+
+不同手术类型注意事项有所差异，建议如...[0m
+[92m
+  ✅ PASSED (Response time: 7.73s)[0m
+[92m  Found keywords: 术后, 恢复, 注意事项, 复查[0m
+[96m
+  🔍 Debug Info:[0m
+     Agents called: 0
+     Tools called: 1
+     Tools used: unknown
+     Thinking steps: 0
+     Mem0 events: 0
+[94m
+================================================================================[0m
+[1m[94m  Test 21/30: Memory Persistence - Allergy[0m

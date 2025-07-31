@@ -91,14 +91,7 @@ async def initialize_v2_conversation_system(db_pool, openai_api_key: str):
             llm=llm,
             memory_manager=memory_manager,
             debug=True,
-            use_real_tools=True,
-            db_config={
-                'host': os.getenv('DB_HOST', 'localhost'),
-                'port': int(os.getenv('DB_PORT', '5432')),
-                'database': os.getenv('DB_NAME', 'postgres'),
-                'user': os.getenv('DB_USER', 'postgres'),
-                'password': os.getenv('DB_PASSWORD', '')
-            }
+            enable_enhanced_logging=True
         )
         
         logger.info("✅ Orchestrators initialized successfully")

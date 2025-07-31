@@ -1,0 +1,2367 @@
+{
+  "timestamp": "20250729_155140",
+  "total_tests": 70,
+  "passed": 0,
+  "failed": 70,
+  "single_turn_passed": 0,
+  "multi_turn_passed": 0,
+  "success_rate": 0.0,
+  "results": [
+    {
+      "test_id": 1,
+      "test_name": "Basic Identity Query",
+      "passed": false,
+      "response_time": 0.0024309158325195312,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "诺亚新舟",
+        "小诺",
+        "健康医疗助理",
+        "AI健康管家"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 2,
+      "test_name": "Company Background",
+      "passed": false,
+      "response_time": 0.005388975143432617,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "以爱行舟",
+        "亲近相守",
+        "500多位",
+        "三甲主任级"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 3,
+      "test_name": "Service Capabilities",
+      "passed": false,
+      "response_time": 0.005264997482299805,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "健康咨询",
+        "实时预约",
+        "检查项目",
+        "诊所导航",
+        "体检报告"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 4,
+      "test_name": "Brand Slogan",
+      "passed": false,
+      "response_time": 0.002904176712036133,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "以爱行舟",
+        "亲近相守"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 5,
+      "test_name": "English Identity Query",
+      "passed": false,
+      "response_time": 0.0037941932678222656,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "Humansa",
+        "health",
+        "assistant",
+        "medical"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 6,
+      "test_name": "Find Cardiologist",
+      "passed": false,
+      "response_time": 0.003939151763916016,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "心",
+        "科",
+        "医生"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 7,
+      "test_name": "Find Doctors by City",
+      "passed": false,
+      "response_time": 0.005326032638549805,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "上海",
+        "医生"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 8,
+      "test_name": "Doctor by Name",
+      "passed": false,
+      "response_time": 0.004609107971191406,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "张",
+        "医生"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 9,
+      "test_name": "Doctor Availability",
+      "passed": false,
+      "response_time": 0.004366159439086914,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "医生",
+        "号",
+        "时间"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 10,
+      "test_name": "Specialist Search",
+      "passed": false,
+      "response_time": 0.005077838897705078,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "神经",
+        "专家"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 11,
+      "test_name": "Book Appointment",
+      "passed": false,
+      "response_time": 0.004912853240966797,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "预约",
+        "骨科",
+        "明天"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 12,
+      "test_name": "Check Availability",
+      "passed": false,
+      "response_time": 0.008478879928588867,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "下周",
+        "时间",
+        "预约"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 13,
+      "test_name": "Cancel Appointment",
+      "passed": false,
+      "response_time": 0.0027778148651123047,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "取消",
+        "预约"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 14,
+      "test_name": "Reschedule",
+      "passed": false,
+      "response_time": 0.0031099319458007812,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "改",
+        "下周三"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 15,
+      "test_name": "Emergency Appointment",
+      "passed": false,
+      "response_time": 0.0030012130737304688,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "加急",
+        "预约"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 16,
+      "test_name": "Nearest Clinic",
+      "passed": false,
+      "response_time": 0.002674102783203125,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "诊所",
+        "近",
+        "地址"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 17,
+      "test_name": "Service Price",
+      "passed": false,
+      "response_time": 0.0046291351318359375,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "血常规",
+        "钱",
+        "价格"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 18,
+      "test_name": "Health Packages",
+      "passed": false,
+      "response_time": 0.0028269290924072266,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "体检",
+        "套餐"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 19,
+      "test_name": "Clinic Hours",
+      "passed": false,
+      "response_time": 0.0030329227447509766,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "诊所",
+        "时间",
+        "营业"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 20,
+      "test_name": "Contact Info",
+      "passed": false,
+      "response_time": 0.0028901100158691406,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "上海",
+        "电话",
+        "联系"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 21,
+      "test_name": "Sleep Issues",
+      "passed": false,
+      "response_time": 0.003050088882446289,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "失眠",
+        "睡眠",
+        "建议"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 22,
+      "test_name": "Child Fever",
+      "passed": false,
+      "response_time": 0.005255937576293945,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "发烧",
+        "39",
+        "处理",
+        "孩子"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 23,
+      "test_name": "Emergency Symptoms",
+      "passed": false,
+      "response_time": 0.005950927734375,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "120",
+        "急救",
+        "立即"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 24,
+      "test_name": "Medication Query",
+      "passed": false,
+      "response_time": 0.007081031799316406,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "高血压",
+        "药",
+        "医生"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 25,
+      "test_name": "Test Results",
+      "passed": false,
+      "response_time": 0.002788066864013672,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "血糖",
+        "控制",
+        "饮食"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 26,
+      "test_name": "Health Products",
+      "passed": false,
+      "response_time": 0.003195047378540039,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "保健品",
+        "推荐",
+        "健康"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 27,
+      "test_name": "Vitamins",
+      "passed": false,
+      "response_time": 0.002023935317993164,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "维生素D",
+        "推荐"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 28,
+      "test_name": "Medical Equipment",
+      "passed": false,
+      "response_time": 0.006851911544799805,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "血压计",
+        "推荐"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 29,
+      "test_name": "Sleep Aid Products",
+      "passed": false,
+      "response_time": 0.0027556419372558594,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "睡眠",
+        "产品",
+        "帮助"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 30,
+      "test_name": "Purchase Guidance",
+      "passed": false,
+      "response_time": 0.0031359195709228516,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "购买",
+        "小程序",
+        "商城"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 31,
+      "test_name": "Store Personal Info",
+      "passed": false,
+      "response_time": 0.003261089324951172,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "记录",
+        "信息"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 32,
+      "test_name": "Store Allergies",
+      "passed": false,
+      "response_time": 0.005794048309326172,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "过敏",
+        "记录",
+        "注意"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 33,
+      "test_name": "Recall Info",
+      "passed": false,
+      "response_time": 0.0039031505584716797,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "李明",
+        "45",
+        "高血压"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 34,
+      "test_name": "Medical History",
+      "passed": false,
+      "response_time": 0.003882884979248047,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "青霉素",
+        "过敏"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 35,
+      "test_name": "Family Member",
+      "passed": false,
+      "response_time": 0.00341796875,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "记录",
+        "女儿",
+        "感冒"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 36,
+      "test_name": "Medication Tracking",
+      "passed": false,
+      "response_time": 0.007863998413085938,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "记录",
+        "药物"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 37,
+      "test_name": "Doctor Preference",
+      "passed": false,
+      "response_time": 0.005546092987060547,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "记录",
+        "偏好",
+        "李医生"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 38,
+      "test_name": "Health Goals",
+      "passed": false,
+      "response_time": 0.0035800933837890625,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "目标",
+        "减重",
+        "10公斤"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 39,
+      "test_name": "Insurance Info",
+      "passed": false,
+      "response_time": 0.003968000411987305,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "保险",
+        "记录"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 40,
+      "test_name": "Complex Context",
+      "passed": false,
+      "response_time": 0.0021669864654541016,
+      "response": "",
+      "found_keywords": [],
+      "missing_keywords": [
+        "高血压",
+        "检查",
+        "建议"
+      ],
+      "tools_used": []
+    },
+    {
+      "test_id": 41,
+      "test_name": "Basic Greeting + Doctor Search",
+      "passed": false,
+      "total_turns": 3,
+      "successful_turns": 0,
+      "total_time": 0.010957002639770508,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "你好",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "你好",
+            "帮助"
+          ],
+          "tools_used": [],
+          "response_time": 0.0038568973541259766
+        },
+        {
+          "turn": 2,
+          "query": "我住在北京",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "北京",
+            "需求"
+          ],
+          "tools_used": [],
+          "response_time": 0.0037050247192382812
+        },
+        {
+          "turn": 3,
+          "query": "帮我找个骨科医生",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "骨科",
+            "医生",
+            "北京"
+          ],
+          "tools_used": [],
+          "response_time": 0.00339508056640625
+        }
+      ]
+    },
+    {
+      "test_id": 42,
+      "test_name": "Symptom Description + Recommendation",
+      "passed": false,
+      "total_turns": 3,
+      "successful_turns": 0,
+      "total_time": 0.008928060531616211,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我最近头痛",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "头痛",
+            "症状"
+          ],
+          "tools_used": [],
+          "response_time": 0.0030341148376464844
+        },
+        {
+          "turn": 2,
+          "query": "已经3天了",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "3天",
+            "持续"
+          ],
+          "tools_used": [],
+          "response_time": 0.0027658939361572266
+        },
+        {
+          "turn": 3,
+          "query": "还伴有恶心",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "恶心",
+            "建议",
+            "医生"
+          ],
+          "tools_used": [],
+          "response_time": 0.0031280517578125
+        }
+      ]
+    },
+    {
+      "test_id": 43,
+      "test_name": "Appointment Booking Flow",
+      "passed": false,
+      "total_turns": 3,
+      "successful_turns": 0,
+      "total_time": 0.01190185546875,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我想看医生",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "医生",
+            "预约"
+          ],
+          "tools_used": [],
+          "response_time": 0.005218029022216797
+        },
+        {
+          "turn": 2,
+          "query": "骨科的",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "骨科"
+          ],
+          "tools_used": [],
+          "response_time": 0.003370046615600586
+        },
+        {
+          "turn": 3,
+          "query": "这周五下午可以吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "周五",
+            "下午",
+            "时间"
+          ],
+          "tools_used": [],
+          "response_time": 0.003313779830932617
+        }
+      ]
+    },
+    {
+      "test_id": 44,
+      "test_name": "Product Inquiry + Purchase",
+      "passed": false,
+      "total_turns": 3,
+      "successful_turns": 0,
+      "total_time": 0.01024007797241211,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "有什么助眠产品吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "助眠",
+            "产品"
+          ],
+          "tools_used": [],
+          "response_time": 0.003618001937866211
+        },
+        {
+          "turn": 2,
+          "query": "价格怎么样",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "价格",
+            "元"
+          ],
+          "tools_used": [],
+          "response_time": 0.003158092498779297
+        },
+        {
+          "turn": 3,
+          "query": "怎么购买",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "购买",
+            "小程序",
+            "商城"
+          ],
+          "tools_used": [],
+          "response_time": 0.0034639835357666016
+        }
+      ]
+    },
+    {
+      "test_id": 45,
+      "test_name": "Emergency Triage",
+      "passed": false,
+      "total_turns": 3,
+      "successful_turns": 0,
+      "total_time": 0.009250164031982422,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我不太舒服",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "不舒服",
+            "症状"
+          ],
+          "tools_used": [],
+          "response_time": 0.003695249557495117
+        },
+        {
+          "turn": 2,
+          "query": "胸口有点闷",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "胸口",
+            "闷"
+          ],
+          "tools_used": [],
+          "response_time": 0.0028820037841796875
+        },
+        {
+          "turn": 3,
+          "query": "还有点喘不上气",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "120",
+            "急救",
+            "立即"
+          ],
+          "tools_used": [],
+          "response_time": 0.002672910690307617
+        }
+      ]
+    },
+    {
+      "test_id": 46,
+      "test_name": "Diabetes Management",
+      "passed": false,
+      "total_turns": 4,
+      "successful_turns": 0,
+      "total_time": 0.012378931045532227,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我有糖尿病",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "糖尿病"
+          ],
+          "tools_used": [],
+          "response_time": 0.003750324249267578
+        },
+        {
+          "turn": 2,
+          "query": "血糖最近控制不好",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "血糖",
+            "控制"
+          ],
+          "tools_used": [],
+          "response_time": 0.0030319690704345703
+        },
+        {
+          "turn": 3,
+          "query": "空腹血糖8.5",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "8.5",
+            "偏高",
+            "建议"
+          ],
+          "tools_used": [],
+          "response_time": 0.002747774124145508
+        },
+        {
+          "turn": 4,
+          "query": "需要调整药物吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "药物",
+            "医生",
+            "调整"
+          ],
+          "tools_used": [],
+          "response_time": 0.0028488636016845703
+        }
+      ]
+    },
+    {
+      "test_id": 47,
+      "test_name": "Child Health Consultation",
+      "passed": false,
+      "total_turns": 4,
+      "successful_turns": 0,
+      "total_time": 0.012375354766845703,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我孩子6岁",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "孩子",
+            "6岁"
+          ],
+          "tools_used": [],
+          "response_time": 0.0038480758666992188
+        },
+        {
+          "turn": 2,
+          "query": "最近不爱吃饭",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "吃饭",
+            "食欲"
+          ],
+          "tools_used": [],
+          "response_time": 0.002495288848876953
+        },
+        {
+          "turn": 3,
+          "query": "还经常说累",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "累",
+            "疲劳"
+          ],
+          "tools_used": [],
+          "response_time": 0.0031719207763671875
+        },
+        {
+          "turn": 4,
+          "query": "需要做什么检查",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "检查",
+            "建议",
+            "儿科"
+          ],
+          "tools_used": [],
+          "response_time": 0.0028600692749023438
+        }
+      ]
+    },
+    {
+      "test_id": 48,
+      "test_name": "Medication Interaction Check",
+      "passed": false,
+      "total_turns": 3,
+      "successful_turns": 0,
+      "total_time": 0.008816957473754883,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我在吃降压药",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "降压药"
+          ],
+          "tools_used": [],
+          "response_time": 0.0030159950256347656
+        },
+        {
+          "turn": 2,
+          "query": "医生又开了抗生素",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "抗生素"
+          ],
+          "tools_used": [],
+          "response_time": 0.0029859542846679688
+        },
+        {
+          "turn": 3,
+          "query": "这两种药能一起吃吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "药物",
+            "相互作用",
+            "注意"
+          ],
+          "tools_used": [],
+          "response_time": 0.0028150081634521484
+        }
+      ]
+    },
+    {
+      "test_id": 49,
+      "test_name": "Post-Surgery Follow-up",
+      "passed": false,
+      "total_turns": 3,
+      "successful_turns": 0,
+      "total_time": 0.013503074645996094,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我上周做了膝盖手术",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "膝盖",
+            "手术"
+          ],
+          "tools_used": [],
+          "response_time": 0.00438690185546875
+        },
+        {
+          "turn": 2,
+          "query": "现在还有点肿",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "肿",
+            "术后"
+          ],
+          "tools_used": [],
+          "response_time": 0.004881143569946289
+        },
+        {
+          "turn": 3,
+          "query": "这正常吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "正常",
+            "恢复",
+            "注意"
+          ],
+          "tools_used": [],
+          "response_time": 0.004235029220581055
+        }
+      ]
+    },
+    {
+      "test_id": 50,
+      "test_name": "Health Check Planning",
+      "passed": false,
+      "total_turns": 4,
+      "successful_turns": 0,
+      "total_time": 0.010253667831420898,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我想做个全面体检",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "体检",
+            "全面"
+          ],
+          "tools_used": [],
+          "response_time": 0.0025730133056640625
+        },
+        {
+          "turn": 2,
+          "query": "有什么套餐推荐",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "套餐",
+            "推荐"
+          ],
+          "tools_used": [],
+          "response_time": 0.002814769744873047
+        },
+        {
+          "turn": 3,
+          "query": "大概多少钱",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "价格",
+            "费用"
+          ],
+          "tools_used": [],
+          "response_time": 0.0024390220642089844
+        },
+        {
+          "turn": 4,
+          "query": "需要预约吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "预约",
+            "时间"
+          ],
+          "tools_used": [],
+          "response_time": 0.0024268627166748047
+        }
+      ]
+    },
+    {
+      "test_id": 51,
+      "test_name": "Personal Info + Recommendation",
+      "passed": false,
+      "total_turns": 3,
+      "successful_turns": 0,
+      "total_time": 0.018208026885986328,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我叫王芳，52岁",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "记录",
+            "信息"
+          ],
+          "tools_used": [],
+          "response_time": 0.010083198547363281
+        },
+        {
+          "turn": 2,
+          "query": "有高血压和糖尿病",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "高血压",
+            "糖尿病",
+            "记录"
+          ],
+          "tools_used": [],
+          "response_time": 0.005631923675537109
+        },
+        {
+          "turn": 3,
+          "query": "推荐个适合我的医生",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "王芳",
+            "高血压",
+            "糖尿病",
+            "医生"
+          ],
+          "tools_used": [],
+          "response_time": 0.0024929046630859375
+        }
+      ]
+    },
+    {
+      "test_id": 52,
+      "test_name": "Allergy Info + Product Check",
+      "passed": false,
+      "total_turns": 2,
+      "successful_turns": 0,
+      "total_time": 0.006510734558105469,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我对花生过敏",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "花生",
+            "过敏",
+            "记录"
+          ],
+          "tools_used": [],
+          "response_time": 0.0031158924102783203
+        },
+        {
+          "turn": 2,
+          "query": "这个保健品含花生吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "花生",
+            "过敏",
+            "注意",
+            "成分"
+          ],
+          "tools_used": [],
+          "response_time": 0.0033948421478271484
+        }
+      ]
+    },
+    {
+      "test_id": 53,
+      "test_name": "Location + Clinic Search",
+      "passed": false,
+      "total_turns": 2,
+      "successful_turns": 0,
+      "total_time": 0.005179643630981445,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我住在浦东新区",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "浦东",
+            "记录"
+          ],
+          "tools_used": [],
+          "response_time": 0.002869844436645508
+        },
+        {
+          "turn": 2,
+          "query": "附近有诊所吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "浦东",
+            "附近",
+            "诊所"
+          ],
+          "tools_used": [],
+          "response_time": 0.0023097991943359375
+        }
+      ]
+    },
+    {
+      "test_id": 54,
+      "test_name": "Previous Condition + Update",
+      "passed": false,
+      "total_turns": 3,
+      "successful_turns": 0,
+      "total_time": 0.01347970962524414,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "上次说的失眠问题",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "失眠"
+          ],
+          "tools_used": [],
+          "response_time": 0.005282878875732422
+        },
+        {
+          "turn": 2,
+          "query": "按你的建议调整作息了",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "建议",
+            "调整"
+          ],
+          "tools_used": [],
+          "response_time": 0.005738973617553711
+        },
+        {
+          "turn": 3,
+          "query": "现在好多了",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "好转",
+            "继续"
+          ],
+          "tools_used": [],
+          "response_time": 0.002457857131958008
+        }
+      ]
+    },
+    {
+      "test_id": 55,
+      "test_name": "Family Health Management",
+      "passed": false,
+      "total_turns": 3,
+      "successful_turns": 0,
+      "total_time": 0.012128353118896484,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我们全家都在你们这看病",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "全家",
+            "记录"
+          ],
+          "tools_used": [],
+          "response_time": 0.0066721439361572266
+        },
+        {
+          "turn": 2,
+          "query": "我老公需要看心脏科",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "心脏科",
+            "预约"
+          ],
+          "tools_used": [],
+          "response_time": 0.0025069713592529297
+        },
+        {
+          "turn": 3,
+          "query": "孩子要打疫苗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "疫苗",
+            "儿科"
+          ],
+          "tools_used": [],
+          "response_time": 0.002949237823486328
+        }
+      ]
+    },
+    {
+      "test_id": 56,
+      "test_name": "Chronic Disease Management",
+      "passed": false,
+      "total_turns": 4,
+      "successful_turns": 0,
+      "total_time": 0.01618790626525879,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我的高血压控制得怎么样",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "高血压",
+            "控制"
+          ],
+          "tools_used": [],
+          "response_time": 0.0028259754180908203
+        },
+        {
+          "turn": 2,
+          "query": "上个月测的是150/95",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "150/95",
+            "偏高"
+          ],
+          "tools_used": [],
+          "response_time": 0.00741887092590332
+        },
+        {
+          "turn": 3,
+          "query": "需要增加药量吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "药量",
+            "调整",
+            "医生"
+          ],
+          "tools_used": [],
+          "response_time": 0.003571033477783203
+        },
+        {
+          "turn": 4,
+          "query": "饮食上要注意什么",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "饮食",
+            "低盐",
+            "建议"
+          ],
+          "tools_used": [],
+          "response_time": 0.0023720264434814453
+        }
+      ]
+    },
+    {
+      "test_id": 57,
+      "test_name": "Pregnancy Consultation",
+      "passed": false,
+      "total_turns": 4,
+      "successful_turns": 0,
+      "total_time": 0.01540684700012207,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我怀孕3个月了",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "怀孕",
+            "3个月"
+          ],
+          "tools_used": [],
+          "response_time": 0.0038688182830810547
+        },
+        {
+          "turn": 2,
+          "query": "最近总是恶心",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "恶心",
+            "孕吐",
+            "正常"
+          ],
+          "tools_used": [],
+          "response_time": 0.004472970962524414
+        },
+        {
+          "turn": 3,
+          "query": "需要补充什么营养",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "营养",
+            "叶酸",
+            "维生素"
+          ],
+          "tools_used": [],
+          "response_time": 0.0033521652221679688
+        },
+        {
+          "turn": 4,
+          "query": "下次产检什么时候",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "产检",
+            "时间",
+            "预约"
+          ],
+          "tools_used": [],
+          "response_time": 0.003712892532348633
+        }
+      ]
+    },
+    {
+      "test_id": 58,
+      "test_name": "Mental Health Support",
+      "passed": false,
+      "total_turns": 4,
+      "successful_turns": 0,
+      "total_time": 0.014262914657592773,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "最近压力很大",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "压力",
+            "情绪"
+          ],
+          "tools_used": [],
+          "response_time": 0.0038399696350097656
+        },
+        {
+          "turn": 2,
+          "query": "晚上睡不好",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "睡眠",
+            "失眠"
+          ],
+          "tools_used": [],
+          "response_time": 0.003389120101928711
+        },
+        {
+          "turn": 3,
+          "query": "白天没精神",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "疲劳",
+            "状态"
+          ],
+          "tools_used": [],
+          "response_time": 0.003883838653564453
+        },
+        {
+          "turn": 4,
+          "query": "需要看心理医生吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "心理",
+            "医生",
+            "建议"
+          ],
+          "tools_used": [],
+          "response_time": 0.0031499862670898438
+        }
+      ]
+    },
+    {
+      "test_id": 59,
+      "test_name": "Vaccination Schedule",
+      "passed": false,
+      "total_turns": 4,
+      "successful_turns": 0,
+      "total_time": 0.016173839569091797,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "宝宝6个月大",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "宝宝",
+            "6个月"
+          ],
+          "tools_used": [],
+          "response_time": 0.00551295280456543
+        },
+        {
+          "turn": 2,
+          "query": "该打什么疫苗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "疫苗",
+            "接种"
+          ],
+          "tools_used": [],
+          "response_time": 0.003396272659301758
+        },
+        {
+          "turn": 3,
+          "query": "有什么注意事项",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "注意",
+            "反应",
+            "发烧"
+          ],
+          "tools_used": [],
+          "response_time": 0.003348827362060547
+        },
+        {
+          "turn": 4,
+          "query": "下一针什么时候",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "下次",
+            "时间",
+            "安排"
+          ],
+          "tools_used": [],
+          "response_time": 0.0039157867431640625
+        }
+      ]
+    },
+    {
+      "test_id": 60,
+      "test_name": "Elder Care Consultation",
+      "passed": false,
+      "total_turns": 4,
+      "successful_turns": 0,
+      "total_time": 0.011148929595947266,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我父亲75岁",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "父亲",
+            "75岁"
+          ],
+          "tools_used": [],
+          "response_time": 0.003718852996826172
+        },
+        {
+          "turn": 2,
+          "query": "最近记忆力下降",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "记忆",
+            "下降"
+          ],
+          "tools_used": [],
+          "response_time": 0.0035338401794433594
+        },
+        {
+          "turn": 3,
+          "query": "有时候会忘事",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "忘事",
+            "症状"
+          ],
+          "tools_used": [],
+          "response_time": 0.0018460750579833984
+        },
+        {
+          "turn": 4,
+          "query": "需要做什么检查",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "检查",
+            "记忆",
+            "评估",
+            "老年"
+          ],
+          "tools_used": [],
+          "response_time": 0.002050161361694336
+        }
+      ]
+    },
+    {
+      "test_id": 61,
+      "test_name": "Complete Health Journey",
+      "passed": false,
+      "total_turns": 5,
+      "successful_turns": 0,
+      "total_time": 0.026201248168945312,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我想全面管理健康",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "健康",
+            "管理"
+          ],
+          "tools_used": [],
+          "response_time": 0.00618433952331543
+        },
+        {
+          "turn": 2,
+          "query": "先从体检开始吧",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "体检",
+            "开始"
+          ],
+          "tools_used": [],
+          "response_time": 0.0030548572540283203
+        },
+        {
+          "turn": 3,
+          "query": "有高端体检套餐吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "高端",
+            "套餐"
+          ],
+          "tools_used": [],
+          "response_time": 0.0044362545013427734
+        },
+        {
+          "turn": 4,
+          "query": "包含哪些项目",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "项目",
+            "检查"
+          ],
+          "tools_used": [],
+          "response_time": 0.008239984512329102
+        },
+        {
+          "turn": 5,
+          "query": "可以这周安排吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "本周",
+            "安排",
+            "预约"
+          ],
+          "tools_used": [],
+          "response_time": 0.0042858123779296875
+        }
+      ]
+    },
+    {
+      "test_id": 62,
+      "test_name": "Treatment Plan Discussion",
+      "passed": false,
+      "total_turns": 5,
+      "successful_turns": 0,
+      "total_time": 0.01680755615234375,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "医生建议我做手术",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "手术",
+            "建议"
+          ],
+          "tools_used": [],
+          "response_time": 0.00392603874206543
+        },
+        {
+          "turn": 2,
+          "query": "我有点担心风险",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "风险",
+            "担心"
+          ],
+          "tools_used": [],
+          "response_time": 0.004083871841430664
+        },
+        {
+          "turn": 3,
+          "query": "有其他治疗方案吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "方案",
+            "选择",
+            "治疗"
+          ],
+          "tools_used": [],
+          "response_time": 0.002907276153564453
+        },
+        {
+          "turn": 4,
+          "query": "哪种效果更好",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "效果",
+            "比较",
+            "建议"
+          ],
+          "tools_used": [],
+          "response_time": 0.0029802322387695312
+        },
+        {
+          "turn": 5,
+          "query": "我需要时间考虑",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "考虑",
+            "理解",
+            "支持"
+          ],
+          "tools_used": [],
+          "response_time": 0.002910137176513672
+        }
+      ]
+    },
+    {
+      "test_id": 63,
+      "test_name": "Rehabilitation Progress",
+      "passed": false,
+      "total_turns": 4,
+      "successful_turns": 0,
+      "total_time": 0.013546943664550781,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我在做康复训练",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "康复",
+            "训练"
+          ],
+          "tools_used": [],
+          "response_time": 0.004786014556884766
+        },
+        {
+          "turn": 2,
+          "query": "腿部力量恢复慢",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "腿部",
+            "力量",
+            "恢复"
+          ],
+          "tools_used": [],
+          "response_time": 0.003534078598022461
+        },
+        {
+          "turn": 3,
+          "query": "有什么加强练习吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "练习",
+            "加强",
+            "建议"
+          ],
+          "tools_used": [],
+          "response_time": 0.0023527145385742188
+        },
+        {
+          "turn": 4,
+          "query": "多久能正常走路",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "时间",
+            "恢复",
+            "预期"
+          ],
+          "tools_used": [],
+          "response_time": 0.002874135971069336
+        }
+      ]
+    },
+    {
+      "test_id": 64,
+      "test_name": "Lifestyle Modification",
+      "passed": false,
+      "total_turns": 5,
+      "successful_turns": 0,
+      "total_time": 0.01999950408935547,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "医生说我要改变生活方式",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "生活方式",
+            "改变"
+          ],
+          "tools_used": [],
+          "response_time": 0.003949165344238281
+        },
+        {
+          "turn": 2,
+          "query": "具体怎么做呢",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "具体",
+            "建议"
+          ],
+          "tools_used": [],
+          "response_time": 0.004322052001953125
+        },
+        {
+          "turn": 3,
+          "query": "饮食方面呢",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "饮食",
+            "健康",
+            "建议"
+          ],
+          "tools_used": [],
+          "response_time": 0.004094839096069336
+        },
+        {
+          "turn": 4,
+          "query": "运动要注意什么",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "运动",
+            "注意",
+            "适度"
+          ],
+          "tools_used": [],
+          "response_time": 0.0038602352142333984
+        },
+        {
+          "turn": 5,
+          "query": "能推荐营养师吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "营养师",
+            "推荐",
+            "专业"
+          ],
+          "tools_used": [],
+          "response_time": 0.003773212432861328
+        }
+      ]
+    },
+    {
+      "test_id": 65,
+      "test_name": "Insurance Coverage Check",
+      "passed": false,
+      "total_turns": 4,
+      "successful_turns": 0,
+      "total_time": 0.014470338821411133,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我有医保",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "医保",
+            "保险"
+          ],
+          "tools_used": [],
+          "response_time": 0.0027649402618408203
+        },
+        {
+          "turn": 2,
+          "query": "还有商业保险",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "商业保险",
+            "补充"
+          ],
+          "tools_used": [],
+          "response_time": 0.005724191665649414
+        },
+        {
+          "turn": 3,
+          "query": "看病能报销多少",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "报销",
+            "比例",
+            "费用"
+          ],
+          "tools_used": [],
+          "response_time": 0.0026950836181640625
+        },
+        {
+          "turn": 4,
+          "query": "需要什么手续",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "手续",
+            "材料",
+            "流程"
+          ],
+          "tools_used": [],
+          "response_time": 0.003286123275756836
+        }
+      ]
+    },
+    {
+      "test_id": 66,
+      "test_name": "Second Opinion Request",
+      "passed": false,
+      "total_turns": 4,
+      "successful_turns": 0,
+      "total_time": 0.011096954345703125,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我想听听其他医生意见",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "意见",
+            "其他医生"
+          ],
+          "tools_used": [],
+          "response_time": 0.0026030540466308594
+        },
+        {
+          "turn": 2,
+          "query": "之前诊断是胃炎",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "胃炎",
+            "诊断"
+          ],
+          "tools_used": [],
+          "response_time": 0.003039836883544922
+        },
+        {
+          "turn": 3,
+          "query": "但吃药效果不好",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "效果",
+            "不好",
+            "药物"
+          ],
+          "tools_used": [],
+          "response_time": 0.0029082298278808594
+        },
+        {
+          "turn": 4,
+          "query": "能约其他专家吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "专家",
+            "预约",
+            "第二"
+          ],
+          "tools_used": [],
+          "response_time": 0.0025458335876464844
+        }
+      ]
+    },
+    {
+      "test_id": 67,
+      "test_name": "Travel Health Prep",
+      "passed": false,
+      "total_turns": 4,
+      "successful_turns": 0,
+      "total_time": 0.016076326370239258,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "下个月要出国",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "出国",
+            "旅行"
+          ],
+          "tools_used": [],
+          "response_time": 0.006058692932128906
+        },
+        {
+          "turn": 2,
+          "query": "去非洲",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "非洲",
+            "目的地"
+          ],
+          "tools_used": [],
+          "response_time": 0.0046079158782958984
+        },
+        {
+          "turn": 3,
+          "query": "需要打什么疫苗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "疫苗",
+            "预防",
+            "旅行"
+          ],
+          "tools_used": [],
+          "response_time": 0.0025107860565185547
+        },
+        {
+          "turn": 4,
+          "query": "要准备什么药品",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "药品",
+            "准备",
+            "常备"
+          ],
+          "tools_used": [],
+          "response_time": 0.0028989315032958984
+        }
+      ]
+    },
+    {
+      "test_id": 68,
+      "test_name": "Pain Management",
+      "passed": false,
+      "total_turns": 5,
+      "successful_turns": 0,
+      "total_time": 0.01645660400390625,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我有慢性疼痛",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "慢性",
+            "疼痛"
+          ],
+          "tools_used": [],
+          "response_time": 0.0038428306579589844
+        },
+        {
+          "turn": 2,
+          "query": "主要是腰部",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "腰部",
+            "位置"
+          ],
+          "tools_used": [],
+          "response_time": 0.003568887710571289
+        },
+        {
+          "turn": 3,
+          "query": "已经半年了",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "半年",
+            "持续"
+          ],
+          "tools_used": [],
+          "response_time": 0.0027379989624023438
+        },
+        {
+          "turn": 4,
+          "query": "止痛药效果有限",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "止痛药",
+            "效果",
+            "有限"
+          ],
+          "tools_used": [],
+          "response_time": 0.003052949905395508
+        },
+        {
+          "turn": 5,
+          "query": "有其他办法吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "办法",
+            "治疗",
+            "方案"
+          ],
+          "tools_used": [],
+          "response_time": 0.003253936767578125
+        }
+      ]
+    },
+    {
+      "test_id": 69,
+      "test_name": "Preventive Care Plan",
+      "passed": false,
+      "total_turns": 5,
+      "successful_turns": 0,
+      "total_time": 0.019245624542236328,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我想做预防保健",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "预防",
+            "保健"
+          ],
+          "tools_used": [],
+          "response_time": 0.003314971923828125
+        },
+        {
+          "turn": 2,
+          "query": "家族有心脏病史",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "家族",
+            "心脏病",
+            "风险"
+          ],
+          "tools_used": [],
+          "response_time": 0.0051348209381103516
+        },
+        {
+          "turn": 3,
+          "query": "应该注意什么",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "注意",
+            "预防",
+            "建议"
+          ],
+          "tools_used": [],
+          "response_time": 0.0037958621978759766
+        },
+        {
+          "turn": 4,
+          "query": "多久检查一次",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "检查",
+            "频率",
+            "定期"
+          ],
+          "tools_used": [],
+          "response_time": 0.004396915435791016
+        },
+        {
+          "turn": 5,
+          "query": "生活上怎么预防",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "生活",
+            "预防",
+            "方式"
+          ],
+          "tools_used": [],
+          "response_time": 0.0026030540466308594
+        }
+      ]
+    },
+    {
+      "test_id": 70,
+      "test_name": "Comprehensive Care Coordination",
+      "passed": false,
+      "total_turns": 5,
+      "successful_turns": 0,
+      "total_time": 0.01279139518737793,
+      "turn_results": [
+        {
+          "turn": 1,
+          "query": "我需要看多个科室",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "多个",
+            "科室"
+          ],
+          "tools_used": [],
+          "response_time": 0.002938985824584961
+        },
+        {
+          "turn": 2,
+          "query": "内科、骨科和眼科",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "内科",
+            "骨科",
+            "眼科"
+          ],
+          "tools_used": [],
+          "response_time": 0.0023491382598876953
+        },
+        {
+          "turn": 3,
+          "query": "能统一安排吗",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "统一",
+            "安排",
+            "协调"
+          ],
+          "tools_used": [],
+          "response_time": 0.0021860599517822266
+        },
+        {
+          "turn": 4,
+          "query": "最好是同一天",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "同一天",
+            "时间",
+            "方便"
+          ],
+          "tools_used": [],
+          "response_time": 0.002615213394165039
+        },
+        {
+          "turn": 5,
+          "query": "费用大概多少",
+          "response": "",
+          "passed": false,
+          "found_keywords": [],
+          "missing_keywords": [
+            "费用",
+            "总计",
+            "预估"
+          ],
+          "tools_used": [],
+          "response_time": 0.002701997756958008
+        }
+      ]
+    }
+  ]
+}

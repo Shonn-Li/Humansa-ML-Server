@@ -41,13 +41,19 @@ class Mem0MemoryManagerAdapter:
         
     async def get_patient_memory(self, patient_id: str) -> Dict[str, Any]:
         """Get patient memory using Mem0."""
+        logger.info(f"🔍 Getting patient memory for: {patient_id}")
+        
         if not self.mem0_manager.initialized:
+            logger.warning("Mem0 not initialized")
             return {"memories": [], "summary": "No memory available"}
             
         try:
             # Get all memories for the patient
             memory_user_id = self.mem0_manager.get_memory_user_id(patient_id)
+            logger.info(f"🔍 Memory user ID: {memory_user_id}")
+            
             memories = await self._get_all_memories_async(memory_user_id)
+            logger.info(f"🔍 Retrieved {len(memories)} memories")
             
             # Build patient memory structure
             patient_memory = {
@@ -62,16 +68,25 @@ class Mem0MemoryManagerAdapter:
             
             # Extract categorized information from memories
             for memory in memories:
-                memory_text = str(memory.get("memory", "")).lower()
+                # Handle different memory formats
+                if isinstance(memory, dict):
+                    memory_text = str(memory.get("memory", "")).lower()
+                elif isinstance(memory, str):
+                    memory_text = memory.lower()
+                else:
+                    continue
                 
-                # Categorize memories
-                if any(word in memory_text for word in ["medication", "drug", "prescription"]):
+                # Log the memory for debugging
+                logger.debug(f"🔍 Processing memory: {memory_text[:100]}...")
+                
+                # Categorize memories - also check Chinese keywords
+                if any(word in memory_text for word in ["medication", "drug", "prescription", "药", "吃", "服用"]):
                     patient_memory["medications"].append(memory)
-                elif any(word in memory_text for word in ["allergy", "allergic"]):
+                elif any(word in memory_text for word in ["allergy", "allergic", "过敏"]):
                     patient_memory["allergies"].append(memory)
-                elif any(word in memory_text for word in ["appointment", "schedule", "booking"]):
+                elif any(word in memory_text for word in ["appointment", "schedule", "booking", "预约", "挂号"]):
                     patient_memory["appointments"].append(memory)
-                elif any(word in memory_text for word in ["prefer", "like", "want"]):
+                elif any(word in memory_text for word in ["prefer", "like", "want", "喜欢", "偏好"]):
                     patient_memory["preferences"].append(memory)
                 else:
                     patient_memory["medical_history"].append(memory)
@@ -88,7 +103,11 @@ class Mem0MemoryManagerAdapter:
         interaction_data: Dict[str, Any]
     ) -> bool:
         """Update patient memory with new interaction data."""
+        logger.info(f"💾 Updating patient memory for: {patient_id}")
+        logger.debug(f"💾 Interaction data: {interaction_data}")
+        
         if not self.mem0_manager.initialized:
+            logger.warning("Mem0 not initialized")
             return False
             
         try:
@@ -124,11 +143,13 @@ class Mem0MemoryManagerAdapter:
                     "agent_results": list(interaction_data.get("agent_results", {}).keys())
                 }
                 
+                logger.info(f"💾 Adding conversation with {len(messages)} messages")
                 success = await self.mem0_manager.add_conversation(
                     user_id=patient_id,
                     messages=messages,
                     metadata=metadata
                 )
+                logger.info(f"💾 Memory update success: {success}")
                 
                 return success
                 
@@ -148,6 +169,71 @@ class Mem0MemoryManagerAdapter:
             logger.error(f"Error getting user context from Mem0: {e}")
             return {"user_id": user_id, "error": str(e)}
             
+    async def add_conversation(
+        self,
+        user_id: str,
+        query: str,
+        response: str,
+        metadata: Optional[Dict[str, Any]] = None
+    ) -> bool:
+        """Add a conversation to memory - compatible with v2 API."""
+        logger.info(f"💾 Adding conversation for user: {user_id}")
+        logger.debug(f"💾 Query: {query[:100]}...")
+        logger.debug(f"💾 Response: {response[:100]}...")
+        
+        if not self.mem0_manager.initialized:
+            logger.warning("Mem0 not initialized")
+            return False
+            
+        try:
+            # Build messages from query and response
+            messages = [
+                {"role": "user", "content": query},
+                {"role": "assistant", "content": response}
+            ]
+            
+            # Add metadata
+            if metadata is None:
+                metadata = {}
+            metadata.update({
+                "source": "humansa_v2",
+                "timestamp": datetime.utcnow().isoformat()
+            })
+            
+            # Add to Mem0
+            success = await self.mem0_manager.add_conversation(
+                user_id=str(user_id),
+                messages=messages,
+                metadata=metadata
+            )
+            
+            logger.info(f"💾 Conversation added successfully: {success}")
+            return success
+            
+        except Exception as e:
+            logger.error(f"Error adding conversation to Mem0: {e}")
+            return False
+    
+    async def _get_all_memories_async(self, user_id: str) -> List[Dict[str, Any]]:
+        """Get all memories for a user asynchronously."""
+        try:
+            # Use the async method from Mem0 manager
+            memories = await self.mem0_manager.get_all_memories_async(user_id)
+            logger.info(f"🧠 Retrieved {len(memories)} memories for user {user_id}")
+            return memories
+        except Exception as e:
+            logger.error(f"Error getting memories: {e}")
+            # Try sync fallback
+            try:
+                import asyncio
+                loop = asyncio.get_event_loop()
+                memories = await loop.run_in_executor(None, self.mem0_manager.get_all_memories, user_id)
+                logger.info(f"🧠 Retrieved {len(memories)} memories using sync fallback")
+                return memories
+            except Exception as fallback_error:
+                logger.error(f"Fallback also failed: {fallback_error}")
+                return []
+    
     async def search_memories(
         self,
         user_id: str,
@@ -335,4 +421,12 @@ class Mem0MemoryManagerAdapter:
             None,
             lambda: self.mem0_manager.memory.get_all(user_id=memory_user_id)
         )
-        return memories or []
+        
+        # Handle different return formats from Mem0
+        if isinstance(memories, dict) and 'results' in memories:
+            return memories['results'] or []
+        elif isinstance(memories, list):
+            return memories
+        else:
+            logger.warning(f"Unexpected memory format: {type(memories)}")
+            return []

@@ -575,3 +575,121 @@ sequenceDiagram
 ## Testing
 
 See [HUMANSA_V2_TESTING.md](./HUMANSA_V2_TESTING.md) for detailed test documentation.
+
+## OpenAI Responses API Integration
+
+### Overview
+
+HUMANSA V2 now implements the OpenAI Responses API format, providing full transparency into the AI's reasoning process and tool usage. This ensures users can see exactly how the AI arrives at its conclusions.
+
+### Response API Architecture
+
+```mermaid
+graph TB
+    subgraph "Response API Layer"
+        RBP[responses_bp<br/>Blueprint]
+        RM[ResponseManager<br/>State Management]
+        RF[ResponseFormatter<br/>Format Conversion]
+        
+        subgraph "Transparent Orchestrator"
+            TO[TransparentOrchestrator]
+            TC[ToolCallCapture<br/>Callback Handler]
+        end
+    end
+    
+    subgraph "Output Format"
+        OA[Output Array]
+        TEXT[Text Items<br/>Reasoning/Response]
+        TOOL[Tool Use Items<br/>Invocations]
+        RESULT[Tool Result Items<br/>Outputs]
+    end
+    
+    RBP --> RM
+    RBP --> TO
+    TO --> TC
+    TC --> RF
+    RF --> OA
+    OA --> TEXT
+    OA --> TOOL
+    OA --> RESULT
+    
+    style TO fill:#9f9,stroke:#333,stroke-width:2px
+    style OA fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+### Response Format
+
+Each response contains a complete reasoning chain in the `output` array:
+
+```json
+{
+  "id": "resp_abc123",
+  "object": "response", 
+  "created": 1234567890,
+  "model": "gpt-4-turbo",
+  "output": [
+    {
+      "type": "text",
+      "text": "Let me search for neurology doctors..."
+    },
+    {
+      "type": "tool_use",
+      "tool_use": {
+        "id": "tool_0",
+        "name": "unified_search",
+        "input": {"query": "神经内科医生"}
+      }
+    },
+    {
+      "type": "tool_result",
+      "tool_result": {
+        "tool_use_id": "tool_0",
+        "output": "Found Dr. Zhang Wei..."
+      }
+    },
+    {
+      "type": "text",
+      "text": "Based on my search, Dr. Zhang Wei is..."
+    }
+  ],
+  "usage": {
+    "total_tokens": 350,
+    "reasoning_tokens": 150,
+    "tool_tokens": 100
+  }
+}
+```
+
+### Event-Based Streaming
+
+When streaming is enabled, responses use OpenAI's event format:
+
+- `response.created` - Signals response start
+- `response.output_item.delta` - Streams text chunks  
+- `response.output_item.done` - Completes each output item
+- `response.done` - Final event with complete response
+
+### API Endpoints
+
+```mermaid
+graph TD
+    subgraph "Response API Endpoints"
+        CREATE[/v2/humansa/responses/create<br/>POST: Create response]
+        STREAM[/v2/humansa/responses/stream<br/>POST: Stream response]
+        GET[/v2/humansa/responses/{id}<br/>GET: Get response]
+        TREE[/v2/humansa/responses/conversations/{id}/tree<br/>GET: Get conversation tree]
+    end
+    
+    subgraph "Features"
+        FORK[Response Forking<br/>Explore alternatives]
+        CHAIN[Response Chaining<br/>Continue conversations]
+        TRANS[Full Transparency<br/>Tool visibility]
+    end
+    
+    CREATE --> FORK
+    CREATE --> CHAIN
+    CREATE --> TRANS
+    STREAM --> TRANS
+```
+
+For detailed Response API documentation, see [RESPONSES_API_FORMAT.md](./RESPONSES_API_FORMAT.md)

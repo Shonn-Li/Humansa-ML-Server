@@ -130,11 +130,11 @@ INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
 INFO:__main__:
 INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
 INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
-INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_prod' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
 INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
 INFO:__main__:✅ Mem0 memory layer initialized for Humansa
 INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
-INFO:__main__:   Environment: production
+INFO:__main__:   Environment: test
 INFO:__main__:✅ Database pool created successfully
 INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
 INFO:humansa.tools.humansa_tools:✅ Database connection verified
@@ -167,6 +167,7 @@ INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 
 INFO:humansa.v2.api:Humansa v2 system initialized successfully
 INFO:__main__:✅ Humansa v2 system initialized with Azure OpenAI
 INFO:humansa.v2.api_responses:✅ Using Mem0 for memory management
+INFO:humansa.v2.api_responses:✅ Memory tables initialized
 INFO:humansa.tools.humansa_tools:✅ Database connection verified
 INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
 INFO:chat.postgres.db_manager:PostgresManager initialized
@@ -232,10 +233,48 @@ INFO:humansa.v2.orchestrator_agent_transparent:✅ HumansaOrchestratorAgentTrans
 INFO:humansa.v2.api_responses:✅ Transparent orchestrator initialized (captures tool calls)
 INFO:humansa.v2.api_responses:✅ Responses API orchestrators initialized successfully
 INFO:__main__:✅ Humansa v2 Responses API initialized
-[2025-07-29 21:01:57 -0700] [78842] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
+[2025-07-30 10:09:14 -0700] [24947] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
 INFO:hypercorn.error:Running on http://0.0.0.0:6001 (CTRL + C to quit)
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py:193: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "timestamp": datetime.utcnow().isoformat()
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 0
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:{'id': '0', 'text': '对花生过敏', 'event': 'ADD'}
+INFO:mem0.vector_stores.pgvector:Inserting 1 vectors into collection mem0_humansa_test_memories
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user test_mem0_fix_001: {'results': [{'id': '47ad6c31-c7bc-4cc1-b7a8-aaa233f17173', 'memory': '对花生过敏', 'event': 'ADD'}]}
+ * Serving Quart app 'main'
+ * Debug mode: True
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:6001 (CTRL + C to quit)
+[2025-07-30 10:13:43 -0700] [24947] [INFO] 127.0.0.1:52149 POST /v2/humansa/memory/add 1.1 200 58 2860944
+ERROR:__main__:🚨 UNHANDLED EXCEPTION: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+ERROR:__main__:Request method: POST
+ERROR:__main__:Request URL: http://localhost:6001/v2/humansa/chat/completions
+ERROR:__main__:Request data: {'user_id': 'test_mem0_fix_001', 'messages': [{'role': 'user', 'content': '我有什么过敏史吗？'}], 'stream': False}
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1500, in full_dispatch_request
+    result = await self.dispatch_request(request_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1591, in dispatch_request
+    self.raise_routing_exception(request_)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1578, in raise_routing_exception
+    raise request.routing_exception
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/ctx.py", line 73, in match_request
+    ) = self.url_adapter.match(  # type: ignore
+        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+        return_rule=True
+        ^^^^^^^^^^^^^^^^
+    )  # noqa
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+[2025-07-30 10:13:43 -0700] [24947] [INFO] 127.0.0.1:52149 POST /v2/humansa/chat/completions 1.1 500 207 3782
 INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
-INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 你是谁？...
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 我有什么过敏史吗？...
 INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
 INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
 /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
@@ -251,16 +290,16 @@ This implementation will be removed in a v0.13.0.
 See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
   return old_new1(cls, *args, **kwargs)
 INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-ERROR:humansa.v2.orchestrator_agent_transparent:Error processing query: name 'selected_tools' is not defined
-INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_fix_complete_7a931754_1753848128 for user: test_fix_complete
-INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_fix_complete_7a931754_1753848128 (5 tokens)
-INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_fix_complete_7a931754_1753848128 (24 tokens)
-INFO:humansa.v2.response_manager:Created response resp_e31f7f006fbd_1753848128 for conversation conv_test_fix_complete_7a931754_1753848128
- * Serving Quart app 'main'
- * Debug mode: True
- * Please use an ASGI server (e.g. Hypercorn) directly in production
- * Running on http://0.0.0.0:6001 (CTRL + C to quit)
-[2025-07-29 21:02:08 -0700] [78842] [INFO] 127.0.0.1:64299 POST /v2/humansa/responses/create 1.1 200 663 2000108
+INFO:humansa.tools.consolidated_tools:💭 Conversation memory: action=retrieve, user=user, type=medical_history
+INFO:humansa.v2.memory.mem0_integration:🔍 Getting patient memory for: user
+INFO:humansa.v2.memory.mem0_integration:🔍 Memory user ID: humansa_test_user
+INFO:humansa.v2.memory.mem0_integration:🔍 Retrieved 0 memories
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_mem0_fix_001_73b11d0f_1753895640 for user: test_mem0_fix_001
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_mem0_fix_001_73b11d0f_1753895640 (13 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_mem0_fix_001_73b11d0f_1753895640 (194 tokens)
+INFO:humansa.v2.response_manager:Created response resp_8c1ac0460371_1753895640 for conversation conv_test_mem0_fix_001_73b11d0f_1753895640
+[2025-07-30 10:14:00 -0700] [24947] [INFO] 127.0.0.1:53060 POST /v2/humansa/responses/create 1.1 200 2083 3288066
 INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python
 INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
 INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
@@ -393,11 +432,11 @@ INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
 INFO:__main__:
 INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
 INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
-INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_prod' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
 INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
 INFO:__main__:✅ Mem0 memory layer initialized for Humansa
 INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
-INFO:__main__:   Environment: production
+INFO:__main__:   Environment: test
 INFO:__main__:✅ Database pool created successfully
 INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
 INFO:humansa.tools.humansa_tools:✅ Database connection verified
@@ -430,6 +469,7 @@ INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 
 INFO:humansa.v2.api:Humansa v2 system initialized successfully
 INFO:__main__:✅ Humansa v2 system initialized with Azure OpenAI
 INFO:humansa.v2.api_responses:✅ Using Mem0 for memory management
+INFO:humansa.v2.api_responses:✅ Memory tables initialized
 INFO:humansa.tools.humansa_tools:✅ Database connection verified
 INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
 INFO:chat.postgres.db_manager:PostgresManager initialized
@@ -495,243 +535,7 @@ INFO:humansa.v2.orchestrator_agent_transparent:✅ HumansaOrchestratorAgentTrans
 INFO:humansa.v2.api_responses:✅ Transparent orchestrator initialized (captures tool calls)
 INFO:humansa.v2.api_responses:✅ Responses API orchestrators initialized successfully
 INFO:__main__:✅ Humansa v2 Responses API initialized
-[2025-07-29 21:02:29 -0700] [78842] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
-INFO:hypercorn.error:Running on http://0.0.0.0:6001 (CTRL + C to quit)
-INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python
-INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
-INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
-INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
-INFO:__main__:🔄 Registering embedding endpoints...
-INFO:__main__:🔄 Attempting to import URL embedding endpoints...
-None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
-INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
-INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
-INFO:chat.token.token_counter:Initialized token counter for gpt-4
-INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
-INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
-INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
-INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
-INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
-INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
-INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
-INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
-INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
-INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
-INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
-INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
-INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
-INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
-INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
-INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
-INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
-WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
-INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
-INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
-INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
-INFO:__main__:✅ Successfully imported URL embedding endpoints
-INFO:__main__:✅ URL embedding endpoints registered successfully
-INFO:__main__:🔄 Attempting to import admin embedding endpoints...
-INFO:__main__:✅ Successfully imported admin embedding endpoints
-INFO:__main__:✅ Admin embedding endpoints registered successfully
-INFO:__main__:🔄 Attempting to import file analyzer endpoints...
-INFO:__main__:✅ Successfully imported file analyzer blueprint
-INFO:__main__:✅ File analyzer endpoints registered successfully
-INFO:__main__:🔄 Attempting to import document converter endpoints...
-INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
-INFO:chat.utils.document_converter:❌ docx2pdf not available
-INFO:chat.utils.document_converter:❌ pypandoc not available
-INFO:chat.utils.document_converter:❌ python-docx not available
-INFO:chat.utils.document_converter:❌ openpyxl not available
-INFO:chat.utils.document_converter:❌ reportlab not available
-INFO:__main__:✅ Successfully imported document converter blueprint
-INFO:__main__:✅ Document converter endpoints registered successfully
-INFO:__main__:✅ Embedding endpoints registration completed
-INFO:__main__:🔄 Registering Humansa endpoints...
-INFO:humansa.postgres.database:HumansaDatabase initialized
-INFO:chat.postgres.db_manager:PostgresManager initialized
-INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
-INFO:chat.websearch.web_search_processor:Web search cache table initialized
-INFO:__main__:✅ Humansa V2 Conversation API endpoints registered
-INFO:__main__:✅ Humansa V2 Responses API endpoints registered
-INFO:__main__:✅ Mem0 API endpoints registered
-INFO:__main__:✅ Humansa v2 blueprint registered
-INFO:__main__:✅ Humansa endpoints registered successfully
-INFO:__main__:=== YouWoAI ML Server Starting ===
-INFO:__main__:Server will be available at: http://0.0.0.0:6001
-INFO:__main__:
-INFO:__main__:📋 Endpoint Summary:
-INFO:__main__:✅ CHAT ENDPOINTS:
-INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
-INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
-INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
-INFO:__main__:
-INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
-INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
-INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
-INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
-INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
-INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
-INFO:__main__:
-INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
-INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
-INFO:__main__:   - /v2/humansa/memory/search - Search user memories
-INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
-INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
-INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
-INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
-INFO:__main__:   - /o3-demo - O3 reasoning demo
-INFO:__main__:   - /v1/status - System status
-INFO:__main__:
-INFO:__main__:✅ PRESERVED ENDPOINTS:
-INFO:__main__:   - /analyze_link - Independent link analysis
-INFO:__main__:   - /note_text/<id> - Essential note operations
-INFO:__main__:   - /note_title/<id> - Essential note operations
-INFO:__main__:
-INFO:__main__:✅ EMBEDDING ENDPOINTS:
-INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
-INFO:__main__:   - /admin/embedding/* - Admin embedding controls
-INFO:__main__:
-INFO:__main__:🔄 Migration Status:
-INFO:__main__:   - ✅ Chat system: Using modular implementation
-INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
-INFO:__main__:   - ✅ Link analyzer: Independent module
-INFO:__main__:   - ✅ Embeddings: New modular architecture
-INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
-INFO:__main__:
-INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
-INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
-INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_prod' ready for Mem0
-INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
-INFO:__main__:✅ Mem0 memory layer initialized for Humansa
-INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
-INFO:__main__:   Environment: production
-INFO:__main__:✅ Database pool created successfully
-INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
-INFO:humansa.tools.humansa_tools:✅ Database connection verified
-INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
-INFO:chat.postgres.db_manager:PostgresManager initialized
-INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
-INFO:chat.websearch.web_search_processor:Web search cache table initialized
-INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
-INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
-INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
-INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
-INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
-INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
-INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
-INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
-INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
-
-This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
-
-See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return cls(
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
-
-This implementation will be removed in a v0.13.0.
-
-See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return old_new1(cls, *args, **kwargs)
-INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
-INFO:humansa.v2.api:Humansa v2 system initialized successfully
-INFO:__main__:✅ Humansa v2 system initialized with Azure OpenAI
-INFO:humansa.v2.api_responses:✅ Using Mem0 for memory management
-INFO:humansa.tools.humansa_tools:✅ Database connection verified
-INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
-INFO:chat.postgres.db_manager:PostgresManager initialized
-INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
-INFO:chat.websearch.web_search_processor:Web search cache table initialized
-INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
-INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
-INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
-INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
-INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
-INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
-INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
-INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
-INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
-
-This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
-
-See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return cls(
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
-
-This implementation will be removed in a v0.13.0.
-
-See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return old_new1(cls, *args, **kwargs)
-INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
-
-This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
-
-See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return cls(
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
-
-This implementation will be removed in a v0.13.0.
-
-See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return old_new1(cls, *args, **kwargs)
-INFO:humansa.v2.orchestrator_agent_enhanced:Initialized Enhanced HumansaOrchestratorAgent with 6 agent tools
-INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
-INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
-INFO:humansa.v2.orchestrator_agent_consolidated:✅ Initialized consolidated tools (7 core functions)
-INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
-
-This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
-
-See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return cls(
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
-
-This implementation will be removed in a v0.13.0.
-
-See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return old_new1(cls, *args, **kwargs)
-INFO:humansa.v2.orchestrator_agent_consolidated:✅ HumansaOrchestratorAgentConsolidated initialized with dynamic tool loading
-INFO:humansa.v2.api_responses:✅ Consolidated orchestrator initialized (7 tools with dynamic loading)
-INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
-INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
-INFO:humansa.v2.orchestrator_agent_transparent:✅ Initialized transparent orchestrator with tool capture
-INFO:humansa.v2.orchestrator_agent_transparent:✅ HumansaOrchestratorAgentTransparent initialized
-INFO:humansa.v2.api_responses:✅ Transparent orchestrator initialized (captures tool calls)
-INFO:humansa.v2.api_responses:✅ Responses API orchestrators initialized successfully
-INFO:__main__:✅ Humansa v2 Responses API initialized
-[2025-07-29 21:02:35 -0700] [78842] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
+[2025-07-30 10:16:43 -0700] [24947] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
 INFO:hypercorn.error:Running on http://0.0.0.0:6001 (CTRL + C to quit)
  * Serving Quart app 'main'
  * Debug mode: True

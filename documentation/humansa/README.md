@@ -18,6 +18,13 @@ Humansa is a multi-agent medical AI system with integrated memory capabilities p
 - **Agents**: 5 specialized medical agents coordinated by orchestrator
 - **Memory**: Full Mem0 integration with context persistence
 
+### V2 Responses API (OpenAI Format)
+- **Endpoints**: `/v2/humansa/responses/*`
+- **Features**: Full reasoning chain transparency with tool visibility
+- **Format**: OpenAI Responses API with output array
+- **Streaming**: Event-based format (response.created, output_item.delta, etc.)
+- **Capabilities**: Response forking, chaining, and conversation trees
+
 ## Test Environment
 
 ⚠️ **CRITICAL**: All Humansa tests use a COMPLETELY ISOLATED test environment. See [HUMANSA_TEST_ENVIRONMENT.md](./HUMANSA_TEST_ENVIRONMENT.md) for details.
@@ -58,6 +65,14 @@ Detailed orchestrator pattern analysis:
 - Comparison of current vs ideal implementation
 - Recommendations for true orchestrator pattern
 
+### 📕 [RESPONSES_API_FORMAT.md](./RESPONSES_API_FORMAT.md)
+OpenAI Responses API implementation:
+- Output array structure with reasoning chain
+- Tool use and tool result transparency
+- Event-based streaming format
+- Response forking and chaining
+- API endpoint specifications
+
 ## Quick Start
 
 ### Test Environment
@@ -87,16 +102,29 @@ curl -X POST http://localhost:6001/v2/humansa/chat \
     "messages": [{"role": "user", "content": "I have diabetes"}],
     "stream": false
   }'
+
+# Test V2 Responses API (with tool transparency)
+curl -X POST http://localhost:6001/v2/humansa/responses/create \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4-turbo",
+    "input": "找一个神经内科医生",
+    "user_id": "test_user_123"
+  }'
 ```
 
 ## Key Features
 
 ### Current Implementation ✅
-- **Multi-Agent System**: 5 specialized medical agents
+- **Multi-Agent System**: 5 specialized medical agents + transparent orchestrator
 - **Memory Layer**: Mem0 integration for persistent user context
 - **Smart Orchestration**: Automatic agent selection based on query
 - **User ID Tracking**: Namespaced format for multi-service support
 - **API Endpoints**: RESTful API with streaming support
+- **Response API**: OpenAI format with full reasoning transparency
+- **Tool Visibility**: Complete tool call and result exposure
+- **Consolidated Tools**: 7 core functions with dynamic loading
+- **Response Management**: Stateful conversations with forking support
 - **Test Coverage**: Comprehensive test suites with mock support
 
 ### Architecture Highlights
@@ -111,7 +139,17 @@ curl -X POST http://localhost:6001/v2/humansa/chat \
 ```
 Humansa V2
 ├── API Layer (Quart blueprints)
-├── Orchestrator (Workflow engine)
+│   ├── V2 Chat API
+│   └── V2 Responses API
+├── Orchestrators
+│   ├── HumansaOrchestratorAgent
+│   ├── HumansaOrchestratorAgentEnhanced
+│   ├── HumansaOrchestratorAgentConsolidated
+│   └── HumansaOrchestratorAgentTransparent
+├── Response Layer
+│   ├── ResponseManager (state management)
+│   ├── ResponseFormatter (format conversion)
+│   └── ConversationManager (context window)
 ├── Agent Pool
 │   ├── GeneralMedicalAgent
 │   ├── DiagnosisAgent
@@ -121,6 +159,9 @@ Humansa V2
 ├── Memory System
 │   ├── Mem0Manager (Singleton)
 │   └── Mem0MemoryManagerAdapter
+├── Tools
+│   ├── Consolidated Tools (7 core functions)
+│   └── Dynamic Tool Loader
 └── Context Manager
 ```
 
@@ -179,3 +220,4 @@ Optional:
 
 - **V1**: Original tool-calling agent with multi-agent enhancement
 - **V2**: LlamaIndex orchestrator pattern with full Mem0 integration
+- **V2 Responses API**: OpenAI-compatible format with transparent tool usage and response management

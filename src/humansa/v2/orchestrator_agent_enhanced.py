@@ -30,7 +30,10 @@ class EnhancedLoggingHandler(BaseCallbackHandler):
     """Custom callback handler for enhanced logging"""
     
     def __init__(self, stream_callback=None):
-        super().__init__([], [])
+        super().__init__(
+            event_starts_to_ignore=[],
+            event_ends_to_ignore=[]
+        )
         self.stream_callback = stream_callback
         self.events = []
         
@@ -96,6 +99,22 @@ class EnhancedLoggingHandler(BaseCallbackHandler):
                 "event_id": event_id,
                 "result": output
             }))
+    
+    def start_trace(self, trace_id: Optional[str] = None) -> None:
+        """Start a trace - required by BaseCallbackHandler"""
+        # Implementation for trace start
+        if trace_id:
+            logger.debug(f"Starting trace: {trace_id}")
+    
+    def end_trace(
+        self,
+        trace_id: Optional[str] = None,
+        trace_map: Optional[Dict[str, List[str]]] = None,
+    ) -> None:
+        """End a trace - required by BaseCallbackHandler"""
+        # Implementation for trace end
+        if trace_id:
+            logger.debug(f"Ending trace: {trace_id}")
 
 
 class HumansaOrchestratorAgentEnhanced:
