@@ -49,7 +49,7 @@ docker-compose -f docker-compose.local.yml up  # Local development
 # docker ps | grep youwoai_test_db
 #
 # Run tests with:
-# ./run_final_tests.sh  # Uses correct configuration
+# DIGIT=2 ./run_final_tests.sh  # Uses correct configuration (DIGIT=2 for new branch)
 
 # HUMANSA V2 Testing with Enhanced Logging
 ./run_HUMANSA_test_environment_v2_enhanced.sh  # Run V2 tests with full process visibility
