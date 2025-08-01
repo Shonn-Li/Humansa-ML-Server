@@ -879,8 +879,21 @@ async def create_db_pool():
             try:
                 from humansa.v2.api import initialize_v2_system
                 use_subagent = os.getenv('HUMANSA_USE_SUBAGENT_ARCHITECTURE', '').lower() == 'true'
-                await initialize_v2_system(app.db_pool, use_subagent_architecture=use_subagent)
-                arch_type = "Sub-Agent Architecture" if use_subagent else "Consolidated Tools"
+                use_workflow = os.getenv('HUMANSA_USE_WORKFLOW_ORCHESTRATOR', '').lower() == 'true'
+                
+                await initialize_v2_system(
+                    app.db_pool, 
+                    use_subagent_architecture=use_subagent,
+                    use_workflow_orchestrator=use_workflow
+                )
+                
+                if use_workflow:
+                    arch_type = "AgentWorkflow (Streaming Reasoning)"
+                elif use_subagent:
+                    arch_type = "Sub-Agent Architecture"
+                else:
+                    arch_type = "Consolidated Tools"
+                    
                 logger.info(f"✅ Humansa v2 system initialized with {arch_type}")
                 
                 # Initialize Humansa v2 conversation API

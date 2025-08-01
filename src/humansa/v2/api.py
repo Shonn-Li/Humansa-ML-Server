@@ -30,13 +30,14 @@ appointment_workflow: Optional[AppointmentBookingWorkflow] = None
 sse_formatter = SSEFormatter()
 
 
-async def initialize_v2_system(db_pool, openai_api_key: str = None, use_subagent_architecture: bool = False):
+async def initialize_v2_system(db_pool, openai_api_key: str = None, use_subagent_architecture: bool = False, use_workflow_orchestrator: bool = False):
     """Initialize the v2 Humansa system.
     
     Args:
         db_pool: Database connection pool
         openai_api_key: OpenAI API key (optional)
         use_subagent_architecture: Use new sub-agent architecture (default: False)
+        use_workflow_orchestrator: Use AgentWorkflow with streaming reasoning (default: False)
     """
     global memory_manager, orchestrator, appointment_workflow
     
@@ -98,7 +99,17 @@ async def initialize_v2_system(db_pool, openai_api_key: str = None, use_subagent
     }
     
     # Initialize orchestrator - choose between architectures
-    if use_subagent_architecture:
+    if use_workflow_orchestrator:
+        # Use new AgentWorkflow architecture with streaming reasoning
+        logger.info("🔥 Initializing HUMANSA V2 with AgentWorkflow (Streaming Reasoning)")
+        from .orchestrator_workflow import create_workflow_orchestrator
+        orchestrator = create_workflow_orchestrator(
+            llm=llm,
+            memory_manager=memory_manager,
+            debug=True,
+            db_config=db_config
+        )
+    elif use_subagent_architecture:
         # Use new sub-agent architecture
         logger.info("🚀 Initializing HUMANSA V2 with Sub-Agent Architecture")
         from .orchestrator_agent_subagent import create_subagent_orchestrator

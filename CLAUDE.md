@@ -54,6 +54,11 @@ docker-compose -f docker-compose.local.yml up  # Local development
 # HUMANSA V2 Testing with Enhanced Logging
 ./run_HUMANSA_test_environment_v2_enhanced.sh  # Run V2 tests with full process visibility
 ./run_HUMANSA_v2_test_40_cases_enhanced.sh     # Run 40 comprehensive test cases
+
+# HUMANSA V2 Workflow Orchestrator (NEW - Streaming Reasoning)
+export HUMANSA_USE_WORKFLOW_ORCHESTRATOR=true  # Enable AgentWorkflow with reasoning visibility
+python -m src.main                              # Start server with workflow orchestrator
+python test_workflow_integration.py            # Test reasoning stream integration
 ```
 
 ## High-Level Architecture
