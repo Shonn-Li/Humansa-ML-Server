@@ -1,0 +1,875 @@
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:🔄 Attempting to import document converter endpoints...
+INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
+INFO:chat.utils.document_converter:❌ docx2pdf not available
+INFO:chat.utils.document_converter:❌ pypandoc not available
+INFO:chat.utils.document_converter:❌ python-docx not available
+INFO:chat.utils.document_converter:❌ openpyxl not available
+INFO:chat.utils.document_converter:❌ reportlab not available
+INFO:__main__:✅ Successfully imported document converter blueprint
+INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:🔄 Registering Humansa endpoints...
+INFO:humansa.postgres.database:HumansaDatabase initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:__main__:✅ Humansa V2 Conversation API endpoints registered
+INFO:__main__:✅ Humansa V2 Responses API endpoints registered
+INFO:__main__:✅ Mem0 API endpoints registered
+INFO:__main__:✅ Humansa v2 blueprint registered
+INFO:__main__:✅ Humansa endpoints registered successfully
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:6001
+INFO:__main__:
+INFO:__main__:📋 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
+INFO:__main__:
+INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
+INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
+INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
+INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
+INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
+INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
+INFO:__main__:
+INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
+INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
+INFO:__main__:   - /v2/humansa/memory/search - Search user memories
+INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
+INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
+INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
+INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
+INFO:__main__:   - /o3-demo - O3 reasoning demo
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
+INFO:__main__:✅ Mem0 memory layer initialized for Humansa
+INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
+INFO:__main__:   Environment: test
+INFO:__main__:✅ Database pool created successfully
+INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
+INFO:humansa.v2.api:🚀 Initializing HUMANSA V2 with Sub-Agent Architecture
+INFO:humansa.v2.agent_tool_wrapper:✅ Created Product Recommendation Agent tool
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.agent_tool_wrapper:✅ Created Appointment Booking Agent tool
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.agent_tool_wrapper:✅ Created Clinical Analysis Agent tool
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.agent_tool_wrapper:✅ Created Medication Guidance Agent tool
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.agent_tool_wrapper:✅ Created General Medical Agent tool
+INFO:humansa.v2.agent_tool_wrapper:✅ Created 5 sub-agent tools successfully
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent_subagent:✅ Initialized SubAgentOrchestrator with 5 sub-agent tools
+INFO:humansa.v2.api:Humansa v2 system initialized successfully
+INFO:__main__:✅ Humansa v2 system initialized with Sub-Agent Architecture
+INFO:humansa.v2.api_responses:✅ Using Mem0 for memory management
+INFO:humansa.v2.api_responses:✅ Memory tables initialized
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent_enhanced:Initialized Enhanced HumansaOrchestratorAgent with 6 agent tools
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ Initialized consolidated tools (7 core functions)
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ HumansaOrchestratorAgentConsolidated initialized with dynamic tool loading
+INFO:humansa.v2.api_responses:✅ Consolidated orchestrator initialized (7 tools with dynamic loading)
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_transparent:✅ Initialized transparent orchestrator with tool capture
+INFO:humansa.v2.orchestrator_agent_transparent:✅ HumansaOrchestratorAgentTransparent initialized
+INFO:humansa.v2.api_responses:✅ Transparent orchestrator initialized (captures tool calls)
+INFO:humansa.v2.api_responses:✅ Responses API orchestrators initialized successfully
+INFO:__main__:✅ Humansa v2 Responses API initialized
+[2025-07-31 18:40:50 -0700] [59882] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:6001 (CTRL + C to quit)
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/context_manager.py:148: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  conversation_id = f"conv_{datetime.utcnow().timestamp()}"
+<string>:6: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_debug_appointment
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': [{'id': '2fca4b5c-1410-4916-a4c3-355882aa03e9', 'memory': '想预约心内科医生', 'hash': 'cb634c57053dc8770f34281132faffb8', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T01:39:08.824780', 'session_id': 'bd2f0c2d-919f-4365-a01e-b70b4209545e', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T18:39:11.388766-07:00', 'updated_at': None, 'user_id': 'humansa_test_debug_appointment'}]}
+INFO:humansa.v2.orchestrator_agent_subagent:Loaded user context for debug_appointment
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.403502 seconds
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:🔍 SEARCH_SLOTS called with: doctor_id=None, specialty=心内科, date_from=None, date_to=None, time_preference=None
+ERROR:humansa.v2.agents.appointment_agent:❌ Error searching appointment slots: invalid input for query argument $2: '2025-07-31' ('str' object has no attribute 'toordinal')
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.492878 seconds
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+ * Serving Quart app 'main'
+ * Debug mode: True
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:6001 (CTRL + C to quit)
+> Running step 93341e08-a956-4cc1-8f19-59b479de88a7. Step input: 我想预约心内科医生
+[1;3;38;5;200mThought: The current language of the user is Chinese. I need to use a tool来帮用户预约心内科医生。
+Action: appointment_booking_agent
+Action Input: {'query': '预约心内科医生', 'kwargs': AttributedDict()}
+[0m[1;3;34mObservation: 
+[0m> Running step 4504eb22-f7c4-4313-a93a-a9c452198708. Step input: None
+[1;3;38;5;200mThought: 工具未返回具体的信息，可能需要补充更多预约细节，例如城市、医院或者就诊时间，以便更好地完成预约。
+Answer: 请您提供所在城市、希望就诊的医院以及期望的就诊时间，这样我可以更准确地为您预约心内科医生。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 6.154067 seconds
+      |_CBEventType.LLM -> 1.214139 seconds
+      |_CBEventType.FUNCTION_CALL -> 2.948047 seconds
+      |_CBEventType.LLM -> 1.985183 seconds
+**********
+INFO:humansa.v2.response_agent:✅ Response processed: type=general, length=33
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py:193: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "timestamp": datetime.utcnow().isoformat()
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 1
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:{'id': '0', 'text': '想预约心内科医生', 'event': 'NONE'}
+INFO:mem0.memory.main:NOOP for Memory.
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user debug_appointment: {'results': []}
+[2025-07-31 18:41:08 -0700] [59882] [INFO] 127.0.0.1:53323 POST /v2/humansa/chat 1.1 200 884 9367512
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:🔄 Attempting to import document converter endpoints...
+INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
+INFO:chat.utils.document_converter:❌ docx2pdf not available
+INFO:chat.utils.document_converter:❌ pypandoc not available
+INFO:chat.utils.document_converter:❌ python-docx not available
+INFO:chat.utils.document_converter:❌ openpyxl not available
+INFO:chat.utils.document_converter:❌ reportlab not available
+INFO:__main__:✅ Successfully imported document converter blueprint
+INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:🔄 Registering Humansa endpoints...
+INFO:humansa.postgres.database:HumansaDatabase initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:__main__:✅ Humansa V2 Conversation API endpoints registered
+INFO:__main__:✅ Humansa V2 Responses API endpoints registered
+INFO:__main__:✅ Mem0 API endpoints registered
+INFO:__main__:✅ Humansa v2 blueprint registered
+INFO:__main__:✅ Humansa endpoints registered successfully
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:6001
+INFO:__main__:
+INFO:__main__:📋 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
+INFO:__main__:
+INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
+INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
+INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
+INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
+INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
+INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
+INFO:__main__:
+INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
+INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
+INFO:__main__:   - /v2/humansa/memory/search - Search user memories
+INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
+INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
+INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
+INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
+INFO:__main__:   - /o3-demo - O3 reasoning demo
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
+INFO:__main__:✅ Mem0 memory layer initialized for Humansa
+INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
+INFO:__main__:   Environment: test
+INFO:__main__:✅ Database pool created successfully
+INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
+INFO:humansa.v2.api:🚀 Initializing HUMANSA V2 with Sub-Agent Architecture
+INFO:humansa.v2.agent_tool_wrapper:✅ Created Product Recommendation Agent tool
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.agent_tool_wrapper:✅ Created Appointment Booking Agent tool
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.agent_tool_wrapper:✅ Created Clinical Analysis Agent tool
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.agent_tool_wrapper:✅ Created Medication Guidance Agent tool
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.agent_tool_wrapper:✅ Created General Medical Agent tool
+INFO:humansa.v2.agent_tool_wrapper:✅ Created 5 sub-agent tools successfully
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent_subagent:✅ Initialized SubAgentOrchestrator with 5 sub-agent tools
+INFO:humansa.v2.api:Humansa v2 system initialized successfully
+INFO:__main__:✅ Humansa v2 system initialized with Sub-Agent Architecture
+INFO:humansa.v2.api_responses:✅ Using Mem0 for memory management
+INFO:humansa.v2.api_responses:✅ Memory tables initialized
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent_enhanced:Initialized Enhanced HumansaOrchestratorAgent with 6 agent tools
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ Initialized consolidated tools (7 core functions)
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ HumansaOrchestratorAgentConsolidated initialized with dynamic tool loading
+INFO:humansa.v2.api_responses:✅ Consolidated orchestrator initialized (7 tools with dynamic loading)
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_transparent:✅ Initialized transparent orchestrator with tool capture
+INFO:humansa.v2.orchestrator_agent_transparent:✅ HumansaOrchestratorAgentTransparent initialized
+INFO:humansa.v2.api_responses:✅ Transparent orchestrator initialized (captures tool calls)
+INFO:humansa.v2.api_responses:✅ Responses API orchestrators initialized successfully
+INFO:__main__:✅ Humansa v2 Responses API initialized
+[2025-07-31 18:41:25 -0700] [59882] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:6001 (CTRL + C to quit)
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/context_manager.py:148: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  conversation_id = f"conv_{datetime.utcnow().timestamp()}"
+<string>:6: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_debug_appointment
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': [{'id': '2fca4b5c-1410-4916-a4c3-355882aa03e9', 'memory': '想预约心内科医生', 'hash': 'cb634c57053dc8770f34281132faffb8', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T01:39:08.824780', 'session_id': 'bd2f0c2d-919f-4365-a01e-b70b4209545e', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T18:39:11.388766-07:00', 'updated_at': None, 'user_id': 'humansa_test_debug_appointment'}]}
+INFO:humansa.v2.orchestrator_agent_subagent:Loaded user context for debug_appointment
+WARNING:asyncio:Executing <Task pending name='Task-15' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.303 seconds
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.467996 seconds
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:🔍 SEARCH_SLOTS called with: doctor_id=None, specialty=心内科, date_from=None, date_to=None, time_preference=None
+INFO:humansa.v2.agents.appointment_agent:✅ Found 20 available appointment slots
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:📋 PRESENT_OPTIONS called with 5 slots
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:📋 PRESENT_OPTIONS called with 5 slots
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.440054 seconds
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+ * Serving Quart app 'main'
+ * Debug mode: True
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:6001 (CTRL + C to quit)
+> Running step 70203a53-21d5-4129-9835-0e1a62683090. Step input: 我想预约心内科医生
+[1;3;38;5;200mThought: 当前用户使用的是中文。我需要使用预约挂号相关的工具来帮助用户预约心内科医生。
+Action: appointment_booking_agent
+Action Input: {'query': '预约心内科医生', 'kwargs': AttributedDict()}
+[0m[1;3;34mObservation: 
+[0m> Running step 2c9bde66-e4b1-4d37-b1f6-0f0bfb659b0a. Step input: None
+[1;3;38;5;200mThought: 上一条工具回复内容为空，可能需要补充具体预约信息，如就诊医院、时间等，以便更好地查询心内科医生的可用号源。
+Answer: 您需要预约哪家医院的心内科医生？请提供您希望就诊的城市、医院名称以及希望的就诊时间（如具体日期或时间段），这样我可以为您更准确地查询并预约。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 15.883944 seconds
+      |_CBEventType.LLM -> 1.440566 seconds
+      |_CBEventType.FUNCTION_CALL -> 12.062746 seconds
+      |_CBEventType.LLM -> 2.298578 seconds
+**********
+INFO:humansa.v2.response_agent:✅ Response processed: type=general, length=33
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/memory/mem0_manager.py:193: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "timestamp": datetime.utcnow().isoformat()
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 1
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:{'id': '0', 'text': '想预约心内科医生', 'event': 'NONE'}
+INFO:mem0.memory.main:NOOP for Memory.
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user debug_appointment: {'results': []}
+[2025-07-31 18:43:38 -0700] [59882] [INFO] 127.0.0.1:54622 POST /v2/humansa/chat 1.1 200 1034 18336431
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_debug_appointment_0
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent_subagent:Loaded user context for debug_appointment_0
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step 78967a68-36d0-4bea-8c82-2d23771a7590. Step input: 我要预约挂号，需要心内科医生
+[1;3;38;5;200mThought: 用户需要预约心内科医生，但还未提供城市、医院或时间等详细信息。我需要先询问以便更好地帮用户预约。
+Answer: 请您提供以下信息，以便为您预约心内科医生：
+1. 就诊的城市或具体医院名称
+2. 您希望的就诊日期或时间段
+3. 是否有指定的医生或特殊需求
+
+提供这些信息后，我会为您查询并预约心内科医生。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 2.514468 seconds
+      |_CBEventType.LLM -> 2.508466 seconds
+**********
+INFO:humansa.v2.response_agent:✅ Response processed: type=general, length=33
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 0
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:{'id': '0', 'text': '需要预约心内科医生', 'event': 'ADD'}
+INFO:mem0.vector_stores.pgvector:Inserting 1 vectors into collection mem0_humansa_test_memories
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user debug_appointment_0: {'results': [{'id': '382430dd-fdd2-417e-bfb3-f200052d8a9e', 'memory': '需要预约心内科医生', 'event': 'ADD'}]}
+[2025-07-31 18:44:55 -0700] [59882] [INFO] 127.0.0.1:56240 POST /v2/humansa/chat 1.1 200 1119 4894306
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_debug_appointment_1
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent_subagent:Loaded user context for debug_appointment_1
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.400414 seconds
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:🔍 SEARCH_SLOTS called with: doctor_id=None, specialty=心内科, date_from=None, date_to=None, time_preference=None
+INFO:humansa.v2.agents.appointment_agent:✅ Found 20 available appointment slots
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:📋 PRESENT_OPTIONS called with 20 slots
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.393125 seconds
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step b6c86b54-8601-44a3-a399-2efaf8d6b7fa. Step input: 帮我预约一个心内科医生的号
+[1;3;38;5;200mThought: The current language of the user is Chinese. I需要用预约挂号工具来帮助用户预约心内科医生，但用户未指定城市、医院和日期，需要先尝试预约心内科医生的号源。
+Action: appointment_booking_agent
+Action Input: {'query': '预约心内科医生', 'kwargs': AttributedDict()}
+[0m[1;3;34mObservation: 
+[0m> Running step f58ccf4a-b4f6-4e83-bbe3-7535df49eb67. Step input: None
+[1;3;38;5;200mThought: 工具未返回具体结果，可能因为缺少关键信息（如城市、医院或日期）。我需要向用户进一步确认相关信息以便完成预约。
+Answer: 为了帮您顺利预约心内科医生，请您补充以下信息：
+1. 就诊的城市或医院名称
+2. 希望的就诊日期或时间段
+3. 是否有指定医生或其他特殊需求
+
+请回复以上信息，我会尽快为您查询并预约心内科医生！
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 25.364496 seconds
+      |_CBEventType.LLM -> 1.001182 seconds
+      |_CBEventType.FUNCTION_CALL -> 22.018215 seconds
+      |_CBEventType.LLM -> 2.340311 seconds
+**********
+INFO:humansa.v2.response_agent:✅ Response processed: type=general, length=33
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 0
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:{'id': '0', 'text': '希望预约心内科医生', 'event': 'ADD'}
+INFO:mem0.vector_stores.pgvector:Inserting 1 vectors into collection mem0_humansa_test_memories
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user debug_appointment_1: {'results': [{'id': '32fe4824-65e6-4601-9a3a-7fd0e075fef9', 'memory': '希望预约心内科医生', 'event': 'ADD'}]}
+[2025-07-31 18:45:24 -0700] [59882] [INFO] 127.0.0.1:56278 POST /v2/humansa/chat 1.1 200 1131 29031554
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_debug_appointment_2
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent_subagent:Loaded user context for debug_appointment_2
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.413324 seconds
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:🔍 SEARCH_SLOTS called with: doctor_id=None, specialty=心内科, date_from=None, date_to=None, time_preference=None
+INFO:humansa.v2.agents.appointment_agent:✅ Found 20 available appointment slots
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:📋 PRESENT_OPTIONS called with 20 slots
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.376600 seconds
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step e2cf0666-8a47-48cb-9e7e-636e9d9d6a77. Step input: 查询心内科医生的可预约时间
+[1;3;38;5;200mThought: The current language of the user is Chinese. I need to用工具查询心内科医生的可预约时间。
+Action: appointment_booking_agent
+Action Input: {'query': '查询心内科医生的可预约时间', 'kwargs': AttributedDict()}
+[0m[1;3;34mObservation: 
+[0m> Running step d25a95ea-4434-4da6-8f26-f82d5b4c5c77. Step input: None
+[1;3;38;5;200mThought: 工具没有返回具体信息，可能需要指定城市或医院才能查询到心内科医生的可预约时间。
+Answer: 请您提供希望就诊的城市或具体医院名称，这样我可以为您查询心内科医生的可预约时间。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 28.653756 seconds
+      |_CBEventType.LLM -> 0.975307 seconds
+      |_CBEventType.FUNCTION_CALL -> 25.648336 seconds
+      |_CBEventType.LLM -> 2.021428 seconds
+**********
+INFO:humansa.v2.response_agent:✅ Response processed: type=general, length=33
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 0
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:{'id': '0', 'text': '查询心内科医生的可预约时间', 'event': 'ADD'}
+INFO:mem0.vector_stores.pgvector:Inserting 1 vectors into collection mem0_humansa_test_memories
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user debug_appointment_2: {'results': [{'id': '3dde00e7-064c-4a5b-a85d-7a4c15e0a5cf', 'memory': '查询心内科医生的可预约时间', 'event': 'ADD'}]}
+[2025-07-31 18:45:55 -0700] [59882] [INFO] 127.0.0.1:56539 POST /v2/humansa/chat 1.1 200 854 31326469
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_debug_appointment_3
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent_subagent:Loaded user context for debug_appointment_3
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.495800 seconds
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:🔍 SEARCH_SLOTS called with: doctor_id=None, specialty=cardiology, date_from=None, date_to=None, time_preference=None
+INFO:humansa.v2.agents.appointment_agent:✅ Found 0 available appointment slots
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.498080 seconds
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step ce96b153-bf5b-42ae-bfc5-2d6035ac2650. Step input: I want to book an appointment with a cardiologist
+[1;3;38;5;200mThought: The current language of the user is English. I need to use a tool to help check available cardiologist appointments.
+Action: appointment_booking_agent
+Action Input: {'query': 'check available appointment times for cardiology', 'kwargs': AttributedDict()}
+[0m[1;3;34mObservation: 
+[0m> Running step 61679636-7afb-4c04-8217-d1a7c028523f. Step input: None
+[1;3;38;5;200mThought: There was no response from the tool. I need more information to proceed with booking an appointment, such as your city or preferred hospital.
+Answer: Could you please provide your city or preferred hospital, as well as your preferred date or time for the appointment? This will help me find available cardiologists for you.
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 7.923975 seconds
+      |_CBEventType.LLM -> 0.922655 seconds
+      |_CBEventType.FUNCTION_CALL -> 4.4948 seconds
+      |_CBEventType.LLM -> 2.498432 seconds
+**********
+INFO:humansa.v2.response_agent:✅ Response processed: type=general, length=33
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 0
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:{'id': '0', 'text': 'Wants to book an appointment with a cardiologist', 'event': 'ADD'}
+INFO:mem0.vector_stores.pgvector:Inserting 1 vectors into collection mem0_humansa_test_memories
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user debug_appointment_3: {'results': [{'id': '13001615-bbfb-4f9a-997e-7fec8f3d81d8', 'memory': 'Wants to book an appointment with a cardiologist', 'event': 'ADD'}]}
+[2025-07-31 18:46:06 -0700] [59882] [INFO] 127.0.0.1:56916 POST /v2/humansa/chat 1.1 200 787 10895960
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_debug_routing
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent_subagent:Loaded user context for debug_routing
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.391463 seconds
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:🔍 SEARCH_SLOTS called with: doctor_id=None, specialty=心内科, date_from=None, date_to=None, time_preference=None
+INFO:humansa.v2.agents.appointment_agent:✅ Found 20 available appointment slots
+> Running step fa93f275-007b-43dd-add7-f24629d9dc45. Step input: 我想预约心内科医生
+[1;3;38;5;200mThought: The current language of the user is: Chinese. I need to use a tool to help me查询心内科医生的可用号源。
+Action: appointment_booking_agent
+Action Input: {'query': '查询心内科医生的可预约时间', 'kwargs': AttributedDict()}
+[0m[2025-07-31 18:47:20 -0700] [59882] [INFO] 127.0.0.1:57983 POST /v2/humansa/chat 1.1 - - 4767620
+**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 4.752858 seconds
+      |_CBEventType.LLM -> 1.287817 seconds
+      |_CBEventType.FUNCTION_CALL -> 3.461428 seconds
+**********
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:📋 PRESENT_OPTIONS called with 20 slots
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:📋 PRESENT_OPTIONS called with 20 slots
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:📋 PRESENT_OPTIONS called with 20 slots
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_debug_appointment
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': [{'id': '2fca4b5c-1410-4916-a4c3-355882aa03e9', 'memory': '想预约心内科医生', 'hash': 'cb634c57053dc8770f34281132faffb8', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T01:39:08.824780', 'session_id': 'bd2f0c2d-919f-4365-a01e-b70b4209545e', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T18:39:11.388766-07:00', 'updated_at': None, 'user_id': 'humansa_test_debug_appointment'}]}
+INFO:humansa.v2.orchestrator_agent_subagent:Loaded user context for debug_appointment
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.413426 seconds
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:🔍 SEARCH_SLOTS called with: doctor_id=None, specialty=心内科, date_from=None, date_to=None, time_preference=None
+INFO:humansa.v2.agents.appointment_agent:✅ Found 20 available appointment slots
+> Running step d7f6e366-0129-4e08-af44-cd8959403ee3. Step input: 我想预约心内科医生
+[1;3;38;5;200mThought: The current language of the user is Chinese. I need to use a tool to help查询心内科医生的可预约号源。
+Action: appointment_booking_agent
+Action Input: {'query': '查询心内科医生的可预约号源', 'kwargs': AttributedDict()}
+[0m[2025-07-31 18:48:36 -0700] [59882] [INFO] 127.0.0.1:58624 POST /v2/humansa/chat 1.1 - - 9837701
+**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 9.835992 seconds
+      |_CBEventType.LLM -> 1.384202 seconds
+      |_CBEventType.FUNCTION_CALL -> 8.450125 seconds
+**********
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:📋 PRESENT_OPTIONS called with 20 slots
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_debug_test_001
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_agent_subagent:Loaded user context for debug_test_001
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.408049 seconds
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:🔍 SEARCH_SLOTS called with: doctor_id=None, specialty=心内科, date_from=None, date_to=None, time_preference=None
+INFO:humansa.v2.agents.appointment_agent:✅ Found 20 available appointment slots
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.agents.appointment_agent:📋 PRESENT_OPTIONS called with 20 slots
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:openai._base_client:Retrying request to /chat/completions in 0.460933 seconds
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step 104404c1-dc8d-4b90-baba-59500c5a15a7. Step input: 我想预约心内科医生
+[1;3;38;5;200mThought: The current language of the user is Chinese. I need to use a tool to help query available cardiology appointments.
+Action: appointment_booking_agent
+Action Input: {'query': '查询心内科医生的可预约时间', 'kwargs': AttributedDict()}
+[0m[1;3;34mObservation: 
+[0m> Running step 9b62f84e-d837-486d-8b99-50b0e62c8ee5. Step input: None
+[1;3;38;5;200mThought: 没有收到医院或城市等具体信息，导致无法查询到具体的可预约时间。需要用户补充相关信息。
+Answer: 为了帮您查询心内科医生的可预约时间，请您提供希望就诊的城市或具体医院名称，这样我才能为您更准确地查询并预约。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 17.129661 seconds
+      |_CBEventType.LLM -> 1.484104 seconds
+      |_CBEventType.FUNCTION_CALL -> 13.620124 seconds
+      |_CBEventType.LLM -> 2.020485 seconds
+**********
+INFO:humansa.v2.response_agent:✅ Response processed: type=general, length=33
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:Total existing memories: 0
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:mem0.memory.main:{'id': '0', 'text': '想预约心内科医生', 'event': 'ADD'}
+INFO:mem0.vector_stores.pgvector:Inserting 1 vectors into collection mem0_humansa_test_memories
+INFO:humansa.memory.mem0_manager:✅ Added conversation to memory for user debug_test_001: {'results': [{'id': '0fc4f25c-d47e-42af-a918-f6131c1cbae0', 'memory': '想预约心内科医生', 'event': 'ADD'}]}
+[2025-07-31 18:51:11 -0700] [59882] [INFO] 127.0.0.1:60405 POST /v2/humansa/chat 1.1 200 938 19331412

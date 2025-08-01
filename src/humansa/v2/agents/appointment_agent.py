@@ -3,6 +3,9 @@ from datetime import datetime, timedelta
 from .base_agent import BaseHumansaAgent
 from llama_index.core.tools import FunctionTool
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 async def search_available_slots(
@@ -13,6 +16,8 @@ async def search_available_slots(
     time_preference: Optional[str] = None
 ) -> List[Dict[str, Any]]:
     """Search for available appointment slots from real database."""
+    logger.info(f"🔍 SEARCH_SLOTS called with: doctor_id={doctor_id}, specialty={specialty}, date_from={date_from}, date_to={date_to}, time_preference={time_preference}")
+    
     try:
         import asyncpg
         import os
@@ -43,9 +48,24 @@ async def search_available_slots(
             
         # Default date range if not specified
         if not date_from:
-            date_from = datetime.now().strftime("%Y-%m-%d")
+            date_from = datetime.now().date()
+        else:
+            # Convert string to date if needed
+            if isinstance(date_from, str):
+                try:
+                    date_from = datetime.strptime(date_from, "%Y-%m-%d").date()
+                except ValueError:
+                    date_from = datetime.now().date()
+            
         if not date_to:
-            date_to = (datetime.now() + timedelta(days=7)).strftime("%Y-%m-%d")
+            date_to = datetime.now().date() + timedelta(days=7)
+        else:
+            # Convert string to date if needed
+            if isinstance(date_to, str):
+                try:
+                    date_to = datetime.strptime(date_to, "%Y-%m-%d").date()
+                except ValueError:
+                    date_to = datetime.now().date() + timedelta(days=7)
             
         query_conditions.append(f"s.date BETWEEN ${param_counter} AND ${param_counter + 1}")
         query_params.extend([date_from, date_to])
@@ -99,13 +119,14 @@ async def search_available_slots(
                     "available": True
                 })
             
+            logger.info(f"✅ Found {len(slots)} available appointment slots")
             return slots
             
         finally:
             await conn.close()
             
     except Exception as e:
-        print(f"Error searching appointment slots: {e}")
+        logger.error(f"❌ Error searching appointment slots: {e}")
         # Fallback to mock data if database connection fails
         return [{
             "slot_id": "fallback_001",
@@ -120,6 +141,235 @@ async def search_available_slots(
             "clinic_name": "北京协和医院",
             "available": True
         }]
+
+
+async def present_appointment_options(
+    available_slots: List[Dict[str, Any]],
+    user_preferences: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
+    """Present available appointment options to user for selection."""
+    logger.info(f"📋 PRESENT_OPTIONS called with {len(available_slots)} slots")
+    
+    if not available_slots:
+        return {
+            "status": "no_slots",
+            "message": "抱歉，没有找到符合条件的可预约时间。请尝试其他日期或科室。",
+            "options": []
+        }
+    
+    # Format options for user selection
+    formatted_options = []
+    for i, slot in enumerate(available_slots[:10], 1):  # Limit to top 10 options
+        option = {
+            "option_number": i,
+            "slot_id": slot["slot_id"],
+            "display_text": f"{i}. {slot['doctor_name']}医生 ({slot['specialty']}) - {slot['date']} {slot['time']} - {slot['clinic_name']} - ¥{slot['consultation_fee']:.0f} ({slot['consultation_type']})",
+            "details": slot
+        }
+        formatted_options.append(option)
+    
+    return {
+        "status": "options_available", 
+        "message": f"为您找到 {len(available_slots)} 个可预约时间，以下是推荐选项：",
+        "options": formatted_options,
+        "total_found": len(available_slots)
+    }
+
+
+async def request_booking_approval(
+    selected_slot: Dict[str, Any],
+    patient_info: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
+    """Request user approval for appointment booking."""
+    logger.info(f"✋ APPROVAL_REQUEST for slot_id={selected_slot.get('slot_id')}")
+    
+    approval_details = {
+        "booking_summary": {
+            "doctor": f"{selected_slot['doctor_name']}医生",
+            "specialty": selected_slot['specialty'],
+            "date": selected_slot['date'],
+            "time": selected_slot['time'],
+            "clinic": selected_slot['clinic_name'],
+            "fee": f"¥{selected_slot['consultation_fee']:.0f}",
+            "type": "现场就诊" if selected_slot['consultation_type'] == 'in-person' else "在线咨询"
+        },
+        "patient_info": patient_info or {},
+        "approval_required": True,
+        "approval_timeout_minutes": 5,
+        "confirmation_message": f"""
+📋 **预约确认**
+
+👨‍⚕️ **医生信息**
+- 医生：{selected_slot['doctor_name']}医生 ({selected_slot['specialty']})
+- 医院：{selected_slot['clinic_name']}
+- 就诊方式：{'现场就诊' if selected_slot['consultation_type'] == 'in-person' else '在线咨询'}
+
+⏰ **预约时间**
+- 日期：{selected_slot['date']}
+- 时间：{selected_slot['time']}
+
+💰 **费用信息**
+- 挂号费：¥{selected_slot['consultation_fee']:.0f}
+
+❓ **请确认是否预约此时间段？**
+回复 "确认预约" 或 "取消预约"
+        """
+    }
+    
+    return approval_details
+
+
+async def process_user_approval(
+    approval_response: str,
+    slot_details: Dict[str, Any],
+    patient_info: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
+    """Process user approval/rejection of appointment booking."""
+    logger.info(f"👤 USER_APPROVAL: '{approval_response}' for slot_id={slot_details.get('slot_id')}")
+    
+    # Normalize response
+    response_lower = approval_response.lower().strip()
+    
+    # Check for approval keywords
+    approval_keywords = ["确认", "预约", "是的", "好的", "同意", "yes", "ok", "确定"]
+    rejection_keywords = ["取消", "不要", "不", "拒绝", "no", "cancel", "不预约"]
+    
+    if any(keyword in response_lower for keyword in approval_keywords):
+        # User approved - proceed with booking
+        return {
+            "status": "approved",
+            "action": "proceed_booking",
+            "message": "✅ 您已确认预约，正在为您安排...",
+            "next_step": "finalize_booking"
+        }
+    elif any(keyword in response_lower for keyword in rejection_keywords):
+        # User rejected - cancel process
+        return {
+            "status": "rejected", 
+            "action": "cancel_booking",
+            "message": "❌ 预约已取消。如需重新预约，请告诉我您的需求。",
+            "next_step": "search_again"
+        }
+    else:
+        # Unclear response - ask for clarification
+        return {
+            "status": "unclear",
+            "action": "request_clarification", 
+            "message": "请明确回复 '确认预约' 或 '取消预约'，以便我为您处理。",
+            "next_step": "await_clear_response"
+        }
+
+
+async def finalize_booking(
+    slot_id: str,
+    patient_info: Dict[str, Any],
+    approval_confirmed: bool = True
+) -> Dict[str, Any]:
+    """Finalize the appointment booking after user approval."""
+    logger.info(f"🎯 FINALIZE_BOOKING for slot_id={slot_id}, approved={approval_confirmed}")
+    
+    if not approval_confirmed:
+        return {
+            "status": "booking_failed",
+            "message": "预约未获得确认，已取消。",
+            "booking_id": None
+        }
+    
+    try:
+        import asyncpg
+        
+        # Database connection parameters
+        db_config = {
+            'host': 'localhost',
+            'port': 5454,
+            'user': 'postgres', 
+            'password': '12931',
+            'database': 'test4'
+        }
+        
+        conn = await asyncpg.connect(**db_config)
+        try:
+            # Get slot details for booking
+            slot_query = """
+            SELECT s.*, d.name as doctor_name, d.specialty, c.name as clinic_name
+            FROM humansa_appointment_slots s
+            JOIN humansa_doctor d ON s.doctor_id = d.doctor_code
+            LEFT JOIN humansa_clinics c ON s.clinic_id = c.clinic_code
+            WHERE s.slot_id = $1 AND s.is_available = true
+            """
+            
+            slot_row = await conn.fetchrow(slot_query, int(slot_id))
+            if not slot_row:
+                return {
+                    "status": "booking_failed",
+                    "message": "该时间段已被预约或不可用，请选择其他时间。",
+                    "booking_id": None
+                }
+            
+            # Create appointment record
+            booking_query = """
+            INSERT INTO humansa_appointments (schedule_id, patient_name, patient_phone, appointment_time, status, created_at)
+            VALUES ($1, $2, $3, $4, 'confirmed', CURRENT_TIMESTAMP)
+            RETURNING appointment_id
+            """
+            
+            booking_id = await conn.fetchval(
+                booking_query,
+                int(slot_id),
+                patient_info.get('name', '患者'),
+                patient_info.get('phone', ''),
+                slot_row['time']
+            )
+            
+            # Mark slot as unavailable
+            update_query = "UPDATE humansa_appointment_slots SET is_available = false WHERE slot_id = $1"
+            await conn.execute(update_query, int(slot_id))
+            
+            logger.info(f"✅ Booking confirmed: appointment_id={booking_id}")
+            
+            return {
+                "status": "booking_confirmed",
+                "booking_id": str(booking_id),
+                "message": f"""
+🎉 **预约成功！**
+
+📋 **预约详情**
+- 预约号：{booking_id}
+- 医生：{slot_row['doctor_name']}医生 ({slot_row['specialty']})
+- 时间：{slot_row['date']} {slot_row['time']}
+- 地点：{slot_row['clinic_name']}
+- 患者：{patient_info.get('name', '患者')}
+
+📱 **联系方式**
+- 手机：{patient_info.get('phone', '请补充')}
+
+⏰ **温馨提示**
+- 请提前15分钟到达
+- 携带身份证和医保卡
+- 如需取消请提前2小时联系
+                """,
+                "appointment_details": {
+                    "booking_id": str(booking_id),
+                    "doctor_name": slot_row['doctor_name'],
+                    "specialty": slot_row['specialty'],
+                    "date": slot_row['date'].strftime("%Y-%m-%d"),
+                    "time": slot_row['time'].strftime("%H:%M"),
+                    "clinic_name": slot_row['clinic_name'],
+                    "patient_name": patient_info.get('name', '患者'),
+                    "patient_phone": patient_info.get('phone', '')
+                }
+            }
+            
+        finally:
+            await conn.close()
+            
+    except Exception as e:
+        logger.error(f"❌ Error finalizing booking: {e}")
+        return {
+            "status": "booking_failed", 
+            "message": f"预约过程中出现错误：{str(e)}，请重新尝试。",
+            "booking_id": None
+        }
 
 
 async def reserve_appointment_slot(
@@ -195,12 +445,32 @@ class AppointmentAgent(BaseHumansaAgent):
             FunctionTool.from_defaults(
                 fn=search_available_slots,
                 name="search_slots",
-                description="Search for available appointment slots"
+                description="Search for available appointment slots by specialty, doctor, date, or time preference"
+            ),
+            FunctionTool.from_defaults(
+                fn=present_appointment_options,
+                name="present_options",
+                description="Present formatted appointment options to user for selection"
+            ),
+            FunctionTool.from_defaults(
+                fn=request_booking_approval,
+                name="request_approval",
+                description="Request user approval for a specific appointment booking"
+            ),
+            FunctionTool.from_defaults(
+                fn=process_user_approval,
+                name="process_approval",
+                description="Process user's approval or rejection response"
+            ),
+            FunctionTool.from_defaults(
+                fn=finalize_booking,
+                name="finalize_booking",
+                description="Complete the appointment booking after user approval"
             ),
             FunctionTool.from_defaults(
                 fn=reserve_appointment_slot,
                 name="reserve_slot",
-                description="Reserve an appointment slot"
+                description="Reserve an appointment slot temporarily"
             ),
             FunctionTool.from_defaults(
                 fn=confirm_appointment,
@@ -224,48 +494,53 @@ class AppointmentAgent(BaseHumansaAgent):
         )
     
     def get_system_prompt(self) -> str:
-        return """You are an appointment booking specialist for Humansa Health.
+        return """You are an appointment booking specialist for Humansa Health with access to real-time appointment data.
+
+🎯 CRITICAL: When a user asks about appointments, IMMEDIATELY use the search_slots tool to find available appointments. Don't ask for location details first - search with what you have and show real options.
 
 Your role is to:
-1. Help patients find and book appointments
-2. Check doctor availability and schedules
-3. Reserve and confirm appointment slots
-4. Provide appointment preparation instructions
-5. Handle rescheduling and cancellations
+1. **PROACTIVELY SEARCH** for available appointments using real database
+2. Present actual available slots with specific doctors, dates, and times  
+3. Guide users through the booking process with real options
+4. Handle reservations, confirmations, and changes
 
-Booking process:
-1. Understand patient needs and preferences
-2. Search for suitable appointment slots
-3. Present options clearly (date, time, type)
-4. Reserve chosen slot
-5. Collect necessary information
-6. Confirm the appointment
-7. Provide preparation instructions
+⚡ IMMEDIATE ACTION REQUIRED:
+- For ANY appointment request → CALL search_slots tool FIRST
+- User says "心内科" → search_slots(specialty="心内科") 
+- User says "张医生" → search_slots(doctor_id="DOC001") 
+- User says "明天" → search_slots(date_from="2025-08-01")
+- User says "上午" → search_slots(time_preference="上午")
 
-Important guidelines:
-- Always confirm patient preferences (date, time, location)
-- Explain the difference between in-person and telemedicine
-- Mention the 15-minute reservation window
-- Collect reason for visit to match with appropriate doctor
-- Provide clear next steps after each action
+🔧 Available Tools:
+- search_slots: Find real available appointments (USE THIS FIRST!)
+- reserve_slot: Hold a specific appointment slot
+- confirm_appointment: Finalize the booking
+- appointment_prep: Get preparation instructions
 
-When presenting slots:
-- Show multiple options when available
-- Include morning and afternoon choices
-- Mention appointment type (in-person/virtual)
-- Highlight earliest available
+📋 Booking Flow:
+1. **SEARCH IMMEDIATELY** with any available criteria
+2. Present REAL options with specific details:
+   - Doctor name and specialty
+   - Exact date and time
+   - Clinic location  
+   - Consultation fee
+   - Online/in-person option
+3. Ask user to choose from real options
+4. Reserve the selected slot
+5. Collect patient details
+6. Confirm and provide instructions
 
-Information to collect:
-- Preferred dates and times
-- Reason for visit
-- Type preference (in-person/telemedicine)
-- Any specific doctor requests
-- Insurance information (for confirmation)
+✅ Example Response:
+"让我为您查询心内科的可预约时间..."
+[CALLS search_slots(specialty="心内科")]
+"找到以下心内科医生的可预约时间：
+1. 孙浩医生 - 8月1日 09:00 - 广州中山医院 - 120元
+2. 孙浩医生 - 8月1日 14:00 - 广州中山医院 - 120元
+..."
 
-Always end with:
-- Confirmation details
-- Preparation instructions
-- Reminder settings confirmation"""
+❌ NEVER say "请提供医院信息" - USE THE SEARCH TOOL FIRST!
+
+Always be helpful and proactive in finding real appointment options."""
     
     def get_capabilities(self) -> List[str]:
         return [

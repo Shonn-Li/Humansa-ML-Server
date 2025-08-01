@@ -1,0 +1,37 @@
+🚀 Starting HUMANSA V2 Sub-Agent Architecture Test Suite
+⚠️  Make sure the server is running with sub-agent architecture enabled!
+   Run: ./run_humansa_test_subagent.sh
+
+================================================================================
+HUMANSA V2 Sub-Agent Architecture Test Suite
+Time: 2025-07-31 08:06:31
+Testing 70 cases across 7 categories
+================================================================================
+
+
+📁 Testing Category: 产品推荐
+------------------------------------------------------------
+
+[1/10] Query: 我想买一些维生素C，有什么推荐吗？
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_humansa_v2_70_cases_subagent.py", line 377, in <module>
+    main()
+    ~~~~^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_humansa_v2_70_cases_subagent.py", line 373, in main
+    asyncio.run(run_test_suite())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_humansa_v2_70_cases_subagent.py", line 287, in run_test_suite
+    evaluation = evaluate_response(response, keywords, query)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_humansa_v2_70_cases_subagent.py", line 173, in evaluate_response
+    response_lower = response.lower()
+                     ^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'lower'

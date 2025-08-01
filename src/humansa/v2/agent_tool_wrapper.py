@@ -33,12 +33,19 @@ class AgentToolWrapper:
             
             # Process through agent
             async for chunk in self.agent.process_query(query, context, stream=False):
+                # Handle different chunk formats
                 if chunk.get('type') == 'content':
                     response_chunks.append(chunk.get('chunk', ''))
                 elif chunk.get('type') == 'error':
                     error_msg = chunk.get('chunk', 'Unknown error')
                     logger.error(f"Agent {self.name} error: {error_msg}")
                     return f"抱歉，{self.description}服务暂时出现问题：{error_msg}"
+                elif 'response' in chunk:
+                    # Handle base agent response format
+                    response_chunks.append(chunk['response'])
+                elif isinstance(chunk, str):
+                    # Handle direct string responses
+                    response_chunks.append(chunk)
             
             # Join all chunks into final response
             response = ''.join(response_chunks)
