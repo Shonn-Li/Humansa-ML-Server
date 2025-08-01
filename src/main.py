@@ -436,34 +436,62 @@ def register_preserved_endpoints(app):
     """Register preserved endpoints that are still needed."""
 
     # Add catch-all for debugging missing endpoints
-    @app.route("/notes/create-embeddings", methods=["POST", "GET"])
-    async def create_embeddings_debug():
-        """Debug endpoint for create-embeddings requests"""
+    @app.route("/notes/create-embeddings", methods=["POST"])
+    async def create_embeddings():
+        """Create embeddings for specified notes - compatible with backend expectations"""
         try:
-            request_data = await request.get_json() if request.method == "POST" else None
-            logger.info(f"=== MISSING ENDPOINT REQUEST ===")
-            logger.info(f"Method: {request.method}")
-            logger.info(f"URL: {request.url}")
-            logger.info(f"Headers: {dict(request.headers)}")
-            logger.info(
-                f"Request Body: {json.dumps(request_data, indent=2) if request_data else 'No body'}")
-            logger.info(f"==============================")
-
+            request_data = await request.get_json()
+            note_ids = request_data.get("note_ids", [])
+            
+            if not note_ids:
+                return jsonify({
+                    "status": "error",
+                    "message": "No note_ids provided",
+                    "results": []
+                }), 400
+            
+            logger.info(f"Creating embeddings for notes: {note_ids}")
+            
+            # Import the embedding manager
+            from chat.embedding.embedding_manager import embedding_manager
+            
+            results = []
+            succeeded = []
+            failed = []
+            
+            # Process each note
+            for note_id in note_ids:
+                try:
+                    # Create embedding for the note
+                    success = await embedding_manager.note_embedder.create_note_embedding(note_id)
+                    
+                    if success:
+                        results.append({"note_id": note_id, "status": "success"})
+                        succeeded.append(note_id)
+                        logger.info(f"Successfully created embedding for note {note_id}")
+                    else:
+                        results.append({"note_id": note_id, "status": "error", "message": "Failed to create embedding"})
+                        failed.append(note_id)
+                        logger.error(f"Failed to create embedding for note {note_id}")
+                        
+                except Exception as e:
+                    results.append({"note_id": note_id, "status": "error", "message": str(e)})
+                    failed.append(note_id)
+                    logger.error(f"Error creating embedding for note {note_id}: {e}")
+            
             return jsonify({
-                "error": "Endpoint not implemented in new modular system",
-                "status": "error",
-                "suggestion": "Use /admin/embedding/* endpoints instead",
-                "available_embedding_endpoints": [
-                    "/admin/embedding/notes",
-                    "/admin/embedding/conversations",
-                    "/admin/embedding/all",
-                    "/admin/embedding/status",
-                    "/v1/embeddings/url"
-                ]
-            }), 404
+                "status": "success",
+                "results": results,
+                "summary": {
+                    "total": len(note_ids),
+                    "succeeded": len(succeeded),
+                    "failed": len(failed)
+                }
+            }), 200
+            
         except Exception as e:
-            logger.error(f"Error in debug endpoint: {e}")
-            return jsonify({"error": str(e)}), 500
+            logger.error(f"Error in create_embeddings endpoint: {e}")
+            return jsonify({"error": str(e), "status": "error"}), 500
 
     # Import link analyzer from new independent location
     try:

@@ -76,13 +76,13 @@ class EmbeddingDBOperations:
             return []
 
     def get_notes_without_embeddings(self, note_ids: List[int]) -> List[int]:
-        """Find note IDs that don't have embeddings - matches old implementation logic"""
+        """Find note IDs that don't have ANY embedding records (never processed)"""
         if not note_ids:
             return []
 
         with self.get_connection() as conn:
             with conn.cursor() as cursor:
-                # Query based on old implementation - check with proper JOIN and flags
+                # Find notes with NO embedding records at all - these have never been processed
                 format_strings = ','.join(['%s'] * len(note_ids))
                 cursor.execute(f"""
                     SELECT n.id 
@@ -90,8 +90,6 @@ class EmbeddingDBOperations:
                     LEFT JOIN embedding_v1 e ON n.id = e.type_id AND e.type = 'note'
                     WHERE n.id IN ({format_strings})
                       AND n."deletedAt" IS NULL
-                      AND n.completed = true
-                      AND n."skipEmbedding" = false
                       AND e.type_id IS NULL
                     ORDER BY n.id
                 """, note_ids)

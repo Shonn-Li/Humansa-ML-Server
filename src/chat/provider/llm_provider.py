@@ -131,7 +131,11 @@ class LLMProviderSelector:
         # Azure AI Inference (Primary Provider) - NOTE: Does NOT support multimodal despite accepting ImageBlocks
         if AZURE_INFERENCE_AVAILABLE and os.getenv("AZURE_INFERENCE_ENDPOINT") and os.getenv("AZURE_INFERENCE_CREDENTIAL"):
             try:
-                azure_llm = AzureAICompletionsModel(
+                # Import O3 wrapper
+                from .o3_model_wrapper import create_azure_llm_with_o3_support
+                
+                # Use wrapper that handles O3/O4 models properly
+                azure_llm = create_azure_llm_with_o3_support(
                     endpoint=os.getenv("AZURE_INFERENCE_ENDPOINT"),
                     credential=os.getenv("AZURE_INFERENCE_CREDENTIAL"),
                     model_name="gpt-4.1-nano",  # Default to most cost-effective model
@@ -148,8 +152,8 @@ class LLMProviderSelector:
                         # GPT-4o models (vision models but not working via AI Inference)
                         "gpt-4o-mini", "gpt-4o",
                         "DeepSeek-R1-0528", "DeepSeek-V3-0324",  # Updated DeepSeek models
-                        "grok-3", "grok-3-mini",  # xAI models
-                        "o4-mini"  # OpenAI o4 model
+                        "grok-3", "grok-3-mini", "grok-4",  # xAI models
+                        "o3", "o4-mini"  # O3/O4 models (require special parameter handling)
                     ],
                     is_available=True,
                     multimodal=None  # IMPORTANT: No multimodal support despite having vision models
@@ -178,8 +182,9 @@ class LLMProviderSelector:
                     provider=LLMProvider.AZURE_OPENAI,
                     llm_instance=azure_openai_llm,
                     supported_models=[
-                        "gpt-4.1-nano", "gpt-4.1", "gpt-4.1-nano", "gpt-4o",
+                        "gpt-4.1-nano", "gpt-4.1", "gpt-4o-mini", "gpt-4o",
                         "gpt-4-turbo", "gpt-3.5-turbo"
+                        # Note: O3/O4 models not available via Azure OpenAI deployment
                     ],
                     is_available=True,
                     multimodal=azure_openai_llm  # This provider DOES support multimodal
@@ -574,7 +579,11 @@ class LLMProviderSelector:
                 }
             }
 
-            llm = AzureAICompletionsModel(
+            # Import O3 wrapper
+            from .o3_model_wrapper import create_azure_llm_with_o3_support
+            
+            # Use wrapper that handles O3/O4 models properly
+            llm = create_azure_llm_with_o3_support(
                 endpoint=os.getenv("AZURE_INFERENCE_ENDPOINT"),
                 credential=os.getenv("AZURE_INFERENCE_CREDENTIAL"),
                 model_name=model,

@@ -1,0 +1,205 @@
+{
+  "timestamp": "20250801_130824",
+  "user_id": 3,
+  "conversation_id": 650,
+  "request": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Summarize my recent notes and highlight the key points"
+      }
+    ],
+    "model": "gpt-4.1",
+    "enable_rag": true,
+    "enable_citations": true,
+    "enable_web_search": true
+  },
+  "context_agents": [
+    "router_agent",
+    "context_search_agent",
+    "web_search_agent",
+    "last_message_id",
+    "last_message_output_index",
+    "annotations",
+    "response_agent"
+  ],
+  "combined_context_length": 1056,
+  "combined_context_preview": "[1] AI Text Summarizer - One-Click Summarization (Ad-Free) - QuillBot:\nQuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.\n\n[2] Free AI-powered Summarizing Tool | No Sign-up Required:\nA faster way to summarize text. Grammarly's summary writer helps you instantly create well-worded summaries that capture the key points of a piece of text.\n\n[3] Anyway to summarize highlights? : r/readwise - Reddit:\nIs there any way to summarize all of my highlights from a document I've read in Reader? I use a podcast app, Snipd, and I like how they turn my podcast ...\n\n[4] TLDR This - Article Summarizer & Online Text Summarizing Tool:\nTLDR This helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.\n\n[5] Scholarcy - Knowledge made simple:\nSummarize any paper, article or textbook. You can summarize videos too! Scholarcy converts...",
+  "sources": [
+    {
+      "source_id": "web_1",
+      "type": "web",
+      "type_id": null,
+      "title": "AI Text Summarizer - One-Click Summarization (Ad-Free) - QuillBot",
+      "content": "QuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.",
+      "url": "https://quillbot.com/summarize",
+      "metadata": {
+        "search_engine": "google"
+      }
+    },
+    {
+      "source_id": "web_2",
+      "type": "web",
+      "type_id": null,
+      "title": "Free AI-powered Summarizing Tool | No Sign-up Required",
+      "content": "A faster way to summarize text. Grammarly's summary writer helps you instantly create well-worded summaries that capture the key points of a piece of text.",
+      "url": "https://www.grammarly.com/ai/ai-writing-tools/summarizing-tool",
+      "metadata": {
+        "search_engine": "google"
+      }
+    },
+    {
+      "source_id": "web_3",
+      "type": "web",
+      "type_id": null,
+      "title": "Anyway to summarize highlights? : r/readwise - Reddit",
+      "content": "Is there any way to summarize all of my highlights from a document I've read in Reader? I use a podcast app, Snipd, and I like how they turn my podcast ...",
+      "url": "https://www.reddit.com/r/readwise/comments/1dhyg75/anyway_to_summarize_highlights/",
+      "metadata": {
+        "search_engine": "google"
+      }
+    },
+    {
+      "source_id": "web_4",
+      "type": "web",
+      "type_id": null,
+      "title": "TLDR This - Article Summarizer & Online Text Summarizing Tool",
+      "content": "TLDR This helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.",
+      "url": "https://tldrthis.com/",
+      "metadata": {
+        "search_engine": "google"
+      }
+    },
+    {
+      "source_id": "web_5",
+      "type": "web",
+      "type_id": null,
+      "title": "Scholarcy - Knowledge made simple",
+      "content": "Summarize any paper, article or textbook. You can summarize videos too! Scholarcy converts long complex texts into interactive summary flashcards.",
+      "url": "https://www.scholarcy.com/",
+      "metadata": {
+        "search_engine": "google"
+      }
+    }
+  ],
+  "sources_count": 5,
+  "context_search_found": true,
+  "web_search_found": true,
+  "attachment_found": false,
+  "full_context": {
+    "context_search": {
+      "status": "completed",
+      "understanding": {
+        "intent": "summarize",
+        "temporal_filter": {
+          "days_ago": 7
+        },
+        "key_concepts": []
+      },
+      "retrieval_steps": [
+        {
+          "strategy": "recency",
+          "query": "Summarize my recent notes and highlight the key points",
+          "results_count": 0
+        },
+        {
+          "strategy": "temporal",
+          "query": "Summarize my recent notes and highlight the key points",
+          "results_count": 0
+        }
+      ],
+      "context": "",
+      "sources": [],
+      "total_sources": 0,
+      "sources_truncated": false,
+      "total_results": 0,
+      "search_summary": "Found 0 relevant chunks from 0 sources using 2 retrieval strategies"
+    },
+    "web_search": {
+      "status": "success",
+      "results": [
+        {
+          "title": "AI Text Summarizer - One-Click Summarization (Ad-Free) - QuillBot",
+          "link": "https://quillbot.com/summarize",
+          "snippet": "QuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.",
+          "source": "serper",
+          "cached": false,
+          "cache_age": null
+        },
+        {
+          "title": "Free AI-powered Summarizing Tool | No Sign-up Required",
+          "link": "https://www.grammarly.com/ai/ai-writing-tools/summarizing-tool",
+          "snippet": "A faster way to summarize text. Grammarly's summary writer helps you instantly create well-worded summaries that capture the key points of a piece of text.",
+          "source": "serper",
+          "cached": false,
+          "cache_age": null
+        },
+        {
+          "title": "Anyway to summarize highlights? : r/readwise - Reddit",
+          "link": "https://www.reddit.com/r/readwise/comments/1dhyg75/anyway_to_summarize_highlights/",
+          "snippet": "Is there any way to summarize all of my highlights from a document I've read in Reader? I use a podcast app, Snipd, and I like how they turn my podcast ...",
+          "source": "serper",
+          "cached": false,
+          "cache_age": null
+        },
+        {
+          "title": "TLDR This - Article Summarizer & Online Text Summarizing Tool",
+          "link": "https://tldrthis.com/",
+          "snippet": "TLDR This helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.",
+          "source": "serper",
+          "cached": false,
+          "cache_age": null
+        },
+        {
+          "title": "Scholarcy - Knowledge made simple",
+          "link": "https://www.scholarcy.com/",
+          "snippet": "Summarize any paper, article or textbook. You can summarize videos too! Scholarcy converts long complex texts into interactive summary flashcards.",
+          "source": "serper",
+          "cached": false,
+          "cache_age": null
+        }
+      ],
+      "context": "[1] AI Text Summarizer - One-Click Summarization (Ad-Free) - QuillBot\nQuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.\nURL: https://quillbot.com/summarize\n\n[2] Free AI-powered Summarizing Tool | No Sign-up Required\nA faster way to summarize text. Grammarly's summary writer helps you instantly create well-worded summaries that capture the key points of a piece of text.\nURL: https://www.grammarly.com/ai/ai-writing-tools/summarizing-tool\n\n[3] Anyway to summarize highlights? : r/readwise - Reddit\nIs there any way to summarize all of my highlights from a document I've read in Reader? I use a podcast app, Snipd, and I like how they turn my podcast ...\nURL: https://www.reddit.com/r/readwise/comments/1dhyg75/anyway_to_summarize_highlights/\n\n[4] TLDR This - Article Summarizer & Online Text Summarizing Tool\nTLDR This helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.\nURL: https://tldrthis.com/\n\n[5] Scholarcy - Knowledge made simple\nSummarize any paper, article or textbook. You can summarize videos too! Scholarcy converts long complex texts into interactive summary flashcards.\nURL: https://www.scholarcy.com/",
+      "metadata": {
+        "query": "Summarize my recent notes and highlight the key points",
+        "result_count": 5,
+        "cache_hit": false
+      }
+    },
+    "attachment": {},
+    "router": {
+      "router_decision": {
+        "selected_tool": "knowledge_base_notes",
+        "search_type": "notes",
+        "confidence": 0.9,
+        "reasoning": "User is asking to summarize their recent notes and highlight key points, which involves accessing personal notes.",
+        "query_classification": "notes_summary"
+      },
+      "original_query": "Summarize my recent notes and highlight the key points",
+      "condensed_query": "Summarize my recent notes and highlight the key points",
+      "enabled_agents": [
+        "response",
+        "context_search",
+        "web_search"
+      ],
+      "model": "gpt-4.1",
+      "search_type": "notes",
+      "has_explicit_ids": false,
+      "explicit_note_ids": null,
+      "explicit_folder_ids": null
+    }
+  },
+  "combined_context_full": "[1] AI Text Summarizer - One-Click Summarization (Ad-Free) - QuillBot:\nQuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.\n\n[2] Free AI-powered Summarizing Tool | No Sign-up Required:\nA faster way to summarize text. Grammarly's summary writer helps you instantly create well-worded summaries that capture the key points of a piece of text.\n\n[3] Anyway to summarize highlights? : r/readwise - Reddit:\nIs there any way to summarize all of my highlights from a document I've read in Reader? I use a podcast app, Snipd, and I like how they turn my podcast ...\n\n[4] TLDR This - Article Summarizer & Online Text Summarizing Tool:\nTLDR This helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.\n\n[5] Scholarcy - Knowledge made simple:\nSummarize any paper, article or textbook. You can summarize videos too! Scholarcy converts long complex texts into interactive summary flashcards.",
+  "llamaindex_messages": [
+    {
+      "role": "system",
+      "content": "You are **YouWoAI**, an AI study assistant.\n\n**Current Date**: 2025-08-01\n\nYour role: help the user learn faster and answer questions.\n• Any prior conversation notes, file‑search snippets, file attachments, or web‑search results will appear as **additional system messages** in this chat. Use them when relevant.\n",
+      "content_length": 313
+    },
+    {
+      "role": "user",
+      "content": "Context from your notes and documents:\n\n[1] AI Text Summarizer - One-Click Summarization (Ad-Free) - QuillBot:\nQuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.\n\n[2] Free AI-powered Summarizing Tool | No Sign-up Required:\nA faster way to summarize text. Grammarly's summary writer helps you instantly create well-worded summaries that capture the key points of a piece of text.\n\n[3] Anyway to summarize highlights? : r/readwise - Reddit:\nIs there any way to summarize all of my highlights from a document I've read in Reader? I use a podcast app, Snipd, and I like how they turn my podcast ...\n\n[4] TLDR This - Article Summarizer & Online Text Summarizing Tool:\nTLDR This helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.\n\n[5] Scholarcy - Knowledge made simple:\nSummarize any paper, article or textbook. You can summarize videos too! Scholarcy converts long complex texts into interactive summary flashcards.\n\nCITATION INSTRUCTIONS:\n- Cite sources using numbered brackets like [1], [2], etc.\n- Place citations immediately after relevant statements\n- You can cite multiple sources like [1, 3]\n- Only cite sources that directly support your statement\n- Every factual claim from the provided sources must have a citation\n\n\nUser Question: Summarize my recent notes and highlight the key points",
+      "content_length": 1477
+    }
+  ]
+}
