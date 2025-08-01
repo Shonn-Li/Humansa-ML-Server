@@ -9,10 +9,10 @@ graph LR
 ## Level 2: Basic Flow
 ```mermaid
 graph TD
-    User[User Query] --> API[/v2/humansa/chat]
+    User[User Query] --> API["/v2/humansa/chat"]
     API --> Orchestrator[Orchestrator]
     Orchestrator --> Agent[Medical Agent]
-    Agent --> Database[(Database)]
+    Agent --> Database[Database]
     Database --> Agent
     Agent --> Orchestrator
     Orchestrator --> User
@@ -21,7 +21,7 @@ graph TD
 ## Level 3: Sub-Agent Architecture
 ```mermaid
 graph TD
-    User[User: "我想预约心内科医生"] --> API[API Endpoint]
+    User["User: 我想预约心内科医生"] --> API[API Endpoint]
     API --> Orchestrator[Main Orchestrator]
     
     Orchestrator --> Product[Product Agent]
@@ -30,7 +30,7 @@ graph TD
     Orchestrator --> Medication[Medication Agent]
     Orchestrator --> General[General Agent]
     
-    Appointment --> DB[(PostgreSQL)]
+    Appointment --> DB[PostgreSQL]
     DB --> Appointment
     Appointment --> Orchestrator
     Orchestrator --> Response[Response Agent]
@@ -236,7 +236,7 @@ flowchart TD
 
 ## Level 10: Complete System Architecture
 ```mermaid
-graph TB
+flowchart TB
     subgraph "Client Layer"
         Web[Web Client]
         Mobile[Mobile App]
@@ -244,12 +244,12 @@ graph TB
     end
     
     subgraph "API Gateway"
-        Gateway[Quart Server<br/>Port 6001/5001]
+        Gateway["Quart Server<br/>Port 6001/5001"]
         Gateway --> Routes{Routes}
-        Routes --> Chat[/v2/humansa/chat]
-        Routes --> Appt[/v2/humansa/appointment/*]
-        Routes --> Memory[/v2/humansa/memory/*]
-        Routes --> Admin[/admin/*]
+        Routes --> Chat["/v2/humansa/chat"]
+        Routes --> Appt["/v2/humansa/appointment/*"]
+        Routes --> Memory["/v2/humansa/memory/*"] 
+        Routes --> Admin["/admin/*"]
     end
     
     subgraph "Business Logic Layer"
@@ -260,11 +260,11 @@ graph TB
         end
         
         subgraph "Sub-Agents"
-            ProdAgent[Product Agent<br/>10 tools]
-            ApptAgent[Appointment Agent<br/>8 tools]
-            ClinAgent[Clinical Agent<br/>12 tools]
-            MedAgent[Medication Agent<br/>6 tools]
-            GenAgent[General Agent<br/>8 tools]
+            ProdAgent["Product Agent<br/>10 tools"]
+            ApptAgent["Appointment Agent<br/>8 tools"]
+            ClinAgent["Clinical Agent<br/>12 tools"]
+            MedAgent["Medication Agent<br/>6 tools"]
+            GenAgent["General Agent<br/>8 tools"]
         end
         
         subgraph "Support Services"
@@ -277,15 +277,15 @@ graph TB
     
     subgraph "Data Layer"
         subgraph "PostgreSQL Databases"
-            TestDB[(Test DB<br/>Port 5454)]
-            ProdDB[(Prod DB<br/>Port 5432)]
-            MemDB[(Memory DB)]
+            TestDB["Test DB<br/>Port 5454"]
+            ProdDB["Prod DB<br/>Port 5432"]
+            MemDB["Memory DB"]
         end
         
         subgraph "External Services"
-            Azure[Azure OpenAI<br/>GPT-4.1]
-            OpenAI[OpenAI API<br/>GPT-4o-mini]
-            WebSearch[Web Search API]
+            Azure["Azure OpenAI<br/>GPT-4.1"]
+            OpenAI["OpenAI API<br/>GPT-4o-mini"]
+            WebSearch["Web Search API"]
         end
     end
     
@@ -293,7 +293,7 @@ graph TB
         Docker[Docker Containers]
         Logs[Logging System]
         Monitor[Monitoring]
-        Config[Configuration<br/>DIGIT=2<br/>SUBAGENT=true]
+        Config["Configuration<br/>DIGIT=2<br/>SUBAGENT=true"]
     end
     
     %% Connections
