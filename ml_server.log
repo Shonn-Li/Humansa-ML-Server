@@ -85,6 +85,41 @@ INFO:chat.utils.document_converter:❌ openpyxl not available
 INFO:chat.utils.document_converter:❌ reportlab not available
 INFO:__main__:✅ Successfully imported document converter blueprint
 INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:🔄 Attempting to import conversation title endpoints...
+INFO:chat.title.title_generator:TitleGenerator initialized
+INFO:chat.provider.llm_provider:=== LLM Provider Initialization Debug ===
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_ENDPOINT: SET
+INFO:chat.provider.llm_provider:AZURE_INFERENCE_CREDENTIAL: SET
+INFO:chat.provider.llm_provider:OPENAI_API_KEY: SET
+INFO:chat.provider.llm_provider:ANTHROPIC_API_KEY: SET
+INFO:chat.provider.llm_provider:GOOGLE_API_KEY: SET
+INFO:chat.provider.llm_provider:DEEPSEEK_API_KEY: SET
+INFO:chat.provider.llm_provider:XAI_API_KEY: SET
+INFO:chat.provider.llm_provider:===========================================
+INFO:chat.provider.llm_provider:✅ Azure AI Inference provider initialized (PRIMARY - NO MULTIMODAL)
+INFO:chat.provider.llm_provider:✅ Azure OpenAI provider initialized (ROUTER COMPATIBLE + MULTIMODAL)
+INFO:chat.provider.llm_provider:✅ OpenAI multimodal support enabled
+INFO:chat.provider.llm_provider:✅ OpenAI provider initialized
+INFO:chat.provider.llm_provider:✅ Anthropic provider initialized
+INFO:chat.provider.llm_provider:✅ Gemini provider initialized
+INFO:chat.provider.llm_provider:✅ DeepSeek provider initialized
+INFO:chat.provider.llm_provider:✅ xAI provider initialized
+INFO:chat.provider.llm_provider:=== Provider Initialization Complete ===
+INFO:chat.provider.llm_provider:Available providers: 7
+INFO:chat.provider.llm_provider:  azure_inference: 11 models
+INFO:chat.provider.llm_provider:  azure_openai: 6 models
+INFO:chat.provider.llm_provider:  openai: 12 models
+INFO:chat.provider.llm_provider:  anthropic: 4 models
+INFO:chat.provider.llm_provider:  gemini: 5 models
+INFO:chat.provider.llm_provider:  deepseek: 3 models
+INFO:chat.provider.llm_provider:  xai: 6 models
+INFO:chat.provider.llm_provider:=========================================
+INFO:__main__:✅ Successfully imported title generation endpoints
+INFO:__main__:✅ Conversation title endpoints registered successfully
+INFO:__main__:   - /v1/conversation/title - Generate single title
+INFO:__main__:   - /v1/conversation/titles/batch - Batch title generation
+INFO:__main__:   - /v1/conversation/titles/migrate - Migrate all titles
+INFO:__main__:   - /v1/conversation/title/health - Health check
 INFO:__main__:✅ Embedding endpoints registration completed
 INFO:__main__:🔄 Registering Humansa endpoints...
 INFO:__main__:✅ Humansa endpoints registered successfully
@@ -109,6 +144,11 @@ INFO:__main__:✅ EMBEDDING ENDPOINTS:
 INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
 INFO:__main__:   - /admin/embedding/* - Admin embedding controls
 INFO:__main__:
+INFO:__main__:✅ TITLE GENERATION ENDPOINTS:
+INFO:__main__:   - /v1/conversation/title - Generate single title
+INFO:__main__:   - /v1/conversation/titles/batch - Batch title generation
+INFO:__main__:   - /v1/conversation/titles/migrate - Migrate all titles
+INFO:__main__:
 INFO:__main__:🔄 Migration Status:
 INFO:__main__:   - ✅ Chat system: Using modular implementation
 INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
@@ -116,56 +156,825 @@ INFO:__main__:   - ✅ Link analyzer: Independent module
 INFO:__main__:   - ✅ Embeddings: New modular architecture
 INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
 INFO:__main__:
-WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:120> wait_for=<Future pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.233 seconds
-[2025-07-25 21:59:46 -0700] [70707] [INFO] Running on http://0.0.0.0:5005 (CTRL + C to quit)
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:120> wait_for=<Future pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.222 seconds
+[2025-08-01 16:10:18 -0700] [62382] [INFO] Running on http://0.0.0.0:5005 (CTRL + C to quit)
 INFO:hypercorn.error:Running on http://0.0.0.0:5005 (CTRL + C to quit)
-ERROR:__main__:🚨 UNHANDLED EXCEPTION: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:__main__:Request method: GET
-ERROR:__main__:Request URL: http://localhost:5005/v1/status
-ERROR:__main__:Request data: None
-Traceback (most recent call last):
-  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1500, in full_dispatch_request
-    result = await self.dispatch_request(request_context)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1591, in dispatch_request
-    self.raise_routing_exception(request_)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py", line 1578, in raise_routing_exception
-    raise request.routing_exception
-  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/ctx.py", line 73, in match_request
-    ) = self.url_adapter.match(  # type: ignore
-        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
-        return_rule=True
-        ^^^^^^^^^^^^^^^^
-    )  # noqa
-    ^
-  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/werkzeug/routing/map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+INFO:chat.title.title_endpoints:=== TITLE MIGRATION REQUEST ===
+INFO:chat.title.title_endpoints:Batch size: 50
+INFO:chat.title.title_endpoints:Dry run: False
+INFO:chat.title.title_endpoints:Provider: openai
+INFO:chat.title.title_endpoints:Max conversations: 100
+INFO:chat.title.title_endpoints:==============================
+INFO:chat.title.conversation_title_service:=== TITLE MIGRATION START ===
+INFO:chat.title.conversation_title_service:Batch size: 50
+INFO:chat.title.conversation_title_service:Dry run: False
+INFO:chat.title.conversation_title_service:Provider: openai, Model: gpt-4o-mini
+INFO:chat.title.conversation_title_service:Max conversations: 100
+INFO:chat.title.conversation_title_service:=============================
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.postgres.conversation_operations:📊 Found 84 conversations without titles
+INFO:chat.title.conversation_title_service:Found 84 conversations without titles
+INFO:chat.title.conversation_title_service:Processing batch 1: 50 conversations
+INFO:chat.title.conversation_title_service:🔄 Starting batch title generation for 50 conversations
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 87 with 3 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 3 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 2 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 3 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 34 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 4 with 6 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 6 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Understanding the Term 老6'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 5 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: '孙悟空的最新动态'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 7 with 5 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 5 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Embracing Personal Freedom and Autonomy'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 38 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Summary of Key Discussion Points'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 40 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 42 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Understanding the Term 老6 in Context'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 8 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Chat List Empty Inquiry'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 6 with 16 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 16 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 11 with 10 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 10 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 35 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 12 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Note Content Discussion'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 10 with 4 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 4 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'PDS Max Model Discussion'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 13 with 3 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 3 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 14 with 5 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 5 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Discussion on Data Structure Notes'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 15 with 3 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 3 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Understanding Empty Lists in Programming'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 17 with 6 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 6 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Game Character Discussion'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 16 with 7 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 7 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Discussion on Key Points'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 30 with 4 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 4 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Conversation Content Inquiry'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 18 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Understanding Empty Lists in Programming'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 36 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Chat Content Overview'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 19 with 4 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 4 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Emotional Wellbeing Discussion'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 20 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Returning After Absence Discussion'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 33 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Disappearing Captions Issue Explanation'
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 37 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 21 with 6 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 6 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Insights on AI Content in Notes'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 22 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Notes on Function Invocation'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 39 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 41 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 52 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Solvent Identification in Experiment One'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 23 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Solving x + y = 2 Discussion'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 24 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 25 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 26 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Summary of Note Content Discussion'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 27 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 28 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'App Functionality Discussion'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 29 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Note Content Discussion'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 31 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Project Timeline Review and Adjustments'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 32 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Current Discussion Overview'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 43 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 44 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Discussion on Current Conversation Topics'
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 45 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 46 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 47 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 48 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Current Conversation Topic Overview'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 49 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Current Project Status Update'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 50 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Current Discussion Overview'
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Current Project Status Update'
+ERROR:chat.title.title_generator:❌ Failed to generate conversation title: Timeout on reading data from socket
+INFO:chat.title.conversation_title_service:✅ Batch complete: 50 successful, 0 failed
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 87 title: '孙悟空的最新动态'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 87: '孙悟空的最新动态'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 2 title: 'Summary of Key Discussion Points'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 2: 'Summary of Key Discussion Points'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 3 title: 'Embracing Personal Freedom and Autonomy'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 3: 'Embracing Personal Freedom and Autonomy'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 34 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 34: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 4 title: 'Understanding the Term 老6'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 4: 'Understanding the Term 老6'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 5 title: 'Understanding the Term 老6 in Context'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 5: 'Understanding the Term 老6 in Context'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 7 title: 'Chat List Empty Inquiry'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 7: 'Chat List Empty Inquiry'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 38 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 38: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 40 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 40: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 42 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 42: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 8 title: 'Note Content Discussion'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 8: 'Note Content Discussion'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 6 title: 'Discussion on Data Structure Notes'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 6: 'Discussion on Data Structure Notes'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 11 title: 'PDS Max Model Discussion'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 11: 'PDS Max Model Discussion'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 35 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 35: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 12 title: 'Understanding Empty Lists in Programming'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 12: 'Understanding Empty Lists in Programming'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 10 title: 'Conversation Content Inquiry'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 10: 'Conversation Content Inquiry'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 13 title: 'Understanding Empty Lists in Programming'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 13: 'Understanding Empty Lists in Programming'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 14 title: 'Game Character Discussion'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 14: 'Game Character Discussion'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 15 title: 'Discussion on Key Points'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 15: 'Discussion on Key Points'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 17 title: 'Chat Content Overview'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 17: 'Chat Content Overview'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 16 title: 'Disappearing Captions Issue Explanation'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 16: 'Disappearing Captions Issue Explanation'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 30 title: 'Returning After Absence Discussion'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 30: 'Returning After Absence Discussion'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 18 title: 'Emotional Wellbeing Discussion'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 18: 'Emotional Wellbeing Discussion'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 36 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 36: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 19 title: 'Insights on AI Content in Notes'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 19: 'Insights on AI Content in Notes'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 20 title: 'Notes on Function Invocation'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 20: 'Notes on Function Invocation'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 33 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 33: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 37 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 37: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 21 title: 'Solving x + y = 2 Discussion'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 21: 'Solving x + y = 2 Discussion'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 22 title: 'Solvent Identification in Experiment One'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 22: 'Solvent Identification in Experiment One'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 39 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 39: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 41 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 41: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 52 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 52: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 23 title: 'New Conversation'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 23: 'New Conversation'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 24 title: 'App Functionality Discussion'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 24: 'App Functionality Discussion'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 25 title: 'Project Timeline Review and Adjustments'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 25: 'Project Timeline Review and Adjustments'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 26 title: 'Summary of Note Content Discussion'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 26: 'Summary of Note Content Discussion'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 27 title: 'Note Content Discussion'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 27: 'Note Content Discussion'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 28 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 28: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 29 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 29: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 31 title: 'Current Discussion Overview'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 31: 'Current Discussion Overview'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 32 title: 'Discussion on Current Conversation Topics'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 32: 'Discussion on Current Conversation Topics'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 43 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 43: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 44 title: 'Current Conversation Topic Overview'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 44: 'Current Conversation Topic Overview'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 45 title: 'Current Project Status Update'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 45: 'Current Project Status Update'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 46 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 46: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 47 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 47: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 48 title: 'Current Discussion Overview'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 48: 'Current Discussion Overview'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 49 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 49: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 50 title: 'Current Project Status Update'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 50: 'Current Project Status Update'
+INFO:chat.title.conversation_title_service:Processing batch 2: 34 conversations
+INFO:chat.title.conversation_title_service:🔄 Starting batch title generation for 34 conversations
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 51 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 53 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 54 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 55 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 56 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 57 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 73 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 62 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 72 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 80 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Is Chatting Still Effective?'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 83 with 4 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 4 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Testing Functionality Outcomes'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 74 with 16 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 16 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'First Time Upgrade Verification'
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Job Interview Preparation Tips'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 77 with 4 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 4 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 81 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'App Functionality and Capabilities Overview'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 79 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Color Correction and Issue Review'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 82 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'What is Youwoai Platform Overview'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 78 with 6 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 6 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Total Dishes and Cost in Chat'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 59 with 8 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 8 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Value Comparison of Various Liquors'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 63 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Total Cost and Dish Count Inquiry'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 65 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Subscript Limit Inquiry'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 67 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Helicopter Operations Discussion'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 68 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Reasons for Note Non-Extension'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 69 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Chinese Language Learning Tips'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 84 with 4 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 4 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Final Opportunity for Enrollment'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 85 with 4 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 4 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Exciting Adventure Plans Confirmation'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 75 with 6 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 6 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Exciting Plans for Our Babys Milestone'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 76 with 10 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 10 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Casual Inquiry About Men'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 9 with 8 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 8 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Clarifying Recent Communication'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 58 with 10 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 10 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Clarifying Recent Comments'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 60 with 8 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 8 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Tracking Conversations Without Limits'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 61 with 4 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 4 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Checking on Annies Wellbeing'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 64 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Message Sending Limit Inquiry'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 1 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Discussion on Game Characters from Note'
+INFO:chat.title.conversation_title_service:🎯 Generating title for conversation 66 with 2 messages
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: openai, requested_model: gpt-4o-mini
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4o-mini -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4o-mini (requested: openai)
+INFO:chat.title.conversation_title_service:📝 Generating title from 2 existing messages
+INFO:chat.title.title_generator:🏷️ Generating conversation title...
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Discussion on Content Repetition'
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Evaluating AI Performance and Limitations'
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Urgent Call for Assistance'
+INFO:chat.title.title_generator:✅ Generated conversation title: 'First Time Content Recognition Challenge'
+INFO:chat.title.title_generator:✅ Generated conversation title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Batch complete: 34 successful, 0 failed
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 51 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 51: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 53 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 53: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 54 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 54: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 55 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 55: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 56 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 56: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 57 title: 'Is Chatting Still Effective?'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 57: 'Is Chatting Still Effective?'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 73 title: 'Testing Functionality Outcomes'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 73: 'Testing Functionality Outcomes'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 62 title: 'First Time Upgrade Verification'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 62: 'First Time Upgrade Verification'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 72 title: 'Job Interview Preparation Tips'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 72: 'Job Interview Preparation Tips'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 80 title: 'App Functionality and Capabilities Overview'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 80: 'App Functionality and Capabilities Overview'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 83 title: 'Value Comparison of Various Liquors'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 83: 'Value Comparison of Various Liquors'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 74 title: 'Color Correction and Issue Review'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 74: 'Color Correction and Issue Review'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 77 title: 'Casual Inquiry About Men'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 77: 'Casual Inquiry About Men'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 81 title: 'Total Dishes and Cost in Chat'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 81: 'Total Dishes and Cost in Chat'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 79 title: 'What is Youwoai Platform Overview'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 79: 'What is Youwoai Platform Overview'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 82 title: 'Total Cost and Dish Count Inquiry'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 82: 'Total Cost and Dish Count Inquiry'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 78 title: 'Helicopter Operations Discussion'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 78: 'Helicopter Operations Discussion'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 59 title: 'Subscript Limit Inquiry'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 59: 'Subscript Limit Inquiry'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 63 title: 'Reasons for Note Non-Extension'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 63: 'Reasons for Note Non-Extension'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 65 title: 'Chinese Language Learning Tips'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 65: 'Chinese Language Learning Tips'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 67 title: 'Exciting Plans for Our Babys Milestone'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 67: 'Exciting Plans for Our Babys Milestone'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 68 title: 'Exciting Adventure Plans Confirmation'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 68: 'Exciting Adventure Plans Confirmation'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 69 title: 'Final Opportunity for Enrollment'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 69: 'Final Opportunity for Enrollment'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 84 title: 'Clarifying Recent Communication'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 84: 'Clarifying Recent Communication'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 85 title: 'Clarifying Recent Comments'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 85: 'Clarifying Recent Comments'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 75 title: 'Checking on Annies Wellbeing'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 75: 'Checking on Annies Wellbeing'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 76 title: 'Tracking Conversations Without Limits'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 76: 'Tracking Conversations Without Limits'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 9 title: 'Discussion on Game Characters from Note'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 9: 'Discussion on Game Characters from Note'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 58 title: 'Message Sending Limit Inquiry'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 58: 'Message Sending Limit Inquiry'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 60 title: 'Discussion on Content Repetition'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 60: 'Discussion on Content Repetition'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 61 title: 'Evaluating AI Performance and Limitations'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 61: 'Evaluating AI Performance and Limitations'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 64 title: 'Urgent Call for Assistance'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 64: 'Urgent Call for Assistance'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 1 title: 'Effective Time Management Techniques'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 1: 'Effective Time Management Techniques'
+INFO:chat.postgres.conversation_operations:✅ Updated conversation 66 title: 'First Time Content Recognition Challenge'
+INFO:chat.title.conversation_title_service:✅ Updated conversation 66: 'First Time Content Recognition Challenge'
+INFO:chat.title.conversation_title_service:🎉 Migration complete: 84/84 successful
+INFO:chat.title.title_endpoints:🎉 Migration complete: 84/84 successful
  * Serving Quart app 'main'
  * Debug mode: True
  * Please use an ASGI server (e.g. Hypercorn) directly in production
  * Running on http://0.0.0.0:5005 (CTRL + C to quit)
-[2025-07-25 22:00:15 -0700] [70707] [INFO] 127.0.0.1:54279 GET /v1/status 1.1 500 207 7620
-INFO:__main__:=== MULTI-AGENT REQUEST ===
+[2025-08-01 16:12:44 -0700] [62382] [INFO] 127.0.0.1:60834 POST /v1/conversation/titles/migrate 1.1 200 9675 139699602
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:125> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.115 seconds
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:125> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.109 seconds
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:125> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.123 seconds
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:125> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.125 seconds
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:125> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.202 seconds
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:125> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.170 seconds
+INFO:__main__:=== CHAT REQUEST ===
 INFO:__main__:Method: POST
-INFO:__main__:URL: http://localhost:5005/v1/multi-agent/response
-INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Host': 'localhost:5005', 'User-Agent': 'curl/8.7.1', 'Accept': '*/*', 'Content-Type': 'application/json', 'Content-Length': '65'}
+INFO:__main__:URL: http://localhost:5005/v1/chat/completions
+INFO:__main__:Headers: {'Remote-Addr': '127.0.0.1', 'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json', 'User-Agent': 'axios/1.9.0', 'Content-Length': '2152', 'Accept-Encoding': 'gzip, compress, deflate, br', 'Sentry-Trace': 'cde675af9bc99c9b434aee2a746c1759-99a67006737a676c-1', 'Baggage': 'sentry-environment=production,sentry-public_key=b2ebd8366c9889368c0181a4776bf2f1,sentry-trace_id=cde675af9bc99c9b434aee2a746c1759,sentry-sample_rate=1,sentry-transaction=GET%20%2Fnotes%2F7569%2Fprompt%2F278,sentry-sampled=true', 'Host': 'localhost:5005', 'Connection': 'keep-alive'}
 INFO:__main__:Request Body: {
   "messages": [
     {
       "role": "user",
-      "content": "test"
+      "content": "\u5c06\u6b64\u5934\u8111\u98ce\u66b4\u4f1a\u8bae\u8f6c\u6362\u4e3a\u7ed3\u6784\u5316\u521b\u610f\u7b80\u62a5\uff1a\n\n\u7ed3\u6784\uff1a\n1. \u6838\u5fc3\u6982\u5ff5\n   - \u4e3b\u8981\u60f3\u6cd5\n   - \u7075\u611f\u6765\u6e90\n   - \u76ee\u6807\u613f\u666f\n2. \u521b\u610f\u5143\u7d20\n   - \u5173\u952e\u4e3b\u9898\n   - \u89c6\u89c9\u65b9\u5411\n   - \u8bed\u8c03/\u98ce\u683c\n3. \u5f00\u53d1\n   - \u521d\u59cb\u8349\u56fe\n   - \u8fed\u4ee3\n   - \u53cd\u9988\u70b9\n4. \u6280\u672f\u9700\u6c42\n   - \u8d44\u6e90\n   - \u5de5\u5177\n   - \u6280\u80fd\n5. \u4e0b\u4e00\u6b65\n   - \u884c\u52a8\u9879\u76ee\n   - \u65f6\u95f4\u7ebf\n   - \u5408\u4f5c\u8005\n\n\u683c\u5f0f\uff1a\n- \u7a81\u51fa\u663e\u793a\u7a81\u7834\u6027\u60f3\u6cd5\n- \u6807\u8bb0\u7075\u611f\u6765\u6e90\n- \u5728\u9876\u90e8\u5305\u542b\"\u521b\u610f\u65b9\u5411\"\n- \u4f7f\u7528\u89c6\u89c9\u63cf\u8ff0\u8bcd\n\n- This world is beyond cruelty. \u266a\u266a\u266a You've been fighting the Harkonnens for decades. My family's been fighting them for centuries. \nThey were massacred... alongside my father. - Your father didn't believe in revenge. \n- We believe in Fremen. - Let me fight beside you. \n- [click] - Reload! \n\u266a\u266a\u266a - He said that-- - I got that. Thanks. \n- I won't be fighting for him. I'm fighting for my people. \nYou young pup. \n\u266a\u266a\u266a - Do you believe in Paul? \n- There are signs. - [cheering] \u266a\u266a\u266a - The prophet. Why is that a bad thing? Use it. \n- Because all my visions lead to horror. - [gasps] \u266a\u266a\u266a - Because you lose control. - Because I gain it. \n- Chani, do you believe in me? \u266a\u266a\u266a - Paul Atreides is still alive. \u266a\u266a\u266a - Deal with this prophet. \n- Show me who you are. - Your father... \u266a\u266a\u266a ...was a weak man. \n\u266a\u266a\u266a - Look who's back from the dead. \u266a\u266a\u266a - I will do what must be done. \u266a\u266a\u266a - We gave them something to hope for. \n- That's not hope! \u266a\u266a\u266a Chani! \u266a\u266a\u266a I will love you as long as I breathe. \n\u266a\u266a\u266a - This prophecy is how they enslave us! \u266a\u266a\u266a - It's not a prophecy. It's a story. - I don't care what you believe! I believe. \n\u266a\u266a\u266a - I am Paul Muad'dib Atreides! \u266a\u266a\u266a Duke of Arrakis! \u266a\u266a\u266a \u266a\u266a\u266a He who can destroy a thing has the real control of it. \n\u266a\u266a\u266a \n"
     }
   ],
-  "model": "gpt-4.1"
+  "model": "gpt-4.1-nano",
+  "user_id": 3,
+  "completion_type": "completion",
+  "enable_rag": false,
+  "enable_web_search": false,
+  "enable_citations": false,
+  "enable_router_retriever": false,
+  "generate_title": false,
+  "stream": false
 }
-INFO:__main__:========================
-INFO:__main__:🔄 Attempting to import multi_agent_endpoint_v2...
+INFO:__main__:==================
+INFO:__main__:🔄 Attempting to import modular_chat_endpoint...
 INFO:chat.postgres.db_manager:PostgresManager initialized
 INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
 INFO:chat.websearch.web_search_processor:Web search cache table initialized
-INFO:chat.config.system_prompts:SystemPromptManager initialized
 INFO:chat.provider.llm_provider:=== LLM Provider Initialization Debug ===
 INFO:chat.provider.llm_provider:AZURE_INFERENCE_ENDPOINT: SET
 INFO:chat.provider.llm_provider:AZURE_INFERENCE_CREDENTIAL: SET
@@ -185,13 +994,13 @@ INFO:chat.provider.llm_provider:✅ DeepSeek provider initialized
 INFO:chat.provider.llm_provider:✅ xAI provider initialized
 INFO:chat.provider.llm_provider:=== Provider Initialization Complete ===
 INFO:chat.provider.llm_provider:Available providers: 7
-INFO:chat.provider.llm_provider:  azure_inference: 9 models
+INFO:chat.provider.llm_provider:  azure_inference: 11 models
 INFO:chat.provider.llm_provider:  azure_openai: 6 models
 INFO:chat.provider.llm_provider:  openai: 12 models
 INFO:chat.provider.llm_provider:  anthropic: 4 models
 INFO:chat.provider.llm_provider:  gemini: 5 models
 INFO:chat.provider.llm_provider:  deepseek: 3 models
-INFO:chat.provider.llm_provider:  xai: 5 models
+INFO:chat.provider.llm_provider:  xai: 6 models
 INFO:chat.provider.llm_provider:=========================================
 INFO:chat.postgres.db_manager:PostgresManager initialized
 INFO:chat.rag.rag_processor:IDResolver initialized
@@ -208,75 +1017,47 @@ INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding prov
 INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
 INFO:chat.rag.rag_processor:UnifiedRAGSearcher initialized
 INFO:chat.rag.rag_processor:RAGProcessor initialized
-INFO:chat.postgres.db_manager:PostgresManager initialized
-INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
-INFO:chat.websearch.web_search_processor:Web search cache table initialized
-INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
 INFO:chat.citation.citation_engine:CitationEngine initialized
-INFO:chat.postgres.db_manager:PostgresManager initialized
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
-INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.azure_embeddings:✅ Azure AI Inference embedding client initialized with model: text-embedding-3-small
-INFO:chat.embedding.azure_embeddings:🔗 Endpoint: 
-INFO:chat.embedding.embedding_provider_selector:✅ Azure AI Inference embedding provider initialized (PRIMARY)
-INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
-INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
-INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (FALLBACK)
-INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['azure_inference', 'openai']
-INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: azure_inference
-INFO:chat.provider.llm_provider:=== LLM Provider Initialization Debug ===
-INFO:chat.provider.llm_provider:AZURE_INFERENCE_ENDPOINT: SET
-INFO:chat.provider.llm_provider:AZURE_INFERENCE_CREDENTIAL: SET
-INFO:chat.provider.llm_provider:OPENAI_API_KEY: SET
-INFO:chat.provider.llm_provider:ANTHROPIC_API_KEY: SET
-INFO:chat.provider.llm_provider:GOOGLE_API_KEY: SET
-INFO:chat.provider.llm_provider:DEEPSEEK_API_KEY: SET
-INFO:chat.provider.llm_provider:XAI_API_KEY: SET
-INFO:chat.provider.llm_provider:===========================================
-INFO:chat.provider.llm_provider:✅ Azure AI Inference provider initialized (PRIMARY - NO MULTIMODAL)
-INFO:chat.provider.llm_provider:✅ Azure OpenAI provider initialized (ROUTER COMPATIBLE + MULTIMODAL)
-INFO:chat.provider.llm_provider:✅ OpenAI multimodal support enabled
-INFO:chat.provider.llm_provider:✅ OpenAI provider initialized
-INFO:chat.provider.llm_provider:✅ Anthropic provider initialized
-INFO:chat.provider.llm_provider:✅ Gemini provider initialized
-INFO:chat.provider.llm_provider:✅ DeepSeek provider initialized
-INFO:chat.provider.llm_provider:✅ xAI provider initialized
-INFO:chat.provider.llm_provider:=== Provider Initialization Complete ===
-INFO:chat.provider.llm_provider:Available providers: 7
-INFO:chat.provider.llm_provider:  azure_inference: 9 models
-INFO:chat.provider.llm_provider:  azure_openai: 6 models
-INFO:chat.provider.llm_provider:  openai: 12 models
-INFO:chat.provider.llm_provider:  anthropic: 4 models
-INFO:chat.provider.llm_provider:  gemini: 5 models
-INFO:chat.provider.llm_provider:  deepseek: 3 models
-INFO:chat.provider.llm_provider:  xai: 5 models
-INFO:chat.provider.llm_provider:=========================================
-INFO:chat.config.system_prompts:SystemPromptManager initialized
-INFO:__main__:✅ Successfully imported multi_agent_endpoint_v2 with streaming support
-INFO:__main__:📄 Starting multi-agent non-streaming response...
-ERROR:chat.endpoints.multi_agent_endpoint_v2:Error in non-streaming request: 'user_id'
-Traceback (most recent call last):
-  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/endpoints/multi_agent_endpoint_v2.py", line 221, in _handle_non_streaming_request
-    router_result = await self.agents["router"].run(request, context)
-                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/src/chat/agent/router_agent.py", line 46, in run
-    query, str(request["user_id"]), request["messages"][-3:], has_attachments
-               ~~~~~~~^^^^^^^^^^^
-KeyError: 'user_id'
-INFO:__main__:=== MULTI-AGENT RESPONSE ===
+INFO:chat.citation.citation_engine:CitationEngine initialized
+INFO:chat.citation.streaming_citation_engine:StreamingCitationEngine initialized
+INFO:chat.streaming.streaming_response_generator:StreamingResponseGenerator initialized with unified astream_chat approach
+INFO:chat.endpoints.modular_chat_endpoint:🔇 Azure logging configured - reduced verbosity
+INFO:chat.endpoints.modular_chat_endpoint:ModularChatEndpoint initialized with citation engines, router retriever support, query transformer, and streaming generator
+INFO:__main__:✅ Successfully imported modular_chat_endpoint
+INFO:__main__:📄 Starting non-streaming response...
+INFO:chat.endpoints.modular_chat_endpoint:=== NEW MODULAR CHAT REQUEST ===
+INFO:chat.endpoints.modular_chat_endpoint:User: 3, RAG: False, Citations: False, WebSearch: False, Stream: False
+INFO:chat.endpoints.modular_chat_endpoint:Router Retriever: False, Generate Title: False
+INFO:chat.endpoints.modular_chat_endpoint:Provider: None, Model: gpt-4.1-nano
+INFO:chat.endpoints.modular_chat_endpoint:Attachments: 0 files
+INFO:chat.endpoints.modular_chat_endpoint:💰 Defaulting to Azure Inference for cost savings: azure_inference with gpt-4.1-nano
+INFO:chat.provider.llm_provider:Provider selection - requested_provider: azure_inference, requested_model: gpt-4.1-nano
+INFO:chat.provider.llm_provider:🔗 Azure AI Inference configured: gpt-4.1-nano -> 
+INFO:chat.provider.llm_provider:🎯 Override to Azure for cost savings: azure_inference with gpt-4.1-nano (requested: azure_inference)
+INFO:chat.endpoints.modular_chat_endpoint:✅ Selected: azure_inference
+INFO:chat.endpoints.modular_chat_endpoint:🔄 STARTING QUERY TRANSFORMATION...
+INFO:chat.query.query_transformer:⚡ Query transformation temporarily disabled - using original query
+INFO:chat.endpoints.modular_chat_endpoint:⚠️ Query transformation failed, using original query: temporarily_disabled
+INFO:chat.endpoints.modular_chat_endpoint:⚡ PROCESSING ENABLED SOURCES...
+INFO:chat.endpoints.modular_chat_endpoint:⚡ No RAG, attachment, or web search processing needed
+INFO:chat.endpoints.modular_chat_endpoint:💬 NON-STREAMING MODE: Generating complete response
+INFO:chat.endpoints.modular_chat_endpoint:🔧 === CONTEXT BUILDING STAGE ===
+INFO:chat.endpoints.modular_chat_endpoint:🤖 AZURE completion starting: unknown (prompt: 1488 chars)
+Executing <Task pending name='Task-271' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:108> wait_for=<Future pending cb=[shield.<locals>._outer_done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:975, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 1.229 seconds
+INFO:__main__:=== CHAT RESPONSE ===
 INFO:__main__:Response type: <class 'dict'>
-INFO:__main__:Response keys: ['error']
-WARNING:__main__:⚠️ No choices found in response
-INFO:__main__:===========================
-[2025-07-25 22:00:26 -0700] [70707] [INFO] 127.0.0.1:54433 POST /v1/multi-agent/response 1.1 200 111 2614400
-WARNING:asyncio:Executing <Task finished name='Task-23' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 2.614 seconds
+INFO:__main__:Response keys: ['id', 'object', 'created', 'model', 'provider', 'choices', 'usage', 'metadata', 'status']
+INFO:__main__:Content length: 813 characters
+INFO:__main__:Content preview: 创意方向
+
+核心概念
+- 主要想法：未来世界超越残酷，融合宗教预言与政治斗争，展现主人公的成长与信仰冲突
+- 灵感来源：科幻史诗、宗教预言、史诗电影（如《沙丘》系列）、经典文学中的英雄旅程
+- 目标愿景：打造一部视觉震撼、情感深刻的科幻作品，强调信仰、控制与命运的主题
+
+创意元素
+- 关键主题：命运与预言、权力与控制、信仰与反抗、家族与牺牲
+- 视觉方向：未来沙漠景观、宏伟的古典建筑融合未来元素、... (truncated from 813 chars)
+INFO:__main__:===================
+[2025-08-01 16:26:16 -0700] [62382] [INFO] 127.0.0.1:54747 POST /v1/chat/completions 1.1 200 5068 6387076
+Executing <Task finished name='Task-271' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_V1/YouWoAI-ML-Server/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 0.215 seconds

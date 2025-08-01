@@ -375,7 +375,7 @@ class EmbeddingDBOperations:
             with conn.cursor() as cursor:
                 cursor.execute("""
                     SELECT id FROM conversation_v1 
-                    WHERE "userId" = %s 
+                    WHERE "ownerId" = %s 
                     ORDER BY id
                 """, (user_id,))
                 return [row[0] for row in cursor.fetchall()]
@@ -533,10 +533,18 @@ class EmbeddingDBOperations:
     def get_all_notes(self) -> List[int]:
         """Get all note IDs in the system - alias for get_all_note_ids"""
         return self.get_all_note_ids()
+    
+    def get_all_conversations(self) -> List[int]:
+        """Get all conversation IDs in the system - alias for get_all_conversation_ids"""
+        return self.get_all_conversation_ids()
 
     def get_user_notes(self, user_id: int) -> List[int]:
         """Get all note IDs for a specific user - alias for get_user_note_ids"""
         return self.get_user_note_ids(user_id)
+    
+    def get_user_conversations(self, user_id: int) -> List[int]:
+        """Get all conversation IDs for a specific user - alias for get_user_conversation_ids"""
+        return self.get_user_conversation_ids(user_id)
 
     def mark_note_skip_embedding(self, note_id: int) -> bool:
         """Mark note to skip embedding (for notes with no content)"""

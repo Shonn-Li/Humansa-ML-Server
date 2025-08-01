@@ -25,7 +25,7 @@ class O3ModelWrapper(AzureAICompletionsModel):
         """Initialize the wrapper"""
         # Store original model name before calling super()
         model_name = kwargs.get('model_name', '')
-        is_o3 = self._is_o3_model(model_name)
+        is_o3 = self._is_o3_model_static(model_name)
         
         # Remove temperature for O3/O4 models
         if is_o3 and 'temperature' in kwargs:
@@ -35,10 +35,11 @@ class O3ModelWrapper(AzureAICompletionsModel):
         super().__init__(*args, **kwargs)
         
         # Set attributes after parent initialization
-        self.original_model = model_name
-        self.is_o3_model = is_o3
+        self._original_model = model_name
+        self._is_o3 = is_o3
     
-    def _is_o3_model(self, model_name: str) -> bool:
+    @staticmethod
+    def _is_o3_model_static(model_name: str) -> bool:
         """Check if this is an O3 or O4 model"""
         if not model_name:
             return False
@@ -49,23 +50,23 @@ class O3ModelWrapper(AzureAICompletionsModel):
         """Prepare parameters for chat completion"""
         params = super()._prepare_chat_params(**kwargs)
         
-        if self.is_o3_model:
+        if self._is_o3:
             # Convert max_tokens to max_completion_tokens
             if 'max_tokens' in params:
                 params['max_completion_tokens'] = params.pop('max_tokens')
-                logger.debug(f"Converted max_tokens to max_completion_tokens for {self.original_model}")
+                logger.debug(f"Converted max_tokens to max_completion_tokens for {self._original_model}")
             
             # Remove temperature (O3/O4 only support default of 1.0)
             if 'temperature' in params:
                 params.pop('temperature')
-                logger.debug(f"Removed temperature parameter for {self.original_model}")
+                logger.debug(f"Removed temperature parameter for {self._original_model}")
         
         return params
     
     async def achat(self, messages: List[ChatMessage], **kwargs) -> ChatResponse:
         """Async chat with parameter adjustment for O3/O4"""
         # Adjust parameters for O3/O4
-        if self.is_o3_model:
+        if self._is_o3:
             if 'max_tokens' in kwargs:
                 kwargs['max_completion_tokens'] = kwargs.pop('max_tokens')
             if 'temperature' in kwargs:
@@ -76,7 +77,7 @@ class O3ModelWrapper(AzureAICompletionsModel):
     def chat(self, messages: List[ChatMessage], **kwargs) -> ChatResponse:
         """Sync chat with parameter adjustment for O3/O4"""
         # Adjust parameters for O3/O4
-        if self.is_o3_model:
+        if self._is_o3:
             if 'max_tokens' in kwargs:
                 kwargs['max_completion_tokens'] = kwargs.pop('max_tokens')
             if 'temperature' in kwargs:
@@ -87,7 +88,7 @@ class O3ModelWrapper(AzureAICompletionsModel):
     async def astream_chat(self, messages: List[ChatMessage], **kwargs) -> AsyncGenerator:
         """Async streaming chat with parameter adjustment for O3/O4"""
         # Adjust parameters for O3/O4
-        if self.is_o3_model:
+        if self._is_o3:
             if 'max_tokens' in kwargs:
                 kwargs['max_completion_tokens'] = kwargs.pop('max_tokens')
             if 'temperature' in kwargs:
@@ -99,7 +100,7 @@ class O3ModelWrapper(AzureAICompletionsModel):
     def stream_chat(self, messages: List[ChatMessage], **kwargs):
         """Sync streaming chat with parameter adjustment for O3/O4"""
         # Adjust parameters for O3/O4
-        if self.is_o3_model:
+        if self._is_o3:
             if 'max_tokens' in kwargs:
                 kwargs['max_completion_tokens'] = kwargs.pop('max_tokens')
             if 'temperature' in kwargs:
@@ -117,7 +118,7 @@ class O3ModelWrapper(AzureAICompletionsModel):
             **kwargs
         }
         
-        if self.is_o3_model:
+        if self._is_o3:
             # Convert max_tokens to max_completion_tokens
             if 'max_tokens' in payload:
                 payload['max_completion_tokens'] = payload.pop('max_tokens')
@@ -126,7 +127,7 @@ class O3ModelWrapper(AzureAICompletionsModel):
             if 'temperature' in payload:
                 payload.pop('temperature')
             
-            logger.debug(f"Adjusted payload for {self.original_model}: {json.dumps(payload, indent=2)}")
+            logger.debug(f"Adjusted payload for {self._original_model}: {json.dumps(payload, indent=2)}")
         
         return payload
 
@@ -144,8 +145,7 @@ def create_azure_llm_with_o3_support(
     
     Returns O3ModelWrapper for O3/O4 models, regular AzureAICompletionsModel otherwise
     """
-    model_lower = model_name.lower()
-    is_o3_model = any(m in model_lower for m in ['o3', 'o4-mini', 'o4'])
+    is_o3_model = O3ModelWrapper._is_o3_model_static(model_name)
     
     if is_o3_model:
         logger.info(f"Creating O3ModelWrapper for {model_name}")

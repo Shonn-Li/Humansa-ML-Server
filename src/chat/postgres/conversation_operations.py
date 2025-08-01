@@ -48,9 +48,6 @@ class ConversationDBOperations:
                 -- Not deleted
                 AND c."deletedAt" IS NULL
                 
-                -- Recent conversations (last 90 days) - focus on recent ones first
-                AND c."createDate" >= NOW() - INTERVAL '90 days'
-                
             ORDER BY c."createDate" DESC
             LIMIT %s
             """
@@ -265,9 +262,6 @@ def _get_conversations_without_titles_sync(max_conversations: int) -> List[Dict[
             
             -- Not deleted
             AND c."deletedAt" IS NULL
-            
-            -- Recent conversations (last 90 days) - focus on recent ones first
-            AND c."createDate" >= NOW() - INTERVAL '90 days'
             
         ORDER BY c."createDate" DESC
         LIMIT %s

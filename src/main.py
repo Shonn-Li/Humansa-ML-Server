@@ -664,6 +664,32 @@ def register_embedding_endpoints(app):
     except ImportError as e:
         logger.error(f"❌ Document converter endpoints import failed: {e}")
 
+    # Conversation Title Generation Endpoints
+    try:
+        logger.info("🔄 Attempting to import conversation title endpoints...")
+        from chat.title.title_endpoints import (
+            generate_conversation_title_endpoint,
+            generate_conversation_titles_batch_endpoint,
+            migrate_conversation_titles_endpoint,
+            title_health_check_endpoint
+        )
+        logger.info("✅ Successfully imported title generation endpoints")
+        
+        # Register individual endpoints
+        app.route("/v1/conversation/title", methods=["POST"])(generate_conversation_title_endpoint)
+        app.route("/v1/conversation/titles/batch", methods=["POST"])(generate_conversation_titles_batch_endpoint)
+        app.route("/v1/conversation/titles/migrate", methods=["POST"])(migrate_conversation_titles_endpoint)
+        app.route("/v1/conversation/title/health", methods=["GET"])(title_health_check_endpoint)
+        
+        logger.info("✅ Conversation title endpoints registered successfully")
+        logger.info("   - /v1/conversation/title - Generate single title")
+        logger.info("   - /v1/conversation/titles/batch - Batch title generation")
+        logger.info("   - /v1/conversation/titles/migrate - Migrate all titles")
+        logger.info("   - /v1/conversation/title/health - Health check")
+        
+    except ImportError as e:
+        logger.error(f"❌ Conversation title endpoints import failed: {e}")
+
     # V1 Conversation Embedding Endpoint (called by backend)
     @app.route("/v1/embeddings/conversation", methods=["POST"])
     async def v1_conversation_embeddings():
@@ -854,6 +880,11 @@ if __name__ == "__main__":
     logger.info("✅ EMBEDDING ENDPOINTS:")
     logger.info("   - /v1/embeddings/url/* - URL embedding operations")
     logger.info("   - /admin/embedding/* - Admin embedding controls")
+    logger.info("")
+    logger.info("✅ TITLE GENERATION ENDPOINTS:")
+    logger.info("   - /v1/conversation/title - Generate single title")
+    logger.info("   - /v1/conversation/titles/batch - Batch title generation")
+    logger.info("   - /v1/conversation/titles/migrate - Migrate all titles")
     logger.info("")
     logger.info("🔄 Migration Status:")
     logger.info("   - ✅ Chat system: Using modular implementation")
