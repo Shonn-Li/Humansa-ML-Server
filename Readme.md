@@ -1,5 +1,7 @@
 # YouWoAI ML Server - Enhanced Edition
 
+[![Docker Build](https://github.com/Shonn-Li/YouWoAI-ML-Server/actions/workflows/docker-build-check.yml/badge.svg)](https://github.com/Shonn-Li/YouWoAI-ML-Server/actions/workflows/docker-build-check.yml)
+
 This is an **enhanced** machine learning inference server built with [Quart](https://pgjones.gitlab.io/quart/) and [LlamaIndex](https://github.com/jerryjliu/llama_index).
 
 ## 🚀 New Features
