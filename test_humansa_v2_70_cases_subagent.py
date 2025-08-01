@@ -144,7 +144,16 @@ async def send_chat_request(session: aiohttp.ClientSession, query: str, user_id:
                 # Extract response text
                 if "choices" in data and len(data["choices"]) > 0:
                     content = data["choices"][0]["message"]["content"]
-                    return content, response_time, data
+                    # Handle case where content is a dict with metadata
+                    if isinstance(content, dict):
+                        # Extract actual content from response agent output
+                        if "output" in content and len(content["output"]) > 0:
+                            actual_content = content["output"][0].get("content", "")
+                        else:
+                            actual_content = str(content)
+                    else:
+                        actual_content = content
+                    return actual_content, response_time, data
                 else:
                     return f"Error: Invalid response format", response_time, data
             else:

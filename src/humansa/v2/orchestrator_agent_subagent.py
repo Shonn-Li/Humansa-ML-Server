@@ -187,9 +187,13 @@ class SubAgentOrchestrator:
                 response = await self.agent.achat(enhanced_query)
                 
                 # Post-process with response agent
+                # Response agent expects a dict with 'output' key
+                response_dict = {
+                    "output": [{"content": response.response}]
+                }
                 final_response = self.response_agent.process_response(
-                    response.response,
-                    {"query": query}
+                    response_dict,
+                    query
                 )
                 
                 yield {

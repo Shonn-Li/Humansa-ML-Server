@@ -26,13 +26,16 @@ docker-compose -f docker-compose.local.yml up  # Local development
 # TEST ENVIRONMENT (CRITICAL - READ CAREFULLY!)
 #
 # ⚠️ UNIFIED TEST ENVIRONMENT - ACTUAL CONFIGURATION ⚠️
-# The ACTUAL running test environment (verified on 2025-07-28):
+# The ACTUAL running test environment (verified on 2025-07-30):
 #    - Container Name: youwoai_test_db (NOT humansa_test_postgres)
-#    - ML Server: Port 6001 (test instance)
+#    - ML Server: Port 6001 (test instance) - ALL TESTS MUST RUN ON THIS PORT!
 #    - PostgreSQL: Port 5454 (Docker container)
 #    - Database: test4 (primary), youwoai_test (also available)
 #    - Password: 12931 (NOT 031203 from docker-compose.yml!)
 #    - User: postgres
+#
+# 🚨 IMPORTANT: NEVER run tests on port 5001 (production/dev server)!
+# All test scripts MUST use port 6001 for the test environment.
 #
 # 🚨 IMPORTANT DISCREPANCIES:
 # - docker-compose.yml shows password "031203" but actual is "12931"

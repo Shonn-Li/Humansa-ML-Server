@@ -164,12 +164,20 @@ async def chat_endpoint():
                 }
             )
         else:
-            result = await orchestrator.process_query(
+            # Non-streaming mode - collect all chunks from async generator
+            result = None
+            async for chunk in orchestrator.process_query(
                 query=user_message,
                 user_id=user_id,
                 messages=messages,
                 stream=False
-            )
+            ):
+                # Keep the last chunk which contains the full response
+                result = chunk
+            
+            if result is None:
+                return jsonify({"error": "No response from orchestrator"}), 500
+                
             return jsonify(result)
             
     except Exception as e:
@@ -472,11 +480,12 @@ async def stream_chat_response(user_id: str, query: str, messages: List[Dict]):
     """Stream chat responses in OpenAI format."""
     try:
         # Process through orchestrator with streaming
-        # Note: orchestrator._process_streaming is an async generator
-        async for chunk in orchestrator._process_streaming(
+        # Note: orchestrator.process_query returns an async generator
+        async for chunk in orchestrator.process_query(
             query=query,
             user_id=user_id,
-            messages=messages
+            messages=messages,
+            stream=True
         ):
             # Convert to SSE format
             yield f"data: {json.dumps(chunk)}\n\n"
