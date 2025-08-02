@@ -20,6 +20,7 @@ from .orchestrator_agent import HumansaOrchestratorAgent
 from .orchestrator_agent_enhanced import HumansaOrchestratorAgentEnhanced
 from .orchestrator_agent_consolidated import HumansaOrchestratorAgentConsolidated
 from .orchestrator_agent_transparent import HumansaOrchestratorAgentTransparent
+from .orchestrator_pattern2_fixed import create_pattern2_orchestrator_fixed
 from .response_formatter import ResponseFormatter
 from .response_agent import HumansaResponseAgent
 from chat.streaming.sse_formatter import SSEFormatter
@@ -41,6 +42,7 @@ orchestrator: Optional[HumansaOrchestratorAgent] = None
 enhanced_orchestrator: Optional[HumansaOrchestratorAgentEnhanced] = None
 consolidated_orchestrator: Optional[HumansaOrchestratorAgentConsolidated] = None
 transparent_orchestrator: Optional[HumansaOrchestratorAgentTransparent] = None
+pattern2_orchestrator: Optional[Any] = None  # Pattern 2 orchestrator
 response_formatter = ResponseFormatter()
 response_agent = HumansaResponseAgent()
 sse_formatter = SSEFormatter()
@@ -49,11 +51,13 @@ sse_formatter = SSEFormatter()
 ENABLE_ENHANCED_LOGGING = os.getenv('HUMANSA_ENHANCED_LOGGING', 'true').lower() == 'true'
 # Check if consolidated tools should be used
 USE_CONSOLIDATED_TOOLS = os.getenv('HUMANSA_USE_CONSOLIDATED_TOOLS', 'true').lower() == 'true'
+# Check if Pattern 2 orchestrator should be used
+USE_PATTERN2_ORCHESTRATOR = os.getenv('HUMANSA_USE_PATTERN2', 'false').lower() == 'true'
 
 
 async def initialize_v2_responses_system(db_pool, openai_api_key: str):
     """Initialize the responses-based v2 Humansa system."""
-    global memory_manager, orchestrator, enhanced_orchestrator, consolidated_orchestrator, transparent_orchestrator
+    global memory_manager, orchestrator, enhanced_orchestrator, consolidated_orchestrator, transparent_orchestrator, pattern2_orchestrator
     global context_compressor, conversation_manager, response_manager, response_formatter
     
     # Initialize LLM
@@ -156,6 +160,71 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
         )
         logger.info("✅ Transparent orchestrator initialized (captures tool calls)")
         
+        # Initialize Pattern 2 orchestrator if enabled
+        if USE_PATTERN2_ORCHESTRATOR:
+            # Create sub-agents for Pattern 2
+            from .agents.product_agent import ProductAgent
+            from .agents.general_medical_agent import GeneralMedicalAgent
+            from .agents.appointment_agent import AppointmentAgent
+            from .agents.diagnosis_agent import DiagnosisAgent
+            from .agents.medication_agent import MedicationAgent
+            
+            pattern2_agents = {}
+            
+            # Initialize available agents
+            try:
+                pattern2_agents["ProductAgent"] = ProductAgent(llm=llm)
+                logger.info("   ✓ ProductAgent initialized")
+            except Exception as e:
+                logger.warning(f"   ⚠ ProductAgent initialization failed: {e}")
+            
+            try:
+                pattern2_agents["GeneralMedicalAgent"] = GeneralMedicalAgent(llm=llm)
+                logger.info("   ✓ GeneralMedicalAgent initialized")
+            except Exception as e:
+                logger.warning(f"   ⚠ GeneralMedicalAgent initialization failed: {e}")
+            
+            try:
+                pattern2_agents["AppointmentAgent"] = AppointmentAgent(
+                    llm=llm,
+                    db_config={
+                        'host': os.getenv('DB_HOST', 'localhost'),
+                        'port': int(os.getenv('DB_PORT', '5432')),
+                        'database': os.getenv('DB_NAME', 'postgres'),
+                        'user': os.getenv('DB_USER', 'postgres'),
+                        'password': os.getenv('DB_PASSWORD', '')
+                    }
+                )
+                logger.info("   ✓ AppointmentAgent initialized")
+            except Exception as e:
+                logger.warning(f"   ⚠ AppointmentAgent initialization failed: {e}")
+            
+            try:
+                pattern2_agents["DiagnosisAgent"] = DiagnosisAgent(llm=llm)
+                pattern2_agents["ClinicalAgent"] = pattern2_agents["DiagnosisAgent"]
+                logger.info("   ✓ DiagnosisAgent initialized")
+            except Exception as e:
+                logger.warning(f"   ⚠ ClinicalAgent initialization failed: {e}")
+            
+            try:
+                pattern2_agents["MedicationAgent"] = MedicationAgent(llm=llm)
+                logger.info("   ✓ MedicationAgent initialized")
+            except Exception as e:
+                logger.warning(f"   ⚠ MedicationAgent initialization failed: {e}")
+            
+            # Also add GeneralAgent alias for backward compatibility
+            if "GeneralMedicalAgent" in pattern2_agents:
+                pattern2_agents["GeneralAgent"] = pattern2_agents["GeneralMedicalAgent"]
+            
+            # Create Pattern 2 orchestrator (fixed version)
+            pattern2_orchestrator = create_pattern2_orchestrator_fixed(
+                llm=llm,
+                agents=pattern2_agents,
+                memory_manager=memory_manager,
+                debug=ENABLE_ENHANCED_LOGGING
+            )
+            logger.info(f"✅ Pattern 2 orchestrator (fixed) initialized with {len(pattern2_agents)} agents")
+        
         # Initialize response formatter
         response_formatter = ResponseFormatter()
         
@@ -236,21 +305,95 @@ async def create_response():
         
         logger.info(f"Processing response with {len(context_messages)} context messages ({token_count} tokens)")
         
-        # Always use transparent orchestrator for proper response format
-        if not transparent_orchestrator:
-            logger.error("Transparent orchestrator not initialized")
-            return jsonify({"error": "Service not available"}), 503
-        
-        # Track start time
-        start_time = time.time()
-        
-        # Process through transparent orchestrator to get full reasoning chain
-        result = await transparent_orchestrator.process_query_with_transparency(
-            query=input_text,
-            user_id=user_id,
-            messages=context_messages,
-            stream=False
-        )
+        # Choose orchestrator based on configuration
+        if USE_PATTERN2_ORCHESTRATOR and pattern2_orchestrator:
+            logger.info("Using Pattern 2 orchestrator (FunctionAgent)")
+            
+            # Track start time
+            start_time = time.time()
+            
+            # Process through Pattern 2 orchestrator
+            result = None
+            async for event in pattern2_orchestrator.process_query(
+                query=input_text,
+                user_id=user_id,
+                messages=context_messages,
+                stream=False,
+                session_id=previous_response_id  # Use previous response as session
+            ):
+                result = event
+                break  # Non-streaming mode returns single event
+            
+            # Transform Pattern 2 response to match expected format
+            if result and 'choices' in result:
+                # Extract content from choices
+                content = result['choices'][0]['message']['content']
+                
+                # Build output array with reasoning
+                output = [{"type": "output_text", "text": content}]
+                
+                # Add usage metadata
+                usage = result.get('usage', {})
+                if 'workflow_state' in usage:
+                    workflow_state = usage['workflow_state']
+                    
+                    # Log workflow state for debugging
+                    logger.info(f"Pattern 2 workflow state: agents_called={workflow_state.get('agents_called', [])}")
+                    logger.info(f"Pattern 2 agent outputs: {list(workflow_state.get('agent_outputs', {}).keys())}")
+                    
+                    # Add tool calls from workflow state
+                    for agent in workflow_state.get('agents_called', []):
+                        if agent_output := workflow_state.get('agent_outputs', {}).get(agent):
+                            output.insert(-1, {
+                                "type": "tool_use",
+                                "tool_use": {"name": agent, "result": agent_output[:200] + "..."}
+                            })
+                            logger.info(f"Added tool_use for agent: {agent}")
+                else:
+                    logger.info("No workflow_state in usage data")
+                
+                result = {
+                    "output": output,
+                    "usage": {
+                        "agents_used": usage.get('agents_used', []),
+                        "total_agents": usage.get('total_agents', 0)
+                    },
+                    "metadata": {
+                        "orchestrator": "pattern2",
+                        "workflow_id": workflow_state.get('workflow_id', '') if 'workflow_state' in usage else ''
+                    }
+                }
+            else:
+                # Fallback if response format is unexpected
+                result = {
+                    "output": [{"type": "output_text", "text": "处理请求时出现错误"}],
+                    "usage": {},
+                    "metadata": {"orchestrator": "pattern2", "error": "unexpected_format"}
+                }
+            
+            # Apply response agent post-processing to Pattern 2 responses
+            result = response_agent.process_response(
+                raw_response=result,
+                query=input_text,
+                user_id=user_id,
+                context_messages=context_messages
+            )
+        else:
+            # Use transparent orchestrator (default)
+            if not transparent_orchestrator:
+                logger.error("Transparent orchestrator not initialized")
+                return jsonify({"error": "Service not available"}), 503
+            
+            # Track start time
+            start_time = time.time()
+            
+            # Process through transparent orchestrator to get full reasoning chain
+            result = await transparent_orchestrator.process_query_with_transparency(
+                query=input_text,
+                user_id=user_id,
+                messages=context_messages,
+                stream=False
+            )
         
         # Apply response agent post-processing to ensure brand consistency
         result = response_agent.process_response(
@@ -457,36 +600,72 @@ async def stream_event_generator(
             context_messages = []
             token_count = 0
         
-        # Always use transparent orchestrator for proper format
-        if not transparent_orchestrator:
-            logger.error("Transparent orchestrator not initialized")
-            yield f"data: {json.dumps({'error': 'Service not available'})}\n\n"
-            yield "data: [DONE]\n\n"
-            return
-        
-        # Track start time
-        start_time = time.time()
-        
-        # Stream through transparent orchestrator with proper event format
-        event_count = 0
-        response_data = None
-        
-        async for event in transparent_orchestrator.stream_query_with_transparency(
-            query=input_text,
-            user_id=user_id,
-            messages=context_messages
-        ):
-            # Apply response agent processing to final event
-            if event.get('event') == 'response.done':
-                event = response_agent.process_streaming_event(event, input_text)
+        # Choose orchestrator based on configuration
+        if USE_PATTERN2_ORCHESTRATOR and pattern2_orchestrator:
+            logger.info("Streaming with Pattern 2 orchestrator (FunctionAgent)")
             
-            # Convert event to SSE format
-            yield f"data: {json.dumps(event)}\n\n"
-            event_count += 1
+            # Track start time
+            start_time = time.time()
             
-            # Capture final response data
-            if event.get('event') == 'response.done':
-                response_data = event.get('data', {})
+            # Stream through Pattern 2 orchestrator
+            event_count = 0
+            response_data = None
+            
+            async for event in pattern2_orchestrator.process_query(
+                query=input_text,
+                user_id=user_id,
+                messages=context_messages,
+                stream=True,
+                session_id=previous_response_id
+            ):
+                # Pattern 2 already returns OpenAI-style events
+                yield f"data: {json.dumps(event)}\n\n"
+                event_count += 1
+                
+                # Capture response metadata
+                if event.get("type") == "response.completed":
+                    response = event.get("response", {})
+                    if output := response.get("output", []):
+                        response_data = {
+                            "output": output,
+                            "usage": {}
+                        }
+                
+                # Capture usage data
+                elif event.get("type") == "response.usage":
+                    if response_data:
+                        response_data["usage"] = event.get("usage", {})
+        else:
+            # Use transparent orchestrator (default)
+            if not transparent_orchestrator:
+                logger.error("Transparent orchestrator not initialized")
+                yield f"data: {json.dumps({'error': 'Service not available'})}\n\n"
+                yield "data: [DONE]\n\n"
+                return
+            
+            # Track start time
+            start_time = time.time()
+            
+            # Stream through transparent orchestrator with proper event format
+            event_count = 0
+            response_data = None
+            
+            async for event in transparent_orchestrator.stream_query_with_transparency(
+                query=input_text,
+                user_id=user_id,
+                messages=context_messages
+            ):
+                # Apply response agent processing to final event
+                if event.get('event') == 'response.done':
+                    event = response_agent.process_streaming_event(event, input_text)
+                
+                # Convert event to SSE format
+                yield f"data: {json.dumps(event)}\n\n"
+                event_count += 1
+                
+                # Capture final response data
+                if event.get('event') == 'response.done':
+                    response_data = event.get('data', {})
         
         # Create response record after streaming completes
         if response_data:

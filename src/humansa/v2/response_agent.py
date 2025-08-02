@@ -151,16 +151,23 @@ class HumansaResponseAgent:
         # Update response with processed text
         processed_response = raw_response.copy()
         
-        # Update the output array with processed text
+        # Update the output array with processed text while preserving tool_use entries
         if output_items:
-            # Find the last text item and update it
+            # Find the last text/output_text item and update it
+            text_found = False
             for i in range(len(output_items) - 1, -1, -1):
-                if output_items[i].get('type') == 'text':
+                if output_items[i].get('type') in ['text', 'output_text']:
                     output_items[i]['text'] = processed_text
+                    # Preserve the original type
+                    text_found = True
                     break
+            
+            # If no text item found, add one at the end
+            if not text_found:
+                output_items.append({'type': 'output_text', 'text': processed_text})
         else:
             # Create new text output
-            output_items = [{'type': 'text', 'text': processed_text}]
+            output_items = [{'type': 'output_text', 'text': processed_text}]
         
         processed_response['output'] = output_items
         
@@ -201,7 +208,8 @@ class HumansaResponseAgent:
         
         # First, try to find the last text that doesn't match thinking patterns
         for item in reversed(output_items):
-            if item.get('type') == 'text':
+            # Handle both 'text' and 'output_text' types
+            if item.get('type') in ['text', 'output_text']:
                 text = item.get('text', '').strip()
                 all_text = text  # Keep as fallback
                 

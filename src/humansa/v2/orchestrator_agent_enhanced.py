@@ -162,14 +162,15 @@ class HumansaOrchestratorAgentEnhanced:
         # Use the REACT prompt which includes proper identity
         orchestrator_prompt = HUMANSA_REACT_PROMPT_V2.format(current_date=current_date)
         
-        # Create orchestrator agent
-        self.orchestrator = ReActAgent.from_tools(
+        # Create orchestrator agent using new API (llama-index 0.13.0)
+        self.orchestrator = ReActAgent(
+            name="HumansaV2EnhancedOrchestrator",
+            description="Enhanced orchestrator for HUMANSA V2 medical consultation system",
             tools=self.tools,
             llm=self.llm,
             verbose=True,  # Always verbose for agent flow visibility
             system_prompt=orchestrator_prompt,
-            callback_manager=self.callback_manager,
-            max_iterations=10
+            callback_manager=self.callback_manager
         )
         
         logger.info(f"Initialized Enhanced HumansaOrchestratorAgent with {len(self.tools)} agent tools")
@@ -357,7 +358,18 @@ class HumansaOrchestratorAgentEnhanced:
                 return self._stream_response(query, user_id, conversation)
             else:
                 # Non-streaming response
-                response = self.orchestrator.chat(query)
+                # Use run method for new API
+                response_handler = self.orchestrator.run(query)
+                result = await response_handler
+                
+                # Extract response text
+                if hasattr(result, 'response'):
+                    response_text = str(result.response)
+                else:
+                    response_text = str(result)
+                
+                # Create a simple response object to match expected format
+                response = type('Response', (), {'response': response_text})()
                 
                 # Save to memory
                 if self.memory_manager:
@@ -404,7 +416,18 @@ class HumansaOrchestratorAgentEnhanced:
         """Stream response with enhanced logging"""
         try:
             # Create response stream
-            response = self.orchestrator.stream_chat(query)
+            # Use run method for new API (no true streaming yet)
+            response_handler = self.orchestrator.run(query)
+            result = await response_handler
+            
+            # Extract response text
+            if hasattr(result, 'response'):
+                response_text = str(result.response)
+            else:
+                response_text = str(result)
+            
+            # Create a simple response object to match expected format
+            response = type('Response', (), {'response': response_text})()
             
             chunk_id = f"chatcmpl-{int(time.time())}"
             full_response = ""

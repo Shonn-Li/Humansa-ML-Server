@@ -1,0 +1,104 @@
+{
+  "timestamp": "2025-08-01T13:46:47.154492",
+  "token_usage": {
+    "status": "error",
+    "error": "No module named 'humansa'"
+  },
+  "test_results": [
+    {
+      "test": "product_search_dha",
+      "name": "搜索DHA产品",
+      "status": "partial",
+      "product_agent_called": false,
+      "products_mentioned": [],
+      "details_loaded": false,
+      "behavior_success_rate": 0.0,
+      "response_length": 74,
+      "duration": 0.012962818145751953
+    },
+    {
+      "test": "product_sleep_aid",
+      "name": "失眠产品推荐",
+      "status": "partial",
+      "product_agent_called": false,
+      "products_mentioned": [],
+      "details_loaded": false,
+      "behavior_success_rate": 0.0,
+      "response_length": 74,
+      "duration": 0.004000186920166016
+    },
+    {
+      "test": "product_immune_boost",
+      "name": "提高免疫力产品",
+      "status": "partial",
+      "product_agent_called": false,
+      "products_mentioned": [],
+      "details_loaded": false,
+      "behavior_success_rate": 0.0,
+      "response_length": 74,
+      "duration": 0.003276824951171875
+    },
+    {
+      "test": "product_pregnancy",
+      "name": "孕期营养补充",
+      "status": "partial",
+      "product_agent_called": false,
+      "products_mentioned": [],
+      "details_loaded": false,
+      "behavior_success_rate": 0.0,
+      "response_length": 74,
+      "duration": 0.002020120620727539
+    },
+    {
+      "test": "product_child_growth",
+      "name": "儿童生长发育",
+      "status": "partial",
+      "product_agent_called": false,
+      "products_mentioned": [],
+      "details_loaded": false,
+      "behavior_success_rate": 0.0,
+      "response_length": 74,
+      "duration": 0.0024259090423583984
+    },
+    {
+      "test": "product_elderly_health",
+      "name": "老年人保健",
+      "status": "partial",
+      "product_agent_called": false,
+      "products_mentioned": [],
+      "details_loaded": false,
+      "behavior_success_rate": 0.0,
+      "response_length": 74,
+      "duration": 0.0024690628051757812
+    },
+    {
+      "test": "product_specific_id",
+      "name": "特定产品查询",
+      "status": "partial",
+      "product_agent_called": false,
+      "products_mentioned": [],
+      "details_loaded": false,
+      "behavior_success_rate": 0.0,
+      "response_length": 74,
+      "duration": 0.0020377635955810547
+    },
+    {
+      "test": "product_comparison",
+      "name": "产品对比",
+      "status": "partial",
+      "product_agent_called": false,
+      "products_mentioned": [],
+      "details_loaded": false,
+      "behavior_success_rate": 0.0,
+      "response_length": 74,
+      "duration": 0.004462003707885742
+    }
+  ],
+  "summary": {
+    "total": 8,
+    "successful": 0,
+    "partial": 8,
+    "failed": 0,
+    "agent_usage_rate": 0.0
+  }
+}

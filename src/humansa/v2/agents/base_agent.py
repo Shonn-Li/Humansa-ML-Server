@@ -37,14 +37,15 @@ class BaseHumansaAgent(ABC):
         self.agent = self._create_agent()
         
     def _create_agent(self) -> ReActAgent:
-        """Create the underlying ReAct agent."""
-        return ReActAgent.from_tools(
+        """Create the underlying ReAct agent using new API (llama-index 0.13.0)."""
+        return ReActAgent(
+            name=self.agent_name,
+            description=self.description,
             tools=self.tools,
             llm=self.llm,
             memory=self.memory,
             callback_manager=self.callback_manager,
-            verbose=self.verbose,
-            max_iterations=10
+            verbose=self.verbose
         )
     
     @abstractmethod
@@ -72,21 +73,36 @@ class BaseHumansaAgent(ABC):
         stream: bool = True
     ) -> AsyncIterator[Dict[str, Any]]:
         """Process a query and yield results."""
-        # Update agent with system prompt
-        self.agent.update_prompts({"system_prompt": self.get_system_prompt()})
+        # TODO: update_prompts might not be available in new API - need to set system prompt differently
+        # For now, incorporate system prompt in the query
+        system_prompt = self.get_system_prompt()
         
         # Add context to query if provided
         enhanced_query = self._enhance_query_with_context(query, context)
+        
+        # Prepend system prompt to query
+        enhanced_query = f"{system_prompt}\n\n{enhanced_query}"
         
         if stream:
             async for chunk in self._stream_response(enhanced_query):
                 yield chunk
         else:
-            response = await self.agent.achat(enhanced_query)
+            # Use run method for new API
+            response_handler = self.agent.run(enhanced_query)
+            result = await response_handler
+            
+            # Extract response text
+            if hasattr(result, 'response'):
+                response_text = str(result.response)
+            elif hasattr(result, 'output'):
+                response_text = str(result.output)
+            else:
+                response_text = str(result)
+            
             yield {
                 "agent_id": self.agent_id,
-                "response": response.response,
-                "source_nodes": response.source_nodes if hasattr(response, 'source_nodes') else []
+                "response": response_text,
+                "source_nodes": []
             }
     
     def _enhance_query_with_context(self, query: str, context: Dict[str, Any]) -> str:
@@ -103,14 +119,27 @@ class BaseHumansaAgent(ABC):
     
     async def _stream_response(self, query: str) -> AsyncIterator[Dict[str, Any]]:
         """Stream the response from the agent."""
-        response_stream = await self.agent.astream_chat(query)
+        # Use run method for new API
+        response_handler = self.agent.run(query)
         
-        async for chunk in response_stream.async_response_gen():
-            yield {
-                "agent_id": self.agent_id,
-                "chunk": chunk,
-                "type": "content"
-            }
+        # For now, just get the complete result
+        # TODO: Figure out proper streaming with new API
+        result = await response_handler
+        
+        # Extract response text
+        if hasattr(result, 'response'):
+            response_text = str(result.response)
+        elif hasattr(result, 'output'):
+            response_text = str(result.output)
+        else:
+            response_text = str(result)
+        
+        # Yield as a single chunk for now
+        yield {
+            "agent_id": self.agent_id,
+            "chunk": response_text,
+            "type": "content"
+        }
     
     def add_tool(self, tool: BaseTool) -> None:
         """Add a new tool to the agent."""

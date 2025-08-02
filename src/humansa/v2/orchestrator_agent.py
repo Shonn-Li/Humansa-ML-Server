@@ -80,14 +80,15 @@ class HumansaOrchestratorAgent:
         # Get the complete system prompt with React format
         orchestrator_prompt = HUMANSA_REACT_PROMPT_V2.format(current_date=current_date)
         
-        # Create orchestrator agent
-        self.orchestrator = ReActAgent.from_tools(
+        # Create orchestrator agent using new API (llama-index 0.13.0)
+        self.orchestrator = ReActAgent(
+            name="HumansaV2Orchestrator",
+            description="Main orchestrator for HUMANSA V2 medical consultation system",
             tools=self.tools,
             llm=self.llm,
             verbose=True,  # Always verbose for agent flow visibility
             system_prompt=orchestrator_prompt,
-            callback_manager=self.callback_manager,
-            max_iterations=10
+            callback_manager=self.callback_manager
         )
         
         logger.info(f"Initialized HumansaOrchestratorAgent with {len(self.tools)} {'real database' if self.use_real_tools else 'simplified'} tools")
@@ -620,7 +621,18 @@ How may I help you today?"""
                 # Log the query being processed
                 logger.info(f"🎯 Processing query: {enhanced_query[:200]}...")
                 
-                response = self.orchestrator.chat(enhanced_query)
+                # Use run method for new API
+                response_handler = self.orchestrator.run(enhanced_query)
+                result = await response_handler
+                
+                # Extract response text  
+                if hasattr(result, 'response'):
+                    response_text = str(result.response)
+                else:
+                    response_text = str(result)
+                    
+                # Create a simple response object to match expected format
+                response = type('Response', (), {'response': response_text})()
                 
                 # Log detailed agent flow
                 if self.debug_handler:
@@ -810,7 +822,18 @@ How may I help you today?"""
             
             # Use regular chat but capture the verbose output
             with redirect_stdout(captured_output):
-                response = self.orchestrator.chat(enhanced_query)
+                # Use run method for new API
+                response_handler = self.orchestrator.run(enhanced_query)
+                result = await response_handler
+                
+                # Extract response text  
+                if hasattr(result, 'response'):
+                    response_text = str(result.response)
+                else:
+                    response_text = str(result)
+                    
+                # Create a simple response object to match expected format
+                response = type('Response', (), {'response': response_text})()
             
             # Get the captured reasoning
             reasoning_output = captured_output.getvalue()

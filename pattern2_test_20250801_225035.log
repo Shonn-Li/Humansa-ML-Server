@@ -1,0 +1,1318 @@
+2025-08-01 22:50:35,021 - __main__ - INFO - ================================================================================
+2025-08-01 22:50:35,021 - __main__ - INFO - Starting Pattern 2 Test Suite
+2025-08-01 22:50:35,021 - __main__ - INFO - Test environment: http://localhost:6001
+2025-08-01 22:50:35,021 - __main__ - INFO - Expected orchestrator: Pattern 2 (FunctionAgent)
+2025-08-01 22:50:35,021 - __main__ - INFO - ================================================================================
+2025-08-01 22:50:35,032 - __main__ - INFO - Health check passed
+2025-08-01 22:50:35,032 - __main__ - INFO - 
+============================================================
+2025-08-01 22:50:35,032 - __main__ - INFO - SINGLE-TURN TESTS
+2025-08-01 22:50:35,032 - __main__ - INFO - ============================================================
+2025-08-01 22:50:35,032 - __main__ - INFO - Testing Pattern 2 - Test #1: Basic Identity Query
+2025-08-01 22:50:35,032 - __main__ - INFO - Query: 你是谁？
+2025-08-01 22:50:35,032 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:50:36,511 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:50:36,511 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:50:36,511 - __main__ - WARNING - Test 1 failed - missing keywords: ['诺亚新舟', '小诺', '健康医疗助理', 'AI健康管家']
+2025-08-01 22:50:37,012 - __main__ - INFO - Testing Pattern 2 - Test #2: Company Background
+2025-08-01 22:50:37,013 - __main__ - INFO - Query: 介绍一下诺亚新舟
+2025-08-01 22:50:37,013 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:50:37,045 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:50:43,132 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:50:43,132 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:50:43,133 - __main__ - INFO - ✅ Response completed in 6.12s
+2025-08-01 22:50:43,133 - __main__ - INFO - Tools used: []
+2025-08-01 22:50:43,133 - __main__ - INFO - Response length: 391 chars
+2025-08-01 22:50:43,133 - __main__ - WARNING - Test 2 failed - missing keywords: ['以爱行舟', '亲近相守', '500多位', '三甲主任级']
+2025-08-01 22:50:43,633 - __main__ - INFO - Testing Pattern 2 - Test #3: Service Capabilities
+2025-08-01 22:50:43,633 - __main__ - INFO - Query: 你能做什么？
+2025-08-01 22:50:43,633 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:50:47,704 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:50:47,704 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:50:47,704 - __main__ - WARNING - Test 3 failed - missing keywords: ['健康咨询', '实时预约', '检查项目', '诊所导航', '体检报告']
+2025-08-01 22:50:48,205 - __main__ - INFO - Testing Pattern 2 - Test #4: Brand Slogan
+2025-08-01 22:50:48,205 - __main__ - INFO - Query: 诺亚新舟的口号是什么？
+2025-08-01 22:50:48,205 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:50:48,215 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:50:49,363 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:50:49,363 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:50:49,363 - __main__ - INFO - ✅ Response completed in 1.16s
+2025-08-01 22:50:49,363 - __main__ - INFO - Tools used: []
+2025-08-01 22:50:49,363 - __main__ - INFO - Response length: 65 chars
+2025-08-01 22:50:49,363 - __main__ - WARNING - Test 4 failed - missing keywords: ['以爱行舟', '亲近相守']
+2025-08-01 22:50:49,865 - __main__ - INFO - Testing Pattern 2 - Test #5: English Identity Query
+2025-08-01 22:50:49,865 - __main__ - INFO - Query: Who are you?
+2025-08-01 22:50:49,865 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:50:51,519 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:50:51,520 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:50:51,520 - __main__ - WARNING - Test 5 failed - missing keywords: ['Humansa', 'health', 'assistant', 'medical']
+2025-08-01 22:50:52,020 - __main__ - INFO - Testing Pattern 2 - Test #6: Find Cardiologist
+2025-08-01 22:50:52,021 - __main__ - INFO - Query: 我想找一个心脏科医生
+2025-08-01 22:50:52,021 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:50:52,040 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:50:54,333 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 22:50:54,333 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 22:50:54,333 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:50:54,333 - __main__ - INFO - ✅ Response completed in 2.31s
+2025-08-01 22:50:54,333 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 22:50:54,334 - __main__ - INFO - Response length: 119 chars
+2025-08-01 22:50:54,835 - __main__ - INFO - Testing Pattern 2 - Test #7: Find Doctors by City
+2025-08-01 22:50:54,835 - __main__ - INFO - Query: 上海有哪些医生？
+2025-08-01 22:50:54,835 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:50:57,232 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:50:57,232 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:50:57,232 - __main__ - WARNING - Test 7 failed - missing keywords: ['上海', '医生']
+2025-08-01 22:50:57,733 - __main__ - INFO - Testing Pattern 2 - Test #8: Doctor by Name
+2025-08-01 22:50:57,733 - __main__ - INFO - Query: 张医生在吗？
+2025-08-01 22:50:57,733 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:50:57,744 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:50:59,898 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 22:50:59,898 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 22:50:59,898 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:50:59,898 - __main__ - INFO - ✅ Response completed in 2.16s
+2025-08-01 22:50:59,898 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 22:50:59,898 - __main__ - INFO - Response length: 101 chars
+2025-08-01 22:51:00,398 - __main__ - INFO - Testing Pattern 2 - Test #9: Doctor Availability
+2025-08-01 22:51:00,399 - __main__ - INFO - Query: 哪个医生现在有号？
+2025-08-01 22:51:00,399 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:51:03,245 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:51:03,245 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:51:03,245 - __main__ - WARNING - Test 9 failed - missing keywords: ['医生', '号', '时间']
+2025-08-01 22:51:03,746 - __main__ - INFO - Testing Pattern 2 - Test #10: Specialist Search
+2025-08-01 22:51:03,746 - __main__ - INFO - Query: 有神经内科的专家吗？
+2025-08-01 22:51:03,746 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:51:03,755 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:51:06,918 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 22:51:06,919 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 22:51:06,919 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:51:06,919 - __main__ - INFO - ✅ Response completed in 3.17s
+2025-08-01 22:51:06,919 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 22:51:06,919 - __main__ - INFO - Response length: 129 chars
+2025-08-01 22:51:07,419 - __main__ - INFO - Testing Pattern 2 - Test #11: Book Appointment
+2025-08-01 22:51:07,419 - __main__ - INFO - Query: 我想预约明天上午的骨科
+2025-08-01 22:51:07,420 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:51:10,148 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:51:10,148 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:51:10,148 - __main__ - WARNING - Test 11 failed - missing keywords: ['预约', '骨科', '明天']
+2025-08-01 22:51:10,649 - __main__ - INFO - Testing Pattern 2 - Test #12: Check Availability
+2025-08-01 22:51:10,649 - __main__ - INFO - Query: 查看下周的可预约时间
+2025-08-01 22:51:10,649 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:51:10,661 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:51:12,683 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 22:51:12,683 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 22:51:12,683 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:51:12,683 - __main__ - INFO - ✅ Response completed in 2.03s
+2025-08-01 22:51:12,683 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 22:51:12,683 - __main__ - INFO - Response length: 66 chars
+2025-08-01 22:51:13,185 - __main__ - INFO - Testing Pattern 2 - Test #13: Cancel Appointment
+2025-08-01 22:51:13,185 - __main__ - INFO - Query: 取消我的预约
+2025-08-01 22:51:13,185 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:51:14,290 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:51:14,290 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:51:14,290 - __main__ - WARNING - Test 13 failed - missing keywords: ['取消', '预约']
+2025-08-01 22:51:14,791 - __main__ - INFO - Testing Pattern 2 - Test #14: Reschedule
+2025-08-01 22:51:14,791 - __main__ - INFO - Query: 改约到下周三
+2025-08-01 22:51:14,791 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:51:14,799 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:51:17,492 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 22:51:17,492 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 22:51:17,492 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:51:17,492 - __main__ - INFO - ✅ Response completed in 2.70s
+2025-08-01 22:51:17,492 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 22:51:17,492 - __main__ - INFO - Response length: 92 chars
+2025-08-01 22:51:17,993 - __main__ - INFO - Testing Pattern 2 - Test #15: Emergency Appointment
+2025-08-01 22:51:17,994 - __main__ - INFO - Query: 能加急预约吗？
+2025-08-01 22:51:17,994 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:51:21,279 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:51:21,279 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:51:21,279 - __main__ - WARNING - Test 15 failed - missing keywords: ['加急', '预约']
+2025-08-01 22:51:21,781 - __main__ - INFO - Testing Pattern 2 - Test #16: Nearest Clinic
+2025-08-01 22:51:21,781 - __main__ - INFO - Query: 离我最近的诊所在哪？
+2025-08-01 22:51:21,781 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:51:21,803 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:51:25,507 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 22:51:25,509 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 22:51:25,509 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:51:25,509 - __main__ - INFO - ✅ Response completed in 3.73s
+2025-08-01 22:51:25,509 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 22:51:25,509 - __main__ - INFO - Response length: 139 chars
+2025-08-01 22:51:25,509 - __main__ - WARNING - Test 16 failed - missing keywords: ['地址']
+2025-08-01 22:51:26,010 - __main__ - INFO - Testing Pattern 2 - Test #17: Service Price
+2025-08-01 22:51:26,010 - __main__ - INFO - Query: 血常规多少钱？
+2025-08-01 22:51:26,010 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:51:30,687 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:51:30,687 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:51:30,687 - __main__ - WARNING - Test 17 failed - missing keywords: ['血常规', '钱', '价格']
+2025-08-01 22:51:31,188 - __main__ - INFO - Testing Pattern 2 - Test #18: Health Packages
+2025-08-01 22:51:31,188 - __main__ - INFO - Query: 体检套餐有哪些？
+2025-08-01 22:51:31,188 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:51:31,199 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:51:44,987 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: general_medical']
+2025-08-01 22:51:44,988 - __main__ - INFO - 📊 Usage - Agents: ['GeneralAgent']
+2025-08-01 22:51:44,988 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:51:44,988 - __main__ - INFO - ✅ Response completed in 13.80s
+2025-08-01 22:51:44,988 - __main__ - INFO - Tools used: ['GeneralAgent']
+2025-08-01 22:51:44,988 - __main__ - INFO - Response length: 474 chars
+2025-08-01 22:51:45,489 - __main__ - INFO - Testing Pattern 2 - Test #19: Clinic Hours
+2025-08-01 22:51:45,489 - __main__ - INFO - Query: 诊所几点开门？
+2025-08-01 22:51:45,489 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:51:49,098 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:51:49,098 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:51:49,098 - __main__ - WARNING - Test 19 failed - missing keywords: ['诊所', '时间', '营业']
+2025-08-01 22:51:49,599 - __main__ - INFO - Testing Pattern 2 - Test #20: Contact Info
+2025-08-01 22:51:49,599 - __main__ - INFO - Query: 上海诊所的电话是多少？
+2025-08-01 22:51:49,599 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:51:49,606 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:51:58,822 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 22:51:58,823 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 22:51:58,823 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:51:58,823 - __main__ - INFO - ✅ Response completed in 9.22s
+2025-08-01 22:51:58,823 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 22:51:58,823 - __main__ - INFO - Response length: 119 chars
+2025-08-01 22:51:59,324 - __main__ - INFO - Testing Pattern 2 - Test #21: Sleep Issues
+2025-08-01 22:51:59,324 - __main__ - INFO - Query: 我最近总是失眠怎么办？
+2025-08-01 22:51:59,324 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:52:09,988 - __main__ - INFO - 🔧 Tool used: DiagnosisAgent
+2025-08-01 22:52:09,988 - __main__ - INFO - 📊 Usage: {'agents_used': ['DiagnosisAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:52:09,988 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:52:09,988 - __main__ - WARNING - Test 21 failed - missing keywords: ['失眠', '睡眠', '建议']
+2025-08-01 22:52:10,490 - __main__ - INFO - Testing Pattern 2 - Test #22: Child Fever
+2025-08-01 22:52:10,490 - __main__ - INFO - Query: 孩子发烧39度该怎么处理？
+2025-08-01 22:52:10,490 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:52:10,503 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:52:24,144 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 22:52:24,144 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 22:52:24,144 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 您的孩子目前体温为39度。请您补充以下信息，以便更好地评估情况：\n1. 发烧持续了多久？是突然出现还是逐渐升高？\n2. 孩子精神状态如何？是否嗜睡、反应迟钝或异常烦躁？\n3. 是否有抽搐、呼吸困难、持续呕吐、皮疹、颈部僵硬、手脚冰凉等其他症状？\n4. 近期是否有接触过生病的人，或去过人多的地方？\n5. 孩子是否能正常进食和饮水，有无尿量减少？\n\n如果孩子出现精神萎靡、持续高热不退、抽搐、呼吸急促、面色苍白或紫绀、持续呕吐、皮疹等紧急情况，请立即前往医院急诊就医。否则，建议密切观察体温变化，多饮水，必要时物理降温，并及时就医由专业医生评估。', 'timestamp': '2025-08-01T22:52:17.693081'}]
+2025-08-01 22:52:24,144 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 22:52:24,144 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:52:24,145 - __main__ - INFO - ✅ Response completed in 13.66s
+2025-08-01 22:52:24,145 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 22:52:24,145 - __main__ - INFO - Response length: 372 chars
+2025-08-01 22:52:24,145 - __main__ - WARNING - Test 22 failed - missing keywords: ['处理']
+2025-08-01 22:52:24,646 - __main__ - INFO - Testing Pattern 2 - Test #23: Emergency Symptoms
+2025-08-01 22:52:24,646 - __main__ - INFO - Query: 胸口疼痛呼吸困难
+2025-08-01 22:52:24,646 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:52:27,294 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:52:27,294 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:52:27,294 - __main__ - WARNING - Test 23 failed - missing keywords: ['120', '急救', '立即']
+2025-08-01 22:52:27,795 - __main__ - INFO - Testing Pattern 2 - Test #24: Medication Query
+2025-08-01 22:52:27,795 - __main__ - INFO - Query: 高血压能吃什么药？
+2025-08-01 22:52:27,795 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:52:27,803 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:52:41,818 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: medication_info']
+2025-08-01 22:52:41,819 - __main__ - INFO - 📊 Usage - Agents: ['MedicationAgent']
+2025-08-01 22:52:41,819 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:52:41,820 - __main__ - INFO - ✅ Response completed in 14.02s
+2025-08-01 22:52:41,820 - __main__ - INFO - Tools used: ['MedicationAgent']
+2025-08-01 22:52:41,820 - __main__ - INFO - Response length: 380 chars
+2025-08-01 22:52:42,320 - __main__ - INFO - Testing Pattern 2 - Test #25: Test Results
+2025-08-01 22:52:42,320 - __main__ - INFO - Query: 体检报告显示血糖偏高
+2025-08-01 22:52:42,320 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:52:52,563 - __main__ - INFO - 🔧 Tool used: DiagnosisAgent
+2025-08-01 22:52:52,564 - __main__ - INFO - 📊 Usage: {'agents_used': ['DiagnosisAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:52:52,564 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:52:52,564 - __main__ - WARNING - Test 25 failed - missing keywords: ['血糖', '控制', '饮食']
+2025-08-01 22:52:53,065 - __main__ - INFO - Testing Pattern 2 - Test #26: Health Products
+2025-08-01 22:52:53,065 - __main__ - INFO - Query: 你们有什么保健品推荐吗？
+2025-08-01 22:52:53,065 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:52:53,077 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:52:54,918 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:52:54,918 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:52:54,919 - __main__ - INFO - ✅ Response completed in 1.85s
+2025-08-01 22:52:54,919 - __main__ - INFO - Tools used: []
+2025-08-01 22:52:54,919 - __main__ - INFO - Response length: 134 chars
+2025-08-01 22:52:55,420 - __main__ - INFO - Testing Pattern 2 - Test #27: Vitamins
+2025-08-01 22:52:55,420 - __main__ - INFO - Query: 我想买维生素D，有什么推荐？
+2025-08-01 22:52:55,420 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:53:10,221 - __main__ - INFO - 🔧 Tool used: ProductAgent
+2025-08-01 22:53:10,221 - __main__ - INFO - 📊 Usage: {'agents_used': ['ProductAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:53:10,221 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:53:10,221 - __main__ - WARNING - Test 27 failed - missing keywords: ['维生素D', '推荐']
+2025-08-01 22:53:10,722 - __main__ - INFO - Testing Pattern 2 - Test #28: Medical Equipment
+2025-08-01 22:53:10,722 - __main__ - INFO - Query: 家里老人需要血压计，推荐一款
+2025-08-01 22:53:10,722 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:53:10,728 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:53:20,899 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: search_products']
+2025-08-01 22:53:20,899 - __main__ - INFO - 📊 Usage - Agents: ['ProductAgent']
+2025-08-01 22:53:20,899 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:53:20,899 - __main__ - INFO - ✅ Response completed in 10.18s
+2025-08-01 22:53:20,899 - __main__ - INFO - Tools used: ['ProductAgent']
+2025-08-01 22:53:20,899 - __main__ - INFO - Response length: 303 chars
+2025-08-01 22:53:21,401 - __main__ - INFO - Testing Pattern 2 - Test #29: Sleep Aid Products
+2025-08-01 22:53:21,401 - __main__ - INFO - Query: 有什么产品可以帮助睡眠？
+2025-08-01 22:53:21,401 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:53:36,472 - __main__ - INFO - 🔧 Tool used: ProductAgent
+2025-08-01 22:53:36,473 - __main__ - INFO - 📊 Usage: {'agents_used': ['ProductAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:53:36,473 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:53:36,473 - __main__ - WARNING - Test 29 failed - missing keywords: ['睡眠', '产品', '帮助']
+2025-08-01 22:53:36,974 - __main__ - INFO - Testing Pattern 2 - Test #30: Purchase Guidance
+2025-08-01 22:53:36,974 - __main__ - INFO - Query: 怎么购买这些产品？
+2025-08-01 22:53:36,974 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:53:36,997 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:53:38,657 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:53:38,657 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:53:38,657 - __main__ - INFO - ✅ Response completed in 1.68s
+2025-08-01 22:53:38,659 - __main__ - INFO - Tools used: []
+2025-08-01 22:53:38,659 - __main__ - INFO - Response length: 122 chars
+2025-08-01 22:53:38,660 - __main__ - WARNING - Test 30 failed - missing keywords: ['小程序', '商城']
+2025-08-01 22:53:39,161 - __main__ - INFO - Testing Pattern 2 - Test #31: Store Personal Info
+2025-08-01 22:53:39,161 - __main__ - INFO - Query: 我叫李明，45岁，有高血压
+2025-08-01 22:53:39,161 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:53:41,155 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:53:41,155 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:53:41,155 - __main__ - WARNING - Test 31 failed - missing keywords: ['记录', '信息']
+2025-08-01 22:53:41,656 - __main__ - INFO - Testing Pattern 2 - Test #32: Store Allergies
+2025-08-01 22:53:41,656 - __main__ - INFO - Query: 我对青霉素过敏
+2025-08-01 22:53:41,656 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:53:41,665 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:53:43,424 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:53:43,424 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:53:43,424 - __main__ - INFO - ✅ Response completed in 1.77s
+2025-08-01 22:53:43,424 - __main__ - INFO - Tools used: []
+2025-08-01 22:53:43,424 - __main__ - INFO - Response length: 114 chars
+2025-08-01 22:53:43,424 - __main__ - WARNING - Test 32 failed - missing keywords: ['记录', '注意']
+2025-08-01 22:53:43,925 - __main__ - INFO - Testing Pattern 2 - Test #33: Recall Info
+2025-08-01 22:53:43,925 - __main__ - INFO - Query: 你记得我的基本信息吗？
+2025-08-01 22:53:43,925 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:53:45,502 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:53:45,502 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:53:45,503 - __main__ - WARNING - Test 33 failed - missing keywords: ['李明', '45', '高血压']
+2025-08-01 22:53:46,004 - __main__ - INFO - Testing Pattern 2 - Test #34: Medical History
+2025-08-01 22:53:46,004 - __main__ - INFO - Query: 我有什么过敏史？
+2025-08-01 22:53:46,004 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:53:46,018 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:53:48,969 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:53:48,969 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:53:48,969 - __main__ - INFO - ✅ Response completed in 2.96s
+2025-08-01 22:53:48,969 - __main__ - INFO - Tools used: []
+2025-08-01 22:53:48,969 - __main__ - INFO - Response length: 280 chars
+2025-08-01 22:53:48,969 - __main__ - WARNING - Test 34 failed - missing keywords: ['青霉素']
+2025-08-01 22:53:49,470 - __main__ - INFO - Testing Pattern 2 - Test #35: Family Member
+2025-08-01 22:53:49,471 - __main__ - INFO - Query: 我女儿5岁，经常感冒
+2025-08-01 22:53:49,471 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:53:53,644 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:53:53,644 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:53:53,644 - __main__ - WARNING - Test 35 failed - missing keywords: ['记录', '女儿', '感冒']
+2025-08-01 22:53:54,145 - __main__ - INFO - Testing Pattern 2 - Test #36: Medication Tracking
+2025-08-01 22:53:54,146 - __main__ - INFO - Query: 我在吃阿司匹林和二甲双胍
+2025-08-01 22:53:54,146 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:53:54,154 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:53:55,737 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:53:55,737 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:53:55,737 - __main__ - INFO - ✅ Response completed in 1.59s
+2025-08-01 22:53:55,737 - __main__ - INFO - Tools used: []
+2025-08-01 22:53:55,737 - __main__ - INFO - Response length: 116 chars
+2025-08-01 22:53:55,737 - __main__ - WARNING - Test 36 failed - missing keywords: ['记录']
+2025-08-01 22:53:56,239 - __main__ - INFO - Testing Pattern 2 - Test #37: Doctor Preference
+2025-08-01 22:53:56,239 - __main__ - INFO - Query: 我喜欢找李医生看病
+2025-08-01 22:53:56,239 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:53:58,417 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:53:58,417 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:53:58,418 - __main__ - WARNING - Test 37 failed - missing keywords: ['记录', '偏好', '李医生']
+2025-08-01 22:53:58,919 - __main__ - INFO - Testing Pattern 2 - Test #38: Health Goals
+2025-08-01 22:53:58,919 - __main__ - INFO - Query: 我想减重10公斤
+2025-08-01 22:53:58,919 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:53:58,926 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:54:10,422 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: general_medical']
+2025-08-01 22:54:10,424 - __main__ - INFO - 📊 Usage - Agents: ['GeneralAgent']
+2025-08-01 22:54:10,424 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:54:10,424 - __main__ - INFO - ✅ Response completed in 11.51s
+2025-08-01 22:54:10,424 - __main__ - INFO - Tools used: ['GeneralAgent']
+2025-08-01 22:54:10,424 - __main__ - INFO - Response length: 348 chars
+2025-08-01 22:54:10,925 - __main__ - INFO - Testing Pattern 2 - Test #39: Insurance Info
+2025-08-01 22:54:10,925 - __main__ - INFO - Query: 我有平安保险的高端医疗险
+2025-08-01 22:54:10,925 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:54:12,673 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:54:12,673 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:54:12,673 - __main__ - WARNING - Test 39 failed - missing keywords: ['保险', '记录']
+2025-08-01 22:54:13,176 - __main__ - INFO - Testing Pattern 2 - Test #40: Complex Context
+2025-08-01 22:54:13,177 - __main__ - INFO - Query: 基于我的情况，需要做哪些检查？
+2025-08-01 22:54:13,177 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:54:13,186 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:54:15,326 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:54:15,327 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:54:15,327 - __main__ - INFO - ✅ Response completed in 2.15s
+2025-08-01 22:54:15,327 - __main__ - INFO - Tools used: []
+2025-08-01 22:54:15,327 - __main__ - INFO - Response length: 173 chars
+2025-08-01 22:54:15,327 - __main__ - WARNING - Test 40 failed - missing keywords: ['高血压']
+2025-08-01 22:54:15,827 - __main__ - INFO - 
+============================================================
+2025-08-01 22:54:15,828 - __main__ - INFO - MULTI-TURN TESTS
+2025-08-01 22:54:15,828 - __main__ - INFO - ============================================================
+2025-08-01 22:54:15,828 - __main__ - INFO - Testing Pattern 2 - Test #41_turn_1: Basic Greeting + Doctor Search - Turn 1
+2025-08-01 22:54:15,828 - __main__ - INFO - Query: 你好
+2025-08-01 22:54:15,828 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:54:17,238 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:54:17,238 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:54:17,238 - __main__ - WARNING - Test 41 turn 1 failed
+2025-08-01 22:54:17,739 - __main__ - INFO - Testing Pattern 2 - Test #41_turn_2: Basic Greeting + Doctor Search - Turn 2
+2025-08-01 22:54:17,739 - __main__ - INFO - Query: 我住在北京
+2025-08-01 22:54:17,739 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:54:19,099 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:54:19,099 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:54:19,099 - __main__ - WARNING - Test 41 turn 2 failed
+2025-08-01 22:54:19,600 - __main__ - INFO - Testing Pattern 2 - Test #41_turn_3: Basic Greeting + Doctor Search - Turn 3
+2025-08-01 22:54:19,600 - __main__ - INFO - Query: 帮我找个骨科医生
+2025-08-01 22:54:19,600 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:54:22,123 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:54:22,123 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:54:22,123 - __main__ - WARNING - Test 41 turn 3 failed
+2025-08-01 22:54:22,625 - __main__ - INFO - Testing Pattern 2 - Test #42_turn_1: Symptom Description + Recommendation - Turn 1
+2025-08-01 22:54:22,625 - __main__ - INFO - Query: 我最近头痛
+2025-08-01 22:54:22,625 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:54:22,634 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:54:31,761 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 22:54:31,762 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 22:54:31,762 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 您最近头痛，请您补充一些信息，以便更好地帮助您：\n1. 头痛持续了多长时间？是突然发生还是逐渐加重？\n2. 头痛的部位在哪里？是全头、偏头还是后脑勺？\n3. 头痛的程度如何？是轻微、适中还是非常严重？\n4. 有没有伴随其他症状，比如恶心、呕吐、视力模糊、发烧、抽搐、意识模糊、肢体无力或麻木等？\n5. 有没有什么因素会让头痛加重或缓解？\n6. 头痛对您的日常生活有多大影响？\n7. 您是否有高血压、糖尿病、心脏病、脑血管疾病等慢性病史？\n8. 最近有无外伤史？\n\n请尽量详细描述您的症状，这有助于进一步分析和判断风险。如有突发剧烈头痛、伴有意识障碍、肢体活动障碍等，请立即就医。', 'timestamp': '2025-08-01T22:54:27.958137'}]
+2025-08-01 22:54:31,762 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 22:54:31,762 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:54:31,762 - __main__ - INFO - ✅ Response completed in 9.14s
+2025-08-01 22:54:31,762 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 22:54:31,762 - __main__ - INFO - Response length: 299 chars
+2025-08-01 22:54:32,263 - __main__ - INFO - Testing Pattern 2 - Test #42_turn_2: Symptom Description + Recommendation - Turn 2
+2025-08-01 22:54:32,264 - __main__ - INFO - Query: 已经3天了
+2025-08-01 22:54:32,264 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:54:32,272 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:54:41,145 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 22:54:41,146 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 22:54:41,146 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 您好，请问可以提供更多关于头痛的信息吗？例如：\n- 头痛开始的具体时间和方式（是突然发作还是慢慢加重？）\n- 头痛的严重程度和性质（是钝痛、刺痛、搏动性等？）\n- 是否有其他相关症状（如发烧、恶心、呕吐、视力模糊、颈部僵硬、意识障碍等？）\n- 有无诱发或缓解头痛的因素？\n- 头痛是否影响到您的日常活动？\n- 您是否有高血压、糖尿病、脑血管疾病等既往病史？\n这些信息有助于更准确地评估您的情况，并判断是否存在需要紧急处理的风险。', 'timestamp': '2025-08-01T22:54:37.158333'}]
+2025-08-01 22:54:41,146 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 22:54:41,146 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:54:41,146 - __main__ - INFO - ✅ Response completed in 8.88s
+2025-08-01 22:54:41,146 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 22:54:41,146 - __main__ - INFO - Response length: 275 chars
+2025-08-01 22:54:41,647 - __main__ - INFO - Testing Pattern 2 - Test #42_turn_3: Symptom Description + Recommendation - Turn 3
+2025-08-01 22:54:41,648 - __main__ - INFO - Query: 还伴有恶心
+2025-08-01 22:54:41,648 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:54:41,670 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:54:50,802 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 22:54:50,803 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 22:54:50,803 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 请您补充以下信息，以便我更好地分析您的症状，并评估需要关注的紧急情况：\n\n1. 主要症状是什么？（例如：头痛、腹痛、发热等）\n2. 症状是突然发生还是逐渐加重的？\n3. 恶心是否伴有呕吐？如果有，呕吐的频率和内容如何？\n4. 是否有发热、腹泻、头晕、胸痛、呼吸困难等其他伴随症状？\n5. 症状对您的日常生活有多大影响？\n6. 是否有任何缓解或加重症状的因素？\n7. 您有无慢性疾病、近期旅行史、药物过敏或特殊用药情况？\n\n请尽量详细描述您的症状和相关情况，这有助于我为您提供更安全和针对性的建议。如果出现剧烈胸痛、呼吸困难、持续呕吐无法进食、意识障碍等情况，请立即就医。', 'timestamp': '2025-08-01T22:54:46.876907'}]
+2025-08-01 22:54:50,803 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 22:54:50,803 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:54:50,803 - __main__ - INFO - ✅ Response completed in 9.16s
+2025-08-01 22:54:50,803 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 22:54:50,803 - __main__ - INFO - Response length: 267 chars
+2025-08-01 22:54:50,803 - __main__ - WARNING - Test 42 turn 3 failed
+2025-08-01 22:54:51,304 - __main__ - INFO - Testing Pattern 2 - Test #43_turn_1: Appointment Booking Flow - Turn 1
+2025-08-01 22:54:51,304 - __main__ - INFO - Query: 我想看医生
+2025-08-01 22:54:51,305 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:54:53,501 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:54:53,501 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:54:53,501 - __main__ - WARNING - Test 43 turn 1 failed
+2025-08-01 22:54:54,003 - __main__ - INFO - Testing Pattern 2 - Test #43_turn_2: Appointment Booking Flow - Turn 2
+2025-08-01 22:54:54,003 - __main__ - INFO - Query: 骨科的
+2025-08-01 22:54:54,003 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:54:56,664 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:54:56,664 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:54:56,665 - __main__ - WARNING - Test 43 turn 2 failed
+2025-08-01 22:54:57,166 - __main__ - INFO - Testing Pattern 2 - Test #43_turn_3: Appointment Booking Flow - Turn 3
+2025-08-01 22:54:57,166 - __main__ - INFO - Query: 这周五下午可以吗
+2025-08-01 22:54:57,166 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:54:59,178 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:54:59,178 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:54:59,178 - __main__ - WARNING - Test 43 turn 3 failed
+2025-08-01 22:54:59,679 - __main__ - INFO - Testing Pattern 2 - Test #44_turn_1: Product Inquiry + Purchase - Turn 1
+2025-08-01 22:54:59,679 - __main__ - INFO - Query: 有什么助眠产品吗
+2025-08-01 22:54:59,679 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:54:59,692 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:55:14,910 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: search_products']
+2025-08-01 22:55:14,911 - __main__ - INFO - 📊 Usage - Agents: ['ProductAgent']
+2025-08-01 22:55:14,911 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:55:14,912 - __main__ - INFO - ✅ Response completed in 15.23s
+2025-08-01 22:55:14,912 - __main__ - INFO - Tools used: ['ProductAgent']
+2025-08-01 22:55:14,912 - __main__ - INFO - Response length: 330 chars
+2025-08-01 22:55:15,414 - __main__ - INFO - Testing Pattern 2 - Test #44_turn_2: Product Inquiry + Purchase - Turn 2
+2025-08-01 22:55:15,414 - __main__ - INFO - Query: 价格怎么样
+2025-08-01 22:55:15,414 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:55:15,433 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:55:28,029 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: search_products']
+2025-08-01 22:55:28,031 - __main__ - INFO - 📊 Usage - Agents: ['ProductAgent']
+2025-08-01 22:55:28,031 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:55:28,031 - __main__ - INFO - ✅ Response completed in 12.62s
+2025-08-01 22:55:28,032 - __main__ - INFO - Tools used: ['ProductAgent']
+2025-08-01 22:55:28,032 - __main__ - INFO - Response length: 303 chars
+2025-08-01 22:55:28,534 - __main__ - INFO - Testing Pattern 2 - Test #44_turn_3: Product Inquiry + Purchase - Turn 3
+2025-08-01 22:55:28,534 - __main__ - INFO - Query: 怎么购买
+2025-08-01 22:55:28,534 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:55:28,542 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:55:30,710 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:55:30,710 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:55:30,711 - __main__ - INFO - ✅ Response completed in 2.18s
+2025-08-01 22:55:30,711 - __main__ - INFO - Tools used: []
+2025-08-01 22:55:30,711 - __main__ - INFO - Response length: 161 chars
+2025-08-01 22:55:30,711 - __main__ - WARNING - Test 44 turn 3 failed
+2025-08-01 22:55:31,212 - __main__ - INFO - Testing Pattern 2 - Test #45_turn_1: Emergency Triage - Turn 1
+2025-08-01 22:55:31,212 - __main__ - INFO - Query: 我不太舒服
+2025-08-01 22:55:31,212 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:55:32,759 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:55:32,760 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:55:32,760 - __main__ - WARNING - Test 45 turn 1 failed
+2025-08-01 22:55:33,261 - __main__ - INFO - Testing Pattern 2 - Test #45_turn_2: Emergency Triage - Turn 2
+2025-08-01 22:55:33,261 - __main__ - INFO - Query: 胸口有点闷
+2025-08-01 22:55:33,261 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:55:42,175 - __main__ - INFO - 🔧 Tool used: DiagnosisAgent
+2025-08-01 22:55:42,175 - __main__ - INFO - 📊 Usage: {'agents_used': ['DiagnosisAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:55:42,175 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:55:42,175 - __main__ - WARNING - Test 45 turn 2 failed
+2025-08-01 22:55:42,677 - __main__ - INFO - Testing Pattern 2 - Test #45_turn_3: Emergency Triage - Turn 3
+2025-08-01 22:55:42,677 - __main__ - INFO - Query: 还有点喘不上气
+2025-08-01 22:55:42,677 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:55:45,127 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:55:45,127 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:55:45,127 - __main__ - WARNING - Test 45 turn 3 failed
+2025-08-01 22:55:45,629 - __main__ - INFO - Testing Pattern 2 - Test #46_turn_1: Diabetes Management - Turn 1
+2025-08-01 22:55:45,629 - __main__ - INFO - Query: 我有糖尿病
+2025-08-01 22:55:45,629 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:55:45,639 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:55:48,672 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:55:48,672 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:55:48,672 - __main__ - INFO - ✅ Response completed in 3.04s
+2025-08-01 22:55:48,672 - __main__ - INFO - Tools used: []
+2025-08-01 22:55:48,672 - __main__ - INFO - Response length: 194 chars
+2025-08-01 22:55:49,173 - __main__ - INFO - Testing Pattern 2 - Test #46_turn_2: Diabetes Management - Turn 2
+2025-08-01 22:55:49,173 - __main__ - INFO - Query: 血糖最近控制不好
+2025-08-01 22:55:49,173 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:55:49,186 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:56:04,867 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 22:56:04,869 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 22:56:04,869 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 您反馈“血糖控制不好”，为了更准确地评估可能原因及相关风险，请补充以下信息：\n1. 血糖控制不佳持续了多长时间？血糖值大致范围是多少？有无明显的高血糖或低血糖症状（如口渴、多尿、乏力、视力模糊、出汗、心悸等）？\n2. 近期饮食、运动、用药有无改变？用药是否规律，是否有漏服或减量？\n3. 是否近期有感染（如发烧、咳嗽、尿路感染、伤口感染等）、精神压力、其他疾病或手术？\n4. 有无出现并发症表现（如足部溃疡、视力急剧下降、胸闷胸痛、呼吸困难、意识障碍等）？\n5. 血糖异常对日常生活有无明显影响？\n\n请补充上述信息，以便进一步分析可能原因、评估风险，并给出合适的专科建议和检查推荐。若有严重高血糖症状或急性并发症，请立即就医！', 'timestamp': '2025-08-01T22:56:01.120089'}]
+2025-08-01 22:56:04,869 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 22:56:04,869 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:56:04,869 - __main__ - INFO - ✅ Response completed in 15.70s
+2025-08-01 22:56:04,869 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 22:56:04,869 - __main__ - INFO - Response length: 288 chars
+2025-08-01 22:56:05,370 - __main__ - INFO - Testing Pattern 2 - Test #46_turn_3: Diabetes Management - Turn 3
+2025-08-01 22:56:05,370 - __main__ - INFO - Query: 空腹血糖8.5
+2025-08-01 22:56:05,370 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:56:05,379 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:56:17,265 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 22:56:17,265 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 22:56:17,265 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 感谢您提供的信息。您提到空腹血糖8.5 mmol/L，血糖控制不佳。为更好地评估您的情况，请问您能补充以下内容吗？\n\n1. 您是否有糖尿病的既往诊断？目前是否在服用降糖药物？用药种类和依从性如何？\n2. 您近期是否有出现以下症状：多饮、多尿、体重明显变化、乏力、视力模糊、口干或其他不适？\n3. 您的血糖升高持续多长时间了？是突然升高还是逐渐升高？\n4. 是否有心脏病、高血压、高血脂等慢性疾病病史？\n5. 日常饮食和运动情况如何？近期是否有特殊情况（如感染、手术、情绪压力等）？\n6. 血糖升高对您的日常生活有无明显影响？\n\n请及时补充上述信息。需要特别注意：如果您出现明显的口渴、频繁呕吐、呼吸急促、意识模糊等症状，请立即前往急诊就医！\n\n无论如何，建议尽快就诊内分泌科或糖尿病专科医生，完善相关检查（如糖化血红蛋白、尿常规、肾功能等），由专业医生指导调整治疗方案。', 'timestamp': '2025-08-01T22:56:12.013609'}]
+2025-08-01 22:56:17,265 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 22:56:17,266 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:56:17,266 - __main__ - INFO - ✅ Response completed in 11.90s
+2025-08-01 22:56:17,266 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 22:56:17,266 - __main__ - INFO - Response length: 365 chars
+2025-08-01 22:56:17,266 - __main__ - WARNING - Test 46 turn 3 failed
+2025-08-01 22:56:17,767 - __main__ - INFO - Testing Pattern 2 - Test #46_turn_4: Diabetes Management - Turn 4
+2025-08-01 22:56:17,767 - __main__ - INFO - Query: 需要调整药物吗
+2025-08-01 22:56:17,767 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:56:17,777 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:56:29,520 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 22:56:29,521 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 22:56:29,521 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 您的空腹血糖为8.5mmol/L，高于正常范围。是否需要调整药物需综合考虑以下因素：\n\n1. 您是否已确诊糖尿病？目前正在使用哪些降糖药物？  \n2. 血糖升高持续了多久？近期血糖是否有波动？  \n3. 是否有口渴、多尿、体重下降、疲乏等症状？  \n4. 近期饮食、运动、情绪、感染等有无变化？  \n5. 是否出现恶心、呕吐、腹痛、嗜睡、呼吸急促等急性症状？（如有，需立即就医）\n\n建议：  \n- 请记录最近一段时间的空腹和餐后血糖数值。  \n- 如无急性不适，建议尽快携带血糖记录和用药清单就诊内分泌科或全科医生，评估是否需要调整药物。  \n- 如出现严重口渴、嗜睡、呼吸困难等症状，请立即就医。\n\n如方便，请补充上述信息，以便提供更具体的建议。', 'timestamp': '2025-08-01T22:56:25.343331'}]
+2025-08-01 22:56:29,521 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 22:56:29,521 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:56:29,521 - __main__ - INFO - ✅ Response completed in 11.75s
+2025-08-01 22:56:29,521 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 22:56:29,522 - __main__ - INFO - Response length: 330 chars
+2025-08-01 22:56:30,023 - __main__ - INFO - Testing Pattern 2 - Test #47_turn_1: Child Health Consultation - Turn 1
+2025-08-01 22:56:30,023 - __main__ - INFO - Query: 我孩子6岁
+2025-08-01 22:56:30,023 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:56:31,421 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:56:31,421 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:56:31,421 - __main__ - WARNING - Test 47 turn 1 failed
+2025-08-01 22:56:31,922 - __main__ - INFO - Testing Pattern 2 - Test #47_turn_2: Child Health Consultation - Turn 2
+2025-08-01 22:56:31,922 - __main__ - INFO - Query: 最近不爱吃饭
+2025-08-01 22:56:31,922 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:56:39,805 - __main__ - INFO - 🔧 Tool used: DiagnosisAgent
+2025-08-01 22:56:39,805 - __main__ - INFO - 📊 Usage: {'agents_used': ['DiagnosisAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:56:39,805 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:56:39,805 - __main__ - WARNING - Test 47 turn 2 failed
+2025-08-01 22:56:40,307 - __main__ - INFO - Testing Pattern 2 - Test #47_turn_3: Child Health Consultation - Turn 3
+2025-08-01 22:56:40,307 - __main__ - INFO - Query: 还经常说累
+2025-08-01 22:56:40,307 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:56:51,038 - __main__ - INFO - 🔧 Tool used: DiagnosisAgent
+2025-08-01 22:56:51,039 - __main__ - INFO - 📊 Usage: {'agents_used': ['DiagnosisAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:56:51,039 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:56:51,039 - __main__ - WARNING - Test 47 turn 3 failed
+2025-08-01 22:56:51,540 - __main__ - INFO - Testing Pattern 2 - Test #47_turn_4: Child Health Consultation - Turn 4
+2025-08-01 22:56:51,540 - __main__ - INFO - Query: 需要做什么检查
+2025-08-01 22:56:51,541 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:57:04,006 - __main__ - INFO - 🔧 Tool used: DiagnosisAgent
+2025-08-01 22:57:04,007 - __main__ - INFO - 📊 Usage: {'agents_used': ['DiagnosisAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:57:04,007 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:57:04,008 - __main__ - WARNING - Test 47 turn 4 failed
+2025-08-01 22:57:04,508 - __main__ - INFO - Testing Pattern 2 - Test #48_turn_1: Medication Interaction Check - Turn 1
+2025-08-01 22:57:04,508 - __main__ - INFO - Query: 我在吃降压药
+2025-08-01 22:57:04,508 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:57:04,518 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:57:06,102 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:57:06,102 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:57:06,102 - __main__ - INFO - ✅ Response completed in 1.59s
+2025-08-01 22:57:06,102 - __main__ - INFO - Tools used: []
+2025-08-01 22:57:06,102 - __main__ - INFO - Response length: 102 chars
+2025-08-01 22:57:06,604 - __main__ - INFO - Testing Pattern 2 - Test #48_turn_2: Medication Interaction Check - Turn 2
+2025-08-01 22:57:06,604 - __main__ - INFO - Query: 医生又开了抗生素
+2025-08-01 22:57:06,604 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:57:06,618 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:57:08,706 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:57:08,707 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:57:08,707 - __main__ - INFO - ✅ Response completed in 2.10s
+2025-08-01 22:57:08,707 - __main__ - INFO - Tools used: []
+2025-08-01 22:57:08,707 - __main__ - INFO - Response length: 154 chars
+2025-08-01 22:57:09,208 - __main__ - INFO - Testing Pattern 2 - Test #48_turn_3: Medication Interaction Check - Turn 3
+2025-08-01 22:57:09,208 - __main__ - INFO - Query: 这两种药能一起吃吗
+2025-08-01 22:57:09,208 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:57:09,224 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:57:10,738 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:57:10,738 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:57:10,738 - __main__ - INFO - ✅ Response completed in 1.53s
+2025-08-01 22:57:10,738 - __main__ - INFO - Tools used: []
+2025-08-01 22:57:10,738 - __main__ - INFO - Response length: 107 chars
+2025-08-01 22:57:11,240 - __main__ - INFO - Testing Pattern 2 - Test #49_turn_1: Post-Surgery Follow-up - Turn 1
+2025-08-01 22:57:11,240 - __main__ - INFO - Query: 我上周做了膝盖手术
+2025-08-01 22:57:11,240 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:57:14,411 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:57:14,411 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:57:14,411 - __main__ - WARNING - Test 49 turn 1 failed
+2025-08-01 22:57:14,913 - __main__ - INFO - Testing Pattern 2 - Test #49_turn_2: Post-Surgery Follow-up - Turn 2
+2025-08-01 22:57:14,913 - __main__ - INFO - Query: 现在还有点肿
+2025-08-01 22:57:14,913 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:57:25,111 - __main__ - INFO - 🔧 Tool used: DiagnosisAgent
+2025-08-01 22:57:25,111 - __main__ - INFO - 📊 Usage: {'agents_used': ['DiagnosisAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:57:25,111 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:57:25,112 - __main__ - WARNING - Test 49 turn 2 failed
+2025-08-01 22:57:25,613 - __main__ - INFO - Testing Pattern 2 - Test #49_turn_3: Post-Surgery Follow-up - Turn 3
+2025-08-01 22:57:25,613 - __main__ - INFO - Query: 这正常吗
+2025-08-01 22:57:25,613 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:57:34,986 - __main__ - INFO - 🔧 Tool used: DiagnosisAgent
+2025-08-01 22:57:34,986 - __main__ - INFO - 📊 Usage: {'agents_used': ['DiagnosisAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:57:34,986 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:57:34,986 - __main__ - WARNING - Test 49 turn 3 failed
+2025-08-01 22:57:35,487 - __main__ - INFO - Testing Pattern 2 - Test #50_turn_1: Health Check Planning - Turn 1
+2025-08-01 22:57:35,488 - __main__ - INFO - Query: 我想做个全面体检
+2025-08-01 22:57:35,488 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:57:35,502 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:57:40,862 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 22:57:40,862 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 22:57:40,862 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:57:40,862 - __main__ - INFO - ✅ Response completed in 5.37s
+2025-08-01 22:57:40,863 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 22:57:40,863 - __main__ - INFO - Response length: 348 chars
+2025-08-01 22:57:41,364 - __main__ - INFO - Testing Pattern 2 - Test #50_turn_2: Health Check Planning - Turn 2
+2025-08-01 22:57:41,364 - __main__ - INFO - Query: 有什么套餐推荐
+2025-08-01 22:57:41,364 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:57:41,376 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:57:51,218 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: search_products']
+2025-08-01 22:57:51,219 - __main__ - INFO - 📊 Usage - Agents: ['ProductAgent']
+2025-08-01 22:57:51,219 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:57:51,219 - __main__ - INFO - ✅ Response completed in 9.85s
+2025-08-01 22:57:51,219 - __main__ - INFO - Tools used: ['ProductAgent']
+2025-08-01 22:57:51,219 - __main__ - INFO - Response length: 290 chars
+2025-08-01 22:57:51,721 - __main__ - INFO - Testing Pattern 2 - Test #50_turn_3: Health Check Planning - Turn 3
+2025-08-01 22:57:51,721 - __main__ - INFO - Query: 大概多少钱
+2025-08-01 22:57:51,721 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:57:51,734 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:57:58,970 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: search_products']
+2025-08-01 22:57:58,971 - __main__ - INFO - 📊 Usage - Agents: ['ProductAgent']
+2025-08-01 22:57:58,971 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:57:58,971 - __main__ - INFO - ✅ Response completed in 7.25s
+2025-08-01 22:57:58,971 - __main__ - INFO - Tools used: ['ProductAgent']
+2025-08-01 22:57:58,971 - __main__ - INFO - Response length: 222 chars
+2025-08-01 22:57:58,971 - __main__ - WARNING - Test 50 turn 3 failed
+2025-08-01 22:57:59,472 - __main__ - INFO - Testing Pattern 2 - Test #50_turn_4: Health Check Planning - Turn 4
+2025-08-01 22:57:59,472 - __main__ - INFO - Query: 需要预约吗
+2025-08-01 22:57:59,472 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:57:59,486 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:58:01,332 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 22:58:01,332 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 22:58:01,332 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:58:01,332 - __main__ - INFO - ✅ Response completed in 1.86s
+2025-08-01 22:58:01,332 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 22:58:01,332 - __main__ - INFO - Response length: 90 chars
+2025-08-01 22:58:01,332 - __main__ - WARNING - Test 50 turn 4 failed
+2025-08-01 22:58:01,834 - __main__ - INFO - Testing Pattern 2 - Test #51_turn_1: Personal Info + Recommendation - Turn 1
+2025-08-01 22:58:01,834 - __main__ - INFO - Query: 我叫王芳，52岁
+2025-08-01 22:58:01,834 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:58:02,904 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:58:02,904 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:58:02,904 - __main__ - WARNING - Test 51 turn 1 failed
+2025-08-01 22:58:03,405 - __main__ - INFO - Testing Pattern 2 - Test #51_turn_2: Personal Info + Recommendation - Turn 2
+2025-08-01 22:58:03,405 - __main__ - INFO - Query: 有高血压和糖尿病
+2025-08-01 22:58:03,405 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:58:05,859 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:58:05,859 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:58:05,859 - __main__ - WARNING - Test 51 turn 2 failed
+2025-08-01 22:58:06,360 - __main__ - INFO - Testing Pattern 2 - Test #51_turn_3: Personal Info + Recommendation - Turn 3
+2025-08-01 22:58:06,360 - __main__ - INFO - Query: 推荐个适合我的医生
+2025-08-01 22:58:06,360 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:58:09,597 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:58:09,597 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:58:09,597 - __main__ - WARNING - Test 51 turn 3 failed
+2025-08-01 22:58:10,098 - __main__ - INFO - Testing Pattern 2 - Test #52_turn_1: Allergy Info + Product Check - Turn 1
+2025-08-01 22:58:10,098 - __main__ - INFO - Query: 我对花生过敏
+2025-08-01 22:58:10,098 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:58:10,107 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:58:15,037 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:58:15,037 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:58:15,037 - __main__ - INFO - ✅ Response completed in 4.94s
+2025-08-01 22:58:15,037 - __main__ - INFO - Tools used: []
+2025-08-01 22:58:15,037 - __main__ - INFO - Response length: 326 chars
+2025-08-01 22:58:15,037 - __main__ - WARNING - Test 52 turn 1 failed
+2025-08-01 22:58:15,539 - __main__ - INFO - Testing Pattern 2 - Test #52_turn_2: Allergy Info + Product Check - Turn 2
+2025-08-01 22:58:15,539 - __main__ - INFO - Query: 这个保健品含花生吗
+2025-08-01 22:58:15,540 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:58:15,554 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:58:25,250 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: search_products']
+2025-08-01 22:58:25,250 - __main__ - INFO - 📊 Usage - Agents: ['ProductAgent']
+2025-08-01 22:58:25,250 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:58:25,250 - __main__ - INFO - ✅ Response completed in 9.71s
+2025-08-01 22:58:25,250 - __main__ - INFO - Tools used: ['ProductAgent']
+2025-08-01 22:58:25,250 - __main__ - INFO - Response length: 162 chars
+2025-08-01 22:58:25,250 - __main__ - WARNING - Test 52 turn 2 failed
+2025-08-01 22:58:25,752 - __main__ - INFO - Testing Pattern 2 - Test #53_turn_1: Location + Clinic Search - Turn 1
+2025-08-01 22:58:25,752 - __main__ - INFO - Query: 我住在浦东新区
+2025-08-01 22:58:25,752 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:58:27,130 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:58:27,130 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:58:27,130 - __main__ - WARNING - Test 53 turn 1 failed
+2025-08-01 22:58:27,630 - __main__ - INFO - Testing Pattern 2 - Test #53_turn_2: Location + Clinic Search - Turn 2
+2025-08-01 22:58:27,630 - __main__ - INFO - Query: 附近有诊所吗
+2025-08-01 22:58:27,631 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:58:30,427 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:58:30,427 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:58:30,427 - __main__ - WARNING - Test 53 turn 2 failed
+2025-08-01 22:58:30,929 - __main__ - INFO - Testing Pattern 2 - Test #54_turn_1: Previous Condition + Update - Turn 1
+2025-08-01 22:58:30,929 - __main__ - INFO - Query: 上次说的失眠问题
+2025-08-01 22:58:30,929 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:58:30,939 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:58:33,575 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:58:33,576 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:58:33,576 - __main__ - INFO - ✅ Response completed in 2.65s
+2025-08-01 22:58:33,576 - __main__ - INFO - Tools used: []
+2025-08-01 22:58:33,576 - __main__ - INFO - Response length: 184 chars
+2025-08-01 22:58:34,077 - __main__ - INFO - Testing Pattern 2 - Test #54_turn_2: Previous Condition + Update - Turn 2
+2025-08-01 22:58:34,077 - __main__ - INFO - Query: 按你的建议调整作息了
+2025-08-01 22:58:34,077 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:58:34,086 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:58:35,909 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:58:35,909 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:58:35,909 - __main__ - INFO - ✅ Response completed in 1.83s
+2025-08-01 22:58:35,909 - __main__ - INFO - Tools used: []
+2025-08-01 22:58:35,909 - __main__ - INFO - Response length: 133 chars
+2025-08-01 22:58:36,410 - __main__ - INFO - Testing Pattern 2 - Test #54_turn_3: Previous Condition + Update - Turn 3
+2025-08-01 22:58:36,410 - __main__ - INFO - Query: 现在好多了
+2025-08-01 22:58:36,410 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:58:36,419 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:58:38,289 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:58:38,289 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:58:38,289 - __main__ - INFO - ✅ Response completed in 1.88s
+2025-08-01 22:58:38,289 - __main__ - INFO - Tools used: []
+2025-08-01 22:58:38,289 - __main__ - INFO - Response length: 176 chars
+2025-08-01 22:58:38,289 - __main__ - WARNING - Test 54 turn 3 failed
+2025-08-01 22:58:38,790 - __main__ - INFO - Testing Pattern 2 - Test #55_turn_1: Family Health Management - Turn 1
+2025-08-01 22:58:38,790 - __main__ - INFO - Query: 我们全家都在你们这看病
+2025-08-01 22:58:38,790 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:58:40,234 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:58:40,235 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:58:40,235 - __main__ - WARNING - Test 55 turn 1 failed
+2025-08-01 22:58:40,735 - __main__ - INFO - Testing Pattern 2 - Test #55_turn_2: Family Health Management - Turn 2
+2025-08-01 22:58:40,736 - __main__ - INFO - Query: 我老公需要看心脏科
+2025-08-01 22:58:40,736 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:58:44,583 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:58:44,584 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:58:44,584 - __main__ - WARNING - Test 55 turn 2 failed
+2025-08-01 22:58:45,085 - __main__ - INFO - Testing Pattern 2 - Test #55_turn_3: Family Health Management - Turn 3
+2025-08-01 22:58:45,086 - __main__ - INFO - Query: 孩子要打疫苗
+2025-08-01 22:58:45,086 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:58:47,365 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:58:47,365 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:58:47,365 - __main__ - WARNING - Test 55 turn 3 failed
+2025-08-01 22:58:47,865 - __main__ - INFO - Testing Pattern 2 - Test #56_turn_1: Chronic Disease Management - Turn 1
+2025-08-01 22:58:47,865 - __main__ - INFO - Query: 我的高血压控制得怎么样
+2025-08-01 22:58:47,865 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:58:47,874 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:58:58,737 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: general_medical']
+2025-08-01 22:58:58,737 - __main__ - INFO - 📊 Usage - Agents: ['GeneralAgent']
+2025-08-01 22:58:58,737 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:58:58,737 - __main__ - INFO - ✅ Response completed in 10.87s
+2025-08-01 22:58:58,737 - __main__ - INFO - Tools used: ['GeneralAgent']
+2025-08-01 22:58:58,737 - __main__ - INFO - Response length: 375 chars
+2025-08-01 22:58:59,239 - __main__ - INFO - Testing Pattern 2 - Test #56_turn_2: Chronic Disease Management - Turn 2
+2025-08-01 22:58:59,239 - __main__ - INFO - Query: 上个月测的是150/95
+2025-08-01 22:58:59,239 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:58:59,248 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:59:03,250 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 22:59:03,250 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:59:03,250 - __main__ - INFO - ✅ Response completed in 4.01s
+2025-08-01 22:59:03,251 - __main__ - INFO - Tools used: []
+2025-08-01 22:59:03,251 - __main__ - INFO - Response length: 355 chars
+2025-08-01 22:59:03,251 - __main__ - WARNING - Test 56 turn 2 failed
+2025-08-01 22:59:03,752 - __main__ - INFO - Testing Pattern 2 - Test #56_turn_3: Chronic Disease Management - Turn 3
+2025-08-01 22:59:03,752 - __main__ - INFO - Query: 需要增加药量吗
+2025-08-01 22:59:03,752 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:59:03,768 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:59:16,688 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 22:59:16,689 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 22:59:16,689 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 为了更好地评估您的情况，请您补充以下信息：\n1. 您目前服用的降压药名称和剂量是多少？服药的规律如何？\n2. 最近测量血压的频率和结果如何？血压保持在什么范围？\n3. 是否有头痛、胸痛、呼吸困难、视力模糊、恶心呕吐或意识模糊等症状？\n4. 您平时的生活方式（如饮食、运动、体重变化）有无改变？\n5. 既往有无心脏病、糖尿病、肾脏疾病等慢性疾病？\n\n一般来说，单次血压150/95mmHg，若无严重不适症状，不属于急症。但建议您做如下处理：\n- 持续每日自测血压，记录变化情况\n- 定期复诊，带上血压记录和用药清单\n- 不要自行随意调整药量，应在医生指导下变更药物方案\n\n如出现剧烈头痛、胸痛、呼吸困难、晕厥、视力障碍等急性症状，请立即前往医院急诊就医。建议将上述问询信息补充后，我可以为您进一步分析并推荐合适的专科医生及检查项目。', 'timestamp': '2025-08-01T22:59:12.653789'}]
+2025-08-01 22:59:16,689 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 22:59:16,689 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:59:16,689 - __main__ - INFO - ✅ Response completed in 12.94s
+2025-08-01 22:59:16,689 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 22:59:16,689 - __main__ - INFO - Response length: 326 chars
+2025-08-01 22:59:17,190 - __main__ - INFO - Testing Pattern 2 - Test #56_turn_4: Chronic Disease Management - Turn 4
+2025-08-01 22:59:17,190 - __main__ - INFO - Query: 饮食上要注意什么
+2025-08-01 22:59:17,191 - __main__ - INFO - Using streaming endpoint
+2025-08-01 22:59:17,204 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 22:59:26,330 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: general_medical']
+2025-08-01 22:59:26,330 - __main__ - INFO - 📊 Usage - Agents: ['GeneralAgent']
+2025-08-01 22:59:26,331 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 22:59:26,331 - __main__ - INFO - ✅ Response completed in 9.14s
+2025-08-01 22:59:26,331 - __main__ - INFO - Tools used: ['GeneralAgent']
+2025-08-01 22:59:26,331 - __main__ - INFO - Response length: 258 chars
+2025-08-01 22:59:26,331 - __main__ - WARNING - Test 56 turn 4 failed
+2025-08-01 22:59:26,832 - __main__ - INFO - Testing Pattern 2 - Test #57_turn_1: Pregnancy Consultation - Turn 1
+2025-08-01 22:59:26,832 - __main__ - INFO - Query: 我怀孕3个月了
+2025-08-01 22:59:26,832 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:59:28,740 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 22:59:28,740 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:59:28,741 - __main__ - WARNING - Test 57 turn 1 failed
+2025-08-01 22:59:29,242 - __main__ - INFO - Testing Pattern 2 - Test #57_turn_2: Pregnancy Consultation - Turn 2
+2025-08-01 22:59:29,242 - __main__ - INFO - Query: 最近总是恶心
+2025-08-01 22:59:29,242 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:59:38,759 - __main__ - INFO - 🔧 Tool used: DiagnosisAgent
+2025-08-01 22:59:38,760 - __main__ - INFO - 📊 Usage: {'agents_used': ['DiagnosisAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 22:59:38,760 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:59:38,760 - __main__ - WARNING - Test 57 turn 2 failed
+2025-08-01 22:59:39,261 - __main__ - INFO - Testing Pattern 2 - Test #57_turn_3: Pregnancy Consultation - Turn 3
+2025-08-01 22:59:39,262 - __main__ - INFO - Query: 需要补充什么营养
+2025-08-01 22:59:39,262 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 22:59:54,845 - __main__ - INFO - 🔧 Tool used: DiagnosisAgent
+2025-08-01 22:59:54,846 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 22:59:54,846 - __main__ - INFO - 📊 Usage: {'agents_used': ['DiagnosisAgent', 'GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 2}
+2025-08-01 22:59:54,846 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 22:59:54,846 - __main__ - WARNING - Test 57 turn 3 failed
+2025-08-01 22:59:55,347 - __main__ - INFO - Testing Pattern 2 - Test #57_turn_4: Pregnancy Consultation - Turn 4
+2025-08-01 22:59:55,347 - __main__ - INFO - Query: 下次产检什么时候
+2025-08-01 22:59:55,347 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:00:04,413 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:00:04,414 - __main__ - INFO - 📊 Usage: {'agents_used': ['GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:00:04,414 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:00:04,414 - __main__ - WARNING - Test 57 turn 4 failed
+2025-08-01 23:00:04,915 - __main__ - INFO - Testing Pattern 2 - Test #58_turn_1: Mental Health Support - Turn 1
+2025-08-01 23:00:04,915 - __main__ - INFO - Query: 最近压力很大
+2025-08-01 23:00:04,915 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:00:04,926 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:00:17,154 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: general_medical']
+2025-08-01 23:00:17,154 - __main__ - INFO - 📊 Usage - Agents: ['GeneralAgent']
+2025-08-01 23:00:17,154 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:00:17,154 - __main__ - INFO - ✅ Response completed in 12.24s
+2025-08-01 23:00:17,154 - __main__ - INFO - Tools used: ['GeneralAgent']
+2025-08-01 23:00:17,154 - __main__ - INFO - Response length: 270 chars
+2025-08-01 23:00:17,655 - __main__ - INFO - Testing Pattern 2 - Test #58_turn_2: Mental Health Support - Turn 2
+2025-08-01 23:00:17,655 - __main__ - INFO - Query: 晚上睡不好
+2025-08-01 23:00:17,655 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:00:17,662 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:00:29,554 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 23:00:29,554 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 23:00:29,554 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 您好！为了更好地分析您的睡眠问题和压力情况，我需要了解更多细节：\n1. 睡眠不好持续了多长时间？是突然发生的还是逐渐加重？\n2. 您每晚大约能睡几个小时？是否经常醒来？\n3. 除了压力大之外，是否还有其他症状（如头痛、心悸、情绪低落、食欲改变等）？\n4. 这些问题对您的日常生活和工作有多大影响？\n5. 是否有任何让您特别担心的地方，比如严重的情绪低落、自杀念头或身体明显不适？\n\n这些信息有助于判断是否需要尽快就医或建议合适的专科和检查。请您补充一下，谢谢！', 'timestamp': '2025-08-01T23:00:24.196251'}]
+2025-08-01 23:00:29,555 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 23:00:29,555 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:00:29,555 - __main__ - INFO - ✅ Response completed in 11.90s
+2025-08-01 23:00:29,555 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 23:00:29,555 - __main__ - INFO - Response length: 268 chars
+2025-08-01 23:00:30,056 - __main__ - INFO - Testing Pattern 2 - Test #58_turn_3: Mental Health Support - Turn 3
+2025-08-01 23:00:30,056 - __main__ - INFO - Query: 白天没精神
+2025-08-01 23:00:30,056 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:00:30,063 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:00:39,400 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 23:00:39,401 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 23:00:39,401 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 您提到“白天没有精神，晚上睡不好”，我需要进一步了解以下信息，帮助您更好地分析症状：\n\n1. 这些情况持续了多长时间？是突然发生还是逐渐出现的？\n2. 晚上睡不好，具体是入睡困难、易醒、早醒，还是睡眠质量差？\n3. 白天没精神，是否影响到您的生活或工作？有没有嗜睡或者注意力不集中等表现？\n4. 最近是否有情绪变化、压力增大、生活习惯改变？\n5. 有没有伴随其他症状，比如头痛、心悸、出汗、体重变化等？\n6. 既往有无相关疾病史（如焦虑、抑郁、甲状腺疾病等）或慢性病？\n\n请您补充上述相关信息，这将有助于进一步分析，并为您推荐合适的就诊方向和检查项目。如出现胸痛、呼吸困难、意识障碍等紧急情况，请立即就医。', 'timestamp': '2025-08-01T23:00:35.888446'}]
+2025-08-01 23:00:39,401 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 23:00:39,401 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:00:39,401 - __main__ - INFO - ✅ Response completed in 9.35s
+2025-08-01 23:00:39,401 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 23:00:39,401 - __main__ - INFO - Response length: 299 chars
+2025-08-01 23:00:39,401 - __main__ - WARNING - Test 58 turn 3 failed
+2025-08-01 23:00:39,902 - __main__ - INFO - Testing Pattern 2 - Test #58_turn_4: Mental Health Support - Turn 4
+2025-08-01 23:00:39,902 - __main__ - INFO - Query: 需要看心理医生吗
+2025-08-01 23:00:39,902 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:00:39,935 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:00:45,170 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 23:00:45,170 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:00:45,170 - __main__ - INFO - ✅ Response completed in 5.27s
+2025-08-01 23:00:45,170 - __main__ - INFO - Tools used: []
+2025-08-01 23:00:45,170 - __main__ - INFO - Response length: 389 chars
+2025-08-01 23:00:45,671 - __main__ - INFO - Testing Pattern 2 - Test #59_turn_1: Vaccination Schedule - Turn 1
+2025-08-01 23:00:45,672 - __main__ - INFO - Query: 宝宝6个月大
+2025-08-01 23:00:45,672 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:00:46,969 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 23:00:46,969 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:00:46,969 - __main__ - WARNING - Test 59 turn 1 failed
+2025-08-01 23:00:47,471 - __main__ - INFO - Testing Pattern 2 - Test #59_turn_2: Vaccination Schedule - Turn 2
+2025-08-01 23:00:47,471 - __main__ - INFO - Query: 该打什么疫苗
+2025-08-01 23:00:47,471 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:00:58,283 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:00:58,284 - __main__ - INFO - 📊 Usage: {'agents_used': ['GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:00:58,284 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:00:58,284 - __main__ - WARNING - Test 59 turn 2 failed
+2025-08-01 23:00:58,786 - __main__ - INFO - Testing Pattern 2 - Test #59_turn_3: Vaccination Schedule - Turn 3
+2025-08-01 23:00:58,786 - __main__ - INFO - Query: 有什么注意事项
+2025-08-01 23:00:58,786 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:01:11,919 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:01:11,920 - __main__ - INFO - 📊 Usage: {'agents_used': ['GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:01:11,920 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:01:11,920 - __main__ - WARNING - Test 59 turn 3 failed
+2025-08-01 23:01:12,422 - __main__ - INFO - Testing Pattern 2 - Test #59_turn_4: Vaccination Schedule - Turn 4
+2025-08-01 23:01:12,422 - __main__ - INFO - Query: 下一针什么时候
+2025-08-01 23:01:12,422 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:01:18,933 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:01:18,934 - __main__ - INFO - 📊 Usage: {'agents_used': ['GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:01:18,934 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:01:18,934 - __main__ - WARNING - Test 59 turn 4 failed
+2025-08-01 23:01:19,435 - __main__ - INFO - Testing Pattern 2 - Test #60_turn_1: Elder Care Consultation - Turn 1
+2025-08-01 23:01:19,435 - __main__ - INFO - Query: 我父亲75岁
+2025-08-01 23:01:19,435 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:01:19,452 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:01:22,162 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 23:01:22,162 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:01:22,162 - __main__ - INFO - ✅ Response completed in 2.73s
+2025-08-01 23:01:22,162 - __main__ - INFO - Tools used: []
+2025-08-01 23:01:22,162 - __main__ - INFO - Response length: 164 chars
+2025-08-01 23:01:22,162 - __main__ - WARNING - Test 60 turn 1 failed
+2025-08-01 23:01:22,663 - __main__ - INFO - Testing Pattern 2 - Test #60_turn_2: Elder Care Consultation - Turn 2
+2025-08-01 23:01:22,664 - __main__ - INFO - Query: 最近记忆力下降
+2025-08-01 23:01:22,664 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:01:22,674 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:01:33,407 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 23:01:33,409 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 23:01:33,409 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 感谢您的信息。请问以下问题以便更好地评估情况：\n1. 记忆力下降大约持续了多长时间？是突然发生还是逐渐加重？\n2. 这种记忆力下降有多严重？是否影响到日常生活（如忘记熟悉的人或事、走失、忘记服药等）？\n3. 是否伴有其他症状，如语言表达困难、性格或情绪变化、定向障碍（如分不清时间、地点）、幻觉、妄想等？\n4. 有无既往脑血管疾病、头部外伤、长期慢性病（如高血压、糖尿病等）或家族中有类似情况？\n5. 近期是否有发热、头痛、抽搐、意识障碍等急性症状？\n\n请补充这些信息，以便建议合适的专科和检查项目，同时评估是否有紧急情况需要立即就医。', 'timestamp': '2025-08-01T23:01:30.047413'}]
+2025-08-01 23:01:33,409 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 23:01:33,409 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:01:33,409 - __main__ - INFO - ✅ Response completed in 10.75s
+2025-08-01 23:01:33,409 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 23:01:33,409 - __main__ - INFO - Response length: 267 chars
+2025-08-01 23:01:33,911 - __main__ - INFO - Testing Pattern 2 - Test #60_turn_3: Elder Care Consultation - Turn 3
+2025-08-01 23:01:33,911 - __main__ - INFO - Query: 有时候会忘事
+2025-08-01 23:01:33,911 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:01:33,937 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:01:43,892 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 23:01:43,892 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 23:01:43,892 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 您好！感谢您分享您的症状。为了更好地评估您的情况，我需要了解更多细节：\n\n1. 记忆力下降大约持续了多久？是突然发生还是逐渐出现的？\n2. 您通常会忘记什么内容（如人名、近期事件、约定等）？\n3. 这种情况有变得更严重吗，还是一直没有变化？\n4. 还有没有伴随其他症状，比如情绪变化、言语困难、头痛、乏力、睡眠问题等？\n5. 这些记忆问题对您的日常生活有多大影响？\n6. 您是否有高血压、糖尿病、脑部外伤、中风、抑郁或其他慢性疾病史？\n7. 近期是否服用过新的药物或有不良反应？\n\n请尽量详细回复上述问题，以帮助我为您提出更合适的建议。', 'timestamp': '2025-08-01T23:01:39.694357'}]
+2025-08-01 23:01:43,892 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 23:01:43,892 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:01:43,892 - __main__ - INFO - ✅ Response completed in 9.98s
+2025-08-01 23:01:43,892 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 23:01:43,892 - __main__ - INFO - Response length: 338 chars
+2025-08-01 23:01:44,394 - __main__ - INFO - Testing Pattern 2 - Test #60_turn_4: Elder Care Consultation - Turn 4
+2025-08-01 23:01:44,394 - __main__ - INFO - Query: 需要做什么检查
+2025-08-01 23:01:44,394 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:01:44,407 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:01:57,238 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 23:01:57,239 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 23:01:57,239 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 您提到“有时候会忘事”，我需要进一步了解您的具体情况，以便更好地分析：\n\n1. 这种健忘持续了多长时间？是突然发生还是逐渐出现的？\n2. 忘事的频率和严重程度如何？会影响到日常生活吗？\n3. 通常是忘记哪些类型的事情？（比如近期的事情、重要约定、旧事等）\n4. 近期有没有出现其他症状，比如头痛、头晕、情绪低落、睡眠不好、语言表达困难等？\n5. 最近有无经历重大压力、情绪波动、外伤或用药史？\n6. 是否有高血压、糖尿病、心脏病、中风、家族中有类似情况等病史？\n\n请您补充以上信息，这有助于评估情况的紧急程度，并为您建议合适的就医方向和检查项目。如有突然严重的记忆丧失、意识障碍、说话或行动困难等，请立即就医。', 'timestamp': '2025-08-01T23:01:51.232441'}]
+2025-08-01 23:01:57,239 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 23:01:57,239 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:01:57,239 - __main__ - INFO - ✅ Response completed in 12.84s
+2025-08-01 23:01:57,239 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 23:01:57,239 - __main__ - INFO - Response length: 398 chars
+2025-08-01 23:01:57,239 - __main__ - WARNING - Test 60 turn 4 failed
+2025-08-01 23:01:57,740 - __main__ - INFO - Testing Pattern 2 - Test #61_turn_1: Complete Health Journey - Turn 1
+2025-08-01 23:01:57,740 - __main__ - INFO - Query: 我想全面管理健康
+2025-08-01 23:01:57,740 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:02:01,192 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 23:02:01,192 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:02:01,192 - __main__ - WARNING - Test 61 turn 1 failed
+2025-08-01 23:02:01,693 - __main__ - INFO - Testing Pattern 2 - Test #61_turn_2: Complete Health Journey - Turn 2
+2025-08-01 23:02:01,693 - __main__ - INFO - Query: 先从体检开始吧
+2025-08-01 23:02:01,694 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:02:21,646 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:02:21,647 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent', 'GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 2}
+2025-08-01 23:02:21,647 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:02:21,647 - __main__ - WARNING - Test 61 turn 2 failed
+2025-08-01 23:02:22,149 - __main__ - INFO - Testing Pattern 2 - Test #61_turn_3: Complete Health Journey - Turn 3
+2025-08-01 23:02:22,149 - __main__ - INFO - Query: 有高端体检套餐吗
+2025-08-01 23:02:22,149 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:02:27,947 - __main__ - INFO - 🔧 Tool used: ProductAgent
+2025-08-01 23:02:27,947 - __main__ - INFO - 📊 Usage: {'agents_used': ['ProductAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:02:27,947 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:02:27,947 - __main__ - WARNING - Test 61 turn 3 failed
+2025-08-01 23:02:28,449 - __main__ - INFO - Testing Pattern 2 - Test #61_turn_4: Complete Health Journey - Turn 4
+2025-08-01 23:02:28,449 - __main__ - INFO - Query: 包含哪些项目
+2025-08-01 23:02:28,449 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:02:39,479 - __main__ - INFO - 🔧 Tool used: ProductAgent
+2025-08-01 23:02:39,480 - __main__ - INFO - 📊 Usage: {'agents_used': ['ProductAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:02:39,480 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:02:39,480 - __main__ - WARNING - Test 61 turn 4 failed
+2025-08-01 23:02:39,981 - __main__ - INFO - Testing Pattern 2 - Test #61_turn_5: Complete Health Journey - Turn 5
+2025-08-01 23:02:39,982 - __main__ - INFO - Query: 可以这周安排吗
+2025-08-01 23:02:39,982 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:02:42,107 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:02:42,107 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:02:42,107 - __main__ - WARNING - Test 61 turn 5 failed
+2025-08-01 23:02:42,609 - __main__ - INFO - Testing Pattern 2 - Test #62_turn_1: Treatment Plan Discussion - Turn 1
+2025-08-01 23:02:42,609 - __main__ - INFO - Query: 医生建议我做手术
+2025-08-01 23:02:42,609 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:02:42,618 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:02:44,451 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 23:02:44,451 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:02:44,451 - __main__ - INFO - ✅ Response completed in 1.84s
+2025-08-01 23:02:44,452 - __main__ - INFO - Tools used: []
+2025-08-01 23:02:44,452 - __main__ - INFO - Response length: 158 chars
+2025-08-01 23:02:44,953 - __main__ - INFO - Testing Pattern 2 - Test #62_turn_2: Treatment Plan Discussion - Turn 2
+2025-08-01 23:02:44,953 - __main__ - INFO - Query: 我有点担心风险
+2025-08-01 23:02:44,954 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:02:44,966 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:02:47,342 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 23:02:47,342 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:02:47,342 - __main__ - INFO - ✅ Response completed in 2.39s
+2025-08-01 23:02:47,342 - __main__ - INFO - Tools used: []
+2025-08-01 23:02:47,342 - __main__ - INFO - Response length: 193 chars
+2025-08-01 23:02:47,844 - __main__ - INFO - Testing Pattern 2 - Test #62_turn_3: Treatment Plan Discussion - Turn 3
+2025-08-01 23:02:47,844 - __main__ - INFO - Query: 有其他治疗方案吗
+2025-08-01 23:02:47,844 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:02:47,852 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:02:53,638 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: general_medical']
+2025-08-01 23:02:53,644 - __main__ - INFO - 📊 Usage - Agents: ['GeneralAgent']
+2025-08-01 23:02:53,644 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:02:53,644 - __main__ - INFO - ✅ Response completed in 5.80s
+2025-08-01 23:02:53,644 - __main__ - INFO - Tools used: ['GeneralAgent']
+2025-08-01 23:02:53,644 - __main__ - INFO - Response length: 155 chars
+2025-08-01 23:02:54,146 - __main__ - INFO - Testing Pattern 2 - Test #62_turn_4: Treatment Plan Discussion - Turn 4
+2025-08-01 23:02:54,146 - __main__ - INFO - Query: 哪种效果更好
+2025-08-01 23:02:54,146 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:02:54,190 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:02:59,403 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: general_medical']
+2025-08-01 23:02:59,404 - __main__ - INFO - 📊 Usage - Agents: ['GeneralAgent']
+2025-08-01 23:02:59,405 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:02:59,405 - __main__ - INFO - ✅ Response completed in 5.26s
+2025-08-01 23:02:59,405 - __main__ - INFO - Tools used: ['GeneralAgent']
+2025-08-01 23:02:59,405 - __main__ - INFO - Response length: 148 chars
+2025-08-01 23:02:59,405 - __main__ - WARNING - Test 62 turn 4 failed
+2025-08-01 23:02:59,906 - __main__ - INFO - Testing Pattern 2 - Test #62_turn_5: Treatment Plan Discussion - Turn 5
+2025-08-01 23:02:59,906 - __main__ - INFO - Query: 我需要时间考虑
+2025-08-01 23:02:59,906 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:02:59,915 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:03:01,224 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 23:03:01,225 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:03:01,225 - __main__ - INFO - ✅ Response completed in 1.32s
+2025-08-01 23:03:01,225 - __main__ - INFO - Tools used: []
+2025-08-01 23:03:01,225 - __main__ - INFO - Response length: 109 chars
+2025-08-01 23:03:01,225 - __main__ - WARNING - Test 62 turn 5 failed
+2025-08-01 23:03:01,726 - __main__ - INFO - Testing Pattern 2 - Test #63_turn_1: Rehabilitation Progress - Turn 1
+2025-08-01 23:03:01,726 - __main__ - INFO - Query: 我在做康复训练
+2025-08-01 23:03:01,727 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:03:04,249 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 23:03:04,249 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:03:04,249 - __main__ - WARNING - Test 63 turn 1 failed
+2025-08-01 23:03:04,750 - __main__ - INFO - Testing Pattern 2 - Test #63_turn_2: Rehabilitation Progress - Turn 2
+2025-08-01 23:03:04,751 - __main__ - INFO - Query: 腿部力量恢复慢
+2025-08-01 23:03:04,751 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:03:07,267 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 23:03:07,267 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:03:07,267 - __main__ - WARNING - Test 63 turn 2 failed
+2025-08-01 23:03:07,769 - __main__ - INFO - Testing Pattern 2 - Test #63_turn_3: Rehabilitation Progress - Turn 3
+2025-08-01 23:03:07,769 - __main__ - INFO - Query: 有什么加强练习吗
+2025-08-01 23:03:07,769 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:03:19,682 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:03:19,683 - __main__ - INFO - 📊 Usage: {'agents_used': ['GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:03:19,683 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:03:19,683 - __main__ - WARNING - Test 63 turn 3 failed
+2025-08-01 23:03:20,184 - __main__ - INFO - Testing Pattern 2 - Test #63_turn_4: Rehabilitation Progress - Turn 4
+2025-08-01 23:03:20,184 - __main__ - INFO - Query: 多久能正常走路
+2025-08-01 23:03:20,185 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:03:30,343 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:03:30,344 - __main__ - INFO - 📊 Usage: {'agents_used': ['GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:03:30,344 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:03:30,344 - __main__ - WARNING - Test 63 turn 4 failed
+2025-08-01 23:03:30,845 - __main__ - INFO - Testing Pattern 2 - Test #64_turn_1: Lifestyle Modification - Turn 1
+2025-08-01 23:03:30,845 - __main__ - INFO - Query: 医生说我要改变生活方式
+2025-08-01 23:03:30,845 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:03:30,864 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:03:35,756 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 23:03:35,757 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:03:35,757 - __main__ - INFO - ✅ Response completed in 4.91s
+2025-08-01 23:03:35,757 - __main__ - INFO - Tools used: []
+2025-08-01 23:03:35,757 - __main__ - INFO - Response length: 381 chars
+2025-08-01 23:03:36,257 - __main__ - INFO - Testing Pattern 2 - Test #64_turn_2: Lifestyle Modification - Turn 2
+2025-08-01 23:03:36,257 - __main__ - INFO - Query: 具体怎么做呢
+2025-08-01 23:03:36,257 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:03:36,266 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:03:48,017 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: general_medical']
+2025-08-01 23:03:48,018 - __main__ - INFO - 📊 Usage - Agents: ['GeneralAgent']
+2025-08-01 23:03:48,018 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:03:48,018 - __main__ - INFO - ✅ Response completed in 11.76s
+2025-08-01 23:03:48,018 - __main__ - INFO - Tools used: ['GeneralAgent']
+2025-08-01 23:03:48,018 - __main__ - INFO - Response length: 339 chars
+2025-08-01 23:03:48,520 - __main__ - INFO - Testing Pattern 2 - Test #64_turn_3: Lifestyle Modification - Turn 3
+2025-08-01 23:03:48,520 - __main__ - INFO - Query: 饮食方面呢
+2025-08-01 23:03:48,520 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:03:48,537 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:04:00,649 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: general_medical']
+2025-08-01 23:04:00,650 - __main__ - INFO - 📊 Usage - Agents: ['GeneralAgent']
+2025-08-01 23:04:00,650 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:04:00,650 - __main__ - INFO - ✅ Response completed in 12.13s
+2025-08-01 23:04:00,650 - __main__ - INFO - Tools used: ['GeneralAgent']
+2025-08-01 23:04:00,650 - __main__ - INFO - Response length: 329 chars
+2025-08-01 23:04:01,152 - __main__ - INFO - Testing Pattern 2 - Test #64_turn_4: Lifestyle Modification - Turn 4
+2025-08-01 23:04:01,152 - __main__ - INFO - Query: 运动要注意什么
+2025-08-01 23:04:01,152 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:04:01,169 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:04:12,917 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: general_medical']
+2025-08-01 23:04:12,917 - __main__ - INFO - 📊 Usage - Agents: ['GeneralAgent']
+2025-08-01 23:04:12,917 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:04:12,917 - __main__ - INFO - ✅ Response completed in 11.77s
+2025-08-01 23:04:12,917 - __main__ - INFO - Tools used: ['GeneralAgent']
+2025-08-01 23:04:12,917 - __main__ - INFO - Response length: 346 chars
+2025-08-01 23:04:12,917 - __main__ - WARNING - Test 64 turn 4 failed
+2025-08-01 23:04:13,418 - __main__ - INFO - Testing Pattern 2 - Test #64_turn_5: Lifestyle Modification - Turn 5
+2025-08-01 23:04:13,418 - __main__ - INFO - Query: 能推荐营养师吗
+2025-08-01 23:04:13,418 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:04:13,426 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:04:15,440 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 23:04:15,441 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 23:04:15,441 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:04:15,441 - __main__ - INFO - ✅ Response completed in 2.02s
+2025-08-01 23:04:15,441 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 23:04:15,441 - __main__ - INFO - Response length: 118 chars
+2025-08-01 23:04:15,441 - __main__ - WARNING - Test 64 turn 5 failed
+2025-08-01 23:04:15,942 - __main__ - INFO - Testing Pattern 2 - Test #65_turn_1: Insurance Coverage Check - Turn 1
+2025-08-01 23:04:15,942 - __main__ - INFO - Query: 我有医保
+2025-08-01 23:04:15,942 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:04:18,253 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 23:04:18,254 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:04:18,254 - __main__ - WARNING - Test 65 turn 1 failed
+2025-08-01 23:04:18,755 - __main__ - INFO - Testing Pattern 2 - Test #65_turn_2: Insurance Coverage Check - Turn 2
+2025-08-01 23:04:18,755 - __main__ - INFO - Query: 还有商业保险
+2025-08-01 23:04:18,755 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:04:20,267 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 23:04:20,267 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:04:20,267 - __main__ - WARNING - Test 65 turn 2 failed
+2025-08-01 23:04:20,768 - __main__ - INFO - Testing Pattern 2 - Test #65_turn_3: Insurance Coverage Check - Turn 3
+2025-08-01 23:04:20,768 - __main__ - INFO - Query: 看病能报销多少
+2025-08-01 23:04:20,768 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:04:28,923 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:04:28,924 - __main__ - INFO - 📊 Usage: {'agents_used': ['GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:04:28,924 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:04:28,924 - __main__ - WARNING - Test 65 turn 3 failed
+2025-08-01 23:04:29,425 - __main__ - INFO - Testing Pattern 2 - Test #65_turn_4: Insurance Coverage Check - Turn 4
+2025-08-01 23:04:29,425 - __main__ - INFO - Query: 需要什么手续
+2025-08-01 23:04:29,425 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:04:38,569 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:04:38,570 - __main__ - INFO - 📊 Usage: {'agents_used': ['GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:04:38,570 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:04:38,570 - __main__ - WARNING - Test 65 turn 4 failed
+2025-08-01 23:04:39,071 - __main__ - INFO - Testing Pattern 2 - Test #66_turn_1: Second Opinion Request - Turn 1
+2025-08-01 23:04:39,071 - __main__ - INFO - Query: 我想听听其他医生意见
+2025-08-01 23:04:39,071 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:04:39,078 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:04:42,918 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 23:04:42,918 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:04:42,918 - __main__ - INFO - ✅ Response completed in 3.85s
+2025-08-01 23:04:42,918 - __main__ - INFO - Tools used: []
+2025-08-01 23:04:42,918 - __main__ - INFO - Response length: 272 chars
+2025-08-01 23:04:43,419 - __main__ - INFO - Testing Pattern 2 - Test #66_turn_2: Second Opinion Request - Turn 2
+2025-08-01 23:04:43,419 - __main__ - INFO - Query: 之前诊断是胃炎
+2025-08-01 23:04:43,419 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:04:43,428 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:04:46,216 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 23:04:46,216 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:04:46,216 - __main__ - INFO - ✅ Response completed in 2.80s
+2025-08-01 23:04:46,216 - __main__ - INFO - Tools used: []
+2025-08-01 23:04:46,216 - __main__ - INFO - Response length: 210 chars
+2025-08-01 23:04:46,717 - __main__ - INFO - Testing Pattern 2 - Test #66_turn_3: Second Opinion Request - Turn 3
+2025-08-01 23:04:46,717 - __main__ - INFO - Query: 但吃药效果不好
+2025-08-01 23:04:46,717 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:04:46,724 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:04:55,786 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 23:04:55,789 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 23:04:55,789 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 您好，请补充以下信息，以便更好地分析您的情况：\n1. 您的胃炎症状持续了多久？是突然发生还是逐渐加重？\n2. 主要表现有哪些？（如腹痛、恶心、呕吐、反酸、食欲下降等）\n3. 服用的是什么药？服药多久、剂量如何？是否按医嘱服用？\n4. 症状是否有加重、缓解或变化？是否影响日常生活？\n5. 有无发热、呕血、黑便、体重明显下降等其他症状？\n6. 既往有无胃病、消化道溃疡、肝胆疾病、肿瘤等病史？是否有家族相关疾病史？\n7. 近期饮食、情绪、生活习惯有无变化？\n\n请尽可能详细地补充上述信息，这将有助于评估是否需要调整药物、进一步检查，或是否存在需要尽快就医的紧急情况。若出现严重腹痛、呕血、黑便、持续呕吐等症状，请立即就医。', 'timestamp': '2025-08-01T23:04:53.039804'}]
+2025-08-01 23:04:55,789 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 23:04:55,789 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:04:55,789 - __main__ - INFO - ✅ Response completed in 9.07s
+2025-08-01 23:04:55,789 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 23:04:55,789 - __main__ - INFO - Response length: 252 chars
+2025-08-01 23:04:55,789 - __main__ - WARNING - Test 66 turn 3 failed
+2025-08-01 23:04:56,290 - __main__ - INFO - Testing Pattern 2 - Test #66_turn_4: Second Opinion Request - Turn 4
+2025-08-01 23:04:56,290 - __main__ - INFO - Query: 能约其他专家吗
+2025-08-01 23:04:56,290 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:04:56,300 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:04:58,471 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 23:04:58,471 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 23:04:58,471 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:04:58,471 - __main__ - INFO - ✅ Response completed in 2.18s
+2025-08-01 23:04:58,471 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 23:04:58,472 - __main__ - INFO - Response length: 106 chars
+2025-08-01 23:04:58,472 - __main__ - WARNING - Test 66 turn 4 failed
+2025-08-01 23:04:58,973 - __main__ - INFO - Testing Pattern 2 - Test #67_turn_1: Travel Health Prep - Turn 1
+2025-08-01 23:04:58,973 - __main__ - INFO - Query: 下个月要出国
+2025-08-01 23:04:58,973 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:05:00,408 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 23:05:00,408 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:05:00,408 - __main__ - WARNING - Test 67 turn 1 failed
+2025-08-01 23:05:00,909 - __main__ - INFO - Testing Pattern 2 - Test #67_turn_2: Travel Health Prep - Turn 2
+2025-08-01 23:05:00,909 - __main__ - INFO - Query: 去非洲
+2025-08-01 23:05:00,910 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:05:02,151 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 23:05:02,151 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:05:02,151 - __main__ - WARNING - Test 67 turn 2 failed
+2025-08-01 23:05:02,652 - __main__ - INFO - Testing Pattern 2 - Test #67_turn_3: Travel Health Prep - Turn 3
+2025-08-01 23:05:02,652 - __main__ - INFO - Query: 需要打什么疫苗
+2025-08-01 23:05:02,652 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:05:13,559 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:05:13,560 - __main__ - INFO - 📊 Usage: {'agents_used': ['GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:05:13,560 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:05:13,560 - __main__ - WARNING - Test 67 turn 3 failed
+2025-08-01 23:05:14,061 - __main__ - INFO - Testing Pattern 2 - Test #67_turn_4: Travel Health Prep - Turn 4
+2025-08-01 23:05:14,062 - __main__ - INFO - Query: 要准备什么药品
+2025-08-01 23:05:14,062 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:05:32,536 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:05:32,538 - __main__ - INFO - 📊 Usage: {'agents_used': ['GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:05:32,538 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:05:32,538 - __main__ - WARNING - Test 67 turn 4 failed
+2025-08-01 23:05:33,040 - __main__ - INFO - Testing Pattern 2 - Test #68_turn_1: Pain Management - Turn 1
+2025-08-01 23:05:33,040 - __main__ - INFO - Query: 我有慢性疼痛
+2025-08-01 23:05:33,040 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:05:33,074 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:05:43,021 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 23:05:43,022 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 23:05:43,022 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 您提到有“慢性疼痛”，为了更好地帮助您，请您补充以下信息：\n1. 疼痛的具体部位是哪里？\n2. 疼痛持续了多长时间？是突然开始还是逐渐加重的？\n3. 疼痛的严重程度如何？对日常生活有多大影响？\n4. 是否有其他相关症状，如发热、体重减轻、活动受限、麻木等？\n5. 有没有什么情况能加重或缓解疼痛？\n6. 过去是否有相关的疾病史或者慢性病史？\n\n请尽量详细描述您的症状，这将有助于我为您提供更有针对性的建议。', 'timestamp': '2025-08-01T23:05:40.567385'}]
+2025-08-01 23:05:43,022 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 23:05:43,022 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:05:43,022 - __main__ - INFO - ✅ Response completed in 9.98s
+2025-08-01 23:05:43,022 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 23:05:43,022 - __main__ - INFO - Response length: 229 chars
+2025-08-01 23:05:43,523 - __main__ - INFO - Testing Pattern 2 - Test #68_turn_2: Pain Management - Turn 2
+2025-08-01 23:05:43,523 - __main__ - INFO - Query: 主要是腰部
+2025-08-01 23:05:43,523 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:05:43,532 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:05:52,304 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 23:05:52,304 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 23:05:52,304 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 为了更好地分析您的慢性腰部疼痛，请您补充以下信息：\n\n1. 疼痛持续了多长时间？最初是怎样开始的（突然还是逐渐）？\n2. 疼痛的严重程度（例如，0-10分评分）以及是否有加重或缓解的情况？\n3. 有无其他相关症状，如下肢麻木、刺痛、无力、大小便异常、发热、体重明显下降等？\n4. 疼痛是否与活动、休息或特定体位有关？有什么缓解或加重因素？\n5. 这次腰痛对您的日常生活造成了哪些影响？\n6. 是否有外伤史、慢性疾病（如糖尿病、骨质疏松）、肿瘤病史、手术史或家族相关疾病史？\n7. 近期是否有剧烈运动、搬重物、久坐、感染等诱因？\n\n请尽量详细回答上述问题，以便更准确地评估您的情况并给出适当建议。如有下肢无力、麻木、大小便失禁等紧急症状，请立即就医。', 'timestamp': '2025-08-01T23:05:48.849845'}]
+2025-08-01 23:05:52,304 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 23:05:52,305 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:05:52,305 - __main__ - INFO - ✅ Response completed in 8.78s
+2025-08-01 23:05:52,305 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 23:05:52,305 - __main__ - INFO - Response length: 323 chars
+2025-08-01 23:05:52,305 - __main__ - WARNING - Test 68 turn 2 failed
+2025-08-01 23:05:52,806 - __main__ - INFO - Testing Pattern 2 - Test #68_turn_3: Pain Management - Turn 3
+2025-08-01 23:05:52,806 - __main__ - INFO - Query: 已经半年了
+2025-08-01 23:05:52,807 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:05:52,826 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:06:00,782 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms']
+2025-08-01 23:06:00,783 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent']
+2025-08-01 23:06:00,783 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 为了更好地评估您的腰部疼痛，请您补充以下信息：\n1. 疼痛是突然开始还是逐渐加重的？有无加重或缓解的趋势？\n2. 疼痛的严重程度（比如0-10分，10分为最严重）？\n3. 有没有放射到其他部位（如腿部）或伴随麻木、无力？\n4. 是否有影响日常活动或夜间疼痛加重？\n5. 有无发热、体重下降、大小便异常等其他症状？\n6. 既往有无外伤、慢性疾病、特殊职业或家族相关病史？\n\n这些信息有助于判断病因及是否存在需要紧急处理的情况。请尽快补充，谢谢！', 'timestamp': '2025-08-01T23:05:57.871026'}]
+2025-08-01 23:06:00,783 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 23:06:00,783 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:06:00,784 - __main__ - INFO - ✅ Response completed in 7.98s
+2025-08-01 23:06:00,784 - __main__ - INFO - Tools used: ['DiagnosisAgent']
+2025-08-01 23:06:00,784 - __main__ - INFO - Response length: 258 chars
+2025-08-01 23:06:00,784 - __main__ - WARNING - Test 68 turn 3 failed
+2025-08-01 23:06:01,285 - __main__ - INFO - Testing Pattern 2 - Test #68_turn_4: Pain Management - Turn 4
+2025-08-01 23:06:01,285 - __main__ - INFO - Query: 止痛药效果有限
+2025-08-01 23:06:01,286 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:06:01,294 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:06:04,414 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 23:06:04,415 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:06:04,415 - __main__ - INFO - ✅ Response completed in 3.13s
+2025-08-01 23:06:04,415 - __main__ - INFO - Tools used: []
+2025-08-01 23:06:04,415 - __main__ - INFO - Response length: 255 chars
+2025-08-01 23:06:04,916 - __main__ - INFO - Testing Pattern 2 - Test #68_turn_5: Pain Management - Turn 5
+2025-08-01 23:06:04,916 - __main__ - INFO - Query: 有其他办法吗
+2025-08-01 23:06:04,916 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:06:04,930 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:06:16,575 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: general_medical']
+2025-08-01 23:06:16,578 - __main__ - INFO - 📊 Usage - Agents: ['GeneralAgent']
+2025-08-01 23:06:16,578 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:06:16,578 - __main__ - INFO - ✅ Response completed in 11.66s
+2025-08-01 23:06:16,578 - __main__ - INFO - Tools used: ['GeneralAgent']
+2025-08-01 23:06:16,578 - __main__ - INFO - Response length: 343 chars
+2025-08-01 23:06:16,578 - __main__ - WARNING - Test 68 turn 5 failed
+2025-08-01 23:06:17,080 - __main__ - INFO - Testing Pattern 2 - Test #69_turn_1: Preventive Care Plan - Turn 1
+2025-08-01 23:06:17,080 - __main__ - INFO - Query: 我想做预防保健
+2025-08-01 23:06:17,080 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:06:30,679 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:06:30,680 - __main__ - INFO - 📊 Usage: {'agents_used': ['GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:06:30,680 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:06:30,680 - __main__ - WARNING - Test 69 turn 1 failed
+2025-08-01 23:06:31,181 - __main__ - INFO - Testing Pattern 2 - Test #69_turn_2: Preventive Care Plan - Turn 2
+2025-08-01 23:06:31,181 - __main__ - INFO - Query: 家族有心脏病史
+2025-08-01 23:06:31,181 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:06:42,843 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:06:42,843 - __main__ - INFO - 📊 Usage: {'agents_used': ['GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:06:42,843 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:06:42,843 - __main__ - WARNING - Test 69 turn 2 failed
+2025-08-01 23:06:43,345 - __main__ - INFO - Testing Pattern 2 - Test #69_turn_3: Preventive Care Plan - Turn 3
+2025-08-01 23:06:43,345 - __main__ - INFO - Query: 应该注意什么
+2025-08-01 23:06:43,345 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:06:54,967 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:06:54,968 - __main__ - INFO - 📊 Usage: {'agents_used': ['GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:06:54,968 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:06:54,968 - __main__ - WARNING - Test 69 turn 3 failed
+2025-08-01 23:06:55,469 - __main__ - INFO - Testing Pattern 2 - Test #69_turn_4: Preventive Care Plan - Turn 4
+2025-08-01 23:06:55,469 - __main__ - INFO - Query: 多久检查一次
+2025-08-01 23:06:55,469 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:07:03,677 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:07:03,677 - __main__ - INFO - 📊 Usage: {'agents_used': ['GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:07:03,677 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:07:03,677 - __main__ - WARNING - Test 69 turn 4 failed
+2025-08-01 23:07:04,179 - __main__ - INFO - Testing Pattern 2 - Test #69_turn_5: Preventive Care Plan - Turn 5
+2025-08-01 23:07:04,179 - __main__ - INFO - Query: 生活上怎么预防
+2025-08-01 23:07:04,179 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:07:14,599 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:07:14,599 - __main__ - INFO - 📊 Usage: {'agents_used': ['GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:07:14,599 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 23:07:14,599 - __main__ - WARNING - Test 69 turn 5 failed
+2025-08-01 23:07:15,100 - __main__ - INFO - Testing Pattern 2 - Test #70_turn_1: Comprehensive Care Coordination - Turn 1
+2025-08-01 23:07:15,100 - __main__ - INFO - Query: 我需要看多个科室
+2025-08-01 23:07:15,100 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:07:15,107 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:07:17,222 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 23:07:17,222 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:07:17,222 - __main__ - INFO - ✅ Response completed in 2.12s
+2025-08-01 23:07:17,222 - __main__ - INFO - Tools used: []
+2025-08-01 23:07:17,222 - __main__ - INFO - Response length: 153 chars
+2025-08-01 23:07:17,222 - __main__ - WARNING - Test 70 turn 1 failed
+2025-08-01 23:07:17,724 - __main__ - INFO - Testing Pattern 2 - Test #70_turn_2: Comprehensive Care Coordination - Turn 2
+2025-08-01 23:07:17,724 - __main__ - INFO - Query: 内科、骨科和眼科
+2025-08-01 23:07:17,724 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:07:17,732 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:07:20,105 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment', 'Calling tool: book_appointment', 'Calling tool: book_appointment']
+2025-08-01 23:07:20,106 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent', 'AppointmentAgent', 'AppointmentAgent']
+2025-08-01 23:07:20,106 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:07:20,106 - __main__ - INFO - ✅ Response completed in 2.38s
+2025-08-01 23:07:20,106 - __main__ - INFO - Tools used: ['AppointmentAgent', 'AppointmentAgent', 'AppointmentAgent']
+2025-08-01 23:07:20,106 - __main__ - INFO - Response length: 122 chars
+2025-08-01 23:07:20,607 - __main__ - INFO - Testing Pattern 2 - Test #70_turn_3: Comprehensive Care Coordination - Turn 3
+2025-08-01 23:07:20,607 - __main__ - INFO - Query: 能统一安排吗
+2025-08-01 23:07:20,607 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:07:20,615 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:07:23,251 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 23:07:23,251 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 23:07:23,251 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:07:23,251 - __main__ - INFO - ✅ Response completed in 2.64s
+2025-08-01 23:07:23,252 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 23:07:23,252 - __main__ - INFO - Response length: 156 chars
+2025-08-01 23:07:23,252 - __main__ - WARNING - Test 70 turn 3 failed
+2025-08-01 23:07:23,753 - __main__ - INFO - Testing Pattern 2 - Test #70_turn_4: Comprehensive Care Coordination - Turn 4
+2025-08-01 23:07:23,753 - __main__ - INFO - Query: 最好是同一天
+2025-08-01 23:07:23,753 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:07:23,769 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:07:26,975 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 23:07:26,975 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 23:07:26,975 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:07:26,975 - __main__ - INFO - ✅ Response completed in 3.22s
+2025-08-01 23:07:26,975 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 23:07:26,975 - __main__ - INFO - Response length: 176 chars
+2025-08-01 23:07:26,975 - __main__ - WARNING - Test 70 turn 4 failed
+2025-08-01 23:07:27,477 - __main__ - INFO - Testing Pattern 2 - Test #70_turn_5: Comprehensive Care Coordination - Turn 5
+2025-08-01 23:07:27,477 - __main__ - INFO - Query: 费用大概多少
+2025-08-01 23:07:27,477 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:07:27,500 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:07:30,069 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 23:07:30,069 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 23:07:30,069 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:07:30,069 - __main__ - INFO - ✅ Response completed in 2.59s
+2025-08-01 23:07:30,069 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 23:07:30,069 - __main__ - INFO - Response length: 180 chars
+2025-08-01 23:07:30,069 - __main__ - WARNING - Test 70 turn 5 failed
+2025-08-01 23:07:30,570 - __main__ - INFO - 
+============================================================
+2025-08-01 23:07:30,571 - __main__ - INFO - FINAL SUMMARY
+2025-08-01 23:07:30,571 - __main__ - INFO - ============================================================
+2025-08-01 23:07:30,571 - __main__ - INFO - Total tests run: 70
+2025-08-01 23:07:30,571 - __main__ - INFO - Tests passed: 12
+2025-08-01 23:07:30,571 - __main__ - INFO - Pass rate: 17.1%
+2025-08-01 23:07:30,571 - __main__ - INFO - Log file: pattern2_test_20250801_230730.log

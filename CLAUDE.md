@@ -26,7 +26,7 @@ docker-compose -f docker-compose.local.yml up  # Local development
 # TEST ENVIRONMENT (CRITICAL - READ CAREFULLY!)
 #
 # ⚠️ UNIFIED TEST ENVIRONMENT - ACTUAL CONFIGURATION ⚠️
-# The ACTUAL running test environment (verified on 2025-07-30):
+# The ACTUAL running test environment (verified on 2025-08-01):
 #    - Container Name: youwoai_test_db (NOT humansa_test_postgres)
 #    - ML Server: Port 6001 (test instance) - ALL TESTS MUST RUN ON THIS PORT!
 #    - PostgreSQL: Port 5454 (Docker container)
@@ -36,6 +36,17 @@ docker-compose -f docker-compose.local.yml up  # Local development
 #
 # 🚨 IMPORTANT: NEVER run tests on port 5001 (production/dev server)!
 # All test scripts MUST use port 6001 for the test environment.
+#
+# 🚨 LAUNCHING TEST ENVIRONMENT:
+# The test server MUST be launched using test environment scripts, NOT main.py directly!
+# Use: ./run_HUMANSA_test_environment_v2_enhanced.sh
+# This script properly sets up:
+#   - Environment variables (ENVIRONMENT=test, ML_SERVER_PORT=6001)
+#   - Database connection to test database
+#   - Correct server startup with --port 6001 argument
+#
+# DO NOT use: python -m src.main (this will use port 5001)
+# DO use: python3 -m src.main --port 6001 (with proper env vars)
 #
 # 🚨 IMPORTANT DISCREPANCIES:
 # - docker-compose.yml shows password "031203" but actual is "12931"
@@ -59,6 +70,17 @@ docker-compose -f docker-compose.local.yml up  # Local development
 export HUMANSA_USE_WORKFLOW_ORCHESTRATOR=true  # Enable AgentWorkflow with reasoning visibility
 python -m src.main                              # Start server with workflow orchestrator
 python test_workflow_integration.py            # Test reasoning stream integration
+
+# HUMANSA V2 Pattern 2 Orchestrator (LlamaIndex FunctionAgent Pattern)
+export HUMANSA_USE_PATTERN2=true               # Enable Pattern 2 with FunctionAgent
+export HUMANSA_ENHANCED_LOGGING=true           # Enable detailed logging
+python -m src.main                             # Start server with Pattern 2
+# Pattern 2 provides:
+# - FunctionAgent as main orchestrator
+# - Sub-agents exposed as context-aware tools
+# - Shared LlamaIndex Context across all tool calls
+# - Full reasoning chain visibility in streaming
+# - Hybrid memory: LlamaIndex Context + UnifiedContext + Mem0
 ```
 
 ## High-Level Architecture

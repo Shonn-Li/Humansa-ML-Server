@@ -6,7 +6,8 @@ import time
 import os
 from datetime import datetime
 # from llama_index.llms.openai import OpenAI  # Commented out - using Azure OpenAI instead
-from llama_index.llms.azure_openai import AzureOpenAI
+# from llama_index.llms.azure_openai import AzureOpenAI
+from .azure_openai_patch import PatchedAzureOpenAI as AzureOpenAI
 from llama_index.core.callbacks import CallbackManager
 from .memory.memory_manager import MemoryManager
 from .memory.mem0_integration import Mem0MemoryManagerAdapter
@@ -71,23 +72,42 @@ async def initialize_v2_system(db_pool, openai_api_key: str = None, use_subagent
         
     await memory_manager.initialize_tables()
     
-    # Initialize LLM with Azure OpenAI
-    # Using GPT-4o as requested (not GPT-4)
-    azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT", "https://youwoai-dev-resource.openai.azure.com/")
-    azure_api_key = os.getenv("AZURE_OPENAI_API_KEY") or os.getenv("AZURE_INFERENCE_CREDENTIAL")
+    # Initialize LLM - try with regular OpenAI to debug the issue
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+    use_azure = os.getenv("USE_AZURE_OPENAI", "true").lower() == "true"
     
-    if not azure_api_key:
-        raise ValueError("AZURE_OPENAI_API_KEY or AZURE_INFERENCE_CREDENTIAL must be set")
-    
-    llm = AzureOpenAI(
-        model="gpt-4.1",  # Using GPT-4.1 as requested
-        deployment_name="gpt-4.1",  # Azure deployment name
-        api_key=azure_api_key,
-        azure_endpoint=azure_endpoint,
-        api_version="2024-02-15-preview",
-        temperature=0.7,
-        max_tokens=4096  # Increase from default to handle longer responses
-    )
+    if use_azure:
+        # Use Azure OpenAI
+        azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT", "https://youwoai-dev-resource.openai.azure.com/")
+        azure_api_key = os.getenv("AZURE_OPENAI_API_KEY") or os.getenv("AZURE_INFERENCE_CREDENTIAL")
+        
+        if not azure_api_key:
+            raise ValueError("AZURE_OPENAI_API_KEY or AZURE_INFERENCE_CREDENTIAL must be set")
+        
+        llm = AzureOpenAI(
+            model="gpt-4.1",  # Using GPT-4.1 as requested
+            deployment_name="gpt-4.1",  # Azure deployment name
+            api_key=azure_api_key,
+            azure_endpoint=azure_endpoint,
+            api_version="2024-02-01",  # Use stable API version
+            temperature=0.7,
+            max_tokens=4096
+        )
+        logger.info("Using Azure OpenAI for LLM")
+    else:
+        # Use regular OpenAI as fallback
+        from llama_index.llms.openai import OpenAI
+        
+        if not openai_api_key:
+            raise ValueError("OPENAI_API_KEY must be set when USE_AZURE_OPENAI=false")
+            
+        llm = OpenAI(
+            model="gpt-4",
+            api_key=openai_api_key,
+            temperature=0.7,
+            max_tokens=4096
+        )
+        logger.info("Using OpenAI for LLM")
     
     # Create database config for tools
     db_config = {

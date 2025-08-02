@@ -16,6 +16,7 @@ try:
     from llama_index.core.agent import ReActAgent
     from llama_index.core.tools import FunctionTool
     from llama_index.core import Settings
+    from .react_formatter import get_humansa_react_formatter
     
     WORKFLOW_AVAILABLE = True
 except ImportError:
@@ -76,28 +77,53 @@ class WorkflowOrchestrator:
         # Import agent implementations
         try:
             from .agents import (
-                ProductAgent,
                 AppointmentAgent,
                 DiagnosisAgent,
                 MedicationAgent,
                 GeneralMedicalAgent
             )
+            from .agents.product_agent import ProductAgent
         except ImportError:
             from src.humansa.v2.agents import (
-                ProductAgent,
                 AppointmentAgent,
                 DiagnosisAgent,
                 MedicationAgent,
                 GeneralMedicalAgent
             )
+            from src.humansa.v2.agents.product_agent import ProductAgent
         
-        # For now, don't instantiate the actual agents - just store None placeholders
-        # The workflow orchestrator will use ReActAgent with tools that call the agents
-        agents["ProductAgent"] = None
-        agents["AppointmentAgent"] = None  
-        agents["ClinicalAgent"] = None
-        agents["MedicationAgent"] = None
-        agents["GeneralAgent"] = None
+        # Instantiate real agent instances
+        try:
+            logger.info(f"Creating agents with LLM: {type(self.llm)}")
+            
+            # Use staged product agent (compact search + detailed load)
+            logger.info("Creating ProductAgent...")
+            agents["ProductAgent"] = ProductAgent(llm=self.llm)
+            logger.info(f"ProductAgent created: {agents['ProductAgent']}")
+            
+            logger.info("Creating AppointmentAgent...")
+            agents["AppointmentAgent"] = AppointmentAgent(llm=self.llm)
+            
+            logger.info("Creating DiagnosisAgent...")
+            agents["ClinicalAgent"] = DiagnosisAgent(llm=self.llm)
+            
+            logger.info("Creating MedicationAgent...")
+            agents["MedicationAgent"] = MedicationAgent(llm=self.llm)
+            
+            logger.info("Creating GeneralMedicalAgent...")
+            agents["GeneralAgent"] = GeneralMedicalAgent(llm=self.llm)
+            
+            logger.info(f"✅ Successfully instantiated {len(agents)} real sub-agents")
+        except Exception as e:
+            logger.error(f"❌ Error instantiating agents: {e}. Using None placeholders.")
+            import traceback
+            logger.error(f"Agent instantiation traceback:\n{traceback.format_exc()}")
+            # Fallback to None placeholders if instantiation fails
+            agents["ProductAgent"] = None
+            agents["AppointmentAgent"] = None  
+            agents["ClinicalAgent"] = None
+            agents["MedicationAgent"] = None
+            agents["GeneralAgent"] = None
         
         return agents
     
@@ -112,14 +138,44 @@ class WorkflowOrchestrator:
         for agent_name in self.agents.keys():
             # Create a tool function for each sub-agent
             def create_agent_tool(name):
-                async def call_agent(query: str) -> str:
-                    """Call the sub-agent and return response"""
+                async def call_agent(query: str = None, input: str = None, **kwargs) -> str:
+                    """Call the sub-agent and return response. Accepts both 'query' and 'input' parameters."""
+                    # Handle both 'query' and 'input' parameters from ReAct agent
+                    actual_query = query or input or ""
+                    
                     try:
-                        # For now, return a mock response indicating which agent would be called
-                        # In a real implementation, this would instantiate and call the actual agent
-                        return f"[{name}代理响应] 收到查询: {query}\n\n这里应该是{name}的实际响应。当前为演示模式。"
+                        # Get the actual agent instance
+                        agent_instance = self.agents.get(name)
+                        
+                        if agent_instance is None:
+                            logger.warning(f"Agent {name} not instantiated, using mock response")
+                            return f"[{name}代理响应] 收到查询: {actual_query}\n\n这里应该是{name}的实际响应。当前为演示模式。"
+                        
+                        # Call the real agent
+                        logger.info(f"🔧 Calling real {name} with query: {actual_query[:100]}...")
+                        
+                        # Collect response from agent's process_query method
+                        if hasattr(agent_instance, 'process_query'):
+                            response_parts = []
+                            async for chunk in agent_instance.process_query(actual_query, {}, stream=True):
+                                if chunk.get('type') == 'content' and chunk.get('chunk'):
+                                    response_parts.append(chunk['chunk'])
+                                elif 'response' in chunk:
+                                    response_parts.append(chunk['response'])
+                            
+                            full_response = ''.join(response_parts)
+                            if full_response.strip():
+                                logger.info(f"✅ {name} returned {len(full_response)} characters")
+                                return full_response
+                        
+                        # Fallback for agents without process_query method
+                        logger.warning(f"Agent {name} has no process_query method")
+                        return f"[{name}代理响应] 收到查询: {query}\n\n代理已接收查询但未能处理。"
+                        
                     except Exception as e:
                         logger.error(f"Error calling {name}: {e}")
+                        import traceback
+                        traceback.print_exc()
                         return f"调用{name}时出现错误: {str(e)}"
                 
                 return call_agent
@@ -132,11 +188,16 @@ class WorkflowOrchestrator:
             )
             orchestrator_tools.append(tool)
         
-        # Create orchestrator with ReActAgent 
-        orchestrator = ReActAgent.from_tools(
-            tools=orchestrator_tools,
-            llm=self.llm,
-            system_prompt=f"""你是诺亚新舟健康医疗助理的主协调器。
+        # Create orchestrator with ReActAgent and custom formatter
+        try:
+            # Use new API for llama-index 0.13.0
+            logger.info("Creating ReActAgent orchestrator...")
+            orchestrator = ReActAgent(
+                name="HumansaOrchestrator",
+                description="Main orchestrator for HUMANSA health assistant",
+                tools=orchestrator_tools,
+                llm=self.llm,
+                system_prompt=f"""你是诺亚新舟健康医疗助理的主协调器。
 
 今天是{datetime.now().strftime('%Y-%m-%d')}。
 
@@ -144,7 +205,7 @@ class WorkflowOrchestrator:
 1. 理解用户的问题和需求
 2. 选择最合适的专业代理来处理
 3. 如果需要多个方面的信息，可以调用多个代理
-4. 整合所有响应，提供完整答案
+4. **重要**：整合所有工具调用的结果，基于获得的信息提供完整、具体的答案
 
 可用的专业代理：
 - call_productagent: 产品推荐、保健品、医疗器械推荐
@@ -155,13 +216,26 @@ class WorkflowOrchestrator:
 
 重要原则：
 - 紧急医疗情况立即使用call_clinicalagent
-- 产品相关问题必须使用call_productagent
+- 产品相关问题必须使用call_productagent并包含产品具体信息
 - 预约相关必须使用call_appointmentagent
 - 可以组合使用多个代理提供全面服务
 
-你必须调用至少一个专业代理来处理用户问题，不要直接回答。""",
-            verbose=True
-        )
+工作流程：
+1. 分析用户问题，确定需要调用的代理
+2. 调用相应代理获取信息
+3. **必须基于工具返回的具体信息（如产品名称、链接、用法等）组织答案**
+4. 如果工具返回的信息不完整，继续调用工具获取更多信息
+5. 最终答案必须包含从工具获得的具体信息，不要给出泛泛的建议
+
+你必须调用至少一个专业代理来处理用户问题，并将代理返回的具体信息整合到你的回答中。""",
+                verbose=True
+            )
+            logger.info("ReActAgent orchestrator created successfully")
+        except Exception as e:
+            logger.error(f"Error creating ReActAgent: {e}")
+            import traceback
+            logger.error(f"ReActAgent creation traceback:\n{traceback.format_exc()}")
+            raise
         
         return orchestrator
     
@@ -264,24 +338,55 @@ class WorkflowOrchestrator:
         
         try:
             # Use ReActAgent's stream_chat for natural streaming with reasoning
-            response_stream = self.orchestrator_agent.stream_chat(query)
+            logger.info(f"Creating stream_chat with query: {query[:100]}...")
+            try:
+                # Try to create proper message format
+                from llama_index.core.base.llms.types import ChatMessage, MessageRole
+                
+                # First try with just string (this is what should work)
+                try:
+                    # Use run method for new API
+                    response_stream = self.orchestrator_agent.run(query)
+                except Exception as e1:
+                    logger.error(f"Error with string query: {e1}")
+                    # If that fails, try with ChatMessage
+                    try:
+                        chat_msg = ChatMessage(role=MessageRole.USER, content=query)
+                        response_stream = self.orchestrator_agent.stream_chat(chat_msg)
+                    except Exception as e2:
+                        logger.error(f"Error with ChatMessage: {e2}")
+                        raise e1  # Raise original error
+            except Exception as e:
+                logger.error(f"Error creating stream_chat: {e}")
+                import traceback
+                logger.error(f"Stream creation traceback:\n{traceback.format_exc()}")
+                raise
             
             # Collect full response
             full_response = ""
-            async for chunk in response_stream.async_response_gen():
-                if chunk:
-                    full_response += str(chunk)
+            logger.info("Starting to collect response chunks...")
             
-            # Post-process with response agent
-            processed_response = self.response_agent.process_response(
-                {"output": [{"content": full_response}]},
-                original_query
-            )
+            # New API - await the response directly
+            try:
+                result = await response_stream
+                if hasattr(result, 'response'):
+                    full_response = str(result.response)
+                else:
+                    full_response = str(result)
+                logger.info(f"Got complete response: {full_response[:100]}...")
+            except Exception as e:
+                logger.error(f"Error getting result: {e}")
+                full_response = "处理查询时出现错误"
             
-            if processed_response.get("output"):
-                final_text = processed_response["output"][0].get("text", full_response)
-            else:
-                final_text = full_response
+            # Check if this is a product query - preserve details
+            is_product_query = any(keyword in original_query.lower() 
+                                 for keyword in ['产品', '推荐', 'dha', '保健品', '营养', '健康商城', '童年故事'])
+            
+            # Skip response agent processing for now - it's causing the 'blocks' error
+            # The response agent expects a different format that we need to investigate
+            final_text = full_response
+            logger.info(f"Using raw response without post-processing: {final_text[:200]}...")
+            logger.info(f"Full response length: {len(final_text)}")
             
             # Create single message item with complete response
             current_time = datetime.utcnow().isoformat() + "Z"
@@ -350,6 +455,8 @@ class WorkflowOrchestrator:
             
         except Exception as e:
             logger.error(f"Error in orchestrator streaming: {e}")
+            import traceback
+            logger.error(f"Full streaming traceback:\n{traceback.format_exc()}")
             # Return error message
             error_message = f"处理查询时出现错误: {str(e)}"
             
@@ -406,17 +513,39 @@ class WorkflowOrchestrator:
         
         try:
             # Use ReActAgent to get response
-            response = self.orchestrator_agent.chat(query)
-            response_text = str(response.response)
+            logger.info(f"Calling orchestrator_agent.chat with query: {query[:100]}...")
+            try:
+                # Use run method for new API
+                response = self.orchestrator_agent.run(query)
+                logger.info(f"Got response type: {type(response)}")
+                logger.info(f"Response attributes: {dir(response)}")
+            except Exception as e:
+                logger.error(f"Error in orchestrator_agent.chat: {e}")
+                import traceback
+                logger.error(f"Chat error traceback:\n{traceback.format_exc()}")
+                
+                # Try to get more info about the error
+                if "'dict' object has no attribute 'blocks'" in str(e):
+                    logger.error("This appears to be a message formatting issue with Azure OpenAI")
+                raise
             
-            # Post-process response
-            processed_response = self.response_agent.process_response(
-                {"output": [{"content": response_text}]},
-                original_query
-            )
+            # Handle the WorkflowHandler response
+            # Wait for the workflow to complete
+            result = await response
             
-            if processed_response.get("output"):
-                response_text = processed_response["output"][0].get("text", response_text)
+            # Extract text from result
+            if hasattr(result, 'response'):
+                response_text = str(result.response)
+            elif hasattr(result, 'output'):
+                response_text = str(result.output)
+            elif hasattr(result, 'content'):
+                response_text = str(result.content)
+            else:
+                response_text = str(result)
+            
+            # Skip response agent processing for now - it's causing the 'blocks' error
+            # The response agent expects a different format that we need to investigate
+            logger.info("Using raw response without post-processing")
             
             return {
                 "id": f"chatcmpl-{uuid.uuid4()}",
@@ -440,6 +569,8 @@ class WorkflowOrchestrator:
             
         except Exception as e:
             logger.error(f"Error in non-streaming processing: {e}")
+            import traceback
+            logger.error(f"Full traceback:\n{traceback.format_exc()}")
             return {
                 "id": f"chatcmpl-{uuid.uuid4()}",
                 "object": "chat.completion",
