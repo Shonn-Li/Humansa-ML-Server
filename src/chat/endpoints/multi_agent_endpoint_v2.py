@@ -419,7 +419,7 @@ class MultiAgentChatEndpointV2:
             sequence += 1
 
             # Initialize context
-            context = {}
+            context = {"start_time": time.time()}
 
             # Phase 1: Router Agent (with reasoning)
             router_id = generate_output_id("router")
@@ -434,8 +434,8 @@ class MultiAgentChatEndpointV2:
             sequence += 1
             current_output_index += 1
 
-            # Stream router reasoning with more detailed text
-            reasoning_text = "Analyzing the user's query to determine which tools and agents to use..."
+            # Stream router reasoning with user-friendly text
+            reasoning_text = "Processing your request..."
             async for event in self._stream_reasoning_step(router_id, current_output_index - 1,
                                                            reasoning_text,
                                                            create_event):
@@ -448,14 +448,8 @@ class MultiAgentChatEndpointV2:
             context["router_agent"] = router_result
             enabled_agents = router_result.get("enabled_agents", ["response"])
 
-            # Stream additional reasoning about the decision
-            decision_text = f"\n\nBased on the query, I'll use: {', '.join(enabled_agents)}"
-            if "context_search" in enabled_agents:
-                decision_text += "\n- Context search: To find relevant information from your notes"
-            if "web_search" in enabled_agents:
-                decision_text += "\n- Web search: To get current information from the internet"
-            if "attachment" in enabled_agents:
-                decision_text += "\n- File search: To analyze attached files"
+            # Stream a simple progress update without exposing internal details
+            decision_text = "\n\nGathering relevant information..."
 
             async for event in self._stream_reasoning_step(router_id, current_output_index - 1,
                                                            decision_text,
@@ -477,6 +471,14 @@ class MultiAgentChatEndpointV2:
                                    }]
                                })
             sequence += 1
+
+            # Start title generation early (in parallel with other agents)
+            title_task = None
+            if request.get("enable_title_generation", True):
+                logger.info(f"🏷️ Starting early title generation at {time.time() - context.get('start_time', time.time()):.2f}s")
+                title_task = asyncio.create_task(self._generate_title(request["messages"], None))
+                context["title_task"] = title_task
+                context["title_start_time"] = time.time()
 
             # Phase 2: Context Collection Agents
             # Stream each enabled agent's work
@@ -749,16 +751,33 @@ class MultiAgentChatEndpointV2:
                                        })
                     sequence += 1
 
-            # Generate title from the response
-            response_text = context.get(
-                "response_agent", {}).get("response", "")
-            title = await self._generate_title(request["messages"], response_text)
-
-            yield create_event("response.title_generated",
-                               sequence_number=sequence,
-                               title=title)
-            sequence += 1
-
+            # Check if title is ready (non-blocking)
+            title_ready = False
+            title = None
+            if "title_task" in context:
+                elapsed = time.time() - context.get("title_start_time", time.time())
+                logger.info(f"🏷️ Checking title task after {elapsed:.2f}s...")
+                title_ready = context["title_task"].done()
+                logger.info(f"🏷️ Title task done: {title_ready}")
+                
+                if title_ready:
+                    try:
+                        title = await context["title_task"]
+                        title_duration = time.time() - context.get("title_start_time", time.time())
+                        logger.info(f"🏷️ Title ready in {title_duration:.2f}s: '{title}'")
+                    except Exception as e:
+                        logger.error(f"Title generation failed: {e}")
+                        title = None
+                else:
+                    logger.info(f"🏷️ Title still generating after {elapsed:.2f}s, skipping for now...")
+            
+            # Send title event if we have it
+            if title:
+                yield create_event("response.title_generated",
+                                   sequence_number=sequence,
+                                   title=title)
+                sequence += 1
+            
             # Stream usage stats
             yield create_event("response.usage",
                                sequence_number=sequence,
@@ -791,11 +810,16 @@ class MultiAgentChatEndpointV2:
             # Debug log the complete event
             logger.info(f"🎯 Sending response.completed with data: {json.dumps(response_completed_data, cls=DecimalEncoder)[:500]}")
             
+            # Log timing
+            elapsed_time = time.time() - context.get("start_time", time.time())
+            logger.info(f"⏱️ Sending response.completed at {elapsed_time:.2f}s from start")
+            
             yield create_event("response.completed",
                                sequence_number=sequence,
                                response=response_completed_data)
             sequence += 1
 
+            logger.info(f"⏱️ Sending response.done at {time.time() - context.get('start_time', time.time()):.2f}s from start")
             yield create_event("response.done",
                                sequence_number=sequence,
                                response={
@@ -1220,28 +1244,35 @@ class MultiAgentChatEndpointV2:
 
         # Note: The actual code output will be included in the response message
 
-    async def _generate_title(self, messages: List[Dict[str, Any]], response: str) -> str:
-        """Generate a title for the conversation using the title generator service"""
+    async def _generate_title(self, messages: List[Dict[str, Any]], response: str = None) -> str:
+        """Generate a title for the conversation using the title generator service
+        
+        Note: The response parameter is ignored as title generator only uses user messages
+        """
+        start_time = time.time()
+        logger.info(f"🏷️ _generate_title started")
+        
+        # Remove artificial delay - was just for testing
+        # await asyncio.sleep(15.0)
+        
         try:
             # Import the title generator
             from ..title.title_generator import title_generator
             
-            # Add the response to messages for context
-            messages_with_response = messages.copy()
-            messages_with_response.append({
-                "role": "assistant",
-                "content": response
-            })
-            
             # Get an LLM instance for title generation
+            logger.info(f"🏷️ Getting LLM provider for title generation...")
             provider_info = self.llm_provider_manager.get_provider(None, "gpt-4.1-nano")
             llm = provider_info["llm"]
+            logger.info(f"🏷️ LLM provider obtained in {time.time() - start_time:.2f}s")
             
             # Generate the title using the proper service
+            # Note: title_generator only uses user messages, so we don't need to add response
+            logger.info(f"🏷️ Calling title generator...")
             generated_title = await title_generator.generate_conversation_title(
-                messages_with_response, 
+                messages, 
                 llm
             )
+            logger.info(f"🏷️ Title generated in total {time.time() - start_time:.2f}s")
             
             if generated_title:
                 logger.info(f"🏷️ Generated unique title: '{generated_title}'")

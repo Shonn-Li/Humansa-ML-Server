@@ -513,7 +513,7 @@ class MultiAgentChatEndpoint:
                                   })
 
             # Stream router thinking
-            async for event in self._stream_reasoning_step(router_id, "Analyzing query and routing to appropriate agents..."):
+            async for event in self._stream_reasoning_step(router_id, "Understanding your request..."):
                 yield event
 
             # Run router agent
