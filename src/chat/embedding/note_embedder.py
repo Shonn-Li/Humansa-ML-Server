@@ -55,30 +55,23 @@ class NoteEmbedder:
                 self.db.get_note_content_separate, note_id
             )
 
-            if not ai_content and not user_content:
+            # MODIFIED: Only check user content since we're excluding AI summaries
+            if not user_content:
                 logger.warning(
-                    f"No content found for note {note_id}, marking to skip embedding")
+                    f"No user content found for note {note_id}, marking to skip embedding")
                 await asyncio.to_thread(self.db.mark_note_skip_embedding, note_id)
                 return False
 
             logger.info(
-                f"Note {note_id}: Processing AI content ({len(ai_content)} chars) "
-                f"and user content ({len(user_content)} chars) separately"
+                f"Note {note_id}: Processing user content only ({len(user_content)} chars) - AI summaries handled separately"
             )
 
             # Prepare chunks and embeddings
             all_chunks_for_embedding = []
             chunk_metadata = []
 
-            # Process AI content (summaries) separately
-            if ai_content.strip():
-                ai_chunks = self.text_processor.split_text(ai_content)
-                logger.info(
-                    f"Note {note_id}: Generated {len(ai_chunks)} AI content chunks")
-
-                for chunk in ai_chunks:
-                    all_chunks_for_embedding.append(chunk)
-                    chunk_metadata.append((chunk, "summary"))
+            # SKIP AI content - summaries are embedded separately via /notes/embed-summary
+            # This prevents duplication and allows independent summary updates
 
             # Process user content separately
             if user_content.strip():
@@ -196,3 +189,91 @@ class NoteEmbedder:
     async def has_embedding_async(self, note_id: int) -> bool:
         """Check if a note has embeddings (async version)"""
         return await asyncio.to_thread(self.has_embedding, note_id)
+    
+    async def create_summary_embedding(self, note_id: int) -> bool:
+        """
+        Create embedding for AI summary only with deduplication check.
+        Only embeds currentPromptContent, not the history.
+        
+        Args:
+            note_id: ID of the note to embed summary for
+            
+        Returns:
+            bool: True if successful or already exists, False otherwise
+        """
+        try:
+            # Get AI content only (from currentPromptContent)
+            ai_content, _, _ = await asyncio.to_thread(
+                self.db.get_note_content_separate, note_id
+            )
+            
+            if not ai_content or not ai_content.strip():
+                logger.info(f"No AI summary content found for note {note_id}")
+                return True  # Not an error, just no summary
+            
+            # Check for existing summary embeddings
+            existing_summaries = await asyncio.to_thread(
+                self.db.execute_query,
+                """SELECT chunk_text FROM embedding_v1 
+                   WHERE type_id = %s AND type = 'note' AND source = 'summary'
+                   ORDER BY last_updated DESC""",
+                (note_id,),
+                fetch_type='all'
+            )
+            
+            # Check if content has changed using simple comparison
+            # (could use hash for better performance with large summaries)
+            for existing in existing_summaries:
+                if existing[0] == ai_content:
+                    logger.info(
+                        f"Summary unchanged for note {note_id}, skipping embedding"
+                    )
+                    return True
+            
+            logger.info(
+                f"Note {note_id}: Creating embedding for AI summary ({len(ai_content)} chars)"
+            )
+            
+            # Split summary into chunks
+            summary_chunks = self.text_processor.split_text(ai_content)
+            logger.info(
+                f"Note {note_id}: Generated {len(summary_chunks)} summary chunks"
+            )
+            
+            if not summary_chunks:
+                logger.warning(f"No valid chunks generated for note {note_id} summary")
+                return False
+            
+            # Create embeddings
+            logger.info(f"Creating embeddings for {len(summary_chunks)} summary chunks")
+            embeddings = await asyncio.to_thread(
+                self.embedder.get_embeddings_with_retry,
+                summary_chunks,
+                max_retries=3,
+                batch_size=50
+            )
+            
+            # Prepare data with source='summary'
+            embeddings_data = []
+            for embedding, chunk_text in zip(embeddings, summary_chunks):
+                embeddings_data.append((embedding, chunk_text, "summary"))
+            
+            # Delete old summary embeddings for this note
+            await asyncio.to_thread(
+                self.db.execute_query,
+                """DELETE FROM embedding_v1 
+                   WHERE type_id = %s AND type = 'note' AND source = 'summary'""",
+                (note_id,)
+            )
+            
+            # Save new summary embeddings
+            await asyncio.to_thread(self.db.save_note_embeddings, note_id, embeddings_data)
+            
+            logger.info(
+                f"Note {note_id}: Saved {len(embeddings_data)} summary embeddings"
+            )
+            return True
+            
+        except Exception as e:
+            logger.error(f"Failed to create summary embedding for note {note_id}: {e}")
+            return False

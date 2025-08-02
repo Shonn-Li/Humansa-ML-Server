@@ -686,3 +686,38 @@ class EmbeddingDBOperations:
             logger.error(
                 f"Failed to enable embedding for conversation {conversation_id}: {e}")
             return False
+    
+    def execute_query(self, query: str, params: tuple = None, fetch_type: str = 'all'):
+        """
+        Execute a generic SQL query with proper error handling
+        
+        Args:
+            query: SQL query to execute
+            params: Query parameters (optional)
+            fetch_type: 'all', 'one', 'scalar', or None
+            
+        Returns:
+            Query results based on fetch_type
+        """
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor() as cursor:
+                    cursor.execute(query, params)
+                    
+                    if fetch_type == 'all':
+                        return cursor.fetchall()
+                    elif fetch_type == 'one':
+                        return cursor.fetchone()
+                    elif fetch_type == 'scalar':
+                        result = cursor.fetchone()
+                        return result[0] if result else None
+                    else:
+                        # For INSERT/UPDATE/DELETE queries
+                        conn.commit()
+                        return cursor.rowcount
+                        
+        except Exception as e:
+            logger.error(f"Query execution failed: {e}")
+            logger.error(f"Query: {query}")
+            logger.error(f"Params: {params}")
+            raise

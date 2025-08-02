@@ -48,6 +48,7 @@ class ChunkResult:
     chunk_text: str
     similarity: float
     section_id: int
+    source: Optional[str] = None  # 'summary', 'text', 'doc', 'youtube', etc.
     metadata: Optional[Dict[str, Any]] = None
 
 
@@ -278,6 +279,7 @@ class PostgresManager:
                         e.chunk_text,
                         1 - (e.embedding <=> %s::vector) as similarity,
                         e.section_id,
+                        e.source,
                         CASE 
                             WHEN e.type = 'note' THEN n."noteTitle"
                             WHEN e.type = 'conversation' THEN c.title
@@ -303,7 +305,8 @@ class PostgresManager:
                         chunk_text=row[2],
                         similarity=row[3],
                         section_id=row[4],
-                        metadata={"title": row[5]} if len(row) > 5 else None
+                        source=row[5] if len(row) > 5 else None,
+                        metadata={"title": row[6]} if len(row) > 6 else None
                     )
                     chunks.append(chunk)
 
@@ -337,6 +340,7 @@ class PostgresManager:
                         e.chunk_text,
                         1 - (e.embedding <=> %s::vector) as similarity,
                         e.section_id,
+                        e.source,
                         n."noteTitle"
                     FROM embedding_v1 e
                     LEFT JOIN note_v1 n ON e.type_id = n.id
@@ -358,7 +362,8 @@ class PostgresManager:
                         chunk_text=row[2],
                         similarity=row[3],
                         section_id=row[4],
-                        metadata={"title": row[5]} if len(row) > 5 else None
+                        source=row[5] if len(row) > 5 else None,
+                        metadata={"title": row[6]} if len(row) > 6 else None
                     )
                     chunks.append(chunk)
 
@@ -392,6 +397,7 @@ class PostgresManager:
                         e.chunk_text,
                         1 - (e.embedding <=> %s::vector) as similarity,
                         e.section_id,
+                        e.source,
                         c.title
                     FROM embedding_v1 e
                     LEFT JOIN conversation_v1 c ON e.type_id = c.id
@@ -413,7 +419,8 @@ class PostgresManager:
                         chunk_text=row[2],
                         similarity=row[3],
                         section_id=row[4],
-                        metadata={"title": row[5]} if len(row) > 5 else None
+                        source=row[5] if len(row) > 5 else None,
+                        metadata={"title": row[6]} if len(row) > 6 else None
                     )
                     chunks.append(chunk)
 

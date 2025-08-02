@@ -492,6 +492,46 @@ def register_preserved_endpoints(app):
         except Exception as e:
             logger.error(f"Error in create_embeddings endpoint: {e}")
             return jsonify({"error": str(e), "status": "error"}), 500
+    
+    @app.route("/notes/embed-summary", methods=["POST"])
+    async def embed_summary():
+        """Embed only the AI summary for a note with deduplication"""
+        try:
+            request_data = await request.get_json()
+            note_id = request_data.get("note_id")
+            
+            if not note_id:
+                return jsonify({
+                    "status": "error",
+                    "message": "note_id is required"
+                }), 400
+            
+            logger.info(f"Creating summary embedding for note: {note_id}")
+            
+            # Import the embedding manager
+            from chat.embedding.embedding_manager import embedding_manager
+            
+            # Create summary embedding only
+            success = await embedding_manager.note_embedder.create_summary_embedding(note_id)
+            
+            if success:
+                logger.info(f"Successfully created/verified summary embedding for note {note_id}")
+                return jsonify({
+                    "status": "success",
+                    "note_id": note_id,
+                    "message": "Summary embedding created or already up-to-date"
+                }), 200
+            else:
+                logger.error(f"Failed to create summary embedding for note {note_id}")
+                return jsonify({
+                    "status": "error",
+                    "note_id": note_id,
+                    "message": "Failed to create summary embedding"
+                }), 500
+                
+        except Exception as e:
+            logger.error(f"Error in embed_summary endpoint: {e}")
+            return jsonify({"error": str(e), "status": "error"}), 500
 
     # Import link analyzer from new independent location
     try:
