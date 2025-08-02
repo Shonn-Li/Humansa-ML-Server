@@ -143,11 +143,11 @@ class ResponseAgent(BaseAgent):
         
         # Generate response
         response = await llm.achat(messages)
-        response_text = response.message.content
+        response_text = response.message.content if response.message.content else ""
         
         # Extract citation annotations if citations are enabled
         annotations = []
-        if enable_citations and sources:
+        if enable_citations and sources and response_text:
             _, annotations = citation_position_tracker.extract_citations_with_positions(response_text, sources)
         
         return {
@@ -241,7 +241,7 @@ class ResponseAgent(BaseAgent):
                                 }
             
             # Extract citation annotations if enabled
-            if enable_citations and sources:
+            if enable_citations and sources and accumulated_response:
                 _, annotations = citation_position_tracker.extract_citations_with_positions(accumulated_response, sources)
                 
                 logger.info(f"📚 Extracted {len(annotations)} annotations from response")

@@ -31,6 +31,12 @@ class O3ModelWrapper(AzureAICompletionsModel):
         if is_o3 and 'temperature' in kwargs:
             logger.info(f"Removing temperature parameter for {model_name}")
             kwargs.pop('temperature')
+        
+        # Set api_version for O3/O4 models
+        # Note: This is passed to the Azure client, NOT added to the URL
+        if is_o3:
+            kwargs['api_version'] = '2024-12-01-preview'
+            logger.info(f"Setting API version to 2024-12-01-preview for {model_name}")
             
         super().__init__(*args, **kwargs)
         
@@ -94,8 +100,11 @@ class O3ModelWrapper(AzureAICompletionsModel):
             if 'temperature' in kwargs:
                 kwargs.pop('temperature')
         
-        async for chunk in super().astream_chat(messages, **kwargs):
-            yield chunk
+        # Await the parent's astream_chat to get the async generator
+        stream = await super().astream_chat(messages, **kwargs)
+        
+        # Return the stream directly (don't iterate and yield)
+        return stream
     
     def stream_chat(self, messages: List[ChatMessage], **kwargs):
         """Sync streaming chat with parameter adjustment for O3/O4"""
@@ -109,27 +118,32 @@ class O3ModelWrapper(AzureAICompletionsModel):
         return super().stream_chat(messages, **kwargs)
     
     # Override the internal method that prepares API requests
-    def _prepare_payload(self, messages: List[Dict[str, Any]], **kwargs) -> Dict[str, Any]:
-        """Prepare the API payload with O3/O4 adjustments"""
-        # Get base payload
-        payload = {
-            "messages": messages,
-            "model": self.model_name,
-            **kwargs
-        }
+    @property
+    def _model_kwargs(self) -> Dict[str, Any]:
+        """Override model kwargs to handle O3/O4 parameter conversion"""
+        base_kwargs = {}
         
-        if self._is_o3:
-            # Convert max_tokens to max_completion_tokens
-            if 'max_tokens' in payload:
-                payload['max_completion_tokens'] = payload.pop('max_tokens')
-            
-            # Remove temperature
-            if 'temperature' in payload:
-                payload.pop('temperature')
-            
-            logger.debug(f"Adjusted payload for {self._original_model}: {json.dumps(payload, indent=2)}")
+        # Add temperature if not O3
+        if not self._is_o3 and self.temperature is not None:
+            base_kwargs["temperature"] = self.temperature
         
-        return payload
+        # Handle max_tokens conversion for O3
+        if self.max_tokens is not None:
+            if self._is_o3:
+                base_kwargs["max_completion_tokens"] = self.max_tokens
+            else:
+                base_kwargs["max_tokens"] = self.max_tokens
+        
+        # Add any additional model_kwargs
+        if hasattr(super(), '_model_kwargs'):
+            parent_kwargs = super()._model_kwargs
+            # Filter out max_tokens and temperature for O3
+            if self._is_o3:
+                parent_kwargs = {k: v for k, v in parent_kwargs.items() 
+                               if k not in ['max_tokens', 'temperature']}
+            base_kwargs.update(parent_kwargs)
+        
+        return base_kwargs
 
 
 def create_azure_llm_with_o3_support(
@@ -143,16 +157,23 @@ def create_azure_llm_with_o3_support(
     """
     Factory function to create the appropriate Azure LLM instance
     
-    Returns O3ModelWrapper for O3/O4 models, regular AzureAICompletionsModel otherwise
+    Returns O3DirectClient for O3/O4 models, regular AzureAICompletionsModel otherwise
     """
     is_o3_model = O3ModelWrapper._is_o3_model_static(model_name)
     
     if is_o3_model:
-        logger.info(f"Creating O3ModelWrapper for {model_name}")
-        return O3ModelWrapper(
+        logger.info(f"Creating O3DirectClient for {model_name}")
+        # Use direct HTTP client for O3 to work around Azure SDK issues
+        from .o3_direct_client import O3DirectClient
+        
+        # Extract max_tokens from kwargs if present
+        max_tokens = kwargs.pop("max_tokens", 1000)
+        
+        return O3DirectClient(
             endpoint=endpoint,
             credential=credential,
             model_name=model_name,
+            max_tokens=max_tokens,
             callback_manager=callback_manager,
             **kwargs
         )
