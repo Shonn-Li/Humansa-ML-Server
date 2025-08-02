@@ -348,7 +348,8 @@ def register_chat_endpoints(app):
 
             if request_data.get('stream'):
                 # Return streaming response
-                logger.info("🌊 Starting multi-agent streaming response...")
+                start_time = time.time()
+                logger.info(f"🌊 Starting multi-agent streaming response at {start_time:.2f}...")
 
                 async def generate_stream():
                     chunk_count = 0
@@ -372,9 +373,11 @@ def register_chat_endpoints(app):
 
                                 yield f"data: {json.dumps(chunk, cls=DecimalEncoder)}\n\n"
 
+                            end_time = time.time()
                             logger.info(
-                                f"✅ Multi-agent streaming complete: {chunk_count} chunks sent")
+                                f"✅ Multi-agent streaming complete: {chunk_count} chunks sent at {end_time:.2f}")
                             yield "data: [DONE]\n\n"
+                            logger.info(f"⏱️ After yielding [DONE] at {time.time():.2f}")
                         else:
                             # It's a dict response (likely an error)
                             logger.warning(f"⚠️ Got non-streaming response in multi-agent streaming mode: {stream_response}")
@@ -388,7 +391,9 @@ def register_chat_endpoints(app):
                             stream_error), "status": "error"}
                         yield f"data: {json.dumps(error_chunk, cls=DecimalEncoder)}\n\n"
 
-                return Response(generate_stream(), mimetype='text/event-stream')
+                response = Response(generate_stream(), mimetype='text/event-stream')
+                logger.info(f"⏱️ Multi-agent Response object created at {time.time():.2f}")
+                return response
             else:
                 # Return standard response
                 logger.info("📄 Starting multi-agent non-streaming response...")

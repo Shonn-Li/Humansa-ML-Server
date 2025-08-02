@@ -258,15 +258,7 @@ class NoteEmbedder:
             for embedding, chunk_text in zip(embeddings, summary_chunks):
                 embeddings_data.append((embedding, chunk_text, "summary"))
             
-            # Delete old summary embeddings for this note
-            await asyncio.to_thread(
-                self.db.execute_query,
-                """DELETE FROM embedding_v1 
-                   WHERE type_id = %s AND type = 'note' AND source = 'summary'""",
-                (note_id,)
-            )
-            
-            # Save new summary embeddings
+            # Save new summary embeddings (keeping all historical embeddings)
             await asyncio.to_thread(self.db.save_note_embeddings, note_id, embeddings_data)
             
             logger.info(
