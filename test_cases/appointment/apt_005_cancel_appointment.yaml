@@ -1,0 +1,30 @@
+category: appointment
+expectations:
+  agents_touched:
+  - FormCanceller
+  emergency_flags: []
+  follow_up_actions: []
+  forbidden_patterns:
+  - APT-
+  - 预约成功
+  keywords:
+  - 取消
+  - 已取消
+  max_response_length: 5000
+  min_response_length: 30
+  required_tools: []
+  response_time_max: 30.0
+  thinking_flow_keywords: []
+id: apt_005_cancel_appointment
+metadata:
+  expect_cancellation: true
+name: Cancel appointment
+previous_turns:
+- content: 预约张医生明天看诊，我叫钱七，电话13600136000
+  role: user
+- content: 预约信息已记录...
+  role: assistant
+priority: 1
+query: 取消预约
+tags: []
+user_context: {}

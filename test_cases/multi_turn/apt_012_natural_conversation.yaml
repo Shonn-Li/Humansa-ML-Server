@@ -1,0 +1,42 @@
+category: multi_turn
+expectations:
+  agents_touched:
+  - ConversationManager
+  - FormCreator
+  - FormUpdater
+  emergency_flags: []
+  follow_up_actions: []
+  forbidden_patterns: []
+  keywords:
+  - 陈十一
+  - '13100131000'
+  - 李明医生
+  - 明天上午
+  - 头晕
+  max_response_length: 5000
+  min_response_length: 100
+  required_tools: []
+  response_time_max: 10.0
+  thinking_flow_keywords: []
+id: apt_012_natural_conversation
+metadata:
+  conversation_length: 7
+  expect_complete_form: true
+name: Natural multi-turn conversation
+previous_turns:
+- content: 我最近总是头晕
+  role: user
+- content: 头晕的情况持续多久了？需要帮您预约医生检查吗？
+  role: assistant
+- content: 已经三天了，是的请帮我预约
+  role: user
+- content: 好的，请问您想预约哪位医生？什么时间方便？
+  role: assistant
+- content: 李明医生吧，明天上午可以吗
+  role: user
+- content: 好的，明天上午李明医生有号。请提供您的姓名和联系方式。
+  role: assistant
+priority: 1
+query: 我叫陈十一，电话13100131000
+tags: []
+user_context: {}

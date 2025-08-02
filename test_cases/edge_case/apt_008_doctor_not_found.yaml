@@ -1,0 +1,27 @@
+category: edge_case
+expectations:
+  agents_touched:
+  - DoctorSearch
+  - FormCreator
+  emergency_flags: []
+  follow_up_actions: []
+  forbidden_patterns: []
+  keywords:
+  - 找不到
+  - 没有找到
+  - 推荐
+  - 其他医生
+  max_response_length: 5000
+  min_response_length: 100
+  required_tools: []
+  response_time_max: 30.0
+  thinking_flow_keywords: []
+id: apt_008_doctor_not_found
+metadata:
+  expect_alternatives: true
+name: Handle invalid doctor name
+previous_turns: []
+priority: 1
+query: 我想预约不存在医生明天看诊
+tags: []
+user_context: {}

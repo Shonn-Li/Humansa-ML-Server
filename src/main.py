@@ -771,6 +771,11 @@ def register_humansa_endpoints(app):
             app.register_blueprint(humansa_v2_responses_bp)
             logger.info("✅ Humansa V2 Responses API endpoints registered")
             
+            # Register Humansa v2 Forms API
+            from humansa.v2.forms.form_api import forms_bp
+            app.register_blueprint(forms_bp)
+            logger.info("✅ Humansa V2 Forms API endpoints registered")
+            
             # Register Mem0 API endpoints
             from humansa.memory.api import mem0_bp
             app.register_blueprint(mem0_bp)

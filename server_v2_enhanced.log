@@ -83,8 +83,7 @@ INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search
 INFO:chat.websearch.web_search_processor:Web search cache table initialized
 INFO:__main__:✅ Humansa V2 Conversation API endpoints registered
 INFO:__main__:✅ Humansa V2 Responses API endpoints registered
-INFO:__main__:✅ Mem0 API endpoints registered
-INFO:__main__:✅ Humansa v2 blueprint registered
+WARNING:__main__:⚠️ Humansa v2 not available: cannot import name 'AppointmentFormService' from 'src.humansa.v2.forms.form_service' (/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py)
 INFO:__main__:✅ Humansa endpoints registered successfully
 INFO:__main__:=== YouWoAI ML Server Starting ===
 INFO:__main__:Server will be available at: http://0.0.0.0:6001
@@ -128,15 +127,18 @@ INFO:__main__:   - ✅ Link analyzer: Independent module
 INFO:__main__:   - ✅ Embeddings: New modular architecture
 INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
 INFO:__main__:
-INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
-INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
-INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
-INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
-INFO:__main__:✅ Mem0 memory layer initialized for Humansa
 INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
 INFO:__main__:   Environment: test
 INFO:__main__:✅ Database pool created successfully
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.v2.api:Initializing Mem0 manager...
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+WARNING:asyncio:Executing <Task pending name='Task-3' coro=<Lifespan.handle_lifespan() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/hypercorn/asyncio/lifespan.py:55> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/hypercorn/asyncio/run.py:83> took 0.280 seconds
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
+INFO:humansa.v2.api:✅ Mem0 manager initialized successfully
 INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
+INFO:humansa.v2.api:Using Azure OpenAI for LLM
 INFO:humansa.v2.api:📦 Initializing HUMANSA V2 with Consolidated Tools
 INFO:humansa.tools.humansa_tools:✅ Database connection verified
 INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
@@ -152,18 +154,14 @@ INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
 INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
 INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
 INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
-
-This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
-
-See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return cls(
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
-
-This implementation will be removed in a v0.13.0.
-
-See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return old_new1(cls, *args, **kwargs)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince20: The `__fields__` attribute is deprecated, use `model_fields` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince20: The `__fields_set__` attribute is deprecated, use `model_fields_set` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince211: Accessing the 'model_computed_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince211: Accessing the 'model_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+  value = getter(object, key)
 INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
 INFO:humansa.v2.api:Humansa v2 system initialized successfully
 INFO:__main__:✅ Humansa v2 system initialized with Consolidated Tools
@@ -183,48 +181,12 @@ INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
 INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
 INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
 INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
-
-This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
-
-See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return cls(
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
-
-This implementation will be removed in a v0.13.0.
-
-See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return old_new1(cls, *args, **kwargs)
 INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
-
-This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
-
-See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return cls(
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
-
-This implementation will be removed in a v0.13.0.
-
-See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return old_new1(cls, *args, **kwargs)
 INFO:humansa.v2.orchestrator_agent_enhanced:Initialized Enhanced HumansaOrchestratorAgent with 6 agent tools
 INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
 INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
 INFO:humansa.v2.orchestrator_agent_consolidated:✅ Initialized consolidated tools (7 core functions)
 INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
-
-This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
-
-See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return cls(
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
-
-This implementation will be removed in a v0.13.0.
-
-See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return old_new1(cls, *args, **kwargs)
 INFO:humansa.v2.orchestrator_agent_consolidated:✅ HumansaOrchestratorAgentConsolidated initialized with dynamic tool loading
 INFO:humansa.v2.api_responses:✅ Consolidated orchestrator initialized (7 tools with dynamic loading)
 INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
@@ -234,93 +196,38 @@ INFO:humansa.v2.orchestrator_agent_transparent:✅ HumansaOrchestratorAgentTrans
 INFO:humansa.v2.api_responses:✅ Transparent orchestrator initialized (captures tool calls)
 INFO:humansa.v2.api_responses:✅ Responses API orchestrators initialized successfully
 INFO:__main__:✅ Humansa v2 Responses API initialized
-[2025-08-01 14:22:47 -0700] [81163] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
+[2025-08-02 09:05:07 -0700] [40178] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
 INFO:hypercorn.error:Running on http://0.0.0.0:6001 (CTRL + C to quit)
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/api.py:481: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/api.py:501: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   "timestamp": datetime.utcnow().isoformat(),
  * Serving Quart app 'main'
  * Debug mode: True
  * Please use an ASGI server (e.g. Hypercorn) directly in production
  * Running on http://0.0.0.0:6001 (CTRL + C to quit)
-[2025-08-01 14:22:47 -0700] [81163] [INFO] 127.0.0.1:56977 GET /v2/humansa/health 1.1 200 201 3484
-[2025-08-01 14:22:47 -0700] [81163] [INFO] 127.0.0.1:56979 GET /v2/humansa/health 1.1 200 201 1143
-[2025-08-01 14:22:47 -0700] [81163] [INFO] 127.0.0.1:56981 GET /v2/humansa/health 1.1 200 201 1027
-[2025-08-01 14:22:47 -0700] [81163] [INFO] 127.0.0.1:56987 GET /v2/humansa/memory/status 1.1 200 143 933
-[2025-08-01 14:22:47 -0700] [81163] [INFO] 127.0.0.1:56989 GET /v2/humansa/health 1.1 200 201 1033
+[2025-08-02 09:05:07 -0700] [40178] [INFO] 127.0.0.1:55106 GET /v2/humansa/health 1.1 200 201 2225
+[2025-08-02 09:05:07 -0700] [40178] [INFO] 127.0.0.1:55112 GET /v2/humansa/health 1.1 200 201 1206
+[2025-08-02 09:05:07 -0700] [40178] [INFO] 127.0.0.1:55114 GET /v2/humansa/health 1.1 200 201 892
+[2025-08-02 09:05:07 -0700] [40178] [INFO] 127.0.0.1:55116 GET /v2/humansa/memory/status 1.1 200 143 815
+[2025-08-02 09:05:08 -0700] [40178] [INFO] 127.0.0.1:55118 GET /v2/humansa/health 1.1 200 201 826
 INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 你是谁？...
 INFO:humansa.v2.orchestrator_agent_transparent:🆔 Detected identity question in streaming - returning HUMANSA identity
-INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_humansa_v2_001_df97b76b_1754083367 for user: test_user_humansa_v2_001
-INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_humansa_v2_001_df97b76b_1754083367 (5 tokens)
-INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_humansa_v2_001_df97b76b_1754083367 (164 tokens)
-INFO:humansa.v2.response_manager:Created response resp_a09d4a5f030f_1754083367 for conversation conv_test_user_humansa_v2_001_df97b76b_1754083367
-[2025-08-01 14:22:47 -0700] [81163] [INFO] 127.0.0.1:56989 POST /v2/humansa/responses/stream 1.1 200 - 2617
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_humansa_v2_001_a95adb31_1754150708 for user: test_user_humansa_v2_001
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_humansa_v2_001_a95adb31_1754150708 (5 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_humansa_v2_001_a95adb31_1754150708 (164 tokens)
+INFO:humansa.v2.response_manager:Created response resp_114427679059_1754150708 for conversation conv_test_user_humansa_v2_001_a95adb31_1754150708
+[2025-08-02 09:05:08 -0700] [40178] [INFO] 127.0.0.1:55118 POST /v2/humansa/responses/stream 1.1 200 - 3561
 INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 介绍一下诺亚新舟...
 INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
 INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
-
-This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
-
-See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return cls(
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
-
-This implementation will be removed in a v0.13.0.
-
-See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return old_new1(cls, *args, **kwargs)
-INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-INFO:humansa.tools.consolidated_tools:🔍 Unified search: query='诺亚新舟', type=None, city=None
-INFO:humansa.postgres.database:📋 Using fallback: returned 1 general doctors
-INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-INFO:humansa.tools.consolidated_tools:🔍 Unified search: query='诺亚新舟诊所', type=clinic, city=None
-INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-INFO:humansa.tools.consolidated_tools:🔍 Unified search: query='诺亚新舟', type=service, city=None
-INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-INFO:humansa.tools.consolidated_tools:ℹ️ Information lookup: type=location, entity=诺亚新舟
-INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_humansa_v2_001_628dadfa_1754083382 for user: test_user_humansa_v2_001
-INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_humansa_v2_001_628dadfa_1754083382 (12 tokens)
-INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_humansa_v2_001_628dadfa_1754083382 (179 tokens)
-INFO:humansa.v2.response_manager:Created response resp_8522f365deff_1754083382 for conversation conv_test_user_humansa_v2_001_628dadfa_1754083382
-[2025-08-01 14:23:02 -0700] [81163] [INFO] 127.0.0.1:57039 POST /v2/humansa/responses/stream 1.1 200 - 13514234
-WARNING:asyncio:Executing <Task finished name='Task-54' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 13.514 seconds
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-02 09:05:09 -0700] [40178] [INFO] 127.0.0.1:55127 POST /v2/humansa/responses/stream 1.1 200 - 2789
 INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 你能做什么？...
 INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
 INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
-
-This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
-
-See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return cls(
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
-
-This implementation will be removed in a v0.13.0.
-
-See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return old_new1(cls, *args, **kwargs)
-INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_humansa_v2_001_ea4b72ad_1754083389 for user: test_user_humansa_v2_001
-INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_humansa_v2_001_ea4b72ad_1754083389 (8 tokens)
-INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_humansa_v2_001_ea4b72ad_1754083389 (356 tokens)
-INFO:humansa.v2.response_manager:Created response resp_d761978f96e7_1754083389 for conversation conv_test_user_humansa_v2_001_ea4b72ad_1754083389
-[2025-08-01 14:23:09 -0700] [81163] [INFO] 127.0.0.1:57175 POST /v2/humansa/responses/stream 1.1 200 - 6339703
-WARNING:asyncio:Executing <Task finished name='Task-70' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 6.340 seconds
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-02 09:05:10 -0700] [40178] [INFO] 127.0.0.1:55133 POST /v2/humansa/responses/stream 1.1 200 - 2634
 INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 诺亚新舟的口号是什么？...
 INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
 INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
-
-This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
-
-See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return cls(
-/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
-
-This implementation will be removed in a v0.13.0.
-
-See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
-  return old_new1(cls, *args, **kwargs)
-INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-INFO:humansa.tools.consolidated_tools:ℹ️ Information lookup: type=general, entity=诺亚新舟
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-02 09:05:11 -0700] [40178] [INFO] 127.0.0.1:55138 POST /v2/humansa/responses/stream 1.1 200 - 2168

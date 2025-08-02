@@ -54,6 +54,9 @@ class WorkflowState:
     emergency_flags: List[Dict[str, Any]] = field(default_factory=list)
     follow_up_actions: List[str] = field(default_factory=list)
     
+    # Form-related state
+    active_forms: Dict[str, Any] = field(default_factory=dict)  # form_id -> form data
+    
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for serialization"""
         return {
@@ -69,7 +72,8 @@ class WorkflowState:
             "agent_outputs": self.agent_outputs,
             "reasoning_chain": self.reasoning_chain,
             "emergency_flags": self.emergency_flags,
-            "follow_up_actions": self.follow_up_actions
+            "follow_up_actions": self.follow_up_actions,
+            "active_forms": self.active_forms
         }
 
 
@@ -86,6 +90,8 @@ class HumansaOrchestratorPattern2Fixed:
         memory_manager: Optional[MemoryManager] = None,
         context_manager: Optional[ContextManager] = None,
         callback_manager: Optional[CallbackManager] = None,
+        db_config: Optional[Dict[str, Any]] = None,
+        db_pool: Optional[Any] = None,
         debug: bool = False
     ):
         self.llm = llm
@@ -93,7 +99,16 @@ class HumansaOrchestratorPattern2Fixed:
         self.memory_manager = memory_manager
         self.context_manager = context_manager or ContextManager()
         self.callback_manager = callback_manager
+        self.db_config = db_config
+        self.db_pool = db_pool
         self.debug = debug
+        
+        # Initialize form tools if database is configured
+        self.form_tools = None
+        self.form_service = None
+        if self.db_pool or self.db_config:
+            self.form_tools = True  # Flag to enable form tools
+            logger.info("✅ Form tools enabled for appointment booking")
         
         # Create orchestrator tools from sub-agents
         self.orchestrator_tools = self._create_agent_tools()
@@ -535,10 +550,209 @@ class HumansaOrchestratorPattern2Fixed:
             description="Recall previously stored user information"
         ))
         
+        # Form Tools for Appointment Booking
+        if self.form_tools:
+            def create_appointment_form(request: str) -> str:
+                """Create appointment form from user request"""
+                logger.info(f"📋 Creating appointment form for: {request}")
+                
+                # Update state
+                if self._current_state:
+                    self._current_state.agents_called.append("FormCreator")
+                    self._current_state.reasoning_chain.append(f"Creating appointment form: {request}")
+                
+                try:
+                    # Import form tools
+                    import sys
+                    import os
+                    # Add the project root to path to import form tools
+                    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+                    if project_root not in sys.path:
+                        sys.path.insert(0, project_root)
+                    
+                    from src.humansa.v2.forms.form_tools import create_appointment_form as form_creator
+                    
+                    # Extract user_id from state
+                    user_id = self._current_state.user_id if self._current_state else "unknown"
+                    
+                    # Create form using async function
+                    import asyncio
+                    
+                    async def run_create_form():
+                        result = await form_creator(
+                            user_id=user_id,
+                            query=request,
+                            context={"source": "pattern2_orchestrator"}
+                        )
+                        return result
+                    
+                    try:
+                        result = asyncio.run(run_create_form())
+                    except RuntimeError as e:
+                        if "already running" in str(e):
+                            loop = asyncio.get_event_loop()
+                            result = loop.run_until_complete(run_create_form())
+                        else:
+                            raise
+                    
+                    # Store form in state if created
+                    if result.get("success") and result.get("form_id"):
+                        if self._current_state:
+                            self._current_state.active_forms[result["form_id"]] = result
+                    
+                    # Format response
+                    if result.get("success"):
+                        return f"预约表单已创建（表单号：{result['form_id']}）\n\n{result.get('preview', '')}"
+                    else:
+                        return result.get("message", "创建预约表单失败")
+                    
+                except Exception as e:
+                    logger.error(f"Form creation error: {e}")
+                    return f"创建预约表单失败: {str(e)}"
+            
+            def update_appointment_form(form_id: str, updates: str) -> str:
+                """Update existing appointment form"""
+                logger.info(f"📝 Updating form {form_id} with: {updates}")
+                
+                # Update state
+                if self._current_state:
+                    self._current_state.agents_called.append("FormUpdater")
+                    self._current_state.reasoning_chain.append(f"Updating form {form_id}: {updates}")
+                
+                try:
+                    # Import form tools
+                    import sys
+                    import os
+                    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+                    if project_root not in sys.path:
+                        sys.path.insert(0, project_root)
+                    
+                    from src.humansa.v2.forms.form_tools import update_appointment_form as form_updater
+                    
+                    user_id = self._current_state.user_id if self._current_state else "unknown"
+                    
+                    # Update form using async function
+                    import asyncio
+                    
+                    async def run_update_form():
+                        result = await form_updater(
+                            form_id=form_id,
+                            user_input=updates,
+                            user_id=user_id
+                        )
+                        return result
+                    
+                    try:
+                        result = asyncio.run(run_update_form())
+                    except RuntimeError as e:
+                        if "already running" in str(e):
+                            loop = asyncio.get_event_loop()
+                            result = loop.run_until_complete(run_update_form())
+                        else:
+                            raise
+                    
+                    # Update form in state
+                    if result.get("success") and self._current_state and form_id in self._current_state.active_forms:
+                        self._current_state.active_forms[form_id].update(result)
+                    
+                    # Format response
+                    if result.get("success"):
+                        return f"预约信息已更新\n\n{result.get('preview', '')}" 
+                    else:
+                        return result.get("message", "更新表单失败")
+                    
+                except Exception as e:
+                    logger.error(f"Form update error: {e}")
+                    return f"更新表单失败: {str(e)}"
+            
+            def submit_appointment_form(form_id: str) -> str:
+                """Submit appointment form for booking"""
+                logger.info(f"✅ Submitting form {form_id}")
+                
+                # Update state
+                if self._current_state:
+                    self._current_state.agents_called.append("FormSubmitter")
+                    self._current_state.reasoning_chain.append(f"Submitting appointment form: {form_id}")
+                
+                try:
+                    # Import form tools
+                    import sys
+                    import os
+                    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+                    if project_root not in sys.path:
+                        sys.path.insert(0, project_root)
+                    
+                    from src.humansa.v2.forms.form_tools import submit_appointment_form as form_submitter
+                    
+                    user_id = self._current_state.user_id if self._current_state else "unknown"
+                    
+                    # Submit form using async function
+                    import asyncio
+                    
+                    async def run_submit_form():
+                        result = await form_submitter(
+                            form_id=form_id,
+                            user_id=user_id
+                        )
+                        return result
+                    
+                    try:
+                        result = asyncio.run(run_submit_form())
+                    except RuntimeError as e:
+                        if "already running" in str(e):
+                            loop = asyncio.get_event_loop()
+                            result = loop.run_until_complete(run_submit_form())
+                        else:
+                            raise
+                    
+                    # Remove form from active forms if successful
+                    if result.get("success") and self._current_state and form_id in self._current_state.active_forms:
+                        del self._current_state.active_forms[form_id]
+                    
+                    # Format response
+                    if result.get("success"):
+                        return result.get("message", "预约已成功提交")
+                    else:
+                        return result.get("message", "提交预约失败")
+                    
+                except Exception as e:
+                    logger.error(f"Form submission error: {e}")
+                    return f"提交预约失败: {str(e)}"
+            
+            # Add form tools
+            tools.append(FunctionTool.from_defaults(
+                fn=create_appointment_form,
+                name="create_appointment_form",
+                description="Create appointment booking form from user request. Use this when user wants to book an appointment."
+            ))
+            
+            tools.append(FunctionTool.from_defaults(
+                fn=update_appointment_form,
+                name="update_appointment_form", 
+                description="Update existing appointment form with new information"
+            ))
+            
+            tools.append(FunctionTool.from_defaults(
+                fn=submit_appointment_form,
+                name="submit_appointment_form",
+                description="Submit confirmed appointment form to complete booking"
+            ))
+        
         return tools
     
     def _get_orchestrator_prompt(self) -> str:
         """System prompt for the orchestrator"""
+        # Import form instructions
+        try:
+            from src.humansa.v2.forms.form_tool_instructions import (
+                APPOINTMENT_FORM_SCHEMA,
+                FORM_COLLECTION_INSTRUCTIONS,
+                ENHANCED_ORCHESTRATOR_PROMPT
+            )
+            form_instructions = ENHANCED_ORCHESTRATOR_PROMPT
+        except:
+            form_instructions = ""
+        
         return f"""你是诺亚新舟健康医疗助理的主协调器。
 
 今天是{datetime.now().strftime('%Y-%m-%d')}。
@@ -549,14 +763,17 @@ class HumansaOrchestratorPattern2Fixed:
 3. 整合所有代理的输出提供完整答案
 4. 智能管理用户信息和对话记忆
 
+{form_instructions}
+
 可用的工具及使用场景：
 
 【医疗咨询工具】
 1. analyze_symptoms - 症状分析和初步评估
    使用场景：头痛、发烧、咳嗽、腹痛等任何症状描述
    
-2. book_appointment - 医生搜索和预约服务
-   使用场景：找医生、挂号、预约、查询医院、科室信息
+2. book_appointment - 医生搜索和预约服务（仅用于查询医生信息）
+   使用场景：查找医生、查询医院、科室信息
+   注意：实际预约请使用 create_appointment_form
    
 3. search_products - 健康产品推荐
    使用场景：保健品、维生素、医疗器械、健康产品推荐
@@ -583,16 +800,35 @@ class HumansaOrchestratorPattern2Fixed:
    - 用户询问"我的信息"、"我之前说过什么"
    - 需要考虑用户特殊情况时
 
+【预约表单工具】
+8. create_appointment_form - 创建预约表单
+   使用场景：用户想要预约医生时使用
+   - 从用户描述中提取预约信息
+   - 返回form_id供确认
+   
+9. update_appointment_form - 更新预约表单
+   使用场景：用户想要修改预约信息
+   
+10. submit_appointment_form - 提交预约表单
+    使用场景：用户确认预约信息后提交
+
 工具选择原则：
 - 优先根据用户意图选择最相关的工具
 - 症状相关问题必须使用 analyze_symptoms
-- 预约相关问题必须使用 book_appointment
+- 查询医生信息使用 book_appointment
+- 实际预约医生使用 create_appointment_form
 - 产品推荐使用 search_products
 - 药物相关使用 medication_info
 - 其他健康咨询使用 general_medical
 - 用户提到个人信息时主动使用 store_user_info 存储
 - 提供建议前使用 recall_user_info 查询相关历史
 - 可以根据需要调用多个工具
+
+预约流程：
+1. 用户表达预约意图时，使用 create_appointment_form 创建表单
+2. 表单返回 form_id 和预览信息
+3. 如果用户要修改，使用 update_appointment_form
+4. 用户确认后，使用 submit_appointment_form 完成预约
 
 记忆管理原则：
 - 主动记录：用户提到重要个人信息时立即存储
@@ -953,6 +1189,8 @@ def create_pattern2_orchestrator_fixed(
     llm: LLM,
     agents: Dict[str, Any],
     memory_manager: Optional[MemoryManager] = None,
+    db_config: Optional[Dict[str, Any]] = None,
+    db_pool: Optional[Any] = None,
     debug: bool = False
 ) -> HumansaOrchestratorPattern2Fixed:
     """
@@ -962,6 +1200,8 @@ def create_pattern2_orchestrator_fixed(
         llm: Language model
         agents: Dictionary of initialized sub-agents
         memory_manager: Memory manager for persistence
+        db_config: Database configuration
+        db_pool: Database connection pool
         debug: Enable debug logging
         
     Returns:
@@ -971,5 +1211,7 @@ def create_pattern2_orchestrator_fixed(
         llm=llm,
         agents=agents,
         memory_manager=memory_manager,
+        db_config=db_config,
+        db_pool=db_pool,
         debug=debug
     )

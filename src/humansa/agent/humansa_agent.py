@@ -42,8 +42,8 @@ class HumansaAgenticAgent:
     using structured schemas. NO heuristic patterns or fallback logic.
     """
 
-    def __init__(self, llm: Optional[LLM] = None, tools: Optional[List[BaseTool]] = None,
-                 callback_manager: Optional[CallbackManager] = None, memory_manager=None):
+    def __init__(self, llm: Optional['LLM'] = None, tools: Optional[List['BaseTool']] = None,
+                 callback_manager: Optional['CallbackManager'] = None, memory_manager=None):
         """Initialize the fully agentic agent with multi-agent orchestrator."""
         self.llm = llm
         self.tools = tools or []

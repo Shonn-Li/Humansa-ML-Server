@@ -1,0 +1,30 @@
+category: emergency
+expectations:
+  agents_touched:
+  - EmergencyDetector
+  - FormCreator
+  emergency_flags:
+  - chest_pain
+  - breathing_difficulty
+  follow_up_actions: []
+  forbidden_patterns: []
+  keywords:
+  - 紧急
+  - 急诊
+  - 立即
+  - 马上
+  max_response_length: 5000
+  min_response_length: 100
+  required_tools: []
+  response_time_max: 30.0
+  thinking_flow_keywords: []
+id: apt_006_urgent_symptoms
+metadata:
+  expect_emergency_routing: true
+  is_urgent: true
+name: Urgent symptom detection
+previous_turns: []
+priority: 1
+query: 我胸口剧痛，呼吸困难，需要紧急预约
+tags: []
+user_context: {}

@@ -1,0 +1,26 @@
+category: appointment
+expectations:
+  agents_touched:
+  - FormCreator
+  emergency_flags: []
+  follow_up_actions: []
+  forbidden_patterns: []
+  keywords:
+  - 09:00
+  - 上午九点
+  max_response_length: 5000
+  min_response_length: 50
+  required_tools:
+  - create_appointment_form
+  response_time_max: 30.0
+  thinking_flow_keywords: []
+id: apt_007d_time_chinese
+metadata:
+  test_time_parsing: true
+  time_expression: 明天上午九点
+name: 'Time parsing: 明天上午九点'
+previous_turns: []
+priority: 1
+query: 预约李医生明天上午九点看诊，我叫测试用户，电话13500135000
+tags: []
+user_context: {}

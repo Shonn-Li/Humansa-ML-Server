@@ -185,16 +185,7 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
                 logger.warning(f"   ⚠ GeneralMedicalAgent initialization failed: {e}")
             
             try:
-                pattern2_agents["AppointmentAgent"] = AppointmentAgent(
-                    llm=llm,
-                    db_config={
-                        'host': os.getenv('DB_HOST', 'localhost'),
-                        'port': int(os.getenv('DB_PORT', '5432')),
-                        'database': os.getenv('DB_NAME', 'postgres'),
-                        'user': os.getenv('DB_USER', 'postgres'),
-                        'password': os.getenv('DB_PASSWORD', '')
-                    }
-                )
+                pattern2_agents["AppointmentAgent"] = AppointmentAgent(llm=llm)
                 logger.info("   ✓ AppointmentAgent initialized")
             except Exception as e:
                 logger.warning(f"   ⚠ AppointmentAgent initialization failed: {e}")
@@ -216,11 +207,22 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
             if "GeneralMedicalAgent" in pattern2_agents:
                 pattern2_agents["GeneralAgent"] = pattern2_agents["GeneralMedicalAgent"]
             
+            # Define db_config for Pattern 2
+            db_config = {
+                'host': os.getenv('DB_HOST', 'localhost'),
+                'port': int(os.getenv('DB_PORT', '5432')),
+                'database': os.getenv('DB_NAME', 'postgres'),
+                'user': os.getenv('DB_USER', 'postgres'),
+                'password': os.getenv('DB_PASSWORD', '')
+            }
+            
             # Create Pattern 2 orchestrator (fixed version)
             pattern2_orchestrator = create_pattern2_orchestrator_fixed(
                 llm=llm,
                 agents=pattern2_agents,
                 memory_manager=memory_manager,
+                db_config=db_config,
+                db_pool=db_pool,
                 debug=ENABLE_ENHANCED_LOGGING
             )
             logger.info(f"✅ Pattern 2 orchestrator (fixed) initialized with {len(pattern2_agents)} agents")
@@ -332,6 +334,9 @@ async def create_response():
                 # Build output array with reasoning
                 output = [{"type": "output_text", "text": content}]
                 
+                # Initialize response metadata
+                response_metadata = {}
+                
                 # Add usage metadata
                 usage = result.get('usage', {})
                 if 'workflow_state' in usage:
@@ -340,6 +345,17 @@ async def create_response():
                     # Log workflow state for debugging
                     logger.info(f"Pattern 2 workflow state: agents_called={workflow_state.get('agents_called', [])}")
                     logger.info(f"Pattern 2 agent outputs: {list(workflow_state.get('agent_outputs', {}).keys())}")
+                    
+                    # Extract form_id from active_forms if available
+                    active_forms = workflow_state.get('active_forms', {})
+                    if active_forms:
+                        # Get the most recent form_id
+                        form_ids = list(active_forms.keys())
+                        if form_ids:
+                            latest_form_id = form_ids[-1]
+                            # Add form_id to metadata
+                            response_metadata['form_id'] = latest_form_id
+                            logger.info(f"Added form_id to metadata: {latest_form_id}")
                     
                     # Add tool calls from workflow state
                     for agent in workflow_state.get('agents_called', []):
@@ -360,7 +376,8 @@ async def create_response():
                     },
                     "metadata": {
                         "orchestrator": "pattern2",
-                        "workflow_id": workflow_state.get('workflow_id', '') if 'workflow_state' in usage else ''
+                        "workflow_id": workflow_state.get('workflow_id', '') if 'workflow_state' in usage else '',
+                        **response_metadata  # Include any additional metadata like form_id
                     }
                 }
             else:

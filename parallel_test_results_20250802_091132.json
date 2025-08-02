@@ -1,0 +1,482 @@
+{
+  "total_tests": 70,
+  "successful": 0,
+  "failed": 70,
+  "success_rate": 0.0,
+  "total_time": 0.07436919212341309,
+  "average_time_per_test": 0.0010624170303344727,
+  "configuration": {
+    "batch_size": 10,
+    "max_workers": 7
+  },
+  "results": [
+    {
+      "test_id": 1,
+      "test_name": "Basic Identity Query",
+      "success": false,
+      "response_length": 0,
+      "found_keywords": [],
+      "missing_keywords": [
+        "\u8bfa\u4e9a\u65b0\u821f",
+        "\u5c0f\u8bfa",
+        "\u5065\u5eb7\u533b\u7597\u52a9\u7406",
+        "AI\u5065\u5eb7\u7ba1\u5bb6"
+      ],
+      "response_time": 0.010160207748413086,
+      "worker_id": 0
+    },
+    {
+      "test_id": 2,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.006498098373413086
+    },
+    {
+      "test_id": 3,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.012096881866455078
+    },
+    {
+      "test_id": 4,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.006747722625732422
+    },
+    {
+      "test_id": 5,
+      "test_name": "English Identity Query",
+      "success": false,
+      "response_length": 0,
+      "found_keywords": [],
+      "missing_keywords": [
+        "Humansa",
+        "health",
+        "assistant",
+        "medical"
+      ],
+      "response_time": 0.007017850875854492,
+      "worker_id": 0
+    },
+    {
+      "test_id": 6,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.005922079086303711
+    },
+    {
+      "test_id": 7,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.0061070919036865234
+    },
+    {
+      "test_id": 8,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.006457090377807617
+    },
+    {
+      "test_id": 9,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.005837917327880859
+    },
+    {
+      "test_id": 10,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.0058519840240478516
+    },
+    {
+      "test_id": 11,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.008185148239135742
+    },
+    {
+      "test_id": 12,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.007603883743286133
+    },
+    {
+      "test_id": 13,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.012087106704711914
+    },
+    {
+      "test_id": 14,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.006696939468383789
+    },
+    {
+      "test_id": 15,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.006432056427001953
+    },
+    {
+      "test_id": 16,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.006523847579956055
+    },
+    {
+      "test_id": 17,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.005857944488525391
+    },
+    {
+      "test_id": 18,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.006699085235595703
+    },
+    {
+      "test_id": 19,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.0059130191802978516
+    },
+    {
+      "test_id": 20,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.005825042724609375
+    },
+    {
+      "test_id": 21,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.011245012283325195
+    },
+    {
+      "test_id": 22,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.012682914733886719
+    },
+    {
+      "test_id": 23,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.006350994110107422
+    },
+    {
+      "test_id": 24,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.006521701812744141
+    },
+    {
+      "test_id": 25,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.0067577362060546875
+    },
+    {
+      "test_id": 26,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.005911827087402344
+    },
+    {
+      "test_id": 27,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.006478071212768555
+    },
+    {
+      "test_id": 28,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.006151914596557617
+    },
+    {
+      "test_id": 29,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.005787849426269531
+    },
+    {
+      "test_id": 30,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.005800008773803711
+    },
+    {
+      "test_id": 31,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.01042628288269043
+    },
+    {
+      "test_id": 32,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.012695074081420898
+    },
+    {
+      "test_id": 33,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.0062448978424072266
+    },
+    {
+      "test_id": 34,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.006463050842285156
+    },
+    {
+      "test_id": 35,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.00692296028137207
+    },
+    {
+      "test_id": 36,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.005952119827270508
+    },
+    {
+      "test_id": 37,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.0064182281494140625
+    },
+    {
+      "test_id": 38,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.006159067153930664
+    },
+    {
+      "test_id": 39,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.005780935287475586
+    },
+    {
+      "test_id": 40,
+      "success": false,
+      "error": "API error 500: {\n  \"error\": \"from_tools\"\n}\n",
+      "response_time": 0.0058209896087646484
+    },
+    {
+      "test_id": 41,
+      "success": false,
+      "error": "'query'",
+      "response_time": 1.9073486328125e-06,
+      "worker_id": 4
+    },
+    {
+      "test_id": 42,
+      "success": false,
+      "error": "'query'",
+      "response_time": 1.1920928955078125e-06,
+      "worker_id": 4
+    },
+    {
+      "test_id": 43,
+      "success": false,
+      "error": "'query'",
+      "response_time": 9.5367431640625e-07,
+      "worker_id": 4
+    },
+    {
+      "test_id": 44,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 4
+    },
+    {
+      "test_id": 45,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 4
+    },
+    {
+      "test_id": 46,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 4
+    },
+    {
+      "test_id": 47,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 4
+    },
+    {
+      "test_id": 48,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 4
+    },
+    {
+      "test_id": 49,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 4
+    },
+    {
+      "test_id": 50,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 4
+    },
+    {
+      "test_id": 51,
+      "success": false,
+      "error": "'query'",
+      "response_time": 9.5367431640625e-07,
+      "worker_id": 5
+    },
+    {
+      "test_id": 52,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 5
+    },
+    {
+      "test_id": 53,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 5
+    },
+    {
+      "test_id": 54,
+      "success": false,
+      "error": "'query'",
+      "response_time": 7.152557373046875e-07,
+      "worker_id": 5
+    },
+    {
+      "test_id": 55,
+      "success": false,
+      "error": "'query'",
+      "response_time": 9.5367431640625e-07,
+      "worker_id": 5
+    },
+    {
+      "test_id": 56,
+      "success": false,
+      "error": "'query'",
+      "response_time": 1.1920928955078125e-06,
+      "worker_id": 5
+    },
+    {
+      "test_id": 57,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 5
+    },
+    {
+      "test_id": 58,
+      "success": false,
+      "error": "'query'",
+      "response_time": 9.5367431640625e-07,
+      "worker_id": 5
+    },
+    {
+      "test_id": 59,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 5
+    },
+    {
+      "test_id": 60,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 5
+    },
+    {
+      "test_id": 61,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 6
+    },
+    {
+      "test_id": 62,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 6
+    },
+    {
+      "test_id": 63,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 6
+    },
+    {
+      "test_id": 64,
+      "success": false,
+      "error": "'query'",
+      "response_time": 1.1920928955078125e-06,
+      "worker_id": 6
+    },
+    {
+      "test_id": 65,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 6
+    },
+    {
+      "test_id": 66,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 6
+    },
+    {
+      "test_id": 67,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 6
+    },
+    {
+      "test_id": 68,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 6
+    },
+    {
+      "test_id": 69,
+      "success": false,
+      "error": "'query'",
+      "response_time": 0.0,
+      "worker_id": 6
+    },
+    {
+      "test_id": 70,
+      "success": false,
+      "error": "'query'",
+      "response_time": 9.5367431640625e-07,
+      "worker_id": 6
+    }
+  ]
+}

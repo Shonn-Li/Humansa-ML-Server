@@ -1,0 +1,32 @@
+category: appointment
+expectations:
+  agents_touched:
+  - FormCreator
+  emergency_flags: []
+  follow_up_actions: []
+  forbidden_patterns: []
+  keywords:
+  - 预约信息
+  - 李明医生
+  - 明天
+  - 上午9点
+  - 头痛
+  - 张三
+  - '13800138000'
+  max_response_length: 5000
+  min_response_length: 100
+  required_tools:
+  - create_appointment_form
+  response_time_max: 5.0
+  thinking_flow_keywords: []
+id: apt_001_complete_request
+metadata:
+  expect_confirmation_prompt: true
+  expect_form_id: true
+  form_should_complete: true
+name: Complete appointment request with all info
+previous_turns: []
+priority: 1
+query: 我想预约李明医生明天上午9点看头痛，我叫张三，电话13800138000
+tags: []
+user_context: {}

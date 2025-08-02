@@ -1,0 +1,28 @@
+category: medical_consultation
+expectations:
+  agents_touched:
+  - SymptomAnalyzer
+  - FormCreator
+  emergency_flags: []
+  follow_up_actions: []
+  forbidden_patterns: []
+  keywords:
+  - 头痛
+  - 发烧
+  - 咳嗽
+  - 内科
+  max_response_length: 5000
+  min_response_length: 100
+  required_tools: []
+  response_time_max: 30.0
+  thinking_flow_keywords: []
+id: apt_011_multiple_symptoms
+metadata:
+  expect_all_symptoms: true
+  symptom_count: 3
+name: Handle multiple symptoms
+previous_turns: []
+priority: 1
+query: 我头痛、发烧、咳嗽，想预约内科医生，我叫郑十，电话13200132000
+tags: []
+user_context: {}

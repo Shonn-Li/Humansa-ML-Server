@@ -1,0 +1,29 @@
+category: appointment
+expectations:
+  agents_touched:
+  - DepartmentSearch
+  - FormCreator
+  emergency_flags: []
+  follow_up_actions: []
+  forbidden_patterns: []
+  keywords:
+  - 皮肤科
+  - 专家
+  - 明天
+  max_response_length: 5000
+  min_response_length: 100
+  required_tools:
+  - search_doctors_by_department
+  - create_appointment_form
+  response_time_max: 30.0
+  thinking_flow_keywords: []
+id: apt_009_department_booking
+metadata:
+  booking_type: department
+  expect_doctor_suggestions: true
+name: Book by department
+previous_turns: []
+priority: 1
+query: 我想预约皮肤科明天的专家门诊，我叫孙八，电话13400134000
+tags: []
+user_context: {}
