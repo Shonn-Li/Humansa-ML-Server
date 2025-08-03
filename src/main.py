@@ -23,6 +23,8 @@ import sys
 import json
 import logging
 import warnings
+import time
+import asyncio
 from quart import Quart, jsonify, request, Response
 from quart_cors import cors
 from dotenv import load_dotenv
@@ -362,6 +364,11 @@ def register_chat_endpoints(app):
                             # It's an async generator, iterate over it
                             async for chunk in stream_response:
                                 chunk_count += 1
+                                
+                                # Enhanced logging for debugging
+                                event_type = chunk.get('type', 'unknown')
+                                current_time = time.time() - start_time
+                                
                                 if chunk_count <= 3:  # Log first 3 chunks
                                     truncated_chunk = truncate_dict(
                                         chunk, max_length=200)
@@ -370,7 +377,11 @@ def register_chat_endpoints(app):
                                 elif chunk_count == 4:
                                     logger.info(
                                         f"📦 ... (logging first 3 chunks only, total so far: {chunk_count})")
-
+                                
+                                # Log important events for debugging
+                                if event_type in ['response.completed', 'response.done', 'response.title_generated']:
+                                    logger.info(f"🎯 Event {event_type} sent at {current_time:.2f}s (chunk #{chunk_count})")
+                                
                                 yield f"data: {json.dumps(chunk, cls=DecimalEncoder)}\n\n"
 
                             end_time = time.time()
@@ -747,19 +758,81 @@ def register_embedding_endpoints(app):
             if not conversation_id:
                 return jsonify({"error": "conversation_id is required"}), 400
 
-            # Import the conversation embedder
-            # Create and run embedder
-            from chat.embedding.conversation_embedder import ConversationEmbedder
-            embedder = ConversationEmbedder()
-            result = await embedder.bulk_embed_conversations([conversation_id])
+            # Check if this is an incremental update
+            incremental = request_data.get('incremental', False)
+            messages = request_data.get('messages', [])
+            last_section_id = request_data.get('last_section_id', None)
 
-            return jsonify({
-                "status": "success",
-                "conversation_id": conversation_id,
-                "embedded": result.get("embedded", 0),
-                "skipped": result.get("skipped", 0),
-                "errors": result.get("errors", 0)
-            })
+            # Import the embedding operations and necessary modules
+            from chat.postgres.embedding_operations import EmbeddingDBOperations
+            from chat.embedding.text_processing import ConversationProcessor
+            from chat.embedding.embedding_provider_selector import EmbeddingProviderSelector
+            
+            if incremental and messages:
+                # For incremental updates, we need to embed only the new messages
+                logger.info(f"📝 Incremental embedding for conversation {conversation_id} with {len(messages)} new messages")
+                
+                # Initialize components
+                db = EmbeddingDBOperations()
+                processor = ConversationProcessor()
+                embedder = EmbeddingProviderSelector().get_embedding_client()
+                
+                # Process messages into chunks
+                chunks = processor.chunk_conversation_messages(messages)
+                
+                if chunks:
+                    # Create embeddings for chunks
+                    chunk_texts = [chunk['text'] for chunk in chunks]
+                    embeddings = await asyncio.to_thread(
+                        embedder.get_embeddings_with_retry,
+                        chunk_texts,
+                        max_retries=3,
+                        batch_size=50
+                    )
+                    
+                    # Prepare embeddings data
+                    embeddings_data = []
+                    for embedding, chunk in zip(embeddings, chunks):
+                        embeddings_data.append((
+                            embedding,
+                            chunk['text'],
+                            chunk['source'],
+                            chunk['metadata']
+                        ))
+                    
+                    # Save with incremental flag
+                    result = await asyncio.to_thread(
+                        db.save_conversation_embeddings,
+                        conversation_id,
+                        embeddings_data,
+                        incremental=True,
+                        last_section_id=last_section_id
+                    )
+                else:
+                    result = {"embedded_count": 0, "last_section_id": last_section_id}
+                
+                return jsonify({
+                    "status": "success",
+                    "conversation_id": conversation_id,
+                    "embedded_count": result.get("embedded_count", 0),
+                    "last_section_id": result.get("last_section_id", None),
+                    "incremental": True
+                })
+            else:
+                # For full embedding, use the existing ConversationEmbedder
+                logger.info(f"🔄 Full embedding for conversation {conversation_id}")
+                from chat.embedding.conversation_embedder import ConversationEmbedder
+                embedder = ConversationEmbedder()
+                result = await embedder.bulk_embed_conversations([conversation_id])
+
+                return jsonify({
+                    "status": "success",
+                    "conversation_id": conversation_id,
+                    "embedded": result.get("embedded_count", 0),
+                    "skipped": result.get("skipped", 0),
+                    "errors": result.get("errors", 0),
+                    "incremental": False
+                })
 
         except Exception as e:
             logger.error(f"❌ Conversation embedding error: {e}")

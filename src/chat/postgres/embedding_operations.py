@@ -274,22 +274,49 @@ class EmbeddingDBOperations:
             logger.error(f"Failed to save note embeddings for {note_id}: {e}")
             return False
 
-    def save_conversation_embeddings(self, conversation_id: int, embeddings_data: List[Tuple]) -> bool:
-        """Save conversation embeddings to database using correct schema"""
+    def save_conversation_embeddings(self, conversation_id: int, embeddings_data: List[Tuple], incremental: bool = False, last_section_id: int = None) -> Dict[str, Any]:
+        """Save conversation embeddings to database using correct schema
+        
+        Args:
+            conversation_id: ID of the conversation
+            embeddings_data: List of tuples (embedding, text, source, metadata)
+            incremental: If True, append new embeddings instead of replacing all
+            last_section_id: For incremental mode, the last section_id to continue from
+            
+        Returns:
+            Dict with embedded_count and last_section_id
+        """
         if not embeddings_data:
-            return True
+            return {"embedded_count": 0, "last_section_id": last_section_id}
 
         try:
             with self.get_connection() as conn:
                 with conn.cursor() as cursor:
-                    # Delete existing embeddings for this conversation
-                    cursor.execute("""
-                        DELETE FROM embedding_v1 
-                        WHERE type_id = %s AND type = 'conversation'
-                    """, (conversation_id,))
+                    start_section_id = 0
+                    
+                    if incremental:
+                        # For incremental updates, get the last section_id if not provided
+                        if last_section_id is None:
+                            cursor.execute("""
+                                SELECT MAX(section_id) FROM embedding_v1 
+                                WHERE type_id = %s AND type = 'conversation'
+                            """, (conversation_id,))
+                            result = cursor.fetchone()
+                            last_section_id = result[0] if result[0] is not None else -1
+                        
+                        start_section_id = last_section_id + 1
+                        logger.info(f"Incremental embedding: starting from section_id {start_section_id}")
+                    else:
+                        # Delete existing embeddings for full re-embedding
+                        cursor.execute("""
+                            DELETE FROM embedding_v1 
+                            WHERE type_id = %s AND type = 'conversation'
+                        """, (conversation_id,))
 
-                    # Insert new embeddings - embeddings_data is list of tuples: (embedding, text, source, metadata)
+                    # Insert new embeddings
+                    final_section_id = start_section_id
                     for idx, (embedding, chunk_text, source, metadata) in enumerate(embeddings_data):
+                        section_id = start_section_id + idx
                         cursor.execute("""
                             INSERT INTO embedding_v1 
                             (type_id, type, section_id, embedding, chunk_text, source, metadata, last_updated)
@@ -297,27 +324,30 @@ class EmbeddingDBOperations:
                         """, (
                             conversation_id,
                             'conversation',
-                            idx,  # Use index as section_id
+                            section_id,
                             embedding,
                             chunk_text,
                             source or 'conversation_message',
-                            json.dumps(
-                                metadata) if metadata else json.dumps({})
+                            json.dumps(metadata) if metadata else json.dumps({})
                         ))
+                        final_section_id = section_id
 
                     conn.commit()
                     logger.info(
-                        f"Saved {len(embeddings_data)} embeddings for conversation {conversation_id}")
+                        f"{'Incrementally saved' if incremental else 'Saved'} {len(embeddings_data)} embeddings for conversation {conversation_id}")
 
                     # Enable embedding for this conversation since it now has embeddings
                     self.enable_conversation_embedding(conversation_id)
 
-                    return True
+                    return {
+                        "embedded_count": len(embeddings_data),
+                        "last_section_id": final_section_id
+                    }
 
         except Exception as e:
             logger.error(
                 f"Failed to save conversation embeddings for {conversation_id}: {e}")
-            return False
+            return {"embedded_count": 0, "last_section_id": last_section_id}
 
     def get_embedding_statistics(self) -> Dict[str, Any]:
         """Get embedding statistics"""

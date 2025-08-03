@@ -15,9 +15,10 @@ from datetime import datetime
 from decimal import Decimal
 
 from .base import BaseAgent
-from ..provider.llm_provider import LLMProviderSelector
+from ..provider.llm_provider import LLMProviderSelector, LLMProvider
 from ..config.system_prompts import SystemPromptManager
 from ..citation.citation_position_tracker import citation_position_tracker
+from ..utils.think_block_parser import ThinkBlockParser
 from llama_index.core.llms import ChatMessage
 
 logger = logging.getLogger(__name__)
@@ -140,10 +141,31 @@ class ResponseAgent(BaseAgent):
         model = request.get("model", "gpt-4.1-nano")
         provider_info = self.llm_provider_manager.get_provider(None, model)
         llm = provider_info["llm"]
+        provider = provider_info["provider"]
         
         # Generate response
         response = await llm.achat(messages)
         response_text = response.message.content if response.message.content else ""
+        
+        # Handle reasoning based on provider and model
+        reasoning_blocks = []
+        
+        # Azure DeepSeek think blocks
+        if provider == LLMProvider.AZURE_INFERENCE and (model.startswith("DeepSeek-") or model.lower().startswith("deepseek")):
+            # Extract think blocks from response
+            clean_text, reasoning_blocks = ThinkBlockParser.extract_all_think_blocks(response_text)
+            response_text = clean_text
+            if reasoning_blocks:
+                logger.info(f"🧠 Extracted {len(reasoning_blocks)} reasoning blocks from Azure DeepSeek response")
+        
+        # O3/O4 reasoning summaries
+        elif model.lower() in ["o3", "o3-mini", "o4-mini"]:
+            # Check for reasoning summary in response
+            if hasattr(response.message, 'additional_kwargs') and response.message.additional_kwargs:
+                reasoning_summary = response.message.additional_kwargs.get("reasoning_summary")
+                if reasoning_summary:
+                    reasoning_blocks = [reasoning_summary]
+                    logger.info(f"🧠 O3/O4 reasoning summary: {reasoning_summary[:100]}...")
         
         # Extract citation annotations if citations are enabled
         annotations = []
@@ -154,10 +176,12 @@ class ResponseAgent(BaseAgent):
             "status": "success",
             "response": response_text,
             "annotations": annotations,  # Now includes all sources with citation positions
+            "reasoning": reasoning_blocks if reasoning_blocks else None,
             "metadata": {
                 "model": request.get("model", "gpt-4.1-nano"),
                 "context_used": bool(combined_context),
-                "citations_enabled": enable_citations
+                "citations_enabled": enable_citations,
+                "has_reasoning": bool(reasoning_blocks)
             }
         }
     
@@ -203,6 +227,17 @@ class ResponseAgent(BaseAgent):
         model = request.get("model", "gpt-4.1-nano")
         provider_info = self.llm_provider_manager.get_provider(None, model)
         llm = provider_info["llm"]
+        provider = provider_info["provider"]
+        
+        # Initialize think block parser for Azure AI Inference
+        think_parser = None
+        is_azure_deepseek = (
+            provider == LLMProvider.AZURE_INFERENCE and 
+            (model.startswith("DeepSeek-") or model.lower().startswith("deepseek"))
+        )
+        if is_azure_deepseek:
+            think_parser = ThinkBlockParser()
+            logger.info(f"🧠 Using ThinkBlockParser for Azure DeepSeek model: {model}")
         
         # Stream response
         try:
@@ -215,30 +250,96 @@ class ResponseAgent(BaseAgent):
             async for chunk in stream:
                 # Handle regular content delta
                 if chunk.delta:
-                    accumulated_response += chunk.delta
-                    yield {
-                        "type": "response_chunk",
-                        "content": chunk.delta,
-                        "metadata": {"agent": "response"}
-                    }
+                    # For Azure DeepSeek, parse think blocks
+                    if think_parser:
+                        regular_content, reasoning_content, has_reasoning = think_parser.process_chunk(chunk.delta)
+                        
+                        # Yield regular content if any
+                        if regular_content:
+                            accumulated_response += regular_content
+                            yield {
+                                "type": "response_chunk",
+                                "content": regular_content,
+                                "metadata": {"agent": "response"}
+                            }
+                        
+                        # Yield completed reasoning content
+                        if reasoning_content:
+                            logger.info(f"🧠 Azure DeepSeek reasoning extracted: {reasoning_content[:50]}...")
+                            yield {
+                                "type": "reasoning_chunk",
+                                "content": reasoning_content,
+                                "metadata": {"agent": "response", "model": model}
+                            }
+                    else:
+                        # Non-Azure or non-DeepSeek models - normal handling
+                        accumulated_response += chunk.delta
+                        yield {
+                            "type": "response_chunk",
+                            "content": chunk.delta,
+                            "metadata": {"agent": "response"}
+                        }
                 
-                # Handle DeepSeek reasoning content
-                # Check if chunk has raw attribute (for llama-index chunks)
+                # Handle provider-specific reasoning content
                 if hasattr(chunk, 'raw') and chunk.raw:
                     raw_chunk = chunk.raw
-                    # Check for DeepSeek reasoning in choices[0].delta
-                    if hasattr(raw_chunk, 'choices') and raw_chunk.choices:
-                        choice = raw_chunk.choices[0]
-                        if hasattr(choice, 'delta') and choice.delta:
-                            delta = choice.delta
-                            # Check for reasoning_content field (DeepSeek R1 specific)
-                            if hasattr(delta, 'reasoning_content') and delta.reasoning_content:
-                                logger.info(f"🧠 DeepSeek reasoning chunk detected: {delta.reasoning_content[:50]}...")
+                    
+                    # Direct DeepSeek API reasoning
+                    if provider == LLMProvider.DEEPSEEK:
+                        # Check for DeepSeek reasoning in choices[0].delta
+                        if hasattr(raw_chunk, 'choices') and raw_chunk.choices:
+                            choice = raw_chunk.choices[0]
+                            if hasattr(choice, 'delta') and choice.delta:
+                                delta = choice.delta
+                                # Check for reasoning_content field (DeepSeek R1 specific)
+                                if hasattr(delta, 'reasoning_content') and delta.reasoning_content:
+                                    logger.info(f"🧠 DeepSeek reasoning chunk detected: {delta.reasoning_content[:50]}...")
+                                    yield {
+                                        "type": "reasoning_chunk", 
+                                        "content": delta.reasoning_content,
+                                        "metadata": {"agent": "response", "model": model}
+                                    }
+                    
+                    # O3/O4 reasoning summaries (may come in final message)
+                    elif model.lower() in ["o3", "o3-mini", "o4-mini"]:
+                        # Check if this is the final chunk with reasoning summary
+                        if isinstance(raw_chunk, dict):
+                            # Check for reasoning summary in the raw response
+                            if "reasoning_summary" in raw_chunk:
+                                reasoning_summary = raw_chunk["reasoning_summary"]
+                                logger.info(f"🧠 O3/O4 reasoning summary detected: {reasoning_summary[:100]}...")
                                 yield {
-                                    "type": "reasoning_chunk", 
-                                    "content": delta.reasoning_content,
-                                    "metadata": {"agent": "response", "model": model}
+                                    "type": "reasoning_chunk",
+                                    "content": reasoning_summary,
+                                    "metadata": {"agent": "response", "model": model, "summary": True}
                                 }
+                            # Also check in message.additional_kwargs if present
+                            elif hasattr(chunk, 'message') and hasattr(chunk.message, 'additional_kwargs'):
+                                kwargs = chunk.message.additional_kwargs
+                                if kwargs and "reasoning_summary" in kwargs:
+                                    reasoning_summary = kwargs["reasoning_summary"]
+                                    logger.info(f"🧠 O3/O4 reasoning summary from kwargs: {reasoning_summary[:100]}...")
+                                    yield {
+                                        "type": "reasoning_chunk",
+                                        "content": reasoning_summary,
+                                        "metadata": {"agent": "response", "model": model, "summary": True}
+                                    }
+            
+            # Check for any remaining partial reasoning (Azure DeepSeek)
+            if think_parser:
+                partial_reasoning = think_parser.get_partial_reasoning()
+                if partial_reasoning:
+                    logger.warning(f"🧠 Warning: Incomplete reasoning block detected: {partial_reasoning[:50]}...")
+                    # Optionally yield the partial reasoning
+                    yield {
+                        "type": "reasoning_chunk",
+                        "content": partial_reasoning,
+                        "metadata": {"agent": "response", "model": model, "partial": True}
+                    }
+            
+            # Check for O3/O4 reasoning summary in final chunk
+            # This is handled by looking for the last chunk's raw data
+            # O3DirectClient may include reasoning_summary in the final response
             
             # Extract citation annotations if enabled
             if enable_citations and sources and accumulated_response:

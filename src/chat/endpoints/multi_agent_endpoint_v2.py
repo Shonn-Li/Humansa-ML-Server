@@ -138,6 +138,13 @@ ONLY return the JSON object, no other text."""
             # Clean the response to ensure it's valid JSON
             response_text = eval_response.message.content.strip()
 
+            # Handle DeepSeek <think> tags
+            if "<think>" in response_text and "</think>" in response_text:
+                # Extract content after </think> tag
+                think_end = response_text.find("</think>")
+                if think_end != -1:
+                    response_text = response_text[think_end + 8:].strip()
+
             # Remove any markdown code blocks if present
             if response_text.startswith("```"):
                 response_text = response_text.split("```")[1]
@@ -297,7 +304,8 @@ class MultiAgentChatEndpointV2:
 
             # Phase 5: Iterative Refinement (if enabled)
             total_iterations = 1  # At least one iteration (initial run)
-            if request.get("enable_iterations", True) and "response" in enabled_agents:
+            # TEMPORARILY DISABLED - causing pauses with reasoning models
+            if request.get("enable_iterations", False) and "response" in enabled_agents:
                 # Create new orchestrator instance per request to avoid state pollution
                 orchestrator = IterativeOrchestrator(
                     self.agents, self.llm_provider_manager)
@@ -709,7 +717,8 @@ class MultiAgentChatEndpointV2:
             # Phase 4: Citations are now handled within response agent streaming
 
             # Phase 5: Iterative Refinement (if enabled)
-            if request.get("enable_iterations", True) and "response" in enabled_agents:
+            # TEMPORARILY DISABLED - causing pauses with reasoning models
+            if request.get("enable_iterations", False) and "response" in enabled_agents:
                 orchestrator = IterativeOrchestrator(
                     self.agents, self.llm_provider_manager)
                 needs_iteration, suggested_agents = await orchestrator.should_iterate(context, request)

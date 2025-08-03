@@ -169,11 +169,15 @@ def create_azure_llm_with_o3_support(
         # Extract max_tokens from kwargs if present
         max_tokens = kwargs.pop("max_tokens", 1000)
         
+        # Extract reasoning_effort from kwargs if present (default to "medium")
+        reasoning_effort = kwargs.pop("reasoning_effort", "medium")
+        
         return O3DirectClient(
             endpoint=endpoint,
             credential=credential,
             model_name=model_name,
             max_tokens=max_tokens,
+            reasoning_effort=reasoning_effort,
             callback_manager=callback_manager,
             **kwargs
         )
