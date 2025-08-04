@@ -8,11 +8,15 @@ A job is a collection of tests that can be executed together.
 
 import uuid
 import asyncio
+import os
+import logging
 from typing import List, Optional, Dict, Any
 from datetime import datetime, timedelta
 from enum import Enum
 from fastapi import APIRouter, HTTPException, BackgroundTasks
 from pydantic import BaseModel, Field
+
+logger = logging.getLogger(__name__)
 
 
 # Enums
@@ -892,15 +896,77 @@ async def create_job_from_template(template_name: str, overrides: Optional[Dict[
 
 
 async def execute_job_background(job_id: str, run_id: str, config: JobConfig):
-    """Background job execution"""
-    # This is a mock implementation
-    # In production, this would execute actual tests
+    """Background job execution with real test runner"""
+    import httpx
+    import subprocess
+    from test_dashboard.backend.core.config import settings
     
     try:
         job = jobs_storage[job_id]
         run_data = job_runs[run_id]
         
+        # Check if ML server is running
+        ml_port = settings.ML_SERVER_PORT or 6001
+        ml_url = f"http://localhost:{ml_port}"
+        
+        # Try to check ML server health
+        server_running = False
+        try:
+            async with httpx.AsyncClient(timeout=5.0) as client:
+                resp = await client.get(f"{ml_url}/health")
+                if resp.status_code == 200:
+                    server_running = True
+                    logger.info(f"ML server already running on port {ml_port}")
+        except:
+            logger.info(f"ML server not running on port {ml_port}")
+        
+        # Start ML server if not running
+        if not server_running:
+            logger.info("Starting ML test server...")
+            try:
+                # Use the test environment script
+                env = os.environ.copy()
+                env["ML_DIGIT"] = str(settings.ML_SERVER_DIGIT or 1)
+                env["ENVIRONMENT"] = "test"
+                env["ML_SERVER_PORT"] = str(ml_port)
+                
+                # Start the server
+                process = subprocess.Popen([
+                    "python3", "-m", "src.main", "--port", str(ml_port)
+                ], env=env, cwd="/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1")
+                
+                # Wait for server to start (with timeout)
+                start_time = datetime.now()
+                timeout = 60  # seconds
+                while (datetime.now() - start_time).seconds < timeout:
+                    await asyncio.sleep(2)
+                    try:
+                        async with httpx.AsyncClient(timeout=5.0) as client:
+                            resp = await client.get(f"{ml_url}/health")
+                            if resp.status_code == 200:
+                                server_running = True
+                                logger.info("ML server started successfully")
+                                break
+                    except:
+                        continue
+                
+                if not server_running:
+                    raise Exception("Failed to start ML server within timeout")
+            except Exception as e:
+                logger.error(f"Failed to start ML server: {e}")
+                # Update job status
+                job.status = JobStatus.FAILED
+                job.completed_at = datetime.now()
+                jobs_storage[job_id] = job
+                run_data["status"] = "failed"
+                run_data["error"] = f"Failed to start ML server: {e}"
+                run_data["completed_at"] = datetime.now()
+                return
+        
         total_tests = len(job.tests)
+        
+        # Get test definitions
+        from test_dashboard.backend.api.tests import get_test_by_id
         
         for i, test_ref in enumerate(job.tests):
             # Check if job was cancelled/paused
@@ -923,11 +989,95 @@ async def execute_job_background(job_id: str, run_id: str, config: JobConfig):
             job.updated_at = datetime.now()
             jobs_storage[job_id] = job
             
-            # Simulate test execution
-            await asyncio.sleep(2)  # Mock execution time
+            # Get test definition
+            test_def = None
+            if is_database_available():
+                from test_dashboard.backend.core.database import execute_query
+                query = "SELECT * FROM test_management.test_definitions WHERE id = %(id)s"
+                rows = await execute_query(query, {'id': test_ref.test_id})
+                if rows:
+                    test_def = rows[0]
             
-            # Mock result
-            success = i % 3 != 0  # 2/3 success rate
+            if not test_def:
+                # Try to get from memory or load from file
+                from test_dashboard.backend.api.tests import tests_storage
+                test_def = tests_storage.get(test_ref.test_id)
+            
+            if not test_def:
+                logger.error(f"Test definition not found: {test_ref.test_id}")
+                success = False
+                error_msg = f"Test definition not found: {test_ref.test_id}"
+            else:
+                # Execute real test
+                try:
+                    # Prepare test request
+                    test_config = test_def.get('config', {}) if isinstance(test_def, dict) else test_def.config
+                    test_request = {
+                        "messages": test_config.get('messages', []),
+                        "model": test_config.get('model', 'gpt-4o'),
+                        "stream": False,
+                        "user_id": f"test_user_{run_id}",
+                        "metadata": {
+                            "test_id": test_ref.test_id,
+                            "run_id": run_id,
+                            "job_id": job_id
+                        }
+                    }
+                    
+                    # Add any config overrides
+                    if test_ref.config_overrides:
+                        test_request.update(test_ref.config_overrides)
+                    
+                    # Call the appropriate endpoint based on test type
+                    test_type = test_def.get('type', 'single') if isinstance(test_def, dict) else test_def.type
+                    endpoint = "/v1-humansa/chat/completions" if test_type == "single" else "/v2/humansa/responses/create"
+                    
+                    async with httpx.AsyncClient(timeout=config.timeout_per_test or 60.0) as client:
+                        start_time = datetime.now()
+                        response = await client.post(f"{ml_url}{endpoint}", json=test_request)
+                        end_time = datetime.now()
+                        duration = (end_time - start_time).total_seconds()
+                        
+                        if response.status_code == 200:
+                            result_data = response.json()
+                            
+                            # Validate response based on test expectations
+                            expectations = test_config.get('expected', {})
+                            success = True
+                            error_msg = None
+                            
+                            # Basic validation
+                            if expectations:
+                                # Check for required fields
+                                if 'contains' in expectations:
+                                    response_text = str(result_data)
+                                    for term in expectations['contains']:
+                                        if term.lower() not in response_text.lower():
+                                            success = False
+                                            error_msg = f"Response missing expected content: {term}"
+                                            break
+                                
+                                # Check response format
+                                if 'format' in expectations and success:
+                                    # Add format validation logic here
+                                    pass
+                            
+                            # Store actual response for logs
+                            run_data["results"][test_ref.test_id]["response"] = result_data
+                        else:
+                            success = False
+                            error_msg = f"API returned status {response.status_code}: {response.text}"
+                            duration = (datetime.now() - start_time).total_seconds()
+                    
+                except asyncio.TimeoutError:
+                    success = False
+                    error_msg = "Test execution timeout"
+                    duration = config.timeout_per_test or 60.0
+                except Exception as e:
+                    success = False
+                    error_msg = f"Test execution error: {str(e)}"
+                    duration = (datetime.now() - datetime.fromisoformat(run_data["results"][test_ref.test_id]["started_at"])).total_seconds()
+            
             test_status = "passed" if success else "failed"
             started_at = datetime.fromisoformat(run_data["results"][test_ref.test_id]["started_at"])
             completed_at = datetime.now()
