@@ -354,8 +354,12 @@ class LLMProviderSelector:
         if requested_provider and requested_model:
             provider_enum = self._get_provider_enum(requested_provider)
 
+            # Check if this is an O3/O4 model that needs Azure OpenAI for reasoning support
+            is_o3_model = requested_model.lower() in ["o3", "o3-mini", "o4-mini"]
+            
             # Always check if Azure supports the model first (for cost savings)
-            if LLMProvider.AZURE_INFERENCE in self.providers:
+            # BUT: Use Azure OpenAI for O3/O4 models to get reasoning support
+            if LLMProvider.AZURE_INFERENCE in self.providers and not is_o3_model:
                 azure_config = self.providers[LLMProvider.AZURE_INFERENCE]
                 if requested_model in azure_config.supported_models:
                     llm = self._create_llm_instance(
@@ -363,6 +367,18 @@ class LLMProviderSelector:
                     logger.info(
                         f"🎯 Override to Azure for cost savings: {LLMProvider.AZURE_INFERENCE.value} with {requested_model} (requested: {requested_provider})")
                     return LLMProvider.AZURE_INFERENCE, llm
+            
+            # For O3/O4 models, prefer Azure OpenAI for reasoning support
+            if is_o3_model and LLMProvider.AZURE_OPENAI in self.providers:
+                azure_openai_config = self.providers[LLMProvider.AZURE_OPENAI]
+                # Add O3/O4 models to Azure OpenAI supported models if not already there
+                if requested_model not in azure_openai_config.supported_models:
+                    azure_openai_config.supported_models.extend(["o3", "o3-mini", "o4-mini"])
+                
+                llm = self._create_llm_instance(LLMProvider.AZURE_OPENAI, requested_model)
+                logger.info(
+                    f"🧠 Using Azure OpenAI for O3/O4 reasoning support: {requested_model}")
+                return LLMProvider.AZURE_OPENAI, llm
 
             # Fallback to requested provider if Azure doesn't support the model
             if provider_enum and provider_enum in self.providers:
@@ -383,21 +399,41 @@ class LLMProviderSelector:
             logger.info(
                 f"Searching for provider supporting model: {requested_model}")
 
-            # First try exact match, prioritizing Azure for cost savings
+            # Check if this is an O3/O4 model that needs Azure OpenAI for reasoning support
+            is_o3_model = requested_model.lower() in ["o3", "o3-mini", "o4-mini"]
+
+            # First try exact match, prioritizing Azure for cost savings (except for O3/O4)
             azure_match = None
+            azure_openai_match = None
             other_matches = []
 
             for provider_enum, config in self.providers.items():
-                if requested_model in config.supported_models:
-                    if provider_enum == LLMProvider.AZURE_INFERENCE:
+                if requested_model in config.supported_models or (is_o3_model and provider_enum == LLMProvider.AZURE_OPENAI):
+                    if provider_enum == LLMProvider.AZURE_INFERENCE and not is_o3_model:
                         azure_match = (provider_enum, requested_model)
                         logger.info(
                             f"🎯 Found Azure match for {requested_model}")
+                    elif provider_enum == LLMProvider.AZURE_OPENAI and is_o3_model:
+                        azure_openai_match = (provider_enum, requested_model)
+                        logger.info(
+                            f"🧠 Found Azure OpenAI match for O3/O4 model {requested_model}")
                     else:
                         other_matches.append((provider_enum, requested_model))
 
-            # Prioritize Azure if available
-            if azure_match:
+            # For O3/O4 models, prioritize Azure OpenAI for reasoning support
+            if is_o3_model and azure_openai_match:
+                provider_enum, model = azure_openai_match
+                # Ensure O3/O4 models are in supported list
+                config = self.providers[provider_enum]
+                if model not in config.supported_models:
+                    config.supported_models.extend(["o3", "o3-mini", "o4-mini"])
+                llm = self._create_llm_instance(provider_enum, model)
+                logger.info(
+                    f"✅ Selected Azure OpenAI for O3/O4 reasoning: {provider_enum.value} with {model}")
+                return provider_enum, llm
+
+            # Prioritize Azure AI Inference for non-O3/O4 models (cost savings)
+            elif azure_match:
                 provider_enum, model = azure_match
                 llm = self._create_llm_instance(provider_enum, model)
                 logger.info(
@@ -600,16 +636,38 @@ class LLMProviderSelector:
             return llm
 
         elif provider == LLMProvider.AZURE_OPENAI and AZURE_OPENAI_AVAILABLE:
-            return AzureOpenAI(
-                azure_endpoint="https://youwoai-dev-resource.openai.azure.com/",
-                api_key=os.getenv("AZURE_INFERENCE_CREDENTIAL"),
-                api_version="2024-02-15-preview",
-                model=model,
-                # Required: deployment name (same as model for Azure)
-                engine=model,
-                temperature=0.7,
-                callback_manager=CallbackManager([self.token_counter])
-            )
+            # Use O3DirectClient for O3/O4 models
+            if model.lower() in ["o3", "o3-mini", "o4-mini"]:
+                from .o3_direct_client import O3DirectClient
+                
+                o3_llm = O3DirectClient(
+                    endpoint="https://youwoai-dev-resource.openai.azure.com/",
+                    credential=os.getenv("AZURE_INFERENCE_CREDENTIAL"),
+                    model_name=model,
+                    max_tokens=100000,  # 100k tokens to avoid any truncation
+                    reasoning_effort="medium",
+                    reasoning_summary="detailed",
+                    callback_manager=CallbackManager([self.token_counter])
+                )
+                
+                logger.info(f"🧠 Using O3DirectClient for {model}")
+                return o3_llm
+            else:
+                # Use standard Azure OpenAI for other models
+                api_version = "2024-02-15-preview"
+                
+                azure_openai_llm = AzureOpenAI(
+                    azure_endpoint="https://youwoai-dev-resource.openai.azure.com/",
+                    api_key=os.getenv("AZURE_INFERENCE_CREDENTIAL"),
+                    api_version=api_version,
+                    model=model,
+                    # Required: deployment name (same as model for Azure)
+                    engine=model,
+                    temperature=0.7,
+                    callback_manager=CallbackManager([self.token_counter])
+                )
+                
+                return azure_openai_llm
         elif provider == LLMProvider.OPENAI:
             return OpenAI(
                 model=model,

@@ -300,14 +300,54 @@ class ResponseAgent(BaseAgent):
                                         "metadata": {"agent": "response", "model": model}
                                     }
                     
-                    # O3/O4 reasoning summaries (may come in final message)
-                    elif model.lower() in ["o3", "o3-mini", "o4-mini"]:
-                        # Check if this is the final chunk with reasoning summary
+                    # O3/O4 reasoning (streaming or summary)
+                    elif model.lower() in ["o3", "o3-mini", "o4-mini", "o1-mini", "o1-preview", "o1"]:
+                        # Check for streaming reasoning chunks
                         if isinstance(raw_chunk, dict):
+                            # Azure O3 Responses API format
+                            if "event_type" in raw_chunk:
+                                # Reasoning delta from Azure O3 Responses API
+                                if raw_chunk.get("event_type") == "reasoning" and "reasoning_delta" in raw_chunk:
+                                    reasoning_text = raw_chunk["reasoning_delta"]
+                                    logger.info(f"🧠 Azure O3 reasoning delta: {reasoning_text[:50]}...")
+                                    yield {
+                                        "type": "reasoning_chunk",
+                                        "content": reasoning_text,
+                                        "metadata": {"agent": "response", "model": model, "streaming": True}
+                                    }
+                                # Final reasoning summary from done event
+                                elif raw_chunk.get("event_type") == "done" and "reasoning_summary" in raw_chunk:
+                                    reasoning_summary = raw_chunk["reasoning_summary"]
+                                    logger.info(f"🧠 Azure O3 complete reasoning summary: {reasoning_summary[:100]}...")
+                                    yield {
+                                        "type": "reasoning_chunk",
+                                        "content": reasoning_summary,
+                                        "metadata": {"agent": "response", "model": model, "summary": True, "complete": True}
+                                    }
+                                # Handle stream_ended event (when stream ends without proper completion)
+                                elif raw_chunk.get("event_type") == "stream_ended":
+                                    logger.warning(f"O3 stream ended without proper completion")
+                                    if "content" in raw_chunk and raw_chunk["content"]:
+                                        accumulated_response = raw_chunk["content"]
+                                    if "reasoning" in raw_chunk and raw_chunk["reasoning"]:
+                                        yield {
+                                            "type": "reasoning_chunk",
+                                            "content": raw_chunk["reasoning"],
+                                            "metadata": {"agent": "response", "model": model, "summary": True, "incomplete": True}
+                                        }
+                            # Legacy format (fallback)
+                            elif "reasoning_chunk" in raw_chunk:
+                                reasoning_text = raw_chunk["reasoning_chunk"]
+                                logger.info(f"🧠 O3/O1 reasoning stream: {reasoning_text[:50]}...")
+                                yield {
+                                    "type": "reasoning_chunk",
+                                    "content": reasoning_text,
+                                    "metadata": {"agent": "response", "model": model, "streaming": True}
+                                }
                             # Check for reasoning summary in the raw response
-                            if "reasoning_summary" in raw_chunk:
+                            elif "reasoning_summary" in raw_chunk:
                                 reasoning_summary = raw_chunk["reasoning_summary"]
-                                logger.info(f"🧠 O3/O4 reasoning summary detected: {reasoning_summary[:100]}...")
+                                logger.info(f"🧠 O3/O1 reasoning summary detected: {reasoning_summary[:100]}...")
                                 yield {
                                     "type": "reasoning_chunk",
                                     "content": reasoning_summary,
@@ -318,12 +358,46 @@ class ResponseAgent(BaseAgent):
                                 kwargs = chunk.message.additional_kwargs
                                 if kwargs and "reasoning_summary" in kwargs:
                                     reasoning_summary = kwargs["reasoning_summary"]
-                                    logger.info(f"🧠 O3/O4 reasoning summary from kwargs: {reasoning_summary[:100]}...")
+                                    logger.info(f"🧠 O3/O1 reasoning summary from kwargs: {reasoning_summary[:100]}...")
                                     yield {
                                         "type": "reasoning_chunk",
                                         "content": reasoning_summary,
                                         "metadata": {"agent": "response", "model": model, "summary": True}
                                     }
+                        
+                        # Azure OpenAI O3/O4 specific reasoning handling
+                        if provider == LLMProvider.AZURE_OPENAI and hasattr(raw_chunk, 'choices') and raw_chunk.choices:
+                            choice = raw_chunk.choices[0]
+                            if hasattr(choice, 'delta') and choice.delta:
+                                delta = choice.delta
+                                # Azure OpenAI might include reasoning_content similar to DeepSeek
+                                if hasattr(delta, 'reasoning_content') and delta.reasoning_content:
+                                    logger.info(f"🧠 Azure OpenAI O3/O4 reasoning content: {delta.reasoning_content[:50]}...")
+                                    yield {
+                                        "type": "reasoning_chunk",
+                                        "content": delta.reasoning_content,
+                                        "metadata": {"agent": "response", "model": model, "provider": "azure_openai"}
+                                    }
+                
+                # Handle chunks with non-empty message content (final accumulated content)
+                if hasattr(chunk, 'message') and hasattr(chunk.message, 'content') and chunk.message.content:
+                    # This happens when O3DirectClient yields final accumulated content
+                    if chunk.message.content not in accumulated_response:
+                        # Only add if it's not already accumulated
+                        accumulated_response = chunk.message.content
+                        logger.info(f"O3DirectClient: Final accumulated content received: {len(accumulated_response)} chars")
+                    
+                    # Check for reasoning summary in additional_kwargs
+                    if hasattr(chunk.message, 'additional_kwargs'):
+                        kwargs = chunk.message.additional_kwargs
+                        if kwargs and "reasoning_summary" in kwargs:
+                            reasoning_summary = kwargs["reasoning_summary"]
+                            logger.info(f"🧠 O3 final reasoning summary: {reasoning_summary[:200]}...")
+                            yield {
+                                "type": "reasoning_chunk",
+                                "content": reasoning_summary,
+                                "metadata": {"agent": "response", "model": model, "summary": True, "complete": True}
+                            }
             
             # Check for any remaining partial reasoning (Azure DeepSeek)
             if think_parser:
