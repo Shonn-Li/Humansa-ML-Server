@@ -1,0 +1,118 @@
+{
+  "id": "PRD_002",
+  "name": "Protein powder product search test",
+  "suite": "product",
+  "type": "single",
+  "priority": 3,
+  "tags": ["product_search", "protein", "fitness_supplements"],
+  
+  "config": {
+    "timeout": 30,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["product_database", "category_filtering"]
+  },
+  
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_prd_002",
+      "profile": {
+        "name": "健身爱好者",
+        "age": 28,
+        "interests": ["fitness", "muscle_building"],
+        "language": "zh"
+      }
+    }
+  },
+  
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "我在健身增肌，想买一些蛋白粉，有什么品牌推荐？",
+      "user_id": "${user_context.user_id}",
+      "metadata": {
+        "test_id": "${id}",
+        "test_name": "${name}"
+      }
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": [
+        "蛋白粉",
+        "健身",
+        "增肌",
+        "品牌",
+        "推荐"
+      ],
+      "output_excludes": [
+        "错误",
+        "失败"
+      ],
+      "min_length": 200,
+      "max_length": 2000
+    },
+    
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": [
+        "protein_powder",
+        "muscle_building",
+        "fitness_supplements",
+        "brand_recommendation"
+      ],
+      "tool_calls": [
+        "product_search",
+        "fitness_category_filter"
+      ]
+    },
+    
+    "agents": {
+      "touched": ["router_agent", "rag_agent"],
+      "max_agents": 3
+    },
+    
+    "context": {
+      "mem0": {
+        "should_store": [
+          "fitness_goal",
+          "muscle_building_intent",
+          "protein_supplement_interest"
+        ]
+      }
+    },
+    
+    "server_logs": {
+      "contains": [
+        "Fitness product search",
+        "Protein powder query",
+        "Muscle building goal"
+      ],
+      "excludes": [
+        "ERROR",
+        "CRITICAL"
+      ],
+      "log_levels": {
+        "ERROR": "=0",
+        "WARNING": "<=1"
+      }
+    },
+    
+    "performance": {
+      "response_time_max": 18.0,
+      "memory_usage_max": "95MB",
+      "token_usage_max": 900
+    }
+  },
+  
+  "cleanup": {
+    "reset_context": true
+  }
+}

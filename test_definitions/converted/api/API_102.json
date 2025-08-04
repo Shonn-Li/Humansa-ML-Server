@@ -1,0 +1,50 @@
+{
+  "id": "API_102",
+  "name": "Response Continuation Test",
+  "suite": "api",
+  "type": "multi_turn",
+  "priority": 5,
+  "tags": ["api", "responses", "continuation", "multi-turn"],
+  "config": {
+    "timeout": 60,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["responses_api", "response_continuation"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_456"
+    },
+    "previous_turns": [
+      {"role": "user", "content": "你好，我最近总是失眠"},
+      {"role": "assistant", "content": "失眠是一个常见的睡眠障碍..."}
+    ]
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "失眠大概有多久了？每天几点睡觉？",
+      "previous_response_id": "${previous_response_id}",
+      "metadata": {
+        "test_scenario": "continuation"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["睡觉", "时间", "症状"]
+    },
+    "context": {
+      "workflow": {
+        "state_changes": {
+          "conversation_continued": true,
+          "context_preserved": true
+        }
+      }
+    },
+    "custom_validators": ["validate_conversation_continuity"]
+  }
+}

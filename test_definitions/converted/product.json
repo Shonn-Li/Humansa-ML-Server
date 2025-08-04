@@ -1,0 +1,3652 @@
+[
+  {
+    "id": "PRD_001",
+    "name": "Product Recommendation 1",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_001",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_001",
+        "metadata": {
+          "test_id": "PRD_001",
+          "test_name": "Product Recommendation 1",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 1"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_002",
+    "name": "Product Recommendation 2",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_002",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_002",
+        "metadata": {
+          "test_id": "PRD_002",
+          "test_name": "Product Recommendation 2",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 2"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_003",
+    "name": "Product Recommendation 3",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_003",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_003",
+        "metadata": {
+          "test_id": "PRD_003",
+          "test_name": "Product Recommendation 3",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 3"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_004",
+    "name": "Product Recommendation 4",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_004",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_004",
+        "metadata": {
+          "test_id": "PRD_004",
+          "test_name": "Product Recommendation 4",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 4"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_005",
+    "name": "Product Recommendation 5",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_005",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_005",
+        "metadata": {
+          "test_id": "PRD_005",
+          "test_name": "Product Recommendation 5",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 5"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_006",
+    "name": "Product Recommendation 6",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_006",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_006",
+        "metadata": {
+          "test_id": "PRD_006",
+          "test_name": "Product Recommendation 6",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 6"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_007",
+    "name": "Product Recommendation 7",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_007",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_007",
+        "metadata": {
+          "test_id": "PRD_007",
+          "test_name": "Product Recommendation 7",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 7"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_008",
+    "name": "Product Recommendation 8",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_008",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_008",
+        "metadata": {
+          "test_id": "PRD_008",
+          "test_name": "Product Recommendation 8",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 8"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_009",
+    "name": "Product Recommendation 9",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_009",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_009",
+        "metadata": {
+          "test_id": "PRD_009",
+          "test_name": "Product Recommendation 9",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 9"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_010",
+    "name": "Product Recommendation 10",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_010",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_010",
+        "metadata": {
+          "test_id": "PRD_010",
+          "test_name": "Product Recommendation 10",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 10"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_011",
+    "name": "Product Recommendation 11",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_011",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_011",
+        "metadata": {
+          "test_id": "PRD_011",
+          "test_name": "Product Recommendation 11",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 11"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_012",
+    "name": "Product Recommendation 12",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_012",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_012",
+        "metadata": {
+          "test_id": "PRD_012",
+          "test_name": "Product Recommendation 12",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 12"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_013",
+    "name": "Product Recommendation 13",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_013",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_013",
+        "metadata": {
+          "test_id": "PRD_013",
+          "test_name": "Product Recommendation 13",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 13"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_014",
+    "name": "Product Recommendation 14",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_014",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_014",
+        "metadata": {
+          "test_id": "PRD_014",
+          "test_name": "Product Recommendation 14",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 14"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_015",
+    "name": "Product Recommendation 15",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_015",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_015",
+        "metadata": {
+          "test_id": "PRD_015",
+          "test_name": "Product Recommendation 15",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 15"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_016",
+    "name": "Product Recommendation 16",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_016",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_016",
+        "metadata": {
+          "test_id": "PRD_016",
+          "test_name": "Product Recommendation 16",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 16"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_017",
+    "name": "Product Recommendation 17",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_017",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_017",
+        "metadata": {
+          "test_id": "PRD_017",
+          "test_name": "Product Recommendation 17",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 17"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_018",
+    "name": "Product Recommendation 18",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_018",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_018",
+        "metadata": {
+          "test_id": "PRD_018",
+          "test_name": "Product Recommendation 18",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 18"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_019",
+    "name": "Product Recommendation 19",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_019",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_019",
+        "metadata": {
+          "test_id": "PRD_019",
+          "test_name": "Product Recommendation 19",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 19"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_020",
+    "name": "Product Recommendation 20",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_020",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_020",
+        "metadata": {
+          "test_id": "PRD_020",
+          "test_name": "Product Recommendation 20",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 20"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_021",
+    "name": "Product Recommendation 21",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_021",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_021",
+        "metadata": {
+          "test_id": "PRD_021",
+          "test_name": "Product Recommendation 21",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 21"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_022",
+    "name": "Product Recommendation 22",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_022",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_022",
+        "metadata": {
+          "test_id": "PRD_022",
+          "test_name": "Product Recommendation 22",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 22"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_023",
+    "name": "Product Recommendation 23",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_023",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_023",
+        "metadata": {
+          "test_id": "PRD_023",
+          "test_name": "Product Recommendation 23",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 23"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_024",
+    "name": "Product Recommendation 24",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_024",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_024",
+        "metadata": {
+          "test_id": "PRD_024",
+          "test_name": "Product Recommendation 24",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 24"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_025",
+    "name": "Product Recommendation 25",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_025",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_025",
+        "metadata": {
+          "test_id": "PRD_025",
+          "test_name": "Product Recommendation 25",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 25"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_026",
+    "name": "Product Recommendation 26",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_026",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_026",
+        "metadata": {
+          "test_id": "PRD_026",
+          "test_name": "Product Recommendation 26",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 26"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_027",
+    "name": "Product Recommendation 27",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_027",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_027",
+        "metadata": {
+          "test_id": "PRD_027",
+          "test_name": "Product Recommendation 27",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 27"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_028",
+    "name": "Product Recommendation 28",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_028",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_028",
+        "metadata": {
+          "test_id": "PRD_028",
+          "test_name": "Product Recommendation 28",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 28"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_029",
+    "name": "Product Recommendation 29",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_029",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_029",
+        "metadata": {
+          "test_id": "PRD_029",
+          "test_name": "Product Recommendation 29",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 29"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_030",
+    "name": "Product Recommendation 30",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_030",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_030",
+        "metadata": {
+          "test_id": "PRD_030",
+          "test_name": "Product Recommendation 30",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 30"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_031",
+    "name": "Product Recommendation 31",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_031",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_031",
+        "metadata": {
+          "test_id": "PRD_031",
+          "test_name": "Product Recommendation 31",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 31"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_032",
+    "name": "Product Recommendation 32",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_032",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_032",
+        "metadata": {
+          "test_id": "PRD_032",
+          "test_name": "Product Recommendation 32",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 32"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_033",
+    "name": "Product Recommendation 33",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_033",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_033",
+        "metadata": {
+          "test_id": "PRD_033",
+          "test_name": "Product Recommendation 33",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 33"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_034",
+    "name": "Product Recommendation 34",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_034",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_034",
+        "metadata": {
+          "test_id": "PRD_034",
+          "test_name": "Product Recommendation 34",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 34"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_035",
+    "name": "Product Recommendation 35",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_035",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_035",
+        "metadata": {
+          "test_id": "PRD_035",
+          "test_name": "Product Recommendation 35",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 35"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_036",
+    "name": "Product Recommendation 36",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_036",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_036",
+        "metadata": {
+          "test_id": "PRD_036",
+          "test_name": "Product Recommendation 36",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 36"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_037",
+    "name": "Product Recommendation 37",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_037",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_037",
+        "metadata": {
+          "test_id": "PRD_037",
+          "test_name": "Product Recommendation 37",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 37"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_038",
+    "name": "Product Recommendation 38",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_038",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_038",
+        "metadata": {
+          "test_id": "PRD_038",
+          "test_name": "Product Recommendation 38",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 38"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_039",
+    "name": "Product Recommendation 39",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_039",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_039",
+        "metadata": {
+          "test_id": "PRD_039",
+          "test_name": "Product Recommendation 39",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 39"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_040",
+    "name": "Product Recommendation 40",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_040",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_040",
+        "metadata": {
+          "test_id": "PRD_040",
+          "test_name": "Product Recommendation 40",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 40"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_041",
+    "name": "Product Recommendation 41",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_041",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_041",
+        "metadata": {
+          "test_id": "PRD_041",
+          "test_name": "Product Recommendation 41",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 41"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_042",
+    "name": "Product Recommendation 42",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_042",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_042",
+        "metadata": {
+          "test_id": "PRD_042",
+          "test_name": "Product Recommendation 42",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 42"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_043",
+    "name": "Product Recommendation 43",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_043",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_043",
+        "metadata": {
+          "test_id": "PRD_043",
+          "test_name": "Product Recommendation 43",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 43"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_044",
+    "name": "Product Recommendation 44",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_044",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_044",
+        "metadata": {
+          "test_id": "PRD_044",
+          "test_name": "Product Recommendation 44",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 44"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_045",
+    "name": "Product Recommendation 45",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_045",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_045",
+        "metadata": {
+          "test_id": "PRD_045",
+          "test_name": "Product Recommendation 45",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 45"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_046",
+    "name": "Product Recommendation 46",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_046",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_046",
+        "metadata": {
+          "test_id": "PRD_046",
+          "test_name": "Product Recommendation 46",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 46"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_047",
+    "name": "Product Recommendation 47",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_047",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_047",
+        "metadata": {
+          "test_id": "PRD_047",
+          "test_name": "Product Recommendation 47",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 47"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_048",
+    "name": "Product Recommendation 48",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_048",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_048",
+        "metadata": {
+          "test_id": "PRD_048",
+          "test_name": "Product Recommendation 48",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 48"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_049",
+    "name": "Product Recommendation 49",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_049",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_049",
+        "metadata": {
+          "test_id": "PRD_049",
+          "test_name": "Product Recommendation 49",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 49"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  },
+  {
+    "id": "PRD_050",
+    "name": "Product Recommendation 50",
+    "suite": "product",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "product",
+      "recommendation",
+      "search"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PRD_050",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PRD_050",
+        "metadata": {
+          "test_id": "PRD_050",
+          "test_name": "Product Recommendation 50",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "产品推荐查询 50"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 200,
+        "max_length": 5000,
+        "output_contains": [
+          "推荐",
+          "产品",
+          "价格"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "product_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "搜索产品",
+          "分析需求"
+        ]
+      }
+    }
+  }
+]

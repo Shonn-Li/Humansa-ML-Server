@@ -1,0 +1,30 @@
+{
+  "id": "API_103",
+  "name": "Response Retrieval Test",
+  "suite": "api",
+  "type": "single",
+  "priority": 3,
+  "tags": ["api", "responses", "retrieval", "history"],
+  "config": {
+    "timeout": 30,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["responses_api", "response_retrieval"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_456"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/${response_id}",
+    "method": "GET"
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["conversation_id", "conversation_state"]
+    },
+    "custom_validators": ["validate_response_structure", "validate_conversation_metadata"]
+  }
+}

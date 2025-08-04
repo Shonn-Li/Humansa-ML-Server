@@ -1,0 +1,1602 @@
+[
+  {
+    "id": "MTS_001",
+    "name": "Multi-turn State: Symptom Consultation to Appointment",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_001",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我最近总是头痛，已经持续一周了"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_001",
+        "metadata": {
+          "test_id": "MTS_001",
+          "test_name": "Multi-turn State: Symptom Consultation to Appointment",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "好的，那我想预约神经科医生检查一下"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "头痛症状",
+            "持续一周"
+          ],
+          "should_retrieve": [
+            "头痛症状"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_002",
+    "name": "Multi-turn State: Product Inquiry with Follow-up",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_002",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我想了解一下你们的维生素C产品"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_002",
+        "metadata": {
+          "test_id": "MTS_002",
+          "test_name": "Multi-turn State: Product Inquiry with Follow-up",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "这个产品的价格是多少？有优惠吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "维生素C咨询"
+          ],
+          "should_retrieve": [
+            "维生素C"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "product_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_003",
+    "name": "Multi-turn State: Symptom Consultation to Appointment",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_003",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我最近总是头痛，已经持续一周了"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_003",
+        "metadata": {
+          "test_id": "MTS_003",
+          "test_name": "Multi-turn State: Symptom Consultation to Appointment",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "好的，那我想预约神经科医生检查一下"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "头痛症状",
+            "持续一周"
+          ],
+          "should_retrieve": [
+            "头痛症状"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_004",
+    "name": "Multi-turn State: Product Inquiry with Follow-up",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_004",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我想了解一下你们的维生素C产品"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_004",
+        "metadata": {
+          "test_id": "MTS_004",
+          "test_name": "Multi-turn State: Product Inquiry with Follow-up",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "这个产品的价格是多少？有优惠吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "维生素C咨询"
+          ],
+          "should_retrieve": [
+            "维生素C"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "product_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_005",
+    "name": "Multi-turn State: Symptom Consultation to Appointment",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_005",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我最近总是头痛，已经持续一周了"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_005",
+        "metadata": {
+          "test_id": "MTS_005",
+          "test_name": "Multi-turn State: Symptom Consultation to Appointment",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "好的，那我想预约神经科医生检查一下"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "头痛症状",
+            "持续一周"
+          ],
+          "should_retrieve": [
+            "头痛症状"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_006",
+    "name": "Multi-turn State: Product Inquiry with Follow-up",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_006",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我想了解一下你们的维生素C产品"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_006",
+        "metadata": {
+          "test_id": "MTS_006",
+          "test_name": "Multi-turn State: Product Inquiry with Follow-up",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "这个产品的价格是多少？有优惠吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "维生素C咨询"
+          ],
+          "should_retrieve": [
+            "维生素C"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "product_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_007",
+    "name": "Multi-turn State: Symptom Consultation to Appointment",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_007",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我最近总是头痛，已经持续一周了"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_007",
+        "metadata": {
+          "test_id": "MTS_007",
+          "test_name": "Multi-turn State: Symptom Consultation to Appointment",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "好的，那我想预约神经科医生检查一下"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "头痛症状",
+            "持续一周"
+          ],
+          "should_retrieve": [
+            "头痛症状"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_008",
+    "name": "Multi-turn State: Product Inquiry with Follow-up",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_008",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我想了解一下你们的维生素C产品"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_008",
+        "metadata": {
+          "test_id": "MTS_008",
+          "test_name": "Multi-turn State: Product Inquiry with Follow-up",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "这个产品的价格是多少？有优惠吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "维生素C咨询"
+          ],
+          "should_retrieve": [
+            "维生素C"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "product_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_009",
+    "name": "Multi-turn State: Symptom Consultation to Appointment",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_009",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我最近总是头痛，已经持续一周了"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_009",
+        "metadata": {
+          "test_id": "MTS_009",
+          "test_name": "Multi-turn State: Symptom Consultation to Appointment",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "好的，那我想预约神经科医生检查一下"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "头痛症状",
+            "持续一周"
+          ],
+          "should_retrieve": [
+            "头痛症状"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_010",
+    "name": "Multi-turn State: Product Inquiry with Follow-up",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_010",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我想了解一下你们的维生素C产品"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_010",
+        "metadata": {
+          "test_id": "MTS_010",
+          "test_name": "Multi-turn State: Product Inquiry with Follow-up",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "这个产品的价格是多少？有优惠吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "维生素C咨询"
+          ],
+          "should_retrieve": [
+            "维生素C"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "product_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_011",
+    "name": "Multi-turn State: Symptom Consultation to Appointment",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_011",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我最近总是头痛，已经持续一周了"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_011",
+        "metadata": {
+          "test_id": "MTS_011",
+          "test_name": "Multi-turn State: Symptom Consultation to Appointment",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "好的，那我想预约神经科医生检查一下"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "头痛症状",
+            "持续一周"
+          ],
+          "should_retrieve": [
+            "头痛症状"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_012",
+    "name": "Multi-turn State: Product Inquiry with Follow-up",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_012",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我想了解一下你们的维生素C产品"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_012",
+        "metadata": {
+          "test_id": "MTS_012",
+          "test_name": "Multi-turn State: Product Inquiry with Follow-up",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "这个产品的价格是多少？有优惠吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "维生素C咨询"
+          ],
+          "should_retrieve": [
+            "维生素C"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "product_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_013",
+    "name": "Multi-turn State: Symptom Consultation to Appointment",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_013",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我最近总是头痛，已经持续一周了"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_013",
+        "metadata": {
+          "test_id": "MTS_013",
+          "test_name": "Multi-turn State: Symptom Consultation to Appointment",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "好的，那我想预约神经科医生检查一下"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "头痛症状",
+            "持续一周"
+          ],
+          "should_retrieve": [
+            "头痛症状"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_014",
+    "name": "Multi-turn State: Product Inquiry with Follow-up",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_014",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我想了解一下你们的维生素C产品"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_014",
+        "metadata": {
+          "test_id": "MTS_014",
+          "test_name": "Multi-turn State: Product Inquiry with Follow-up",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "这个产品的价格是多少？有优惠吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "维生素C咨询"
+          ],
+          "should_retrieve": [
+            "维生素C"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "product_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_015",
+    "name": "Multi-turn State: Symptom Consultation to Appointment",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_015",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我最近总是头痛，已经持续一周了"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_015",
+        "metadata": {
+          "test_id": "MTS_015",
+          "test_name": "Multi-turn State: Symptom Consultation to Appointment",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "好的，那我想预约神经科医生检查一下"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "头痛症状",
+            "持续一周"
+          ],
+          "should_retrieve": [
+            "头痛症状"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_016",
+    "name": "Multi-turn State: Product Inquiry with Follow-up",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_016",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我想了解一下你们的维生素C产品"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_016",
+        "metadata": {
+          "test_id": "MTS_016",
+          "test_name": "Multi-turn State: Product Inquiry with Follow-up",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "这个产品的价格是多少？有优惠吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "维生素C咨询"
+          ],
+          "should_retrieve": [
+            "维生素C"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "product_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_017",
+    "name": "Multi-turn State: Symptom Consultation to Appointment",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_017",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我最近总是头痛，已经持续一周了"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_017",
+        "metadata": {
+          "test_id": "MTS_017",
+          "test_name": "Multi-turn State: Symptom Consultation to Appointment",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "好的，那我想预约神经科医生检查一下"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "头痛症状",
+            "持续一周"
+          ],
+          "should_retrieve": [
+            "头痛症状"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_018",
+    "name": "Multi-turn State: Product Inquiry with Follow-up",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_018",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我想了解一下你们的维生素C产品"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_018",
+        "metadata": {
+          "test_id": "MTS_018",
+          "test_name": "Multi-turn State: Product Inquiry with Follow-up",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "这个产品的价格是多少？有优惠吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "维生素C咨询"
+          ],
+          "should_retrieve": [
+            "维生素C"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "product_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_019",
+    "name": "Multi-turn State: Symptom Consultation to Appointment",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_019",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我最近总是头痛，已经持续一周了"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_019",
+        "metadata": {
+          "test_id": "MTS_019",
+          "test_name": "Multi-turn State: Symptom Consultation to Appointment",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "好的，那我想预约神经科医生检查一下"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "头痛症状",
+            "持续一周"
+          ],
+          "should_retrieve": [
+            "头痛症状"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MTS_020",
+    "name": "Multi-turn State: Product Inquiry with Follow-up",
+    "suite": "multi_turn",
+    "type": "multi_turn",
+    "priority": 4,
+    "tags": [
+      "multi_turn",
+      "state_management",
+      "memory"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MTS_020",
+        "profile": {}
+      },
+      "environment": {},
+      "previous_turns": [
+        {
+          "role": "user",
+          "content": "我想了解一下你们的维生素C产品"
+        }
+      ]
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MTS_020",
+        "metadata": {
+          "test_id": "MTS_020",
+          "test_name": "Multi-turn State: Product Inquiry with Follow-up",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "这个产品的价格是多少？有优惠吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "context": {
+        "mem0": {
+          "should_store": [
+            "维生素C咨询"
+          ],
+          "should_retrieve": [
+            "维生素C"
+          ]
+        }
+      },
+      "agents": {
+        "touched": [
+          "product_agent",
+          "memory_agent"
+        ]
+      }
+    }
+  }
+]

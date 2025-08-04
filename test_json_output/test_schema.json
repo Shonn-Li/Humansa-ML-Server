@@ -1,0 +1,131 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Test Case Schema",
+  "description": "Standardized JSON format for test cases",
+  "type": "object",
+  "required": ["test_id", "name", "category", "type", "request", "validation"],
+  "properties": {
+    "test_id": {
+      "type": "string",
+      "description": "Unique test identifier (e.g., APT_001, MULTI_001, PERF_001)",
+      "pattern": "^(APT|MULTI|PERF)_\\d{3}$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human readable test name"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["appointment", "multi_agent", "performance", "basic", "context_search", "file_attachment", "web_search", "code_interpreter", "edge_case"]
+    },
+    "type": {
+      "type": "string",
+      "enum": ["single-turn", "multi-turn", "integration", "stress-test", "edge-case", "validation", "unit"]
+    },
+    "complexity": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "can_parallelize": {
+      "type": "boolean",
+      "description": "Whether this test can be run in parallel with others"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of what the test validates"
+    },
+    "request": {
+      "type": "object",
+      "required": ["model", "messages", "stream", "user_id"],
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "AI model to use for the test"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {"type": "string", "enum": ["user", "assistant", "system"]},
+              "content": {"type": "string"}
+            },
+            "required": ["role", "content"]
+          }
+        },
+        "stream": {
+          "type": "boolean",
+          "description": "Whether to use streaming response"
+        },
+        "user_id": {
+          "type": "integer",
+          "description": "User ID for the test"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "File attachments (URLs or paths)"
+        },
+        "enable_citations": {
+          "type": "boolean",
+          "description": "Whether to enable citations"
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "description": "Validation rules for the test",
+      "properties": {
+        "expected_tools": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Tools that should be called during execution"
+        },
+        "no_tools": {
+          "type": "boolean",
+          "description": "Test should not call any tools"
+        },
+        "should_have_citations": {
+          "type": "boolean",
+          "description": "Response should include citations"
+        },
+        "response_contains": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Text that must appear in the response"
+        },
+        "response_not_empty": {
+          "type": "boolean",
+          "description": "Response should not be empty or too short"
+        },
+        "min_response_length": {
+          "type": "integer",
+          "description": "Minimum response length in characters"
+        },
+        "max_execution_time": {
+          "type": "number",
+          "description": "Maximum allowed execution time in seconds"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata about the test",
+      "properties": {
+        "source_file": {"type": "string"},
+        "source_line": {"type": "integer"},
+        "created_date": {"type": "string", "format": "date-time"},
+        "last_modified": {"type": "string", "format": "date-time"},
+        "tags": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "notes": {"type": "string"},
+        "related_tests": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    }
+  }
+}

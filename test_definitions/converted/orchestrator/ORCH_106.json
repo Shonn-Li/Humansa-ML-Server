@@ -1,0 +1,52 @@
+{
+  "id": "ORCH_106",
+  "name": "Pattern2 Multi-Agent Coordination Test",
+  "suite": "orchestrator",
+  "type": "single",
+  "priority": 5,
+  "tags": ["pattern2", "orchestrator", "multi-agent", "medical", "product"],
+  "config": {
+    "timeout": 60,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["pattern2_orchestrator", "multi_agent_coordination"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_003"
+    }
+  },
+  "execution": {
+    "endpoint": "/humansa/pattern2/process",
+    "method": "POST",
+    "payload": {
+      "query": "我头痛已经一周了，需要看医生吗？同时想买一些缓解头痛的保健品",
+      "user_id": "test_user_003",
+      "stream": true
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["头痛", "医生", "保健品", "缓解"],
+      "min_length": 150
+    },
+    "reasoning": {
+      "steps_min": 3,
+      "contains_keywords": ["medical", "product", "coordination"]
+    },
+    "agents": {
+      "touched": ["GeneralMedicalAgent", "ProductAgent"],
+      "call_order": ["GeneralMedicalAgent", "ProductAgent"],
+      "max_agents": 3
+    },
+    "context": {
+      "workflow": {
+        "state_changes": {
+          "multi_agent_called": true,
+          "coordination_successful": true
+        }
+      }
+    }
+  }
+}

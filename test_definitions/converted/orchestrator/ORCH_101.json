@@ -1,0 +1,55 @@
+{
+  "id": "ORCH_101",
+  "name": "Workflow API Integration Streaming Test",
+  "suite": "orchestrator",
+  "type": "single",
+  "priority": 4,
+  "tags": ["workflow", "orchestrator", "streaming", "api", "integration"],
+  "config": {
+    "timeout": 60,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["workflow_orchestrator", "streaming_api"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_workflow"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/chat",
+    "method": "POST",
+    "payload": {
+      "user_id": "test_user_workflow",
+      "messages": [
+        {"role": "user", "content": "我想买一些维生素C，有什么推荐吗？"}
+      ],
+      "stream": true,
+      "debug": true,
+      "use_workflow": true
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["维生素C", "推荐"]
+    },
+    "reasoning": {
+      "steps_min": 1,
+      "contains_keywords": ["reasoning", "workflow"]
+    },
+    "server_logs": {
+      "contains": ["response.reasoning_text.delta", "response.output_item.added"],
+      "excludes": ["ERROR", "CRITICAL"]
+    },
+    "agents": {
+      "touched": ["ProductAgent"],
+      "max_agents": 3
+    },
+    "context": {
+      "workflow": {
+        "events_emitted": ["response.created", "response.reasoning_text.delta", "response.output_item.added", "response.completed"]
+      }
+    }
+  }
+}

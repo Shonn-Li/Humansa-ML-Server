@@ -1,0 +1,1737 @@
+[
+  {
+    "id": "PER_001",
+    "name": "Performance Load: Basic Medical Consultation Load (10 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 10,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_001",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_001",
+        "metadata": {
+          "test_id": "PER_001",
+          "test_name": "Performance Load: Basic Medical Consultation Load (10 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我最近总是头痛，请问需要看医生吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 6.0,
+        "memory_usage_max": "100MB",
+        "token_usage_max": 1000
+      },
+      "agents": {
+        "max_agents": 2
+      }
+    }
+  },
+  {
+    "id": "PER_002",
+    "name": "Performance Load: Complex Multi-Agent Load (11 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 11,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_002",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_002",
+        "metadata": {
+          "test_id": "PER_002",
+          "test_name": "Performance Load: Complex Multi-Agent Load (11 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我想了解高血压症状，然后预约心脏科医生，顺便买一些降压药"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 18.3,
+        "memory_usage_max": "200MB",
+        "token_usage_max": 2000
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "product_agent"
+        ],
+        "max_agents": 4
+      }
+    }
+  },
+  {
+    "id": "PER_003",
+    "name": "Performance Load: Basic Medical Consultation Load (12 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 12,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_003",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_003",
+        "metadata": {
+          "test_id": "PER_003",
+          "test_name": "Performance Load: Basic Medical Consultation Load (12 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我最近总是头痛，请问需要看医生吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 7.4399999999999995,
+        "memory_usage_max": "100MB",
+        "token_usage_max": 1000
+      },
+      "agents": {
+        "max_agents": 2
+      }
+    }
+  },
+  {
+    "id": "PER_004",
+    "name": "Performance Load: Complex Multi-Agent Load (13 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 13,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_004",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_004",
+        "metadata": {
+          "test_id": "PER_004",
+          "test_name": "Performance Load: Complex Multi-Agent Load (13 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我想了解高血压症状，然后预约心脏科医生，顺便买一些降压药"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 23.058,
+        "memory_usage_max": "200MB",
+        "token_usage_max": 2000
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "product_agent"
+        ],
+        "max_agents": 4
+      }
+    }
+  },
+  {
+    "id": "PER_005",
+    "name": "Performance Load: Basic Medical Consultation Load (14 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 14,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_005",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_005",
+        "metadata": {
+          "test_id": "PER_005",
+          "test_name": "Performance Load: Basic Medical Consultation Load (14 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我最近总是头痛，请问需要看医生吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 9.5232,
+        "memory_usage_max": "100MB",
+        "token_usage_max": 1000
+      },
+      "agents": {
+        "max_agents": 2
+      }
+    }
+  },
+  {
+    "id": "PER_006",
+    "name": "Performance Load: Complex Multi-Agent Load (15 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 15,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_006",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_006",
+        "metadata": {
+          "test_id": "PER_006",
+          "test_name": "Performance Load: Complex Multi-Agent Load (15 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我想了解高血压症状，然后预约心脏科医生，顺便买一些降压药"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 29.9754,
+        "memory_usage_max": "200MB",
+        "token_usage_max": 2000
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "product_agent"
+        ],
+        "max_agents": 4
+      }
+    }
+  },
+  {
+    "id": "PER_007",
+    "name": "Performance Load: Basic Medical Consultation Load (16 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 16,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_007",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_007",
+        "metadata": {
+          "test_id": "PER_007",
+          "test_name": "Performance Load: Basic Medical Consultation Load (16 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我最近总是头痛，请问需要看医生吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 12.570623999999999,
+        "memory_usage_max": "100MB",
+        "token_usage_max": 1000
+      },
+      "agents": {
+        "max_agents": 2
+      }
+    }
+  },
+  {
+    "id": "PER_008",
+    "name": "Performance Load: Complex Multi-Agent Load (17 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 17,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_008",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_008",
+        "metadata": {
+          "test_id": "PER_008",
+          "test_name": "Performance Load: Complex Multi-Agent Load (17 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我想了解高血压症状，然后预约心脏科医生，顺便买一些降压药"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 40.167036,
+        "memory_usage_max": "200MB",
+        "token_usage_max": 2000
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "product_agent"
+        ],
+        "max_agents": 4
+      }
+    }
+  },
+  {
+    "id": "PER_009",
+    "name": "Performance Load: Basic Medical Consultation Load (18 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 18,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_009",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_009",
+        "metadata": {
+          "test_id": "PER_009",
+          "test_name": "Performance Load: Basic Medical Consultation Load (18 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我最近总是头痛，请问需要看医生吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 17.096048639999996,
+        "memory_usage_max": "100MB",
+        "token_usage_max": 1000
+      },
+      "agents": {
+        "max_agents": 2
+      }
+    }
+  },
+  {
+    "id": "PER_010",
+    "name": "Performance Load: Complex Multi-Agent Load (19 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 19,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_010",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_010",
+        "metadata": {
+          "test_id": "PER_010",
+          "test_name": "Performance Load: Complex Multi-Agent Load (19 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我想了解高血压症状，然后预约心脏科医生，顺便买一些降压药"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 55.43050968,
+        "memory_usage_max": "200MB",
+        "token_usage_max": 2000
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "product_agent"
+        ],
+        "max_agents": 4
+      }
+    }
+  },
+  {
+    "id": "PER_011",
+    "name": "Performance Load: Basic Medical Consultation Load (20 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 20,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_011",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_011",
+        "metadata": {
+          "test_id": "PER_011",
+          "test_name": "Performance Load: Basic Medical Consultation Load (20 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我最近总是头痛，请问需要看医生吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 23.934468095999993,
+        "memory_usage_max": "100MB",
+        "token_usage_max": 1000
+      },
+      "agents": {
+        "max_agents": 2
+      }
+    }
+  },
+  {
+    "id": "PER_012",
+    "name": "Performance Load: Complex Multi-Agent Load (21 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 21,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_012",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_012",
+        "metadata": {
+          "test_id": "PER_012",
+          "test_name": "Performance Load: Complex Multi-Agent Load (21 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我想了解高血压症状，然后预约心脏科医生，顺便买一些降压药"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 78.7113237456,
+        "memory_usage_max": "200MB",
+        "token_usage_max": 2000
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "product_agent"
+        ],
+        "max_agents": 4
+      }
+    }
+  },
+  {
+    "id": "PER_013",
+    "name": "Performance Load: Basic Medical Consultation Load (22 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 22,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_013",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_013",
+        "metadata": {
+          "test_id": "PER_013",
+          "test_name": "Performance Load: Basic Medical Consultation Load (22 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我最近总是头痛，请问需要看医生吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 34.465634058239985,
+        "memory_usage_max": "100MB",
+        "token_usage_max": 1000
+      },
+      "agents": {
+        "max_agents": 2
+      }
+    }
+  },
+  {
+    "id": "PER_014",
+    "name": "Performance Load: Complex Multi-Agent Load (23 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 23,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_014",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_014",
+        "metadata": {
+          "test_id": "PER_014",
+          "test_name": "Performance Load: Complex Multi-Agent Load (23 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我想了解高血压症状，然后预约心脏科医生，顺便买一些降压药"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 114.91853266857599,
+        "memory_usage_max": "200MB",
+        "token_usage_max": 2000
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "product_agent"
+        ],
+        "max_agents": 4
+      }
+    }
+  },
+  {
+    "id": "PER_015",
+    "name": "Performance Load: Basic Medical Consultation Load (24 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 24,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_015",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_015",
+        "metadata": {
+          "test_id": "PER_015",
+          "test_name": "Performance Load: Basic Medical Consultation Load (24 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我最近总是头痛，请问需要看医生吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 51.00913840619518,
+        "memory_usage_max": "100MB",
+        "token_usage_max": 1000
+      },
+      "agents": {
+        "max_agents": 2
+      }
+    }
+  },
+  {
+    "id": "PER_016",
+    "name": "Performance Load: Complex Multi-Agent Load (25 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 25,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_016",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_016",
+        "metadata": {
+          "test_id": "PER_016",
+          "test_name": "Performance Load: Complex Multi-Agent Load (25 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我想了解高血压症状，然后预约心脏科医生，顺便买一些降压药"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 172.37779900286398,
+        "memory_usage_max": "200MB",
+        "token_usage_max": 2000
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "product_agent"
+        ],
+        "max_agents": 4
+      }
+    }
+  },
+  {
+    "id": "PER_017",
+    "name": "Performance Load: Basic Medical Consultation Load (26 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 26,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_017",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_017",
+        "metadata": {
+          "test_id": "PER_017",
+          "test_name": "Performance Load: Basic Medical Consultation Load (26 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我最近总是头痛，请问需要看医生吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 77.53389037741667,
+        "memory_usage_max": "100MB",
+        "token_usage_max": 1000
+      },
+      "agents": {
+        "max_agents": 2
+      }
+    }
+  },
+  {
+    "id": "PER_018",
+    "name": "Performance Load: Complex Multi-Agent Load (27 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 27,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_018",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_018",
+        "metadata": {
+          "test_id": "PER_018",
+          "test_name": "Performance Load: Complex Multi-Agent Load (27 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我想了解高血压症状，然后预约心脏科医生，顺便买一些降压药"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 265.4618104644105,
+        "memory_usage_max": "200MB",
+        "token_usage_max": 2000
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "product_agent"
+        ],
+        "max_agents": 4
+      }
+    }
+  },
+  {
+    "id": "PER_019",
+    "name": "Performance Load: Basic Medical Consultation Load (28 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 28,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_019",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_019",
+        "metadata": {
+          "test_id": "PER_019",
+          "test_name": "Performance Load: Basic Medical Consultation Load (28 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我最近总是头痛，请问需要看医生吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 120.95286898877,
+        "memory_usage_max": "100MB",
+        "token_usage_max": 1000
+      },
+      "agents": {
+        "max_agents": 2
+      }
+    }
+  },
+  {
+    "id": "PER_020",
+    "name": "Performance Load: Complex Multi-Agent Load (29 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 29,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_020",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_020",
+        "metadata": {
+          "test_id": "PER_020",
+          "test_name": "Performance Load: Complex Multi-Agent Load (29 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我想了解高血压症状，然后预约心脏科医生，顺便买一些降压药"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 419.42966053376864,
+        "memory_usage_max": "200MB",
+        "token_usage_max": 2000
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "product_agent"
+        ],
+        "max_agents": 4
+      }
+    }
+  },
+  {
+    "id": "PER_021",
+    "name": "Performance Load: Basic Medical Consultation Load (30 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 30,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_021",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_021",
+        "metadata": {
+          "test_id": "PER_021",
+          "test_name": "Performance Load: Basic Medical Consultation Load (30 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我最近总是头痛，请问需要看医生吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 193.52459038203202,
+        "memory_usage_max": "100MB",
+        "token_usage_max": 1000
+      },
+      "agents": {
+        "max_agents": 2
+      }
+    }
+  },
+  {
+    "id": "PER_022",
+    "name": "Performance Load: Complex Multi-Agent Load (31 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 31,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_022",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_022",
+        "metadata": {
+          "test_id": "PER_022",
+          "test_name": "Performance Load: Complex Multi-Agent Load (31 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我想了解高血压症状，然后预约心脏科医生，顺便买一些降压药"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 679.4760500647052,
+        "memory_usage_max": "200MB",
+        "token_usage_max": 2000
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "product_agent"
+        ],
+        "max_agents": 4
+      }
+    }
+  },
+  {
+    "id": "PER_023",
+    "name": "Performance Load: Basic Medical Consultation Load (32 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 32,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_023",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_023",
+        "metadata": {
+          "test_id": "PER_023",
+          "test_name": "Performance Load: Basic Medical Consultation Load (32 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我最近总是头痛，请问需要看医生吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 317.3803282265325,
+        "memory_usage_max": "100MB",
+        "token_usage_max": 1000
+      },
+      "agents": {
+        "max_agents": 2
+      }
+    }
+  },
+  {
+    "id": "PER_024",
+    "name": "Performance Load: Complex Multi-Agent Load (33 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 33,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_024",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_024",
+        "metadata": {
+          "test_id": "PER_024",
+          "test_name": "Performance Load: Complex Multi-Agent Load (33 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我想了解高血压症状，然后预约心脏科医生，顺便买一些降压药"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 1127.9302431074107,
+        "memory_usage_max": "200MB",
+        "token_usage_max": 2000
+      },
+      "agents": {
+        "touched": [
+          "medical_agent",
+          "appointment_agent",
+          "product_agent"
+        ],
+        "max_agents": 4
+      }
+    }
+  },
+  {
+    "id": "PER_025",
+    "name": "Performance Load: Basic Medical Consultation Load (34 concurrent)",
+    "suite": "performance",
+    "type": "single",
+    "priority": 1,
+    "tags": [
+      "performance",
+      "load_test",
+      "stress_test"
+    ],
+    "config": {
+      "timeout": 60,
+      "retries": 0,
+      "parallel_safe": false,
+      "requirements": [
+        "performance_monitoring",
+        "load_balancer"
+      ],
+      "load_test": {
+        "concurrent_requests": 34,
+        "duration": 60,
+        "ramp_up": 10
+      }
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_PER_025",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_PER_025",
+        "metadata": {
+          "test_id": "PER_025",
+          "test_name": "Performance Load: Basic Medical Consultation Load (34 concurrent)",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我最近总是头痛，请问需要看医生吗？"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000
+      },
+      "performance": {
+        "response_time_max": 533.1989514205746,
+        "memory_usage_max": "100MB",
+        "token_usage_max": 1000
+      },
+      "agents": {
+        "max_agents": 2
+      }
+    }
+  }
+]

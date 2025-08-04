@@ -1,0 +1,84 @@
+{
+  "id": "HUV_041",
+  "name": "Basic Greeting + Doctor Search",
+  "suite": "multi_turn",
+  "type": "multi_turn",
+  "priority": 5,
+  "tags": ["multi_turn", "greeting", "doctor_search", "conversation", "chinese"],
+  "config": {
+    "timeout": 90,
+    "retries": 0,
+    "parallel_safe": false,
+    "requirements": ["humansa_v2", "pattern2", "conversation_memory"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_041",
+      "profile": {}
+    },
+    "previous_turns": [],
+    "environment": {
+      "HUMANSA_USE_PATTERN2": "true"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "你好",
+      "user_id": "test_user_041",
+      "metadata": {
+        "test_id": "HUV_041",
+        "test_name": "Basic Greeting + Doctor Search",
+        "orchestrator": "pattern2"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["你好", "帮助"],
+      "min_length": 50
+    },
+    "reasoning": {
+      "steps_min": 1,
+      "contains_keywords": ["greeting", "conversation_start"],
+      "tool_calls": ["conversation_handler"]
+    },
+    "agents": {
+      "touched": ["FunctionAgent"],
+      "max_agents": 3
+    },
+    "context": {
+      "mem0": {
+        "should_store": ["greeting", "conversation_start"],
+        "memory_count": 1
+      },
+      "workflow": {
+        "state_changes": {
+          "conversation_state": "active"
+        },
+        "events_emitted": ["conversation_started"]
+      }
+    },
+    "server_logs": {
+      "contains": ["Pattern 2", "greeting", "multi_turn"],
+      "excludes": ["ERROR", "exception"],
+      "log_levels": {
+        "ERROR": "=0"
+      }
+    },
+    "performance": {
+      "response_time_max": 30,
+      "token_usage_max": 800
+    }
+  },
+  "cleanup": {
+    "commands": [],
+    "reset_context": true
+  }
+}

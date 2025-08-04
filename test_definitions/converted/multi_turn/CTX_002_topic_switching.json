@@ -1,0 +1,140 @@
+{
+  "id": "CTX_002",
+  "name": "Context persistence during topic switching test",
+  "suite": "multi_turn",
+  "type": "multi_turn",
+  "priority": 4,
+  "tags": ["context_persistence", "topic_switching", "memory"],
+  
+  "config": {
+    "timeout": 45,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["mem0", "context_persistence", "multi_agent"]
+  },
+  
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_ctx_002",
+      "profile": {
+        "name": "张总",
+        "age": 50,
+        "title": "企业家",
+        "language": "zh"
+      }
+    },
+    "previous_turns": [
+      {
+        "role": "user",
+        "content": "我是张总，今年50岁，经营一家制药公司"
+      },
+      {
+        "role": "assistant",
+        "content": "张总您好！很高兴为您服务。作为制药行业的企业家，您对健康和医药产品一定有深入的了解。请问今天有什么可以帮助您的？"
+      },
+      {
+        "role": "user",
+        "content": "我想了解一些关于降血脂的保健品市场情况"
+      },
+      {
+        "role": "assistant",
+        "content": "张总，降血脂保健品市场确实很有前景。主要产品包括：红曲米、植物甾醇、欧米伽-3等。市场规模年增长约15%，特别是中老年消费群体需求旺盛。作为制药企业家，您是考虑投资这个领域吗？"
+      }
+    ]
+  },
+  
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "话题换一下，我最近感觉记忆力下降，有什么好的建议吗？顺便，你还记得我的职业吗？",
+      "user_id": "${user_context.user_id}",
+      "conversation_history": "${setup.previous_turns}",
+      "metadata": {
+        "test_id": "${id}",
+        "test_name": "${name}"
+      }
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": [
+        "张总",
+        "制药公司",
+        "企业家",
+        "记忆力",
+        "建议"
+      ],
+      "output_excludes": [
+        "错误",
+        "失败",
+        "不记得"
+      ],
+      "min_length": 150,
+      "max_length": 1500
+    },
+    
+    "reasoning": {
+      "steps_min": 3,
+      "contains_keywords": [
+        "topic_switch",
+        "context_retention",
+        "memory_enhancement",
+        "pharmaceutical_background"
+      ]
+    },
+    
+    "agents": {
+      "touched": ["router_agent", "rag_agent", "response_agent"],
+      "max_agents": 4
+    },
+    
+    "context": {
+      "mem0": {
+        "should_retrieve": [
+          "pharmaceutical_company_owner",
+          "entrepreneur_title",
+          "age_50"
+        ],
+        "should_store": [
+          "memory_decline_concern",
+          "topic_switch_request"
+        ],
+        "memory_count": 4
+      }
+    },
+    
+    "server_logs": {
+      "contains": [
+        "Topic switch detected",
+        "Context preserved",
+        "Memory enhancement advice"
+      ],
+      "excludes": [
+        "ERROR",
+        "CRITICAL",
+        "Context lost"
+      ],
+      "log_levels": {
+        "ERROR": "=0",
+        "WARNING": "<=1"
+      }
+    },
+    
+    "performance": {
+      "response_time_max": 20.0,
+      "memory_usage_max": "100MB",
+      "token_usage_max": 800
+    }
+  },
+  
+  "cleanup": {
+    "reset_context": false
+  }
+}

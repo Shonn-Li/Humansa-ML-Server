@@ -1,0 +1,142 @@
+{
+  "id": "INT_005",
+  "name": "Multi-turn conversation with memory integration test",
+  "suite": "integration",
+  "type": "multi_turn",
+  "priority": 5,
+  "tags": ["multi_turn", "memory", "context", "integration"],
+  
+  "config": {
+    "timeout": 45,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["multi_agent", "mem0", "context_persistence"]
+  },
+  
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_int_005",
+      "profile": {
+        "name": "张医生",
+        "age": 35,
+        "profession": "医生",
+        "language": "zh"
+      }
+    },
+    "previous_turns": [
+      {
+        "role": "user",
+        "content": "我叫张医生，今年35岁，是一名外科医生"
+      },
+      {
+        "role": "assistant",
+        "content": "您好张医生！很高兴认识您。作为一名外科医生，您在医疗健康方面有丰富的专业知识。请问今天有什么可以帮助您的吗？"
+      },
+      {
+        "role": "user",
+        "content": "我最近工作压力比较大，想了解一些缓解压力的保健品"
+      },
+      {
+        "role": "assistant",
+        "content": "张医生，我理解您作为外科医生工作压力很大。针对压力缓解，我推荐一些温和有效的保健品：\n1. 维生素B族复合物 - 有助于神经系统健康\n2. 镁元素补充剂 - 有助于肌肉放松和睡眠\n3. 洋甘菊茶或提取物 - 天然的放松剂\n\n您对哪种类型比较感兴趣呢？"
+      }
+    ]
+  },
+  
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "我对维生素B族比较感兴趣，你能推荐几个具体的品牌吗？",
+      "user_id": "${user_context.user_id}",
+      "conversation_history": "${setup.previous_turns}",
+      "metadata": {
+        "test_id": "${id}",
+        "test_name": "${name}"
+      }
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": [
+        "张医生",
+        "维生素B族",
+        "品牌",
+        "推荐"
+      ],
+      "output_excludes": [
+        "错误",
+        "失败"
+      ],
+      "min_length": 200,
+      "max_length": 2000
+    },
+    
+    "reasoning": {
+      "steps_min": 3,
+      "contains_keywords": [
+        "vitamin_b",
+        "brand_recommendation",
+        "context_awareness",
+        "doctor_profile"
+      ],
+      "tool_calls": [
+        "product_search",
+        "brand_filter"
+      ]
+    },
+    
+    "agents": {
+      "touched": ["router_agent", "rag_agent", "response_agent"],
+      "max_agents": 4
+    },
+    
+    "context": {
+      "mem0": {
+        "should_retrieve": [
+          "user_profession",
+          "stress_relief_interest",
+          "vitamin_b_preference"
+        ],
+        "should_store": [
+          "brand_inquiry",
+          "specific_product_interest"
+        ],
+        "memory_count": 3
+      }
+    },
+    
+    "server_logs": {
+      "contains": [
+        "Context retrieval",
+        "Memory integration",
+        "Brand recommendation"
+      ],
+      "excludes": [
+        "ERROR",
+        "CRITICAL",
+        "Context lost"
+      ],
+      "log_levels": {
+        "ERROR": "=0",
+        "WARNING": "<=1"
+      }
+    },
+    
+    "performance": {
+      "response_time_max": 20.0,
+      "memory_usage_max": "120MB",
+      "token_usage_max": 1000
+    }
+  },
+  
+  "cleanup": {
+    "reset_context": false
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "id": "MTN_002",
+  "name": "Progressive multi-turn conversation test",
+  "suite": "multi_turn",
+  "type": "multi_turn",
+  "priority": 5,
+  "tags": ["multi_turn", "progressive", "context_building"],
+  
+  "config": {
+    "timeout": 45,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["multi_agent", "mem0", "context_persistence"]
+  },
+  
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_mtn_002",
+      "profile": {
+        "name": "李女士",
+        "age": 42,
+        "language": "zh"
+      }
+    },
+    "previous_turns": [
+      {
+        "role": "user",
+        "content": "你好，我最近总是感觉疲劳"
+      },
+      {
+        "role": "assistant",
+        "content": "您好李女士！感觉疲劳可能有很多原因。请问这种疲劳持续多长时间了？是否影响到您的日常工作和生活？"
+      },
+      {
+        "role": "user",
+        "content": "大概有两个月了，确实影响工作效率，晚上睡眠也不太好"
+      },
+      {
+        "role": "assistant",
+        "content": "我理解您的困扰。疲劳伴随睡眠问题持续两个月确实需要关注。可能的原因包括压力、营养不良、甲状腺功能等。建议您：1）规律作息 2）适量运动 3）考虑检查甲状腺功能。您最近的工作压力大吗？"
+      }
+    ]
+  },
+  
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "工作压力确实很大，我是做财务工作的，最近在做年度审计。你能推荐一些补充维生素的产品吗？",
+      "user_id": "${user_context.user_id}",
+      "conversation_history": "${setup.previous_turns}",
+      "metadata": {
+        "test_id": "${id}",
+        "test_name": "${name}"
+      }
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": [
+        "李女士",
+        "财务工作",
+        "审计",
+        "压力",
+        "维生素",
+        "推荐"
+      ],
+      "output_excludes": [
+        "错误",
+        "失败"
+      ],
+      "min_length": 200,
+      "max_length": 2000
+    },
+    
+    "reasoning": {
+      "steps_min": 4,
+      "contains_keywords": [
+        "work_stress",
+        "financial_profession",
+        "audit_pressure",
+        "vitamin_recommendation",
+        "fatigue_correlation"
+      ],
+      "tool_calls": [
+        "product_search",
+        "health_analysis"
+      ]
+    },
+    
+    "agents": {
+      "touched": ["router_agent", "rag_agent", "response_agent"],
+      "max_agents": 4
+    },
+    
+    "context": {
+      "mem0": {
+        "should_retrieve": [
+          "fatigue_symptoms",
+          "sleep_problems",
+          "duration_two_months"
+        ],
+        "should_store": [
+          "work_stress_high",
+          "financial_profession",
+          "audit_period",
+          "vitamin_interest"
+        ],
+        "memory_count": 4
+      }
+    },
+    
+    "server_logs": {
+      "contains": [
+        "Context continuation",
+        "Professional stress analysis",
+        "Vitamin recommendation"
+      ],
+      "excludes": [
+        "ERROR",
+        "CRITICAL",
+        "Context lost"
+      ],
+      "log_levels": {
+        "ERROR": "=0",
+        "WARNING": "<=1"
+      }
+    },
+    
+    "performance": {
+      "response_time_max": 25.0,
+      "memory_usage_max": "130MB",
+      "token_usage_max": 1200
+    }
+  },
+  
+  "cleanup": {
+    "reset_context": false
+  }
+}

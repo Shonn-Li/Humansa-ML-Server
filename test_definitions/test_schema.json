@@ -1,0 +1,386 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Standardized Test Definition",
+  "description": "Schema for YouWo AI ML Server test cases",
+  "type": "object",
+  "required": ["id", "name", "suite", "type", "execution", "expectations"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}_\\d{3}$",
+      "description": "Unique test identifier (e.g., APT_001)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable test name"
+    },
+    "suite": {
+      "type": "string",
+      "enum": ["appointment", "medical_consultation", "product", "identity", "emergency", "multi_turn", "edge_case", "performance"],
+      "description": "Test suite category"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["single", "multi_turn"],
+      "description": "Test execution type"
+    },
+    "priority": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "default": 3,
+      "description": "Test priority (1=lowest, 5=highest)"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags for categorization and filtering"
+    },
+    "config": {
+      "type": "object",
+      "properties": {
+        "timeout": {
+          "type": "number",
+          "default": 30,
+          "description": "Maximum execution time in seconds"
+        },
+        "retries": {
+          "type": "integer",
+          "default": 0,
+          "description": "Number of retries on failure"
+        },
+        "parallel_safe": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether test can run in parallel with others"
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Required server features or configurations"
+        }
+      }
+    },
+    "setup": {
+      "type": "object",
+      "properties": {
+        "user_context": {
+          "type": "object",
+          "properties": {
+            "user_id": {
+              "type": "string",
+              "default": "test_user_${test_id}"
+            },
+            "profile": {
+              "type": "object",
+              "description": "User profile data"
+            }
+          }
+        },
+        "previous_turns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["role", "content"],
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": ["user", "assistant"]
+              },
+              "content": {
+                "type": "string"
+              }
+            }
+          },
+          "description": "Previous conversation turns for multi-turn tests"
+        },
+        "environment": {
+          "type": "object",
+          "description": "Environment variable overrides"
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "required": ["endpoint", "payload"],
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "API endpoint path"
+        },
+        "method": {
+          "type": "string",
+          "enum": ["GET", "POST", "PUT", "DELETE"],
+          "default": "POST"
+        },
+        "headers": {
+          "type": "object",
+          "description": "Request headers"
+        },
+        "payload": {
+          "type": "object",
+          "description": "Request body"
+        }
+      }
+    },
+    "expectations": {
+      "type": "object",
+      "properties": {
+        "response": {
+          "type": "object",
+          "properties": {
+            "status_code": {
+              "type": "integer",
+              "default": 200
+            },
+            "headers": {
+              "type": "object",
+              "description": "Expected response headers"
+            },
+            "output_contains": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Keywords that must appear in output"
+            },
+            "output_excludes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Keywords that must not appear in output"
+            },
+            "output_regex": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Regex patterns to match in output"
+            },
+            "min_length": {
+              "type": "integer",
+              "description": "Minimum response length"
+            },
+            "max_length": {
+              "type": "integer",
+              "description": "Maximum response length"
+            },
+            "custom_validators": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Names of custom validation functions"
+            }
+          }
+        },
+        "reasoning": {
+          "type": "object",
+          "properties": {
+            "steps_min": {
+              "type": "integer",
+              "description": "Minimum reasoning steps"
+            },
+            "steps_max": {
+              "type": "integer",
+              "description": "Maximum reasoning steps"
+            },
+            "contains_keywords": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Keywords expected in reasoning"
+            },
+            "excludes_keywords": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Keywords that should not appear in reasoning"
+            },
+            "tool_calls": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Expected tool calls"
+            },
+            "tool_results_contain": {
+              "type": "object",
+              "description": "Expected content in tool results"
+            }
+          }
+        },
+        "agents": {
+          "type": "object",
+          "properties": {
+            "touched": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Agents that should be involved"
+            },
+            "not_touched": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Agents that should not be involved"
+            },
+            "call_order": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Expected order of agent calls"
+            },
+            "max_agents": {
+              "type": "integer",
+              "description": "Maximum number of agents to be called"
+            }
+          }
+        },
+        "context": {
+          "type": "object",
+          "properties": {
+            "mem0": {
+              "type": "object",
+              "properties": {
+                "should_store": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Information that should be stored in memory"
+                },
+                "should_retrieve": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Information that should be retrieved from memory"
+                },
+                "memory_count": {
+                  "type": "integer",
+                  "description": "Expected number of memories"
+                }
+              }
+            },
+            "workflow": {
+              "type": "object",
+              "properties": {
+                "state_changes": {
+                  "type": "object",
+                  "description": "Expected workflow state changes"
+                },
+                "final_state": {
+                  "type": "object",
+                  "description": "Expected final workflow state"
+                },
+                "events_emitted": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Expected workflow events"
+                }
+              }
+            }
+          }
+        },
+        "server_logs": {
+          "type": "object",
+          "properties": {
+            "contains": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Strings that must appear in server logs"
+            },
+            "excludes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Strings that must not appear in server logs"
+            },
+            "regex_matches": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Regex patterns to match in server logs"
+            },
+            "log_levels": {
+              "type": "object",
+              "properties": {
+                "ERROR": {
+                  "type": "string",
+                  "pattern": "^(=|<|>|<=|>=)\\d+$",
+                  "description": "Constraint on ERROR log count"
+                },
+                "WARNING": {
+                  "type": "string",
+                  "pattern": "^(=|<|>|<=|>=)\\d+$",
+                  "description": "Constraint on WARNING log count"
+                },
+                "INFO": {
+                  "type": "string",
+                  "pattern": "^(=|<|>|<=|>=)\\d+$",
+                  "description": "Constraint on INFO log count"
+                }
+              }
+            }
+          }
+        },
+        "performance": {
+          "type": "object",
+          "properties": {
+            "response_time_max": {
+              "type": "number",
+              "description": "Maximum response time in seconds"
+            },
+            "memory_usage_max": {
+              "type": "string",
+              "pattern": "^\\d+(B|KB|MB|GB)$",
+              "description": "Maximum memory usage"
+            },
+            "token_usage_max": {
+              "type": "integer",
+              "description": "Maximum token usage"
+            },
+            "database_queries_max": {
+              "type": "integer",
+              "description": "Maximum database queries"
+            }
+          }
+        }
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "properties": {
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Cleanup commands to run after test"
+        },
+        "reset_context": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to reset user context after test"
+        }
+      }
+    }
+  }
+}

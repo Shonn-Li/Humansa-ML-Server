@@ -1,0 +1,40 @@
+{
+  "id": "HUM_005",
+  "name": "Code Interpreter Fibonacci Test",
+  "suite": "humansa",
+  "type": "single",
+  "priority": 4,
+  "tags": ["humansa", "code-interpreter", "fibonacci", "calculation"],
+  "config": {
+    "timeout": 45,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["multi_agent_endpoint_v2", "code_interpreter"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "10001"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/multi-agent/chat",
+    "method": "POST",
+    "payload": {
+      "model": "gpt-4.1-nano",
+      "messages": [{"role": "user", "content": "Calculate the first 10 Fibonacci numbers"}],
+      "stream": true,
+      "user_id": 10001
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["0", "1", "1", "2", "3", "5", "8"]
+    },
+    "agents": {
+      "touched": ["code_interpreter"],
+      "max_agents": 2
+    },
+    "custom_validators": ["validate_code_interpreter_used"]
+  }
+}

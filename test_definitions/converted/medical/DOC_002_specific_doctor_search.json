@@ -1,0 +1,120 @@
+{
+  "id": "DOC_002",
+  "name": "Specific doctor search and recommendation",
+  "suite": "medical_consultation",
+  "type": "single",
+  "priority": 4,
+  "tags": ["doctor_search", "specific_doctor", "recommendation"],
+  
+  "config": {
+    "timeout": 30,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["doctor_database", "search_functionality"]
+  },
+  
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_doc_002",
+      "profile": {
+        "name": "患者王女士",
+        "age": 35,
+        "gender": "female",
+        "location": "北京",
+        "language": "zh"
+      }
+    }
+  },
+  
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "我想找一个妇科专家，最好是有多年经验的女医生，你能推荐吗？",
+      "user_id": "${user_context.user_id}",
+      "metadata": {
+        "test_id": "${id}",
+        "test_name": "${name}"
+      }
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": [
+        "妇科",
+        "专家",
+        "女医生",
+        "经验",
+        "推荐"
+      ],
+      "output_excludes": [
+        "错误",
+        "失败",
+        "男医生"
+      ],
+      "min_length": 120,
+      "max_length": 1500
+    },
+    
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": [
+        "gynecology",
+        "female_doctor",
+        "experience_criteria",
+        "doctor_search"
+      ],
+      "tool_calls": [
+        "search_doctors",
+        "filter_by_criteria"
+      ]
+    },
+    
+    "agents": {
+      "touched": ["router_agent", "rag_agent"],
+      "max_agents": 3
+    },
+    
+    "context": {
+      "mem0": {
+        "should_store": [
+          "gynecology_preference",
+          "female_doctor_preference",
+          "experience_requirement"
+        ]
+      }
+    },
+    
+    "server_logs": {
+      "contains": [
+        "Doctor search",
+        "Gynecology filter",
+        "Female doctor preference"
+      ],
+      "excludes": [
+        "ERROR",
+        "CRITICAL"
+      ],
+      "log_levels": {
+        "ERROR": "=0",
+        "WARNING": "<=1"
+      }
+    },
+    
+    "performance": {
+      "response_time_max": 18.0,
+      "memory_usage_max": "85MB",
+      "token_usage_max": 700
+    }
+  },
+  
+  "cleanup": {
+    "reset_context": true
+  }
+}

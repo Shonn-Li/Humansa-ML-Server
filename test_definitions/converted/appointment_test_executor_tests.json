@@ -1,0 +1,326 @@
+{
+  "source_file": "appointment_test_executor.py",
+  "conversion_timestamp": "2025-08-03T00:00:00Z",
+  "agent": "Test Conversion Agent 3",
+  "test_count": 8,
+  "tests": [
+    {
+      "id": "ATE_001",
+      "name": "Basic Appointment Test Execution",
+      "suite": "appointment",
+      "type": "single",
+      "priority": 3,
+      "tags": ["test_framework", "appointment", "basic_execution"],
+      "config": {
+        "timeout": 30,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["appointment_test_executor", "humansa_v2"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "test_user_ate_001"
+        }
+      },
+      "execution": {
+        "endpoint": "/v2/humansa/responses/create",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4-turbo",
+          "input": "我想预约明天的号",
+          "user_id": "test_user_ate_001",
+          "metadata": {
+            "test_id": "ATE_001",
+            "test_name": "basic_appointment",
+            "test_category": "appointment"
+          }
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "output_contains": ["预约", "明天"]
+        }
+      }
+    },
+    {
+      "id": "ATE_002",
+      "name": "Multi-turn Conversation Context",
+      "suite": "appointment",
+      "type": "multi_turn",
+      "priority": 4,
+      "tags": ["test_framework", "multi_turn", "conversation_context"],
+      "config": {
+        "timeout": 60,
+        "retries": 1,
+        "parallel_safe": false,
+        "requirements": ["appointment_test_executor", "conversation_context"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "test_user_ate_002"
+        },
+        "previous_turns": [
+          {
+            "role": "user",
+            "content": "我要预约内科"
+          },
+          {
+            "role": "assistant",
+            "content": "好的，请告诉我您的姓名和联系方式"
+          }
+        ]
+      },
+      "execution": {
+        "endpoint": "/v2/humansa/responses/create",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4-turbo",
+          "input": "我叫张三，电话是13800138000",
+          "user_id": "test_user_ate_002",
+          "metadata": {
+            "test_id": "ATE_002",
+            "test_name": "multi_turn_context"
+          }
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "output_contains": ["张三", "13800138000", "内科"]
+        }
+      }
+    },
+    {
+      "id": "ATE_003",
+      "name": "Form ID Generation Validation",
+      "suite": "appointment",
+      "type": "single",
+      "priority": 3,
+      "tags": ["test_framework", "form_validation", "form_id"],
+      "config": {
+        "timeout": 30,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["appointment_test_executor", "form_system"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "test_user_ate_003"
+        }
+      },
+      "execution": {
+        "endpoint": "/v2/humansa/responses/create",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4-turbo",
+          "input": "创建预约表单",
+          "user_id": "test_user_ate_003",
+          "metadata": {
+            "test_id": "ATE_003",
+            "expect_form_id": true
+          }
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "custom_validators": ["has_form_id"]
+        }
+      }
+    },
+    {
+      "id": "ATE_004",
+      "name": "Confirmation Code Pattern Validation",
+      "suite": "appointment",
+      "type": "single",
+      "priority": 3,
+      "tags": ["test_framework", "confirmation_code", "pattern_matching"],
+      "config": {
+        "timeout": 30,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["appointment_test_executor", "confirmation_system"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "test_user_ate_004"
+        }
+      },
+      "execution": {
+        "endpoint": "/v2/humansa/responses/create",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4-turbo",
+          "input": "提交我的预约申请",
+          "user_id": "test_user_ate_004",
+          "metadata": {
+            "test_id": "ATE_004",
+            "expect_confirmation_code": true,
+            "confirmation_pattern": "APT-\\d+"
+          }
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "output_regex": ["APT-\\d+"]
+        }
+      }
+    },
+    {
+      "id": "ATE_005",
+      "name": "Form Completion Validation",
+      "suite": "appointment",
+      "type": "single",
+      "priority": 4,
+      "tags": ["test_framework", "form_completion", "required_fields"],
+      "config": {
+        "timeout": 45,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["appointment_test_executor", "form_validation"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "test_user_ate_005"
+        }
+      },
+      "execution": {
+        "endpoint": "/v2/humansa/responses/create",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4-turbo",
+          "input": "我要预约李医生明天下午2点，我叫王小明，电话13800138000，头痛症状",
+          "user_id": "test_user_ate_005",
+          "metadata": {
+            "test_id": "ATE_005",
+            "form_should_complete": true
+          }
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "output_contains": ["医生", "时间", "症状", "姓名", "电话"]
+        }
+      }
+    },
+    {
+      "id": "ATE_006",
+      "name": "Alternative Suggestions Validation",
+      "suite": "appointment",
+      "type": "single",
+      "priority": 3,
+      "tags": ["test_framework", "alternatives", "suggestions"],
+      "config": {
+        "timeout": 30,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["appointment_test_executor", "suggestion_system"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "test_user_ate_006"
+        }
+      },
+      "execution": {
+        "endpoint": "/v2/humansa/responses/create",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4-turbo",
+          "input": "李医生明天没有空，有其他选择吗？",
+          "user_id": "test_user_ate_006",
+          "metadata": {
+            "test_id": "ATE_006",
+            "expect_alternatives": true
+          }
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "output_contains": ["推荐", "建议", "其他", "可以选择"]
+        }
+      }
+    },
+    {
+      "id": "ATE_007",
+      "name": "Emergency Handling Validation",
+      "suite": "emergency",
+      "type": "single",
+      "priority": 5,
+      "tags": ["test_framework", "emergency", "urgent_symptoms"],
+      "config": {
+        "timeout": 30,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["appointment_test_executor", "emergency_detection"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "test_user_ate_007"
+        }
+      },
+      "execution": {
+        "endpoint": "/v2/humansa/responses/create",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4-turbo",
+          "input": "我胸痛很厉害，需要紧急预约",
+          "user_id": "test_user_ate_007",
+          "metadata": {
+            "test_id": "ATE_007",
+            "is_urgent": true
+          }
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "output_contains": ["紧急", "急诊", "立即", "马上", "危急"]
+        }
+      }
+    },
+    {
+      "id": "ATE_008",
+      "name": "Response Time Performance",
+      "suite": "performance",
+      "type": "single",
+      "priority": 3,
+      "tags": ["test_framework", "performance", "response_time"],
+      "config": {
+        "timeout": 10,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["appointment_test_executor", "performance_monitoring"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "test_user_ate_008"
+        }
+      },
+      "execution": {
+        "endpoint": "/v2/humansa/responses/create",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4-turbo",
+          "input": "快速预约测试",
+          "user_id": "test_user_ate_008",
+          "metadata": {
+            "test_id": "ATE_008"
+          }
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "min_length": 10
+        },
+        "performance": {
+          "response_time_max": 10
+        }
+      }
+    }
+  ]
+}

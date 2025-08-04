@@ -1,0 +1,33 @@
+{
+  "id": "API_106",
+  "name": "Response Cleanup Test",
+  "suite": "api",
+  "type": "single",
+  "priority": 2,
+  "tags": ["api", "responses", "cleanup", "maintenance"],
+  "config": {
+    "timeout": 30,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["responses_api", "cleanup_functionality"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_456"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/cleanup",
+    "method": "POST",
+    "payload": {
+      "max_age_hours": 0.001
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["cleaned", "removed"]
+    },
+    "custom_validators": ["validate_cleanup_results"]
+  }
+}

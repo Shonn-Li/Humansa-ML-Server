@@ -1,0 +1,37 @@
+{
+  "id": "API_104",
+  "name": "Streaming Response Continuation Test",
+  "suite": "api",
+  "type": "single",
+  "priority": 4,
+  "tags": ["api", "responses", "streaming", "continuation"],
+  "config": {
+    "timeout": 60,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["responses_api", "streaming_continuation"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_456"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/${previous_response_id}/stream",
+    "method": "POST",
+    "payload": {
+      "input": "她还需要定期复查哪些项目？",
+      "model": "gpt-4-turbo",
+      "metadata": {
+        "test_scenario": "streaming"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["复查", "项目"]
+    },
+    "custom_validators": ["validate_streaming_continuation", "validate_response_id_in_stream"]
+  }
+}

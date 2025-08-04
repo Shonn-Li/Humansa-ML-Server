@@ -1,0 +1,31 @@
+{
+  "test_id": "MULTI_010",
+  "name": "Code - Fibonacci",
+  "category": "code_interpreter",
+  "type": "single-turn",
+  "complexity": "medium",
+  "can_parallelize": true,
+  "description": "Test code interpreter with mathematical sequence generation",
+  "request": {
+    "model": "gpt-4.1-nano",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Calculate the first 10 Fibonacci numbers"
+      }
+    ],
+    "stream": true,
+    "user_id": 10001
+  },
+  "validation": {
+    "expected_tools": ["code_interpreter_call"],
+    "response_contains": ["0", "1", "1", "2", "3", "5", "8"]
+  },
+  "metadata": {
+    "source_file": "test/core/test_comprehensive_detailed.py",
+    "source_line": 354,
+    "created_date": "2025-08-03T00:00:00Z",
+    "tags": ["code_interpreter", "mathematics", "fibonacci"],
+    "notes": "Tests code execution for mathematical sequences"
+  }
+}

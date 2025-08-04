@@ -1,0 +1,33 @@
+{
+  "test_id": "MULTI_008",
+  "name": "Web Search - Current Events",
+  "category": "web_search",
+  "type": "single-turn",
+  "complexity": "medium",
+  "can_parallelize": true,
+  "description": "Test web search for current events and recent developments",
+  "request": {
+    "model": "gpt-4.1-nano",
+    "messages": [
+      {
+        "role": "user",
+        "content": "What are the latest developments in quantum computing 2025?"
+      }
+    ],
+    "stream": true,
+    "enable_citations": true,
+    "user_id": 10001
+  },
+  "validation": {
+    "expected_tools": ["web_search_call"],
+    "should_have_citations": true,
+    "response_contains": ["quantum", "2025"]
+  },
+  "metadata": {
+    "source_file": "test/core/test_comprehensive_detailed.py",
+    "source_line": 322,
+    "created_date": "2025-08-03T00:00:00Z",
+    "tags": ["web_search", "current_events", "quantum_computing"],
+    "notes": "Tests web search for current developments"
+  }
+}

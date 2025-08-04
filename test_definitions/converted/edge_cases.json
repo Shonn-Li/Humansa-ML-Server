@@ -1,0 +1,1412 @@
+[
+  {
+    "id": "EDG_001",
+    "name": "Gibberish Input Handling",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_001",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_001",
+        "metadata": {
+          "test_id": "EDG_001",
+          "test_name": "Gibberish Input Handling",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "alksjdflkasjdf"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 500,
+        "output_contains": [
+          "不明白",
+          "理解",
+          "请"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      }
+    }
+  },
+  {
+    "id": "EDG_002",
+    "name": "Unrealistic Quantity Request",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_002",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_002",
+        "metadata": {
+          "test_id": "EDG_002",
+          "test_name": "Unrealistic Quantity Request",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我要买1000000个维生素C"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000,
+        "output_contains": [
+          "数量",
+          "确认",
+          "合理"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "异常",
+          "数量检查"
+        ]
+      }
+    }
+  },
+  {
+    "id": "EDG_003",
+    "name": "Invalid Time Request",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_003",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_003",
+        "metadata": {
+          "test_id": "EDG_003",
+          "test_name": "Invalid Time Request",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我想预约100年后的医生"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000,
+        "output_contains": [
+          "时间",
+          "无法",
+          "合理"
+        ],
+        "output_excludes": [
+          "已预约",
+          "成功"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      }
+    }
+  },
+  {
+    "id": "EDG_004",
+    "name": "Emoji Only Input",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_004",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_004",
+        "metadata": {
+          "test_id": "EDG_004",
+          "test_name": "Emoji Only Input",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "😀🎉🏥💊"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 300,
+        "output_contains": [
+          "请",
+          "文字",
+          "描述"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      }
+    }
+  },
+  {
+    "id": "EDG_005",
+    "name": "Repetitive Input",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_005",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_005",
+        "metadata": {
+          "test_id": "EDG_005",
+          "test_name": "Repetitive Input",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000,
+        "output_contains": [
+          "请",
+          "问题",
+          "清楚"
+        ]
+      },
+      "performance": {
+        "response_time_max": 10.0
+      }
+    }
+  },
+  {
+    "id": "EDG_006",
+    "name": "Gibberish Input Handling",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_006",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_006",
+        "metadata": {
+          "test_id": "EDG_006",
+          "test_name": "Gibberish Input Handling",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "alksjdflkasjdf"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 500,
+        "output_contains": [
+          "不明白",
+          "理解",
+          "请"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      }
+    }
+  },
+  {
+    "id": "EDG_007",
+    "name": "Unrealistic Quantity Request",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_007",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_007",
+        "metadata": {
+          "test_id": "EDG_007",
+          "test_name": "Unrealistic Quantity Request",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我要买1000000个维生素C"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000,
+        "output_contains": [
+          "数量",
+          "确认",
+          "合理"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "异常",
+          "数量检查"
+        ]
+      }
+    }
+  },
+  {
+    "id": "EDG_008",
+    "name": "Invalid Time Request",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_008",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_008",
+        "metadata": {
+          "test_id": "EDG_008",
+          "test_name": "Invalid Time Request",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我想预约100年后的医生"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000,
+        "output_contains": [
+          "时间",
+          "无法",
+          "合理"
+        ],
+        "output_excludes": [
+          "已预约",
+          "成功"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      }
+    }
+  },
+  {
+    "id": "EDG_009",
+    "name": "Emoji Only Input",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_009",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_009",
+        "metadata": {
+          "test_id": "EDG_009",
+          "test_name": "Emoji Only Input",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "😀🎉🏥💊"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 300,
+        "output_contains": [
+          "请",
+          "文字",
+          "描述"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      }
+    }
+  },
+  {
+    "id": "EDG_010",
+    "name": "Repetitive Input",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_010",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_010",
+        "metadata": {
+          "test_id": "EDG_010",
+          "test_name": "Repetitive Input",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000,
+        "output_contains": [
+          "请",
+          "问题",
+          "清楚"
+        ]
+      },
+      "performance": {
+        "response_time_max": 10.0
+      }
+    }
+  },
+  {
+    "id": "EDG_011",
+    "name": "Gibberish Input Handling",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_011",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_011",
+        "metadata": {
+          "test_id": "EDG_011",
+          "test_name": "Gibberish Input Handling",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "alksjdflkasjdf"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 500,
+        "output_contains": [
+          "不明白",
+          "理解",
+          "请"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      }
+    }
+  },
+  {
+    "id": "EDG_012",
+    "name": "Unrealistic Quantity Request",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_012",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_012",
+        "metadata": {
+          "test_id": "EDG_012",
+          "test_name": "Unrealistic Quantity Request",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我要买1000000个维生素C"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000,
+        "output_contains": [
+          "数量",
+          "确认",
+          "合理"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "异常",
+          "数量检查"
+        ]
+      }
+    }
+  },
+  {
+    "id": "EDG_013",
+    "name": "Invalid Time Request",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_013",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_013",
+        "metadata": {
+          "test_id": "EDG_013",
+          "test_name": "Invalid Time Request",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我想预约100年后的医生"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000,
+        "output_contains": [
+          "时间",
+          "无法",
+          "合理"
+        ],
+        "output_excludes": [
+          "已预约",
+          "成功"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      }
+    }
+  },
+  {
+    "id": "EDG_014",
+    "name": "Emoji Only Input",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_014",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_014",
+        "metadata": {
+          "test_id": "EDG_014",
+          "test_name": "Emoji Only Input",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "😀🎉🏥💊"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 300,
+        "output_contains": [
+          "请",
+          "文字",
+          "描述"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      }
+    }
+  },
+  {
+    "id": "EDG_015",
+    "name": "Repetitive Input",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_015",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_015",
+        "metadata": {
+          "test_id": "EDG_015",
+          "test_name": "Repetitive Input",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000,
+        "output_contains": [
+          "请",
+          "问题",
+          "清楚"
+        ]
+      },
+      "performance": {
+        "response_time_max": 10.0
+      }
+    }
+  },
+  {
+    "id": "EDG_016",
+    "name": "Gibberish Input Handling",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_016",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_016",
+        "metadata": {
+          "test_id": "EDG_016",
+          "test_name": "Gibberish Input Handling",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "alksjdflkasjdf"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 500,
+        "output_contains": [
+          "不明白",
+          "理解",
+          "请"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      }
+    }
+  },
+  {
+    "id": "EDG_017",
+    "name": "Unrealistic Quantity Request",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_017",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_017",
+        "metadata": {
+          "test_id": "EDG_017",
+          "test_name": "Unrealistic Quantity Request",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我要买1000000个维生素C"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000,
+        "output_contains": [
+          "数量",
+          "确认",
+          "合理"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "异常",
+          "数量检查"
+        ]
+      }
+    }
+  },
+  {
+    "id": "EDG_018",
+    "name": "Invalid Time Request",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_018",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_018",
+        "metadata": {
+          "test_id": "EDG_018",
+          "test_name": "Invalid Time Request",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我想预约100年后的医生"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000,
+        "output_contains": [
+          "时间",
+          "无法",
+          "合理"
+        ],
+        "output_excludes": [
+          "已预约",
+          "成功"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      }
+    }
+  },
+  {
+    "id": "EDG_019",
+    "name": "Emoji Only Input",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_019",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_019",
+        "metadata": {
+          "test_id": "EDG_019",
+          "test_name": "Emoji Only Input",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "😀🎉🏥💊"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 300,
+        "output_contains": [
+          "请",
+          "文字",
+          "描述"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      }
+    }
+  },
+  {
+    "id": "EDG_020",
+    "name": "Repetitive Input",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_020",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_020",
+        "metadata": {
+          "test_id": "EDG_020",
+          "test_name": "Repetitive Input",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000,
+        "output_contains": [
+          "请",
+          "问题",
+          "清楚"
+        ]
+      },
+      "performance": {
+        "response_time_max": 10.0
+      }
+    }
+  },
+  {
+    "id": "EDG_021",
+    "name": "Gibberish Input Handling",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_021",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_021",
+        "metadata": {
+          "test_id": "EDG_021",
+          "test_name": "Gibberish Input Handling",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "alksjdflkasjdf"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 500,
+        "output_contains": [
+          "不明白",
+          "理解",
+          "请"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      }
+    }
+  },
+  {
+    "id": "EDG_022",
+    "name": "Unrealistic Quantity Request",
+    "suite": "edge_case",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "edge_case",
+      "robustness",
+      "error_handling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_EDG_022",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_EDG_022",
+        "metadata": {
+          "test_id": "EDG_022",
+          "test_name": "Unrealistic Quantity Request",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "我要买1000000个维生素C"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 50,
+        "max_length": 5000,
+        "output_contains": [
+          "数量",
+          "确认",
+          "合理"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "异常",
+          "数量检查"
+        ]
+      }
+    }
+  }
+]

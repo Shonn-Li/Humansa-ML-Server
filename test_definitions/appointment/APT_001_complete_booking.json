@@ -1,0 +1,131 @@
+{
+  "id": "APT_001",
+  "name": "Complete appointment booking with all information",
+  "suite": "appointment",
+  "type": "single",
+  "priority": 5,
+  "tags": ["form", "complete", "happy_path"],
+  
+  "config": {
+    "timeout": 30,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["pattern2", "form_system"]
+  },
+  
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_apt_001",
+      "profile": {
+        "name": "张三",
+        "phone": "13800138000",
+        "age": 35,
+        "gender": "male"
+      }
+    }
+  },
+  
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "我想预约李明医生明天上午9点看头痛，我叫张三，电话13800138000",
+      "user_id": "${user_context.user_id}",
+      "metadata": {
+        "test_id": "${id}",
+        "test_name": "${name}"
+      }
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": [
+        "李明医生",
+        "明天",
+        "上午9点",
+        "头痛",
+        "张三",
+        "13800138000",
+        "预约信息"
+      ],
+      "output_excludes": [
+        "错误",
+        "失败",
+        "不支持"
+      ],
+      "min_length": 100,
+      "max_length": 1000
+    },
+    
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": [
+        "appointment",
+        "form",
+        "doctor"
+      ],
+      "tool_calls": [
+        "create_appointment_form"
+      ]
+    },
+    
+    "agents": {
+      "touched": ["FormCreator"],
+      "max_agents": 2
+    },
+    
+    "context": {
+      "mem0": {
+        "should_store": [
+          "appointment_intent",
+          "doctor_preference",
+          "symptoms"
+        ]
+      },
+      "workflow": {
+        "state_changes": {
+          "form_created": true,
+          "form_filled": true
+        },
+        "events_emitted": [
+          "form.created",
+          "form.updated"
+        ]
+      }
+    },
+    
+    "server_logs": {
+      "contains": [
+        "Pattern 2 orchestrator",
+        "Form created with ID",
+        "FormCreator agent"
+      ],
+      "excludes": [
+        "ERROR",
+        "CRITICAL",
+        "Exception"
+      ],
+      "log_levels": {
+        "ERROR": "=0",
+        "WARNING": "<=2",
+        "INFO": ">=5"
+      }
+    },
+    
+    "performance": {
+      "response_time_max": 5.0,
+      "memory_usage_max": "100MB",
+      "token_usage_max": 1000
+    }
+  },
+  
+  "cleanup": {
+    "reset_context": true
+  }
+}

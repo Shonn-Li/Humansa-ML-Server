@@ -1,0 +1,147 @@
+{
+  "id": "MTN_004",
+  "name": "Multi-turn medical consultation test",
+  "suite": "multi_turn",
+  "type": "multi_turn",
+  "priority": 5,
+  "tags": ["multi_turn", "medical", "consultation", "symptom_analysis"],
+  
+  "config": {
+    "timeout": 50,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["multi_agent", "medical_knowledge", "mem0"]
+  },
+  
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_mtn_004",
+      "profile": {
+        "name": "陈女士",
+        "age": 29,
+        "gender": "female",
+        "language": "zh"
+      }
+    },
+    "previous_turns": [
+      {
+        "role": "user",
+        "content": "医生，我最近经常头痛，特别是下午的时候"
+      },
+      {
+        "role": "assistant",
+        "content": "陈女士，您好。头痛确实需要关注，特别是有明显时间规律的头痛。请问这种下午头痛大概持续多长时间了？疼痛的性质是怎样的，比如是胀痛、刺痛还是跳痛？"
+      },
+      {
+        "role": "user",
+        "content": "大概有一个多月了，主要是胀痛，有时候还会感到恶心"
+      },
+      {
+        "role": "assistant",
+        "content": "一个多月的胀痛伴有恶心，这需要仔细分析。可能的原因包括：1）紧张性头痛（工作压力大）2）血管性头痛 3）颈椎问题引起。请问您最近工作压力大吗？长时间对着电脑工作吗？"
+      }
+    ]
+  },
+  
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "是的，我是程序员，每天要对着电脑10多个小时，最近项目很赶，压力确实很大",
+      "user_id": "${user_context.user_id}",
+      "conversation_history": "${setup.previous_turns}",
+      "metadata": {
+        "test_id": "${id}",
+        "test_name": "${name}"
+      }
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": [
+        "陈女士",
+        "程序员",
+        "电脑",
+        "压力",
+        "颈椎",
+        "建议"
+      ],
+      "output_excludes": [
+        "错误",
+        "失败"
+      ],
+      "min_length": 250,
+      "max_length": 2000
+    },
+    
+    "reasoning": {
+      "steps_min": 4,
+      "contains_keywords": [
+        "occupational_health",
+        "computer_strain",
+        "tension_headache",
+        "ergonomic_factors",
+        "stress_correlation"
+      ],
+      "tool_calls": [
+        "analyze_symptoms",
+        "search_ergonomic_advice"
+      ]
+    },
+    
+    "agents": {
+      "touched": ["router_agent", "rag_agent", "response_agent"],
+      "max_agents": 4
+    },
+    
+    "context": {
+      "mem0": {
+        "should_retrieve": [
+          "afternoon_headaches",
+          "one_month_duration",
+          "throbbing_pain_nausea"
+        ],
+        "should_store": [
+          "programmer_profession",
+          "long_computer_hours",
+          "high_work_pressure",
+          "project_deadline_stress"
+        ],
+        "memory_count": 6
+      }
+    },
+    
+    "server_logs": {
+      "contains": [
+        "Medical consultation",
+        "Occupational health analysis",
+        "Symptom correlation"
+      ],
+      "excludes": [
+        "ERROR",
+        "CRITICAL",
+        "Medical advice error"
+      ],
+      "log_levels": {
+        "ERROR": "=0",
+        "WARNING": "<=1"
+      }
+    },
+    
+    "performance": {
+      "response_time_max": 22.0,
+      "memory_usage_max": "110MB",
+      "token_usage_max": 1000
+    }
+  },
+  
+  "cleanup": {
+    "reset_context": false
+  }
+}

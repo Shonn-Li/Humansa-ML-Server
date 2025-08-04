@@ -14,11 +14,12 @@ This document describes the current state of the Humansa V2 implementation with 
                           ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                Test Environment Setup                        │
-│  • Port: 5001 (ML Server)                                   │
+│  • Port: 6001 (ML Server Test Instance)                     │
 │  • DB Port: 5454 (PostgreSQL Test DB)                       │
 │  • DB Name: test4                                           │
 │  • Environment: test                                        │
 │  • Enhanced Logging: true                                   │
+│  • Pattern 2: true (when enabled)                           │
 └─────────────────────────┬───────────────────────────────────┘
                           │
                           ▼
@@ -41,10 +42,11 @@ This document describes the current state of the Humansa V2 implementation with 
                           ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                  ML Server Startup                           │
-│  python -m src.main                                          │
+│  python3 -m src.main --port 6001                            │
 │  • Initializes Humansa V2 system                           │
 │  • Loads V1 and V2 endpoints                               │
 │  • Initializes memory managers                              │
+│  • Pattern 2 orchestrator (when HUMANSA_USE_PATTERN2=true) │
 └─────────────────────────┬───────────────────────────────────┘
                           │
                           ▼
@@ -209,8 +211,9 @@ DB_PORT=5454
 DB_USER=postgres
 DB_PASSWORD=12931
 DB_NAME=test4
-ML_SERVER_PORT=5001
+ML_SERVER_PORT=6001  # Test environment always uses 6001
 HUMANSA_ENHANCED_LOGGING=true
+HUMANSA_USE_PATTERN2=true  # Enable Pattern 2 orchestrator (optional)
 ```
 
 ## Key Files

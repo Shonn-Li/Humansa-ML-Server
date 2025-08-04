@@ -1,0 +1,55 @@
+{
+  "id": "ORCH_103",
+  "name": "Pattern2 Orchestrator Context Sharing Test",
+  "suite": "orchestrator",
+  "type": "single",
+  "priority": 5,
+  "tags": ["pattern2", "orchestrator", "context", "medical", "product"],
+  "config": {
+    "timeout": 45,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["pattern2_orchestrator", "azure_openai"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_001"
+    }
+  },
+  "execution": {
+    "endpoint": "/humansa/pattern2/process",
+    "method": "POST",
+    "payload": {
+      "query": "我最近头痛，有什么好的维生素或保健品推荐吗？",
+      "user_id": "test_user_001",
+      "stream": true
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["头痛", "维生素", "保健品"],
+      "min_length": 100
+    },
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": ["reasoning", "medical", "product"]
+    },
+    "agents": {
+      "touched": ["ProductAgent", "GeneralMedicalAgent"],
+      "max_agents": 3
+    },
+    "context": {
+      "workflow": {
+        "state_changes": {
+          "context_shared": true,
+          "agents_coordinated": true
+        }
+      }
+    },
+    "server_logs": {
+      "contains": ["Pattern 2 orchestrator", "context sharing"],
+      "excludes": ["ERROR"]
+    }
+  }
+}

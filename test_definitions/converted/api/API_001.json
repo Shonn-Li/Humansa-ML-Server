@@ -1,0 +1,81 @@
+{
+  "id": "API_001",
+  "name": "Linear Medical Consultation",
+  "suite": "medical_consultation",
+  "type": "multi_turn",
+  "priority": 4,
+  "tags": ["api", "linear_conversation", "medical", "insomnia", "chinese"],
+  "config": {
+    "timeout": 120,
+    "retries": 0,
+    "parallel_safe": false,
+    "requirements": ["responses_api", "conversation_context"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_456",
+      "profile": {}
+    },
+    "previous_turns": [],
+    "environment": {}
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "你好，我最近总是失眠",
+      "user_id": "test_user_456",
+      "metadata": {
+        "test_scenario": "initial"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["失眠", "睡眠", "多久"],
+      "min_length": 80
+    },
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": ["medical_consultation", "sleep_issues", "follow_up_questions"],
+      "tool_calls": ["medical_consultation", "symptom_assessment"]
+    },
+    "agents": {
+      "touched": ["MedicalAgent", "ConversationAgent"],
+      "max_agents": 4
+    },
+    "context": {
+      "mem0": {
+        "should_store": ["insomnia complaint", "sleep problems", "medical consultation"],
+        "memory_count": 2
+      },
+      "workflow": {
+        "state_changes": {
+          "conversation_state": "medical_consultation",
+          "consultation_topic": "sleep_disorders"
+        },
+        "events_emitted": ["medical_consultation_started", "symptom_reported"]
+      }
+    },
+    "server_logs": {
+      "contains": ["medical consultation", "insomnia", "sleep"],
+      "excludes": ["ERROR", "exception"],
+      "log_levels": {
+        "ERROR": "=0"
+      }
+    },
+    "performance": {
+      "response_time_max": 30,
+      "token_usage_max": 1000
+    }
+  },
+  "cleanup": {
+    "commands": [],
+    "reset_context": true
+  }
+}

@@ -1,0 +1,778 @@
+{
+  "source_file": "test/core/test_comprehensive_detailed.py",
+  "conversion_timestamp": "2025-08-03T00:00:00Z",
+  "agent": "Test Conversion Agent 3",
+  "test_count": 20,
+  "tests": [
+    {
+      "id": "CDT_001",
+      "name": "Simple Math",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 1,
+      "tags": ["basic", "math", "no_tools"],
+      "config": {
+        "timeout": 30,
+        "retries": 0,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "What is 2+2?"}],
+          "stream": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "output_contains": ["4", "four"],
+          "min_length": 10
+        },
+        "agents": {
+          "not_touched": ["context_search_call", "file_search_call", "web_search_call", "code_interpreter_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_002",
+      "name": "General Knowledge",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 1,
+      "tags": ["basic", "knowledge", "no_tools"],
+      "config": {
+        "timeout": 30,
+        "retries": 0,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "What is the capital of France?"}],
+          "stream": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "output_contains": ["Paris"]
+        },
+        "agents": {
+          "not_touched": ["context_search_call", "file_search_call", "web_search_call", "code_interpreter_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_003",
+      "name": "Context Search - PARL",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 3,
+      "tags": ["context_search", "citations", "notes"],
+      "config": {
+        "timeout": 60,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2", "context_search"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "What do my notes say about PARL?"}],
+          "stream": true,
+          "enable_citations": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "output_contains": ["PARL", "Predictability-Aware"]
+        },
+        "agents": {
+          "touched": ["context_search_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_004",
+      "name": "Context Search - Note by ID",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 3,
+      "tags": ["context_search", "note_retrieval"],
+      "config": {
+        "timeout": 60,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2", "context_search"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "Show me the content of note 10001"}],
+          "stream": true,
+          "enable_citations": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "min_length": 10
+        },
+        "agents": {
+          "touched": ["context_search_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_005",
+      "name": "Context Search - My Notes",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 3,
+      "tags": ["context_search", "ai_startups", "citations"],
+      "config": {
+        "timeout": 60,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2", "context_search"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "Search my notes for information about AI startups"}],
+          "stream": true,
+          "enable_citations": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200
+        },
+        "agents": {
+          "touched": ["context_search_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_006",
+      "name": "File Attachment - Single PDF",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 4,
+      "tags": ["file_search", "pdf", "arxiv", "citations"],
+      "config": {
+        "timeout": 120,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2", "file_search"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "Summarize this paper"}],
+          "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"],
+          "stream": true,
+          "enable_citations": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "output_contains": ["G1", "graph"]
+        },
+        "agents": {
+          "touched": ["file_search_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_007",
+      "name": "File Attachment - Question about PDF",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 4,
+      "tags": ["file_search", "pdf", "research_question"],
+      "config": {
+        "timeout": 120,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2", "file_search"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "What is the main contribution of this paper?"}],
+          "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"],
+          "stream": true,
+          "enable_citations": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "min_length": 50
+        },
+        "agents": {
+          "touched": ["file_search_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_008",
+      "name": "Web Search - Current Events",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 4,
+      "tags": ["web_search", "current_events", "quantum_computing"],
+      "config": {
+        "timeout": 90,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2", "web_search"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "What are the latest developments in quantum computing 2025?"}],
+          "stream": true,
+          "enable_citations": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "output_contains": ["quantum", "2025"]
+        },
+        "agents": {
+          "touched": ["web_search_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_009",
+      "name": "Web Search - News",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 3,
+      "tags": ["web_search", "news", "ai"],
+      "config": {
+        "timeout": 90,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2", "web_search"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "Search the web for latest AI news"}],
+          "stream": true,
+          "enable_citations": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "min_length": 50
+        },
+        "agents": {
+          "touched": ["web_search_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_010",
+      "name": "Code - Fibonacci",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 3,
+      "tags": ["code_interpreter", "fibonacci", "math"],
+      "config": {
+        "timeout": 60,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2", "code_interpreter"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "Calculate the first 10 Fibonacci numbers"}],
+          "stream": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "output_contains": ["0", "1", "1", "2", "3", "5", "8"]
+        },
+        "agents": {
+          "touched": ["code_interpreter_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_011",
+      "name": "Code - Data Analysis",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 3,
+      "tags": ["code_interpreter", "python", "data_analysis"],
+      "config": {
+        "timeout": 60,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2", "code_interpreter"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "Create a Python list of squares from 1 to 10"}],
+          "stream": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "output_contains": ["1", "4", "9", "16", "25"]
+        },
+        "agents": {
+          "touched": ["code_interpreter_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_012",
+      "name": "Code - Visualization",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 3,
+      "tags": ["code_interpreter", "visualization", "chart"],
+      "config": {
+        "timeout": 90,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2", "code_interpreter"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "Create a bar chart of values [10, 20, 15, 25, 30]"}],
+          "stream": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "min_length": 50
+        },
+        "agents": {
+          "touched": ["code_interpreter_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_013",
+      "name": "Multi - Context + Attachment",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 5,
+      "tags": ["multi_agent", "context_search", "file_search", "comparison"],
+      "config": {
+        "timeout": 180,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2", "context_search", "file_search"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "Compare this paper with my notes on PARL"}],
+          "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"],
+          "stream": true,
+          "enable_citations": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "output_contains": ["PARL", "compare", "paper"]
+        },
+        "agents": {
+          "touched": ["context_search_call", "file_search_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_014",
+      "name": "Multi - Context + Web",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 5,
+      "tags": ["multi_agent", "context_search", "web_search", "trends"],
+      "config": {
+        "timeout": 180,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2", "context_search", "web_search"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "Compare my notes on AI startups with current trends online"}],
+          "stream": true,
+          "enable_citations": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200
+        },
+        "agents": {
+          "touched": ["context_search_call", "web_search_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_015",
+      "name": "Multi - Attachment + Code",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 5,
+      "tags": ["multi_agent", "file_search", "code_interpreter", "analysis"],
+      "config": {
+        "timeout": 240,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2", "file_search", "code_interpreter"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "Analyze the data in this paper and create a summary statistics"}],
+          "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"],
+          "stream": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "min_length": 100
+        },
+        "agents": {
+          "touched": ["file_search_call", "code_interpreter_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_016",
+      "name": "Edge - Empty Query",
+      "suite": "edge_case",
+      "type": "single",
+      "priority": 2,
+      "tags": ["edge_case", "empty_input", "error_handling"],
+      "config": {
+        "timeout": 30,
+        "retries": 0,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": ""}],
+          "stream": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "min_length": 10
+        }
+      }
+    },
+    {
+      "id": "CDT_017",
+      "name": "Edge - Very Long Query",
+      "suite": "edge_case",
+      "type": "single",
+      "priority": 2,
+      "tags": ["edge_case", "long_input", "performance"],
+      "config": {
+        "timeout": 60,
+        "retries": 0,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. I have a very specific question about machine learning. "}],
+          "stream": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "min_length": 10
+        }
+      }
+    },
+    {
+      "id": "CDT_018",
+      "name": "Context - Conversation Search",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 3,
+      "tags": ["context_search", "conversation_history", "machine_learning"],
+      "config": {
+        "timeout": 60,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2", "context_search"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "What did we discuss about machine learning in our conversations?"}],
+          "stream": true,
+          "enable_citations": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "min_length": 20
+        },
+        "agents": {
+          "touched": ["context_search_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_019",
+      "name": "Multi - All Agents",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 5,
+      "tags": ["multi_agent", "all_tools", "comprehensive"],
+      "config": {
+        "timeout": 300,
+        "retries": 1,
+        "parallel_safe": false,
+        "requirements": ["multi_agent_endpoint_v2", "context_search", "file_search", "web_search"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "Compare this paper with my notes and search online for related work, then create a summary table"}],
+          "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"],
+          "stream": true,
+          "enable_citations": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "min_length": 200
+        },
+        "agents": {
+          "touched": ["context_search_call", "file_search_call", "web_search_call"]
+        }
+      }
+    },
+    {
+      "id": "CDT_020",
+      "name": "Context - Specific Query",
+      "suite": "multi_turn",
+      "type": "single",
+      "priority": 3,
+      "tags": ["context_search", "ai_startup", "specific_query"],
+      "config": {
+        "timeout": 60,
+        "retries": 1,
+        "parallel_safe": true,
+        "requirements": ["multi_agent_endpoint_v2", "context_search"]
+      },
+      "setup": {
+        "user_context": {
+          "user_id": "10001"
+        }
+      },
+      "execution": {
+        "endpoint": "/multi_agent/chat",
+        "method": "POST",
+        "payload": {
+          "model": "gpt-4.1-nano",
+          "messages": [{"role": "user", "content": "Based on my notes, what are the main AI startup ideas I've saved?"}],
+          "stream": true,
+          "enable_citations": true,
+          "user_id": 10001
+        }
+      },
+      "expectations": {
+        "response": {
+          "status_code": 200,
+          "output_contains": ["startup", "AI"]
+        },
+        "agents": {
+          "touched": ["context_search_call"]
+        }
+      }
+    }
+  ]
+}

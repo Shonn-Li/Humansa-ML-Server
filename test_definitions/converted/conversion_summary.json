@@ -1,0 +1,19 @@
+{
+  "conversion_summary": {
+    "agent_id": "Test Conversion Agent 5",
+    "total_tests_converted": 387,
+    "categories": {
+      "edge_cases": 22,
+      "multi_turn_state": 20,
+      "multi_turn_context_flow": 20,
+      "performance_load": 25,
+      "medical_consultation": 100,
+      "appointment": 100,
+      "product": 50,
+      "multi_turn_framework": 50
+    },
+    "output_directory": "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted",
+    "schema_version": "1.0",
+    "conversion_timestamp": "2025-08-03T00:00:00Z"
+  }
+}

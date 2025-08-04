@@ -1,0 +1,20 @@
+
+> test-dashboard-frontend@1.0.0 start
+> PORT=3020 SKIP_PREFLIGHT_CHECK=true NODE_OPTIONS=--openssl-legacy-provider react-scripts start
+
+[34mℹ[39m [90m｢wds｣[39m: Project is running at http://192.168.1.87/
+[34mℹ[39m [90m｢wds｣[39m: webpack output is served from 
+[34mℹ[39m [90m｢wds｣[39m: Content not from webpack is served from /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/frontend/public
+[34mℹ[39m [90m｢wds｣[39m: 404s will fallback to /
+Starting the development server...
+
+Compiled with warnings.
+
+src/App.tsx
+  Line 206:28:   Unexpected mix of '&&' and '||'. Use parentheses to clarify the intended order of operations  no-mixed-operators
+  Line 206:101:  Unexpected mix of '&&' and '||'. Use parentheses to clarify the intended order of operations  no-mixed-operators
+  Line 303:13:   'job' is assigned a value but never used                                                      @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+

@@ -1,0 +1,40 @@
+{
+  "id": "STR_017",
+  "name": "Streaming JSON Format Validation Test",
+  "suite": "streaming",
+  "type": "single",
+  "priority": 4,
+  "tags": ["streaming", "json", "validation", "format"],
+  "config": {
+    "timeout": 45,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["streaming_api", "json_validation"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_stream_017"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "请推荐感冒药物",
+      "user_id": "test_user_stream_017",
+      "stream": true,
+      "metadata": {
+        "test_id": "STREAM_017",
+        "test_name": "streaming_json_validation"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["感冒", "药物", "推荐"]
+    },
+    "custom_validators": ["validate_json_format", "validate_json_validity_rate"]
+  }
+}

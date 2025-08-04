@@ -1,0 +1,5 @@
+
+> test-dashboard-frontend@1.0.0 start
+> PORT=3020 SKIP_PREFLIGHT_CHECK=true NODE_OPTIONS=--openssl-legacy-provider react-scripts start
+
+Something is already running on port 3020.

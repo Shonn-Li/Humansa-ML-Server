@@ -1,0 +1,43 @@
+{
+  "id": "STR_012",
+  "name": "Streaming Error Handling Test",
+  "suite": "streaming",
+  "type": "single",
+  "priority": 3,
+  "tags": ["streaming", "error-handling", "validation"],
+  "config": {
+    "timeout": 30,
+    "retries": 0,
+    "parallel_safe": true,
+    "requirements": ["streaming_api", "error_handling"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_stream_012"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "payload": {
+      "model": "invalid-model",
+      "input": "测试错误处理",
+      "user_id": "test_user_stream_012",
+      "stream": true,
+      "metadata": {
+        "test_id": "STREAM_012",
+        "test_name": "streaming_error_handling"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 400
+    },
+    "server_logs": {
+      "contains": ["invalid model", "error"],
+      "excludes": ["CRITICAL", "FATAL"]
+    },
+    "custom_validators": ["validate_error_response"]
+  }
+}

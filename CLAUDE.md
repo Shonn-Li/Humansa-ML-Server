@@ -81,6 +81,29 @@ python -m src.main                             # Start server with Pattern 2
 # - Shared LlamaIndex Context across all tool calls
 # - Full reasoning chain visibility in streaming
 # - Hybrid memory: LlamaIndex Context + UnifiedContext + Mem0
+
+# Test Management Dashboard
+# Comprehensive test execution and monitoring system with PostgreSQL persistence
+cd test_dashboard && ./launch_dashboard_final.sh  # Launch dashboard (Backend: 6002, Frontend: 3020)
+# Frontend: http://localhost:3020
+# Backend API: http://localhost:6002
+# API Docs: http://localhost:6002/docs
+# Integration Test: cd test_dashboard && ./test_integration.sh
+# See test_dashboard/DASHBOARD_LAUNCH_SUCCESS.md for launch verification
+# NOTE: Dashboard loads 465+ tests from 87 JSON files (some files contain multiple tests)
+# To manually trigger test discovery: curl -X POST http://localhost:6002/api/tests/discover
+#
+# Database Integration (PostgreSQL):
+# - Uses test1 database on localhost:5432 with password 12931
+# - Schema: test_management (auto-created on first launch)
+# - Tables: jobs, runs, results, test_definitions, test_suites, etc.
+# - Jobs and test results are persisted across restarts
+# - Test suites can be saved and reused
+# - Real-time job execution tracking with progress updates
+#
+# Required: SQLAlchemy and asyncpg (auto-installed by launch script)
+# Database environment variables:
+#   DB_HOST=localhost DB_PORT=5432 DB_USER=postgres DB_PASSWORD=12931 DB_NAME=test1
 ```
 
 ## High-Level Architecture

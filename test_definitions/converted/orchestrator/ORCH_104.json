@@ -1,0 +1,55 @@
+{
+  "id": "ORCH_104",
+  "name": "Pattern2 Follow-up Context Persistence Test",
+  "suite": "orchestrator",
+  "type": "multi_turn",
+  "priority": 5,
+  "tags": ["pattern2", "orchestrator", "context", "multi-turn", "persistence"],
+  "config": {
+    "timeout": 60,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["pattern2_orchestrator", "session_persistence"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_001"
+    },
+    "previous_turns": [
+      {"role": "user", "content": "我最近头痛，有什么好的维生素或保健品推荐吗？"},
+      {"role": "assistant", "content": "我推荐一些维生素B复合物和镁补充剂..."}
+    ]
+  },
+  "execution": {
+    "endpoint": "/humansa/pattern2/process",
+    "method": "POST",
+    "payload": {
+      "query": "还有其他产品吗？我对维生素B也有兴趣",
+      "user_id": "test_user_001",
+      "session_id": "conv_test_001",
+      "stream": true
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["维生素B", "其他产品"],
+      "min_length": 80
+    },
+    "reasoning": {
+      "contains_keywords": ["previous", "context", "follow-up"]
+    },
+    "agents": {
+      "touched": ["ProductAgent"],
+      "max_agents": 2
+    },
+    "context": {
+      "workflow": {
+        "state_changes": {
+          "context_preserved": true,
+          "session_continued": true
+        }
+      }
+    }
+  }
+}

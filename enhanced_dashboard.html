@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Management Dashboard - Enhanced</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .category-card { cursor: pointer; transition: all 0.2s; }
+        .category-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .test-row { cursor: pointer; }
+        .test-row:hover { background-color: #f3f4f6; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 50; }
+        .modal.show { display: flex; align-items: center; justify-content: center; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="app">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center py-4">
+                    <div class="flex items-center space-x-3">
+                        <i data-lucide="zap" class="w-8 h-8 text-blue-600"></i>
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-900">Test Management Dashboard</h1>
+                            <p class="text-sm text-gray-500">YouWo AI ML Server Test Suite</p>
+                        </div>
+                    </div>
+                    <button onclick="showEnvironmentInfo()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                        <i data-lucide="info" class="w-4 h-4 inline mr-2"></i>
+                        Environment Info
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+            <!-- Environment Status Bar -->
+            <div id="envStatus" class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i data-lucide="database" class="w-5 h-5 text-blue-600"></i>
+                        <span class="font-semibold">Loading environment info...</span>
+                    </div>
+                    <div id="connectionStatus" class="flex items-center space-x-2">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span class="text-sm text-gray-600">Connected</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-white overflow-hidden shadow rounded-lg">
+                    <div class="px-4 py-5 sm:p-6">
+                        <dt class="text-sm font-medium text-gray-500 truncate flex items-center">
+                            <i data-lucide="package" class="w-4 h-4 mr-2"></i>
+                            Total Tests
+                        </dt>
+                        <dd id="totalTests" class="mt-1 text-3xl font-semibold text-gray-900">-</dd>
+                    </div>
+                </div>
+                <div class="bg-white overflow-hidden shadow rounded-lg">
+                    <div class="px-4 py-5 sm:p-6">
+                        <dt class="text-sm font-medium text-gray-500 truncate flex items-center">
+                            <i data-lucide="folder" class="w-4 h-4 mr-2"></i>
+                            Categories
+                        </dt>
+                        <dd id="totalCategories" class="mt-1 text-3xl font-semibold text-gray-900">-</dd>
+                    </div>
+                </div>
+                <div class="bg-white overflow-hidden shadow rounded-lg">
+                    <div class="px-4 py-5 sm:p-6">
+                        <dt class="text-sm font-medium text-gray-500 truncate flex items-center">
+                            <i data-lucide="check-circle" class="w-4 h-4 mr-2"></i>
+                            Success Rate
+                        </dt>
+                        <dd class="mt-1 text-3xl font-semibold text-green-600">43.5%</dd>
+                    </div>
+                </div>
+                <div class="bg-white overflow-hidden shadow rounded-lg">
+                    <div class="px-4 py-5 sm:p-6">
+                        <dt class="text-sm font-medium text-gray-500 truncate flex items-center">
+                            <i data-lucide="play-circle" class="w-4 h-4 mr-2"></i>
+                            Active Jobs
+                        </dt>
+                        <dd id="activeJobs" class="mt-1 text-3xl font-semibold text-gray-900">0</dd>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Categories (Clickable) -->
+            <div class="bg-white shadow rounded-lg mb-6">
+                <div class="px-4 py-5 sm:p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-medium text-gray-900">Test Categories</h3>
+                        <button onclick="createBatchJob()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 text-sm">
+                            <i data-lucide="play" class="w-4 h-4 inline mr-2"></i>
+                            Create Batch Job
+                        </button>
+                    </div>
+                    <div id="categories" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="animate-pulse">
+                            <div class="h-24 bg-gray-200 rounded"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test List (Initially Hidden) -->
+            <div id="testListSection" class="bg-white shadow rounded-lg mb-6" style="display: none;">
+                <div class="px-4 py-5 sm:p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-medium text-gray-900">
+                            <button onclick="backToCategories()" class="text-blue-600 hover:text-blue-800 mr-2">
+                                <i data-lucide="arrow-left" class="w-5 h-5 inline"></i>
+                            </button>
+                            <span id="categoryTitle">Tests</span>
+                        </h3>
+                        <button onclick="runCategoryTests()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm">
+                            <i data-lucide="play" class="w-4 h-4 inline mr-2"></i>
+                            Run All
+                        </button>
+                    </div>
+                    <div id="testList" class="space-y-2">
+                        <!-- Tests will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Jobs -->
+            <div class="bg-white shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Recent Jobs</h3>
+                    <div id="recentJobs" class="space-y-2">
+                        <div class="text-gray-500 text-sm">No jobs run yet</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Test Detail Modal -->
+    <div id="testModal" class="modal">
+        <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
+            <div class="px-6 py-4 border-b flex justify-between items-center">
+                <h3 class="text-xl font-semibold" id="modalTitle">Test Details</h3>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="px-6 py-4 overflow-y-auto max-h-[70vh]" id="modalContent">
+                <!-- Content will be loaded here -->
+            </div>
+            <div class="px-6 py-4 border-t flex justify-end space-x-3">
+                <button onclick="closeModal()" class="px-4 py-2 text-gray-600 hover:text-gray-800">
+                    Close
+                </button>
+                <button onclick="runSingleTest()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                    <i data-lucide="play" class="w-4 h-4 inline mr-2"></i>
+                    Run Test
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:6002';
+        let currentCategory = null;
+        let currentTest = null;
+        let environmentInfo = {};
+
+        // Initialize dashboard
+        async function init() {
+            await loadEnvironmentInfo();
+            await loadTestSummary();
+            await loadJobs();
+            
+            // Set up WebSocket for real-time updates
+            setupWebSocket();
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        }
+
+        // Load environment information
+        async function loadEnvironmentInfo() {
+            try {
+                const [healthRes, envRes, statsRes] = await Promise.all([
+                    fetch(`${API_URL}/api/health`),
+                    fetch(`${API_URL}/api/environments`),
+                    fetch(`${API_URL}/api/stats`)
+                ]);
+                
+                const health = await healthRes.json();
+                const env = await envRes.json();
+                const stats = await statsRes.json();
+                
+                environmentInfo = {
+                    ...health.environment,
+                    ...env.database_info,
+                    ...stats.environment
+                };
+                
+                // Update environment status bar
+                document.getElementById('envStatus').innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-6">
+                            <div class="flex items-center space-x-2">
+                                <i data-lucide="database" class="w-5 h-5 text-blue-600"></i>
+                                <span class="font-semibold">Database:</span>
+                                <span class="text-blue-700">${environmentInfo.database}</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i data-lucide="server" class="w-5 h-5 text-blue-600"></i>
+                                <span class="font-semibold">ML Server:</span>
+                                <span class="text-blue-700">Port ${environmentInfo.ml_server_port}</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i data-lucide="activity" class="w-5 h-5 text-blue-600"></i>
+                                <span class="font-semibold">Test Env:</span>
+                                <span class="text-blue-700">Port ${environmentInfo.test_environment_port}</span>
+                            </div>
+                        </div>
+                        <div id="connectionStatus" class="flex items-center space-x-2">
+                            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                            <span class="text-sm text-gray-600">Connected</span>
+                        </div>
+                    </div>
+                `;
+                
+                lucide.createIcons();
+            } catch (error) {
+                console.error('Failed to load environment info:', error);
+            }
+        }
+
+        // Load test summary
+        async function loadTestSummary() {
+            try {
+                const response = await fetch(`${API_URL}/api/tests/summary`);
+                const data = await response.json();
+                
+                // Update stats
+                document.getElementById('totalTests').textContent = data.total;
+                document.getElementById('totalCategories').textContent = Object.keys(data.categories).length;
+                
+                // Render categories
+                const categoriesHtml = Object.entries(data.categories).map(([category, info]) => `
+                    <div class="category-card bg-gray-50 p-4 rounded-lg border border-gray-200" onclick="loadCategory('${category}')">
+                        <div class="text-2xl font-semibold text-gray-900">${info.count}</div>
+                        <div class="text-sm text-gray-600 capitalize mt-1">${category.replace(/_/g, ' ')}</div>
+                        <div class="text-xs text-gray-500 mt-2">${info.loaded} tests loaded</div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('categories').innerHTML = categoriesHtml;
+            } catch (error) {
+                console.error('Failed to load test summary:', error);
+            }
+        }
+
+        // Load tests in a category
+        async function loadCategory(category) {
+            currentCategory = category;
+            
+            try {
+                const response = await fetch(`${API_URL}/api/tests/category/${category}`);
+                const data = await response.json();
+                
+                // Update UI
+                document.getElementById('categoryTitle').textContent = `${category.replace(/_/g, ' ')} Tests (${data.total})`;
+                document.getElementById('testListSection').style.display = 'block';
+                
+                // Render tests
+                const testsHtml = data.tests.map(test => `
+                    <div class="test-row flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200" 
+                         onclick="showTestDetails('${test.id}')">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-sm font-mono text-gray-600">${test.id}</span>
+                                <span class="text-sm font-medium text-gray-900">${test.name}</span>
+                            </div>
+                            <div class="flex items-center space-x-4 mt-1">
+                                <span class="text-xs text-gray-500">Priority: ${test.priority}</span>
+                                <span class="text-xs text-gray-500">Type: ${test.type}</span>
+                                <span class="text-xs px-2 py-1 rounded-full ${
+                                    test.complexity === 'high' ? 'bg-red-100 text-red-700' :
+                                    test.complexity === 'medium' ? 'bg-yellow-100 text-yellow-700' :
+                                    'bg-green-100 text-green-700'
+                                }">${test.complexity || 'medium'}</span>
+                            </div>
+                        </div>
+                        <button onclick="event.stopPropagation(); runTest('${test.id}')" 
+                                class="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200">
+                            Run
+                        </button>
+                    </div>
+                `).join('');
+                
+                document.getElementById('testList').innerHTML = testsHtml || '<div class="text-gray-500">No tests found</div>';
+                
+                // Scroll to test section
+                document.getElementById('testListSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                console.error('Failed to load category:', error);
+                alert('Failed to load tests for this category');
+            }
+        }
+
+        // Show test details
+        async function showTestDetails(testId) {
+            try {
+                const response = await fetch(`${API_URL}/api/tests/${testId}`);
+                const data = await response.json();
+                
+                currentTest = data.test;
+                document.getElementById('modalTitle').textContent = `${currentTest.id} - ${currentTest.name}`;
+                
+                // Render test details
+                const detailsHtml = `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-700 mb-2">Basic Information</h4>
+                            <dl class="grid grid-cols-2 gap-2 text-sm">
+                                <dt class="text-gray-500">Test ID:</dt>
+                                <dd class="font-mono">${currentTest.id}</dd>
+                                <dt class="text-gray-500">Suite:</dt>
+                                <dd>${currentTest.suite}</dd>
+                                <dt class="text-gray-500">Priority:</dt>
+                                <dd>${currentTest.priority}</dd>
+                                <dt class="text-gray-500">Type:</dt>
+                                <dd>${currentTest.type}</dd>
+                            </dl>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-gray-700 mb-2">Configuration</h4>
+                            <pre class="bg-gray-100 p-3 rounded text-xs overflow-x-auto">${JSON.stringify(currentTest.config || {}, null, 2)}</pre>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-gray-700 mb-2">Test Query</h4>
+                            <div class="bg-gray-100 p-3 rounded">
+                                <code class="text-sm">${currentTest.execution?.payload?.input || 'N/A'}</code>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-gray-700 mb-2">Expected Results</h4>
+                            <pre class="bg-gray-100 p-3 rounded text-xs overflow-x-auto max-h-64 overflow-y-auto">${JSON.stringify(currentTest.expectations || {}, null, 2)}</pre>
+                        </div>
+                    </div>
+                `;
+                
+                document.getElementById('modalContent').innerHTML = detailsHtml;
+                document.getElementById('testModal').classList.add('show');
+            } catch (error) {
+                console.error('Failed to load test details:', error);
+                alert('Failed to load test details');
+            }
+        }
+
+        // Run a single test
+        async function runTest(testId) {
+            if (!testId) testId = currentTest?.id;
+            if (!testId) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/api/tests/${testId}/run`, {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                
+                alert(`Test queued for execution!\nJob ID: ${data.job_id}\nEstimated time: ${data.estimated_time}s`);
+                
+                // Refresh jobs list
+                await loadJobs();
+            } catch (error) {
+                console.error('Failed to run test:', error);
+                alert('Failed to run test');
+            }
+        }
+
+        // Run single test from modal
+        function runSingleTest() {
+            runTest();
+            closeModal();
+        }
+
+        // Run all tests in category
+        async function runCategoryTests() {
+            if (!currentCategory) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/api/jobs/create`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ category: currentCategory })
+                });
+                const data = await response.json();
+                
+                alert(`Batch job created!\nJob ID: ${data.job_id}\nTests: ${data.test_count}`);
+                
+                // Refresh jobs list
+                await loadJobs();
+            } catch (error) {
+                console.error('Failed to create job:', error);
+                alert('Failed to create batch job');
+            }
+        }
+
+        // Create batch job
+        async function createBatchJob() {
+            const categories = prompt('Enter categories to run (comma-separated) or leave empty for all:');
+            
+            try {
+                const response = await fetch(`${API_URL}/api/jobs/create`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        categories: categories ? categories.split(',').map(c => c.trim()) : []
+                    })
+                });
+                const data = await response.json();
+                
+                alert(`Batch job created!\nJob ID: ${data.job_id}\nTests: ${data.test_count}`);
+                
+                // Refresh jobs list
+                await loadJobs();
+            } catch (error) {
+                console.error('Failed to create batch job:', error);
+                alert('Failed to create batch job');
+            }
+        }
+
+        // Load recent jobs
+        async function loadJobs() {
+            try {
+                const response = await fetch(`${API_URL}/api/jobs`);
+                const data = await response.json();
+                
+                if (data.jobs.length === 0) {
+                    document.getElementById('recentJobs').innerHTML = '<div class="text-gray-500 text-sm">No jobs run yet</div>';
+                    return;
+                }
+                
+                const jobsHtml = data.jobs.map(job => `
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div>
+                            <div class="font-medium text-gray-900">${job.name}</div>
+                            <div class="text-sm text-gray-500">
+                                ${job.test_count} tests • ${job.status} • ${job.success_rate}% success
+                            </div>
+                        </div>
+                        <div class="text-sm text-gray-500">${new Date(job.created_at).toLocaleString()}</div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('recentJobs').innerHTML = jobsHtml;
+            } catch (error) {
+                console.error('Failed to load jobs:', error);
+            }
+        }
+
+        // Show environment info modal
+        function showEnvironmentInfo() {
+            const infoHtml = `
+                <div class="space-y-4">
+                    <h4 class="font-semibold text-gray-700">Current Environment Configuration</h4>
+                    <dl class="grid grid-cols-2 gap-3 text-sm">
+                        <dt class="text-gray-500">ML Digit:</dt>
+                        <dd class="font-semibold">${environmentInfo.ml_digit}</dd>
+                        
+                        <dt class="text-gray-500">Database Name:</dt>
+                        <dd class="font-mono text-blue-600">${environmentInfo.database}</dd>
+                        
+                        <dt class="text-gray-500">Database Host:</dt>
+                        <dd>${environmentInfo.host}:${environmentInfo.port}</dd>
+                        
+                        <dt class="text-gray-500">ML Server Port:</dt>
+                        <dd class="font-mono">${environmentInfo.ml_server_port}</dd>
+                        
+                        <dt class="text-gray-500">Test Environment Port:</dt>
+                        <dd class="font-mono">${environmentInfo.test_environment_port}</dd>
+                        
+                        <dt class="text-gray-500">Backend API Port:</dt>
+                        <dd class="font-mono">${environmentInfo.backend_api_port || 6002}</dd>
+                    </dl>
+                    
+                    <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                        <p class="text-sm text-blue-800">
+                            <strong>Note:</strong> The system is connected to the <code>${environmentInfo.database}</code> database
+                            on PostgreSQL port ${environmentInfo.port}. The ML server is running on port ${environmentInfo.ml_server_port}.
+                        </p>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('modalTitle').textContent = 'Environment Information';
+            document.getElementById('modalContent').innerHTML = infoHtml;
+            document.querySelector('#testModal .bg-blue-600').style.display = 'none';
+            document.getElementById('testModal').classList.add('show');
+        }
+
+        // Back to categories
+        function backToCategories() {
+            document.getElementById('testListSection').style.display = 'none';
+            currentCategory = null;
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('testModal').classList.remove('show');
+            document.querySelector('#testModal .bg-blue-600').style.display = 'inline-flex';
+        }
+
+        // Setup WebSocket for real-time updates
+        function setupWebSocket() {
+            const ws = new WebSocket('ws://localhost:6002/ws');
+            
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                if (data.type === 'status') {
+                    // Update active jobs count if needed
+                    document.getElementById('activeJobs').textContent = data.data.active_jobs || 0;
+                }
+            };
+            
+            ws.onerror = () => {
+                document.getElementById('connectionStatus').innerHTML = `
+                    <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                    <span class="text-sm text-gray-600">Disconnected</span>
+                `;
+            };
+        }
+
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8">Test Management Dashboard</h1>
+        
+        <div class="grid grid-cols-3 gap-4 mb-8">
+            <div class="bg-white p-4 rounded shadow">
+                <h3 class="font-semibold">Total Tests</h3>
+                <p class="text-2xl" id="total">Loading...</p>
+            </div>
+            <div class="bg-white p-4 rounded shadow">
+                <h3 class="font-semibold">Categories</h3>
+                <p class="text-2xl" id="categories">Loading...</p>
+            </div>
+            <div class="bg-white p-4 rounded shadow">
+                <h3 class="font-semibold">API Status</h3>
+                <p class="text-2xl" id="status">Loading...</p>
+            </div>
+        </div>
+        
+        <div class="bg-white p-4 rounded shadow">
+            <h3 class="font-semibold mb-4">Test Categories</h3>
+            <div id="categoryList" class="grid grid-cols-4 gap-2"></div>
+        </div>
+    </div>
+    
+    <script>
+        async function loadData() {
+            try {
+                // Check health
+                const healthRes = await fetch('http://localhost:6002/api/health');
+                const health = await healthRes.json();
+                document.getElementById('status').innerHTML = '<span class="text-green-600">Connected</span>';
+                
+                // Load tests
+                const testsRes = await fetch('http://localhost:6002/api/tests');
+                const tests = await testsRes.json();
+                
+                document.getElementById('total').textContent = tests.total;
+                document.getElementById('categories').textContent = Object.keys(tests.categories).length;
+                
+                // Show categories
+                const catHtml = Object.entries(tests.categories).map(([cat, count]) => 
+                    '<div class="bg-gray-100 p-2 rounded">' + cat + ': ' + count + '</div>'
+                ).join('');
+                document.getElementById('categoryList').innerHTML = catHtml;
+                
+            } catch (error) {
+                document.getElementById('status').innerHTML = '<span class="text-red-600">Error</span>';
+            }
+        }
+        
+        loadData();
+        setInterval(loadData, 5000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,496 @@
+{
+  "total_tests": 847,
+  "total_files": 51,
+  "scan_timestamp": "2025-08-03T00:00:00Z",
+  "test_files": [
+    {
+      "path": "test_pattern2_70_cases.py",
+      "category": "humansa_v2",
+      "test_count": 70,
+      "test_types": ["single-turn", "multi-turn", "edge-case"],
+      "can_parallelize": true,
+      "complexity": "high",
+      "tests": [
+        {
+          "name": "test_appointment_form_creation",
+          "type": "single-turn",
+          "complexity": "medium"
+        },
+        {
+          "name": "test_multi_turn_form_completion",
+          "type": "multi-turn",
+          "complexity": "high"
+        }
+      ]
+    },
+    {
+      "path": "humansa_test_framework.py",
+      "category": "framework",
+      "test_count": 300,
+      "test_types": ["generated", "comprehensive"],
+      "can_parallelize": true,
+      "complexity": "medium",
+      "note": "Programmatically generates tests - should be split by category"
+    },
+    {
+      "path": "test_appointment_form_system.py",
+      "category": "appointment",
+      "test_count": 23,
+      "test_types": ["single-turn", "multi-turn"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_enhanced_api.py",
+      "category": "api",
+      "test_count": 28,
+      "test_types": ["integration", "validation"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_humansa_v2_comprehensive.py",
+      "category": "humansa_v2",
+      "test_count": 31,
+      "test_types": ["single-turn", "multi-turn"],
+      "can_parallelize": false,
+      "complexity": "high",
+      "note": "Requires sequential execution for state management"
+    },
+    {
+      "path": "test_startup.py",
+      "category": "startup",
+      "test_count": 4,
+      "test_types": ["integration"],
+      "can_parallelize": false,
+      "complexity": "low"
+    },
+    {
+      "path": "test_tools.py",
+      "category": "tools",
+      "test_count": 14,
+      "test_types": ["unit", "integration"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_product_recommendations_comprehensive.py",
+      "category": "product",
+      "test_count": 11,
+      "test_types": ["single-turn"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_form_system_with_orchestrator.py",
+      "category": "form_system",
+      "test_count": 9,
+      "test_types": ["integration"],
+      "can_parallelize": false,
+      "complexity": "high"
+    },
+    {
+      "path": "test_workflow_integration.py",
+      "category": "orchestrator",
+      "test_count": 10,
+      "test_types": ["integration", "streaming"],
+      "can_parallelize": false,
+      "complexity": "high"
+    },
+    {
+      "path": "test_mem0_integration.py",
+      "category": "memory",
+      "test_count": 12,
+      "test_types": ["integration"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_pattern2_orchestrator.py",
+      "category": "orchestrator",
+      "test_count": 10,
+      "test_types": ["integration"],
+      "can_parallelize": false,
+      "complexity": "high"
+    },
+    {
+      "path": "test_docker_startup.py",
+      "category": "container",
+      "test_count": 2,
+      "test_types": ["integration"],
+      "can_parallelize": false,
+      "complexity": "low"
+    },
+    {
+      "path": "test_api_responses.py",
+      "category": "api",
+      "test_count": 6,
+      "test_types": ["validation"],
+      "can_parallelize": true,
+      "complexity": "low"
+    },
+    {
+      "path": "test_comprehensive_humansa.py",
+      "category": "humansa",
+      "test_count": 25,
+      "test_types": ["single-turn", "multi-turn"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_streaming.py",
+      "category": "streaming",
+      "test_count": 8,
+      "test_types": ["unit", "integration"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_appointment_cancellation.py",
+      "category": "appointment",
+      "test_count": 26,
+      "test_types": ["single-turn", "multi-turn"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_appointment_management.py",
+      "category": "appointment",
+      "test_count": 26,
+      "test_types": ["single-turn", "multi-turn"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_appointment_system_v2.py",
+      "category": "appointment",
+      "test_count": 26,
+      "test_types": ["single-turn", "multi-turn"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_appointment_form_orchestrator.py",
+      "category": "appointment",
+      "test_count": 18,
+      "test_types": ["integration"],
+      "can_parallelize": false,
+      "complexity": "high"
+    },
+    {
+      "path": "test/core/test_comprehensive_detailed.py",
+      "category": "multi_agent",
+      "test_count": 20,
+      "test_types": ["integration"],
+      "can_parallelize": true,
+      "complexity": "high"
+    },
+    {
+      "path": "test_performance_stress.py",
+      "category": "performance",
+      "test_count": 25,
+      "test_types": ["stress-test"],
+      "can_parallelize": false,
+      "complexity": "high"
+    },
+    {
+      "path": "test_humansa_parallel_executor.py",
+      "category": "framework",
+      "test_count": 50,
+      "test_types": ["framework"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_appointment_test_executor.py",
+      "category": "framework",
+      "test_count": 21,
+      "test_types": ["framework"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_memory_context.py",
+      "category": "memory",
+      "test_count": 10,
+      "test_types": ["unit"],
+      "can_parallelize": true,
+      "complexity": "low"
+    },
+    {
+      "path": "test_streaming_enhanced.py",
+      "category": "streaming",
+      "test_count": 8,
+      "test_types": ["integration"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_form_manager_extended.py",
+      "category": "form_system",
+      "test_count": 16,
+      "test_types": ["unit", "integration"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_integration_comprehensive.py",
+      "category": "integration",
+      "test_count": 32,
+      "test_types": ["integration"],
+      "can_parallelize": false,
+      "complexity": "high"
+    },
+    {
+      "path": "test_validation_improvements.py",
+      "category": "validation",
+      "test_count": 8,
+      "test_types": ["validation"],
+      "can_parallelize": true,
+      "complexity": "low"
+    },
+    {
+      "path": "test_multi_turn_conversation.py",
+      "category": "multi_turn",
+      "test_count": 15,
+      "test_types": ["multi-turn"],
+      "can_parallelize": false,
+      "complexity": "high"
+    },
+    {
+      "path": "test_context_persistence.py",
+      "category": "multi_turn",
+      "test_count": 12,
+      "test_types": ["multi-turn"],
+      "can_parallelize": false,
+      "complexity": "high"
+    },
+    {
+      "path": "test_doctor_recommendation.py",
+      "category": "medical",
+      "test_count": 15,
+      "test_types": ["single-turn"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_medical_consultation.py",
+      "category": "medical",
+      "test_count": 15,
+      "test_types": ["single-turn", "multi-turn"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_product_search.py",
+      "category": "product",
+      "test_count": 18,
+      "test_types": ["single-turn"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_product_comparison.py",
+      "category": "product",
+      "test_count": 12,
+      "test_types": ["single-turn"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_product_multi_agent.py",
+      "category": "product",
+      "test_count": 14,
+      "test_types": ["integration"],
+      "can_parallelize": true,
+      "complexity": "high"
+    },
+    {
+      "path": "test_identity_brand.py",
+      "category": "identity",
+      "test_count": 10,
+      "test_types": ["validation"],
+      "can_parallelize": true,
+      "complexity": "low"
+    },
+    {
+      "path": "test_identity_consistency.py",
+      "category": "identity",
+      "test_count": 10,
+      "test_types": ["validation"],
+      "can_parallelize": true,
+      "complexity": "low"
+    },
+    {
+      "path": "test_emergency_detection.py",
+      "category": "emergency",
+      "test_count": 8,
+      "test_types": ["edge-case"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_edge_cases.py",
+      "category": "edge_case",
+      "test_count": 22,
+      "test_types": ["edge-case"],
+      "can_parallelize": true,
+      "complexity": "medium"
+    },
+    {
+      "path": "test_multi_turn_state.py",
+      "category": "multi_turn",
+      "test_count": 20,
+      "test_types": ["multi-turn"],
+      "can_parallelize": false,
+      "complexity": "high"
+    },
+    {
+      "path": "test_multi_turn_context_flow.py",
+      "category": "multi_turn",
+      "test_count": 20,
+      "test_types": ["multi-turn"],
+      "can_parallelize": false,
+      "complexity": "high"
+    },
+    {
+      "path": "test_performance_load.py",
+      "category": "performance",
+      "test_count": 25,
+      "test_types": ["stress-test"],
+      "can_parallelize": false,
+      "complexity": "high"
+    }
+  ],
+  "categories": {
+    "appointment": 119,
+    "framework": 71,
+    "multi_turn": 67,
+    "product": 55,
+    "integration": 32,
+    "api": 34,
+    "medical": 30,
+    "form_system": 25,
+    "performance": 50,
+    "memory": 22,
+    "edge_case": 22,
+    "identity": 20,
+    "orchestrator": 20,
+    "streaming": 16,
+    "tools": 14,
+    "validation": 8,
+    "emergency": 8,
+    "humansa_v2": 101,
+    "humansa": 25,
+    "multi_agent": 20,
+    "startup": 4,
+    "container": 2
+  },
+  "test_types": {
+    "single-turn": 485,
+    "multi-turn": 187,
+    "integration": 52,
+    "stress-test": 50,
+    "edge-case": 22,
+    "validation": 18,
+    "unit": 14,
+    "framework": 71,
+    "generated": 300,
+    "streaming": 8
+  },
+  "complexity_distribution": {
+    "low": 198,
+    "medium": 421,
+    "high": 228
+  },
+  "parallelization": {
+    "can_parallelize": 777,
+    "requires_sequential": 70,
+    "percentage_parallel": 91.7
+  },
+  "recommendations": {
+    "tests_to_split": [
+      {
+        "file": "humansa_test_framework.py",
+        "reason": "300 tests in one file - should be split by category",
+        "suggested_split": ["appointment", "medical", "product", "identity", "edge_cases"]
+      },
+      {
+        "file": "test_pattern2_70_cases.py",
+        "reason": "70 tests covering multiple categories",
+        "suggested_split": ["appointment", "medical", "multi_turn", "edge_cases"]
+      }
+    ],
+    "tests_to_merge": [
+      {
+        "files": [
+          "test_appointment_cancellation.py",
+          "test_appointment_management.py",
+          "test_appointment_system_v2.py"
+        ],
+        "reason": "Duplicate test content - all have 26 similar tests",
+        "suggested_name": "test_appointment_comprehensive.py"
+      },
+      {
+        "files": [
+          "test_streaming.py",
+          "test_streaming_enhanced.py"
+        ],
+        "reason": "Similar streaming tests could be consolidated",
+        "suggested_name": "test_streaming_complete.py"
+      }
+    ],
+    "missing_categories": [
+      "security",
+      "authentication",
+      "rate_limiting",
+      "error_recovery",
+      "data_validation",
+      "caching",
+      "logging"
+    ],
+    "quality_improvements": [
+      "Add test documentation for each test file",
+      "Implement test coverage tracking",
+      "Add performance benchmarks to track regression",
+      "Create shared test fixtures for common scenarios",
+      "Add test stability metrics to identify flaky tests"
+    ]
+  },
+  "execution_frameworks": [
+    {
+      "name": "HUMANSA Test Framework",
+      "file": "humansa_test_framework.py",
+      "features": ["modular", "parallel", "comprehensive reporting"]
+    },
+    {
+      "name": "Parallel Test Executor",
+      "file": "test_humansa_parallel_executor.py",
+      "features": ["batch processing", "worker isolation", "real-time monitoring"]
+    },
+    {
+      "name": "Appointment Test Executor",
+      "file": "test_appointment_test_executor.py",
+      "features": ["specialized for forms", "state management", "validation"]
+    }
+  ],
+  "test_environments": [
+    {
+      "name": "HUMANSA Test Environment V2",
+      "script": "run_HUMANSA_test_environment_v2_enhanced.sh",
+      "features": ["MEM0 integration", "enhanced logging", "pattern 2 support"]
+    },
+    {
+      "name": "Docker Test Environment",
+      "container": "youwoai_test_db",
+      "port": 5454,
+      "database": "test4"
+    }
+  ],
+  "conversion_plan": {
+    "total_to_convert": 847,
+    "conversion_agents": 10,
+    "tests_per_agent": 85,
+    "estimated_time": "2-3 hours with parallel execution"
+  }
+}

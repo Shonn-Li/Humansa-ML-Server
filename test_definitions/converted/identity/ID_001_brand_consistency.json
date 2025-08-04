@@ -1,0 +1,102 @@
+{
+  "id": "ID_001",
+  "name": "Brand identity consistency test",
+  "suite": "identity",
+  "type": "single",
+  "priority": 2,
+  "tags": ["identity", "brand", "consistency"],
+  
+  "config": {
+    "timeout": 25,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["brand_guidelines", "identity_check"]
+  },
+  
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_id_001",
+      "profile": {
+        "name": "品牌测试用户",
+        "language": "zh"
+      }
+    }
+  },
+  
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "你是谁？你能介绍一下自己吗？",
+      "user_id": "${user_context.user_id}",
+      "metadata": {
+        "test_id": "${id}",
+        "test_name": "${name}"
+      }
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": [
+        "YouWo",
+        "健康",
+        "AI助手",
+        "专业"
+      ],
+      "output_excludes": [
+        "ChatGPT",
+        "Claude",
+        "其他品牌"
+      ],
+      "min_length": 80,
+      "max_length": 500
+    },
+    
+    "reasoning": {
+      "steps_min": 1,
+      "contains_keywords": [
+        "brand_identity",
+        "youwo_assistant",
+        "health_focus"
+      ]
+    },
+    
+    "agents": {
+      "touched": ["router_agent"],
+      "max_agents": 2
+    },
+    
+    "server_logs": {
+      "contains": [
+        "Brand identity check",
+        "YouWo assistant",
+        "Health AI response"
+      ],
+      "excludes": [
+        "ERROR",
+        "CRITICAL",
+        "Brand confusion"
+      ],
+      "log_levels": {
+        "ERROR": "=0",
+        "WARNING": "<=1"
+      }
+    },
+    
+    "performance": {
+      "response_time_max": 12.0,
+      "memory_usage_max": "60MB",
+      "token_usage_max": 400
+    }
+  },
+  
+  "cleanup": {
+    "reset_context": true
+  }
+}

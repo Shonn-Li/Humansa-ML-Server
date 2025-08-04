@@ -1,0 +1,7302 @@
+[
+  {
+    "id": "APT_001",
+    "name": "Appointment Booking 1",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_001",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_001",
+        "metadata": {
+          "test_id": "APT_001",
+          "test_name": "Appointment Booking 1",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 1"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_002",
+    "name": "Appointment Booking 2",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_002",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_002",
+        "metadata": {
+          "test_id": "APT_002",
+          "test_name": "Appointment Booking 2",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 2"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_003",
+    "name": "Appointment Booking 3",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_003",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_003",
+        "metadata": {
+          "test_id": "APT_003",
+          "test_name": "Appointment Booking 3",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 3"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_004",
+    "name": "Appointment Booking 4",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_004",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_004",
+        "metadata": {
+          "test_id": "APT_004",
+          "test_name": "Appointment Booking 4",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 4"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_005",
+    "name": "Appointment Booking 5",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_005",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_005",
+        "metadata": {
+          "test_id": "APT_005",
+          "test_name": "Appointment Booking 5",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 5"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_006",
+    "name": "Appointment Booking 6",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_006",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_006",
+        "metadata": {
+          "test_id": "APT_006",
+          "test_name": "Appointment Booking 6",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 6"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_007",
+    "name": "Appointment Booking 7",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_007",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_007",
+        "metadata": {
+          "test_id": "APT_007",
+          "test_name": "Appointment Booking 7",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 7"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_008",
+    "name": "Appointment Booking 8",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_008",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_008",
+        "metadata": {
+          "test_id": "APT_008",
+          "test_name": "Appointment Booking 8",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 8"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_009",
+    "name": "Appointment Booking 9",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_009",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_009",
+        "metadata": {
+          "test_id": "APT_009",
+          "test_name": "Appointment Booking 9",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 9"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_010",
+    "name": "Appointment Booking 10",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_010",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_010",
+        "metadata": {
+          "test_id": "APT_010",
+          "test_name": "Appointment Booking 10",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 10"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_011",
+    "name": "Appointment Booking 11",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_011",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_011",
+        "metadata": {
+          "test_id": "APT_011",
+          "test_name": "Appointment Booking 11",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 11"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_012",
+    "name": "Appointment Booking 12",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_012",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_012",
+        "metadata": {
+          "test_id": "APT_012",
+          "test_name": "Appointment Booking 12",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 12"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_013",
+    "name": "Appointment Booking 13",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_013",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_013",
+        "metadata": {
+          "test_id": "APT_013",
+          "test_name": "Appointment Booking 13",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 13"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_014",
+    "name": "Appointment Booking 14",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_014",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_014",
+        "metadata": {
+          "test_id": "APT_014",
+          "test_name": "Appointment Booking 14",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 14"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_015",
+    "name": "Appointment Booking 15",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_015",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_015",
+        "metadata": {
+          "test_id": "APT_015",
+          "test_name": "Appointment Booking 15",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 15"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_016",
+    "name": "Appointment Booking 16",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_016",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_016",
+        "metadata": {
+          "test_id": "APT_016",
+          "test_name": "Appointment Booking 16",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 16"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_017",
+    "name": "Appointment Booking 17",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_017",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_017",
+        "metadata": {
+          "test_id": "APT_017",
+          "test_name": "Appointment Booking 17",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 17"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_018",
+    "name": "Appointment Booking 18",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_018",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_018",
+        "metadata": {
+          "test_id": "APT_018",
+          "test_name": "Appointment Booking 18",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 18"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_019",
+    "name": "Appointment Booking 19",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_019",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_019",
+        "metadata": {
+          "test_id": "APT_019",
+          "test_name": "Appointment Booking 19",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 19"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_020",
+    "name": "Appointment Booking 20",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_020",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_020",
+        "metadata": {
+          "test_id": "APT_020",
+          "test_name": "Appointment Booking 20",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 20"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_021",
+    "name": "Appointment Booking 21",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_021",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_021",
+        "metadata": {
+          "test_id": "APT_021",
+          "test_name": "Appointment Booking 21",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 21"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_022",
+    "name": "Appointment Booking 22",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_022",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_022",
+        "metadata": {
+          "test_id": "APT_022",
+          "test_name": "Appointment Booking 22",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 22"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_023",
+    "name": "Appointment Booking 23",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_023",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_023",
+        "metadata": {
+          "test_id": "APT_023",
+          "test_name": "Appointment Booking 23",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 23"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_024",
+    "name": "Appointment Booking 24",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_024",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_024",
+        "metadata": {
+          "test_id": "APT_024",
+          "test_name": "Appointment Booking 24",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 24"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_025",
+    "name": "Appointment Booking 25",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_025",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_025",
+        "metadata": {
+          "test_id": "APT_025",
+          "test_name": "Appointment Booking 25",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 25"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_026",
+    "name": "Appointment Booking 26",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_026",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_026",
+        "metadata": {
+          "test_id": "APT_026",
+          "test_name": "Appointment Booking 26",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 26"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_027",
+    "name": "Appointment Booking 27",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_027",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_027",
+        "metadata": {
+          "test_id": "APT_027",
+          "test_name": "Appointment Booking 27",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 27"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_028",
+    "name": "Appointment Booking 28",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_028",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_028",
+        "metadata": {
+          "test_id": "APT_028",
+          "test_name": "Appointment Booking 28",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 28"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_029",
+    "name": "Appointment Booking 29",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_029",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_029",
+        "metadata": {
+          "test_id": "APT_029",
+          "test_name": "Appointment Booking 29",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 29"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_030",
+    "name": "Appointment Booking 30",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_030",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_030",
+        "metadata": {
+          "test_id": "APT_030",
+          "test_name": "Appointment Booking 30",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 30"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_031",
+    "name": "Appointment Booking 31",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_031",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_031",
+        "metadata": {
+          "test_id": "APT_031",
+          "test_name": "Appointment Booking 31",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 31"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_032",
+    "name": "Appointment Booking 32",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_032",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_032",
+        "metadata": {
+          "test_id": "APT_032",
+          "test_name": "Appointment Booking 32",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 32"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_033",
+    "name": "Appointment Booking 33",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_033",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_033",
+        "metadata": {
+          "test_id": "APT_033",
+          "test_name": "Appointment Booking 33",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 33"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_034",
+    "name": "Appointment Booking 34",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_034",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_034",
+        "metadata": {
+          "test_id": "APT_034",
+          "test_name": "Appointment Booking 34",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 34"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_035",
+    "name": "Appointment Booking 35",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_035",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_035",
+        "metadata": {
+          "test_id": "APT_035",
+          "test_name": "Appointment Booking 35",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 35"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_036",
+    "name": "Appointment Booking 36",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_036",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_036",
+        "metadata": {
+          "test_id": "APT_036",
+          "test_name": "Appointment Booking 36",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 36"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_037",
+    "name": "Appointment Booking 37",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_037",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_037",
+        "metadata": {
+          "test_id": "APT_037",
+          "test_name": "Appointment Booking 37",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 37"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_038",
+    "name": "Appointment Booking 38",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_038",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_038",
+        "metadata": {
+          "test_id": "APT_038",
+          "test_name": "Appointment Booking 38",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 38"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_039",
+    "name": "Appointment Booking 39",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_039",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_039",
+        "metadata": {
+          "test_id": "APT_039",
+          "test_name": "Appointment Booking 39",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 39"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_040",
+    "name": "Appointment Booking 40",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_040",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_040",
+        "metadata": {
+          "test_id": "APT_040",
+          "test_name": "Appointment Booking 40",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 40"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_041",
+    "name": "Appointment Booking 41",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_041",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_041",
+        "metadata": {
+          "test_id": "APT_041",
+          "test_name": "Appointment Booking 41",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 41"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_042",
+    "name": "Appointment Booking 42",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_042",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_042",
+        "metadata": {
+          "test_id": "APT_042",
+          "test_name": "Appointment Booking 42",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 42"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_043",
+    "name": "Appointment Booking 43",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_043",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_043",
+        "metadata": {
+          "test_id": "APT_043",
+          "test_name": "Appointment Booking 43",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 43"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_044",
+    "name": "Appointment Booking 44",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_044",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_044",
+        "metadata": {
+          "test_id": "APT_044",
+          "test_name": "Appointment Booking 44",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 44"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_045",
+    "name": "Appointment Booking 45",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_045",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_045",
+        "metadata": {
+          "test_id": "APT_045",
+          "test_name": "Appointment Booking 45",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 45"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_046",
+    "name": "Appointment Booking 46",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_046",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_046",
+        "metadata": {
+          "test_id": "APT_046",
+          "test_name": "Appointment Booking 46",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 46"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_047",
+    "name": "Appointment Booking 47",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_047",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_047",
+        "metadata": {
+          "test_id": "APT_047",
+          "test_name": "Appointment Booking 47",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 47"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_048",
+    "name": "Appointment Booking 48",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_048",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_048",
+        "metadata": {
+          "test_id": "APT_048",
+          "test_name": "Appointment Booking 48",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 48"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_049",
+    "name": "Appointment Booking 49",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_049",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_049",
+        "metadata": {
+          "test_id": "APT_049",
+          "test_name": "Appointment Booking 49",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 49"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_050",
+    "name": "Appointment Booking 50",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_050",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_050",
+        "metadata": {
+          "test_id": "APT_050",
+          "test_name": "Appointment Booking 50",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 50"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_051",
+    "name": "Appointment Booking 51",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_051",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_051",
+        "metadata": {
+          "test_id": "APT_051",
+          "test_name": "Appointment Booking 51",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 51"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_052",
+    "name": "Appointment Booking 52",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_052",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_052",
+        "metadata": {
+          "test_id": "APT_052",
+          "test_name": "Appointment Booking 52",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 52"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_053",
+    "name": "Appointment Booking 53",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_053",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_053",
+        "metadata": {
+          "test_id": "APT_053",
+          "test_name": "Appointment Booking 53",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 53"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_054",
+    "name": "Appointment Booking 54",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_054",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_054",
+        "metadata": {
+          "test_id": "APT_054",
+          "test_name": "Appointment Booking 54",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 54"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_055",
+    "name": "Appointment Booking 55",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_055",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_055",
+        "metadata": {
+          "test_id": "APT_055",
+          "test_name": "Appointment Booking 55",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 55"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_056",
+    "name": "Appointment Booking 56",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_056",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_056",
+        "metadata": {
+          "test_id": "APT_056",
+          "test_name": "Appointment Booking 56",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 56"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_057",
+    "name": "Appointment Booking 57",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_057",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_057",
+        "metadata": {
+          "test_id": "APT_057",
+          "test_name": "Appointment Booking 57",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 57"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_058",
+    "name": "Appointment Booking 58",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_058",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_058",
+        "metadata": {
+          "test_id": "APT_058",
+          "test_name": "Appointment Booking 58",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 58"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_059",
+    "name": "Appointment Booking 59",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_059",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_059",
+        "metadata": {
+          "test_id": "APT_059",
+          "test_name": "Appointment Booking 59",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 59"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_060",
+    "name": "Appointment Booking 60",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_060",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_060",
+        "metadata": {
+          "test_id": "APT_060",
+          "test_name": "Appointment Booking 60",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 60"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_061",
+    "name": "Appointment Booking 61",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_061",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_061",
+        "metadata": {
+          "test_id": "APT_061",
+          "test_name": "Appointment Booking 61",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 61"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_062",
+    "name": "Appointment Booking 62",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_062",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_062",
+        "metadata": {
+          "test_id": "APT_062",
+          "test_name": "Appointment Booking 62",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 62"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_063",
+    "name": "Appointment Booking 63",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_063",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_063",
+        "metadata": {
+          "test_id": "APT_063",
+          "test_name": "Appointment Booking 63",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 63"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_064",
+    "name": "Appointment Booking 64",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_064",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_064",
+        "metadata": {
+          "test_id": "APT_064",
+          "test_name": "Appointment Booking 64",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 64"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_065",
+    "name": "Appointment Booking 65",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_065",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_065",
+        "metadata": {
+          "test_id": "APT_065",
+          "test_name": "Appointment Booking 65",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 65"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_066",
+    "name": "Appointment Booking 66",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_066",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_066",
+        "metadata": {
+          "test_id": "APT_066",
+          "test_name": "Appointment Booking 66",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 66"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_067",
+    "name": "Appointment Booking 67",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_067",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_067",
+        "metadata": {
+          "test_id": "APT_067",
+          "test_name": "Appointment Booking 67",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 67"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_068",
+    "name": "Appointment Booking 68",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_068",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_068",
+        "metadata": {
+          "test_id": "APT_068",
+          "test_name": "Appointment Booking 68",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 68"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_069",
+    "name": "Appointment Booking 69",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_069",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_069",
+        "metadata": {
+          "test_id": "APT_069",
+          "test_name": "Appointment Booking 69",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 69"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_070",
+    "name": "Appointment Booking 70",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_070",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_070",
+        "metadata": {
+          "test_id": "APT_070",
+          "test_name": "Appointment Booking 70",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 70"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_071",
+    "name": "Appointment Booking 71",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_071",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_071",
+        "metadata": {
+          "test_id": "APT_071",
+          "test_name": "Appointment Booking 71",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 71"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_072",
+    "name": "Appointment Booking 72",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_072",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_072",
+        "metadata": {
+          "test_id": "APT_072",
+          "test_name": "Appointment Booking 72",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 72"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_073",
+    "name": "Appointment Booking 73",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_073",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_073",
+        "metadata": {
+          "test_id": "APT_073",
+          "test_name": "Appointment Booking 73",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 73"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_074",
+    "name": "Appointment Booking 74",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_074",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_074",
+        "metadata": {
+          "test_id": "APT_074",
+          "test_name": "Appointment Booking 74",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 74"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_075",
+    "name": "Appointment Booking 75",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_075",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_075",
+        "metadata": {
+          "test_id": "APT_075",
+          "test_name": "Appointment Booking 75",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 75"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_076",
+    "name": "Appointment Booking 76",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_076",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_076",
+        "metadata": {
+          "test_id": "APT_076",
+          "test_name": "Appointment Booking 76",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 76"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_077",
+    "name": "Appointment Booking 77",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_077",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_077",
+        "metadata": {
+          "test_id": "APT_077",
+          "test_name": "Appointment Booking 77",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 77"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_078",
+    "name": "Appointment Booking 78",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_078",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_078",
+        "metadata": {
+          "test_id": "APT_078",
+          "test_name": "Appointment Booking 78",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 78"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_079",
+    "name": "Appointment Booking 79",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_079",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_079",
+        "metadata": {
+          "test_id": "APT_079",
+          "test_name": "Appointment Booking 79",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 79"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_080",
+    "name": "Appointment Booking 80",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_080",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_080",
+        "metadata": {
+          "test_id": "APT_080",
+          "test_name": "Appointment Booking 80",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 80"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_081",
+    "name": "Appointment Booking 81",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_081",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_081",
+        "metadata": {
+          "test_id": "APT_081",
+          "test_name": "Appointment Booking 81",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 81"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_082",
+    "name": "Appointment Booking 82",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_082",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_082",
+        "metadata": {
+          "test_id": "APT_082",
+          "test_name": "Appointment Booking 82",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 82"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_083",
+    "name": "Appointment Booking 83",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_083",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_083",
+        "metadata": {
+          "test_id": "APT_083",
+          "test_name": "Appointment Booking 83",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 83"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_084",
+    "name": "Appointment Booking 84",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_084",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_084",
+        "metadata": {
+          "test_id": "APT_084",
+          "test_name": "Appointment Booking 84",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 84"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_085",
+    "name": "Appointment Booking 85",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_085",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_085",
+        "metadata": {
+          "test_id": "APT_085",
+          "test_name": "Appointment Booking 85",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 85"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_086",
+    "name": "Appointment Booking 86",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_086",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_086",
+        "metadata": {
+          "test_id": "APT_086",
+          "test_name": "Appointment Booking 86",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 86"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_087",
+    "name": "Appointment Booking 87",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_087",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_087",
+        "metadata": {
+          "test_id": "APT_087",
+          "test_name": "Appointment Booking 87",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 87"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_088",
+    "name": "Appointment Booking 88",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_088",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_088",
+        "metadata": {
+          "test_id": "APT_088",
+          "test_name": "Appointment Booking 88",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 88"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_089",
+    "name": "Appointment Booking 89",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_089",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_089",
+        "metadata": {
+          "test_id": "APT_089",
+          "test_name": "Appointment Booking 89",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 89"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_090",
+    "name": "Appointment Booking 90",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_090",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_090",
+        "metadata": {
+          "test_id": "APT_090",
+          "test_name": "Appointment Booking 90",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 90"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_091",
+    "name": "Appointment Booking 91",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_091",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_091",
+        "metadata": {
+          "test_id": "APT_091",
+          "test_name": "Appointment Booking 91",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 91"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_092",
+    "name": "Appointment Booking 92",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_092",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_092",
+        "metadata": {
+          "test_id": "APT_092",
+          "test_name": "Appointment Booking 92",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 92"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_093",
+    "name": "Appointment Booking 93",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_093",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_093",
+        "metadata": {
+          "test_id": "APT_093",
+          "test_name": "Appointment Booking 93",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 93"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_094",
+    "name": "Appointment Booking 94",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_094",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_094",
+        "metadata": {
+          "test_id": "APT_094",
+          "test_name": "Appointment Booking 94",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 94"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_095",
+    "name": "Appointment Booking 95",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_095",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_095",
+        "metadata": {
+          "test_id": "APT_095",
+          "test_name": "Appointment Booking 95",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 95"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_096",
+    "name": "Appointment Booking 96",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_096",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_096",
+        "metadata": {
+          "test_id": "APT_096",
+          "test_name": "Appointment Booking 96",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 96"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_097",
+    "name": "Appointment Booking 97",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_097",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_097",
+        "metadata": {
+          "test_id": "APT_097",
+          "test_name": "Appointment Booking 97",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 97"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_098",
+    "name": "Appointment Booking 98",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_098",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_098",
+        "metadata": {
+          "test_id": "APT_098",
+          "test_name": "Appointment Booking 98",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 98"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_099",
+    "name": "Appointment Booking 99",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_099",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_099",
+        "metadata": {
+          "test_id": "APT_099",
+          "test_name": "Appointment Booking 99",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 99"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  },
+  {
+    "id": "APT_100",
+    "name": "Appointment Booking 100",
+    "suite": "appointment",
+    "type": "single",
+    "priority": 3,
+    "tags": [
+      "appointment",
+      "booking",
+      "scheduling"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_APT_100",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_APT_100",
+        "metadata": {
+          "test_id": "APT_100",
+          "test_name": "Appointment Booking 100",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "预约查询 100"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 150,
+        "max_length": 5000,
+        "output_contains": [
+          "预约",
+          "医生",
+          "时间"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "appointment_agent"
+        ]
+      },
+      "reasoning": {
+        "tool_calls": [
+          "get_available_doctors",
+          "check_appointment_slots"
+        ]
+      }
+    }
+  }
+]

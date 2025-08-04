@@ -1,0 +1,42 @@
+{
+  "id": "API_101",
+  "name": "Linear Medical Consultation Response Creation Test",
+  "suite": "api",
+  "type": "single",
+  "priority": 4,
+  "tags": ["api", "responses", "medical", "consultation", "linear"],
+  "config": {
+    "timeout": 45,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["responses_api", "openai_style"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_456"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "你好，我最近总是失眠",
+      "user_id": "test_user_456",
+      "metadata": {
+        "test_scenario": "initial"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["失眠", "睡眠"],
+      "min_length": 50
+    },
+    "reasoning": {
+      "contains_keywords": ["medical", "sleep", "consultation"]
+    },
+    "custom_validators": ["validate_response_id", "validate_openai_format"]
+  }
+}

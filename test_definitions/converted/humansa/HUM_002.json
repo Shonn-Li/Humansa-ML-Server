@@ -1,0 +1,41 @@
+{
+  "id": "HUM_002",
+  "name": "Context Search PARL Notes Test",
+  "suite": "humansa",
+  "type": "single",
+  "priority": 4,
+  "tags": ["humansa", "context-search", "citations", "notes"],
+  "config": {
+    "timeout": 45,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["multi_agent_endpoint_v2", "context_search", "citations"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "10001"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/multi-agent/chat",
+    "method": "POST",
+    "payload": {
+      "model": "gpt-4.1-nano",
+      "messages": [{"role": "user", "content": "What do my notes say about PARL?"}],
+      "stream": true,
+      "enable_citations": true,
+      "user_id": 10001
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["PARL", "Predictability-Aware"]
+    },
+    "agents": {
+      "touched": ["context_search"],
+      "max_agents": 2
+    },
+    "custom_validators": ["validate_citations_present", "validate_context_search_used"]
+  }
+}

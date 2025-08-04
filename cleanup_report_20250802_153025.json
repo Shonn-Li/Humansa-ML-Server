@@ -1,0 +1,74 @@
+{
+  "timestamp": "2025-08-02T15:30:25.208069",
+  "dry_run": true,
+  "results": {
+    "deleted": [
+      "test_orchestrator_debug.py",
+      "test_minimal_format.py",
+      "test_quick_identity.py",
+      "test_azure_openai_issue.py",
+      "test_react_minimal.py",
+      "test_form_simple.py",
+      "test_pattern2_mock.py",
+      "test_pattern2_single.py",
+      "test_react_fix_simple.py",
+      "test_form_api_direct.py",
+      "test_v2_correct_endpoint.py",
+      "test_tool_selection.py",
+      "src/humansa/v2/orchestrator_agent_fix.py",
+      "src/humansa/v2/orchestrator_agent_subagent.py",
+      "src/humansa/v2/workflows/orchestrator_backup.py",
+      "src/humansa/v2/workflows/orchestrator_workaround.py",
+      "src/humansa/v2/workflows/debug_orchestrator.py",
+      "src/humansa/v2/workflows/orchestrator_simple_debug.py",
+      "src/humansa/v2/workflows/orchestrator_fixed.py",
+      "test_workflow_poc.py",
+      "test_workflow_direct.py",
+      "test_v2_workflow_focus.py",
+      "test_v2_workflow_product.py",
+      "test_workflow_streaming.py",
+      "test_response_agent_fix.py",
+      "test_response_forking_scenarios.py",
+      "test_appointment_quick.py",
+      "test_appointment_agent_direct.py",
+      "test_appointment_db_direct.py",
+      "test_form_filling_process.py",
+      "test_form_flow_simple.py",
+      "test_form_db_integration.py",
+      "test_product_agent_simple.py",
+      "test_product_agent_csv.py",
+      "test_product_simple_direct.py",
+      "test_product_direct_workflow.py",
+      "test_csv_products_simple.py",
+      "test_subagent_architecture.py",
+      "test_subagent_simple.py",
+      "test_humansa_v2_70_cases_subagent.py"
+    ],
+    "archived": [
+      "test_HUMANSA_v2_70_cases_multiturn.py",
+      "test_HUMANSA_v2_comprehensive_enhanced.py",
+      "test_long_conversation_suite.py",
+      "test_humansa_v2_with_reasoning.py",
+      "test_reasoning_stream_comparison.py"
+    ],
+    "not_found": [],
+    "errors": []
+  },
+  "consolidation_plan": {
+    "appointment_tests": [
+      "test_appointment_approval_flow.py",
+      "test_appointment_realistic.py",
+      "test_form_appointment_flow.py"
+    ],
+    "product_tests": [
+      "test_product_agent_staged.py",
+      "test_enhanced_product_agent.py"
+    ],
+    "pattern2_tests": [
+      "test_pattern2_orchestrator.py",
+      "test_pattern2_form_complete.py",
+      "test_pattern2_memory.py",
+      "test_pattern2_quick_appointment.py"
+    ]
+  }
+}

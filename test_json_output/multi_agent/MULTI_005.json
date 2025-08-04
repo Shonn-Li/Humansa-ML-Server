@@ -1,0 +1,32 @@
+{
+  "test_id": "MULTI_005",
+  "name": "Context Search - My Notes",
+  "category": "context_search",
+  "type": "single-turn",
+  "complexity": "medium",
+  "can_parallelize": true,
+  "description": "Test context search for general topic search across user notes",
+  "request": {
+    "model": "gpt-4.1-nano",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Search my notes for information about AI startups"
+      }
+    ],
+    "stream": true,
+    "enable_citations": true,
+    "user_id": 10001
+  },
+  "validation": {
+    "expected_tools": ["context_search_call"],
+    "should_have_citations": true
+  },
+  "metadata": {
+    "source_file": "test/core/test_comprehensive_detailed.py",
+    "source_line": 274,
+    "created_date": "2025-08-03T00:00:00Z",
+    "tags": ["context_search", "general_search", "AI_startups"],
+    "notes": "Tests general topic search across notes"
+  }
+}

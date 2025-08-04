@@ -1,0 +1,601 @@
+INFO:     Will watch for changes in these directories: ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend']
+INFO:     Uvicorn running on http://0.0.0.0:6002 (Press CTRL+C to quit)
+INFO:     Started reloader process [94410] using WatchFiles
+INFO:     Started server process [94418]
+INFO:     Waiting for application startup.
+2025-08-03 22:05:50,196 - main - INFO - Starting Test Management Dashboard...
+2025-08-03 22:05:50,196 - test_dashboard.backend.core.database - INFO - Initializing database: test1
+2025-08-03 22:05:50,233 - test_dashboard.backend.core.database - INFO - Schema already exists
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_030', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_031', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_032', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_033', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_034', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_035', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_036', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_037', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_038', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_039', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_040', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_041', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_042', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_043', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_044', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_045', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/conversion_summary_agent3.json: ["Validation error: 6 validation errors for TestDefinition\nid\n  Field required [type=missing, input_value={'conversion_summary': {'..., and feature testing'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nname\n  Field required [type=missing, input_value={'conversion_summary': {'..., and feature testing'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nsuite\n  Field required [type=missing, input_value={'conversion_summary': {'..., and feature testing'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\ntype\n  Field required [type=missing, input_value={'conversion_summary': {'..., and feature testing'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nexecution\n  Field required [type=missing, input_value={'conversion_summary': {'..., and feature testing'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nexpectations\n  Field required [type=missing, input_value={'conversion_summary': {'..., and feature testing'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/streaming_enhanced_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='STREAM_010', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/streaming_enhanced_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='STREAM_011', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/streaming_enhanced_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='STREAM_012', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/streaming_enhanced_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='STREAM_013', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/streaming_enhanced_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='STREAM_014', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/streaming_enhanced_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='STREAM_015', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/streaming_enhanced_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='STREAM_016', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/streaming_enhanced_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='STREAM_017', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/pattern2_orchestrator_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_020', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/pattern2_orchestrator_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_021', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/pattern2_orchestrator_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_022', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/pattern2_orchestrator_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_023', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/pattern2_orchestrator_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_024', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/pattern2_orchestrator_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_025', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/identity/ID_001_brand_consistency.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ID_001', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Failed to load test definitions from /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/multi_turn/MTN_003_appointment_flow.json: Expecting property name enclosed in double quotes: line 18 column 38 (char 435)
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/api/API_104.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='api', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/api/API_105.json: ["Validation error: 2 validation errors for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='api', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error\nexecution.payload\n  Field required [type=missing, input_value={'endpoint': '/v2/humansa.../tree', 'method': 'GET'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/api/API_102.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='api', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/api/API_103.json: ["Validation error: 2 validation errors for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='api', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error\nexecution.payload\n  Field required [type=missing, input_value={'endpoint': '/v2/humansa...e_id}', 'method': 'GET'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/api/API_101.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='api', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/api/API_106.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='api', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/humansa/HUM_005.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='humansa', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/humansa/HUM_004.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='humansa', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/humansa/HUM_003.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='humansa', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/humansa/HUM_002.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='humansa', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/humansa/HUM_001.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='humansa', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/humansa/HUM_006.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='humansa', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/orchestrator/ORCH_101.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_101', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/orchestrator/ORCH_106.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_106', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/orchestrator/ORCH_107.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_107', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/orchestrator/ORCH_104.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_104', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/orchestrator/ORCH_108.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_108', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/orchestrator/ORCH_105.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_105', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/orchestrator/ORCH_102.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_102', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/orchestrator/ORCH_103.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_103', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]INFO:     Application startup complete.
+
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/validation/VAL_001_input_validation.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='validation', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/orchestrator/ORCH_004.json: ["Validation error: 3 validation errors for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_004', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch\nsetup.previous_turns.0.role\n  String should match pattern '^(user|assistant)$' [type=string_pattern_mismatch, input_value='system', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch\nsetup.environment.debug\n  Input should be a valid string [type=string_type, input_value=True, input_type=bool]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/orchestrator/ORCH_005.json: ["Validation error: 2 validation errors for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_005', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch\nsetup.environment.debug\n  Input should be a valid string [type=string_type, input_value=True, input_type=bool]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/orchestrator/ORCH_002.json: ["Validation error: 2 validation errors for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_002', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch\nsetup.environment.use_workflow\n  Input should be a valid string [type=string_type, input_value=True, input_type=bool]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/orchestrator/ORCH_003.json: ["Validation error: 2 validation errors for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_003', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch\nsetup.environment.debug\n  Input should be a valid string [type=string_type, input_value=True, input_type=bool]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/orchestrator/ORCH_001.json: ["Validation error: 2 validation errors for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_001', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch\nsetup.environment.use_workflow\n  Input should be a valid string [type=string_type, input_value=True, input_type=bool]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/orchestrator/ORCH_006.json: ["Validation error: 2 validation errors for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_006', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch\nsetup.environment.debug\n  Input should be a valid string [type=string_type, input_value=False, input_type=bool]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type"]
+Discovered 465 tests on startup
+INFO:     127.0.0.1:60984 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61015 - "GET /api/tests?limit=1000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61018 - "GET /api/tests?limit=1000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61012 - "GET /system-info HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/main.py", line 173, in get_system_info
+    "digit": settings.ML_DIGIT,
+             ^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/pydantic/main.py", line 991, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'Settings' object has no attribute 'ML_DIGIT'
+INFO:     127.0.0.1:61015 - "GET /system-info HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/main.py", line 173, in get_system_info
+    "digit": settings.ML_DIGIT,
+             ^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/pydantic/main.py", line 991, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'Settings' object has no attribute 'ML_DIGIT'
+INFO:     127.0.0.1:61018 - "GET /system-info HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/main.py", line 173, in get_system_info
+    "digit": settings.ML_DIGIT,
+             ^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/pydantic/main.py", line 991, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'Settings' object has no attribute 'ML_DIGIT'
+INFO:     127.0.0.1:61071 - "GET /system-info HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/main.py", line 173, in get_system_info
+    "digit": settings.ML_DIGIT,
+             ^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/pydantic/main.py", line 991, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'Settings' object has no attribute 'ML_DIGIT'
+INFO:     127.0.0.1:61069 - "GET /system-info HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/main.py", line 173, in get_system_info
+    "digit": settings.ML_DIGIT,
+             ^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/pydantic/main.py", line 991, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'Settings' object has no attribute 'ML_DIGIT'
+INFO:     127.0.0.1:61077 - "GET /system-info HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/main.py", line 173, in get_system_info
+    "digit": settings.ML_DIGIT,
+             ^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/pydantic/main.py", line 991, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'Settings' object has no attribute 'ML_DIGIT'
+INFO:     127.0.0.1:61081 - "GET /system-info HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/starlette/routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/fastapi/routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/main.py", line 173, in get_system_info
+    "digit": settings.ML_DIGIT,
+             ^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/pydantic/main.py", line 991, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'Settings' object has no attribute 'ML_DIGIT'
+INFO:     127.0.0.1:61016 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61016 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61176 - "GET /health HTTP/1.1" 200 OK
+2025-08-03 22:07:57,878 - watchfiles.main - INFO - 3 changes detected
+WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2025-08-03 22:07:58,002 - main - INFO - Shutting down Test Management Dashboard...
+2025-08-03 22:07:58,002 - test_dashboard.backend.core.websocket - INFO - All WebSocket connections closed
+INFO:     Application shutdown complete.
+INFO:     Finished server process [94418]
+INFO:     Started server process [95316]
+INFO:     Waiting for application startup.
+2025-08-03 22:07:58,638 - main - INFO - Starting Test Management Dashboard...
+2025-08-03 22:07:58,638 - test_dashboard.backend.core.database - INFO - Initializing database: test1
+2025-08-03 22:07:58,670 - test_dashboard.backend.core.database - INFO - Schema already exists
+2025-08-03 22:07:58,683 - watchfiles.main - INFO - 3 changes detected
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_030', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_031', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_032', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_033', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_034', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_035', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_036', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_037', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_038', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_039', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_040', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_041', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_042', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_043', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_044', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/form_manager_extended_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='FORM_045', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/conversion_summary_agent3.json: ["Validation error: 6 validation errors for TestDefinition\nid\n  Field required [type=missing, input_value={'conversion_summary': {'..., and feature testing'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nname\n  Field required [type=missing, input_value={'conversion_summary': {'..., and feature testing'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nsuite\n  Field required [type=missing, input_value={'conversion_summary': {'..., and feature testing'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\ntype\n  Field required [type=missing, input_value={'conversion_summary': {'..., and feature testing'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nexecution\n  Field required [type=missing, input_value={'conversion_summary': {'..., and feature testing'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nexpectations\n  Field required [type=missing, input_value={'conversion_summary': {'..., and feature testing'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/streaming_enhanced_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='STREAM_010', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/streaming_enhanced_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='STREAM_011', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/streaming_enhanced_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='STREAM_012', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/streaming_enhanced_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='STREAM_013', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/streaming_enhanced_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='STREAM_014', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/streaming_enhanced_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='STREAM_015', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/streaming_enhanced_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='STREAM_016', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/streaming_enhanced_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='STREAM_017', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/pattern2_orchestrator_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_020', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/pattern2_orchestrator_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_021', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/pattern2_orchestrator_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_022', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/pattern2_orchestrator_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_023', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/pattern2_orchestrator_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_024', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/pattern2_orchestrator_tests.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_025', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/identity/ID_001_brand_consistency.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ID_001', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Failed to load test definitions from /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/multi_turn/MTN_003_appointment_flow.json: Expecting property name enclosed in double quotes: line 18 column 38 (char 435)
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/api/API_104.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='api', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/api/API_105.json: ["Validation error: 2 validation errors for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='api', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error\nexecution.payload\n  Field required [type=missing, input_value={'endpoint': '/v2/humansa.../tree', 'method': 'GET'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/api/API_102.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='api', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/api/API_103.json: ["Validation error: 2 validation errors for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='api', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error\nexecution.payload\n  Field required [type=missing, input_value={'endpoint': '/v2/humansa...e_id}', 'method': 'GET'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/api/API_101.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='api', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/api/API_106.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='api', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/humansa/HUM_005.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='humansa', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/humansa/HUM_004.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='humansa', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/humansa/HUM_003.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='humansa', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/humansa/HUM_002.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='humansa', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/humansa/HUM_001.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='humansa', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/humansa/HUM_006.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='humansa', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/orchestrator/ORCH_101.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_101', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/orchestrator/ORCH_106.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_106', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/orchestrator/ORCH_107.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_107', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/orchestrator/ORCH_104.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_104', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/orchestrator/ORCH_108.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_108', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/orchestrator/ORCH_105.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_105', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/orchestrator/ORCH_102.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_102', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/orchestrator/ORCH_103.json: ["Validation error: 1 validation error for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_103', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch"]INFO:     Application startup complete.
+2025-08-03 22:08:03,795 - watchfiles.main - INFO - 1 change detected
+2025-08-03 22:08:04,265 - watchfiles.main - INFO - 1 change detected
+2025-08-03 22:08:11,229 - watchfiles.main - INFO - 1 change detected
+2025-08-03 22:08:11,695 - watchfiles.main - INFO - 1 change detected
+
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/validation/VAL_001_input_validation.json: ["Validation error: 1 validation error for TestDefinition\nsuite\n  Value error, Suite must be one of: appointment, medical_consultation, product, identity, emergency, multi_turn, edge_case, performance, integration, orchestrator, streaming, memory, form, workflow, pattern2 [type=value_error, input_value='validation', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/orchestrator/ORCH_004.json: ["Validation error: 3 validation errors for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_004', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch\nsetup.previous_turns.0.role\n  String should match pattern '^(user|assistant)$' [type=string_pattern_mismatch, input_value='system', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch\nsetup.environment.debug\n  Input should be a valid string [type=string_type, input_value=True, input_type=bool]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/orchestrator/ORCH_005.json: ["Validation error: 2 validation errors for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_005', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch\nsetup.environment.debug\n  Input should be a valid string [type=string_type, input_value=True, input_type=bool]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/orchestrator/ORCH_002.json: ["Validation error: 2 validation errors for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_002', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch\nsetup.environment.use_workflow\n  Input should be a valid string [type=string_type, input_value=True, input_type=bool]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/orchestrator/ORCH_003.json: ["Validation error: 2 validation errors for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_003', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch\nsetup.environment.debug\n  Input should be a valid string [type=string_type, input_value=True, input_type=bool]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/orchestrator/ORCH_001.json: ["Validation error: 2 validation errors for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_001', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch\nsetup.environment.use_workflow\n  Input should be a valid string [type=string_type, input_value=True, input_type=bool]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type"]
+Invalid test in /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/orchestrator/ORCH_006.json: ["Validation error: 2 validation errors for TestDefinition\nid\n  String should match pattern '^[A-Z]{3}_\\d{3}$' [type=string_pattern_mismatch, input_value='ORCH_006', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch\nsetup.environment.debug\n  Input should be a valid string [type=string_type, input_value=False, input_type=bool]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_type"]
+Discovered 465 tests on startup
+INFO:     127.0.0.1:62616 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62747 - "GET /system-info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62852 - "HEAD /system-info HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:62910 - "GET /system-info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63893 - "GET /api/tests?limit=1000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63896 - "GET /api/tests?limit=1000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63892 - "GET /system-info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63896 - "GET /system-info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63892 - "GET /system-info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63896 - "GET /system-info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63894 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63896 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2025-08-03 22:25:53,747 - main - INFO - Shutting down Test Management Dashboard...
+2025-08-03 22:25:53,747 - test_dashboard.backend.core.websocket - INFO - All WebSocket connections closed
+INFO:     Application shutdown complete.
+INFO:     Finished server process [95316]

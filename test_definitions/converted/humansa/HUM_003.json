@@ -1,0 +1,42 @@
+{
+  "id": "HUM_003",
+  "name": "File Attachment PDF Analysis Test",
+  "suite": "humansa",
+  "type": "single",
+  "priority": 5,
+  "tags": ["humansa", "file-attachment", "pdf", "citations", "research"],
+  "config": {
+    "timeout": 90,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["multi_agent_endpoint_v2", "file_search", "pdf_processing"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "10001"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/multi-agent/chat",
+    "method": "POST",
+    "payload": {
+      "model": "gpt-4.1-nano",
+      "messages": [{"role": "user", "content": "Summarize this paper"}],
+      "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"],
+      "stream": true,
+      "enable_citations": true,
+      "user_id": 10001
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["G1", "graph"]
+    },
+    "agents": {
+      "touched": ["file_search"],
+      "max_agents": 2
+    },
+    "custom_validators": ["validate_citations_present", "validate_file_search_used"]
+  }
+}

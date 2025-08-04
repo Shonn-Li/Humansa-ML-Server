@@ -1,0 +1,33 @@
+{
+  "test_id": "MULTI_003",
+  "name": "Context Search - PARL",
+  "category": "context_search",
+  "type": "single-turn",
+  "complexity": "medium",
+  "can_parallelize": true,
+  "description": "Test context search functionality for specific note content about PARL",
+  "request": {
+    "model": "gpt-4.1-nano",
+    "messages": [
+      {
+        "role": "user",
+        "content": "What do my notes say about PARL?"
+      }
+    ],
+    "stream": true,
+    "enable_citations": true,
+    "user_id": 10001
+  },
+  "validation": {
+    "expected_tools": ["context_search_call"],
+    "should_have_citations": true,
+    "response_contains": ["PARL", "Predictability-Aware"]
+  },
+  "metadata": {
+    "source_file": "test/core/test_comprehensive_detailed.py",
+    "source_line": 245,
+    "created_date": "2025-08-03T00:00:00Z",
+    "tags": ["context_search", "notes", "citations", "PARL"],
+    "notes": "Tests context search with specific technical term"
+  }
+}

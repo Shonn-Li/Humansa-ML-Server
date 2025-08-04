@@ -1,0 +1,42 @@
+{
+  "id": "HUM_006",
+  "name": "Multi-Agent Context and Attachment Test",
+  "suite": "humansa",
+  "type": "single",
+  "priority": 5,
+  "tags": ["humansa", "multi-agent", "context-search", "file-search", "coordination"],
+  "config": {
+    "timeout": 120,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["multi_agent_endpoint_v2", "context_search", "file_search", "multi_agent_coordination"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "10001"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/multi-agent/chat",
+    "method": "POST",
+    "payload": {
+      "model": "gpt-4.1-nano",
+      "messages": [{"role": "user", "content": "Compare this paper with my notes on PARL"}],
+      "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"],
+      "stream": true,
+      "enable_citations": true,
+      "user_id": 10001
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["PARL", "compare", "paper"]
+    },
+    "agents": {
+      "touched": ["context_search", "file_search"],
+      "max_agents": 3
+    },
+    "custom_validators": ["validate_citations_present", "validate_multi_agent_coordination"]
+  }
+}

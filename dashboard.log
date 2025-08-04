@@ -1,0 +1,336 @@
+INFO:     Started server process [96121]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:6002 (Press CTRL+C to quit)
+
+=== Test Management Dashboard ===
+ML Digit: 5
+Database: test5 (PostgreSQL port 5432)
+ML Server: localhost:5005
+Test Environment: localhost:6001
+
+Starting dashboard...
+Dashboard URL: http://localhost:6002
+
+Press Ctrl+C to stop
+
+Loading test data from /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+Loaded inventory: 847 tests in 22 categories
+Categories: ['appointment', 'framework', 'multi_turn', 'product', 'integration', 'api', 'medical', 'form_system', 'performance', 'memory', 'edge_case', 'identity', 'orchestrator', 'streaming', 'tools', 'validation', 'emergency', 'humansa_v2', 'humansa', 'multi_agent', 'startup', 'container']
+Loading converted tests from /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted
+  Loaded tests from form_manager_extended_tests.json into uncategorized
+  Loaded 4 tests from appointment
+  Loaded tests from multi_turn_context_flow.json into multi_turn
+  Loaded tests from multi_turn_state.json into multi_turn
+  Loaded 5 tests from identity
+  Loaded tests from edge_cases.json into edge_case
+Error loading /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/multi_turn/MTN_003_appointment_flow.json: Expecting property name enclosed in double quotes: line 18 column 38 (char 435)
+  Loaded 6 tests from multi_turn
+  Loaded tests from multi_turn_framework.json into framework
+  Loaded 6 tests from integration
+  Loaded tests from medical_consultation.json into medical
+  Loaded tests from conversion_summary_agent3.json into uncategorized
+  Loaded 2 tests from emergency
+  Loaded 3 tests from product
+  Loaded 8 tests from streaming
+  Loaded tests from conversion_summary.json into uncategorized
+  Loaded tests from memory_context_tests.json into memory
+  Loaded tests from streaming_enhanced_tests.json into streaming
+  Loaded 6 tests from medical
+  Loaded 7 tests from api
+  Loaded tests from appointment.json into appointment
+  Loaded tests from pattern2_orchestrator_tests.json into orchestrator
+  Loaded tests from product.json into product
+  Loaded tests from performance_load.json into performance
+  Loaded 6 tests from humansa
+  Loaded tests from appointment_test_executor_tests.json into appointment
+  Loaded tests from comprehensive_detailed_tests.json into uncategorized
+  Loaded 8 tests from orchestrator
+  Loaded 1 tests from validation
+Total loaded: 457 tests across 20 categories
+Categories with tests: ['uncategorized(4)', 'appointment(105)', 'multi_turn(6)', 'identity(5)', 'edge_case(22)', 'framework(50)', 'integration(6)', 'medical(6)', 'emergency(2)', 'product(53)', 'streaming(9)', 'memory(1)', 'api(7)', 'orchestrator(8)', 'performance(25)', 'humansa(6)', 'validation(1)']
+Connected to database: test5
+Loaded 316 tests
+INFO:     127.0.0.1:58093 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58350 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58350 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58632 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58632 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59098 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59098 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59479 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59479 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59933 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59933 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60541 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60541 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60928 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60928 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61333 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61333 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61605 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61605 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61912 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61912 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62338 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62338 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62762 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62762 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63159 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63159 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63540 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63540 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64160 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64160 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64780 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64780 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65314 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65314 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49501 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49501 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50175 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50175 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50785 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50785 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51372 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51372 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51929 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51929 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52569 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52569 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53193 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53193 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53858 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53858 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54428 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54428 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54978 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54978 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55379 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55379 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55693 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55693 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55960 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55960 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56595 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56595 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57103 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57103 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57671 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57671 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57961 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57961 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58251 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58251 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58525 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58525 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58807 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58807 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59069 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59069 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59340 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59340 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59605 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59605 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59892 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59892 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60163 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60163 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60444 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60444 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60717 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60717 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60978 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60978 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61283 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61283 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61576 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61576 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61972 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61972 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62245 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62245 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62505 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62505 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62793 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62793 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63052 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63052 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63317 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63317 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63590 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63590 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63872 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63872 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64160 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64160 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64420 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64420 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64684 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64684 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64957 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64957 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65230 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65230 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65491 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65491 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49391 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49391 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49781 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49781 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50039 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50039 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50312 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50312 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50607 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50607 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50866 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50866 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51125 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51125 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51399 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51399 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51678 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51678 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51938 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51938 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52228 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52228 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52494 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52494 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52765 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52765 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53029 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53029 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53350 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53350 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53627 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53627 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54006 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54006 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54316 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54316 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54591 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54591 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54868 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54868 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55148 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55148 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55450 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55450 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55727 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55727 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55987 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55987 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56283 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56283 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56566 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56566 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56857 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56857 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57140 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57140 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57425 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57425 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57708 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57708 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58006 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58006 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58397 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58397 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58881 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58881 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59350 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59350 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59702 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59702 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60213 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60213 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60514 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60514 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60813 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60813 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61091 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61091 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61511 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61511 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62060 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62060 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62364 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62364 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62823 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62823 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63341 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63341 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63893 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63893 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64369 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64369 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64761 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64761 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49179 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49179 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49689 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49689 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50275 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50275 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50574 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50574 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50871 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50871 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51394 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51394 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51691 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51691 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52518 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52518 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52850 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52850 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53436 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53436 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53990 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53990 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54300 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54300 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54598 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54598 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54873 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54873 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55161 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55161 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55463 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55463 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56026 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56026 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56403 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56403 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56836 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56836 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57465 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57465 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57875 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57875 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57894 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57894 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57927 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57927 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57963 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57963 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57990 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57990 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58021 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58021 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58068 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58068 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58092 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58092 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58121 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58121 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58145 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58145 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58174 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58174 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58205 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58205 - "GET /api/tests HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58241 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58241 - "GET /api/tests HTTP/1.1" 404 Not Found

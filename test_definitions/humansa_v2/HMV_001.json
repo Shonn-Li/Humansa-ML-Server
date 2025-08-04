@@ -1,0 +1,77 @@
+{
+  "id": "HMV_001",
+  "name": "Basic Identity Query",
+  "suite": "identity",
+  "type": "single",
+  "priority": 4,
+  "tags": ["identity", "introduction", "brand"],
+  "config": {
+    "timeout": 30,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["pattern2_orchestrator"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_001",
+      "profile": {}
+    },
+    "previous_turns": [],
+    "environment": {
+      "HUMANSA_USE_PATTERN2": "true"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "你是谁？",
+      "user_id": "test_user_001",
+      "metadata": {
+        "test_id": "HMV_001",
+        "test_name": "Basic Identity Query",
+        "orchestrator": "pattern2"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["诺亚新舟", "小诺", "健康医疗助理", "AI健康管家"],
+      "output_excludes": [],
+      "min_length": 50
+    },
+    "reasoning": {
+      "steps_min": 1,
+      "contains_keywords": ["identity", "introduction"],
+      "tool_calls": []
+    },
+    "agents": {
+      "max_agents": 3
+    },
+    "context": {
+      "mem0": {
+        "should_store": [],
+        "should_retrieve": []
+      }
+    },
+    "server_logs": {
+      "excludes": ["ERROR", "Exception"],
+      "log_levels": {
+        "ERROR": "=0"
+      }
+    },
+    "performance": {
+      "response_time_max": 10.0,
+      "token_usage_max": 1000
+    }
+  },
+  "cleanup": {
+    "commands": [],
+    "reset_context": false
+  }
+}

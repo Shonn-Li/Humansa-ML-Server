@@ -1,0 +1,78 @@
+{
+  "id": "HUV_021",
+  "name": "Sleep Issues Consultation",
+  "suite": "medical_consultation",
+  "type": "single",
+  "priority": 4,
+  "tags": ["medical", "consultation", "sleep", "insomnia", "chinese"],
+  "config": {
+    "timeout": 30,
+    "retries": 0,
+    "parallel_safe": true,
+    "requirements": ["humansa_v2", "pattern2", "medical_knowledge"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_021",
+      "profile": {}
+    },
+    "previous_turns": [],
+    "environment": {
+      "HUMANSA_USE_PATTERN2": "true"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "我最近总是失眠怎么办？",
+      "user_id": "test_user_021",
+      "metadata": {
+        "test_id": "HUV_021",
+        "test_name": "Sleep Issues Consultation",
+        "orchestrator": "pattern2"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["失眠", "睡眠", "建议"],
+      "min_length": 150
+    },
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": ["medical", "advice", "sleep", "symptoms"],
+      "tool_calls": ["medical_knowledge_search", "health_recommendations"]
+    },
+    "agents": {
+      "touched": ["FunctionAgent", "MedicalAgent"],
+      "max_agents": 4
+    },
+    "context": {
+      "mem0": {
+        "should_store": ["sleep issues", "insomnia complaint", "medical consultation"],
+        "memory_count": 2
+      }
+    },
+    "server_logs": {
+      "contains": ["Pattern 2", "medical", "consultation"],
+      "excludes": ["ERROR", "exception"],
+      "log_levels": {
+        "ERROR": "=0"
+      }
+    },
+    "performance": {
+      "response_time_max": 30,
+      "token_usage_max": 1200
+    }
+  },
+  "cleanup": {
+    "commands": [],
+    "reset_context": false
+  }
+}

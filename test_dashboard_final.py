@@ -402,7 +402,7 @@ DASHBOARD_HTML = """
 
             <!-- Stats -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <div class="bg-white rounded-lg shadow p-6 hoverable">
+                <div class="bg-white rounded-lg shadow p-6 hoverable" onclick="showAllTests()">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm font-medium text-gray-500">Total Tests</p>
@@ -636,20 +636,14 @@ DASHBOARD_HTML = """
             grid.innerHTML = Object.entries(categories).map(([cat, tests]) => {
                 const count = Array.isArray(tests) ? tests.length : tests;
                 return `
-                <div class="bg-white rounded-lg shadow p-6 hoverable" onclick="toggleCategory('${cat}')">
+                <div class="bg-white rounded-lg shadow p-6 hoverable cursor-pointer" onclick="toggleCategory('${cat}')">
                     <div class="flex items-center justify-between mb-2">
                         <h3 class="font-semibold capitalize">${cat.replace(/_/g, ' ')}</h3>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform" 
-                           id="cat-icon-${cat}"></i>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400"></i>
                     </div>
                     <p class="text-2xl font-bold text-gray-900">${count}</p>
                     <p class="text-sm text-gray-500">tests</p>
-                    
-                    <div class="expandable collapsed mt-4" id="cat-tests-${cat}">
-                        <div class="space-y-1 text-sm" id="cat-list-${cat}">
-                            Loading...
-                        </div>
-                    </div>
+                    <p class="text-xs text-blue-600 mt-2">Click to view tests →</p>
                 </div>
             `}).join('');
             
@@ -658,33 +652,8 @@ DASHBOARD_HTML = """
 
         // Toggle category expansion
         async function toggleCategory(category) {
-            const container = document.getElementById(`cat-tests-${category}`);
-            const icon = document.getElementById(`cat-icon-${category}`);
-            const list = document.getElementById(`cat-list-${category}`);
-            
-            if (container.classList.contains('collapsed')) {
-                // Load tests if not loaded
-                if (list.textContent === 'Loading...') {
-                    const res = await fetch(`${API_URL}/api/tests/category/${category}`);
-                    const data = await res.json();
-                    
-                    list.innerHTML = data.tests.map(test => `
-                        <div class="test-item p-2 rounded hover:bg-gray-100" 
-                             onclick="event.stopPropagation(); showTestDetails('${test.id}')">
-                            <span class="font-mono text-xs text-gray-600">${test.id}</span>
-                            <span class="ml-2">${test.name}</span>
-                        </div>
-                    `).join('');
-                }
-                
-                container.classList.remove('collapsed');
-                container.classList.add('expanded');
-                icon.style.transform = 'rotate(180deg)';
-            } else {
-                container.classList.add('collapsed');
-                container.classList.remove('expanded');
-                icon.style.transform = 'rotate(0deg)';
-            }
+            // Navigate directly to test table with category filter
+            showAllTests(category);
         }
 
         // Show test details
@@ -714,19 +683,32 @@ DASHBOARD_HTML = """
             document.getElementById('jobCreatorView').style.display = 'none';
         }
 
-        function showAllTests() {
+        function showAllTests(category = null) {
             document.getElementById('categoriesView').style.display = 'none';
             document.getElementById('allTestsView').style.display = 'block';
             document.getElementById('jobCreatorView').style.display = 'none';
             
-            // Render all tests table
+            // Filter tests by category if provided
+            const testsToShow = category 
+                ? allTests.filter(test => test.category === category)
+                : allTests;
+            
+            // Update header to show category filter
+            const header = document.querySelector('#allTestsView h2');
+            if (category) {
+                header.innerHTML = `${category.replace(/_/g, ' ').charAt(0).toUpperCase() + category.replace(/_/g, ' ').slice(1)} Tests (${testsToShow.length})`;
+            } else {
+                header.innerHTML = `All Tests (${testsToShow.length})`;
+            }
+            
+            // Render tests table
             const tbody = document.getElementById('allTestsTable');
-            tbody.innerHTML = allTests.map(test => `
+            tbody.innerHTML = testsToShow.map(test => `
                 <tr class="test-item">
-                    <td class="px-6 py-4 text-sm font-mono">${test.id}</td>
-                    <td class="px-6 py-4 text-sm">${test.name}</td>
-                    <td class="px-6 py-4 text-sm">${test.category}</td>
-                    <td class="px-6 py-4 text-sm">${test.priority}</td>
+                    <td class="px-6 py-4 text-sm font-mono">${test.id || '-'}</td>
+                    <td class="px-6 py-4 text-sm">${test.name || '-'}</td>
+                    <td class="px-6 py-4 text-sm capitalize">${test.category.replace(/_/g, ' ')}</td>
+                    <td class="px-6 py-4 text-sm text-center">${test.priority}</td>
                     <td class="px-6 py-4 text-sm">${test.type}</td>
                     <td class="px-6 py-4 text-sm">
                         <button onclick="showTestDetails('${test.id}')" 

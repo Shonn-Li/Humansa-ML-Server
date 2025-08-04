@@ -1,0 +1,7302 @@
+[
+  {
+    "id": "MED_001",
+    "name": "Medical Consultation 1",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_001",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_001",
+        "metadata": {
+          "test_id": "MED_001",
+          "test_name": "Medical Consultation 1",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 1"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_002",
+    "name": "Medical Consultation 2",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_002",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_002",
+        "metadata": {
+          "test_id": "MED_002",
+          "test_name": "Medical Consultation 2",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 2"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_003",
+    "name": "Medical Consultation 3",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_003",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_003",
+        "metadata": {
+          "test_id": "MED_003",
+          "test_name": "Medical Consultation 3",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 3"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_004",
+    "name": "Medical Consultation 4",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_004",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_004",
+        "metadata": {
+          "test_id": "MED_004",
+          "test_name": "Medical Consultation 4",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 4"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_005",
+    "name": "Medical Consultation 5",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_005",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_005",
+        "metadata": {
+          "test_id": "MED_005",
+          "test_name": "Medical Consultation 5",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 5"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_006",
+    "name": "Medical Consultation 6",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_006",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_006",
+        "metadata": {
+          "test_id": "MED_006",
+          "test_name": "Medical Consultation 6",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 6"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_007",
+    "name": "Medical Consultation 7",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_007",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_007",
+        "metadata": {
+          "test_id": "MED_007",
+          "test_name": "Medical Consultation 7",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 7"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_008",
+    "name": "Medical Consultation 8",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_008",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_008",
+        "metadata": {
+          "test_id": "MED_008",
+          "test_name": "Medical Consultation 8",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 8"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_009",
+    "name": "Medical Consultation 9",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_009",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_009",
+        "metadata": {
+          "test_id": "MED_009",
+          "test_name": "Medical Consultation 9",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 9"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_010",
+    "name": "Medical Consultation 10",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_010",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_010",
+        "metadata": {
+          "test_id": "MED_010",
+          "test_name": "Medical Consultation 10",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 10"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_011",
+    "name": "Medical Consultation 11",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_011",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_011",
+        "metadata": {
+          "test_id": "MED_011",
+          "test_name": "Medical Consultation 11",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 11"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_012",
+    "name": "Medical Consultation 12",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_012",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_012",
+        "metadata": {
+          "test_id": "MED_012",
+          "test_name": "Medical Consultation 12",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 12"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_013",
+    "name": "Medical Consultation 13",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_013",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_013",
+        "metadata": {
+          "test_id": "MED_013",
+          "test_name": "Medical Consultation 13",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 13"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_014",
+    "name": "Medical Consultation 14",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_014",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_014",
+        "metadata": {
+          "test_id": "MED_014",
+          "test_name": "Medical Consultation 14",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 14"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_015",
+    "name": "Medical Consultation 15",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_015",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_015",
+        "metadata": {
+          "test_id": "MED_015",
+          "test_name": "Medical Consultation 15",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 15"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_016",
+    "name": "Medical Consultation 16",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_016",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_016",
+        "metadata": {
+          "test_id": "MED_016",
+          "test_name": "Medical Consultation 16",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 16"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_017",
+    "name": "Medical Consultation 17",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_017",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_017",
+        "metadata": {
+          "test_id": "MED_017",
+          "test_name": "Medical Consultation 17",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 17"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_018",
+    "name": "Medical Consultation 18",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_018",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_018",
+        "metadata": {
+          "test_id": "MED_018",
+          "test_name": "Medical Consultation 18",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 18"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_019",
+    "name": "Medical Consultation 19",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_019",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_019",
+        "metadata": {
+          "test_id": "MED_019",
+          "test_name": "Medical Consultation 19",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 19"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_020",
+    "name": "Medical Consultation 20",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_020",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_020",
+        "metadata": {
+          "test_id": "MED_020",
+          "test_name": "Medical Consultation 20",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 20"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_021",
+    "name": "Medical Consultation 21",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_021",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_021",
+        "metadata": {
+          "test_id": "MED_021",
+          "test_name": "Medical Consultation 21",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 21"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_022",
+    "name": "Medical Consultation 22",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_022",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_022",
+        "metadata": {
+          "test_id": "MED_022",
+          "test_name": "Medical Consultation 22",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 22"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_023",
+    "name": "Medical Consultation 23",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_023",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_023",
+        "metadata": {
+          "test_id": "MED_023",
+          "test_name": "Medical Consultation 23",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 23"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_024",
+    "name": "Medical Consultation 24",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_024",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_024",
+        "metadata": {
+          "test_id": "MED_024",
+          "test_name": "Medical Consultation 24",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 24"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_025",
+    "name": "Medical Consultation 25",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_025",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_025",
+        "metadata": {
+          "test_id": "MED_025",
+          "test_name": "Medical Consultation 25",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 25"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_026",
+    "name": "Medical Consultation 26",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_026",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_026",
+        "metadata": {
+          "test_id": "MED_026",
+          "test_name": "Medical Consultation 26",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 26"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_027",
+    "name": "Medical Consultation 27",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_027",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_027",
+        "metadata": {
+          "test_id": "MED_027",
+          "test_name": "Medical Consultation 27",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 27"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_028",
+    "name": "Medical Consultation 28",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_028",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_028",
+        "metadata": {
+          "test_id": "MED_028",
+          "test_name": "Medical Consultation 28",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 28"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_029",
+    "name": "Medical Consultation 29",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_029",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_029",
+        "metadata": {
+          "test_id": "MED_029",
+          "test_name": "Medical Consultation 29",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 29"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_030",
+    "name": "Medical Consultation 30",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_030",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_030",
+        "metadata": {
+          "test_id": "MED_030",
+          "test_name": "Medical Consultation 30",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 30"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_031",
+    "name": "Medical Consultation 31",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_031",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_031",
+        "metadata": {
+          "test_id": "MED_031",
+          "test_name": "Medical Consultation 31",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 31"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_032",
+    "name": "Medical Consultation 32",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_032",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_032",
+        "metadata": {
+          "test_id": "MED_032",
+          "test_name": "Medical Consultation 32",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 32"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_033",
+    "name": "Medical Consultation 33",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_033",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_033",
+        "metadata": {
+          "test_id": "MED_033",
+          "test_name": "Medical Consultation 33",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 33"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_034",
+    "name": "Medical Consultation 34",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_034",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_034",
+        "metadata": {
+          "test_id": "MED_034",
+          "test_name": "Medical Consultation 34",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 34"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_035",
+    "name": "Medical Consultation 35",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_035",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_035",
+        "metadata": {
+          "test_id": "MED_035",
+          "test_name": "Medical Consultation 35",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 35"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_036",
+    "name": "Medical Consultation 36",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_036",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_036",
+        "metadata": {
+          "test_id": "MED_036",
+          "test_name": "Medical Consultation 36",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 36"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_037",
+    "name": "Medical Consultation 37",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_037",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_037",
+        "metadata": {
+          "test_id": "MED_037",
+          "test_name": "Medical Consultation 37",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 37"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_038",
+    "name": "Medical Consultation 38",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_038",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_038",
+        "metadata": {
+          "test_id": "MED_038",
+          "test_name": "Medical Consultation 38",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 38"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_039",
+    "name": "Medical Consultation 39",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_039",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_039",
+        "metadata": {
+          "test_id": "MED_039",
+          "test_name": "Medical Consultation 39",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 39"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_040",
+    "name": "Medical Consultation 40",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_040",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_040",
+        "metadata": {
+          "test_id": "MED_040",
+          "test_name": "Medical Consultation 40",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 40"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_041",
+    "name": "Medical Consultation 41",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_041",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_041",
+        "metadata": {
+          "test_id": "MED_041",
+          "test_name": "Medical Consultation 41",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 41"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_042",
+    "name": "Medical Consultation 42",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_042",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_042",
+        "metadata": {
+          "test_id": "MED_042",
+          "test_name": "Medical Consultation 42",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 42"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_043",
+    "name": "Medical Consultation 43",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_043",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_043",
+        "metadata": {
+          "test_id": "MED_043",
+          "test_name": "Medical Consultation 43",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 43"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_044",
+    "name": "Medical Consultation 44",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_044",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_044",
+        "metadata": {
+          "test_id": "MED_044",
+          "test_name": "Medical Consultation 44",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 44"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_045",
+    "name": "Medical Consultation 45",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_045",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_045",
+        "metadata": {
+          "test_id": "MED_045",
+          "test_name": "Medical Consultation 45",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 45"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_046",
+    "name": "Medical Consultation 46",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_046",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_046",
+        "metadata": {
+          "test_id": "MED_046",
+          "test_name": "Medical Consultation 46",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 46"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_047",
+    "name": "Medical Consultation 47",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_047",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_047",
+        "metadata": {
+          "test_id": "MED_047",
+          "test_name": "Medical Consultation 47",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 47"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_048",
+    "name": "Medical Consultation 48",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_048",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_048",
+        "metadata": {
+          "test_id": "MED_048",
+          "test_name": "Medical Consultation 48",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 48"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_049",
+    "name": "Medical Consultation 49",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_049",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_049",
+        "metadata": {
+          "test_id": "MED_049",
+          "test_name": "Medical Consultation 49",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 49"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_050",
+    "name": "Medical Consultation 50",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_050",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_050",
+        "metadata": {
+          "test_id": "MED_050",
+          "test_name": "Medical Consultation 50",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 50"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_051",
+    "name": "Medical Consultation 51",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_051",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_051",
+        "metadata": {
+          "test_id": "MED_051",
+          "test_name": "Medical Consultation 51",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 51"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_052",
+    "name": "Medical Consultation 52",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_052",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_052",
+        "metadata": {
+          "test_id": "MED_052",
+          "test_name": "Medical Consultation 52",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 52"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_053",
+    "name": "Medical Consultation 53",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_053",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_053",
+        "metadata": {
+          "test_id": "MED_053",
+          "test_name": "Medical Consultation 53",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 53"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_054",
+    "name": "Medical Consultation 54",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_054",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_054",
+        "metadata": {
+          "test_id": "MED_054",
+          "test_name": "Medical Consultation 54",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 54"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_055",
+    "name": "Medical Consultation 55",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_055",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_055",
+        "metadata": {
+          "test_id": "MED_055",
+          "test_name": "Medical Consultation 55",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 55"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_056",
+    "name": "Medical Consultation 56",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_056",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_056",
+        "metadata": {
+          "test_id": "MED_056",
+          "test_name": "Medical Consultation 56",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 56"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_057",
+    "name": "Medical Consultation 57",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_057",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_057",
+        "metadata": {
+          "test_id": "MED_057",
+          "test_name": "Medical Consultation 57",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 57"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_058",
+    "name": "Medical Consultation 58",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_058",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_058",
+        "metadata": {
+          "test_id": "MED_058",
+          "test_name": "Medical Consultation 58",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 58"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_059",
+    "name": "Medical Consultation 59",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_059",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_059",
+        "metadata": {
+          "test_id": "MED_059",
+          "test_name": "Medical Consultation 59",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 59"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_060",
+    "name": "Medical Consultation 60",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_060",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_060",
+        "metadata": {
+          "test_id": "MED_060",
+          "test_name": "Medical Consultation 60",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 60"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_061",
+    "name": "Medical Consultation 61",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_061",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_061",
+        "metadata": {
+          "test_id": "MED_061",
+          "test_name": "Medical Consultation 61",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 61"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_062",
+    "name": "Medical Consultation 62",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_062",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_062",
+        "metadata": {
+          "test_id": "MED_062",
+          "test_name": "Medical Consultation 62",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 62"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_063",
+    "name": "Medical Consultation 63",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_063",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_063",
+        "metadata": {
+          "test_id": "MED_063",
+          "test_name": "Medical Consultation 63",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 63"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_064",
+    "name": "Medical Consultation 64",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_064",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_064",
+        "metadata": {
+          "test_id": "MED_064",
+          "test_name": "Medical Consultation 64",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 64"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_065",
+    "name": "Medical Consultation 65",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_065",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_065",
+        "metadata": {
+          "test_id": "MED_065",
+          "test_name": "Medical Consultation 65",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 65"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_066",
+    "name": "Medical Consultation 66",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_066",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_066",
+        "metadata": {
+          "test_id": "MED_066",
+          "test_name": "Medical Consultation 66",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 66"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_067",
+    "name": "Medical Consultation 67",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_067",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_067",
+        "metadata": {
+          "test_id": "MED_067",
+          "test_name": "Medical Consultation 67",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 67"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_068",
+    "name": "Medical Consultation 68",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_068",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_068",
+        "metadata": {
+          "test_id": "MED_068",
+          "test_name": "Medical Consultation 68",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 68"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_069",
+    "name": "Medical Consultation 69",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_069",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_069",
+        "metadata": {
+          "test_id": "MED_069",
+          "test_name": "Medical Consultation 69",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 69"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_070",
+    "name": "Medical Consultation 70",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_070",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_070",
+        "metadata": {
+          "test_id": "MED_070",
+          "test_name": "Medical Consultation 70",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 70"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_071",
+    "name": "Medical Consultation 71",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_071",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_071",
+        "metadata": {
+          "test_id": "MED_071",
+          "test_name": "Medical Consultation 71",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 71"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_072",
+    "name": "Medical Consultation 72",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_072",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_072",
+        "metadata": {
+          "test_id": "MED_072",
+          "test_name": "Medical Consultation 72",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 72"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_073",
+    "name": "Medical Consultation 73",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_073",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_073",
+        "metadata": {
+          "test_id": "MED_073",
+          "test_name": "Medical Consultation 73",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 73"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_074",
+    "name": "Medical Consultation 74",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_074",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_074",
+        "metadata": {
+          "test_id": "MED_074",
+          "test_name": "Medical Consultation 74",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 74"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_075",
+    "name": "Medical Consultation 75",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_075",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_075",
+        "metadata": {
+          "test_id": "MED_075",
+          "test_name": "Medical Consultation 75",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 75"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_076",
+    "name": "Medical Consultation 76",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_076",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_076",
+        "metadata": {
+          "test_id": "MED_076",
+          "test_name": "Medical Consultation 76",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 76"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_077",
+    "name": "Medical Consultation 77",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_077",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_077",
+        "metadata": {
+          "test_id": "MED_077",
+          "test_name": "Medical Consultation 77",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 77"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_078",
+    "name": "Medical Consultation 78",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_078",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_078",
+        "metadata": {
+          "test_id": "MED_078",
+          "test_name": "Medical Consultation 78",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 78"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_079",
+    "name": "Medical Consultation 79",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_079",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_079",
+        "metadata": {
+          "test_id": "MED_079",
+          "test_name": "Medical Consultation 79",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 79"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_080",
+    "name": "Medical Consultation 80",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_080",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_080",
+        "metadata": {
+          "test_id": "MED_080",
+          "test_name": "Medical Consultation 80",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 80"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_081",
+    "name": "Medical Consultation 81",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_081",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_081",
+        "metadata": {
+          "test_id": "MED_081",
+          "test_name": "Medical Consultation 81",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 81"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_082",
+    "name": "Medical Consultation 82",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_082",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_082",
+        "metadata": {
+          "test_id": "MED_082",
+          "test_name": "Medical Consultation 82",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 82"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_083",
+    "name": "Medical Consultation 83",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_083",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_083",
+        "metadata": {
+          "test_id": "MED_083",
+          "test_name": "Medical Consultation 83",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 83"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_084",
+    "name": "Medical Consultation 84",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_084",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_084",
+        "metadata": {
+          "test_id": "MED_084",
+          "test_name": "Medical Consultation 84",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 84"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_085",
+    "name": "Medical Consultation 85",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_085",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_085",
+        "metadata": {
+          "test_id": "MED_085",
+          "test_name": "Medical Consultation 85",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 85"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_086",
+    "name": "Medical Consultation 86",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_086",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_086",
+        "metadata": {
+          "test_id": "MED_086",
+          "test_name": "Medical Consultation 86",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 86"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_087",
+    "name": "Medical Consultation 87",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_087",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_087",
+        "metadata": {
+          "test_id": "MED_087",
+          "test_name": "Medical Consultation 87",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 87"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_088",
+    "name": "Medical Consultation 88",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_088",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_088",
+        "metadata": {
+          "test_id": "MED_088",
+          "test_name": "Medical Consultation 88",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 88"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_089",
+    "name": "Medical Consultation 89",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_089",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_089",
+        "metadata": {
+          "test_id": "MED_089",
+          "test_name": "Medical Consultation 89",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 89"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_090",
+    "name": "Medical Consultation 90",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_090",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_090",
+        "metadata": {
+          "test_id": "MED_090",
+          "test_name": "Medical Consultation 90",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 90"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_091",
+    "name": "Medical Consultation 91",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_091",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_091",
+        "metadata": {
+          "test_id": "MED_091",
+          "test_name": "Medical Consultation 91",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 91"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_092",
+    "name": "Medical Consultation 92",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_092",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_092",
+        "metadata": {
+          "test_id": "MED_092",
+          "test_name": "Medical Consultation 92",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 92"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_093",
+    "name": "Medical Consultation 93",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_093",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_093",
+        "metadata": {
+          "test_id": "MED_093",
+          "test_name": "Medical Consultation 93",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 93"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_094",
+    "name": "Medical Consultation 94",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_094",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_094",
+        "metadata": {
+          "test_id": "MED_094",
+          "test_name": "Medical Consultation 94",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 94"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_095",
+    "name": "Medical Consultation 95",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_095",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_095",
+        "metadata": {
+          "test_id": "MED_095",
+          "test_name": "Medical Consultation 95",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 95"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_096",
+    "name": "Medical Consultation 96",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_096",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_096",
+        "metadata": {
+          "test_id": "MED_096",
+          "test_name": "Medical Consultation 96",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 96"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_097",
+    "name": "Medical Consultation 97",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_097",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_097",
+        "metadata": {
+          "test_id": "MED_097",
+          "test_name": "Medical Consultation 97",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 97"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_098",
+    "name": "Medical Consultation 98",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_098",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_098",
+        "metadata": {
+          "test_id": "MED_098",
+          "test_name": "Medical Consultation 98",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 98"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_099",
+    "name": "Medical Consultation 99",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_099",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_099",
+        "metadata": {
+          "test_id": "MED_099",
+          "test_name": "Medical Consultation 99",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 99"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  },
+  {
+    "id": "MED_100",
+    "name": "Medical Consultation 100",
+    "suite": "medical_consultation",
+    "type": "single",
+    "priority": 2,
+    "tags": [
+      "medical",
+      "consultation",
+      "symptom_analysis"
+    ],
+    "config": {
+      "timeout": 30,
+      "retries": 0,
+      "parallel_safe": true,
+      "requirements": [
+        "humansa_v2",
+        "pattern2_orchestrator"
+      ]
+    },
+    "setup": {
+      "user_context": {
+        "user_id": "test_user_MED_100",
+        "profile": {}
+      },
+      "environment": {}
+    },
+    "execution": {
+      "endpoint": "/v2/humansa/responses/stream",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "payload": {
+        "model": "gpt-4-turbo",
+        "user_id": "test_user_MED_100",
+        "metadata": {
+          "test_id": "MED_100",
+          "test_name": "Medical Consultation 100",
+          "orchestrator": "pattern2"
+        },
+        "stream": true,
+        "debug": true,
+        "input": "医疗咨询查询 100"
+      }
+    },
+    "expectations": {
+      "response": {
+        "status_code": 200,
+        "min_length": 100,
+        "max_length": 5000,
+        "output_contains": [
+          "医生",
+          "建议",
+          "症状"
+        ]
+      },
+      "performance": {
+        "response_time_max": 30.0
+      },
+      "agents": {
+        "touched": [
+          "medical_agent"
+        ]
+      },
+      "reasoning": {
+        "contains_keywords": [
+          "分析症状",
+          "评估严重程度"
+        ]
+      }
+    }
+  }
+]

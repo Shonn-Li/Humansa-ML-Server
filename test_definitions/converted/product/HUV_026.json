@@ -1,0 +1,78 @@
+{
+  "id": "HUV_026",
+  "name": "Health Products Recommendation",
+  "suite": "product",
+  "type": "single",
+  "priority": 4,
+  "tags": ["product", "recommendation", "health", "supplements", "chinese"],
+  "config": {
+    "timeout": 30,
+    "retries": 0,
+    "parallel_safe": true,
+    "requirements": ["humansa_v2", "pattern2", "product_catalog"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_026",
+      "profile": {}
+    },
+    "previous_turns": [],
+    "environment": {
+      "HUMANSA_USE_PATTERN2": "true"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "你们有什么保健品推荐吗？",
+      "user_id": "test_user_026",
+      "metadata": {
+        "test_id": "HUV_026",
+        "test_name": "Health Products Recommendation",
+        "orchestrator": "pattern2"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["保健品", "推荐", "健康"],
+      "min_length": 100
+    },
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": ["product", "recommendation", "health"],
+      "tool_calls": ["search_products", "product_recommendations"]
+    },
+    "agents": {
+      "touched": ["FunctionAgent", "ProductAgent"],
+      "max_agents": 4
+    },
+    "context": {
+      "mem0": {
+        "should_store": ["product inquiry", "health supplements interest"],
+        "memory_count": 2
+      }
+    },
+    "server_logs": {
+      "contains": ["Pattern 2", "product", "recommendation"],
+      "excludes": ["ERROR", "exception"],
+      "log_levels": {
+        "ERROR": "=0"
+      }
+    },
+    "performance": {
+      "response_time_max": 30,
+      "token_usage_max": 1000
+    }
+  },
+  "cleanup": {
+    "commands": [],
+    "reset_context": false
+  }
+}

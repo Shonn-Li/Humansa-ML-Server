@@ -1,0 +1,34 @@
+{
+  "test_id": "MULTI_006",
+  "name": "File Attachment - Single PDF",
+  "category": "file_attachment",
+  "type": "single-turn",
+  "complexity": "medium",
+  "can_parallelize": true,
+  "description": "Test file attachment processing with PDF summarization",
+  "request": {
+    "model": "gpt-4.1-nano",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Summarize this paper"
+      }
+    ],
+    "attachments": ["https://arxiv.org/pdf/2505.18499.pdf"],
+    "stream": true,
+    "enable_citations": true,
+    "user_id": 10001
+  },
+  "validation": {
+    "expected_tools": ["file_search_call"],
+    "should_have_citations": true,
+    "response_contains": ["G1", "graph"]
+  },
+  "metadata": {
+    "source_file": "test/core/test_comprehensive_detailed.py",
+    "source_line": 290,
+    "created_date": "2025-08-03T00:00:00Z",
+    "tags": ["file_attachment", "PDF", "summarization"],
+    "notes": "Tests PDF processing and summarization capabilities"
+  }
+}
