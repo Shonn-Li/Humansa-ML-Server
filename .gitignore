@@ -7,3 +7,6 @@ vector_store
 .env
 .env.local
 .env.*.local
+
+# Debug logs
+debug_logs/
