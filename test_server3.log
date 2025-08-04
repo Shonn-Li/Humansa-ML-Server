@@ -9347,3 +9347,557 @@ INFO:humansa.v2.conversation_manager:Added user message to conversation conv_tes
 INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_006_b10dd160_1754331470 (0 tokens)
 INFO:humansa.v2.response_manager:Created response resp_427d4c7bf479_1754331470 for conversation conv_test_user_006_b10dd160_1754331470
 [2025-08-04 11:17:50 -0700] [54294] [INFO] 127.0.0.1:55985 POST /v2/humansa/responses/create 1.1 200 2006 7954689
+[2025-08-04 11:52:53 -0700] [54294] [INFO] 127.0.0.1:59245 GET /health 1.1 200 113 10624
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_011
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_011
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 我想预约明天上午的骨科...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约明天上午的骨科
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_user_011
+INFO:src.humansa.v2.forms.form_tools:   Query: 预约明天上午的骨科
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 预约明天上午的骨科
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 50%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['appointment_date', 'appointment_time', 'time_preference', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: ['doctor', 'symptoms', 'patient_name', 'patient_phone']
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 50%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: ['doctor', 'symptoms', 'patient_name', 'patient_phone']
+INFO:src.humansa.v2.forms.form_service:Created form 5cf2b6ed-0937-4865-8283-c5ef83855d80 for user test_user_011
+INFO:src.humansa.v2.forms.form_tools:✅ Form created with ID: 5cf2b6ed-0937-4865-8283-c5ef83855d80
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.api_responses:Added form_id to metadata: 5cf2b6ed-0937-4865-8283-c5ef83855d80
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=140
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=159
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_011_d6d5dfc6_1754333578 for user: test_user_011
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_011_d6d5dfc6_1754333578 (14 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_011_d6d5dfc6_1754333578 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_58ebb2805dd3_1754333578 for conversation conv_test_user_011_d6d5dfc6_1754333578
+[2025-08-04 11:52:58 -0700] [54294] [INFO] 127.0.0.1:59248 POST /v2/humansa/responses/create 1.1 200 1784 4377486
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_${user_context.user_id}
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for ${user_context.user_id}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 我想预约李明医生明天上午9点看头痛，我叫张三，电话13800138000...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约李明医生，明天上午9点，症状为头痛，患者姓名张三，电话13800138000
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user ${user_context.user_id}
+INFO:src.humansa.v2.forms.form_tools:   Query: 预约李明医生，明天上午9点，症状为头痛，患者姓名张三，电话13800138000
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 预约李明医生，明天上午9点，症状为头痛，患者姓名张三，电话13800138000
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 100%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_id', 'doctor_name', 'department', 'doctor_title', 'appointment_date', 'appointment_time', 'symptoms', 'is_urgent', 'patient_phone']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: []
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 100%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: []
+INFO:src.humansa.v2.forms.form_service:Created form 5beb6a0c-21aa-457c-ac90-23c660c8c305 for user ${user_context.user_id}
+INFO:src.humansa.v2.forms.form_tools:✅ Form created with ID: 5beb6a0c-21aa-457c-ac90-23c660c8c305
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.api_responses:Added form_id to metadata: 5beb6a0c-21aa-457c-ac90-23c660c8c305
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=176
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=195
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_${user_context.user_id}_7eb44202_1754333585 for user: ${user_context.user_id}
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_${user_context.user_id}_7eb44202_1754333585 (34 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_${user_context.user_id}_7eb44202_1754333585 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_74fd8adc62dc_1754333585 for conversation conv_${user_context.user_id}_7eb44202_1754333585
+[2025-08-04 11:53:05 -0700] [54294] [INFO] 127.0.0.1:59323 POST /v2/humansa/responses/create 1.1 200 2046 7558336
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_${user_context.user_id}
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for ${user_context.user_id}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 我最近感觉胸闷气短，想预约心内科专家，并且了解一下相关的保健品...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 胸闷气短，预约心内科专家
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user ${user_context.user_id}
+INFO:src.humansa.v2.forms.form_tools:   Query: 胸闷气短，预约心内科专家
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 胸闷气短，预约心内科专家
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 25%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['symptoms', 'department', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: ['doctor', 'appointment_date', 'appointment_time', 'patient_name', 'patient_phone']
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 25%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: ['doctor', 'appointment_date', 'appointment_time', 'patient_name', 'patient_phone']
+INFO:src.humansa.v2.forms.form_service:Created form 220d5928-fb4d-4645-af05-bc32b7b7acb6 for user ${user_context.user_id}
+INFO:src.humansa.v2.forms.form_tools:✅ Form created with ID: 220d5928-fb4d-4645-af05-bc32b7b7acb6
+INFO:humansa.v2.orchestrator_pattern2_fixed:🔍 DiagnosisAgent called with: 胸闷气短
+INFO:humansa.v2.orchestrator_pattern2_fixed:🛍️ ProductAgent called with: 缓解胸闷气短、心血管健康的保健品
+INFO:openai._base_client:Retrying request to /chat/completions in 0.481861 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🧠 TRACE CAPTURED: Thought: The current language of the user is: Chinese. I need to use a tool to help me回答关于缓解胸闷气短、心血管...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🧠 TRACE CAPTURED: Thought: The current language of the user is: Chinese. The user reports "胸闷气短" (chest tightness and ...
+INFO:humansa.tools.humansa_tools:🧠 TRACE CAPTURED: Thought: 搜索结果中没有直接针对胸闷气短和心血管健康的保健品。我需要用“智能匹配”工具根据用户需求推荐更相关的产品。
+Action: match_products
+Action Input: ...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🧠 TRACE CAPTURED: Thought: I have preliminary information, but many important details are missing. To assess risk and ...
+INFO:humansa.tools.humansa_tools:🧠 TRACE CAPTURED: Thought: 目前匹配到的产品多为益生菌类，主要针对肠道健康和免疫调节，并没有直接针对心血管健康与胸闷气短的保健品。需要进一步说明或推荐常见成分或产品类型。
+Thought: 我可以提供常见用于心...
+INFO:openai._base_client:Retrying request to /chat/completions in 0.474539 seconds
+INFO:openai._base_client:Retrying request to /chat/completions in 0.862457 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator', 'DiagnosisAgent', 'ProductAgent']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: ['DiagnosisAgent', 'ProductAgent']
+INFO:humansa.v2.api_responses:Added form_id to metadata: 220d5928-fb4d-4645-af05-bc32b7b7acb6
+INFO:humansa.v2.api_responses:Added tool_use for agent: DiagnosisAgent
+INFO:humansa.v2.api_responses:Added tool_use for agent: ProductAgent
+INFO:humansa.v2.response_agent:✅ Response processed: type=emergency, length=572
+INFO:humansa.v2.response_agent:✅ Response processed: type=emergency, length=650
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_${user_context.user_id}_dd49e909_1754333611 for user: ${user_context.user_id}
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_${user_context.user_id}_dd49e909_1754333611 (38 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_${user_context.user_id}_dd49e909_1754333611 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_9df97634a518_1754333611 for conversation conv_${user_context.user_id}_dd49e909_1754333611
+Running step init_run
+Step init_run produced event AgentInput
+Running step setup_agent
+Step setup_agent produced event AgentSetup
+Running step run_agent_step
+Step run_agent_step produced event AgentOutput
+Running step parse_agent_output
+Step parse_agent_output produced no event
+Running step call_tool
+Step call_tool produced event ToolCallResult
+Running step aggregate_tool_results
+Step aggregate_tool_results produced event AgentInput
+Running step setup_agent
+Step setup_agent produced event AgentSetup
+Running step run_agent_step
+Step run_agent_step produced event AgentOutput
+Running step parse_agent_output
+Step parse_agent_output produced no event
+Running step call_tool
+Step call_tool produced event ToolCallResult
+Running step aggregate_tool_results
+Step aggregate_tool_results produced event AgentInput
+Running step setup_agent
+Step setup_agent produced event AgentSetup
+Running step run_agent_step
+Step run_agent_step produced event AgentOutput
+Running step parse_agent_output
+Step parse_agent_output produced event StopEvent
+[2025-08-04 11:53:31 -0700] [54294] [INFO] 127.0.0.1:59463 POST /v2/humansa/responses/create 1.1 200 6851 25830225
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python3
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:🔄 Attempting to import document converter endpoints...
+INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
+INFO:chat.utils.document_converter:❌ docx2pdf not available
+INFO:chat.utils.document_converter:❌ pypandoc not available
+INFO:chat.utils.document_converter:❌ python-docx not available
+INFO:chat.utils.document_converter:❌ openpyxl not available
+INFO:chat.utils.document_converter:❌ reportlab not available
+INFO:__main__:✅ Successfully imported document converter blueprint
+INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:🔄 Registering Humansa endpoints...
+INFO:humansa.postgres.database:HumansaDatabase initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:__main__:✅ Humansa V2 Conversation API endpoints registered
+INFO:__main__:✅ Humansa V2 Responses API endpoints registered
+INFO:__main__:✅ Humansa V2 Forms API endpoints registered
+INFO:__main__:✅ Mem0 API endpoints registered
+INFO:__main__:✅ Humansa v2 blueprint registered
+INFO:__main__:✅ Humansa endpoints registered successfully
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:6001
+INFO:__main__:
+INFO:__main__:📋 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
+INFO:__main__:
+INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
+INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
+INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
+INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
+INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
+INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
+INFO:__main__:
+INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
+INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
+INFO:__main__:   - /v2/humansa/memory/search - Search user memories
+INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
+INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
+INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
+INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
+INFO:__main__:   - /o3-demo - O3 reasoning demo
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
+INFO:__main__:✅ Mem0 memory layer initialized for Humansa
+INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
+INFO:__main__:   Environment: test
+INFO:__main__:✅ Database pool created successfully
+INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
+INFO:humansa.v2.api:Using Azure OpenAI for LLM
+INFO:humansa.v2.api:📦 Initializing HUMANSA V2 with Consolidated Tools
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince20: The `__fields__` attribute is deprecated, use `model_fields` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince20: The `__fields_set__` attribute is deprecated, use `model_fields_set` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince211: Accessing the 'model_computed_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince211: Accessing the 'model_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+  value = getter(object, key)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+INFO:humansa.v2.api:Humansa v2 system initialized successfully
+INFO:__main__:✅ Humansa v2 system initialized with Consolidated Tools
+INFO:humansa.v2.api_responses:✅ Using Mem0 for memory management
+INFO:humansa.v2.api_responses:✅ Memory tables initialized
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+INFO:humansa.v2.orchestrator_agent_enhanced:Initialized Enhanced HumansaOrchestratorAgent with 6 agent tools
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ Initialized consolidated tools (7 core functions)
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ HumansaOrchestratorAgentConsolidated initialized with dynamic tool loading
+INFO:humansa.v2.api_responses:✅ Consolidated orchestrator initialized (7 tools with dynamic loading)
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_transparent:✅ Initialized transparent orchestrator with tool capture
+INFO:humansa.v2.orchestrator_agent_transparent:✅ HumansaOrchestratorAgentTransparent initialized
+INFO:humansa.v2.api_responses:✅ Transparent orchestrator initialized (captures tool calls)
+INFO:humansa.v2.agents.product_agent:✅ Initialized ProductAgent with 134 products (staged loading)
+INFO:humansa.v2.api_responses:   ✓ ProductAgent initialized
+INFO:humansa.v2.api_responses:   ✓ GeneralMedicalAgent initialized
+INFO:humansa.v2.api_responses:   ✓ AppointmentAgent initialized
+INFO:humansa.v2.api_responses:   ✓ DiagnosisAgent initialized
+INFO:humansa.v2.api_responses:   ✓ MedicationAgent initialized
+INFO:humansa.v2.orchestrator_pattern2_fixed:✅ Form tools enabled for appointment booking
+INFO:humansa.v2.orchestrator_pattern2_fixed:✅ Initialized Pattern 2 Orchestrator (Fixed) with 10 agent tools
+INFO:humansa.v2.api_responses:✅ Pattern 2 orchestrator (fixed) initialized with 7 agents
+INFO:humansa.v2.api_responses:✅ Responses API orchestrators initialized successfully
+INFO:__main__:✅ Humansa v2 Responses API initialized
+[2025-08-04 11:56:02 -0700] [54294] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:6001 (CTRL + C to quit)
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python3
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:🔄 Attempting to import document converter endpoints...
+INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
+INFO:chat.utils.document_converter:❌ docx2pdf not available
+INFO:chat.utils.document_converter:❌ pypandoc not available
+INFO:chat.utils.document_converter:❌ python-docx not available
+INFO:chat.utils.document_converter:❌ openpyxl not available
+INFO:chat.utils.document_converter:❌ reportlab not available
+INFO:__main__:✅ Successfully imported document converter blueprint
+INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:🔄 Registering Humansa endpoints...
+INFO:humansa.postgres.database:HumansaDatabase initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:__main__:✅ Humansa V2 Conversation API endpoints registered
+INFO:__main__:✅ Humansa V2 Responses API endpoints registered
+INFO:__main__:✅ Humansa V2 Forms API endpoints registered
+INFO:__main__:✅ Mem0 API endpoints registered
+INFO:__main__:✅ Humansa v2 blueprint registered
+INFO:__main__:✅ Humansa endpoints registered successfully
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:6001
+INFO:__main__:
+INFO:__main__:📋 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
+INFO:__main__:
+INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
+INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
+INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
+INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
+INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
+INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
+INFO:__main__:
+INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
+INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
+INFO:__main__:   - /v2/humansa/memory/search - Search user memories
+INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
+INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
+INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
+INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
+INFO:__main__:   - /o3-demo - O3 reasoning demo
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
+INFO:__main__:✅ Mem0 memory layer initialized for Humansa
+INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
+INFO:__main__:   Environment: test
+INFO:__main__:✅ Database pool created successfully
+INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
+INFO:humansa.v2.api:Using Azure OpenAI for LLM
+INFO:humansa.v2.api:📦 Initializing HUMANSA V2 with Consolidated Tools
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince20: The `__fields__` attribute is deprecated, use `model_fields` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince20: The `__fields_set__` attribute is deprecated, use `model_fields_set` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince211: Accessing the 'model_computed_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince211: Accessing the 'model_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+  value = getter(object, key)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+INFO:humansa.v2.api:Humansa v2 system initialized successfully
+INFO:__main__:✅ Humansa v2 system initialized with Consolidated Tools
+INFO:humansa.v2.api_responses:✅ Using Mem0 for memory management
+INFO:humansa.v2.api_responses:✅ Memory tables initialized
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+INFO:humansa.v2.orchestrator_agent_enhanced:Initialized Enhanced HumansaOrchestratorAgent with 6 agent tools
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ Initialized consolidated tools (7 core functions)
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ HumansaOrchestratorAgentConsolidated initialized with dynamic tool loading
+INFO:humansa.v2.api_responses:✅ Consolidated orchestrator initialized (7 tools with dynamic loading)
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_transparent:✅ Initialized transparent orchestrator with tool capture
+INFO:humansa.v2.orchestrator_agent_transparent:✅ HumansaOrchestratorAgentTransparent initialized
+INFO:humansa.v2.api_responses:✅ Transparent orchestrator initialized (captures tool calls)
+INFO:humansa.v2.agents.product_agent:✅ Initialized ProductAgent with 134 products (staged loading)
+INFO:humansa.v2.api_responses:   ✓ ProductAgent initialized
+INFO:humansa.v2.api_responses:   ✓ GeneralMedicalAgent initialized
+INFO:humansa.v2.api_responses:   ✓ AppointmentAgent initialized
+INFO:humansa.v2.api_responses:   ✓ DiagnosisAgent initialized
+INFO:humansa.v2.api_responses:   ✓ MedicationAgent initialized
+INFO:humansa.v2.orchestrator_pattern2_fixed:✅ Form tools enabled for appointment booking
+INFO:humansa.v2.orchestrator_pattern2_fixed:✅ Initialized Pattern 2 Orchestrator (Fixed) with 10 agent tools
+INFO:humansa.v2.api_responses:✅ Pattern 2 orchestrator (fixed) initialized with 7 agents
+INFO:humansa.v2.api_responses:✅ Responses API orchestrators initialized successfully
+INFO:__main__:✅ Humansa v2 Responses API initialized
+[2025-08-04 11:56:11 -0700] [54294] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:6001 (CTRL + C to quit)

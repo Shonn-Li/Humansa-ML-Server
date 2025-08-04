@@ -381,8 +381,11 @@ class HumansaResponseAgent:
             return content
         
         else:
-            # For general responses, ensure identity is mentioned if not present
-            if self.ASSISTANT_NAME not in content and self.COMPANY_NAME not in content:
+            # For general responses, only add identity if truly missing and appropriate
+            if (self.ASSISTANT_NAME not in content and 
+                self.COMPANY_NAME not in content and
+                '预约' not in content and  # Avoid duplication with appointment message
+                len(content) < 100):  # Only for shorter responses that might need context
                 # Add subtle identity reminder
                 content = f"{content}\n\n作为您的{self.FULL_IDENTITY}，我随时准备为您提供更多帮助。"
             return content
@@ -402,9 +405,11 @@ class HumansaResponseAgent:
             if '诊所' in content and self.COMPANY_NAME not in content:
                 content = content.replace('诊所', f'{self.COMPANY_NAME}诊所')
         
-        # Ensure contact info has branding
-        if '预约' in content and '电话' not in content:
-            content += "\n\n如需人工协助预约，请联系诺亚新舟客服。"
+        # Ensure contact info has branding - but avoid duplication
+        if '预约' in content and '电话' not in content and '客服' not in content:
+            # Check if we already added identity reminder
+            if '作为您的' not in content and '随时准备为您提供更多帮助' not in content:
+                content += "\n\n如需人工协助预约，请联系诺亚新舟客服。"
         
         return content
     

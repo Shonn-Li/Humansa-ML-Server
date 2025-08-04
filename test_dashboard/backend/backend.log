@@ -142,3 +142,57 @@ INFO:     127.0.0.1:58301 - "GET /api/jobs/85cf8d27-904e-4565-b766-f3c24e1a82cd 
 INFO:     127.0.0.1:58301 - "GET /api/jobs/85cf8d27-904e-4565-b766-f3c24e1a82cd/runs/3ee3bdc3-3bea-423b-b448-72017b5dc762 HTTP/1.1" 200 OK
 INFO:     127.0.0.1:58331 - "GET /health HTTP/1.1" 200 OK
 INFO:     127.0.0.1:58339 - "GET /api/results/85cf8d27-904e-4565-b766-f3c24e1a82cd/3ee3bdc3-3bea-423b-b448-72017b5dc762/HUV_011/logs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58738 - "GET /api/jobs/85cf8d27-904e-4565-b766-f3c24e1a82cd HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58738 - "GET /api/jobs/85cf8d27-904e-4565-b766-f3c24e1a82cd/runs/3ee3bdc3-3bea-423b-b448-72017b5dc762 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58748 - "GET /api/results/85cf8d27-904e-4565-b766-f3c24e1a82cd/3ee3bdc3-3bea-423b-b448-72017b5dc762/HUV_011/logs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59168 - "OPTIONS /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59168 - "POST /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59168 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59235 - "OPTIONS /api/jobs/09a25139-00ec-42f1-98f8-f1f78142e2a2/execute HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59235 - "POST /api/jobs/09a25139-00ec-42f1-98f8-f1f78142e2a2/execute HTTP/1.1" 200 OK
+2025-08-04 11:52:53,755 - test_dashboard.backend.core.database - WARNING - Update execution failed: column "updated_at" of relation "runs" does not exist
+2025-08-04 11:52:53,756 - test_dashboard.backend.api.jobs_enhanced - INFO - 🏃 Starting enhanced job execution for 09a25139-00ec-42f1-98f8-f1f78142e2a2/357bd228-ab29-4a52-b1aa-8f083b6dfba1
+2025-08-04 11:52:53,834 - httpx - INFO - HTTP Request: GET http://localhost:6001/health "HTTP/1.1 200 "
+2025-08-04 11:52:53,835 - test_dashboard.backend.api.jobs_enhanced - INFO - ✅ ML server already running on port 6001
+2025-08-04 11:52:53,835 - test_dashboard.backend.api.jobs_enhanced - ERROR - Error in log capture: No module named 'aiofiles'
+INFO:     127.0.0.1:59235 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59294 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-04 11:52:58,251 - httpx - INFO - HTTP Request: POST http://localhost:6001/v2/humansa/responses/create "HTTP/1.1 200 "
+INFO:     127.0.0.1:59294 - "GET /api/jobs/09a25139-00ec-42f1-98f8-f1f78142e2a2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59294 - "GET /api/jobs/09a25139-00ec-42f1-98f8-f1f78142e2a2/runs/357bd228-ab29-4a52-b1aa-8f083b6dfba1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59294 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59294 - "GET /api/results/09a25139-00ec-42f1-98f8-f1f78142e2a2/357bd228-ab29-4a52-b1aa-8f083b6dfba1/HUV_011/logs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59294 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59294 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-04 11:53:05,884 - httpx - INFO - HTTP Request: POST http://localhost:6001/v2/humansa/responses/create "HTTP/1.1 200 "
+INFO:     127.0.0.1:59294 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59483 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59483 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59483 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59588 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59588 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59656 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59656 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59656 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59656 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59656 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59821 - "GET /api/jobs/09a25139-00ec-42f1-98f8-f1f78142e2a2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59821 - "GET /api/jobs/09a25139-00ec-42f1-98f8-f1f78142e2a2/runs/357bd228-ab29-4a52-b1aa-8f083b6dfba1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59821 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59821 - "GET /api/results/09a25139-00ec-42f1-98f8-f1f78142e2a2/357bd228-ab29-4a52-b1aa-8f083b6dfba1/APT_001/logs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59821 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-04 11:53:31,777 - httpx - INFO - HTTP Request: POST http://localhost:6001/v2/humansa/responses/create "HTTP/1.1 200 "
+2025-08-04 11:53:31,822 - test_dashboard.backend.api.jobs_enhanced - ERROR - Job execution failed: 'ConversationTurn' object has no attribute 'get'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/api/jobs_enhanced.py", line 627, in execute_job_background_enhanced
+    if turn.get('role') == 'user':
+       ^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_dashboard/backend/venv/lib/python3.13/site-packages/pydantic/main.py", line 991, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'ConversationTurn' object has no attribute 'get'
+2025-08-04 11:53:31,851 - test_dashboard.backend.core.database - WARNING - Update execution failed: column "updated_at" of relation "runs" does not exist
+INFO:     127.0.0.1:59821 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59821 - "GET /api/jobs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60166 - "GET /api/jobs/09a25139-00ec-42f1-98f8-f1f78142e2a2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60166 - "GET /api/jobs/09a25139-00ec-42f1-98f8-f1f78142e2a2/runs/357bd228-ab29-4a52-b1aa-8f083b6dfba1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60166 - "GET /api/results/09a25139-00ec-42f1-98f8-f1f78142e2a2/357bd228-ab29-4a52-b1aa-8f083b6dfba1/INT_004/logs HTTP/1.1" 200 OK
