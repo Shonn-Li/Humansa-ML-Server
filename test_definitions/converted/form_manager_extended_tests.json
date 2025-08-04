@@ -26,7 +26,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我想预约张医生明天的号",
           "user_id": "test_user_form_030",
           "metadata": {"test_id": "FORM_030", "test_name": "basic_form_creation"}
@@ -66,7 +66,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我的电话是abc123，年龄是-5岁",
           "user_id": "test_user_form_031",
           "metadata": {"test_id": "FORM_031", "test_name": "form_field_validation"}
@@ -111,7 +111,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "时间是明天下午2点",
           "user_id": "test_user_form_032",
           "metadata": {"test_id": "FORM_032_2", "test_name": "progressive_form_2"}
@@ -154,7 +154,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "用我的信息预约明天的号",
           "user_id": "test_user_form_033",
           "metadata": {"test_id": "FORM_033", "test_name": "form_auto_completion"}
@@ -189,7 +189,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我要预约产科，我怀孕了",
           "user_id": "test_user_form_034",
           "metadata": {"test_id": "FORM_034", "test_name": "form_conditional_fields"}
@@ -234,7 +234,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我刚才预约的医生是谁？",
           "user_id": "test_user_form_035",
           "metadata": {"test_id": "FORM_035_2", "test_name": "form_persistence_retrieve"}
@@ -269,7 +269,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我要修改预约时间，改成后天上午",
           "user_id": "test_user_form_035",
           "metadata": {"test_id": "FORM_036", "test_name": "form_update"}
@@ -304,7 +304,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我的预约信息都填好了，请提交预约",
           "user_id": "test_user_form_035",
           "metadata": {"test_id": "FORM_037", "test_name": "form_submission"}
@@ -347,7 +347,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我要预约不存在的科室XYZ科",
           "user_id": "test_user_form_038",
           "metadata": {"test_id": "FORM_038", "test_name": "form_error_handling"}
@@ -382,7 +382,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我不想预约了，取消这个表单",
           "user_id": "test_user_form_039",
           "metadata": {"test_id": "FORM_039", "test_name": "form_cancellation"}
@@ -432,7 +432,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我还要预约眼科",
           "user_id": "test_user_form_040",
           "metadata": {"test_id": "FORM_040_2", "test_name": "multi_form_2"}
@@ -467,7 +467,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "用标准预约模板创建表单",
           "user_id": "test_user_form_041",
           "metadata": {"test_id": "FORM_041", "test_name": "form_template"}
@@ -502,7 +502,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我选择了外科，需要手术预约",
           "user_id": "test_user_form_042",
           "metadata": {"test_id": "FORM_042", "test_name": "form_dependencies"}
@@ -537,7 +537,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我的电话是123，身份证是xyz",
           "user_id": "test_user_form_043",
           "metadata": {"test_id": "FORM_043", "test_name": "form_validation_messages"}
@@ -572,7 +572,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我先填一部分，保存为草稿",
           "user_id": "test_user_form_044",
           "metadata": {"test_id": "FORM_044", "test_name": "form_draft_saving"}
@@ -612,7 +612,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我的表单完成了多少？还需要填什么？",
           "user_id": "test_user_form_044",
           "metadata": {"test_id": "FORM_045", "test_name": "form_completion_status"}

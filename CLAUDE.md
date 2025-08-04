@@ -2,6 +2,20 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 🚨 CRITICAL MODEL REQUIREMENTS 🚨
+
+**DEFAULT MODEL MUST ALWAYS BE gpt-4.1**
+
+- ❌ NEVER use `gpt-4-turbo`, `gpt-4o`, `gpt-4-turbo-preview`, or any other model
+- ✅ ALWAYS use `gpt-4.1` as the default model in ALL contexts:
+  - Test configurations
+  - API requests
+  - Default parameters
+  - Test case definitions
+  - Fallback values
+- This is MANDATORY for proper Azure OpenAI inference integration
+- NO EXCEPTIONS to this rule
+
 ## Development Commands
 
 ```bash
@@ -84,7 +98,7 @@ python -m src.main                             # Start server with Pattern 2
 
 # Test Management Dashboard
 # Comprehensive test execution and monitoring system with PostgreSQL persistence
-cd test_dashboard && ./launch_dashboard_final.sh  # Launch dashboard (Backend: 6002, Frontend: 3020)
+cd test_dashboard && ./launch_dashboard.sh  # Launch dashboard (Backend: 6002, Frontend: 3020)
 # Frontend: http://localhost:3020
 # Backend API: http://localhost:6002
 # API Docs: http://localhost:6002/docs
@@ -104,6 +118,11 @@ cd test_dashboard && ./launch_dashboard_final.sh  # Launch dashboard (Backend: 6
 # Required: SQLAlchemy and asyncpg (auto-installed by launch script)
 # Database environment variables:
 #   DB_HOST=localhost DB_PORT=5432 DB_USER=postgres DB_PASSWORD=12931 DB_NAME=test1
+#
+# ⚠️ IMPORTANT: Test Dashboard Documentation
+# - Comprehensive documentation is in DOC.md
+# - DOC.md contains architecture diagrams, API endpoints, and implementation details
+# - ALWAYS update DOC.md when making changes to the test dashboard
 ```
 
 ## High-Level Architecture

@@ -33,7 +33,7 @@
       "Content-Type": "application/json"
     },
     "payload": {
-      "model": "gpt-4-turbo",
+      "model": "gpt-4.1",
       "input": "我想找一个妇科专家，最好是有多年经验的女医生，你能推荐吗？",
       "user_id": "${user_context.user_id}",
       "metadata": {

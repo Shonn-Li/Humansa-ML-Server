@@ -50,7 +50,7 @@
       "Content-Type": "application/json"
     },
     "payload": {
-      "model": "gpt-4-turbo",
+      "model": "gpt-4.1",
       "input": "我对维生素B族比较感兴趣，你能推荐几个具体的品牌吗？",
       "user_id": "${user_context.user_id}",
       "conversation_history": "${setup.previous_turns}",

@@ -50,6 +50,10 @@ async def lifespan(app: FastAPI):
     # Initialize database
     await init_db()
     
+    # Discover tests on startup
+    from test_dashboard.backend.api.tests import startup_discover_tests
+    await startup_discover_tests()
+    
     # Start background tasks
     app.state.tasks = []
     

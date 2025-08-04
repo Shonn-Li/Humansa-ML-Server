@@ -1671,19 +1671,30 @@ function App() {
 
         {/* Test Result Details Modal */}
         {selectedTestResult && (
-          <div style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 1000
-          }}>
-            <div style={{
+          <div 
+            onClick={(e) => {
+              // Close modal when clicking backdrop
+              if (e.target === e.currentTarget) {
+                setSelectedTestResult(null);
+                setTestLogs(null);
+              }
+            }}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 1000,
+              cursor: 'pointer'
+            }}>
+            <div 
+              onClick={(e) => e.stopPropagation()}
+              style={{
               backgroundColor: 'white',
               borderRadius: '8px',
               padding: '30px',
@@ -1691,7 +1702,8 @@ function App() {
               width: '90%',
               maxHeight: '80vh',
               overflow: 'auto',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+              cursor: 'default'
             }}>
               <h2 style={{ marginBottom: '20px' }}>Test Result Details</h2>
               
@@ -1830,11 +1842,33 @@ function App() {
                         padding: '10px',
                         borderRadius: '4px',
                         overflow: 'auto',
-                        maxHeight: '200px',
+                        maxHeight: '300px',
                         fontSize: '12px',
-                        fontFamily: 'monospace'
+                        fontFamily: 'monospace',
+                        whiteSpace: 'pre-wrap',
+                        wordBreak: 'break-word'
                       }}>
-                        {testLogs.server_logs}
+                        {(() => {
+                          try {
+                            // Parse server logs if it's a JSON string
+                            const logsData = typeof testLogs.server_logs === 'string' 
+                              ? JSON.parse(testLogs.server_logs) 
+                              : testLogs.server_logs;
+                            
+                            // Extract logs array if present
+                            if (logsData.logs && Array.isArray(logsData.logs)) {
+                              return logsData.logs.join('\n');
+                            } else if (Array.isArray(logsData)) {
+                              return logsData.join('\n');
+                            } else {
+                              // If it's not an array, stringify it nicely
+                              return JSON.stringify(logsData, null, 2);
+                            }
+                          } catch (e) {
+                            // If parsing fails, return as-is
+                            return testLogs.server_logs;
+                          }
+                        })()}
                       </pre>
                     </div>
                   )}
@@ -1874,11 +1908,24 @@ function App() {
                         padding: '10px',
                         borderRadius: '4px',
                         overflow: 'auto',
-                        maxHeight: '200px',
+                        maxHeight: '300px',
                         fontSize: '12px',
-                        fontFamily: 'monospace'
+                        fontFamily: 'monospace',
+                        whiteSpace: 'pre-wrap',
+                        wordBreak: 'break-word'
                       }}>
-                        {JSON.stringify(testLogs.request, null, 2)}
+                        {(() => {
+                          try {
+                            // If request is a string, try to parse it
+                            const requestData = typeof testLogs.request === 'string' 
+                              ? JSON.parse(testLogs.request) 
+                              : testLogs.request;
+                            return JSON.stringify(requestData, null, 2);
+                          } catch (e) {
+                            // If parsing fails, return as-is
+                            return testLogs.request;
+                          }
+                        })()}
                       </pre>
                     </div>
                   )}
@@ -1891,11 +1938,24 @@ function App() {
                         padding: '10px',
                         borderRadius: '4px',
                         overflow: 'auto',
-                        maxHeight: '200px',
+                        maxHeight: '300px',
                         fontSize: '12px',
-                        fontFamily: 'monospace'
+                        fontFamily: 'monospace',
+                        whiteSpace: 'pre-wrap',
+                        wordBreak: 'break-word'
                       }}>
-                        {JSON.stringify(testLogs.response, null, 2)}
+                        {(() => {
+                          try {
+                            // If response is a string, try to parse it
+                            const responseData = typeof testLogs.response === 'string' 
+                              ? JSON.parse(testLogs.response) 
+                              : testLogs.response;
+                            return JSON.stringify(responseData, null, 2);
+                          } catch (e) {
+                            // If parsing fails, return as-is
+                            return testLogs.response;
+                          }
+                        })()}
                       </pre>
                     </div>
                   )}

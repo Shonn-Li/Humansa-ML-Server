@@ -171,7 +171,7 @@ def convert_single_turn_test(test_case: Dict[str, Any]) -> Dict[str, Any]:
                 "Content-Type": "application/json"
             },
             "payload": {
-                "model": "gpt-4-turbo",
+                "model": "gpt-4.1",
                 "input": test_case['query'],
                 "user_id": test_case.get('user_id', f"test_user_{test_case['id']:03d}"),
                 "metadata": {
@@ -297,7 +297,7 @@ def convert_multi_turn_test(test_case: Dict[str, Any]) -> Dict[str, Any]:
                 "Content-Type": "application/json"
             },
             "payload": {
-                "model": "gpt-4-turbo",
+                "model": "gpt-4.1",
                 "input": last_turn['query'],
                 "user_id": f"mt_test_{test_case['id']}",
                 "metadata": {

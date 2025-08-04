@@ -256,7 +256,8 @@ class HumansaOrchestratorAgentTransparent:
         query: str,
         user_id: Optional[str] = None,
         messages: Optional[List[Dict[str, str]]] = None,
-        stream: bool = False
+        stream: bool = False,
+        model: str = "gpt-4.1"
     ) -> Dict[str, Any]:
         """
         Process query and return response in OpenAI Responses API format
@@ -274,7 +275,7 @@ class HumansaOrchestratorAgentTransparent:
                 "id": f"resp_{uuid.uuid4().hex[:12]}_{int(time.time())}",
                 "object": "response",
                 "created": int(time.time()),
-                "model": "gpt-4-turbo",
+                "model": model,
                 "output": [
                     {
                         "type": "text",
@@ -325,7 +326,7 @@ class HumansaOrchestratorAgentTransparent:
                 "id": f"resp_{uuid.uuid4().hex[:12]}_{int(time.time())}",
                 "object": "response",
                 "created": int(time.time()),
-                "model": "gpt-4-turbo",
+                "model": model,
                 "output": output_items,
                 "usage": usage,
                 "metadata": {
@@ -343,7 +344,7 @@ class HumansaOrchestratorAgentTransparent:
                 "id": f"resp_error_{int(time.time())}",
                 "object": "response",
                 "created": int(time.time()),
-                "model": "gpt-4-turbo",
+                "model": model,
                 "output": [
                     {
                         "type": "text",
@@ -358,7 +359,8 @@ class HumansaOrchestratorAgentTransparent:
         self,
         query: str,
         user_id: Optional[str] = None,
-        messages: Optional[List[Dict[str, str]]] = None
+        messages: Optional[List[Dict[str, str]]] = None,
+        model: str = "gpt-4.1"
     ) -> AsyncGenerator[Dict[str, Any], None]:
         """
         Stream response with proper event format
@@ -381,7 +383,7 @@ class HumansaOrchestratorAgentTransparent:
                     "id": response_id,
                     "object": "response",
                     "created": created_timestamp,
-                    "model": "gpt-4-turbo"
+                    "model": model
                 }
             }
             
@@ -411,7 +413,7 @@ class HumansaOrchestratorAgentTransparent:
                     "id": response_id,
                     "object": "response",
                     "created": created_timestamp,
-                    "model": "gpt-4-turbo",
+                    "model": model,
                     "output": [{"type": "text", "text": identity_response}],
                     "usage": usage,
                     "metadata": {
@@ -437,7 +439,7 @@ class HumansaOrchestratorAgentTransparent:
                 "id": response_id,
                 "object": "response",
                 "created": created_timestamp,
-                "model": "gpt-4-turbo"
+                "model": "gpt-4.1"
             }
         }
         
@@ -537,7 +539,7 @@ class HumansaOrchestratorAgentTransparent:
                     "id": response_id,
                     "object": "response",
                     "created": created_timestamp,
-                    "model": "gpt-4-turbo",
+                    "model": model,
                     "output": output_items,
                     "usage": usage
                 }
@@ -563,7 +565,7 @@ class HumansaOrchestratorAgentTransparent:
                     "id": response_id,
                     "object": "response",
                     "created": created_timestamp,
-                    "model": "gpt-4-turbo",
+                    "model": model,
                     "output": [{"type": "text", "text": f"错误：{str(e)}"}],
                     "usage": {"total_tokens": 0},
                     "error": str(e)

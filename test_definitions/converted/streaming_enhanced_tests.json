@@ -26,7 +26,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "请详细介绍中医的基本理论",
           "user_id": "test_user_stream_010",
           "stream": true,
@@ -63,7 +63,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我头痛，请帮我分析可能的原因并推荐医生",
           "user_id": "test_user_stream_011",
           "stream": true,
@@ -136,7 +136,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "请写一篇关于中医养生的长篇文章",
           "user_id": "test_user_stream_013",
           "stream": true,
@@ -172,7 +172,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "会话1: 请简单介绍一下针灸",
           "user_id": "test_user_stream_014_1",
           "stream": true,
@@ -211,7 +211,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "请详细介绍中医的历史发展、基本理论、诊断方法、治疗原则和现代应用",
           "user_id": "test_user_stream_015",
           "stream": true,
@@ -250,7 +250,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "请进行复杂的医学分析",
           "user_id": "test_user_stream_016",
           "stream": true,
@@ -286,7 +286,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "请推荐感冒药物",
           "user_id": "test_user_stream_017",
           "stream": true,

@@ -53,7 +53,7 @@ def create_standardized_test(
             "Content-Type": "application/json"
         },
         "payload": {
-            "model": "gpt-4-turbo",
+            "model": "gpt-4.1",
             "user_id": default_setup["user_context"]["user_id"],
             "metadata": {
                 "test_id": test_id,

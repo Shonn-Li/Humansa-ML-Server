@@ -39,7 +39,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_001",
         "metadata": {
           "test_id": "MTC_001",
@@ -123,7 +123,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_002",
         "metadata": {
           "test_id": "MTC_002",
@@ -200,7 +200,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_003",
         "metadata": {
           "test_id": "MTC_003",
@@ -284,7 +284,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_004",
         "metadata": {
           "test_id": "MTC_004",
@@ -361,7 +361,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_005",
         "metadata": {
           "test_id": "MTC_005",
@@ -445,7 +445,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_006",
         "metadata": {
           "test_id": "MTC_006",
@@ -522,7 +522,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_007",
         "metadata": {
           "test_id": "MTC_007",
@@ -606,7 +606,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_008",
         "metadata": {
           "test_id": "MTC_008",
@@ -683,7 +683,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_009",
         "metadata": {
           "test_id": "MTC_009",
@@ -767,7 +767,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_010",
         "metadata": {
           "test_id": "MTC_010",
@@ -844,7 +844,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_011",
         "metadata": {
           "test_id": "MTC_011",
@@ -928,7 +928,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_012",
         "metadata": {
           "test_id": "MTC_012",
@@ -1005,7 +1005,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_013",
         "metadata": {
           "test_id": "MTC_013",
@@ -1089,7 +1089,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_014",
         "metadata": {
           "test_id": "MTC_014",
@@ -1166,7 +1166,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_015",
         "metadata": {
           "test_id": "MTC_015",
@@ -1250,7 +1250,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_016",
         "metadata": {
           "test_id": "MTC_016",
@@ -1327,7 +1327,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_017",
         "metadata": {
           "test_id": "MTC_017",
@@ -1411,7 +1411,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_018",
         "metadata": {
           "test_id": "MTC_018",
@@ -1488,7 +1488,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_019",
         "metadata": {
           "test_id": "MTC_019",
@@ -1572,7 +1572,7 @@
         "Content-Type": "application/json"
       },
       "payload": {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "user_id": "test_user_MTC_020",
         "metadata": {
           "test_id": "MTC_020",

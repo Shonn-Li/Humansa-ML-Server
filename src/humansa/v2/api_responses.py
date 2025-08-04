@@ -60,10 +60,10 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
     global memory_manager, orchestrator, enhanced_orchestrator, consolidated_orchestrator, transparent_orchestrator, pattern2_orchestrator
     global context_compressor, conversation_manager, response_manager, response_formatter
     
-    # Initialize LLM
-    llm = OpenAI(
+    # Initialize default LLM (will be overridden per request)
+    default_llm = OpenAI(
         api_key=openai_api_key,
-        model="gpt-4.1",  # Use gpt-4.1 - the latest model from ChatGPT
+        model="gpt-4.1",  # Default model
         temperature=0.7
     )
     
@@ -72,7 +72,7 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
     response_manager = ResponseManager(conversation_manager)
     
     # Initialize context compressor
-    context_compressor = ContextCompressor(llm=llm)
+    context_compressor = ContextCompressor(llm=default_llm)
     
     # Try to use Mem0 if available
     try:
@@ -107,7 +107,7 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
     # Initialize orchestrators
     try:
         orchestrator = HumansaOrchestratorAgent(
-            llm=llm,
+            llm=default_llm,
             memory_manager=memory_manager,
             debug=False,
             use_real_tools=True,
@@ -121,7 +121,7 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
         )
         
         enhanced_orchestrator = HumansaOrchestratorAgentEnhanced(
-            llm=llm,
+            llm=default_llm,
             memory_manager=memory_manager,
             debug=True,
             enable_enhanced_logging=True
@@ -130,7 +130,7 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
         # Initialize consolidated orchestrator if enabled
         if USE_CONSOLIDATED_TOOLS:
             consolidated_orchestrator = HumansaOrchestratorAgentConsolidated(
-                llm=llm,
+                llm=default_llm,
                 memory_manager=memory_manager,
                 debug=False,
                 use_real_tools=True,
@@ -146,7 +146,7 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
         
         # Initialize transparent orchestrator for proper response format
         transparent_orchestrator = HumansaOrchestratorAgentTransparent(
-            llm=llm,
+            llm=default_llm,
             memory_manager=memory_manager,
             debug=False,
             use_real_tools=True,
@@ -173,32 +173,32 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
             
             # Initialize available agents
             try:
-                pattern2_agents["ProductAgent"] = ProductAgent(llm=llm)
+                pattern2_agents["ProductAgent"] = ProductAgent(llm=default_llm)
                 logger.info("   ✓ ProductAgent initialized")
             except Exception as e:
                 logger.warning(f"   ⚠ ProductAgent initialization failed: {e}")
             
             try:
-                pattern2_agents["GeneralMedicalAgent"] = GeneralMedicalAgent(llm=llm)
+                pattern2_agents["GeneralMedicalAgent"] = GeneralMedicalAgent(llm=default_llm)
                 logger.info("   ✓ GeneralMedicalAgent initialized")
             except Exception as e:
                 logger.warning(f"   ⚠ GeneralMedicalAgent initialization failed: {e}")
             
             try:
-                pattern2_agents["AppointmentAgent"] = AppointmentAgent(llm=llm)
+                pattern2_agents["AppointmentAgent"] = AppointmentAgent(llm=default_llm)
                 logger.info("   ✓ AppointmentAgent initialized")
             except Exception as e:
                 logger.warning(f"   ⚠ AppointmentAgent initialization failed: {e}")
             
             try:
-                pattern2_agents["DiagnosisAgent"] = DiagnosisAgent(llm=llm)
+                pattern2_agents["DiagnosisAgent"] = DiagnosisAgent(llm=default_llm)
                 pattern2_agents["ClinicalAgent"] = pattern2_agents["DiagnosisAgent"]
                 logger.info("   ✓ DiagnosisAgent initialized")
             except Exception as e:
                 logger.warning(f"   ⚠ ClinicalAgent initialization failed: {e}")
             
             try:
-                pattern2_agents["MedicationAgent"] = MedicationAgent(llm=llm)
+                pattern2_agents["MedicationAgent"] = MedicationAgent(llm=default_llm)
                 logger.info("   ✓ MedicationAgent initialized")
             except Exception as e:
                 logger.warning(f"   ⚠ MedicationAgent initialization failed: {e}")
@@ -218,7 +218,7 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
             
             # Create Pattern 2 orchestrator (fixed version)
             pattern2_orchestrator = create_pattern2_orchestrator_fixed(
-                llm=llm,
+                llm=default_llm,
                 agents=pattern2_agents,
                 memory_manager=memory_manager,
                 db_config=db_config,
@@ -243,7 +243,7 @@ async def create_response():
     
     Request body:
     {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "input": "你好",
         "user_id": "user123",  # Optional if continuing
         "previous_response_id": "resp_abc123",  # Optional for continuation
@@ -255,7 +255,7 @@ async def create_response():
         "id": "resp_xyz789",
         "object": "response",
         "created": 1234567890,
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "conversation_id": "conv_123",
         "previous_response_id": "resp_abc123",
         "input": "你好",
@@ -274,7 +274,7 @@ async def create_response():
     """
     try:
         data = await request.get_json()
-        model = data.get('model', 'gpt-4-turbo')
+        model = data.get('model', 'gpt-4.1')
         input_text = data.get('input', '')
         user_id = data.get('user_id')
         previous_response_id = data.get('previous_response_id')
@@ -409,7 +409,8 @@ async def create_response():
                 query=input_text,
                 user_id=user_id,
                 messages=context_messages,
-                stream=False
+                stream=False,
+                model=model
             )
         
         # Apply response agent post-processing to ensure brand consistency
@@ -463,7 +464,7 @@ async def create_streaming_response():
     
     Request body:
     {
-        "model": "gpt-4-turbo",
+        "model": "gpt-4.1",
         "input": "你好",
         "user_id": "user123",
         "previous_response_id": "resp_abc123",  # Optional
@@ -478,7 +479,7 @@ async def create_streaming_response():
     """
     try:
         data = await request.get_json()
-        model = data.get('model', 'gpt-4-turbo')
+        model = data.get('model', 'gpt-4.1')
         input_text = data.get('input', '')
         user_id = data.get('user_id')
         previous_response_id = data.get('previous_response_id')
@@ -670,7 +671,8 @@ async def stream_event_generator(
             async for event in transparent_orchestrator.stream_query_with_transparency(
                 query=input_text,
                 user_id=user_id,
-                messages=context_messages
+                messages=context_messages,
+                model=model
             ):
                 # Apply response agent processing to final event
                 if event.get('event') == 'response.done':

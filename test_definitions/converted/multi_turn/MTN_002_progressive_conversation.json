@@ -49,7 +49,7 @@
       "Content-Type": "application/json"
     },
     "payload": {
-      "model": "gpt-4-turbo",
+      "model": "gpt-4.1",
       "input": "工作压力确实很大，我是做财务工作的，最近在做年度审计。你能推荐一些补充维生素的产品吗？",
       "user_id": "${user_context.user_id}",
       "conversation_history": "${setup.previous_turns}",

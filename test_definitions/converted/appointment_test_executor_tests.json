@@ -26,7 +26,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我想预约明天的号",
           "user_id": "test_user_ate_001",
           "metadata": {
@@ -75,7 +75,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我叫张三，电话是13800138000",
           "user_id": "test_user_ate_002",
           "metadata": {
@@ -113,7 +113,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "创建预约表单",
           "user_id": "test_user_ate_003",
           "metadata": {
@@ -151,7 +151,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "提交我的预约申请",
           "user_id": "test_user_ate_004",
           "metadata": {
@@ -190,7 +190,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我要预约李医生明天下午2点，我叫王小明，电话13800138000，头痛症状",
           "user_id": "test_user_ate_005",
           "metadata": {
@@ -228,7 +228,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "李医生明天没有空，有其他选择吗？",
           "user_id": "test_user_ate_006",
           "metadata": {
@@ -266,7 +266,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "我胸痛很厉害，需要紧急预约",
           "user_id": "test_user_ate_007",
           "metadata": {
@@ -304,7 +304,7 @@
         "endpoint": "/v2/humansa/responses/create",
         "method": "POST",
         "payload": {
-          "model": "gpt-4-turbo",
+          "model": "gpt-4.1",
           "input": "快速预约测试",
           "user_id": "test_user_ate_008",
           "metadata": {

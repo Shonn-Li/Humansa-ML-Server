@@ -69,7 +69,7 @@ class ResponseFormatter:
     def format_agent_response(
         self,
         agent_response: Any,
-        model: str = "gpt-4-turbo",
+        model: str = "gpt-4.1",
         response_id: Optional[str] = None
     ) -> Dict[str, Any]:
         """
@@ -271,7 +271,7 @@ class ResponseFormatter:
         self,
         agent_stream: AsyncGenerator,
         response_id: Optional[str] = None,
-        model: str = "gpt-4-turbo"
+        model: str = "gpt-4.1"
     ) -> AsyncGenerator[Dict[str, Any], None]:
         """
         Convert agent streaming output to OpenAI Responses API streaming events

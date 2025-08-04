@@ -50,7 +50,7 @@
       "Content-Type": "application/json"
     },
     "payload": {
-      "model": "gpt-4-turbo",
+      "model": "gpt-4.1",
       "input": "是的，我是程序员，每天要对着电脑10多个小时，最近项目很赶，压力确实很大",
       "user_id": "${user_context.user_id}",
       "conversation_history": "${setup.previous_turns}",

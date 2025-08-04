@@ -28,7 +28,7 @@
       "Content-Type": "application/json"
     },
     "payload": {
-      "model": "gpt-4-turbo",
+      "model": "gpt-4.1",
       "input": "你们有什么保健品推荐吗？",
       "user_id": "test_user_026",
       "metadata": {

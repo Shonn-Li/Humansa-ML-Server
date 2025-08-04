@@ -50,7 +50,7 @@ async def initialize_v2_conversation_system(db_pool, openai_api_key: str):
     # Initialize LLM
     llm = OpenAI(
         api_key=openai_api_key,
-        model="gpt-4-turbo-preview",
+        model="gpt-4.1",
         temperature=0.7
     )
     

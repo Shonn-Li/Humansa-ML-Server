@@ -15,6 +15,8 @@ from datetime import datetime, timedelta
 from enum import Enum
 from fastapi import APIRouter, HTTPException, BackgroundTasks
 from pydantic import BaseModel, Field
+import time
+import tempfile
 
 logger = logging.getLogger(__name__)
 
@@ -133,9 +135,51 @@ router = APIRouter()
 from test_dashboard.backend.core.database import execute_query, execute_update, is_database_available
 import json
 
+# Import enhanced execution functions
+try:
+    from test_dashboard.backend.api.jobs_enhanced import (
+        TestCaseLog,
+        capture_ml_server_logs,
+        execute_test_with_log_capture,
+        ensure_ml_server_running
+    )
+    ENHANCED_EXECUTION_AVAILABLE = True
+except ImportError:
+    logger.warning("Enhanced execution not available, using basic execution")
+    ENHANCED_EXECUTION_AVAILABLE = False
+    # Define fallback TestCaseLog
+    class TestCaseLog(BaseModel):
+        test_case_id: str
+        test_case_name: str
+        status: str
+        execution_time: float
+        request_data: Dict[str, Any]
+        response_data: Dict[str, Any]
+        server_logs: List[str]
+        error_message: Optional[str] = None
+
 # In-memory storage (fallback when database not available)
 jobs_storage: Dict[str, Job] = {}
 job_runs: Dict[str, Dict] = {}  # job_id -> run data
+
+# Job service helper
+class JobService:
+    @staticmethod
+    async def update_job_status(job_id: str, run_id: str, status: str, error: Optional[str] = None):
+        """Update job status in database and memory"""
+        if job_id in jobs_storage:
+            job = jobs_storage[job_id]
+            job.status = JobStatus(status)
+            job.updated_at = datetime.now()
+            jobs_storage[job_id] = job
+        
+        if is_database_available():
+            await execute_update(
+                "UPDATE test_management.runs SET status = %(status)s, updated_at = %(updated_at)s WHERE id = %(run_id)s",
+                {'status': status, 'updated_at': datetime.now(), 'run_id': run_id}
+            )
+
+job_service = JobService()
 
 
 def generate_job_id() -> str:
@@ -661,7 +705,11 @@ async def execute_job(job_id: str, execution: JobExecution, background_tasks: Ba
     
     if not execution.dry_run:
         # Start execution in background
-        background_tasks.add_task(execute_job_background, job_id, run_id, config)
+        if ENHANCED_EXECUTION_AVAILABLE:
+            from test_dashboard.backend.api.jobs_enhanced import execute_job_background_enhanced
+            background_tasks.add_task(execute_job_background_enhanced, job_id, run_id, config)
+        else:
+            background_tasks.add_task(execute_job_background, job_id, run_id, config)
     
     return {
         "message": f"Job {job_id} {'dry-run started' if execution.dry_run else 'execution started'}",
@@ -736,7 +784,11 @@ async def resume_job(job_id: str, background_tasks: BackgroundTasks):
     jobs_storage[job_id] = job
     
     # Resume execution
-    background_tasks.add_task(execute_job_background, job_id, job.run_id, job.config)
+    if ENHANCED_EXECUTION_AVAILABLE:
+        from test_dashboard.backend.api.jobs_enhanced import execute_job_background_enhanced
+        background_tasks.add_task(execute_job_background_enhanced, job_id, job.run_id, job.config)
+    else:
+        background_tasks.add_task(execute_job_background, job_id, job.run_id, job.config)
     
     return {"message": f"Job {job_id} resumed"}
 
@@ -899,15 +951,81 @@ async def execute_job_background(job_id: str, run_id: str, config: JobConfig):
     """Background job execution with real test runner"""
     import httpx
     import subprocess
+    import tempfile
+    import aiofiles
     from test_dashboard.backend.core.config import settings
     
+    # Initialize log capture
+    ml_server_logs = []
+    log_capture_task = None
+    log_file_path = None
+    
     try:
-        job = jobs_storage[job_id]
+        # Get job from database or memory
+        job = await get_job(job_id)
+        
+        # Get or create run data
+        if run_id not in job_runs:
+            job_runs[run_id] = {
+                "job_id": job_id,
+                "run_id": run_id,
+                "started_at": datetime.now(),
+                "completed_at": None,
+                "status": "running",
+                "environment_id": config.environment_id,
+                "config": config.dict(),
+                "results": {},
+                "dry_run": False
+            }
         run_data = job_runs[run_id]
         
         # Check if ML server is running
         ml_port = settings.ML_SERVER_PORT or 6001
         ml_url = f"http://localhost:{ml_port}"
+        
+        # Function to capture ML server logs
+        async def capture_ml_server_logs(start_time: datetime):
+            """Capture ML server logs during test execution"""
+            nonlocal ml_server_logs
+            
+            # Option 1: Try to find ML server log file
+            possible_log_paths = [
+                f"/tmp/ml_server_{ml_port}.log",
+                f"ml_server_{ml_port}.log",
+                f"logs/ml_server_{ml_port}.log",
+                "/tmp/ml_server.log",
+                "ml_server.log"
+            ]
+            
+            log_file = None
+            for path in possible_log_paths:
+                if os.path.exists(path):
+                    log_file = path
+                    break
+            
+            if log_file:
+                try:
+                    # Read existing file and monitor for new lines
+                    async with aiofiles.open(log_file, 'r') as f:
+                        # Go to end of file
+                        await f.seek(0, 2)
+                        
+                        while True:
+                            line = await f.readline()
+                            if line:
+                                # Parse timestamp if present
+                                ml_server_logs.append({
+                                    "timestamp": datetime.now().isoformat(),
+                                    "message": line.strip(),
+                                    "source": "ml_server_file"
+                                })
+                            else:
+                                await asyncio.sleep(0.1)
+                except Exception as e:
+                    logger.warning(f"Failed to read ML server log file: {e}")
+            
+            # Option 2: If we started the ML server, capture its output
+            # This is handled below when starting the server
         
         # Try to check ML server health
         server_running = False
@@ -957,16 +1075,28 @@ async def execute_job_background(job_id: str, run_id: str, config: JobConfig):
                 # Update job status
                 job.status = JobStatus.FAILED
                 job.completed_at = datetime.now()
+                job.failed_tests = len(job.tests)  # All tests failed
                 jobs_storage[job_id] = job
                 run_data["status"] = "failed"
                 run_data["error"] = f"Failed to start ML server: {e}"
                 run_data["completed_at"] = datetime.now()
+                
+                # Update database if available
+                if is_database_available():
+                    await execute_update("""
+                        UPDATE test_management.runs 
+                        SET status = 'failed', completed_at = %(completed_at)s, error_message = %(error)s
+                        WHERE id = %(run_id)s
+                    """, {
+                        'run_id': run_id,
+                        'completed_at': datetime.now(),
+                        'error': f"Failed to start ML server: {e}"
+                    })
                 return
         
         total_tests = len(job.tests)
         
         # Get test definitions
-        from test_dashboard.backend.api.tests import get_test_by_id
         
         for i, test_ref in enumerate(job.tests):
             # Check if job was cancelled/paused
@@ -1000,8 +1130,8 @@ async def execute_job_background(job_id: str, run_id: str, config: JobConfig):
             
             if not test_def:
                 # Try to get from memory or load from file
-                from test_dashboard.backend.api.tests import tests_storage
-                test_def = tests_storage.get(test_ref.test_id)
+                from test_dashboard.backend.api.tests import test_definitions
+                test_def = test_definitions.get(test_ref.test_id)
             
             if not test_def:
                 logger.error(f"Test definition not found: {test_ref.test_id}")
@@ -1010,48 +1140,136 @@ async def execute_job_background(job_id: str, run_id: str, config: JobConfig):
             else:
                 # Execute real test
                 try:
-                    # Prepare test request
-                    test_config = test_def.get('config', {}) if isinstance(test_def, dict) else test_def.config
-                    test_request = {
-                        "messages": test_config.get('messages', []),
-                        "model": test_config.get('model', 'gpt-4o'),
-                        "stream": False,
-                        "user_id": f"test_user_{run_id}",
-                        "metadata": {
-                            "test_id": test_ref.test_id,
-                            "run_id": run_id,
-                            "job_id": job_id
-                        }
+                    # Get test execution details
+                    if isinstance(test_def, dict):
+                        # From database
+                        test_execution = test_def.get('execution', {})
+                        test_endpoint = test_execution.get('endpoint', '/v1-humansa/chat/completions')
+                        test_payload = test_execution.get('payload', {})
+                        test_name = test_def.get('name', test_ref.test_id)
+                        test_suite = test_def.get('suite', 'unknown')
+                    else:
+                        # From memory (TestDefinition object)
+                        test_endpoint = test_def.execution.endpoint
+                        test_payload = test_def.execution.payload.copy()
+                        test_name = test_def.name
+                        test_suite = test_def.suite
+                    
+                    # Handle multi-turn tests
+                    previous_response_id = None
+                    test_type = test_def.get('type') if isinstance(test_def, dict) else (test_def.type if hasattr(test_def, 'type') else 'single')
+                    if test_type == 'multi_turn':
+                        # Get previous turns from test setup
+                        setup = test_def.get('setup', {}) if isinstance(test_def, dict) else (test_def.setup.dict() if hasattr(test_def, 'setup') else {})
+                        previous_turns = setup.get('previous_turns', [])
+                        
+                        # Execute previous turns if any
+                        for turn in previous_turns:
+                            turn_payload = {
+                                "model": test_payload.get("model", "gpt-4.1"),
+                                "input": turn.get("content", ""),
+                                "user_id": test_payload.get("user_id", f"test_user_{test_ref.test_id}"),
+                                "metadata": {
+                                    "test_id": test_ref.test_id,
+                                    "turn": "setup"
+                                }
+                            }
+                            
+                            try:
+                                async with httpx.AsyncClient(timeout=30.0) as client:
+                                    turn_response = await client.post(f"{ml_url}{test_endpoint}", json=turn_payload)
+                                    if turn_response.status_code == 200:
+                                        turn_data = turn_response.json()
+                                        # Extract response ID if available
+                                        if 'response_id' in turn_data:
+                                            previous_response_id = turn_data['response_id']
+                                        elif 'id' in turn_data:
+                                            previous_response_id = turn_data['id']
+                            except Exception as e:
+                                logger.warning(f"Failed to execute previous turn: {e}")
+                    
+                    # Replace placeholders in payload
+                    payload_str = json.dumps(test_payload)
+                    if previous_response_id:
+                        payload_str = payload_str.replace("{{previous_response_id}}", previous_response_id)
+                    test_payload = json.loads(payload_str)
+                    
+                    # Add metadata to payload
+                    test_payload["metadata"] = {
+                        "test_id": test_ref.test_id,
+                        "run_id": run_id,
+                        "job_id": job_id
                     }
                     
                     # Add any config overrides
                     if test_ref.config_overrides:
-                        test_request.update(test_ref.config_overrides)
-                    
-                    # Call the appropriate endpoint based on test type
-                    test_type = test_def.get('type', 'single') if isinstance(test_def, dict) else test_def.type
-                    endpoint = "/v1-humansa/chat/completions" if test_type == "single" else "/v2/humansa/responses/create"
+                        test_payload.update(test_ref.config_overrides)
                     
                     async with httpx.AsyncClient(timeout=config.timeout_per_test or 60.0) as client:
                         start_time = datetime.now()
-                        response = await client.post(f"{ml_url}{endpoint}", json=test_request)
+                        
+                        # Check if this is a streaming endpoint
+                        is_streaming = test_payload.get("stream", False) or "/stream" in test_endpoint
+                        
+                        response = await client.post(f"{ml_url}{test_endpoint}", json=test_payload)
                         end_time = datetime.now()
                         duration = (end_time - start_time).total_seconds()
                         
                         if response.status_code == 200:
-                            result_data = response.json()
+                            if is_streaming:
+                                # Handle streaming response
+                                try:
+                                    # Collect all chunks from streaming response
+                                    chunks = []
+                                    for line in response.text.strip().split('\n'):
+                                        if line.startswith('data: '):
+                                            chunk_data = line[6:]
+                                            if chunk_data != '[DONE]':
+                                                try:
+                                                    chunk = json.loads(chunk_data)
+                                                    chunks.append(chunk)
+                                                except:
+                                                    pass
+                                    
+                                    # Combine chunks into result
+                                    result_data = {
+                                        "stream": True,
+                                        "chunks": chunks,
+                                        "message": "".join(chunk.get("content", "") for chunk in chunks if chunk.get("content"))
+                                    }
+                                    success = True
+                                    error_msg = None
+                                except Exception as e:
+                                    success = False
+                                    error_msg = f"Failed to parse streaming response: {str(e)}"
+                                    result_data = {"error": "Stream parsing failed", "raw": response.text[:500]}
+                            else:
+                                try:
+                                    result_data = response.json()
+                                except json.JSONDecodeError as e:
+                                    success = False
+                                    error_msg = f"Invalid JSON response: {str(e)}"
+                                    result_data = {"error": "Invalid JSON", "raw": response.text[:500]}
+                                else:
+                                    # Validate response based on test expectations
+                                    expectations = test_def.get('expectations', {}) if isinstance(test_def, dict) else (test_def.expectations.dict() if hasattr(test_def, 'expectations') else {})
+                                    success = True
+                                    error_msg = None
                             
-                            # Validate response based on test expectations
-                            expectations = test_config.get('expected', {})
-                            success = True
-                            error_msg = None
-                            
-                            # Basic validation
-                            if expectations:
-                                # Check for required fields
-                                if 'contains' in expectations:
-                                    response_text = str(result_data)
-                                    for term in expectations['contains']:
+                            # Basic validation only if we successfully parsed response
+                            if success and expectations:
+                                # Get response expectations
+                                resp_expectations = expectations.get('response', {})
+                                
+                                # Check for required content
+                                if 'output_contains' in resp_expectations:
+                                    # For streaming responses, check the message field
+                                    if is_streaming:
+                                        response_text = result_data.get('message', '')
+                                    else:
+                                        response_text = str(result_data)
+                                    
+                                    for term in resp_expectations['output_contains']:
                                         if term.lower() not in response_text.lower():
                                             success = False
                                             error_msg = f"Response missing expected content: {term}"
@@ -1066,17 +1284,28 @@ async def execute_job_background(job_id: str, run_id: str, config: JobConfig):
                             run_data["results"][test_ref.test_id]["response"] = result_data
                         else:
                             success = False
-                            error_msg = f"API returned status {response.status_code}: {response.text}"
+                            error_msg = f"API returned status {response.status_code}: {response.text[:500]}"
                             duration = (datetime.now() - start_time).total_seconds()
+                            # Store error response for debugging
+                            result_data = {
+                                "error": f"HTTP {response.status_code}",
+                                "status_code": response.status_code,
+                                "raw": response.text[:1000]
+                            }
+                            run_data["results"][test_ref.test_id]["response"] = result_data
                     
                 except asyncio.TimeoutError:
                     success = False
                     error_msg = "Test execution timeout"
                     duration = config.timeout_per_test or 60.0
+                    result_data = {"error": "Timeout", "duration": duration}
+                    run_data["results"][test_ref.test_id]["response"] = result_data
                 except Exception as e:
                     success = False
                     error_msg = f"Test execution error: {str(e)}"
                     duration = (datetime.now() - datetime.fromisoformat(run_data["results"][test_ref.test_id]["started_at"])).total_seconds()
+                    result_data = {"error": str(e), "type": type(e).__name__}
+                    run_data["results"][test_ref.test_id]["response"] = result_data
             
             test_status = "passed" if success else "failed"
             started_at = datetime.fromisoformat(run_data["results"][test_ref.test_id]["started_at"])
@@ -1085,12 +1314,14 @@ async def execute_job_background(job_id: str, run_id: str, config: JobConfig):
             
             run_data["results"][test_ref.test_id] = {
                 "test_id": test_ref.test_id,
+                "test_name": test_name,
+                "suite": test_suite,
                 "status": "completed" if success else "failed", 
                 "started_at": started_at.isoformat(),
                 "completed_at": completed_at.isoformat(),
                 "duration": duration,
                 "success": success,
-                "error": None if success else "Mock test failure"
+                "error": error_msg if not success else None
             }
             
             # Update database if available
@@ -1101,17 +1332,61 @@ async def execute_job_background(job_id: str, run_id: str, config: JobConfig):
                     VALUES (%(run_id)s, %(test_id)s, %(suite)s, %(test_name)s, %(status)s, %(started_at)s, %(completed_at)s, %(duration)s, %(error)s)
                 """
                 
-                await execute_update(result_query, {
+                result_id = await execute_update(result_query, {
                     'run_id': run_id,
                     'test_id': test_ref.test_id,
-                    'suite': test_ref.suite or 'unknown',
-                    'test_name': f"Test {test_ref.test_id}",
+                    'suite': test_suite,
+                    'test_name': test_name,
                     'status': test_status,
                     'started_at': started_at,
                     'completed_at': completed_at,
                     'duration': duration,
-                    'error': None if success else "Mock test failure"
+                    'error': error_msg if not success else None
                 })
+                
+                # Store test case logs with actual request/response
+                # Always store logs even if test failed
+                if True:
+                    logs_query = """
+                        INSERT INTO test_management.test_case_logs
+                        (result_id, request, response, server_logs, performance_metrics)
+                        VALUES (
+                            (SELECT id FROM test_management.results WHERE run_id = %(run_id)s AND test_id = %(test_id)s LIMIT 1),
+                            %(request)s, %(response)s, %(server_logs)s, %(performance_metrics)s
+                        )
+                    """
+                    
+                    # Get the actual request and response data
+                    request_data = {
+                        "endpoint": test_endpoint,
+                        "payload": test_payload,
+                        "headers": {"Content-Type": "application/json"}
+                    }
+                    
+                    response_data = run_data["results"][test_ref.test_id].get("response", {})
+                    
+                    # Capture server logs if available
+                    server_logs = {
+                        "ml_server_port": ml_port,
+                        "execution_time": duration,
+                        "status_code": 200 if success else 500,
+                        "error": error_msg if not success else None
+                    }
+                    
+                    performance_metrics = {
+                        "start_time": started_at.isoformat(),
+                        "end_time": completed_at.isoformat(),
+                        "duration_seconds": duration
+                    }
+                    
+                    await execute_update(logs_query, {
+                        'run_id': run_id,
+                        'test_id': test_ref.test_id,
+                        'request': json.dumps(request_data),
+                        'response': json.dumps(response_data),
+                        'server_logs': json.dumps(server_logs),
+                        'performance_metrics': json.dumps(performance_metrics)
+                    })
             
             # Update failed count
             if not success:
@@ -1162,14 +1437,20 @@ async def execute_job_background(job_id: str, run_id: str, config: JobConfig):
         
     except Exception as e:
         # Handle execution errors
-        job.status = JobStatus.FAILED
-        job.completed_at = datetime.now()
-        job.updated_at = datetime.now()
-        jobs_storage[job_id] = job
+        logger.error(f"Job execution failed: {e}", exc_info=True)
         
-        run_data["status"] = "failed"
-        run_data["error"] = str(e)
-        run_data["completed_at"] = datetime.now()
+        # Ensure we have job object even if error happened early
+        if 'job' in locals():
+            job.status = JobStatus.FAILED
+            job.completed_at = datetime.now()
+            job.updated_at = datetime.now()
+            job.failed_tests = len(job.tests) if hasattr(job, 'tests') else 0
+            jobs_storage[job_id] = job
+        
+        if 'run_data' in locals():
+            run_data["status"] = "failed"
+            run_data["error"] = str(e)
+            run_data["completed_at"] = datetime.now()
         
         # Update run in database
         if is_database_available():

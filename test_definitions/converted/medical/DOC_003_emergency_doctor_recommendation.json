@@ -32,7 +32,7 @@
       "Content-Type": "application/json"
     },
     "payload": {
-      "model": "gpt-4-turbo",
+      "model": "gpt-4.1",
       "input": "我突然剧烈胸痛，冷汗直流，需要立即看医生，应该怎么办？",
       "user_id": "${user_context.user_id}",
       "metadata": {
