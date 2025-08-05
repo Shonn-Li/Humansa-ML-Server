@@ -157,12 +157,16 @@ def create_azure_llm_with_o3_support(
     """
     Factory function to create the appropriate Azure LLM instance
     
-    Returns O3DirectClient for O3/O4 models, regular AzureAICompletionsModel otherwise
+    NOTE: O3/O4 models should now use Azure OpenAI SDK directly for proper reasoning support.
+    The O3DirectClient was an attempt to work around Azure AI Inference limitations,
+    but Azure OpenAI SDK provides full reasoning capabilities for O3/O4 models.
+    
+    Returns O3DirectClient for O3/O4 models (legacy), regular AzureAICompletionsModel otherwise
     """
     is_o3_model = O3ModelWrapper._is_o3_model_static(model_name)
     
     if is_o3_model:
-        logger.info(f"Creating O3DirectClient for {model_name}")
+        logger.warning(f"⚠️ O3DirectClient is being used for {model_name}, but Azure OpenAI SDK is recommended for reasoning support")
         # Use direct HTTP client for O3 to work around Azure SDK issues
         from .o3_direct_client import O3DirectClient
         
