@@ -149,6 +149,7 @@ class LLMProviderSelector:
                     supported_models=[
                         # Available Azure models from your deployment
                         "gpt-4.1-nano", "gpt-4.1",  # OpenAI models
+                        "gpt-oss-120b",  # New OpenAI OSS model (120B parameters)
                         # GPT-4o models (vision models but not working via AI Inference)
                         "gpt-4o-mini", "gpt-4o",
                         "DeepSeek-R1-0528", "DeepSeek-V3-0324",  # Updated DeepSeek models
@@ -208,8 +209,8 @@ class LLMProviderSelector:
                     llm_instance=openai_llm,
                     supported_models=[
                         "gpt-4.1-nano", "gpt-4.1-nano", "gpt-4o", "gpt-3.5-turbo",
-                        "gpt-4-turbo", "gpt-4.1", "gpt-4.1-mini", "o3", "o4-mini",
-                        "gpt-4", "o1-mini", "o1-preview"
+                        "gpt-4-turbo", "gpt-4.1", "gpt-4.1-mini", "gpt-oss-120b",
+                        "o3", "o4-mini", "gpt-4", "o1-mini", "o1-preview"
                     ],
                     is_available=True
                 )
