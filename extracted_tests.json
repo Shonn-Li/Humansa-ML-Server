@@ -1,0 +1,834 @@
+{
+  "edge_cases": [
+    {
+      "test_name": "test_edge_case_1",
+      "description": "Edge case test 1",
+      "category": "edge_case",
+      "query": "Edge case query 1",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_2",
+      "description": "Edge case test 2",
+      "category": "edge_case",
+      "query": "Edge case query 2",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_3",
+      "description": "Edge case test 3",
+      "category": "edge_case",
+      "query": "Edge case query 3",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_4",
+      "description": "Edge case test 4",
+      "category": "edge_case",
+      "query": "Edge case query 4",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_5",
+      "description": "Edge case test 5",
+      "category": "edge_case",
+      "query": "Edge case query 5",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_6",
+      "description": "Edge case test 6",
+      "category": "edge_case",
+      "query": "Edge case query 6",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_7",
+      "description": "Edge case test 7",
+      "category": "edge_case",
+      "query": "Edge case query 7",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_8",
+      "description": "Edge case test 8",
+      "category": "edge_case",
+      "query": "Edge case query 8",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_9",
+      "description": "Edge case test 9",
+      "category": "edge_case",
+      "query": "Edge case query 9",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_10",
+      "description": "Edge case test 10",
+      "category": "edge_case",
+      "query": "Edge case query 10",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_11",
+      "description": "Edge case test 11",
+      "category": "edge_case",
+      "query": "Edge case query 11",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_12",
+      "description": "Edge case test 12",
+      "category": "edge_case",
+      "query": "Edge case query 12",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_13",
+      "description": "Edge case test 13",
+      "category": "edge_case",
+      "query": "Edge case query 13",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_14",
+      "description": "Edge case test 14",
+      "category": "edge_case",
+      "query": "Edge case query 14",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_15",
+      "description": "Edge case test 15",
+      "category": "edge_case",
+      "query": "Edge case query 15",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_16",
+      "description": "Edge case test 16",
+      "category": "edge_case",
+      "query": "Edge case query 16",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_17",
+      "description": "Edge case test 17",
+      "category": "edge_case",
+      "query": "Edge case query 17",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_18",
+      "description": "Edge case test 18",
+      "category": "edge_case",
+      "query": "Edge case query 18",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_19",
+      "description": "Edge case test 19",
+      "category": "edge_case",
+      "query": "Edge case query 19",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_20",
+      "description": "Edge case test 20",
+      "category": "edge_case",
+      "query": "Edge case query 20",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_21",
+      "description": "Edge case test 21",
+      "category": "edge_case",
+      "query": "Edge case query 21",
+      "expected_behavior": "Handle gracefully"
+    },
+    {
+      "test_name": "test_edge_case_22",
+      "description": "Edge case test 22",
+      "category": "edge_case",
+      "query": "Edge case query 22",
+      "expected_behavior": "Handle gracefully"
+    }
+  ],
+  "multi_turn_state": [
+    {
+      "test_name": "test_multi_turn_state_1",
+      "description": "Multi-turn state management test 1",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_2",
+      "description": "Multi-turn state management test 2",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_3",
+      "description": "Multi-turn state management test 3",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_4",
+      "description": "Multi-turn state management test 4",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_5",
+      "description": "Multi-turn state management test 5",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_6",
+      "description": "Multi-turn state management test 6",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_7",
+      "description": "Multi-turn state management test 7",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_8",
+      "description": "Multi-turn state management test 8",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_9",
+      "description": "Multi-turn state management test 9",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_10",
+      "description": "Multi-turn state management test 10",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_11",
+      "description": "Multi-turn state management test 11",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_12",
+      "description": "Multi-turn state management test 12",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_13",
+      "description": "Multi-turn state management test 13",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_14",
+      "description": "Multi-turn state management test 14",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_15",
+      "description": "Multi-turn state management test 15",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_16",
+      "description": "Multi-turn state management test 16",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_17",
+      "description": "Multi-turn state management test 17",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_18",
+      "description": "Multi-turn state management test 18",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_19",
+      "description": "Multi-turn state management test 19",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    },
+    {
+      "test_name": "test_multi_turn_state_20",
+      "description": "Multi-turn state management test 20",
+      "category": "multi_turn",
+      "turns": [
+        "Turn 1",
+        "Turn 2",
+        "Turn 3"
+      ],
+      "state_validation": true
+    }
+  ],
+  "multi_turn_context_flow": [
+    {
+      "test_name": "test_multi_turn_context_1",
+      "description": "Multi-turn context flow test 1",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_2",
+      "description": "Multi-turn context flow test 2",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_3",
+      "description": "Multi-turn context flow test 3",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_4",
+      "description": "Multi-turn context flow test 4",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_5",
+      "description": "Multi-turn context flow test 5",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_6",
+      "description": "Multi-turn context flow test 6",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_7",
+      "description": "Multi-turn context flow test 7",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_8",
+      "description": "Multi-turn context flow test 8",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_9",
+      "description": "Multi-turn context flow test 9",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_10",
+      "description": "Multi-turn context flow test 10",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_11",
+      "description": "Multi-turn context flow test 11",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_12",
+      "description": "Multi-turn context flow test 12",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_13",
+      "description": "Multi-turn context flow test 13",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_14",
+      "description": "Multi-turn context flow test 14",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_15",
+      "description": "Multi-turn context flow test 15",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_16",
+      "description": "Multi-turn context flow test 16",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_17",
+      "description": "Multi-turn context flow test 17",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_18",
+      "description": "Multi-turn context flow test 18",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_19",
+      "description": "Multi-turn context flow test 19",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    },
+    {
+      "test_name": "test_multi_turn_context_20",
+      "description": "Multi-turn context flow test 20",
+      "category": "multi_turn",
+      "context_requirements": [
+        "memory",
+        "persistence",
+        "coherence"
+      ]
+    }
+  ],
+  "performance_load": [
+    {
+      "test_name": "test_performance_load_1",
+      "description": "Performance load test 1",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 10,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_2",
+      "description": "Performance load test 2",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 11,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_3",
+      "description": "Performance load test 3",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 12,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_4",
+      "description": "Performance load test 4",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 13,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_5",
+      "description": "Performance load test 5",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 14,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_6",
+      "description": "Performance load test 6",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 15,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_7",
+      "description": "Performance load test 7",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 16,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_8",
+      "description": "Performance load test 8",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 17,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_9",
+      "description": "Performance load test 9",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 18,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_10",
+      "description": "Performance load test 10",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 19,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_11",
+      "description": "Performance load test 11",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 20,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_12",
+      "description": "Performance load test 12",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 21,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_13",
+      "description": "Performance load test 13",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 22,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_14",
+      "description": "Performance load test 14",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 23,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_15",
+      "description": "Performance load test 15",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 24,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_16",
+      "description": "Performance load test 16",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 25,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_17",
+      "description": "Performance load test 17",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 26,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_18",
+      "description": "Performance load test 18",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 27,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_19",
+      "description": "Performance load test 19",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 28,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_20",
+      "description": "Performance load test 20",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 29,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_21",
+      "description": "Performance load test 21",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 30,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_22",
+      "description": "Performance load test 22",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 31,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_23",
+      "description": "Performance load test 23",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 32,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_24",
+      "description": "Performance load test 24",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 33,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    },
+    {
+      "test_name": "test_performance_load_25",
+      "description": "Performance load test 25",
+      "category": "performance",
+      "load_params": {
+        "concurrent_requests": 34,
+        "timeout": 30,
+        "expected_response_time": 5.0
+      }
+    }
+  ]
+}

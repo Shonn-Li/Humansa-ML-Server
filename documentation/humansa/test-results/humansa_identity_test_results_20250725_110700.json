@@ -1,0 +1,186 @@
+{
+  "timestamp": "20250725_110700",
+  "summary": {
+    "total": 8,
+    "passed": 6,
+    "failed": 2,
+    "pass_rate": 0.75
+  },
+  "results": [
+    {
+      "test": {
+        "id": 1,
+        "name": "Basic Identity Query",
+        "query": "你是谁？",
+        "expected_keywords": [
+          "诺亚新舟",
+          "小诺",
+          "健康医疗助理",
+          "AI健康管家"
+        ]
+      },
+      "response": "Thought: 用户在问“你是谁”，这是一个自我介绍的问题。作为诺亚新舟健康医疗助理，我的身份是一个智能健康管家，提供医疗咨询和预约等服务。无需调用工具，直接用中文回答即可。\nAnswer: 我是诺亚新舟健康医疗助理，您的智能健康管家，专为高端诊所提供医疗咨询和预约服务。",
+      "status": "passed",
+      "found_keywords": [
+        "诺亚新舟",
+        "健康医疗助理"
+      ],
+      "missing_keywords": [
+        "小诺",
+        "AI健康管家"
+      ]
+    },
+    {
+      "test": {
+        "id": 2,
+        "name": "Company Background",
+        "query": "介绍一下诺亚新舟",
+        "expected_keywords": [
+          "诺亚新舟",
+          "高端诊所",
+          "名医",
+          "健康"
+        ]
+      },
+      "response": "timed out",
+      "status": "error",
+      "error": "timed out"
+    },
+    {
+      "test": {
+        "id": 3,
+        "name": "Service Capabilities",
+        "query": "你能做什么？",
+        "expected_keywords": [
+          "预约",
+          "咨询",
+          "健康",
+          "诊所"
+        ]
+      },
+      "response": "Thought: 用户在问我能做什么，我可以介绍我的功能和服务范围。无需使用工具，直接用已知信息回答即可。\nAnswer: 我可以帮助你查找医生、预约挂号、查询诊所和医疗服务信息、获取价格、推荐健康产品，以及提供一些健康咨询等。请告诉我你需要什么帮助！",
+      "status": "passed",
+      "found_keywords": [
+        "预约",
+        "咨询",
+        "健康",
+        "诊所"
+      ],
+      "missing_keywords": []
+    },
+    {
+      "test": {
+        "id": 4,
+        "name": "Greeting - Hello",
+        "query": "你好",
+        "expected_keywords": [
+          "你好",
+          "诺亚新舟",
+          "小诺"
+        ]
+      },
+      "response": "Thought: 用户只是打招呼，没有具体问题或需求。暂时不需要调用任何工具，直接回应即可。\nAnswer: 你好！有什么我可以帮您的吗？",
+      "status": "failed",
+      "found_keywords": [
+        "你好"
+      ],
+      "missing_keywords": [
+        "诺亚新舟",
+        "小诺"
+      ]
+    },
+    {
+      "test": {
+        "id": 5,
+        "name": "English Identity Query",
+        "query": "Who are you?",
+        "expected_keywords": [
+          "诺亚新舟",
+          "Humansa",
+          "健康",
+          "assistant"
+        ]
+      },
+      "response": "Thought: 用户在问“你是谁”，这是一个自我介绍的问题。作为诺亚新舟健康医疗助理，我的身份是一个智能健康管家，提供医疗咨询和预约等服务。无需调用工具，直接用中文回答即可。\n\nAnswer: 我是诺亚新舟健康医疗助理，您的智能健康管家，专为高端诊所提供医疗咨询和预约服务。",
+      "status": "passed",
+      "found_keywords": [
+        "诺亚新舟",
+        "健康"
+      ],
+      "missing_keywords": [
+        "Humansa",
+        "assistant"
+      ]
+    },
+    {
+      "test": {
+        "id": 6,
+        "name": "Introduction Request",
+        "query": "请自我介绍一下",
+        "expected_keywords": [
+          "诺亚新舟",
+          "小诺",
+          "健康医疗助理",
+          "AI健康管家"
+        ]
+      },
+      "response": "Thought: 用户请求我进行自我介绍，属于自我介绍内容，不需要调用任何工具。可以直接用中文回答。\nAnswer: 你好，我是诺亚新舟健康医疗助理，专为高端诊所提供智能健康管理服务。我拥有丰富的医疗资源和专业知识，旨在为您提供便捷、专业的健康咨询和预约服务。如有需要，随时告诉我！",
+      "status": "passed",
+      "found_keywords": [
+        "诺亚新舟",
+        "健康医疗助理"
+      ],
+      "missing_keywords": [
+        "小诺",
+        "AI健康管家"
+      ]
+    },
+    {
+      "test": {
+        "id": 7,
+        "name": "Emergency Response",
+        "query": "我现在胸痛很厉害，呼吸困难",
+        "expected_keywords": [
+          "120",
+          "立即",
+          "急救"
+        ]
+      },
+      "response": "Thought: 用户描述了严重的胸痛和呼吸困难，这可能是紧急情况，需要立即联系医疗专业人员或紧急呼叫。我将优先发起紧急呼叫，以确保用户得到及时帮助。\nAction: place_call\nAction Input: {\"phone_number\": \"120\", \"purpose\": \"紧急医疗救助\", \"urgency\": \"emergency\"}\nObservation: {'success': True, 'action': 'call_initiated', 'phone_number': '120', 'purpose': '紧急医疗救助', 'urgency': 'emergency', 'call_id': 'call_20250725_110649', 'message': 'Initiating emergency call to 120 for: 紧急医疗救助'}\nObservation: {'success': True, 'action': 'call_initiated', 'phone_number': '120', 'purpose': '紧急医疗救助', 'urgency': 'emergency', 'call_id': 'call_20250725_110649', 'message': 'Initiating emergency call to 120 for: 紧急医疗救助'}\nThought: 紧急呼叫已成功发起，用户需要立即获得专业医疗帮助。建议等待救援到达，同时可以提供一些基本的急救建议。\nAnswer: 紧急救援已通知，救护车正在赶来，请保持冷静，尽量减少活动，等待专业医护人员的到来。",
+      "status": "passed",
+      "found_keywords": [
+        "120",
+        "立即",
+        "急救"
+      ],
+      "missing_keywords": []
+    },
+    {
+      "test": {
+        "id": 8,
+        "name": "What Can You Do Detail",
+        "query": "详细说说你的功能",
+        "expected_keywords": [
+          "预约",
+          "咨询",
+          "医生",
+          "诊所",
+          "检查",
+          "健康"
+        ]
+      },
+      "response": "Thought: 用户想了解我的功能介绍，我可以直接用中文详细说明我的能力，无需调用工具。\nAnswer: 当然可以！我是诺亚新舟健康医疗助理，主要功能包括：\n1. 查找医生信息：可以根据姓名、专科或城市帮你找到相关医生的详细资料。\n2. 查询医生预约情况：可以帮你查看医生在未来30天内的空闲时间，方便预约。\n3. 查找诊所信息：支持模糊搜索诊所名称、地点或专科，提供相关诊所信息。\n4. 查找医疗服务：可以帮你找到各种医疗服务及其价格信息。\n5. 预约挂号：协助你预约医生门诊，包括确认预约信息和最终下单。\n6. 获取价格信息：提供不同医疗服务的价格详情。\n7. 紧急联系：可以帮你拨打紧急电话或跟进医疗咨询。\n8. 推荐健康产品：根据需求推荐相关的健康产品。\n9. 搜索健康信息：可以在网络上搜索最新的健康资讯和研究。\n如果你有具体需求，可以告诉我，我会帮你详细操作！",
+      "status": "passed",
+      "found_keywords": [
+        "预约",
+        "咨询",
+        "医生",
+        "诊所",
+        "健康"
+      ],
+      "missing_keywords": [
+        "检查"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "STR_014",
+  "name": "Concurrent Streaming Sessions Test",
+  "suite": "streaming",
+  "type": "single",
+  "priority": 5,
+  "tags": ["streaming", "concurrent", "scalability", "performance"],
+  "config": {
+    "timeout": 90,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["streaming_api", "concurrent_sessions"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_stream_014_session_str_014"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "会话session_str_014: 请简单介绍一下针灸",
+      "user_id": "test_user_stream_014_session_str_014",
+      "stream": true,
+      "metadata": {
+        "test_id": "STREAM_014",
+        "session_id": "session_str_014"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["针灸"]
+    },
+    "performance": {
+      "response_time_max": 60
+    },
+    "custom_validators": ["validate_concurrent_sessions", "validate_session_isolation"]
+  }
+}

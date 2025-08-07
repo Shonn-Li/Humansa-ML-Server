@@ -1,0 +1,49 @@
+{
+  "id": "ORC_102",
+  "name": "Workflow Non-Streaming Mode Test",
+  "suite": "orchestrator",
+  "type": "single",
+  "priority": 3,
+  "tags": ["workflow", "orchestrator", "non-streaming", "api", "integration"],
+  "config": {
+    "timeout": 30,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["workflow_orchestrator"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_workflow"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/chat",
+    "method": "POST",
+    "payload": {
+      "user_id": "test_user_workflow",
+      "messages": [
+        {"role": "user", "content": "我需要预约心内科医生"}
+      ],
+      "stream": false,
+      "use_workflow": true
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["心内科", "医生", "预约"],
+      "min_length": 50
+    },
+    "agents": {
+      "touched": ["AppointmentAgent"],
+      "max_agents": 2
+    },
+    "context": {
+      "workflow": {
+        "final_state": {
+          "agents_used": ["AppointmentAgent"]
+        }
+      }
+    }
+  }
+}

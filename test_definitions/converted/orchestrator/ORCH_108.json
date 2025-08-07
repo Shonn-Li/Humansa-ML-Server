@@ -1,0 +1,46 @@
+{
+  "id": "ORC_108",
+  "name": "Pattern2 Error Handling Missing Agent Test",
+  "suite": "orchestrator",
+  "type": "single",
+  "priority": 4,
+  "tags": ["pattern2", "orchestrator", "error-handling", "missing-agent"],
+  "config": {
+    "timeout": 30,
+    "retries": 0,
+    "parallel_safe": true,
+    "requirements": ["pattern2_orchestrator"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_error"
+    }
+  },
+  "execution": {
+    "endpoint": "/humansa/pattern2/process",
+    "method": "POST",
+    "payload": {
+      "query": "我需要预约医生",
+      "user_id": "test_error",
+      "stream": true
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["预约", "医生"],
+      "min_length": 50
+    },
+    "reasoning": {
+      "contains_keywords": ["error", "graceful", "fallback"]
+    },
+    "agents": {
+      "not_touched": ["AppointmentAgent"],
+      "max_agents": 2
+    },
+    "server_logs": {
+      "contains": ["missing", "AppointmentAgent", "graceful"],
+      "excludes": ["CRITICAL", "FATAL"]
+    }
+  }
+}

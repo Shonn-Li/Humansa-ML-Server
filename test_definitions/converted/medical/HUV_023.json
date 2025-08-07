@@ -1,0 +1,86 @@
+{
+  "id": "HUV_023",
+  "name": "Emergency Symptoms Detection",
+  "suite": "emergency",
+  "type": "single",
+  "priority": 5,
+  "tags": ["emergency", "chest_pain", "breathing_difficulty", "chinese"],
+  "config": {
+    "timeout": 20,
+    "retries": 0,
+    "parallel_safe": true,
+    "requirements": ["humansa_v2", "pattern2", "emergency_detection"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_023",
+      "profile": {}
+    },
+    "previous_turns": [],
+    "environment": {
+      "HUMANSA_USE_PATTERN2": "true"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "胸口疼痛呼吸困难",
+      "user_id": "test_user_023",
+      "metadata": {
+        "test_id": "HUV_023",
+        "test_name": "Emergency Symptoms Detection",
+        "orchestrator": "pattern2"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["120", "急救", "立即"],
+      "min_length": 80
+    },
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": ["emergency", "chest_pain", "breathing", "immediate_action"],
+      "tool_calls": ["emergency_symptom_detection", "emergency_protocol"]
+    },
+    "agents": {
+      "touched": ["FunctionAgent", "EmergencyAgent"],
+      "max_agents": 3
+    },
+    "context": {
+      "mem0": {
+        "should_store": ["emergency symptoms", "chest pain", "breathing difficulty"],
+        "memory_count": 2
+      },
+      "workflow": {
+        "state_changes": {
+          "emergency_status": "detected",
+          "priority_level": "urgent"
+        },
+        "events_emitted": ["emergency_detected", "immediate_response_required"]
+      }
+    },
+    "server_logs": {
+      "contains": ["Pattern 2", "emergency", "urgent"],
+      "excludes": ["ERROR", "exception"],
+      "log_levels": {
+        "ERROR": "=0",
+        "WARNING": ">=1"
+      }
+    },
+    "performance": {
+      "response_time_max": 15,
+      "token_usage_max": 800
+    }
+  },
+  "cleanup": {
+    "commands": [],
+    "reset_context": false
+  }
+}

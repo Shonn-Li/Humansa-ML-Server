@@ -1,0 +1,77 @@
+{
+  "id": "HUV_002",
+  "name": "Company Background",
+  "suite": "identity",
+  "type": "single",
+  "priority": 4,
+  "tags": ["identity", "company", "background", "chinese"],
+  "config": {
+    "timeout": 30,
+    "retries": 0,
+    "parallel_safe": true,
+    "requirements": ["humansa_v2", "pattern2"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_002",
+      "profile": {}
+    },
+    "previous_turns": [],
+    "environment": {
+      "HUMANSA_USE_PATTERN2": "true"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "介绍一下诺亚新舟",
+      "user_id": "test_user_002",
+      "metadata": {
+        "test_id": "HUV_002",
+        "test_name": "Company Background",
+        "orchestrator": "pattern2"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["以爱行舟", "亲近相守", "500多位", "三甲主任级"],
+      "min_length": 100
+    },
+    "reasoning": {
+      "steps_min": 1,
+      "contains_keywords": ["company", "background", "introduction"]
+    },
+    "agents": {
+      "touched": ["FunctionAgent"],
+      "max_agents": 3
+    },
+    "context": {
+      "mem0": {
+        "should_store": ["company inquiry", "knowledge request"],
+        "memory_count": 1
+      }
+    },
+    "server_logs": {
+      "contains": ["Pattern 2", "company"],
+      "excludes": ["ERROR", "exception"],
+      "log_levels": {
+        "ERROR": "=0"
+      }
+    },
+    "performance": {
+      "response_time_max": 30,
+      "token_usage_max": 1000
+    }
+  },
+  "cleanup": {
+    "commands": [],
+    "reset_context": false
+  }
+}

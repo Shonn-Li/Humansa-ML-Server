@@ -1,0 +1,365 @@
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python3
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:🔄 Attempting to import document converter endpoints...
+INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
+INFO:chat.utils.document_converter:❌ docx2pdf not available
+INFO:chat.utils.document_converter:❌ pypandoc not available
+INFO:chat.utils.document_converter:❌ python-docx not available
+INFO:chat.utils.document_converter:❌ openpyxl not available
+INFO:chat.utils.document_converter:❌ reportlab not available
+INFO:__main__:✅ Successfully imported document converter blueprint
+INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:🔄 Registering Humansa endpoints...
+INFO:humansa.postgres.database:HumansaDatabase initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:__main__:✅ Mem0 API endpoints registered
+INFO:__main__:✅ Humansa v2 blueprint registered
+INFO:__main__:✅ Humansa endpoints registered successfully
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:6001
+INFO:__main__:
+INFO:__main__:📋 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
+INFO:__main__:
+INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
+INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
+INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
+INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
+INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
+INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
+INFO:__main__:
+INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
+INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
+INFO:__main__:   - /v2/humansa/memory/search - Search user memories
+INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
+INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
+INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
+INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
+INFO:__main__:   - /o3-demo - O3 reasoning demo
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with Azure OpenAI - endpoint: https://youwoai-dev-resource.openai.azure.com/, deployment: gpt-4.1
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
+ERROR:humansa.memory.mem0_manager:Failed to initialize Mem0: BaseEmbedderConfig.__init__() got an unexpected keyword argument 'azure_endpoint'
+WARNING:__main__:⚠️ Mem0 initialization failed - memory features disabled
+INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
+INFO:__main__:   Environment: test
+INFO:__main__:✅ Database pool created successfully
+INFO:humansa.v2.api:Initializing Mem0 manager...
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
+ERROR:humansa.memory.mem0_manager:Failed to initialize Mem0: BaseEmbedderConfig.__init__() got an unexpected keyword argument 'azure_endpoint'
+WARNING:humansa.v2.api:❌ Mem0 manager initialization failed
+INFO:humansa.v2.api:Using basic memory manager (Mem0 not available)
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with Azure OpenAI - endpoint: https://youwoai-dev-resource.openai.azure.com/, deployment: gpt-4.1
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+INFO:humansa.v2.api:Humansa v2 system initialized successfully
+INFO:__main__:✅ Humansa v2 system initialized with Azure OpenAI
+[2025-07-28 08:33:27 -0700] [72246] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:6001 (CTRL + C to quit)
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/api.py:444: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "timestamp": datetime.utcnow().isoformat(),
+ * Serving Quart app 'main'
+ * Debug mode: True
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:6001 (CTRL + C to quit)
+[2025-07-28 08:33:28 -0700] [72246] [INFO] 127.0.0.1:49182 GET /v2/humansa/health 1.1 200 201 2997
+[2025-07-28 08:33:28 -0700] [72246] [INFO] 127.0.0.1:49184 GET /v2/humansa/health 1.1 200 201 1667
+[2025-07-28 08:33:28 -0700] [72246] [INFO] 127.0.0.1:49186 GET /v2/humansa/memory/status 1.1 200 61 946
+[2025-07-28 08:33:28 -0700] [72246] [INFO] 127.0.0.1:49192 GET /v2/humansa/memory/status 1.1 200 61 952
+ERROR:humansa.v2.api:Error adding memory: 'MemoryManager' object has no attribute 'add_conversation'
+[2025-07-28 08:33:28 -0700] [72246] [INFO] 127.0.0.1:49192 POST /v2/humansa/memory/add 1.1 500 76 849
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/memory/memory_manager.py:87: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "created_at": datetime.utcnow(),
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/memory/memory_manager.py:88: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "updated_at": datetime.utcnow()
+[2025-07-28 08:33:28 -0700] [72246] [INFO] 127.0.0.1:49192 GET /v2/humansa/memory/context/test_user_10001 1.1 200 403 13126
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/context_manager.py:148: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  conversation_id = f"conv_{datetime.utcnow().timestamp()}"
+<string>:6: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: What medications should I avoid?...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_10001
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_10001', 'patient_profile': {'user_id': 'test_user_10001', 'profile_data': '{}', 'medical_history': '[]', 'preferences': '{}', 'created_at': datetime.datetime(2025, 7, 28, 15, 33, 28, 352804), 'updated_at': datetime.datetime(2025, 7, 28, 15, 33, 28, 352804)}, 'conversation_history': '', 'last_interaction': None}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: What medications should I avoid?...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step 15d3ca0e-f220-4a6b-a940-e9bd749d6f82. Step input: What medications should I avoid?
+[1;3;38;5;200mThought: The user's question is very general and lacks context such as medical history, current conditions, allergies, or medications already being taken. I need to collect more information to provide a relevant and safe answer.
+Action: collect_appointment_info
+Action Input: {'kwargs': AttributedDict([('question', 'What medications should I avoid?')])}
+[0m[1;3;34mObservation: {'success': True, 'complete': False, 'missing_fields': [{'field': 'city', 'description': '就诊城市', 'required': True}, {'field': 'specialty', 'description': '科室', 'required': True}, {'field': 'doctor_name', 'description': '医生姓名（可选）', 'required': False}, {'field': 'preferred_date', 'description': '就诊日期', 'required': True}, {'field': 'preferred_time', 'description': '就诊时间段（上午/下午）', 'required': True}, {'field': 'patient_name', 'description': '您的姓名', 'required': True}, {'field': 'patient_phone', 'description': '联系电话', 'required': True}], 'next_question': '请问您想在哪个城市就诊？（如：北京、上海、深圳）', 'next_field': 'city', 'collected_info': {}}
+[0m> Running step 692a1a95-46db-4b5c-b63f-85085a84cbdb. Step input: None
+[1;3;38;5;200mThought: I need to collect more information from the user to give a safe and specific answer about medication avoidance, starting with the city for potential consultation or context.
+Answer: 请问您想在哪个城市就诊？（如：北京、上海、深圳）如果只是一般咨询，也请说明您的基本健康状况、过敏史或是否有特殊疾病，以便为您提供更准确的建议。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 3.17154 seconds
+      |_CBEventType.LLM -> 1.712003 seconds
+      |_CBEventType.FUNCTION_CALL -> 0.00045 seconds
+      |_CBEventType.LLM -> 1.449134 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 2 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+ERROR:humansa.v2.orchestrator_agent:❌ Error storing conversation: 'MemoryManager' object has no attribute 'add_conversation'
+[2025-07-28 08:33:31 -0700] [72246] [INFO] 127.0.0.1:49192 POST /v2/humansa/chat 1.1 200 856 3179590
+WARNING:asyncio:Executing <Task finished name='Task-51' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 3.173 seconds
+[2025-07-28 08:33:31 -0700] [72246] [INFO] 127.0.0.1:49192 POST /v2/humansa/memory/search 1.1 200 102 4634
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: Can you book me an appointment in the afternoon?...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_10001
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_10001', 'patient_profile': {'user_id': 'test_user_10001', 'profile_data': '{}', 'medical_history': '[]', 'preferences': '{}', 'created_at': datetime.datetime(2025, 7, 28, 15, 33, 28, 352804), 'updated_at': datetime.datetime(2025, 7, 28, 15, 33, 28, 352804)}, 'conversation_history': '', 'last_interaction': None}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: Can you book me an appointment in the afternoon?...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step 854845a4-c6b8-4b2b-b9c5-f7eaa666218c. Step input: Can you book me an appointment in the afternoon?
+[1;3;38;5;200mThought: The user wants to book an appointment in the afternoon but hasn't provided enough information (city, specialty, doctor, date, etc.). I need to collect the missing details to proceed.
+Action: collect_appointment_info
+Action Input: {'kwargs': AttributedDict([('preferred_time', 'afternoon')])}
+[0m[1;3;34mObservation: {'success': True, 'complete': False, 'missing_fields': [{'field': 'city', 'description': '就诊城市', 'required': True}, {'field': 'specialty', 'description': '科室', 'required': True}, {'field': 'doctor_name', 'description': '医生姓名（可选）', 'required': False}, {'field': 'preferred_date', 'description': '就诊日期', 'required': True}, {'field': 'preferred_time', 'description': '就诊时间段（上午/下午）', 'required': True}, {'field': 'patient_name', 'description': '您的姓名', 'required': True}, {'field': 'patient_phone', 'description': '联系电话', 'required': True}], 'next_question': '请问您想在哪个城市就诊？（如：北京、上海、深圳）', 'next_field': 'city', 'collected_info': {}}
+[0m> Running step b1303804-1da6-4e9a-b83e-2f7c5b65c1f0. Step input: None
+[1;3;38;5;200mThought: I need to collect the city where the user wants to book the appointment.
+Answer: 请问您想在哪个城市就诊？（如：北京、上海、深圳）
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 4.609844 seconds
+      |_CBEventType.LLM -> 1.984126 seconds
+      |_CBEventType.FUNCTION_CALL -> 8.8e-05 seconds
+      |_CBEventType.LLM -> 2.619639 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 4 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+ERROR:humansa.v2.orchestrator_agent:❌ Error storing conversation: 'MemoryManager' object has no attribute 'add_conversation'
+[2025-07-28 08:33:36 -0700] [72246] [INFO] 127.0.0.1:49192 POST /v2/humansa/chat 1.1 200 574 4616614
+WARNING:asyncio:Executing <Task finished name='Task-62' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 4.611 seconds
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator processing query: Do I have any allergies?...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_20002
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_20002', 'patient_profile': {'user_id': 'test_user_20002', 'profile_data': {}, 'medical_history': [], 'preferences': {}, 'created_at': datetime.datetime(2025, 7, 28, 15, 33, 36, 172428), 'updated_at': datetime.datetime(2025, 7, 28, 15, 33, 36, 172433)}, 'conversation_history': '', 'last_interaction': None}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:humansa.v2.orchestrator_agent:🎯 Processing query: Do I have any allergies?...
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+> Running step d7b678f8-40bf-499d-8ab1-2cef47c16692. Step input: Do I have any allergies?
+[1;3;38;5;200mThought: The user is asking about their allergy history, but I do not have access to their personal medical records by default. I need to check if there is any appointment or health history available for the user.
+Action: get_appointment_history
+Action Input: {'kwargs': AttributedDict()}
+[0m[1;3;34mObservation: {'success': False, 'message': '请提供手机号或患者ID'}
+[0m> Running step a1620171-8ff8-44a3-a64a-5d4131d1d018. Step input: None
+[1;3;38;5;200mThought: I need your phone number or patient ID to check your allergy records or previous medical history.
+Answer: 请提供您的手机号或患者ID，这样我可以帮您查询是否有过敏史或相关健康记录。
+[0m**********
+Trace: chat
+    |_CBEventType.AGENT_STEP -> 2.340001 seconds
+      |_CBEventType.LLM -> 1.382542 seconds
+      |_CBEventType.FUNCTION_CALL -> 8.3e-05 seconds
+      |_CBEventType.LLM -> 0.948287 seconds
+**********
+INFO:humansa.v2.orchestrator_agent:🔍 Agent trace: 6 LLM calls
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 1:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 2:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 3:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 4:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 5:
+INFO:humansa.v2.orchestrator_agent:
+📋 LLM Call 6:
+ERROR:humansa.v2.orchestrator_agent:❌ Error storing conversation: 'MemoryManager' object has no attribute 'add_conversation'
+[2025-07-28 08:33:38 -0700] [72246] [INFO] 127.0.0.1:49192 POST /v2/humansa/chat 1.1 200 642 2351503
+WARNING:asyncio:Executing <Task finished name='Task-71' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 2.342 seconds
+[2025-07-28 08:33:38 -0700] [72246] [INFO] 127.0.0.1:49330 GET /v2/humansa/health 1.1 200 201 1340
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator streaming query: 我想找个骨科医生...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_doctor_001
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_doctor_001', 'patient_profile': {'user_id': 'test_user_doctor_001', 'profile_data': {}, 'medical_history': [], 'preferences': {}, 'created_at': datetime.datetime(2025, 7, 28, 15, 33, 38, 903423), 'updated_at': datetime.datetime(2025, 7, 28, 15, 33, 38, 903425)}, 'conversation_history': '', 'last_interaction': None}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🔍 find_doctor_info_structured called with: name=None, specialty=骨科, city=None
+INFO:humansa.postgres.database:🎯 Found 2 doctors matching search criteria
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+ERROR:humansa.v2.orchestrator_agent:❌ Error storing conversation: 'MemoryManager' object has no attribute 'add_conversation'
+[2025-07-28 08:33:42 -0700] [72246] [INFO] 127.0.0.1:49330 POST /v2/humansa/chat 1.1 200 - 3412483
+WARNING:asyncio:Executing <Task finished name='Task-84' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 3.392 seconds
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator streaming query: 帮我找深圳的心脏科医生...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_doctor_001
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_doctor_001', 'patient_profile': {'user_id': 'test_user_doctor_001', 'profile_data': '{}', 'medical_history': '[]', 'preferences': '{}', 'created_at': datetime.datetime(2025, 7, 28, 15, 33, 38, 900810), 'updated_at': datetime.datetime(2025, 7, 28, 15, 33, 38, 900810)}, 'conversation_history': '', 'last_interaction': None}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🔍 find_doctor_info_structured called with: name=None, specialty=心脏科, city=深圳
+INFO:humansa.postgres.database:📋 Using fallback: returned 5 general doctors
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+ERROR:humansa.v2.orchestrator_agent:❌ Error storing conversation: 'MemoryManager' object has no attribute 'add_conversation'
+[2025-07-28 08:33:46 -0700] [72246] [INFO] 127.0.0.1:49393 POST /v2/humansa/chat 1.1 200 - 3613098
+WARNING:asyncio:Executing <Task finished name='Task-94' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 3.609 seconds
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator streaming query: 帮我预约张医生明天上午的号...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_doctor_001
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_doctor_001', 'patient_profile': {'user_id': 'test_user_doctor_001', 'profile_data': '{}', 'medical_history': '[]', 'preferences': '{}', 'created_at': datetime.datetime(2025, 7, 28, 15, 33, 38, 900810), 'updated_at': datetime.datetime(2025, 7, 28, 15, 33, 38, 900810)}, 'conversation_history': '', 'last_interaction': None}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+ERROR:humansa.v2.orchestrator_agent:❌ Error storing conversation: 'MemoryManager' object has no attribute 'add_conversation'
+[2025-07-28 08:33:49 -0700] [72246] [INFO] 127.0.0.1:49505 POST /v2/humansa/chat 1.1 200 - 1190768
+WARNING:asyncio:Executing <Task finished name='Task-106' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 1.185 seconds
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator streaming query: 李医生这周还有号吗？...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_doctor_001
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_doctor_001', 'patient_profile': {'user_id': 'test_user_doctor_001', 'profile_data': '{}', 'medical_history': '[]', 'preferences': '{}', 'created_at': datetime.datetime(2025, 7, 28, 15, 33, 38, 900810), 'updated_at': datetime.datetime(2025, 7, 28, 15, 33, 38, 900810)}, 'conversation_history': '', 'last_interaction': None}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:📅 find_doctor_availability_structured called with: doctor=李, range=2025-07-28 to 2025-08-04
+ERROR:humansa.postgres.database:Database connection error: column d.clinic_id does not exist
+LINE 2:                         SELECT d.doctor_code, d.clinic_id, d...
+                                                      ^
+HINT:  Perhaps you meant to reference the column "d.clinic_code".
+
+ERROR:humansa.postgres.database:Error finding doctor 李: column d.clinic_id does not exist
+LINE 2:                         SELECT d.doctor_code, d.clinic_id, d...
+                                                      ^
+HINT:  Perhaps you meant to reference the column "d.clinic_code".
+
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+ERROR:humansa.v2.orchestrator_agent:❌ Error storing conversation: 'MemoryManager' object has no attribute 'add_conversation'
+[2025-07-28 08:33:54 -0700] [72246] [INFO] 127.0.0.1:49610 POST /v2/humansa/chat 1.1 200 - 3986056
+WARNING:asyncio:Executing <Task finished name='Task-115' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 3.980 seconds
+INFO:humansa.v2.orchestrator_agent:🎭 Orchestrator streaming query: 北京的诊所在哪里？...
+INFO:humansa.v2.orchestrator_agent:👤 User ID: test_user_doctor_001
+INFO:humansa.v2.orchestrator_agent:📚 Loading user context from Mem0...
+INFO:humansa.v2.orchestrator_agent:📚 User context loaded: {'user_id': 'test_user_doctor_001', 'patient_profile': {'user_id': 'test_user_doctor_001', 'profile_data': '{}', 'medical_history': '[]', 'preferences': '{}', 'created_at': datetime.datetime(2025, 7, 28, 15, 33, 38, 900810), 'updated_at': datetime.datetime(2025, 7, 28, 15, 33, 38, 900810)}, 'conversation_history': '', 'last_interaction': None}
+INFO:humansa.v2.orchestrator_agent:📭 No recent memories found for user
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🏥 search_clinics_structured called with: clinic=None, city=北京, specialty=None
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+ERROR:humansa.v2.orchestrator_agent:❌ Error storing conversation: 'MemoryManager' object has no attribute 'add_conversation'
+[2025-07-28 08:33:58 -0700] [72246] [INFO] 127.0.0.1:49642 POST /v2/humansa/chat 1.1 200 - 3782530
+WARNING:asyncio:Executing <Task finished name='Task-127' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 3.777 seconds

@@ -1,0 +1,120 @@
+{
+  "id": "DOC_003",
+  "name": "Emergency doctor recommendation test",
+  "suite": "medical_consultation",
+  "type": "single",
+  "priority": 5,
+  "tags": ["emergency", "urgent_care", "doctor_recommendation"],
+  
+  "config": {
+    "timeout": 20,
+    "retries": 2,
+    "parallel_safe": true,
+    "requirements": ["emergency_detection", "urgent_care_protocol"]
+  },
+  
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_doc_003",
+      "profile": {
+        "name": "急诊患者",
+        "age": 60,
+        "gender": "male",
+        "language": "zh"
+      }
+    }
+  },
+  
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "我突然剧烈胸痛，冷汗直流，需要立即看医生，应该怎么办？",
+      "user_id": "test_user_doc_003",
+      "metadata": {
+        "test_id": "DOC_003",
+        "test_name": "Emergency doctor recommendation test"
+      }
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": [
+        "急诊",
+        "立即",
+        "胸痛",
+        "120",
+        "医院"
+      ],
+      "output_excludes": [
+        "等一下",
+        "不着急",
+        "明天"
+      ],
+      "min_length": 100,
+      "max_length": 1000
+    },
+    
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": [
+        "emergency",
+        "chest_pain",
+        "immediate_care",
+        "emergency_room"
+      ],
+      "tool_calls": [
+        "emergency_detection",
+        "urgent_care_protocol"
+      ]
+    },
+    
+    "agents": {
+      "touched": ["router_agent", "emergency_agent"],
+      "max_agents": 3
+    },
+    
+    "context": {
+      "mem0": {
+        "should_store": [
+          "emergency_chest_pain",
+          "urgent_medical_attention",
+          "emergency_protocol_activated"
+        ]
+      }
+    },
+    
+    "server_logs": {
+      "contains": [
+        "Emergency detected",
+        "Urgent care protocol",
+        "Chest pain emergency"
+      ],
+      "excludes": [
+        "ERROR",
+        "CRITICAL",
+        "Non-urgent response"
+      ],
+      "log_levels": {
+        "ERROR": "=0",
+        "WARNING": "<=1"
+      }
+    },
+    
+    "performance": {
+      "response_time_max": 10.0,
+      "memory_usage_max": "60MB",
+      "token_usage_max": 400
+    }
+  },
+  
+  "cleanup": {
+    "reset_context": true
+  }
+}

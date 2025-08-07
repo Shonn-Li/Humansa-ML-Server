@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  humansa-test-db:
+    image: pgvector/pgvector:pg15
+    container_name: humansa_test_postgres
+    environment:
+      POSTGRES_USER: youwo
+      POSTGRES_PASSWORD: youwo123
+      POSTGRES_DB: youwoai
+    ports:
+      - "5456:5432"  # Humansa test DB on unique port
+    volumes:
+      - humansa_test_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U youwo -d youwoai"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  humansa-test-pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: humansa_test_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@humansa.test
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5455:80"  # PgAdmin on different port
+    depends_on:
+      - humansa-test-db
+    volumes:
+      - humansa_test_pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  humansa_test_postgres_data:
+  humansa_test_pgadmin_data:

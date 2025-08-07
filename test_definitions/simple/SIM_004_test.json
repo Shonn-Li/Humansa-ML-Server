@@ -1,0 +1,36 @@
+{
+  "id": "SIM_004",
+  "name": "Simple Test Case 4",
+  "suite": "integration",
+  "type": "single",
+  "priority": 1,
+  "tags": ["simple", "test4"],
+  
+  "config": {
+    "timeout": 30,
+    "retries": 1,
+    "parallel_safe": true
+  },
+  
+  "execution": {
+    "endpoint": "/v1/chat/completions",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4.1",
+      "messages": [{"role": "user", "content": "This is test number 4. Please respond with 'Test 4 acknowledged'."}],
+      "user_id": 1000004,
+      "max_tokens": 50
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["Test", "4", "acknowledged"],
+      "min_length": 10
+    }
+  }
+}

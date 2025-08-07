@@ -1,0 +1,389 @@
+[94m
+================================================================================[0m
+[1m[94m  HUMANSA V2 Pattern 2 Test Suite - 70 Test Cases[0m
+[94m================================================================================[0m
+2025-08-01 23:33:52,280 - __main__ - INFO - ================================================================================
+2025-08-01 23:33:52,280 - __main__ - INFO - Starting Pattern 2 Test Suite
+2025-08-01 23:33:52,280 - __main__ - INFO - Test environment: http://localhost:6001
+2025-08-01 23:33:52,280 - __main__ - INFO - Expected orchestrator: Pattern 2 (FunctionAgent)
+2025-08-01 23:33:52,280 - __main__ - INFO - ================================================================================
+[92m
+✅ V2 Health Check Passed[0m
+2025-08-01 23:33:52,293 - __main__ - INFO - Health check passed
+[94m
+================================================================================[0m
+[1m[94m  Running Single-Turn Tests (1-40)[0m
+[94m================================================================================[0m
+2025-08-01 23:33:52,293 - __main__ - INFO - 
+============================================================
+2025-08-01 23:33:52,293 - __main__ - INFO - SINGLE-TURN TESTS
+2025-08-01 23:33:52,293 - __main__ - INFO - ============================================================
+[96m
+🔹 Test #1: Basic Identity Query[0m
+   Category: Identity
+   Query: 你是谁？
+2025-08-01 23:33:52,293 - __main__ - INFO - Testing Pattern 2 - Test #1: Basic Identity Query
+2025-08-01 23:33:52,293 - __main__ - INFO - Query: 你是谁？
+2025-08-01 23:33:52,293 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:33:54,188 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 23:33:54,188 - __main__ - INFO - Orchestrator: pattern2
+[92m   Response: ...[0m
+[91m   ❌ FAILED - Missing: ['诺亚新舟', '小诺', '健康医疗助理', 'AI健康管家'][0m
+2025-08-01 23:33:54,188 - __main__ - WARNING - Test 1 failed - missing keywords: ['诺亚新舟', '小诺', '健康医疗助理', 'AI健康管家']
+[96m
+🔹 Test #2: Company Background[0m
+   Category: Identity
+   Query: 介绍一下诺亚新舟
+2025-08-01 23:33:54,689 - __main__ - INFO - Testing Pattern 2 - Test #2: Company Background
+2025-08-01 23:33:54,689 - __main__ - INFO - Query: 介绍一下诺亚新舟
+2025-08-01 23:33:54,689 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:33:54,698 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:34:00,172 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 23:34:00,172 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:34:00,172 - __main__ - INFO - ✅ Response completed in 5.48s
+2025-08-01 23:34:00,172 - __main__ - INFO - Tools used: []
+2025-08-01 23:34:00,172 - __main__ - INFO - Response length: 444 chars
+[92m   Response: assistant: 诺亚新舟是一家致力于为用户提供专业、智能、个性化健康医疗服务的平台。我们的服务宗旨是通过技术手段，帮助用户精准识别健康问题、获得科学的健康建议，并便捷地连接优质医疗资源。主要特色包括：
+
+1. 智能健康助理：通过对用户症状、健康需求的分析，为用户提供定制化的健康咨询与管理建议。...[0m
+[91m   ❌ FAILED - Missing: ['以爱行舟', '亲近相守', '500多位', '三甲主任级'][0m
+2025-08-01 23:34:00,172 - __main__ - WARNING - Test 2 failed - missing keywords: ['以爱行舟', '亲近相守', '500多位', '三甲主任级']
+[96m
+🔹 Test #3: Service Capabilities[0m
+   Category: Identity
+   Query: 你能做什么？
+2025-08-01 23:34:00,673 - __main__ - INFO - Testing Pattern 2 - Test #3: Service Capabilities
+2025-08-01 23:34:00,674 - __main__ - INFO - Query: 你能做什么？
+2025-08-01 23:34:00,674 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:34:03,719 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 23:34:03,719 - __main__ - INFO - Orchestrator: pattern2
+[92m   Response: ...[0m
+[91m   ❌ FAILED - Missing: ['健康咨询', '实时预约', '检查项目', '诊所导航', '体检报告'][0m
+2025-08-01 23:34:03,719 - __main__ - WARNING - Test 3 failed - missing keywords: ['健康咨询', '实时预约', '检查项目', '诊所导航', '体检报告']
+[96m
+🔹 Test #4: Brand Slogan[0m
+   Category: Identity
+   Query: 诺亚新舟的口号是什么？
+2025-08-01 23:34:04,220 - __main__ - INFO - Testing Pattern 2 - Test #4: Brand Slogan
+2025-08-01 23:34:04,220 - __main__ - INFO - Query: 诺亚新舟的口号是什么？
+2025-08-01 23:34:04,220 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:34:04,227 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:34:05,365 - __main__ - INFO - 📊 Usage - Agents: []
+2025-08-01 23:34:05,365 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:34:05,365 - __main__ - INFO - ✅ Response completed in 1.14s
+2025-08-01 23:34:05,365 - __main__ - INFO - Tools used: []
+2025-08-01 23:34:05,365 - __main__ - INFO - Response length: 77 chars
+[92m   Response: assistant: 诺亚新舟的官方口号是：“科技守护健康，关爱伴您同行。”
+
+如果您有其他关于诺亚新舟的服务、产品或健康医疗方面的问题，也欢迎随时咨询！...[0m
+[91m   ❌ FAILED - Missing: ['以爱行舟', '亲近相守'][0m
+2025-08-01 23:34:05,365 - __main__ - WARNING - Test 4 failed - missing keywords: ['以爱行舟', '亲近相守']
+[96m
+🔹 Test #5: English Identity Query[0m
+   Category: Identity
+   Query: Who are you?
+2025-08-01 23:34:05,866 - __main__ - INFO - Testing Pattern 2 - Test #5: English Identity Query
+2025-08-01 23:34:05,866 - __main__ - INFO - Query: Who are you?
+2025-08-01 23:34:05,866 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:34:08,615 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 23:34:08,616 - __main__ - INFO - Orchestrator: pattern2
+[92m   Response: ...[0m
+[91m   ❌ FAILED - Missing: ['Humansa', 'health', 'assistant', 'medical'][0m
+2025-08-01 23:34:08,616 - __main__ - WARNING - Test 5 failed - missing keywords: ['Humansa', 'health', 'assistant', 'medical']
+[96m
+🔹 Test #6: Find Cardiologist[0m
+   Category: Doctor Search
+   Query: 我想找一个心脏科医生
+2025-08-01 23:34:09,117 - __main__ - INFO - Testing Pattern 2 - Test #6: Find Cardiologist
+2025-08-01 23:34:09,117 - __main__ - INFO - Query: 我想找一个心脏科医生
+2025-08-01 23:34:09,117 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:34:09,130 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:34:12,070 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 23:34:12,070 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 23:34:12,070 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:34:12,070 - __main__ - INFO - ✅ Response completed in 2.95s
+2025-08-01 23:34:12,071 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 23:34:12,071 - __main__ - INFO - Response length: 124 chars
+[92m   Response: assistant: 很抱歉，目前预约心脏科医生的服务暂时不可用。如果您有具体的心脏相关症状或健康问题，可以告诉我，我可以为您进行初步的健康评估或提供相关建议。如果需要，我也可以为您解答有关心脏健康的问题或推荐相关的健康产品。请问有什么具体需求吗？...[0m
+[92m   ✅ PASSED (2.95s)[0m
+   🔧 Tools: AppointmentAgent
+   🧠 Reasoning steps: 1
+[96m
+🔹 Test #7: Find Doctors by City[0m
+   Category: Doctor Search
+   Query: 上海有哪些医生？
+2025-08-01 23:34:12,572 - __main__ - INFO - Testing Pattern 2 - Test #7: Find Doctors by City
+2025-08-01 23:34:12,572 - __main__ - INFO - Query: 上海有哪些医生？
+2025-08-01 23:34:12,572 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:34:15,300 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:34:15,301 - __main__ - INFO - Orchestrator: pattern2
+[92m   Response: ...[0m
+[91m   ❌ FAILED - Missing: ['上海', '医生'][0m
+2025-08-01 23:34:15,301 - __main__ - WARNING - Test 7 failed - missing keywords: ['上海', '医生']
+[96m
+🔹 Test #8: Doctor by Name[0m
+   Category: Doctor Search
+   Query: 张医生在吗？
+2025-08-01 23:34:15,802 - __main__ - INFO - Testing Pattern 2 - Test #8: Doctor by Name
+2025-08-01 23:34:15,802 - __main__ - INFO - Query: 张医生在吗？
+2025-08-01 23:34:15,802 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:34:15,809 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:34:18,827 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 23:34:18,827 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 23:34:18,827 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:34:18,827 - __main__ - INFO - ✅ Response completed in 3.03s
+2025-08-01 23:34:18,827 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 23:34:18,827 - __main__ - INFO - Response length: 90 chars
+[92m   Response: assistant: 目前预约服务暂时不可用，无法直接查询或预约张医生。如果您有具体的健康问题或需要与张医生相关的帮助，请告诉我您的详细需求，我会为您提供专业的医疗建议或其他帮助。...[0m
+[92m   ✅ PASSED (3.03s)[0m
+   🔧 Tools: AppointmentAgent
+   🧠 Reasoning steps: 1
+[96m
+🔹 Test #9: Doctor Availability[0m
+   Category: Doctor Search
+   Query: 哪个医生现在有号？
+2025-08-01 23:34:19,328 - __main__ - INFO - Testing Pattern 2 - Test #9: Doctor Availability
+2025-08-01 23:34:19,328 - __main__ - INFO - Query: 哪个医生现在有号？
+2025-08-01 23:34:19,328 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:34:22,735 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:34:22,735 - __main__ - INFO - Orchestrator: pattern2
+[92m   Response: ...[0m
+[91m   ❌ FAILED - Missing: ['医生', '号', '时间'][0m
+2025-08-01 23:34:22,735 - __main__ - WARNING - Test 9 failed - missing keywords: ['医生', '号', '时间']
+[96m
+🔹 Test #10: Specialist Search[0m
+   Category: Doctor Search
+   Query: 有神经内科的专家吗？
+2025-08-01 23:34:23,236 - __main__ - INFO - Testing Pattern 2 - Test #10: Specialist Search
+2025-08-01 23:34:23,236 - __main__ - INFO - Query: 有神经内科的专家吗？
+2025-08-01 23:34:23,236 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:34:23,246 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:34:25,927 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 23:34:25,928 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 23:34:25,928 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:34:25,928 - __main__ - INFO - ✅ Response completed in 2.69s
+2025-08-01 23:34:25,929 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 23:34:25,929 - __main__ - INFO - Response length: 118 chars
+[92m   Response: assistant: 很抱歉，目前神经内科专家的预约服务暂时不可用。不过如果您有神经内科相关的问题、症状或需要建议，可以详细描述您的情况，我可以为您提供专业的初步评估和健康建议。如果需要找医院或医生的具体信息，也可以继续告诉我您的需求。...[0m
+[92m   ✅ PASSED (2.69s)[0m
+   🔧 Tools: AppointmentAgent
+   🧠 Reasoning steps: 1
+[96m
+🔹 Test #11: Book Appointment[0m
+   Category: Appointment
+   Query: 我想预约明天上午的骨科
+2025-08-01 23:34:26,430 - __main__ - INFO - Testing Pattern 2 - Test #11: Book Appointment
+2025-08-01 23:34:26,430 - __main__ - INFO - Query: 我想预约明天上午的骨科
+2025-08-01 23:34:26,430 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:34:28,885 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:34:28,885 - __main__ - INFO - Orchestrator: pattern2
+[92m   Response: ...[0m
+[91m   ❌ FAILED - Missing: ['预约', '骨科', '明天'][0m
+2025-08-01 23:34:28,885 - __main__ - WARNING - Test 11 failed - missing keywords: ['预约', '骨科', '明天']
+[96m
+🔹 Test #12: Check Availability[0m
+   Category: Appointment
+   Query: 查看下周的可预约时间
+2025-08-01 23:34:29,386 - __main__ - INFO - Testing Pattern 2 - Test #12: Check Availability
+2025-08-01 23:34:29,386 - __main__ - INFO - Query: 查看下周的可预约时间
+2025-08-01 23:34:29,386 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:34:29,398 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:34:31,552 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 23:34:31,552 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 23:34:31,552 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:34:31,553 - __main__ - INFO - ✅ Response completed in 2.17s
+2025-08-01 23:34:31,553 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 23:34:31,553 - __main__ - INFO - Response length: 84 chars
+[92m   Response: assistant: 很抱歉，目前预约服务暂时不可用，无法查询下周的可预约时间。如果您有其他健康相关的问题或需要咨询医生信息，我可以为您提供帮助。需要我协助其他方面吗？...[0m
+[92m   ✅ PASSED (2.17s)[0m
+   🔧 Tools: AppointmentAgent
+   🧠 Reasoning steps: 1
+[96m
+🔹 Test #13: Cancel Appointment[0m
+   Category: Appointment
+   Query: 取消我的预约
+2025-08-01 23:34:32,054 - __main__ - INFO - Testing Pattern 2 - Test #13: Cancel Appointment
+2025-08-01 23:34:32,054 - __main__ - INFO - Query: 取消我的预约
+2025-08-01 23:34:32,054 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:34:34,029 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:34:34,029 - __main__ - INFO - Orchestrator: pattern2
+[92m   Response: ...[0m
+[91m   ❌ FAILED - Missing: ['取消', '预约'][0m
+2025-08-01 23:34:34,029 - __main__ - WARNING - Test 13 failed - missing keywords: ['取消', '预约']
+[96m
+🔹 Test #14: Reschedule[0m
+   Category: Appointment
+   Query: 改约到下周三
+2025-08-01 23:34:34,531 - __main__ - INFO - Testing Pattern 2 - Test #14: Reschedule
+2025-08-01 23:34:34,531 - __main__ - INFO - Query: 改约到下周三
+2025-08-01 23:34:34,531 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:34:34,538 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:34:36,774 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 23:34:36,774 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 23:34:36,774 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:34:36,774 - __main__ - INFO - ✅ Response completed in 2.24s
+2025-08-01 23:34:36,774 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 23:34:36,775 - __main__ - INFO - Response length: 86 chars
+[92m   Response: assistant: 很抱歉，目前预约服务暂时不可用，无法将您的预约改到下周三。建议您稍后再试，或者直接联系相关医院/医生进行更改。如果有其他需要帮助的事项，请随时告诉我。...[0m
+[92m   ✅ PASSED (2.24s)[0m
+   🔧 Tools: AppointmentAgent
+   🧠 Reasoning steps: 1
+[96m
+🔹 Test #15: Emergency Appointment[0m
+   Category: Appointment
+   Query: 能加急预约吗？
+2025-08-01 23:34:37,276 - __main__ - INFO - Testing Pattern 2 - Test #15: Emergency Appointment
+2025-08-01 23:34:37,276 - __main__ - INFO - Query: 能加急预约吗？
+2025-08-01 23:34:37,276 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:34:39,326 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:34:39,326 - __main__ - INFO - Orchestrator: pattern2
+[92m   Response: ...[0m
+[91m   ❌ FAILED - Missing: ['加急', '预约'][0m
+2025-08-01 23:34:39,326 - __main__ - WARNING - Test 15 failed - missing keywords: ['加急', '预约']
+[96m
+🔹 Test #16: Nearest Clinic[0m
+   Category: Clinic
+   Query: 离我最近的诊所在哪？
+2025-08-01 23:34:39,827 - __main__ - INFO - Testing Pattern 2 - Test #16: Nearest Clinic
+2025-08-01 23:34:39,827 - __main__ - INFO - Query: 离我最近的诊所在哪？
+2025-08-01 23:34:39,827 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:34:39,838 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:34:43,148 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 23:34:43,148 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 23:34:43,148 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:34:43,148 - __main__ - INFO - ✅ Response completed in 3.32s
+2025-08-01 23:34:43,148 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 23:34:43,148 - __main__ - INFO - Response length: 94 chars
+[92m   Response: assistant: 很抱歉，目前诊所查询和预约服务暂时不可用。如果您能告诉我您的位置（如所在城市或区），我可以为您推荐一些常见的医疗资源或其他就医建议。请问需要我协助查询其他健康信息吗？...[0m
+[91m   ❌ FAILED - Missing: ['近', '地址'][0m
+2025-08-01 23:34:43,148 - __main__ - WARNING - Test 16 failed - missing keywords: ['近', '地址']
+   🔧 Tools: AppointmentAgent
+   🧠 Reasoning steps: 1
+[96m
+🔹 Test #17: Service Price[0m
+   Category: Service
+   Query: 血常规多少钱？
+2025-08-01 23:34:43,649 - __main__ - INFO - Testing Pattern 2 - Test #17: Service Price
+2025-08-01 23:34:43,649 - __main__ - INFO - Query: 血常规多少钱？
+2025-08-01 23:34:43,649 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:34:51,862 - __main__ - INFO - 🔧 Tool used: GeneralAgent
+2025-08-01 23:34:51,863 - __main__ - INFO - 📊 Usage: {'agents_used': ['GeneralAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:34:51,863 - __main__ - INFO - Orchestrator: pattern2
+[92m   Response: ...[0m
+[91m   ❌ FAILED - Missing: ['血常规', '钱', '价格'][0m
+2025-08-01 23:34:51,863 - __main__ - WARNING - Test 17 failed - missing keywords: ['血常规', '钱', '价格']
+   🔧 Tools: GeneralAgent
+[96m
+🔹 Test #18: Health Packages[0m
+   Category: Service
+   Query: 体检套餐有哪些？
+2025-08-01 23:34:52,364 - __main__ - INFO - Testing Pattern 2 - Test #18: Health Packages
+2025-08-01 23:34:52,364 - __main__ - INFO - Query: 体检套餐有哪些？
+2025-08-01 23:34:52,364 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:34:52,374 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:35:08,384 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: general_medical']
+2025-08-01 23:35:08,384 - __main__ - INFO - 📊 Usage - Agents: ['GeneralAgent']
+2025-08-01 23:35:08,385 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:35:08,385 - __main__ - INFO - ✅ Response completed in 16.02s
+2025-08-01 23:35:08,385 - __main__ - INFO - Tools used: ['GeneralAgent']
+2025-08-01 23:35:08,385 - __main__ - INFO - Response length: 483 chars
+[92m   Response: assistant: 常见体检套餐包括以下几类，具体可根据年龄、性别和健康需求选择：
+
+1. 基础体检套餐
+- 适合：一般健康人群
+- 常含：血常规、尿常规、肝肾功能、血脂血糖、心电图、胸片、腹部B超、体格检查等。
+
+2. 女士专项体检套餐
+- 适合：女性
+- 常含：基础项目+乳腺B超/钼靶、妇科B...[0m
+[92m   ✅ PASSED (16.02s)[0m
+   🔧 Tools: GeneralAgent
+   🧠 Reasoning steps: 1
+[96m
+🔹 Test #19: Clinic Hours[0m
+   Category: Clinic
+   Query: 诊所几点开门？
+2025-08-01 23:35:08,886 - __main__ - INFO - Testing Pattern 2 - Test #19: Clinic Hours
+2025-08-01 23:35:08,886 - __main__ - INFO - Query: 诊所几点开门？
+2025-08-01 23:35:08,886 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:35:11,562 - __main__ - INFO - 📊 Usage: {'agents_used': ['AppointmentAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:35:11,562 - __main__ - INFO - Orchestrator: pattern2
+[92m   Response: ...[0m
+[91m   ❌ FAILED - Missing: ['诊所', '时间', '营业'][0m
+2025-08-01 23:35:11,562 - __main__ - WARNING - Test 19 failed - missing keywords: ['诊所', '时间', '营业']
+[96m
+🔹 Test #20: Contact Info[0m
+   Category: Clinic
+   Query: 上海诊所的电话是多少？
+2025-08-01 23:35:12,063 - __main__ - INFO - Testing Pattern 2 - Test #20: Contact Info
+2025-08-01 23:35:12,063 - __main__ - INFO - Query: 上海诊所的电话是多少？
+2025-08-01 23:35:12,063 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:35:12,072 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:35:13,951 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: book_appointment']
+2025-08-01 23:35:13,951 - __main__ - INFO - 📊 Usage - Agents: ['AppointmentAgent']
+2025-08-01 23:35:13,951 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:35:13,951 - __main__ - INFO - ✅ Response completed in 1.89s
+2025-08-01 23:35:13,951 - __main__ - INFO - Tools used: ['AppointmentAgent']
+2025-08-01 23:35:13,951 - __main__ - INFO - Response length: 82 chars
+[92m   Response: assistant: 很抱歉，目前预约服务暂时不可用，无法直接查询上海诊所的联系电话。如果您有具体的诊所名称或地址，可以告诉我，我会尽量为您提供其他查询方式或建议。...[0m
+[92m   ✅ PASSED (1.89s)[0m
+   🔧 Tools: AppointmentAgent
+   🧠 Reasoning steps: 1
+[96m
+🔹 Test #21: Sleep Issues[0m
+   Category: Medical
+   Query: 我最近总是失眠怎么办？
+2025-08-01 23:35:14,453 - __main__ - INFO - Testing Pattern 2 - Test #21: Sleep Issues
+2025-08-01 23:35:14,453 - __main__ - INFO - Query: 我最近总是失眠怎么办？
+2025-08-01 23:35:14,453 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:35:23,609 - __main__ - INFO - 🔧 Tool used: DiagnosisAgent
+2025-08-01 23:35:23,609 - __main__ - INFO - 📊 Usage: {'agents_used': ['DiagnosisAgent'], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 1}
+2025-08-01 23:35:23,609 - __main__ - INFO - Orchestrator: pattern2
+[92m   Response: ...[0m
+[91m   ❌ FAILED - Missing: ['失眠', '睡眠', '建议'][0m
+2025-08-01 23:35:23,609 - __main__ - WARNING - Test 21 failed - missing keywords: ['失眠', '睡眠', '建议']
+   🔧 Tools: DiagnosisAgent
+[96m
+🔹 Test #22: Child Fever[0m
+   Category: Medical
+   Query: 孩子发烧39度该怎么处理？
+2025-08-01 23:35:24,109 - __main__ - INFO - Testing Pattern 2 - Test #22: Child Fever
+2025-08-01 23:35:24,109 - __main__ - INFO - Query: 孩子发烧39度该怎么处理？
+2025-08-01 23:35:24,109 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:35:24,116 - __main__ - INFO - Pattern 2 Response Created
+2025-08-01 23:35:37,601 - __main__ - INFO - 🧠 Reasoning Chain: ['Calling tool: analyze_symptoms', 'Calling tool: recall_user_info']
+2025-08-01 23:35:37,601 - __main__ - INFO - 📊 Usage - Agents: ['DiagnosisAgent', 'MemoryRecall']
+2025-08-01 23:35:37,601 - __main__ - WARNING - 🚨 Emergency Flags: [{'type': 'medical_emergency', 'details': 'assistant: 您好，请问孩子发烧39度已经持续了多长时间？有没有其他伴随症状，比如咳嗽、呼吸急促、抽搐、皮疹、持续哭闹或精神萎靡等？孩子多大年龄？请描述一下孩子的整体状态，例如能否正常进食、喝水、活动等。这些信息有助于判断是否需要紧急就医，以及下一步如何处理。请您尽快补充相关信息。如果孩子出现高热持续不退、精神反应差、持续呕吐、抽搐、皮肤发紫、呼吸困难等情况，请立即带孩子前往急诊就医。', 'timestamp': '2025-08-01T23:35:31.199641'}]
+2025-08-01 23:35:37,601 - __main__ - INFO - 📋 Follow-up Actions: ['立即联系急救服务']
+2025-08-01 23:35:37,601 - __main__ - INFO - Pattern 2 Response Completed
+2025-08-01 23:35:37,601 - __main__ - INFO - ✅ Response completed in 13.49s
+2025-08-01 23:35:37,601 - __main__ - INFO - Tools used: ['DiagnosisAgent', 'MemoryRecall']
+2025-08-01 23:35:37,601 - __main__ - INFO - Response length: 401 chars
+[92m   Response: assistant: 孩子发烧到39度属于中高热，需要及时关注和适当处理。请您补充以下信息，以便我给出更精准的建议：
+
+1. 孩子的年龄是多少？
+2. 发烧持续了多长时间？是否有使用过退烧药？是否有药物或食物过敏史？
+3. 目前孩子是否有其他症状，比如咳嗽、呼吸急促、抽搐、皮疹、持续哭闹或精神萎靡等...[0m
+[92m   ✅ PASSED (13.49s)[0m
+   🔧 Tools: DiagnosisAgent, MemoryRecall
+   🧠 Reasoning steps: 2
+[96m
+🔹 Test #23: Emergency Symptoms[0m
+   Category: Medical
+   Query: 胸口疼痛呼吸困难
+2025-08-01 23:35:38,102 - __main__ - INFO - Testing Pattern 2 - Test #23: Emergency Symptoms
+2025-08-01 23:35:38,102 - __main__ - INFO - Query: 胸口疼痛呼吸困难
+2025-08-01 23:35:38,102 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 23:35:42,711 - __main__ - INFO - 📊 Usage: {'agents_used': [], 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_agents': 0}
+2025-08-01 23:35:42,711 - __main__ - INFO - Orchestrator: pattern2
+[92m   Response: ...[0m
+[91m   ❌ FAILED - Missing: ['120', '急救', '立即'][0m
+2025-08-01 23:35:42,711 - __main__ - WARNING - Test 23 failed - missing keywords: ['120', '急救', '立即']
+[96m
+🔹 Test #24: Medication Query[0m
+   Category: Medical
+   Query: 高血压能吃什么药？
+2025-08-01 23:35:43,212 - __main__ - INFO - Testing Pattern 2 - Test #24: Medication Query
+2025-08-01 23:35:43,212 - __main__ - INFO - Query: 高血压能吃什么药？
+2025-08-01 23:35:43,212 - __main__ - INFO - Using streaming endpoint
+2025-08-01 23:35:43,221 - __main__ - INFO - Pattern 2 Response Created

@@ -1,0 +1,140 @@
+{
+  "id": "CTX_002",
+  "name": "Context persistence during topic switching test",
+  "suite": "multi_turn",
+  "type": "multi_turn",
+  "priority": 4,
+  "tags": ["context_persistence", "topic_switching", "memory"],
+  
+  "config": {
+    "timeout": 45,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["mem0", "context_persistence", "multi_agent"]
+  },
+  
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_ctx_002",
+      "profile": {
+        "name": "张总",
+        "age": 50,
+        "title": "企业家",
+        "language": "zh"
+      }
+    },
+    "previous_turns": [
+      {
+        "role": "user",
+        "content": "我是张总，今年50岁，经营一家制药公司"
+      },
+      {
+        "role": "assistant",
+        "content": "张总您好！很高兴为您服务。作为制药行业的企业家，您对健康和医药产品一定有深入的了解。请问今天有什么可以帮助您的？"
+      },
+      {
+        "role": "user",
+        "content": "我想了解一些关于降血脂的保健品市场情况"
+      },
+      {
+        "role": "assistant",
+        "content": "张总，降血脂保健品市场确实很有前景。主要产品包括：红曲米、植物甾醇、欧米伽-3等。市场规模年增长约15%，特别是中老年消费群体需求旺盛。作为制药企业家，您是考虑投资这个领域吗？"
+      }
+    ]
+  },
+  
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "话题换一下，我最近感觉记忆力下降，有什么好的建议吗？顺便，你还记得我的职业吗？",
+      "user_id": "test_user_ctx_002",
+      "conversation_history": [{"role": "user", "content": "\u6211\u662f\u5f20\u603b\uff0c\u4eca\u5e7450\u5c81\uff0c\u7ecf\u8425\u4e00\u5bb6\u5236\u836f\u516c\u53f8"}, {"role": "assistant", "content": "\u5f20\u603b\u60a8\u597d\uff01\u5f88\u9ad8\u5174\u4e3a\u60a8\u670d\u52a1\u3002\u4f5c\u4e3a\u5236\u836f\u884c\u4e1a\u7684\u4f01\u4e1a\u5bb6\uff0c\u60a8\u5bf9\u5065\u5eb7\u548c\u533b\u836f\u4ea7\u54c1\u4e00\u5b9a\u6709\u6df1\u5165\u7684\u4e86\u89e3\u3002\u8bf7\u95ee\u4eca\u5929\u6709\u4ec0\u4e48\u53ef\u4ee5\u5e2e\u52a9\u60a8\u7684\uff1f"}, {"role": "user", "content": "\u6211\u60f3\u4e86\u89e3\u4e00\u4e9b\u5173\u4e8e\u964d\u8840\u8102\u7684\u4fdd\u5065\u54c1\u5e02\u573a\u60c5\u51b5"}, {"role": "assistant", "content": "\u5f20\u603b\uff0c\u964d\u8840\u8102\u4fdd\u5065\u54c1\u5e02\u573a\u786e\u5b9e\u5f88\u6709\u524d\u666f\u3002\u4e3b\u8981\u4ea7\u54c1\u5305\u62ec\uff1a\u7ea2\u66f2\u7c73\u3001\u690d\u7269\u753e\u9187\u3001\u6b27\u7c73\u4f3d-3\u7b49\u3002\u5e02\u573a\u89c4\u6a21\u5e74\u589e\u957f\u7ea615%\uff0c\u7279\u522b\u662f\u4e2d\u8001\u5e74\u6d88\u8d39\u7fa4\u4f53\u9700\u6c42\u65fa\u76db\u3002\u4f5c\u4e3a\u5236\u836f\u4f01\u4e1a\u5bb6\uff0c\u60a8\u662f\u8003\u8651\u6295\u8d44\u8fd9\u4e2a\u9886\u57df\u5417\uff1f"}],
+      "metadata": {
+        "test_id": "CTX_002",
+        "test_name": "Context persistence during topic switching test"
+      }
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": [
+        "张总",
+        "制药公司",
+        "企业家",
+        "记忆力",
+        "建议"
+      ],
+      "output_excludes": [
+        "错误",
+        "失败",
+        "不记得"
+      ],
+      "min_length": 150,
+      "max_length": 1500
+    },
+    
+    "reasoning": {
+      "steps_min": 3,
+      "contains_keywords": [
+        "topic_switch",
+        "context_retention",
+        "memory_enhancement",
+        "pharmaceutical_background"
+      ]
+    },
+    
+    "agents": {
+      "touched": ["router_agent", "rag_agent", "response_agent"],
+      "max_agents": 4
+    },
+    
+    "context": {
+      "mem0": {
+        "should_retrieve": [
+          "pharmaceutical_company_owner",
+          "entrepreneur_title",
+          "age_50"
+        ],
+        "should_store": [
+          "memory_decline_concern",
+          "topic_switch_request"
+        ],
+        "memory_count": 4
+      }
+    },
+    
+    "server_logs": {
+      "contains": [
+        "Topic switch detected",
+        "Context preserved",
+        "Memory enhancement advice"
+      ],
+      "excludes": [
+        "ERROR",
+        "CRITICAL",
+        "Context lost"
+      ],
+      "log_levels": {
+        "ERROR": "=0",
+        "WARNING": "<=1"
+      }
+    },
+    
+    "performance": {
+      "response_time_max": 20.0,
+      "memory_usage_max": "100MB",
+      "token_usage_max": 800
+    }
+  },
+  
+  "cleanup": {
+    "reset_context": false
+  }
+}

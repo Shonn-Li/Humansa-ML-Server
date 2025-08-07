@@ -20,6 +20,7 @@ import os
 from datetime import datetime, date, timedelta
 from pydantic import BaseModel, Field, validator
 from dotenv import load_dotenv
+from ..utils.date_parser import ChineseDateParser
 
 # Load environment variables
 load_dotenv()
@@ -610,7 +611,7 @@ class HumansaAgenticToolManager:
             FunctionTool.from_defaults(
                 fn=self.find_doctor_availability_structured,
                 name="find_doctor_availability",
-                description="查询Humansa医生在灵活日期范围（最多30天）内的可用时间。必须提供doctor_name参数——如需按城市/专科查找医生请先用find_doctor_info。返回可预约时段及医生信息（含挂号费）。支持'下周'、'本月'等请求。医生姓名模糊匹配。始终返回有用结果——如未找到医生，将推荐有空档的相似医生及价格。医生姓名仅填写真实中文姓氏或姓名（如'张'、'王'、'李明'），不要包含头衔。",
+                description="查询Humansa医生在灵活日期范围（最多30天）内的可用时间。必须提供doctor_name参数——如需按城市/专科查找医生请先用find_doctor_info。返回可预约时段及医生信息（含挂号费）。日期处理：'明天'用days_ahead=1，'后天'用days_ahead=2，'下周'用days_ahead=7，'本周'用days_ahead=0-6，'下个月'用days_ahead=30。医生姓名模糊匹配。始终返回有用结果——如未找到医生，将推荐有空档的相似医生及价格。医生姓名仅填写真实中文姓氏或姓名（如'张'、'王'、'李明'），不要包含头衔。",
                 fn_schema=DoctorAvailabilityArgs
             ),
             FunctionTool.from_defaults(
@@ -673,13 +674,56 @@ class HumansaAgenticToolManager:
                 description="外部网络搜索新闻、研究、健康信息——不用于Humansa服务。查找诊所/医生/服务请用内部工具（find_doctor_info、find_clinic_info、search_services）。",
                 fn_schema=SearchArgs
             ),
-            FunctionTool.from_defaults(
-                fn=self.find_clinic_info_structured,
-                name="find_clinic_info",
-                description="按名称或地点查找诊所信息。诊所名称支持模糊匹配，城市/区域精确匹配。",
-                fn_schema=ClinicSearchArgs
-            )
         ])
+
+        # Add appointment management tools if available
+        try:
+            from .appointment_management_tools import (
+                collect_appointment_info_tool,
+                book_appointment_tool,
+                get_appointment_history_tool,
+                reschedule_appointment_tool,
+                cancel_appointment_tool
+            )
+            
+            # Initialize memory manager if needed
+            if not hasattr(self, 'memory_manager'):
+                from humansa.memory.mem0_manager import Mem0Manager
+                self.memory_manager = Mem0Manager()
+            
+            appointment_tools = [
+                FunctionTool.from_defaults(
+                    fn=collect_appointment_info_tool(db, self.memory_manager),
+                    name="collect_appointment_info",
+                    description="分析预约请求中缺失的信息，逐步收集所需信息。当用户想预约但信息不完整时使用此工具。它会识别需要哪些信息（城市、科室、日期、时间、姓名、电话）并引导对话收集。"
+                ),
+                FunctionTool.from_defaults(
+                    fn=book_appointment_tool(db, self.memory_manager),
+                    name="confirm_appointment_booking",
+                    description="在收集完所有必要信息后，执行实际的预约确认和登记。需要医生代码、患者姓名、电话、日期和时间。创建预约记录并返回预约确认号。"
+                ),
+                FunctionTool.from_defaults(
+                    fn=get_appointment_history_tool(db, self.memory_manager),
+                    name="get_appointment_history",
+                    description="查询患者的预约历史记录。通过手机号或患者ID查找所有预约（已完成、待就诊、已取消）。"
+                ),
+                FunctionTool.from_defaults(
+                    fn=reschedule_appointment_tool(db, self.memory_manager),
+                    name="reschedule_appointment",
+                    description="修改现有预约的日期或时间。需要预约号或手机号，以及新的日期时间。"
+                ),
+                FunctionTool.from_defaults(
+                    fn=cancel_appointment_tool(db, self.memory_manager),
+                    name="cancel_appointment",
+                    description="取消现有预约。通过预约号或手机号取消，可提供取消原因。"
+                ),
+            ]
+            
+            tools.extend(appointment_tools)
+            logger.info(f"✅ Added {len(appointment_tools)} appointment management tools")
+            
+        except ImportError as e:
+            logger.warning(f"⚠️ Appointment management tools not available: {e}")
 
         logger.info(
             f"✅ Created {len(tools)} LlamaIndex FunctionTools with Pydantic schemas")
@@ -1104,29 +1148,138 @@ class HumansaAgenticToolManager:
 
     def recommend_product_structured(self, product_category: str, reason: str,
                                      price_range: Optional[str] = None) -> Dict[str, Any]:
-        """Recommend products using structured arguments - NO heuristic extraction."""
+        """Recommend products using structured arguments - REAL DATABASE VERSION."""
         logger.info(
             f"🛍️ recommend_product_structured called with: category={product_category}")
 
         try:
-            # Mock product recommendations
-            products = {
-                "supplements": ["Vitamin D3", "Omega-3", "Multivitamin"],
-                "equipment": ["Blood Pressure Monitor", "Thermometer", "Pulse Oximeter"],
-                "skincare": ["Medical Grade Moisturizer", "Sunscreen SPF 50", "Gentle Cleanser"]
+            # Parse price range if provided
+            min_price = None
+            max_price = None
+            if price_range:
+                # Parse ranges like "100-500" or "under 500" or "over 1000"
+                if "-" in price_range:
+                    parts = price_range.replace("元", "").split("-")
+                    try:
+                        min_price = float(parts[0])
+                        max_price = float(parts[1]) if len(parts) > 1 else None
+                    except:
+                        pass
+                elif "以下" in price_range or "under" in price_range.lower():
+                    try:
+                        max_price = float(price_range.replace("以下", "").replace("under", "").replace("元", "").strip())
+                    except:
+                        pass
+                elif "以上" in price_range or "over" in price_range.lower():
+                    try:
+                        min_price = float(price_range.replace("以上", "").replace("over", "").replace("元", "").strip())
+                    except:
+                        pass
+            
+            # Map user-friendly categories to database categories
+            category_mapping = {
+                "保健品": "营养保健",
+                "营养品": "营养保健",
+                "维生素": "营养保健",
+                "vitamin": "营养保健",
+                "vitamin d": "营养保健",
+                "supplements": "营养保健",
+                "health supplements": "营养保健",
+                "health care": "营养保健",  # Added for English agent responses
+                "医疗器械": "医疗器械",
+                "设备": "医疗器械",
+                "equipment": "医疗器械",
+                "护肤": "护肤美容",
+                "美容": "护肤美容",
+                "skincare": "护肤美容",
+                "中医": "中医养生",
+                "养生": "中医养生",
+                "母婴": "母婴健康",
+                "孕妇": "母婴健康",
+                "婴儿": "母婴健康"
             }
-
-            category_products = products.get(product_category.lower(), [
-                                             "General Health Products"])
-
-            return {
-                "success": True,
-                "category": product_category,
-                "reason": reason,
-                "price_range": price_range,
-                "recommended_products": category_products,
-                "message": f"Recommended {len(category_products)} products in {product_category} category"
-            }
+            
+            # Get the database category
+            db_category = category_mapping.get(product_category.lower(), "营养保健")  # Default to 营养保健
+            logger.info(f"🛍️ Mapped category '{product_category}' to '{db_category}'")
+            
+            # Query products from database
+            logger.info(f"🛍️ Searching products with category='{db_category}', min_price={min_price}, max_price={max_price}")
+            products = db.search_products(
+                category=db_category,
+                min_price=min_price,
+                max_price=max_price,
+                reason=reason,
+                limit=5
+            )
+            
+            logger.info(f"🛍️ Found {len(products) if products else 0} products")
+            if not products:
+                logger.info(f"🛍️ No products found. Checking if db is None: {db is None}")
+            
+            if products:
+                # Format product recommendations
+                recommendations = []
+                for product in products:
+                    rec = {
+                        "product_id": product.get("product_id"),
+                        "name": product.get("name"),
+                        "price": float(product.get("price", 0)),
+                        "original_price": float(product.get("original_price", 0)) if product.get("original_price") else None,
+                        "discount_tag": product.get("discount_tag"),
+                        "description": product.get("description"),
+                        "benefits": product.get("benefits"),
+                        "suitable_for": product.get("suitable_for")
+                    }
+                    recommendations.append(rec)
+                
+                # Also check for relevant packages
+                packages = db.search_product_packages(
+                    category=db_category,
+                    min_price=min_price,
+                    max_price=max_price,
+                    limit=3
+                )
+                
+                package_recs = []
+                if packages:
+                    for pkg in packages:
+                        pkg_rec = {
+                            "package_id": pkg.get("package_id"),
+                            "name": pkg.get("name"),
+                            "price": float(pkg.get("price", 0)),
+                            "original_price": float(pkg.get("original_price", 0)) if pkg.get("original_price") else None,
+                            "discount_percentage": pkg.get("discount_percentage"),
+                            "description": pkg.get("description"),
+                            "includes": pkg.get("includes")
+                        }
+                        package_recs.append(pkg_rec)
+                
+                return {
+                    "success": True,
+                    "category": product_category,
+                    "reason": reason,
+                    "price_range": price_range,
+                    "recommended_products": recommendations,
+                    "recommended_packages": package_recs,
+                    "total_products": len(recommendations),
+                    "total_packages": len(package_recs),
+                    "message": f"为您推荐了 {len(recommendations)} 个产品" + (f"和 {len(package_recs)} 个套餐" if package_recs else ""),
+                    "shop_link": "健康商城：#小程序://诺亚新舟医疗/t5ZpOWu0UyRtEFl"
+                }
+            else:
+                # No products found, provide general recommendation
+                return {
+                    "success": True,
+                    "category": product_category,
+                    "reason": reason,
+                    "price_range": price_range,
+                    "recommended_products": [],
+                    "recommended_packages": [],
+                    "message": f"暂时没有找到符合条件的{product_category}产品，建议您访问我们的健康商城查看更多选择",
+                    "shop_link": "健康商城：#小程序://诺亚新舟医疗/t5ZpOWu0UyRtEFl"
+                }
+                
         except Exception as e:
             logger.error(f"❌ recommend_product_structured failed: {e}")
             return {"error": str(e), "success": False}

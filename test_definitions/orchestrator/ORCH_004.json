@@ -1,0 +1,80 @@
+{
+  "id": "ORC_004",
+  "name": "Pattern2 Orchestrator - Patient Profile with Allergies",
+  "suite": "orchestrator",
+  "type": "single",
+  "priority": 5,
+  "tags": ["pattern2", "patient_profile", "allergies", "safety", "emergency_detection"],
+  "config": {
+    "timeout": 60,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["azure_openai", "pattern2_orchestrator"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_002",
+      "profile": {
+        "allergies": ["peanut"],
+        "medical_conditions": []
+      }
+    },
+    "previous_turns": [
+      {"role": "user", "content": "Patient has peanut allergy"}
+    ],
+    "environment": {
+      "AZURE_OPENAI_DEPLOYMENT_NAME": "gpt-4",
+      "debug": "true"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/pattern2/process",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "query": "我对花生过敏，有什么适合我的营养补充品？",
+      "user_id": "test_user_002",
+      "messages": [
+        {"role": "user", "content": "Patient has peanut allergy"},
+        {"role": "user", "content": "我对花生过敏，有什么适合我的营养补充品？"}
+      ],
+      "stream": true
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["过敏", "安全", "营养补充"],
+      "output_excludes": ["花生", "含花生"],
+      "min_length": 100
+    },
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": ["过敏", "安全", "nutrition"],
+      "excludes_keywords": ["peanut", "花生"],
+      "tool_calls": ["ProductAgent.safe_search", "GeneralMedicalAgent.allergy_check"]
+    },
+    "agents": {
+      "touched": ["ProductAgent", "GeneralMedicalAgent"],
+      "max_agents": 2
+    },
+    "context": {
+      "workflow": {
+        "events_emitted": ["response.usage"]
+      }
+    },
+    "server_logs": {
+      "contains": ["allergy", "emergency flags", "safety check"],
+      "regex_matches": [".*emergency.*flag.*", ".*allergy.*detected.*"],
+      "excludes": ["ERROR", "CRITICAL"]
+    },
+    "performance": {
+      "response_time_max": 30.0
+    }
+  },
+  "cleanup": {
+    "reset_context": true
+  }
+}

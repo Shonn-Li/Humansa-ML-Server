@@ -1,0 +1,79 @@
+{
+  "id": "APF_004",
+  "name": "Progressive Information Collection",
+  "suite": "multi_turn",
+  "type": "multi_turn",
+  "priority": 5,
+  "tags": ["multi_turn", "progressive_collection", "form_completion", "chinese"],
+  "config": {
+    "timeout": 90,
+    "retries": 0,
+    "parallel_safe": false,
+    "requirements": ["appointment_form_system", "conversation_context", "progressive_collection"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_apf_004",
+      "profile": {}
+    },
+    "previous_turns": [],
+    "environment": {}
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Authorization": "Bearer test-api-key",
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "我最近头痛",
+      "user_id": "test_user_apf_004"
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["头痛", "症状", "医生", "时间"],
+      "min_length": 80
+    },
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": ["symptom_collection", "progressive_questioning", "medical_assessment"],
+      "tool_calls": ["collect_symptoms", "progressive_form_filling"]
+    },
+    "agents": {
+      "touched": ["FormAgent", "MedicalAgent", "ConversationAgent"],
+      "max_agents": 5
+    },
+    "context": {
+      "mem0": {
+        "should_store": ["headache symptom", "medical complaint", "progressive conversation"],
+        "memory_count": 3
+      },
+      "workflow": {
+        "state_changes": {
+          "form_status": "in_progress",
+          "symptoms_collected": "partial"
+        },
+        "events_emitted": ["symptom_reported", "progressive_collection_started"]
+      }
+    },
+    "server_logs": {
+      "contains": ["progressive collection", "symptom", "headache"],
+      "excludes": ["ERROR", "exception"],
+      "log_levels": {
+        "ERROR": "=0"
+      }
+    },
+    "performance": {
+      "response_time_max": 30,
+      "token_usage_max": 1200
+    }
+  },
+  "cleanup": {
+    "commands": [],
+    "reset_context": true
+  }
+}

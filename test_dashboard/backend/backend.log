@@ -1,0 +1,139 @@
+INFO:     Will watch for changes in these directories: ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/humansa-ml-server/test_dashboard/backend']
+INFO:     Uvicorn running on http://0.0.0.0:6002 (Press CTRL+C to quit)
+INFO:     Started reloader process [38970] using WatchFiles
+INFO:     Started server process [38978]
+INFO:     Waiting for application startup.
+2025-08-06 14:24:24,725 - main - INFO - Starting Test Management Dashboard...
+2025-08-06 14:24:24,725 - test_dashboard.backend.core.database - INFO - Initializing database: test5
+2025-08-06 14:24:24,764 - test_dashboard.backend.core.database - INFO - Schema already exists
+2025-08-06 14:24:24,805 - main - INFO - Multi-instance mode enabled. Initializing 4 instances...
+2025-08-06 14:24:24,805 - test_dashboard.backend.api.instances - INFO - 🏊 Initializing instance pool with 4 instances
+2025-08-06 14:24:24,805 - test_dashboard.backend.api.instances - INFO - 🚀 Starting ML server instance 1 on port 6011
+2025-08-06 14:24:24,805 - test_dashboard.backend.api.instances - ERROR - ❌ Port 6011 is already in use (instance 1)
+2025-08-06 14:24:24,805 - test_dashboard.backend.api.instances - INFO - 🚀 Starting ML server instance 2 on port 6012
+2025-08-06 14:24:24,805 - test_dashboard.backend.api.instances - ERROR - ❌ Port 6012 is already in use (instance 2)
+2025-08-06 14:24:24,805 - test_dashboard.backend.api.instances - INFO - 🚀 Starting ML server instance 3 on port 6013
+2025-08-06 14:24:24,805 - test_dashboard.backend.api.instances - ERROR - ❌ Port 6013 is already in use (instance 3)
+2025-08-06 14:24:24,805 - test_dashboard.backend.api.instances - INFO - 🚀 Starting ML server instance 4 on port 6014
+2025-08-06 14:24:24,805 - test_dashboard.backend.api.instances - ERROR - ❌ Port 6014 is already in use (instance 4)
+2025-08-06 14:24:24,806 - test_dashboard.backend.api.instances - INFO - ✅ Started 0/4 instances successfully
+2025-08-06 14:24:24,806 - main - INFO - Multi-instance pool initialized successfully
+INFO:     Application startup complete.
+Discovered 525 tests on startup
+Discovered 525 tests on startup
+INFO:     127.0.0.1:60034 - "GET /health HTTP/1.1" 200 OK
+2025-08-06 14:24:24,908 - httpx - INFO - HTTP Request: GET http://localhost:6011/health "HTTP/1.1 200 "
+2025-08-06 14:24:24,908 - test_dashboard.backend.api.instances - INFO - ✅ Instance 1 is already running on port 6011
+2025-08-06 14:24:24,916 - httpx - INFO - HTTP Request: GET http://localhost:6012/health "HTTP/1.1 200 "
+2025-08-06 14:24:24,916 - test_dashboard.backend.api.instances - INFO - ✅ Instance 2 is already running on port 6012
+2025-08-06 14:24:24,925 - httpx - INFO - HTTP Request: GET http://localhost:6013/health "HTTP/1.1 200 "
+2025-08-06 14:24:24,925 - test_dashboard.backend.api.instances - INFO - ✅ Instance 3 is already running on port 6013
+2025-08-06 14:24:24,933 - httpx - INFO - HTTP Request: GET http://localhost:6014/health "HTTP/1.1 200 "
+2025-08-06 14:24:24,933 - test_dashboard.backend.api.instances - INFO - ✅ Instance 4 is already running on port 6014
+INFO:     127.0.0.1:60036 - "POST /api/instances/sync HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60054 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60093 - "GET /api/tests?limit=1000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60100 - "GET /api/tests?limit=1000 HTTP/1.1" 200 OK
+2025-08-06 14:24:30,769 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "config" does not exist
+INFO:     127.0.0.1:60091 - "GET /system-info HTTP/1.1" 200 OK
+2025-08-06 14:24:30,787 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60095 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-06 14:24:30,787 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "config" does not exist
+INFO:     127.0.0.1:60100 - "GET /system-info HTTP/1.1" 200 OK
+2025-08-06 14:24:30,801 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "config" does not exist
+INFO:     127.0.0.1:60100 - "GET /system-info HTTP/1.1" 200 OK
+2025-08-06 14:24:30,817 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60091 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-06 14:24:30,817 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "config" does not exist
+INFO:     127.0.0.1:60095 - "GET /system-info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60095 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60091 - "GET /api/settings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60100 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60095 - "GET /api/settings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60138 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60138 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60138 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60138 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60138 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60138 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60269 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60269 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60313 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60313 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60313 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60377 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60399 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60399 - "GET /api/instances/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60399 - "OPTIONS /api/jobs/34a0e845-e4e3-4026-9a8e-1a57bbf879ac/execute HTTP/1.1" 200 OK
+2025-08-06 14:25:42,930 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+2025-08-06 14:25:42,959 - test_dashboard.backend.core.database - WARNING - Update execution failed: column "execution_config" of relation "runs" does not exist
+INFO:     127.0.0.1:60399 - "POST /api/jobs/34a0e845-e4e3-4026-9a8e-1a57bbf879ac/execute HTTP/1.1" 200 OK
+2025-08-06 14:25:42,987 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+2025-08-06 14:25:43,001 - test_dashboard.backend.api.jobs_enhanced - INFO - 🏃 Starting multi-instance job execution for 34a0e845-e4e3-4026-9a8e-1a57bbf879ac/a9a8f500-ed5e-4b03-8506-5f6449198f9f
+2025-08-06 14:25:43,001 - test_dashboard.backend.api.jobs_enhanced - INFO - Using 3 workers with 4 available instances
+2025-08-06 14:25:43,001 - test_dashboard.backend.api.instances - INFO - 🎯 Allocated instance 1 (port 6011) to test worker_0_job_34a0e845-e4e3-4026-9a8e-1a57bbf879ac (worker 0) - Round-robin distribution
+2025-08-06 14:25:43,001 - test_dashboard.backend.api.jobs_enhanced - INFO - 🎯 Worker 0 allocated instance 1 (ML port 6011, DB port 5061)
+2025-08-06 14:25:43,002 - test_dashboard.backend.api.instances - INFO - 🎯 Allocated instance 2 (port 6012) to test worker_1_job_34a0e845-e4e3-4026-9a8e-1a57bbf879ac (worker 1) - Round-robin distribution
+2025-08-06 14:25:43,002 - test_dashboard.backend.api.jobs_enhanced - INFO - 🎯 Worker 1 allocated instance 2 (ML port 6012, DB port 5062)
+2025-08-06 14:25:43,002 - test_dashboard.backend.api.instances - INFO - 🎯 Allocated instance 3 (port 6013) to test worker_2_job_34a0e845-e4e3-4026-9a8e-1a57bbf879ac (worker 2) - Round-robin distribution
+2025-08-06 14:25:43,002 - test_dashboard.backend.api.jobs_enhanced - INFO - 🎯 Worker 2 allocated instance 3 (ML port 6013, DB port 5063)
+2025-08-06 14:25:43,005 - test_dashboard.backend.api.jobs_enhanced - INFO - 📋 Found ML server log file at: /tmp/ml_server_6011.log
+2025-08-06 14:25:43,006 - test_dashboard.backend.api.jobs_enhanced - INFO - 📋 Found ML server log file at: /tmp/ml_server_6012.log
+2025-08-06 14:25:43,006 - test_dashboard.backend.api.jobs_enhanced - INFO - 📋 Found ML server log file at: /tmp/ml_server_6013.log
+2025-08-06 14:25:43,019 - test_dashboard.backend.core.database - WARNING - Query execution failed: invalid input for query argument $1: 'HUV_011' ('str' object cannot be interpreted as an integer)
+2025-08-06 14:25:43,025 - test_dashboard.backend.core.database - WARNING - Query execution failed: invalid input for query argument $1: 'APF_002' ('str' object cannot be interpreted as an integer)
+2025-08-06 14:25:43,030 - test_dashboard.backend.core.database - WARNING - Query execution failed: invalid input for query argument $1: 'APT_001' ('str' object cannot be interpreted as an integer)
+2025-08-06 14:25:43,045 - httpx - INFO - HTTP Request: POST http://localhost:6013/v2/humansa/responses/create "HTTP/1.1 200 "
+2025-08-06 14:25:43,045 - httpx - INFO - HTTP Request: POST http://localhost:6012/v2/humansa/responses/create "HTTP/1.1 200 "
+2025-08-06 14:25:43,045 - httpx - INFO - HTTP Request: POST http://localhost:6011/v2/humansa/responses/create "HTTP/1.1 200 "
+2025-08-06 14:25:43,055 - httpx - INFO - HTTP Request: POST http://localhost:6013/v2/humansa/responses/create "HTTP/1.1 200 "
+2025-08-06 14:25:43,066 - test_dashboard.backend.core.database - WARNING - Update execution failed: insert or update on table "results" violates foreign key constraint "results_run_id_fkey"
+DETAIL:  Key (run_id)=(a9a8f500-ed5e-4b03-8506-5f6449198f9f) is not present in table "runs".
+2025-08-06 14:25:43,067 - test_dashboard.backend.core.database - WARNING - Update execution failed: insert or update on table "results" violates foreign key constraint "results_run_id_fkey"
+DETAIL:  Key (run_id)=(a9a8f500-ed5e-4b03-8506-5f6449198f9f) is not present in table "runs".
+2025-08-06 14:25:43,069 - test_dashboard.backend.core.database - WARNING - Update execution failed: insert or update on table "results" violates foreign key constraint "results_run_id_fkey"
+DETAIL:  Key (run_id)=(a9a8f500-ed5e-4b03-8506-5f6449198f9f) is not present in table "runs".
+2025-08-06 14:25:43,083 - test_dashboard.backend.api.jobs_enhanced - INFO - Worker 1: Completed test HUV_011 - failed
+2025-08-06 14:25:43,083 - test_dashboard.backend.api.jobs_enhanced - INFO - Worker 0: Completed test APT_001 - failed
+2025-08-06 14:25:43,084 - test_dashboard.backend.api.jobs_enhanced - INFO - Worker 2: Completed test APF_002 - failed
+2025-08-06 14:25:44,083 - test_dashboard.backend.api.jobs_enhanced - INFO - Log capture task cancelled
+2025-08-06 14:25:44,084 - test_dashboard.backend.api.jobs_enhanced - INFO - Log capture task cancelled
+2025-08-06 14:25:44,084 - test_dashboard.backend.api.jobs_enhanced - INFO - Log capture task cancelled
+2025-08-06 14:25:44,084 - test_dashboard.backend.api.instances - INFO - 🔄 Released instance 2 back to pool
+2025-08-06 14:25:44,084 - test_dashboard.backend.api.jobs_enhanced - INFO - 🔄 Worker 1 released instance 2
+2025-08-06 14:25:44,084 - test_dashboard.backend.api.instances - INFO - 🔄 Released instance 1 back to pool
+2025-08-06 14:25:44,085 - test_dashboard.backend.api.jobs_enhanced - INFO - 🔄 Worker 0 released instance 1
+2025-08-06 14:25:44,085 - test_dashboard.backend.api.instances - INFO - 🔄 Released instance 3 back to pool
+2025-08-06 14:25:44,086 - test_dashboard.backend.api.jobs_enhanced - INFO - 🔄 Worker 2 released instance 3
+2025-08-06 14:25:44,133 - test_dashboard.backend.core.database - WARNING - Update execution failed: column "total_tests" of relation "runs" does not exist
+2025-08-06 14:25:44,163 - test_dashboard.backend.api.jobs_enhanced - INFO - ✅ Multi-instance job 34a0e845-e4e3-4026-9a8e-1a57bbf879ac/a9a8f500-ed5e-4b03-8506-5f6449198f9f completed successfully
+2025-08-06 14:25:45,020 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60399 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-06 14:25:47,010 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60399 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-06 14:25:48,311 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60399 - "GET /api/jobs/34a0e845-e4e3-4026-9a8e-1a57bbf879ac HTTP/1.1" 200 OK
+2025-08-06 14:25:49,025 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60399 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-06 14:25:51,006 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60399 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-06 14:25:53,017 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60399 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-06 14:25:55,004 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60399 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-06 14:25:57,005 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60399 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-06 14:25:59,014 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60399 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-06 14:26:01,006 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60399 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-06 14:26:02,999 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60399 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-06 14:26:05,003 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60399 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-06 14:26:06,992 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60399 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-06 14:26:08,994 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60399 - "GET /api/jobs HTTP/1.1" 200 OK
+2025-08-06 14:26:11,017 - test_dashboard.backend.core.database - WARNING - Query execution failed: column "total_tests" does not exist
+INFO:     127.0.0.1:60399 - "GET /api/jobs HTTP/1.1" 200 OK

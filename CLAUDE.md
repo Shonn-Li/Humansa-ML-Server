@@ -809,6 +809,93 @@ These modules support multiple agents:
 - **`openai_integration.py`**: OpenAI function calling
 - **`comprehensive_response_streaming_handler_fixed.py`**: Streaming handler
 
+### Humansa Multi-Agent System (V2)
+
+The Humansa system has evolved into a sophisticated multi-agent orchestration framework:
+
+#### Architecture
+- **Pattern 2 Orchestration** (`v2/orchestrator_pattern2.py`): LlamaIndex FunctionAgent pattern with sub-agents as tools
+- **Workflow State Management**: Maintains patient context, medical history, and agent coordination state
+- **Memory Integration**: Long-term memory via Mem0 for patient profiles and conversation continuity
+
+#### Specialized Agents (`v2/agents/`)
+- **Appointment Agent**: Books medical appointments, manages scheduling
+- **Diagnosis Agent**: Analyzes symptoms, provides assessments
+- **Medication Agent**: Drug information, interaction checks, prescription management
+- **Emergency Triage Agent**: Urgency assessment, emergency routing
+- **Product Agent**: Medical product recommendations and ordering
+- **General Medical Agent**: General health Q&A and guidance
+
+#### Key Features
+- **Transparent Reasoning**: Full visibility into agent decision-making process
+- **Tool Orchestration**: Coordinated tool execution across agents
+- **Context Persistence**: Maintains state across multi-turn conversations
+- **Error Resilience**: Graceful fallback strategies for failed operations
+
+For detailed documentation, see: `/documentation/ml-server/humansa-agent-system.md`
+
+## Test Dashboard System
+
+A comprehensive web-based testing framework for the ML Server:
+
+### Overview
+- **Purpose**: Centralized test execution, monitoring, and analysis
+- **Architecture**: FastAPI backend (port 6002) + React frontend
+- **Database**: Uses same PostgreSQL instance as ML server
+
+### Key Features
+
+#### Multi-Instance Support
+- **Instance Pool**: Manages ML server instances (ports 6001-6009)
+- **Parallel Execution**: Run tests concurrently across multiple instances
+- **Isolated Databases**: Each instance uses separate test database (test1-test9)
+- **Automatic Scaling**: Spins up/down instances based on workload
+
+#### Test Management
+- **JSON Test Definitions**: Standardized test format with expectations
+- **Test Suites**: Organized by functionality (appointment, medical, product, etc.)
+- **Real-time Monitoring**: WebSocket-based live updates
+- **Comprehensive Logging**: Captures ML server logs per test execution
+
+#### Results Analysis
+- **Hierarchical View**: Jobs → Runs → Suites → Tests → Logs
+- **Performance Metrics**: Response times, success rates, trends
+- **Export Capabilities**: PDF/CSV reports for sharing
+- **Failure Analysis**: Detailed error tracking and debugging
+
+### Usage
+```bash
+# Start dashboard
+cd test_dashboard
+./launch_dashboard.sh
+
+# Access UI
+http://localhost:6002
+
+# Start with multi-instance support
+./launch_multi_instance.sh
+```
+
+### Test Format Example
+```json
+{
+  "id": "TEST_001",
+  "name": "Test appointment booking",
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "payload": {"input": "Book appointment with Dr. Li"}
+  },
+  "expectations": {
+    "response": {
+      "output_contains": ["appointment", "Dr. Li"],
+      "status_code": 200
+    }
+  }
+}
+```
+
+For detailed documentation, see: `/documentation/ml-server/test-dashboard.md`
+
 ## Important Notes
 
 1. **Two Systems, One Server**: Both YouWoAI and Humansa systems run on the same port

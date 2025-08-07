@@ -1,0 +1,146 @@
+{
+  "id": "MTN_002",
+  "name": "Progressive multi-turn conversation test",
+  "suite": "multi_turn",
+  "type": "multi_turn",
+  "priority": 5,
+  "tags": ["multi_turn", "progressive", "context_building"],
+  
+  "config": {
+    "timeout": 45,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["multi_agent", "mem0", "context_persistence"]
+  },
+  
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_mtn_002",
+      "profile": {
+        "name": "李女士",
+        "age": 42,
+        "language": "zh"
+      }
+    },
+    "previous_turns": [
+      {
+        "role": "user",
+        "content": "你好，我最近总是感觉疲劳"
+      },
+      {
+        "role": "assistant",
+        "content": "您好李女士！感觉疲劳可能有很多原因。请问这种疲劳持续多长时间了？是否影响到您的日常工作和生活？"
+      },
+      {
+        "role": "user",
+        "content": "大概有两个月了，确实影响工作效率，晚上睡眠也不太好"
+      },
+      {
+        "role": "assistant",
+        "content": "我理解您的困扰。疲劳伴随睡眠问题持续两个月确实需要关注。可能的原因包括压力、营养不良、甲状腺功能等。建议您：1）规律作息 2）适量运动 3）考虑检查甲状腺功能。您最近的工作压力大吗？"
+      }
+    ]
+  },
+  
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "工作压力确实很大，我是做财务工作的，最近在做年度审计。你能推荐一些补充维生素的产品吗？",
+      "user_id": "test_user_mtn_002",
+      "conversation_history": [{"role": "user", "content": "\u4f60\u597d\uff0c\u6211\u6700\u8fd1\u603b\u662f\u611f\u89c9\u75b2\u52b3"}, {"role": "assistant", "content": "\u60a8\u597d\u674e\u5973\u58eb\uff01\u611f\u89c9\u75b2\u52b3\u53ef\u80fd\u6709\u5f88\u591a\u539f\u56e0\u3002\u8bf7\u95ee\u8fd9\u79cd\u75b2\u52b3\u6301\u7eed\u591a\u957f\u65f6\u95f4\u4e86\uff1f\u662f\u5426\u5f71\u54cd\u5230\u60a8\u7684\u65e5\u5e38\u5de5\u4f5c\u548c\u751f\u6d3b\uff1f"}, {"role": "user", "content": "\u5927\u6982\u6709\u4e24\u4e2a\u6708\u4e86\uff0c\u786e\u5b9e\u5f71\u54cd\u5de5\u4f5c\u6548\u7387\uff0c\u665a\u4e0a\u7761\u7720\u4e5f\u4e0d\u592a\u597d"}, {"role": "assistant", "content": "\u6211\u7406\u89e3\u60a8\u7684\u56f0\u6270\u3002\u75b2\u52b3\u4f34\u968f\u7761\u7720\u95ee\u9898\u6301\u7eed\u4e24\u4e2a\u6708\u786e\u5b9e\u9700\u8981\u5173\u6ce8\u3002\u53ef\u80fd\u7684\u539f\u56e0\u5305\u62ec\u538b\u529b\u3001\u8425\u517b\u4e0d\u826f\u3001\u7532\u72b6\u817a\u529f\u80fd\u7b49\u3002\u5efa\u8bae\u60a8\uff1a1\uff09\u89c4\u5f8b\u4f5c\u606f 2\uff09\u9002\u91cf\u8fd0\u52a8 3\uff09\u8003\u8651\u68c0\u67e5\u7532\u72b6\u817a\u529f\u80fd\u3002\u60a8\u6700\u8fd1\u7684\u5de5\u4f5c\u538b\u529b\u5927\u5417\uff1f"}],
+      "metadata": {
+        "test_id": "MTN_002",
+        "test_name": "Progressive multi-turn conversation test"
+      }
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": [
+        "李女士",
+        "财务工作",
+        "审计",
+        "压力",
+        "维生素",
+        "推荐"
+      ],
+      "output_excludes": [
+        "错误",
+        "失败"
+      ],
+      "min_length": 200,
+      "max_length": 2000
+    },
+    
+    "reasoning": {
+      "steps_min": 4,
+      "contains_keywords": [
+        "work_stress",
+        "financial_profession",
+        "audit_pressure",
+        "vitamin_recommendation",
+        "fatigue_correlation"
+      ],
+      "tool_calls": [
+        "product_search",
+        "health_analysis"
+      ]
+    },
+    
+    "agents": {
+      "touched": ["router_agent", "rag_agent", "response_agent"],
+      "max_agents": 4
+    },
+    
+    "context": {
+      "mem0": {
+        "should_retrieve": [
+          "fatigue_symptoms",
+          "sleep_problems",
+          "duration_two_months"
+        ],
+        "should_store": [
+          "work_stress_high",
+          "financial_profession",
+          "audit_period",
+          "vitamin_interest"
+        ],
+        "memory_count": 4
+      }
+    },
+    
+    "server_logs": {
+      "contains": [
+        "Context continuation",
+        "Professional stress analysis",
+        "Vitamin recommendation"
+      ],
+      "excludes": [
+        "ERROR",
+        "CRITICAL",
+        "Context lost"
+      ],
+      "log_levels": {
+        "ERROR": "=0",
+        "WARNING": "<=1"
+      }
+    },
+    
+    "performance": {
+      "response_time_max": 25.0,
+      "memory_usage_max": "130MB",
+      "token_usage_max": 1200
+    }
+  },
+  
+  "cleanup": {
+    "reset_context": false
+  }
+}

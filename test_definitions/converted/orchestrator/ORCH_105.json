@@ -1,0 +1,61 @@
+{
+  "id": "ORC_105",
+  "name": "Pattern2 Patient Profile Allergy Test",
+  "suite": "orchestrator",
+  "type": "single",
+  "priority": 5,
+  "tags": ["pattern2", "orchestrator", "patient-profile", "allergies", "safety"],
+  "config": {
+    "timeout": 45,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["pattern2_orchestrator", "patient_profiles"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_002",
+      "profile": {
+        "allergies": ["peanut"]
+      }
+    }
+  },
+  "execution": {
+    "endpoint": "/humansa/pattern2/process",
+    "method": "POST",
+    "payload": {
+      "query": "我对花生过敏，有什么适合我的营养补充品？",
+      "user_id": "test_user_002",
+      "messages": [
+        {"role": "system", "content": "Patient has peanut allergy"},
+        {"role": "user", "content": "我对花生过敏，有什么适合我的营养补充品？"}
+      ],
+      "stream": true
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["过敏", "营养补充", "适合"],
+      "output_excludes": ["花生", "坚果"]
+    },
+    "reasoning": {
+      "contains_keywords": ["allergy", "safety", "contraindication"]
+    },
+    "agents": {
+      "touched": ["ProductAgent", "GeneralMedicalAgent"],
+      "max_agents": 3
+    },
+    "context": {
+      "workflow": {
+        "state_changes": {
+          "allergy_aware": true,
+          "safety_checked": true
+        }
+      }
+    },
+    "server_logs": {
+      "contains": ["peanut allergy", "safety check"],
+      "excludes": ["ERROR"]
+    }
+  }
+}

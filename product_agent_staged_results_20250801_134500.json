@@ -1,0 +1,64 @@
+{
+  "timestamp": "2025-08-01T13:45:00.559628",
+  "token_usage": {
+    "status": "error",
+    "error": "No module named 'humansa'"
+  },
+  "test_results": [
+    {
+      "test": "product_search_dha",
+      "status": "error",
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('::1', 6001, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6001)]",
+      "duration": 0.0027959346771240234
+    },
+    {
+      "test": "product_sleep_aid",
+      "status": "error",
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('127.0.0.1', 6001), [Errno 61] Connect call failed ('::1', 6001, 0, 0)]",
+      "duration": 0.000965118408203125
+    },
+    {
+      "test": "product_immune_boost",
+      "status": "error",
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('::1', 6001, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6001)]",
+      "duration": 0.0007710456848144531
+    },
+    {
+      "test": "product_pregnancy",
+      "status": "error",
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('127.0.0.1', 6001), [Errno 61] Connect call failed ('::1', 6001, 0, 0)]",
+      "duration": 0.0007069110870361328
+    },
+    {
+      "test": "product_child_growth",
+      "status": "error",
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('::1', 6001, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6001)]",
+      "duration": 0.0009710788726806641
+    },
+    {
+      "test": "product_elderly_health",
+      "status": "error",
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('::1', 6001, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6001)]",
+      "duration": 0.001294851303100586
+    },
+    {
+      "test": "product_specific_id",
+      "status": "error",
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('127.0.0.1', 6001), [Errno 61] Connect call failed ('::1', 6001, 0, 0)]",
+      "duration": 0.0006089210510253906
+    },
+    {
+      "test": "product_comparison",
+      "status": "error",
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('::1', 6001, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6001)]",
+      "duration": 0.00096893310546875
+    }
+  ],
+  "summary": {
+    "total": 8,
+    "successful": 0,
+    "partial": 0,
+    "failed": 8,
+    "agent_usage_rate": 0.0
+  }
+}

@@ -1,0 +1,31 @@
+category: appointment
+expectations:
+  agents_touched:
+  - FormSubmitter
+  emergency_flags: []
+  follow_up_actions: []
+  forbidden_patterns: []
+  keywords:
+  - 成功
+  - 预约成功
+  - APT-
+  max_response_length: 5000
+  min_response_length: 50
+  required_tools:
+  - submit_appointment_form
+  response_time_max: 30.0
+  thinking_flow_keywords: []
+id: apt_003_confirm_appointment
+metadata:
+  confirmation_pattern: APT-\d+
+  expect_confirmation_code: true
+name: Confirm complete appointment
+previous_turns:
+- content: 我想预约李明医生明天上午9点看头痛，我叫张三，电话13800138000
+  role: user
+- content: 您的预约信息如下：医生：李明医生...请确认
+  role: assistant
+priority: 1
+query: 确认预约
+tags: []
+user_context: {}

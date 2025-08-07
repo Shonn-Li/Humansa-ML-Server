@@ -1,0 +1,168 @@
+{
+  "timestamp": "20250725_105829",
+  "summary": {
+    "total_tests": 10,
+    "passed": 0,
+    "failed": 10,
+    "pass_rate": 0.0
+  },
+  "detailed_results": [
+    {
+      "id": 1,
+      "name": "Basic Identity Query",
+      "query": "你是谁？",
+      "expected_keywords": [
+        "诺亚新舟",
+        "小诺",
+        "健康医疗助理",
+        "AI健康管家"
+      ],
+      "success": false,
+      "response": "",
+      "keywords_found": [],
+      "keywords_missing": [],
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('::1', 6001, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6001)]"
+    },
+    {
+      "id": 2,
+      "name": "Company Background",
+      "query": "介绍一下诺亚新舟",
+      "expected_keywords": [
+        "以爱行舟",
+        "亲近相守",
+        "500多位",
+        "三甲主任级",
+        "名医专家",
+        "30+家",
+        "高端综合名医诊所"
+      ],
+      "success": false,
+      "response": "",
+      "keywords_found": [],
+      "keywords_missing": [],
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('127.0.0.1', 6001), [Errno 61] Connect call failed ('::1', 6001, 0, 0)]"
+    },
+    {
+      "id": 3,
+      "name": "Service Capabilities",
+      "query": "你能做什么？",
+      "expected_keywords": [
+        "健康咨询",
+        "实时预约",
+        "检查项目",
+        "诊所导航",
+        "体检报告"
+      ],
+      "success": false,
+      "response": "",
+      "keywords_found": [],
+      "keywords_missing": [],
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('::1', 6001, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6001)]"
+    },
+    {
+      "id": 4,
+      "name": "Brand Slogan",
+      "query": "诺亚新舟的口号是什么？",
+      "expected_keywords": [
+        "以爱行舟",
+        "亲近相守"
+      ],
+      "success": false,
+      "response": "",
+      "keywords_found": [],
+      "keywords_missing": [],
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('127.0.0.1', 6001), [Errno 61] Connect call failed ('::1', 6001, 0, 0)]"
+    },
+    {
+      "id": 5,
+      "name": "English Identity Query",
+      "query": "Who are you?",
+      "expected_keywords": [
+        "Humansa",
+        "health",
+        "assistant",
+        "medical"
+      ],
+      "success": false,
+      "response": "",
+      "keywords_found": [],
+      "keywords_missing": [],
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('::1', 6001, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6001)]"
+    },
+    {
+      "id": 6,
+      "name": "Service Scope",
+      "query": "你们有多少医生？多少诊所？",
+      "expected_keywords": [
+        "500",
+        "三甲",
+        "30+",
+        "诊所"
+      ],
+      "success": false,
+      "response": "",
+      "keywords_found": [],
+      "keywords_missing": [],
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('127.0.0.1', 6001), [Errno 61] Connect call failed ('::1', 6001, 0, 0)]"
+    },
+    {
+      "id": 7,
+      "name": "Health Mall Reference",
+      "query": "我想买保健品",
+      "expected_keywords": [
+        "健康商城",
+        "诺亚新舟医疗",
+        "小程序"
+      ],
+      "success": false,
+      "response": "",
+      "keywords_found": [],
+      "keywords_missing": [],
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('::1', 6001, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6001)]"
+    },
+    {
+      "id": 8,
+      "name": "Article Reference",
+      "query": "有什么最新的健康文章推荐吗？",
+      "expected_keywords": [
+        "mp.weixin.qq.com",
+        "最新文章"
+      ],
+      "success": false,
+      "response": "",
+      "keywords_found": [],
+      "keywords_missing": [],
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('127.0.0.1', 6001), [Errno 61] Connect call failed ('::1', 6001, 0, 0)]"
+    },
+    {
+      "id": 9,
+      "name": "Emergency Response",
+      "query": "我现在胸痛很厉害，呼吸困难",
+      "expected_keywords": [
+        "120",
+        "立即",
+        "急救"
+      ],
+      "success": false,
+      "response": "",
+      "keywords_found": [],
+      "keywords_missing": [],
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('::1', 6001, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 6001)]"
+    },
+    {
+      "id": 10,
+      "name": "Self-Owned Clinics Only",
+      "query": "推荐一个最好的医院给我",
+      "expected_keywords": [
+        "诊所",
+        "诺亚新舟",
+        "预约"
+      ],
+      "success": false,
+      "response": "",
+      "keywords_found": [],
+      "keywords_missing": [],
+      "error": "Cannot connect to host localhost:6001 ssl:default [Multiple exceptions: [Errno 61] Connect call failed ('127.0.0.1', 6001), [Errno 61] Connect call failed ('::1', 6001, 0, 0)]"
+    }
+  ]
+}

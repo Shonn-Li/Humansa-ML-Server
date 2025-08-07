@@ -1,0 +1,212 @@
+{
+  "timestamp": "20250725_222909",
+  "summary": {
+    "total_tests": 20,
+    "passed": 20,
+    "failed": 0,
+    "pass_rate": 100.0,
+    "average_response_time": 0.2752251625061035
+  },
+  "detailed_results": [
+    {
+      "id": 1,
+      "name": "Find Cardiologist in Chinese",
+      "query": "我想找一个心脏科医生",
+      "success": true,
+      "duration": 0.4054548740386963,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 2,
+      "name": "Find Doctors by City",
+      "query": "深圳有哪些医生？",
+      "success": true,
+      "duration": 0.20698189735412598,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 3,
+      "name": "Find Specific Doctor Info",
+      "query": "张医生的信息",
+      "success": true,
+      "duration": 0.2177870273590088,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 4,
+      "name": "Check Doctor Availability",
+      "query": "李医生下周有空吗？",
+      "success": true,
+      "duration": 0.357285737991333,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 5,
+      "name": "Multi-criteria Doctor Search",
+      "query": "北京的骨科医生",
+      "success": true,
+      "duration": 0.19586515426635742,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 6,
+      "name": "Book Appointment with Details",
+      "query": "预约王医生，我叫李明，电话13800138000",
+      "success": true,
+      "duration": 0.30646824836730957,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 7,
+      "name": "Incomplete Booking Request",
+      "query": "帮我预约张医生",
+      "success": true,
+      "duration": 0.20475411415100098,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 8,
+      "name": "Emergency Symptom Case",
+      "query": "胸痛很严重，需要看医生",
+      "success": true,
+      "duration": 0.22658419609069824,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 9,
+      "name": "Appointment Confirmation",
+      "query": "确认我明天的预约",
+      "success": true,
+      "duration": 0.36960530281066895,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 10,
+      "name": "Cancel Appointment Inquiry",
+      "query": "如何取消预约？",
+      "success": true,
+      "duration": 0.18651223182678223,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 11,
+      "name": "Find Clinics by Location",
+      "query": "广州有哪些诊所？",
+      "success": true,
+      "duration": 0.2990729808807373,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 12,
+      "name": "Clinic Services Query",
+      "query": "深圳诊所提供什么服务？",
+      "success": true,
+      "duration": 0.18854308128356934,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 13,
+      "name": "Service Pricing Query",
+      "query": "肝功能检查多少钱？",
+      "success": true,
+      "duration": 0.2272660732269287,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 14,
+      "name": "Compare Service Prices",
+      "query": "哪里的体检最便宜？",
+      "success": true,
+      "duration": 0.35473108291625977,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 15,
+      "name": "Specific Medical Service",
+      "query": "核磁共振检查的信息",
+      "success": true,
+      "duration": 0.19309115409851074,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 16,
+      "name": "Symptom Department Recommendation",
+      "query": "头痛应该看什么科？",
+      "success": true,
+      "duration": 0.3277590274810791,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 17,
+      "name": "Clinic Operating Hours",
+      "query": "诊所的营业时间",
+      "success": true,
+      "duration": 0.3684239387512207,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 18,
+      "name": "Health Product Recommendation",
+      "query": "推荐一些健康产品",
+      "success": true,
+      "duration": 0.3518352508544922,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 19,
+      "name": "Simple Greeting",
+      "query": "你好",
+      "success": true,
+      "duration": 0.20612001419067383,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    },
+    {
+      "id": 20,
+      "name": "Complex Multi-part Query",
+      "query": "北京的心脏科医生下周的时间和收费标准",
+      "success": true,
+      "duration": 0.3103618621826172,
+      "tools_used": [],
+      "response": "抱歉，我无法处理您的请求。请稍后再试。",
+      "error": null
+    }
+  ]
+}

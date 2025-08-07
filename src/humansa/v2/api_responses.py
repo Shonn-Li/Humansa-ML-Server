@@ -1,0 +1,810 @@
+"""
+Responses API for HUMANSA V2 - OpenAI-style stateful conversation management
+"""
+
+from quart import Blueprint, request, jsonify, Response
+from typing import Dict, Any, Optional, List, AsyncGenerator
+import json
+import asyncio
+import time
+import uuid
+from datetime import datetime
+from llama_index.llms.openai import OpenAI
+from .response_manager import ResponseManager
+from .conversation_manager import ConversationManager
+from .context_compressor import ContextCompressor
+from .memory.memory_manager import MemoryManager
+from .memory.mem0_integration import Mem0MemoryManagerAdapter
+from .context_manager import ContextManager
+from .orchestrator_agent import HumansaOrchestratorAgent
+from .orchestrator_agent_enhanced import HumansaOrchestratorAgentEnhanced
+from .orchestrator_agent_consolidated import HumansaOrchestratorAgentConsolidated
+from .orchestrator_agent_transparent import HumansaOrchestratorAgentTransparent
+from .orchestrator_pattern2_fixed import create_pattern2_orchestrator_fixed
+from .response_formatter import ResponseFormatter
+from .response_agent import HumansaResponseAgent
+from chat.streaming.sse_formatter import SSEFormatter
+import logging
+import os
+
+logger = logging.getLogger(__name__)
+
+# Create v2 responses blueprint
+humansa_v2_responses_bp = Blueprint('humansa_v2_responses', __name__)
+
+# Global instances
+conversation_manager: Optional[ConversationManager] = None
+response_manager: Optional[ResponseManager] = None
+context_compressor: Optional[ContextCompressor] = None
+memory_manager: Optional[MemoryManager] = None
+context_manager = ContextManager()
+orchestrator: Optional[HumansaOrchestratorAgent] = None
+enhanced_orchestrator: Optional[HumansaOrchestratorAgentEnhanced] = None
+consolidated_orchestrator: Optional[HumansaOrchestratorAgentConsolidated] = None
+transparent_orchestrator: Optional[HumansaOrchestratorAgentTransparent] = None
+pattern2_orchestrator: Optional[Any] = None  # Pattern 2 orchestrator
+response_formatter = ResponseFormatter()
+response_agent = HumansaResponseAgent()
+sse_formatter = SSEFormatter()
+
+# Check if enhanced logging is enabled
+ENABLE_ENHANCED_LOGGING = os.getenv('HUMANSA_ENHANCED_LOGGING', 'true').lower() == 'true'
+# Check if consolidated tools should be used
+USE_CONSOLIDATED_TOOLS = os.getenv('HUMANSA_USE_CONSOLIDATED_TOOLS', 'true').lower() == 'true'
+# Check if Pattern 2 orchestrator should be used
+USE_PATTERN2_ORCHESTRATOR = os.getenv('HUMANSA_USE_PATTERN2', 'false').lower() == 'true'
+
+
+async def initialize_v2_responses_system(db_pool, openai_api_key: str):
+    """Initialize the responses-based v2 Humansa system."""
+    global memory_manager, orchestrator, enhanced_orchestrator, consolidated_orchestrator, transparent_orchestrator, pattern2_orchestrator
+    global context_compressor, conversation_manager, response_manager, response_formatter
+    
+    # Initialize default LLM (will be overridden per request)
+    default_llm = OpenAI(
+        api_key=openai_api_key,
+        model="gpt-4.1",  # Default model
+        temperature=0.7
+    )
+    
+    # Initialize conversation and response managers
+    conversation_manager = ConversationManager(max_context_tokens=8000, max_recent_messages=6)
+    response_manager = ResponseManager(conversation_manager)
+    
+    # Initialize context compressor
+    context_compressor = ContextCompressor(llm=default_llm)
+    
+    # Try to use Mem0 if available
+    try:
+        from humansa.memory.mem0_manager import Mem0Manager
+        mem0_manager = Mem0Manager.get_instance()
+        
+        # Initialize Mem0 if not already initialized
+        if not mem0_manager.initialized:
+            logger.info("Initializing Mem0 manager...")
+            init_success = await mem0_manager.initialize()
+            if init_success:
+                logger.info("✅ Mem0 manager initialized successfully")
+            else:
+                logger.warning("⚠️ Mem0 initialization failed")
+        
+        if mem0_manager.initialized:
+            # Use Mem0 adapter WITH db_pool parameter
+            memory_manager = Mem0MemoryManagerAdapter(db_pool, mem0_manager)
+            logger.info("✅ Using Mem0 for memory management")
+        else:
+            # Fall back to basic memory manager
+            memory_manager = MemoryManager(db_pool)
+            logger.info("✅ Using basic memory manager (Mem0 not initialized)")
+    except ImportError:
+        memory_manager = MemoryManager(db_pool)
+        logger.info("✅ Using basic memory manager")
+    
+    # Initialize memory tables
+    await memory_manager.initialize_tables()
+    logger.info("✅ Memory tables initialized")
+    
+    # Initialize orchestrators
+    try:
+        globals()['orchestrator'] = HumansaOrchestratorAgent(
+            llm=default_llm,
+            memory_manager=memory_manager,
+            debug=False,
+            use_real_tools=True,
+            db_config={
+                'host': os.getenv('DB_HOST', 'localhost'),
+                'port': int(os.getenv('DB_PORT', '5432')),
+                'database': os.getenv('DB_NAME', 'postgres'),
+                'user': os.getenv('DB_USER', 'postgres'),
+                'password': os.getenv('DB_PASSWORD', '')
+            }
+        )
+        
+        globals()['enhanced_orchestrator'] = HumansaOrchestratorAgentEnhanced(
+            llm=default_llm,
+            memory_manager=memory_manager,
+            debug=True,
+            enable_enhanced_logging=True
+        )
+        
+        # Initialize consolidated orchestrator if enabled
+        if USE_CONSOLIDATED_TOOLS:
+            globals()['consolidated_orchestrator'] = HumansaOrchestratorAgentConsolidated(
+                llm=default_llm,
+                memory_manager=memory_manager,
+                debug=False,
+                use_real_tools=True,
+                db_config={
+                    'host': os.getenv('DB_HOST', 'localhost'),
+                    'port': int(os.getenv('DB_PORT', '5432')),
+                    'database': os.getenv('DB_NAME', 'postgres'),
+                    'user': os.getenv('DB_USER', 'postgres'),
+                    'password': os.getenv('DB_PASSWORD', '')
+                }
+            )
+            logger.info("✅ Consolidated orchestrator initialized (7 tools with dynamic loading)")
+        
+        # Initialize transparent orchestrator for proper response format
+        globals()['transparent_orchestrator'] = HumansaOrchestratorAgentTransparent(
+            llm=default_llm,
+            memory_manager=memory_manager,
+            debug=False,
+            use_real_tools=True,
+            db_config={
+                'host': os.getenv('DB_HOST', 'localhost'),
+                'port': int(os.getenv('DB_PORT', '5432')),
+                'database': os.getenv('DB_NAME', 'postgres'),
+                'user': os.getenv('DB_USER', 'postgres'),
+                'password': os.getenv('DB_PASSWORD', '')
+            }
+        )
+        logger.info("✅ Transparent orchestrator initialized (captures tool calls)")
+        
+        # Initialize Pattern 2 orchestrator if enabled
+        if USE_PATTERN2_ORCHESTRATOR:
+            # Create sub-agents for Pattern 2
+            from .agents.product_agent import ProductAgent
+            from .agents.general_medical_agent import GeneralMedicalAgent
+            from .agents.appointment_agent import AppointmentAgent
+            from .agents.diagnosis_agent import DiagnosisAgent
+            from .agents.medication_agent import MedicationAgent
+            
+            pattern2_agents = {}
+            
+            # Initialize available agents
+            try:
+                pattern2_agents["ProductAgent"] = ProductAgent(llm=default_llm)
+                logger.info("   ✓ ProductAgent initialized")
+            except Exception as e:
+                logger.warning(f"   ⚠ ProductAgent initialization failed: {e}")
+            
+            try:
+                pattern2_agents["GeneralMedicalAgent"] = GeneralMedicalAgent(llm=default_llm)
+                logger.info("   ✓ GeneralMedicalAgent initialized")
+            except Exception as e:
+                logger.warning(f"   ⚠ GeneralMedicalAgent initialization failed: {e}")
+            
+            try:
+                pattern2_agents["AppointmentAgent"] = AppointmentAgent(llm=default_llm)
+                logger.info("   ✓ AppointmentAgent initialized")
+            except Exception as e:
+                logger.warning(f"   ⚠ AppointmentAgent initialization failed: {e}")
+            
+            try:
+                pattern2_agents["DiagnosisAgent"] = DiagnosisAgent(llm=default_llm)
+                pattern2_agents["ClinicalAgent"] = pattern2_agents["DiagnosisAgent"]
+                logger.info("   ✓ DiagnosisAgent initialized")
+            except Exception as e:
+                logger.warning(f"   ⚠ ClinicalAgent initialization failed: {e}")
+            
+            try:
+                pattern2_agents["MedicationAgent"] = MedicationAgent(llm=default_llm)
+                logger.info("   ✓ MedicationAgent initialized")
+            except Exception as e:
+                logger.warning(f"   ⚠ MedicationAgent initialization failed: {e}")
+            
+            # Also add GeneralAgent alias for backward compatibility
+            if "GeneralMedicalAgent" in pattern2_agents:
+                pattern2_agents["GeneralAgent"] = pattern2_agents["GeneralMedicalAgent"]
+            
+            # Define db_config for Pattern 2
+            db_config = {
+                'host': os.getenv('DB_HOST', 'localhost'),
+                'port': int(os.getenv('DB_PORT', '5432')),
+                'database': os.getenv('DB_NAME', 'postgres'),
+                'user': os.getenv('DB_USER', 'postgres'),
+                'password': os.getenv('DB_PASSWORD', '')
+            }
+            
+            # Create Pattern 2 orchestrator (fixed version)
+            globals()['pattern2_orchestrator'] = create_pattern2_orchestrator_fixed(
+                llm=default_llm,
+                agents=pattern2_agents,
+                memory_manager=memory_manager,
+                db_config=db_config,
+                db_pool=db_pool,
+                debug=ENABLE_ENHANCED_LOGGING
+            )
+            logger.info(f"✅ Pattern 2 orchestrator (fixed) initialized with {len(pattern2_agents)} agents")
+        
+        # Initialize response formatter
+        response_formatter = ResponseFormatter()
+        
+        logger.info("✅ Responses API orchestrators initialized successfully")
+    except Exception as e:
+        logger.error(f"❌ Failed to initialize orchestrators: {e}")
+        raise
+
+
+@humansa_v2_responses_bp.route('/v2/humansa/responses/create', methods=['POST'])
+async def create_response():
+    """
+    Create a new response - OpenAI Responses API style
+    
+    Request body:
+    {
+        "model": "gpt-4.1",
+        "input": "你好",
+        "user_id": "user123",  # Optional if continuing
+        "previous_response_id": "resp_abc123",  # Optional for continuation
+        "metadata": {}  # Optional
+    }
+    
+    Response:
+    {
+        "id": "resp_xyz789",
+        "object": "response",
+        "created": 1234567890,
+        "model": "gpt-4.1",
+        "conversation_id": "conv_123",
+        "previous_response_id": "resp_abc123",
+        "input": "你好",
+        "output": [
+            {
+                "type": "text",
+                "text": "您好！我是您的AI医疗助手..."
+            }
+        ],
+        "usage": {
+            "prompt_tokens": 100,
+            "completion_tokens": 50,
+            "total_tokens": 150
+        }
+    }
+    """
+    try:
+        data = await request.get_json()
+        model = data.get('model', 'gpt-4.1')
+        input_text = data.get('input', '')
+        user_id = data.get('user_id')
+        previous_response_id = data.get('previous_response_id')
+        metadata = data.get('metadata', {})
+        
+        if not input_text:
+            return jsonify({"error": "Input is required"}), 400
+        
+        # Handle user_id for new conversations
+        if not previous_response_id and not user_id:
+            user_id = f'anonymous_{uuid.uuid4().hex[:8]}'
+        
+        # Get context if continuing from previous response
+        if previous_response_id:
+            context_messages, token_count = response_manager.get_context_for_response(
+                previous_response_id,
+                include_summary=True
+            )
+            
+            # Check if we need compression
+            if token_count > 6000:
+                await compress_context_for_response(previous_response_id)
+                context_messages, token_count = response_manager.get_context_for_response(
+                    previous_response_id,
+                    include_summary=True
+                )
+        else:
+            context_messages = []
+            token_count = 0
+        
+        logger.info(f"Processing response with {len(context_messages)} context messages ({token_count} tokens)")
+        
+        # Choose orchestrator based on configuration
+        if USE_PATTERN2_ORCHESTRATOR and pattern2_orchestrator:
+            logger.info("Using Pattern 2 orchestrator (FunctionAgent)")
+            
+            # Track start time
+            start_time = time.time()
+            
+            # Process through Pattern 2 orchestrator
+            result = None
+            async for event in pattern2_orchestrator.process_query(
+                query=input_text,
+                user_id=user_id,
+                messages=context_messages,
+                stream=False,
+                session_id=previous_response_id  # Use previous response as session
+            ):
+                result = event
+                break  # Non-streaming mode returns single event
+            
+            # Transform Pattern 2 response to match expected format
+            if result and 'choices' in result:
+                # Extract content from choices
+                content = result['choices'][0]['message']['content']
+                
+                # Build output array with reasoning
+                output = [{"type": "output_text", "text": content}]
+                
+                # Initialize response metadata
+                response_metadata = {}
+                
+                # Add usage metadata
+                usage = result.get('usage', {})
+                if 'workflow_state' in usage:
+                    workflow_state = usage['workflow_state']
+                    
+                    # Log workflow state for debugging
+                    logger.info(f"Pattern 2 workflow state: agents_called={workflow_state.get('agents_called', [])}")
+                    logger.info(f"Pattern 2 agent outputs: {list(workflow_state.get('agent_outputs', {}).keys())}")
+                    
+                    # Extract form_id from active_forms if available
+                    active_forms = workflow_state.get('active_forms', {})
+                    if active_forms:
+                        # Get the most recent form_id
+                        form_ids = list(active_forms.keys())
+                        if form_ids:
+                            latest_form_id = form_ids[-1]
+                            # Add form_id to metadata
+                            response_metadata['form_id'] = latest_form_id
+                            logger.info(f"Added form_id to metadata: {latest_form_id}")
+                    
+                    # Add tool calls from workflow state
+                    for agent in workflow_state.get('agents_called', []):
+                        if agent_output := workflow_state.get('agent_outputs', {}).get(agent):
+                            output.insert(-1, {
+                                "type": "tool_use",
+                                "tool_use": {"name": agent, "result": agent_output[:200] + "..."}
+                            })
+                            logger.info(f"Added tool_use for agent: {agent}")
+                else:
+                    logger.info("No workflow_state in usage data")
+                
+                result = {
+                    "output": output,
+                    "usage": {
+                        "agents_used": usage.get('agents_used', []),
+                        "total_agents": usage.get('total_agents', 0)
+                    },
+                    "metadata": {
+                        "orchestrator": "pattern2",
+                        "workflow_id": workflow_state.get('workflow_id', '') if 'workflow_state' in usage else '',
+                        **response_metadata  # Include any additional metadata like form_id
+                    }
+                }
+            else:
+                # Fallback if response format is unexpected
+                result = {
+                    "output": [{"type": "output_text", "text": "处理请求时出现错误"}],
+                    "usage": {},
+                    "metadata": {"orchestrator": "pattern2", "error": "unexpected_format"}
+                }
+            
+            # Apply response agent post-processing to Pattern 2 responses
+            result = response_agent.process_response(
+                raw_response=result,
+                query=input_text,
+                user_id=user_id,
+                context_messages=context_messages
+            )
+        else:
+            # Use transparent orchestrator (default)
+            if not transparent_orchestrator:
+                logger.error("Transparent orchestrator not initialized")
+                return jsonify({"error": "Service not available"}), 503
+            
+            # Track start time
+            start_time = time.time()
+            
+            # Process through transparent orchestrator to get full reasoning chain
+            result = await transparent_orchestrator.process_query_with_transparency(
+                query=input_text,
+                user_id=user_id,
+                messages=context_messages,
+                stream=False,
+                model=model
+            )
+        
+        # Apply response agent post-processing to ensure brand consistency
+        result = response_agent.process_response(
+            raw_response=result,
+            query=input_text,
+            user_id=user_id,
+            context_messages=context_messages
+        )
+        
+        # Extract output array and metadata
+        output = result.get('output', [])
+        usage = result.get('usage', {})
+        response_metadata = result.get('metadata', {})
+        
+        # Extract tools used from output
+        tools_used = []
+        for item in output:
+            if item.get('type') == 'tool_use':
+                tool_name = item.get('tool_use', {}).get('name', '')
+                if tool_name and tool_name not in tools_used:
+                    tools_used.append(tool_name)
+        
+        # Create response record with full output array
+        response = response_manager.create_response(
+            user_id=user_id,
+            model=model,
+            input_text=input_text,
+            output=output,  # Full reasoning chain with tool calls
+            previous_response_id=previous_response_id,
+            metadata={
+                **metadata,
+                **response_metadata,
+                "processing_time": time.time() - start_time
+            },
+            tools_used=tools_used,
+            token_usage=usage
+        )
+        
+        return jsonify(response.to_dict())
+        
+    except Exception as e:
+        logger.error(f"Error creating response: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@humansa_v2_responses_bp.route('/v2/humansa/responses/stream', methods=['POST'])
+async def create_streaming_response():
+    """
+    Create a new response with streaming - OpenAI Responses API style
+    
+    Request body:
+    {
+        "model": "gpt-4.1",
+        "input": "你好",
+        "user_id": "user123",
+        "previous_response_id": "resp_abc123",  # Optional
+        "metadata": {}  # Optional
+    }
+    
+    Response: Event stream with format:
+    - response.created
+    - response.output_item.delta  
+    - response.output_item.done
+    - response.done
+    """
+    try:
+        data = await request.get_json()
+        model = data.get('model', 'gpt-4.1')
+        input_text = data.get('input', '')
+        user_id = data.get('user_id')
+        previous_response_id = data.get('previous_response_id')
+        metadata = data.get('metadata', {})
+        
+        if not input_text:
+            return jsonify({"error": "Input is required"}), 400
+        
+        # Handle user_id for new conversations
+        if not previous_response_id and not user_id:
+            user_id = f'anonymous_{uuid.uuid4().hex[:8]}'
+        
+        # Stream response using event-based format
+        return Response(
+            stream_event_generator(
+                input_text=input_text,
+                previous_response_id=previous_response_id,
+                user_id=user_id,
+                model=model,
+                metadata=metadata
+            ),
+            mimetype="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache",
+                "X-Accel-Buffering": "no"
+            }
+        )
+        
+    except Exception as e:
+        logger.error(f"Error creating streaming response: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@humansa_v2_responses_bp.route('/v2/humansa/responses/<response_id>', methods=['GET'])
+async def get_response(response_id: str):
+    """
+    Retrieve a response and its full conversation history
+    """
+    try:
+        response = response_manager.get_response(response_id)
+        if not response:
+            return jsonify({"error": "Response not found"}), 404
+        
+        # Get full response chain
+        chain = response_manager.get_response_chain(response_id)
+        
+        # Build full conversation history
+        messages = []
+        for resp in chain:
+            messages.append({
+                "role": "user",
+                "content": resp.input,
+                "timestamp": datetime.fromtimestamp(resp.created).isoformat()
+            })
+            messages.append({
+                "role": "assistant",
+                "content": response_manager._extract_text_from_output(resp.output),
+                "timestamp": datetime.fromtimestamp(resp.created).isoformat(),
+                "response_id": resp.id
+            })
+        
+        # Get conversation state
+        state = conversation_manager.get_conversation_state(response.conversation_id)
+        
+        result = {
+            **response.to_dict(),
+            "conversation_history": messages,
+            "conversation_state": {
+                "turn_count": state.turn_count if state else 0,
+                "summary": state.summary if state else None,
+                "key_facts": state.key_facts if state else []
+            }
+        }
+        
+        return jsonify(result)
+        
+    except Exception as e:
+        logger.error(f"Error retrieving response: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@humansa_v2_responses_bp.route('/v2/humansa/responses/<response_id>/stream', methods=['POST'])
+async def stream_response_continuation(response_id: str):
+    """
+    Stream a response continuation from a previous response
+    """
+    try:
+        # Check if previous response exists
+        previous_response = response_manager.get_response(response_id)
+        if not previous_response:
+            return jsonify({"error": "Previous response not found"}), 404
+        
+        data = await request.get_json()
+        input_text = data.get('input', '')
+        
+        if not input_text:
+            return jsonify({"error": "Input is required"}), 400
+        
+        # Stream response using event-based format
+        return Response(
+            stream_event_generator(
+                input_text=input_text,
+                previous_response_id=response_id,
+                user_id=previous_response.user_id,
+                model=data.get('model', previous_response.model),
+                metadata=data.get('metadata', {})
+            ),
+            mimetype="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache",
+                "X-Accel-Buffering": "no"
+            }
+        )
+        
+    except Exception as e:
+        logger.error(f"Error streaming response: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+async def stream_event_generator(
+    input_text: str,
+    previous_response_id: Optional[str],
+    user_id: str,
+    model: str,
+    metadata: Dict[str, Any]
+) -> AsyncGenerator[str, None]:
+    """Generate event-based streaming response in OpenAI format"""
+    try:
+        # Get context
+        if previous_response_id:
+            context_messages, token_count = response_manager.get_context_for_response(
+                previous_response_id,
+                include_summary=True
+            )
+        else:
+            context_messages = []
+            token_count = 0
+        
+        # Choose orchestrator based on configuration
+        if USE_PATTERN2_ORCHESTRATOR and pattern2_orchestrator:
+            logger.info("Streaming with Pattern 2 orchestrator (FunctionAgent)")
+            
+            # Track start time
+            start_time = time.time()
+            
+            # Stream through Pattern 2 orchestrator
+            event_count = 0
+            response_data = None
+            
+            async for event in pattern2_orchestrator.process_query(
+                query=input_text,
+                user_id=user_id,
+                messages=context_messages,
+                stream=True,
+                session_id=previous_response_id
+            ):
+                # Pattern 2 already returns OpenAI-style events
+                yield f"data: {json.dumps(event)}\n\n"
+                event_count += 1
+                
+                # Capture response metadata
+                if event.get("type") == "response.completed":
+                    response = event.get("response", {})
+                    if output := response.get("output", []):
+                        response_data = {
+                            "output": output,
+                            "usage": {}
+                        }
+                
+                # Capture usage data
+                elif event.get("type") == "response.usage":
+                    if response_data:
+                        response_data["usage"] = event.get("usage", {})
+        else:
+            # Use transparent orchestrator (default)
+            if not transparent_orchestrator:
+                logger.error("Transparent orchestrator not initialized")
+                yield f"data: {json.dumps({'error': 'Service not available'})}\n\n"
+                yield "data: [DONE]\n\n"
+                return
+            
+            # Track start time
+            start_time = time.time()
+            
+            # Stream through transparent orchestrator with proper event format
+            event_count = 0
+            response_data = None
+            
+            async for event in transparent_orchestrator.stream_query_with_transparency(
+                query=input_text,
+                user_id=user_id,
+                messages=context_messages,
+                model=model
+            ):
+                # Apply response agent processing to final event
+                if event.get('event') == 'response.done':
+                    event = response_agent.process_streaming_event(event, input_text)
+                
+                # Convert event to SSE format
+                yield f"data: {json.dumps(event)}\n\n"
+                event_count += 1
+                
+                # Capture final response data
+                if event.get('event') == 'response.done':
+                    response_data = event.get('data', {})
+        
+        # Create response record after streaming completes
+        if response_data:
+            output = response_data.get('output', [])
+            usage = response_data.get('usage', {})
+            
+            # Extract tools used
+            tools_used = []
+            for item in output:
+                if item.get('type') == 'tool_use':
+                    tool_name = item.get('tool_use', {}).get('name', '')
+                    if tool_name and tool_name not in tools_used:
+                        tools_used.append(tool_name)
+            
+            response = response_manager.create_response(
+                user_id=user_id,
+                model=model,
+                input_text=input_text,
+                output=output,
+                previous_response_id=previous_response_id,
+                metadata={
+                    **metadata,
+                    "processing_time": time.time() - start_time,
+                    "streamed": True,
+                    "event_count": event_count
+                },
+                tools_used=tools_used,
+                token_usage=usage
+            )
+            
+            # Send response metadata as final event
+            yield f"data: {json.dumps({'event': 'response.metadata', 'data': {'response_id': response.id, 'conversation_id': response.conversation_id}})}\n\n"
+        
+        yield "data: [DONE]\n\n"
+        
+    except Exception as e:
+        logger.error(f"Error in stream_response_generator: {e}")
+        error_chunk = {
+            "choices": [{
+                "delta": {"content": f"Error: {str(e)}"},
+                "finish_reason": "error"
+            }]
+        }
+        yield f"data: {json.dumps(error_chunk)}\n\n"
+        yield "data: [DONE]\n\n"
+
+
+@humansa_v2_responses_bp.route('/v2/humansa/responses/conversations/<conversation_id>/tree', methods=['GET'])
+async def get_conversation_tree(conversation_id: str):
+    """
+    Get the full conversation tree showing all response branches
+    """
+    try:
+        tree = response_manager.get_conversation_tree(conversation_id)
+        if not tree:
+            return jsonify({"error": "Conversation not found"}), 404
+        
+        # Add statistics
+        stats = response_manager.get_response_statistics(conversation_id)
+        
+        return jsonify({
+            "tree": tree,
+            "statistics": stats
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting conversation tree: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+@humansa_v2_responses_bp.route('/v2/humansa/responses/cleanup', methods=['POST'])
+async def cleanup_responses():
+    """
+    Clean up old responses
+    """
+    try:
+        data = await request.get_json()
+        max_age_hours = data.get('max_age_hours', 24)
+        
+        # Clean up both managers
+        response_manager.cleanup_old_responses(max_age_hours)
+        conversation_manager.cleanup_old_conversations(max_age_hours)
+        
+        return jsonify({
+            "message": f"Cleaned up responses older than {max_age_hours} hours"
+        })
+        
+    except Exception as e:
+        logger.error(f"Error cleaning up responses: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+async def compress_context_for_response(response_id: str):
+    """Compress context for a response chain"""
+    try:
+        chain = response_manager.get_response_chain(response_id)
+        if not chain or len(chain) < 10:
+            return
+        
+        conversation_id = chain[0].conversation_id
+        
+        # Build messages for compression
+        messages = []
+        for response in chain[:-5]:  # Keep last 5 uncompressed
+            messages.append({"role": "user", "content": response.input})
+            messages.append({
+                "role": "assistant",
+                "content": response_manager._extract_text_from_output(response.output)
+            })
+        
+        # Compress
+        summary, _ = await context_compressor.compress_conversation(
+            messages,
+            compression_type="medical_summary"
+        )
+        
+        # Update conversation summary
+        conversation_manager.update_summary(conversation_id, summary)
+        
+        logger.info(f"Compressed context for response chain ending at {response_id}")
+        
+    except Exception as e:
+        logger.error(f"Error compressing context: {e}")

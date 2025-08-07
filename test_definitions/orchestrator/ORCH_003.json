@@ -1,0 +1,77 @@
+{
+  "id": "ORC_003",
+  "name": "Pattern2 Orchestrator - Context Sharing Test",
+  "suite": "orchestrator",
+  "type": "multi_turn",
+  "priority": 4,
+  "tags": ["pattern2", "context_sharing", "state_persistence", "medical", "product"],
+  "config": {
+    "timeout": 90,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["azure_openai", "pattern2_orchestrator"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_001",
+      "profile": {}
+    },
+    "previous_turns": [
+      {"role": "user", "content": "我最近头痛，有什么好的维生素或保健品推荐吗？"}
+    ],
+    "environment": {
+      "AZURE_OPENAI_DEPLOYMENT_NAME": "gpt-4",
+      "debug": "true"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/pattern2/process",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "query": "还有其他产品吗？我对维生素B也有兴趣",
+      "user_id": "test_user_001",
+      "stream": true,
+      "session_id": "conv_test_001"
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["维生素B", "产品", "推荐"],
+      "min_length": 100
+    },
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": ["维生素B", "头痛", "context"],
+      "tool_calls": ["ProductAgent.search", "GeneralMedicalAgent.analyze"]
+    },
+    "agents": {
+      "touched": ["ProductAgent", "GeneralMedicalAgent"],
+      "call_order": ["ProductAgent", "GeneralMedicalAgent"],
+      "max_agents": 2
+    },
+    "context": {
+      "workflow": {
+        "state_changes": {
+          "user_preferences": "updated",
+          "product_context": "maintained"
+        },
+        "events_emitted": ["response.reasoning", "response.usage", "response.output_item.added"]
+      }
+    },
+    "server_logs": {
+      "contains": ["Pattern 2", "context sharing", "shared state"],
+      "excludes": ["ERROR", "CRITICAL"]
+    },
+    "performance": {
+      "response_time_max": 45.0
+    }
+  },
+  "cleanup": {
+    "commands": ["clear_session_context"],
+    "reset_context": true
+  }
+}

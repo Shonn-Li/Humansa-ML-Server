@@ -1,0 +1,119 @@
+{
+  "id": "PRD_001",
+  "name": "Vitamin product search test",
+  "suite": "product",
+  "type": "single",
+  "priority": 3,
+  "tags": ["product_search", "vitamins", "health_supplements"],
+  
+  "config": {
+    "timeout": 30,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["product_database", "search_functionality"]
+  },
+  
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_prd_001",
+      "profile": {
+        "name": "健康用户",
+        "age": 35,
+        "language": "zh"
+      }
+    }
+  },
+  
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "我想找一些维生素C的产品，有什么好的推荐吗？",
+      "user_id": "test_user_prd_001",
+      "metadata": {
+        "test_id": "PRD_001",
+        "test_name": "Vitamin product search test"
+      }
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": [
+        "维生素C",
+        "产品",
+        "推荐",
+        "品牌",
+        "含量"
+      ],
+      "output_excludes": [
+        "错误",
+        "失败",
+        "没有找到"
+      ],
+      "min_length": 150,
+      "max_length": 2000
+    },
+    
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": [
+        "vitamin_c",
+        "product_search",
+        "health_supplements",
+        "recommendation"
+      ],
+      "tool_calls": [
+        "product_search",
+        "vitamin_filter"
+      ]
+    },
+    
+    "agents": {
+      "touched": ["router_agent", "rag_agent"],
+      "max_agents": 3
+    },
+    
+    "context": {
+      "mem0": {
+        "should_store": [
+          "vitamin_c_interest",
+          "supplement_preference",
+          "product_search_request"
+        ]
+      }
+    },
+    
+    "server_logs": {
+      "contains": [
+        "Product search",
+        "Vitamin C filter",
+        "Health supplement query"
+      ],
+      "excludes": [
+        "ERROR",
+        "CRITICAL",
+        "Search failed"
+      ],
+      "log_levels": {
+        "ERROR": "=0",
+        "WARNING": "<=1"
+      }
+    },
+    
+    "performance": {
+      "response_time_max": 15.0,
+      "memory_usage_max": "90MB",
+      "token_usage_max": 800
+    }
+  },
+  
+  "cleanup": {
+    "reset_context": true
+  }
+}

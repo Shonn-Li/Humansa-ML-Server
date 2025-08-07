@@ -1,0 +1,44 @@
+{
+  "timestamp": "20250728_082905",
+  "user_id": "test_user_doctor_001",
+  "total_tests": 5,
+  "passed": 0,
+  "failed": 5,
+  "results": [
+    {
+      "scenario": "Find Orthopedic Doctor",
+      "success": false,
+      "tools_called": [],
+      "response_time": 4.341288089752197,
+      "response_length": 1114
+    },
+    {
+      "scenario": "Doctor in Specific City",
+      "success": false,
+      "tools_called": [],
+      "response_time": 4.408430099487305,
+      "response_length": 1978
+    },
+    {
+      "scenario": "Book Appointment",
+      "success": false,
+      "tools_called": [],
+      "response_time": 0.9316112995147705,
+      "response_length": 127
+    },
+    {
+      "scenario": "Check Doctor Availability",
+      "success": false,
+      "tools_called": [],
+      "response_time": 4.35862922668457,
+      "response_length": 1930
+    },
+    {
+      "scenario": "Clinic Information",
+      "success": false,
+      "tools_called": [],
+      "response_time": 4.6496710777282715,
+      "response_length": 886
+    }
+  ]
+}

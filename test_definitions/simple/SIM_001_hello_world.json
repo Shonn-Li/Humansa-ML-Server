@@ -1,0 +1,36 @@
+{
+  "id": "SIM_001",
+  "name": "Simple Hello World Test",
+  "suite": "integration",
+  "type": "single",
+  "priority": 1,
+  "tags": ["simple", "basic", "hello_world"],
+  
+  "config": {
+    "timeout": 30,
+    "retries": 1,
+    "parallel_safe": true
+  },
+  
+  "execution": {
+    "endpoint": "/v1/chat/completions",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4.1",
+      "messages": [{"role": "user", "content": "Say hello world"}],
+      "user_id": 1000001,
+      "max_tokens": 50
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["hello", "world"],
+      "min_length": 5
+    }
+  }
+}

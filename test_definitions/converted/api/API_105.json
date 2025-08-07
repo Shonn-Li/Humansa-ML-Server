@@ -1,0 +1,34 @@
+{
+  "id": "API_105",
+  "name": "Conversation Tree Retrieval Test",
+  "suite": "integration",
+  "type": "single",
+  "priority": 3,
+  "tags": ["api", "responses", "conversation-tree", "branching"],
+  "config": {
+    "timeout": 30,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["responses_api", "conversation_tree"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_456"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/conversations/conv_api_105/tree",
+    "method": "GET",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {}
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["statistics", "tree", "total_responses", "fork_count"]
+    },
+    "custom_validators": ["validate_tree_structure", "validate_conversation_statistics"]
+  }
+}

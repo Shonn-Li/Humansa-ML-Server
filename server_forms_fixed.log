@@ -1,0 +1,1394 @@
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python3
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:🔄 Attempting to import document converter endpoints...
+INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
+INFO:chat.utils.document_converter:❌ docx2pdf not available
+INFO:chat.utils.document_converter:❌ pypandoc not available
+INFO:chat.utils.document_converter:❌ python-docx not available
+INFO:chat.utils.document_converter:❌ openpyxl not available
+INFO:chat.utils.document_converter:❌ reportlab not available
+INFO:__main__:✅ Successfully imported document converter blueprint
+INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:🔄 Registering Humansa endpoints...
+INFO:humansa.postgres.database:HumansaDatabase initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:__main__:✅ Humansa V2 Conversation API endpoints registered
+INFO:__main__:✅ Humansa V2 Responses API endpoints registered
+WARNING:__main__:⚠️ Humansa v2 not available: cannot import name 'AppointmentFormService' from 'src.humansa.v2.forms.form_service' (/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py)
+INFO:__main__:✅ Humansa endpoints registered successfully
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:6001
+INFO:__main__:
+INFO:__main__:📋 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
+INFO:__main__:
+INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
+INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
+INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
+INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
+INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
+INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
+INFO:__main__:
+INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
+INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
+INFO:__main__:   - /v2/humansa/memory/search - Search user memories
+INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
+INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
+INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
+INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
+INFO:__main__:   - /o3-demo - O3 reasoning demo
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
+INFO:__main__:   Environment: test
+INFO:__main__:✅ Database pool created successfully
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.v2.api:Initializing Mem0 manager...
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+WARNING:asyncio:Executing <Task pending name='Task-3' coro=<Lifespan.handle_lifespan() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/hypercorn/asyncio/lifespan.py:55> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/hypercorn/asyncio/run.py:83> took 0.311 seconds
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
+INFO:humansa.v2.api:✅ Mem0 manager initialized successfully
+INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
+INFO:humansa.v2.api:Using Azure OpenAI for LLM
+INFO:humansa.v2.api:📦 Initializing HUMANSA V2 with Consolidated Tools
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince20: The `__fields__` attribute is deprecated, use `model_fields` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince20: The `__fields_set__` attribute is deprecated, use `model_fields_set` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince211: Accessing the 'model_computed_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince211: Accessing the 'model_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+  value = getter(object, key)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+INFO:humansa.v2.api:Humansa v2 system initialized successfully
+INFO:__main__:✅ Humansa v2 system initialized with Consolidated Tools
+INFO:humansa.v2.api_responses:✅ Using Mem0 for memory management
+INFO:humansa.v2.api_responses:✅ Memory tables initialized
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+INFO:humansa.v2.orchestrator_agent_enhanced:Initialized Enhanced HumansaOrchestratorAgent with 6 agent tools
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ Initialized consolidated tools (7 core functions)
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ HumansaOrchestratorAgentConsolidated initialized with dynamic tool loading
+INFO:humansa.v2.api_responses:✅ Consolidated orchestrator initialized (7 tools with dynamic loading)
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_transparent:✅ Initialized transparent orchestrator with tool capture
+INFO:humansa.v2.orchestrator_agent_transparent:✅ HumansaOrchestratorAgentTransparent initialized
+INFO:humansa.v2.api_responses:✅ Transparent orchestrator initialized (captures tool calls)
+INFO:humansa.v2.agents.product_agent:✅ Initialized ProductAgent with 134 products (staged loading)
+INFO:humansa.v2.api_responses:   ✓ ProductAgent initialized
+INFO:humansa.v2.api_responses:   ✓ GeneralMedicalAgent initialized
+INFO:humansa.v2.api_responses:   ✓ AppointmentAgent initialized
+INFO:humansa.v2.api_responses:   ✓ DiagnosisAgent initialized
+INFO:humansa.v2.api_responses:   ✓ MedicationAgent initialized
+INFO:humansa.v2.orchestrator_pattern2_fixed:✅ Form tools enabled for appointment booking
+INFO:humansa.v2.orchestrator_pattern2_fixed:✅ Initialized Pattern 2 Orchestrator (Fixed) with 10 agent tools
+INFO:humansa.v2.api_responses:✅ Pattern 2 orchestrator (fixed) initialized with 7 agents
+INFO:humansa.v2.api_responses:✅ Responses API orchestrators initialized successfully
+INFO:__main__:✅ Humansa v2 Responses API initialized
+WARNING:asyncio:Executing <Task pending name='Task-3' coro=<Lifespan.handle_lifespan() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/hypercorn/asyncio/lifespan.py:55> wait_for=<Future pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/hypercorn/asyncio/run.py:83> took 0.104 seconds
+[2025-08-02 12:38:46 -0700] [27344] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:6001 (CTRL + C to quit)
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_form_user_001
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_form_user_001
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/orchestrator_pattern2_fixed.py:894: DeprecationWarning: Context.set(key, value) is deprecated. Use 'await ctx.store.set(key, value)' instead.
+  await ctx.set("workflow_state", self._current_state.to_dict())
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 我想预约李明医生明天上午9点看头痛...
+WARNING:asyncio:Executing <Task pending name='run_agent_step' coro=<Context._step_worker() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/workflows/context/context.py:689> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:410> took 0.110 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约李明医生，明天上午9点，看头痛
+ERROR:humansa.v2.orchestrator_pattern2_fixed:Form creation error: cannot import name 'AppointmentFormService' from 'src.humansa.v2.forms.form_service' (/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py)
+INFO:humansa.v2.orchestrator_pattern2_fixed:🔍 DiagnosisAgent called with: 头痛
+INFO:openai._base_client:Retrying request to /chat/completions in 0.389269 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🧠 TRACE CAPTURED: Thought: The current language of the user is Chinese. I need to use a tool to help me analyze the sy...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🧠 TRACE CAPTURED: Thought: 我需要进一步了解头痛的详细情况（如持续时间、严重程度、伴随症状等），以便更好地进行分析并考虑鉴别诊断。
+Answer: 您好，请您提供以下有关头痛的详细信息，以帮助分析和判断：
+1....
+INFO:openai._base_client:Retrying request to /chat/completions in 0.410041 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator', 'DiagnosisAgent']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: ['DiagnosisAgent']
+INFO:humansa.v2.api_responses:Added tool_use for agent: DiagnosisAgent
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=433
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=452
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_form_user_001_bb52d776_1754163549 for user: test_form_user_001
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_form_user_001_bb52d776_1754163549 (22 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_form_user_001_bb52d776_1754163549 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_bf56e82c87ac_1754163549 for conversation conv_test_form_user_001_bb52d776_1754163549
+ * Serving Quart app 'main'
+ * Debug mode: True
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:6001 (CTRL + C to quit)
+[2025-08-02 12:39:09 -0700] [27344] [INFO] 127.0.0.1:51493 POST /v2/humansa/responses/create 1.1 200 4518 14184647
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_form_user_002
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_form_user_002
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 我想看医生...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=116
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=115
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_form_user_002_13324fdb_1754163550 for user: test_form_user_002
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_form_user_002_13324fdb_1754163550 (7 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_form_user_002_13324fdb_1754163550 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_5ec0ba2f5884_1754163550 for conversation conv_test_form_user_002_13324fdb_1754163550
+[2025-08-02 12:39:10 -0700] [27344] [INFO] 127.0.0.1:51683 POST /v2/humansa/responses/create 1.1 200 1363 1457565
+INFO:humansa.v2.api_responses:Processing response with 2 context messages (7 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_form_user_002
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_form_user_002
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 头痛，想看李明医生...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:🔍 DiagnosisAgent called with: 头痛
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 头痛，想看李明医生
+ERROR:humansa.v2.orchestrator_pattern2_fixed:Form creation error: cannot import name 'AppointmentFormService' from 'src.humansa.v2.forms.form_service' (/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py)
+INFO:openai._base_client:Retrying request to /chat/completions in 0.441549 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🧠 TRACE CAPTURED: Thought: The current language of the user is Chinese. I need to use a tool to help me analyze the sy...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🧠 TRACE CAPTURED: Thought: 我需要进一步了解头痛的具体情况，包括持续时间、发生方式、严重程度、伴随症状、诱发或缓解因素，以及对日常生活的影响，以便更全面地分析风险并提出建议。
+Answer: 您好！关于您的头痛...
+INFO:openai._base_client:Retrying request to /chat/completions in 0.421168 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['DiagnosisAgent', 'FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: ['DiagnosisAgent']
+INFO:humansa.v2.api_responses:Added tool_use for agent: DiagnosisAgent
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=438
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=457
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_form_user_002_13324fdb_1754163550 (14 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_form_user_002_13324fdb_1754163550 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_31980dc72d9f_1754163568 for conversation conv_test_form_user_002_13324fdb_1754163550
+[2025-08-02 12:39:28 -0700] [27344] [INFO] 127.0.0.1:51693 POST /v2/humansa/responses/create 1.1 200 4511 17527434
+[2025-08-02 13:11:21 -0700] [27344] [INFO] 127.0.0.1:63387 GET /health 1.1 200 113 2348
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 我想预约李明医生明天上午9点看头痛...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约李明医生，明天上午9点，症状是头痛
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_user_1754165481.038152
+INFO:src.humansa.v2.forms.form_tools:   Query: 预约李明医生，明天上午9点，症状是头痛
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 预约李明医生，明天上午9点，症状是头痛
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 90%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_id', 'doctor_name', 'department', 'doctor_title', 'appointment_date', 'appointment_time', 'symptoms', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: []
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 90%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: []
+ERROR:src.humansa.v2.forms.form_tools:Error creating appointment form: type object 'AppointmentForm' has no attribute 'create_new'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_tools.py", line 92, in create_appointment_form
+    form = await form_service.create_form(user_id, form_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py", line 28, in create_form
+    form = AppointmentForm.create_new(user_id, initial_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'AppointmentForm' has no attribute 'create_new'
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=156
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=175
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_7a9d2e9e_1754165483 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_7a9d2e9e_1754165483 (22 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_7a9d2e9e_1754165483 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_e085aee2c2e6_1754165483 for conversation conv_test_user_1754165481.038152_7a9d2e9e_1754165483
+[2025-08-02 13:11:23 -0700] [27344] [INFO] 127.0.0.1:63389 POST /v2/humansa/responses/create 1.1 200 1812 2882895
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 我想预约李明医生明天上午9点看头痛...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约李明医生，明天上午9点，症状为头痛
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_user_1754165481.038152
+INFO:src.humansa.v2.forms.form_tools:   Query: 预约李明医生，明天上午9点，症状为头痛
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 预约李明医生，明天上午9点，症状为头痛
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 90%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_id', 'doctor_name', 'department', 'doctor_title', 'appointment_date', 'appointment_time', 'symptoms', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: []
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 90%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: []
+ERROR:src.humansa.v2.forms.form_tools:Error creating appointment form: type object 'AppointmentForm' has no attribute 'create_new'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_tools.py", line 92, in create_appointment_form
+    form = await form_service.create_form(user_id, form_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py", line 28, in create_form
+    form = AppointmentForm.create_new(user_id, initial_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'AppointmentForm' has no attribute 'create_new'
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=161
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=200
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_a337966e_1754165487 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_a337966e_1754165487 (22 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_a337966e_1754165487 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_08d79fc7c917_1754165487 for conversation conv_test_user_1754165481.038152_a337966e_1754165487
+[2025-08-02 13:11:27 -0700] [27344] [INFO] 127.0.0.1:63441 POST /v2/humansa/responses/create 1.1 200 1939 2604080
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 我想看医生...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=123
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=142
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_67d7a069_1754165488 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_67d7a069_1754165488 (7 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_67d7a069_1754165488 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_9ba36e8ce3c3_1754165488 for conversation conv_test_user_1754165481.038152_67d7a069_1754165488
+[2025-08-02 13:11:28 -0700] [27344] [INFO] 127.0.0.1:63531 POST /v2/humansa/responses/create 1.1 200 1521 1107729
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 我最近头痛...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=349
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=368
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_6e6ce8de_1754165493 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_6e6ce8de_1754165493 (7 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_6e6ce8de_1754165493 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_6b60cfde3fdb_1754165493 for conversation conv_test_user_1754165481.038152_6e6ce8de_1754165493
+[2025-08-02 13:11:33 -0700] [27344] [INFO] 127.0.0.1:63555 POST /v2/humansa/responses/create 1.1 200 2774 4455546
+INFO:humansa.v2.api_responses:Processing response with 2 context messages (7 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 想看李明医生...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=142
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=161
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_6e6ce8de_1754165493 (9 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_6e6ce8de_1754165493 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_5ff7d1024507_1754165494 for conversation conv_test_user_1754165481.038152_6e6ce8de_1754165493
+[2025-08-02 13:11:34 -0700] [27344] [INFO] 127.0.0.1:63630 POST /v2/humansa/responses/create 1.1 200 1668 1326938
+INFO:humansa.v2.api_responses:Processing response with 4 context messages (16 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 明天可以吗...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约李明医生，时间为明天
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_user_1754165481.038152
+INFO:src.humansa.v2.forms.form_tools:   Query: 预约李明医生，时间为明天
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 预约李明医生，时间为明天
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 50%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_id', 'doctor_name', 'department', 'doctor_title', 'appointment_date', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: ['appointment_time', 'symptoms']
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 50%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: ['appointment_time', 'symptoms']
+ERROR:src.humansa.v2.forms.form_tools:Error creating appointment form: type object 'AppointmentForm' has no attribute 'create_new'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_tools.py", line 92, in create_appointment_form
+    form = await form_service.create_form(user_id, form_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py", line 28, in create_form
+    form = AppointmentForm.create_new(user_id, initial_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'AppointmentForm' has no attribute 'create_new'
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=141
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=160
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_6e6ce8de_1754165493 (5 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_6e6ce8de_1754165493 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_a2f627a3b272_1754165497 for conversation conv_test_user_1754165481.038152_6e6ce8de_1754165493
+[2025-08-02 13:11:37 -0700] [27344] [INFO] 127.0.0.1:63682 POST /v2/humansa/responses/create 1.1 200 1680 2680861
+INFO:humansa.v2.api_responses:Processing response with 6 context messages (21 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 上午9点...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约李医生，症状是头痛，时间是明天上午9点
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_user_1754165481.038152
+INFO:src.humansa.v2.forms.form_tools:   Query: 预约李医生，症状是头痛，时间是明天上午9点
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 预约李医生，症状是头痛，时间是明天上午9点
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 90%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_name', 'doctor_search_needed', 'appointment_date', 'appointment_time', 'symptoms', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: []
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 90%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: []
+ERROR:src.humansa.v2.forms.form_tools:Error creating appointment form: type object 'AppointmentForm' has no attribute 'create_new'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_tools.py", line 92, in create_appointment_form
+    form = await form_service.create_form(user_id, form_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py", line 28, in create_form
+    form = AppointmentForm.create_new(user_id, initial_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'AppointmentForm' has no attribute 'create_new'
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=134
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=173
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_6e6ce8de_1754165493 (4 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_6e6ce8de_1754165493 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_05e04c28c73b_1754165500 for conversation conv_test_user_1754165481.038152_6e6ce8de_1754165493
+[2025-08-02 13:11:40 -0700] [27344] [INFO] 127.0.0.1:63700 POST /v2/humansa/responses/create 1.1 200 1724 2885764
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 预约张伟医生后天下午3点看胃痛...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约张伟医生后天下午3点看胃痛
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_user_1754165481.038152
+INFO:src.humansa.v2.forms.form_tools:   Query: 预约张伟医生后天下午3点看胃痛
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 预约张伟医生后天下午3点看胃痛
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 90%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_id', 'doctor_name', 'department', 'doctor_title', 'appointment_date', 'appointment_time', 'symptoms', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: []
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 90%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: []
+ERROR:src.humansa.v2.forms.form_tools:Error creating appointment form: type object 'AppointmentForm' has no attribute 'create_new'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_tools.py", line 92, in create_appointment_form
+    form = await form_service.create_form(user_id, form_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py", line 28, in create_form
+    form = AppointmentForm.create_new(user_id, initial_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'AppointmentForm' has no attribute 'create_new'
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=151
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=170
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_8d8aa06c_1754165504 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_8d8aa06c_1754165504 (20 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_8d8aa06c_1754165504 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_a86875b33439_1754165504 for conversation conv_test_user_1754165481.038152_8d8aa06c_1754165504
+[2025-08-02 13:11:44 -0700] [27344] [INFO] 127.0.0.1:63790 POST /v2/humansa/responses/create 1.1 200 1770 3404103
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 预约王芳医生明天下午看孩子咳嗽...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约王芳医生明天下午看孩子咳嗽
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_user_1754165481.038152
+INFO:src.humansa.v2.forms.form_tools:   Query: 预约王芳医生明天下午看孩子咳嗽
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 预约王芳医生明天下午看孩子咳嗽
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 90%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_id', 'doctor_name', 'department', 'doctor_title', 'appointment_date', 'appointment_time', 'time_preference', 'symptoms', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: []
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 90%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: []
+ERROR:src.humansa.v2.forms.form_tools:Error creating appointment form: type object 'AppointmentForm' has no attribute 'create_new'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_tools.py", line 92, in create_appointment_form
+    form = await form_service.create_form(user_id, form_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py", line 28, in create_form
+    form = AppointmentForm.create_new(user_id, initial_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'AppointmentForm' has no attribute 'create_new'
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=205
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=224
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_e24d5b9e_1754165508 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_e24d5b9e_1754165508 (23 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_e24d5b9e_1754165508 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_a2a037917748_1754165508 for conversation conv_test_user_1754165481.038152_e24d5b9e_1754165508
+[2025-08-02 13:11:48 -0700] [27344] [INFO] 127.0.0.1:63882 POST /v2/humansa/responses/create 1.1 200 2098 3494530
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 我最近皮肤过敏很严重...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=298
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=317
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_eb6711ef_1754165513 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_eb6711ef_1754165513 (15 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_eb6711ef_1754165513 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_b009d5ed1437_1754165513 for conversation conv_test_user_1754165481.038152_eb6711ef_1754165513
+[2025-08-02 13:11:53 -0700] [27344] [INFO] 127.0.0.1:63940 POST /v2/humansa/responses/create 1.1 200 2521 4113301
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 我胸痛呼吸困难...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=emergency, length=217
+INFO:humansa.v2.response_agent:✅ Response processed: type=emergency, length=275
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_630b3652_1754165516 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_630b3652_1754165516 (14 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_630b3652_1754165516 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_7bd45faef77f_1754165516 for conversation conv_test_user_1754165481.038152_630b3652_1754165516
+[2025-08-02 13:11:56 -0700] [27344] [INFO] 127.0.0.1:63987 POST /v2/humansa/responses/create 1.1 200 2251 2611523
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 预约李明医生今天下午看诊...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=128
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=167
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_961a7dcd_1754165517 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_961a7dcd_1754165517 (15 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_961a7dcd_1754165517 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_9c7ace7e8e80_1754165517 for conversation conv_test_user_1754165481.038152_961a7dcd_1754165517
+[2025-08-02 13:11:57 -0700] [27344] [INFO] 127.0.0.1:64005 POST /v2/humansa/responses/create 1.1 200 1690 1186110
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 预约李明医生明天早上看诊...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约李明医生明天早上看诊
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_user_1754165481.038152
+INFO:src.humansa.v2.forms.form_tools:   Query: 预约李明医生明天早上看诊
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 预约李明医生明天早上看诊
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 50%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_id', 'doctor_name', 'department', 'doctor_title', 'appointment_date', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: ['appointment_time', 'symptoms']
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 50%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: ['appointment_time', 'symptoms']
+ERROR:src.humansa.v2.forms.form_tools:Error creating appointment form: type object 'AppointmentForm' has no attribute 'create_new'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_tools.py", line 92, in create_appointment_form
+    form = await form_service.create_form(user_id, form_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py", line 28, in create_form
+    form = AppointmentForm.create_new(user_id, initial_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'AppointmentForm' has no attribute 'create_new'
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=147
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=166
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_34299e5d_1754165520 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_34299e5d_1754165520 (16 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_34299e5d_1754165520 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_54ab4b0658e1_1754165520 for conversation conv_test_user_1754165481.038152_34299e5d_1754165520
+[2025-08-02 13:12:00 -0700] [27344] [INFO] 127.0.0.1:64011 POST /v2/humansa/responses/create 1.1 200 1732 2495522
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 预约李明医生后天上午10点看诊...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约李明医生后天上午10点看诊
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_user_1754165481.038152
+INFO:src.humansa.v2.forms.form_tools:   Query: 预约李明医生后天上午10点看诊
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 预约李明医生后天上午10点看诊
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 75%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_id', 'doctor_name', 'department', 'doctor_title', 'appointment_date', 'appointment_time', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: ['symptoms']
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 75%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: ['symptoms']
+ERROR:src.humansa.v2.forms.form_tools:Error creating appointment form: type object 'AppointmentForm' has no attribute 'create_new'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_tools.py", line 92, in create_appointment_form
+    form = await form_service.create_form(user_id, form_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py", line 28, in create_form
+    form = AppointmentForm.create_new(user_id, initial_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'AppointmentForm' has no attribute 'create_new'
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=148
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=167
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_2085f66f_1754165522 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_2085f66f_1754165522 (17 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_2085f66f_1754165522 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_11588082519a_1754165522 for conversation conv_test_user_1754165481.038152_2085f66f_1754165522
+[2025-08-02 13:12:02 -0700] [27344] [INFO] 127.0.0.1:64056 POST /v2/humansa/responses/create 1.1 200 1746 2094494
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 预约李明医生下周一看诊...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=129
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=148
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_70d5755e_1754165523 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_70d5755e_1754165523 (14 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_70d5755e_1754165523 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_9a46e69bb44f_1754165523 for conversation conv_test_user_1754165481.038152_70d5755e_1754165523
+[2025-08-02 13:12:03 -0700] [27344] [INFO] 127.0.0.1:64070 POST /v2/humansa/responses/create 1.1 200 1594 1303027
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 预约李明医生这周五下午看诊...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约李明医生这周五下午看诊
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_user_1754165481.038152
+INFO:src.humansa.v2.forms.form_tools:   Query: 预约李明医生这周五下午看诊
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 预约李明医生这周五下午看诊
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 75%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_id', 'doctor_name', 'department', 'doctor_title', 'appointment_date', 'appointment_time', 'time_preference', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: ['symptoms']
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 75%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: ['symptoms']
+ERROR:src.humansa.v2.forms.form_tools:Error creating appointment form: type object 'AppointmentForm' has no attribute 'create_new'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_tools.py", line 92, in create_appointment_form
+    form = await form_service.create_form(user_id, form_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py", line 28, in create_form
+    form = AppointmentForm.create_new(user_id, initial_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'AppointmentForm' has no attribute 'create_new'
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=152
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=171
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_f402cf57_1754165525 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_f402cf57_1754165525 (16 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_f402cf57_1754165525 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_42a6de04c55f_1754165525 for conversation conv_test_user_1754165481.038152_f402cf57_1754165525
+[2025-08-02 13:12:05 -0700] [27344] [INFO] 127.0.0.1:64076 POST /v2/humansa/responses/create 1.1 200 1768 2167917
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 我想预约看医生...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=112
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=151
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_c932efa5_1754165527 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_c932efa5_1754165527 (9 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_c932efa5_1754165527 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_0f20d3754f38_1754165527 for conversation conv_test_user_1754165481.038152_c932efa5_1754165527
+[2025-08-02 13:12:07 -0700] [27344] [INFO] 127.0.0.1:64128 POST /v2/humansa/responses/create 1.1 200 1565 988093
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 我头痛发烧还咳嗽，想看医生...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=164
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=163
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_9b2a75a9_1754165529 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_9b2a75a9_1754165529 (23 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_9b2a75a9_1754165529 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_ee312d02f8fc_1754165529 for conversation conv_test_user_1754165481.038152_9b2a75a9_1754165529
+[2025-08-02 13:12:09 -0700] [27344] [INFO] 127.0.0.1:64134 POST /v2/humansa/responses/create 1.1 200 1708 2048910
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 我想预约不存在医生明天看病...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=118
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=137
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_9f27b435_1754165531 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_9f27b435_1754165531 (15 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_9f27b435_1754165531 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_c249e58dd502_1754165531 for conversation conv_test_user_1754165481.038152_9f27b435_1754165531
+[2025-08-02 13:12:11 -0700] [27344] [INFO] 127.0.0.1:64184 POST /v2/humansa/responses/create 1.1 200 1540 1389520
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 预约李明医生昨天上午...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=124
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=143
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_2f7e6c23_1754165533 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_2f7e6c23_1754165533 (13 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_2f7e6c23_1754165533 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_ab054b6e2dc3_1754165533 for conversation conv_test_user_1754165481.038152_2f7e6c23_1754165533
+[2025-08-02 13:12:13 -0700] [27344] [INFO] 127.0.0.1:64192 POST /v2/humansa/responses/create 1.1 200 1557 1603632
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 预约李明医生明天上午看头痛...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约李明医生明天上午看头痛
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_user_1754165481.038152
+INFO:src.humansa.v2.forms.form_tools:   Query: 预约李明医生明天上午看头痛
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 预约李明医生明天上午看头痛
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 90%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_id', 'doctor_name', 'department', 'doctor_title', 'appointment_date', 'appointment_time', 'time_preference', 'symptoms', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: []
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 90%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: []
+ERROR:src.humansa.v2.forms.form_tools:Error creating appointment form: type object 'AppointmentForm' has no attribute 'create_new'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_tools.py", line 92, in create_appointment_form
+    form = await form_service.create_form(user_id, form_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py", line 28, in create_form
+    form = AppointmentForm.create_new(user_id, initial_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'AppointmentForm' has no attribute 'create_new'
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=161
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=180
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_33068b67_1754165536 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_33068b67_1754165536 (17 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_33068b67_1754165536 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_555ce3e6b3f1_1754165536 for conversation conv_test_user_1754165481.038152_33068b67_1754165536
+[2025-08-02 13:12:16 -0700] [27344] [INFO] 127.0.0.1:64207 POST /v2/humansa/responses/create 1.1 200 1822 2334560
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 预约张医生明天下午三点半...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=127
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=166
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_846dc1e1_1754165538 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_846dc1e1_1754165538 (14 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_846dc1e1_1754165538 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_4ee37916d015_1754165538 for conversation conv_test_user_1754165481.038152_846dc1e1_1754165538
+[2025-08-02 13:12:18 -0700] [27344] [INFO] 127.0.0.1:64217 POST /v2/humansa/responses/create 1.1 200 1685 1417629
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 我想挂儿科门诊，孩子发烧了...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=140
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=139
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_d2f545b0_1754165540 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_d2f545b0_1754165540 (21 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_d2f545b0_1754165540 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_41582a594846_1754165540 for conversation conv_test_user_1754165481.038152_d2f545b0_1754165540
+[2025-08-02 13:12:20 -0700] [27344] [INFO] 127.0.0.1:64227 POST /v2/humansa/responses/create 1.1 200 1564 1645873
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 预约李明医生...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=120
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=139
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_cf06a0a2_1754165542 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_cf06a0a2_1754165542 (8 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_cf06a0a2_1754165542 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_51670fc711f2_1754165542 for conversation conv_test_user_1754165481.038152_cf06a0a2_1754165542
+[2025-08-02 13:12:22 -0700] [27344] [INFO] 127.0.0.1:64237 POST /v2/humansa/responses/create 1.1 200 1510 1227505
+INFO:humansa.v2.api_responses:Processing response with 2 context messages (8 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 确认...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=119
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=138
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_cf06a0a2_1754165542 (1 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_cf06a0a2_1754165542 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_bff500779be1_1754165543 for conversation conv_test_user_1754165481.038152_cf06a0a2_1754165542
+[2025-08-02 13:12:23 -0700] [27344] [INFO] 127.0.0.1:64247 POST /v2/humansa/responses/create 1.1 200 1505 948297
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 医生，我最近老是失眠...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=general, length=215
+INFO:humansa.v2.response_agent:✅ Response processed: type=general, length=214
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_0db6ff89_1754165546 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_0db6ff89_1754165546 (12 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_0db6ff89_1754165546 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_030c3ab3b982_1754165546 for conversation conv_test_user_1754165481.038152_0db6ff89_1754165546
+[2025-08-02 13:12:26 -0700] [27344] [INFO] 127.0.0.1:64287 POST /v2/humansa/responses/create 1.1 200 1893 2221923
+INFO:humansa.v2.api_responses:Processing response with 2 context messages (12 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 已经一个多星期了，想找个医生看看...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=191
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=230
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_0db6ff89_1754165546 (17 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_0db6ff89_1754165546 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_1ac2bca053ae_1754165548 for conversation conv_test_user_1754165481.038152_0db6ff89_1754165546
+[2025-08-02 13:12:28 -0700] [27344] [INFO] 127.0.0.1:64299 POST /v2/humansa/responses/create 1.1 200 2114 2133277
+INFO:humansa.v2.api_responses:Processing response with 4 context messages (29 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 听说刘洋医生不错...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=151
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=170
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_0db6ff89_1754165546 (11 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_0db6ff89_1754165546 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_0080fc100232_1754165550 for conversation conv_test_user_1754165481.038152_0db6ff89_1754165546
+[2025-08-02 13:12:30 -0700] [27344] [INFO] 127.0.0.1:64331 POST /v2/humansa/responses/create 1.1 200 1734 1819688
+INFO:humansa.v2.api_responses:Processing response with 6 context messages (40 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 最近什么时候有号？...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:🏥 AppointmentAgent called with: 刘洋医生最近的预约时间
+INFO:openai._base_client:Retrying request to /chat/completions in 0.422438 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🧠 TRACE CAPTURED: Thought: The user is asking for the soonest available appointment with 刘洋医生. I need to use the searc...
+INFO:humansa.v2.agents.appointment_agent:🔍 SEARCH_SLOTS called with: doctor_id=刘洋医生, specialty=None, date_from=None, date_to=None, time_preference=None
+INFO:humansa.v2.agents.appointment_agent:✅ Found 0 available appointment slots
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🧠 TRACE CAPTURED: Thought: There was no response from the tool. I need to try searching for available slots with 刘洋医生 ...
+INFO:humansa.v2.agents.appointment_agent:🔍 SEARCH_SLOTS called with: doctor_id=刘洋医生, specialty=None, date_from=None, date_to=None, time_preference=None
+INFO:humansa.v2.agents.appointment_agent:✅ Found 0 available appointment slots
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🧠 TRACE CAPTURED: Thought: The tool did not return any results. There may be a technical issue or missing data. I will...
+INFO:humansa.v2.agents.appointment_agent:🔍 SEARCH_SLOTS called with: doctor_id=None, specialty=None, date_from=None, date_to=None, time_preference=None
+INFO:humansa.v2.agents.appointment_agent:✅ Found 20 available appointment slots
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.tools.humansa_tools:🧠 TRACE CAPTURED: Thought: The available slots do not include 刘洋医生, so there are currently no可预约时间 for 刘洋医生。I should i...
+INFO:openai._base_client:Retrying request to /chat/completions in 0.451427 seconds
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['AppointmentAgent']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: ['AppointmentAgent']
+INFO:humansa.v2.api_responses:Added tool_use for agent: AppointmentAgent
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=139
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=158
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_0db6ff89_1754165546 (11 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_0db6ff89_1754165546 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_ebeabf43b027_1754165561 for conversation conv_test_user_1754165481.038152_0db6ff89_1754165546
+[2025-08-02 13:12:41 -0700] [27344] [INFO] 127.0.0.1:64343 POST /v2/humansa/responses/create 1.1 200 2322 10964704
+INFO:humansa.v2.api_responses:Processing response with 6 context messages (39 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 那就明天上午吧...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 明天上午预约医生
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_user_1754165481.038152
+INFO:src.humansa.v2.forms.form_tools:   Query: 明天上午预约医生
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 明天上午预约医生
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 75%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_name', 'doctor_search_needed', 'appointment_date', 'appointment_time', 'time_preference', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: ['symptoms']
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 75%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: ['symptoms']
+ERROR:src.humansa.v2.forms.form_tools:Error creating appointment form: type object 'AppointmentForm' has no attribute 'create_new'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_tools.py", line 92, in create_appointment_form
+    form = await form_service.create_form(user_id, form_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py", line 28, in create_form
+    form = AppointmentForm.create_new(user_id, initial_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'AppointmentForm' has no attribute 'create_new'
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=152
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=171
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_0db6ff89_1754165546 (9 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_0db6ff89_1754165546 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_90931ba652b5_1754165563 for conversation conv_test_user_1754165481.038152_0db6ff89_1754165546
+[2025-08-02 13:12:43 -0700] [27344] [INFO] 127.0.0.1:64492 POST /v2/humansa/responses/create 1.1 200 1758 2280008
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 给我自己预约李明医生明天上午看头痛...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约李明医生，时间为明天上午，症状为头痛
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_user_1754165481.038152
+INFO:src.humansa.v2.forms.form_tools:   Query: 预约李明医生，时间为明天上午，症状为头痛
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 预约李明医生，时间为明天上午，症状为头痛
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 90%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_id', 'doctor_name', 'department', 'doctor_title', 'appointment_date', 'appointment_time', 'time_preference', 'symptoms', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: []
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 90%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: []
+ERROR:src.humansa.v2.forms.form_tools:Error creating appointment form: type object 'AppointmentForm' has no attribute 'create_new'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_tools.py", line 92, in create_appointment_form
+    form = await form_service.create_form(user_id, form_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py", line 28, in create_form
+    form = AppointmentForm.create_new(user_id, initial_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'AppointmentForm' has no attribute 'create_new'
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=164
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=183
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_23c5be86_1754165566 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_23c5be86_1754165566 (22 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_23c5be86_1754165566 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_9fd4c47acd7e_1754165566 for conversation conv_test_user_1754165481.038152_23c5be86_1754165566
+[2025-08-02 13:12:46 -0700] [27344] [INFO] 127.0.0.1:64510 POST /v2/humansa/responses/create 1.1 200 1864 2903886
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 给我妈妈预约王芳医生后天下午看高血压...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 帮我妈妈预约王芳医生后天下午看高血压
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_user_1754165481.038152
+INFO:src.humansa.v2.forms.form_tools:   Query: 帮我妈妈预约王芳医生后天下午看高血压
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 帮我妈妈预约王芳医生后天下午看高血压
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 75%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_id', 'doctor_name', 'department', 'doctor_title', 'appointment_date', 'appointment_time', 'time_preference', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: ['symptoms']
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 75%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: ['symptoms']
+ERROR:src.humansa.v2.forms.form_tools:Error creating appointment form: type object 'AppointmentForm' has no attribute 'create_new'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_tools.py", line 92, in create_appointment_form
+    form = await form_service.create_form(user_id, form_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py", line 28, in create_form
+    form = AppointmentForm.create_new(user_id, initial_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'AppointmentForm' has no attribute 'create_new'
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=143
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=182
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_383842bf_1754165569 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_383842bf_1754165569 (27 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_383842bf_1754165569 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_dde72e46792a_1754165569 for conversation conv_test_user_1754165481.038152_383842bf_1754165569
+[2025-08-02 13:12:49 -0700] [27344] [INFO] 127.0.0.1:64558 POST /v2/humansa/responses/create 1.1 200 1842 2429431
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 确认...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=[]
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=131
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=150
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_8e0f3d03_1754165571 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_8e0f3d03_1754165571 (1 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_8e0f3d03_1754165571 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_3085d33ac573_1754165571 for conversation conv_test_user_1754165481.038152_8e0f3d03_1754165571
+[2025-08-02 13:12:51 -0700] [27344] [INFO] 127.0.0.1:64574 POST /v2/humansa/responses/create 1.1 200 1552 1485126
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 预约李明医生明天上午看诊...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约李明医生明天上午看诊
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_user_1754165481.038152
+INFO:src.humansa.v2.forms.form_tools:   Query: 预约李明医生明天上午看诊
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 预约李明医生明天上午看诊
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 75%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_id', 'doctor_name', 'department', 'doctor_title', 'appointment_date', 'appointment_time', 'time_preference', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: ['symptoms']
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 75%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: ['symptoms']
+ERROR:src.humansa.v2.forms.form_tools:Error creating appointment form: type object 'AppointmentForm' has no attribute 'create_new'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_tools.py", line 92, in create_appointment_form
+    form = await form_service.create_form(user_id, form_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py", line 28, in create_form
+    form = AppointmentForm.create_new(user_id, initial_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'AppointmentForm' has no attribute 'create_new'
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=163
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=182
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_68aa049f_1754165574 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_68aa049f_1754165574 (15 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_68aa049f_1754165574 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_8835b1ab1407_1754165574 for conversation conv_test_user_1754165481.038152_68aa049f_1754165574
+[2025-08-02 13:12:54 -0700] [27344] [INFO] 127.0.0.1:64584 POST /v2/humansa/responses/create 1.1 200 1824 2922137
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_user_1754165481.038152
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_user_1754165481.038152
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 预约张伟医生明天下午2点看胃痛...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约张伟医生明天下午2点看胃痛
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_user_1754165481.038152
+INFO:src.humansa.v2.forms.form_tools:   Query: 预约张伟医生明天下午2点看胃痛
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 预约张伟医生明天下午2点看胃痛
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 90%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_id', 'doctor_name', 'department', 'doctor_title', 'appointment_date', 'appointment_time', 'symptoms', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: []
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 90%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: []
+ERROR:src.humansa.v2.forms.form_tools:Error creating appointment form: type object 'AppointmentForm' has no attribute 'create_new'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_tools.py", line 92, in create_appointment_form
+    form = await form_service.create_form(user_id, form_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py", line 28, in create_form
+    form = AppointmentForm.create_new(user_id, initial_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'AppointmentForm' has no attribute 'create_new'
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=154
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=173
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1754165481.038152_76746f35_1754165578 for user: test_user_1754165481.038152
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1754165481.038152_76746f35_1754165578 (20 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1754165481.038152_76746f35_1754165578 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_d9e685a27f20_1754165578 for conversation conv_test_user_1754165481.038152_76746f35_1754165578
+[2025-08-02 13:12:58 -0700] [27344] [INFO] 127.0.0.1:64640 POST /v2/humansa/responses/create 1.1 200 1788 2900103
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.api_responses:Using Pattern 2 orchestrator (FunctionAgent)
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_test_test_form_user_001
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': []}
+INFO:humansa.v2.orchestrator_pattern2_fixed:Loaded patient memory for test_form_user_001
+INFO:humansa.v2.orchestrator_pattern2_fixed:Running Pattern 2 workflow with query: 我想预约李明医生明天上午9点看头痛...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.orchestrator_pattern2_fixed:📋 Creating appointment form for: 预约李明医生，明天上午9点，症状是头痛
+INFO:src.humansa.v2.forms.form_tools:📋 Creating appointment form for user test_form_user_001
+INFO:src.humansa.v2.forms.form_tools:   Query: 预约李明医生，明天上午9点，症状是头痛
+INFO:src.humansa.v2.forms.form_filling_agent:🤖 Form Filling Agent processing: 预约李明医生，明天上午9点，症状是头痛
+INFO:src.humansa.v2.forms.form_filling_agent:✅ Form filled with confidence: 90%
+INFO:src.humansa.v2.forms.form_filling_agent:   Extracted fields: ['doctor_id', 'doctor_name', 'department', 'doctor_title', 'appointment_date', 'appointment_time', 'symptoms', 'is_urgent']
+INFO:src.humansa.v2.forms.form_filling_agent:   Missing fields: []
+INFO:src.humansa.v2.forms.form_tools:   Extraction confidence: 90%
+INFO:src.humansa.v2.forms.form_tools:   Missing fields: []
+ERROR:src.humansa.v2.forms.form_tools:Error creating appointment form: type object 'AppointmentForm' has no attribute 'create_new'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_tools.py", line 92, in create_appointment_form
+    form = await form_service.create_form(user_id, form_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/forms/form_service.py", line 28, in create_form
+    form = AppointmentForm.create_new(user_id, initial_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'AppointmentForm' has no attribute 'create_new'
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:humansa.v2.api_responses:Pattern 2 workflow state: agents_called=['FormCreator']
+INFO:humansa.v2.api_responses:Pattern 2 agent outputs: []
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=151
+INFO:humansa.v2.response_agent:✅ Response processed: type=appointment, length=170
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_form_user_001_8cbe228a_1754165589 for user: test_form_user_001
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_form_user_001_8cbe228a_1754165589 (22 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_form_user_001_8cbe228a_1754165589 (0 tokens)
+INFO:humansa.v2.response_manager:Created response resp_8a2dda3d5434_1754165589 for conversation conv_test_form_user_001_8cbe228a_1754165589
+[2025-08-02 13:13:09 -0700] [27344] [INFO] 127.0.0.1:64771 POST /v2/humansa/responses/create 1.1 200 1773 3389502
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python3
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:🔄 Attempting to import document converter endpoints...
+INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
+INFO:chat.utils.document_converter:❌ docx2pdf not available
+INFO:chat.utils.document_converter:❌ pypandoc not available
+INFO:chat.utils.document_converter:❌ python-docx not available
+INFO:chat.utils.document_converter:❌ openpyxl not available
+INFO:chat.utils.document_converter:❌ reportlab not available
+INFO:__main__:✅ Successfully imported document converter blueprint
+INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:🔄 Registering Humansa endpoints...
+INFO:humansa.postgres.database:HumansaDatabase initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:__main__:✅ Humansa V2 Conversation API endpoints registered
+INFO:__main__:✅ Humansa V2 Responses API endpoints registered
+INFO:__main__:✅ Humansa V2 Forms API endpoints registered
+INFO:__main__:✅ Mem0 API endpoints registered
+INFO:__main__:✅ Humansa v2 blueprint registered
+INFO:__main__:✅ Humansa endpoints registered successfully
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:6001
+INFO:__main__:
+INFO:__main__:📋 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
+INFO:__main__:
+INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
+INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
+INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
+INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
+INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
+INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
+INFO:__main__:
+INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
+INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
+INFO:__main__:   - /v2/humansa/memory/search - Search user memories
+INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
+INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
+INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
+INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
+INFO:__main__:   - /o3-demo - O3 reasoning demo
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
+INFO:__main__:✅ Mem0 memory layer initialized for Humansa
+INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
+INFO:__main__:   Environment: test
+INFO:__main__:✅ Database pool created successfully
+INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
+INFO:humansa.v2.api:Using Azure OpenAI for LLM
+INFO:humansa.v2.api:📦 Initializing HUMANSA V2 with Consolidated Tools
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince20: The `__fields__` attribute is deprecated, use `model_fields` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince20: The `__fields_set__` attribute is deprecated, use `model_fields_set` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince211: Accessing the 'model_computed_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince211: Accessing the 'model_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+  value = getter(object, key)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+INFO:humansa.v2.api:Humansa v2 system initialized successfully
+INFO:__main__:✅ Humansa v2 system initialized with Consolidated Tools
+INFO:humansa.v2.api_responses:✅ Using Mem0 for memory management
+INFO:humansa.v2.api_responses:✅ Memory tables initialized
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+INFO:humansa.v2.orchestrator_agent_enhanced:Initialized Enhanced HumansaOrchestratorAgent with 6 agent tools
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ Initialized consolidated tools (7 core functions)
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ HumansaOrchestratorAgentConsolidated initialized with dynamic tool loading
+INFO:humansa.v2.api_responses:✅ Consolidated orchestrator initialized (7 tools with dynamic loading)
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_transparent:✅ Initialized transparent orchestrator with tool capture
+INFO:humansa.v2.orchestrator_agent_transparent:✅ HumansaOrchestratorAgentTransparent initialized
+INFO:humansa.v2.api_responses:✅ Transparent orchestrator initialized (captures tool calls)
+INFO:humansa.v2.agents.product_agent:✅ Initialized ProductAgent with 134 products (staged loading)
+INFO:humansa.v2.api_responses:   ✓ ProductAgent initialized
+INFO:humansa.v2.api_responses:   ✓ GeneralMedicalAgent initialized
+INFO:humansa.v2.api_responses:   ✓ AppointmentAgent initialized
+INFO:humansa.v2.api_responses:   ✓ DiagnosisAgent initialized
+INFO:humansa.v2.api_responses:   ✓ MedicationAgent initialized
+INFO:humansa.v2.orchestrator_pattern2_fixed:✅ Form tools enabled for appointment booking
+INFO:humansa.v2.orchestrator_pattern2_fixed:✅ Initialized Pattern 2 Orchestrator (Fixed) with 10 agent tools
+INFO:humansa.v2.api_responses:✅ Pattern 2 orchestrator (fixed) initialized with 7 agents
+INFO:humansa.v2.api_responses:✅ Responses API orchestrators initialized successfully
+INFO:__main__:✅ Humansa v2 Responses API initialized
+[2025-08-02 13:13:49 -0700] [27344] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:6001 (CTRL + C to quit)
+ * Serving Quart app 'main'
+ * Debug mode: True
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:6001 (CTRL + C to quit)

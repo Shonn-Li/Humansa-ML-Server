@@ -1,0 +1,1267 @@
+2025-08-01 16:53:45,973 - __main__ - INFO - ================================================================================
+2025-08-01 16:53:45,974 - __main__ - INFO - Starting Pattern 2 Test Suite
+2025-08-01 16:53:45,974 - __main__ - INFO - Test environment: http://localhost:6001
+2025-08-01 16:53:45,974 - __main__ - INFO - Expected orchestrator: Pattern 2 (FunctionAgent)
+2025-08-01 16:53:45,974 - __main__ - INFO - ================================================================================
+2025-08-01 16:53:45,982 - __main__ - INFO - Health check passed
+2025-08-01 16:53:45,982 - __main__ - INFO - 
+============================================================
+2025-08-01 16:53:45,983 - __main__ - INFO - SINGLE-TURN TESTS
+2025-08-01 16:53:45,983 - __main__ - INFO - ============================================================
+2025-08-01 16:53:45,983 - __main__ - INFO - Testing Pattern 2 - Test #1: Basic Identity Query
+2025-08-01 16:53:45,983 - __main__ - INFO - Query: 你是谁？
+2025-08-01 16:53:45,983 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:53:45,987 - __main__ - INFO - 📊 Usage: {'completion_tokens': 61, 'prompt_tokens': 1, 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_tokens': 62}
+2025-08-01 16:53:45,988 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 16:53:46,489 - __main__ - INFO - Testing Pattern 2 - Test #2: Company Background
+2025-08-01 16:53:46,489 - __main__ - INFO - Query: 介绍一下诺亚新舟
+2025-08-01 16:53:46,489 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:53:46,492 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:53:46,492 - __main__ - INFO - Tools used: []
+2025-08-01 16:53:46,492 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:53:46,492 - __main__ - WARNING - Test 2 failed - missing keywords: ['以爱行舟', '亲近相守', '500多位', '三甲主任级']
+2025-08-01 16:53:46,993 - __main__ - INFO - Testing Pattern 2 - Test #3: Service Capabilities
+2025-08-01 16:53:46,993 - __main__ - INFO - Query: 你能做什么？
+2025-08-01 16:53:46,993 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:53:46,997 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:46,997 - __main__ - ERROR - Test 3 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:47,498 - __main__ - INFO - Testing Pattern 2 - Test #4: Brand Slogan
+2025-08-01 16:53:47,498 - __main__ - INFO - Query: 诺亚新舟的口号是什么？
+2025-08-01 16:53:47,498 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:53:47,500 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:53:47,500 - __main__ - INFO - Tools used: []
+2025-08-01 16:53:47,500 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:53:47,500 - __main__ - WARNING - Test 4 failed - missing keywords: ['以爱行舟', '亲近相守']
+2025-08-01 16:53:48,001 - __main__ - INFO - Testing Pattern 2 - Test #5: English Identity Query
+2025-08-01 16:53:48,001 - __main__ - INFO - Query: Who are you?
+2025-08-01 16:53:48,001 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:53:48,004 - __main__ - INFO - 📊 Usage: {'completion_tokens': 61, 'prompt_tokens': 3, 'reasoning_tokens': 0, 'tool_tokens': 0, 'total_tokens': 64}
+2025-08-01 16:53:48,004 - __main__ - INFO - Orchestrator: pattern2
+2025-08-01 16:53:48,004 - __main__ - WARNING - Test 5 failed - missing keywords: ['health', 'assistant', 'medical']
+2025-08-01 16:53:48,505 - __main__ - INFO - Testing Pattern 2 - Test #6: Find Cardiologist
+2025-08-01 16:53:48,506 - __main__ - INFO - Query: 我想找一个心脏科医生
+2025-08-01 16:53:48,506 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:53:48,507 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:53:48,507 - __main__ - INFO - Tools used: []
+2025-08-01 16:53:48,508 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:53:48,508 - __main__ - WARNING - Test 6 failed - missing keywords: ['心', '科', '医生']
+2025-08-01 16:53:49,009 - __main__ - INFO - Testing Pattern 2 - Test #7: Find Doctors by City
+2025-08-01 16:53:49,009 - __main__ - INFO - Query: 上海有哪些医生？
+2025-08-01 16:53:49,009 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:53:49,012 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:49,012 - __main__ - ERROR - Test 7 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:49,513 - __main__ - INFO - Testing Pattern 2 - Test #8: Doctor by Name
+2025-08-01 16:53:49,513 - __main__ - INFO - Query: 张医生在吗？
+2025-08-01 16:53:49,513 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:53:49,516 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:53:49,516 - __main__ - INFO - Tools used: []
+2025-08-01 16:53:49,516 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:53:49,516 - __main__ - WARNING - Test 8 failed - missing keywords: ['张', '医生']
+2025-08-01 16:53:50,017 - __main__ - INFO - Testing Pattern 2 - Test #9: Doctor Availability
+2025-08-01 16:53:50,017 - __main__ - INFO - Query: 哪个医生现在有号？
+2025-08-01 16:53:50,017 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:53:50,020 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:50,020 - __main__ - ERROR - Test 9 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:50,522 - __main__ - INFO - Testing Pattern 2 - Test #10: Specialist Search
+2025-08-01 16:53:50,522 - __main__ - INFO - Query: 有神经内科的专家吗？
+2025-08-01 16:53:50,522 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:53:50,524 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:53:50,524 - __main__ - INFO - Tools used: []
+2025-08-01 16:53:50,524 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:53:50,524 - __main__ - WARNING - Test 10 failed - missing keywords: ['神经', '专家']
+2025-08-01 16:53:51,025 - __main__ - INFO - Testing Pattern 2 - Test #11: Book Appointment
+2025-08-01 16:53:51,025 - __main__ - INFO - Query: 我想预约明天上午的骨科
+2025-08-01 16:53:51,025 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:53:51,028 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:51,028 - __main__ - ERROR - Test 11 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:51,529 - __main__ - INFO - Testing Pattern 2 - Test #12: Check Availability
+2025-08-01 16:53:51,530 - __main__ - INFO - Query: 查看下周的可预约时间
+2025-08-01 16:53:51,530 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:53:51,532 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:53:51,532 - __main__ - INFO - Tools used: []
+2025-08-01 16:53:51,532 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:53:51,532 - __main__ - WARNING - Test 12 failed - missing keywords: ['下周', '时间', '预约']
+2025-08-01 16:53:52,033 - __main__ - INFO - Testing Pattern 2 - Test #13: Cancel Appointment
+2025-08-01 16:53:52,033 - __main__ - INFO - Query: 取消我的预约
+2025-08-01 16:53:52,033 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:53:52,038 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:52,038 - __main__ - ERROR - Test 13 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:52,538 - __main__ - INFO - Testing Pattern 2 - Test #14: Reschedule
+2025-08-01 16:53:52,539 - __main__ - INFO - Query: 改约到下周三
+2025-08-01 16:53:52,539 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:53:52,542 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:53:52,542 - __main__ - INFO - Tools used: []
+2025-08-01 16:53:52,542 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:53:52,543 - __main__ - WARNING - Test 14 failed - missing keywords: ['改', '下周三']
+2025-08-01 16:53:53,044 - __main__ - INFO - Testing Pattern 2 - Test #15: Emergency Appointment
+2025-08-01 16:53:53,044 - __main__ - INFO - Query: 能加急预约吗？
+2025-08-01 16:53:53,044 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:53:53,047 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:53,048 - __main__ - ERROR - Test 15 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:53,548 - __main__ - INFO - Testing Pattern 2 - Test #16: Nearest Clinic
+2025-08-01 16:53:53,548 - __main__ - INFO - Query: 离我最近的诊所在哪？
+2025-08-01 16:53:53,548 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:53:53,550 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:53:53,550 - __main__ - INFO - Tools used: []
+2025-08-01 16:53:53,550 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:53:53,550 - __main__ - WARNING - Test 16 failed - missing keywords: ['诊所', '近', '地址']
+2025-08-01 16:53:54,052 - __main__ - INFO - Testing Pattern 2 - Test #17: Service Price
+2025-08-01 16:53:54,052 - __main__ - INFO - Query: 血常规多少钱？
+2025-08-01 16:53:54,052 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:53:54,056 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:54,056 - __main__ - ERROR - Test 17 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:54,557 - __main__ - INFO - Testing Pattern 2 - Test #18: Health Packages
+2025-08-01 16:53:54,557 - __main__ - INFO - Query: 体检套餐有哪些？
+2025-08-01 16:53:54,557 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:53:54,559 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:53:54,559 - __main__ - INFO - Tools used: []
+2025-08-01 16:53:54,559 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:53:54,559 - __main__ - WARNING - Test 18 failed - missing keywords: ['体检', '套餐']
+2025-08-01 16:53:55,060 - __main__ - INFO - Testing Pattern 2 - Test #19: Clinic Hours
+2025-08-01 16:53:55,060 - __main__ - INFO - Query: 诊所几点开门？
+2025-08-01 16:53:55,060 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:53:55,064 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:55,064 - __main__ - ERROR - Test 19 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:55,564 - __main__ - INFO - Testing Pattern 2 - Test #20: Contact Info
+2025-08-01 16:53:55,565 - __main__ - INFO - Query: 上海诊所的电话是多少？
+2025-08-01 16:53:55,565 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:53:55,568 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:53:55,568 - __main__ - INFO - Tools used: []
+2025-08-01 16:53:55,568 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:53:55,568 - __main__ - WARNING - Test 20 failed - missing keywords: ['上海', '电话', '联系']
+2025-08-01 16:53:56,069 - __main__ - INFO - Testing Pattern 2 - Test #21: Sleep Issues
+2025-08-01 16:53:56,069 - __main__ - INFO - Query: 我最近总是失眠怎么办？
+2025-08-01 16:53:56,069 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:53:56,071 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:56,071 - __main__ - ERROR - Test 21 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:56,572 - __main__ - INFO - Testing Pattern 2 - Test #22: Child Fever
+2025-08-01 16:53:56,572 - __main__ - INFO - Query: 孩子发烧39度该怎么处理？
+2025-08-01 16:53:56,572 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:53:56,575 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:53:56,575 - __main__ - INFO - Tools used: []
+2025-08-01 16:53:56,575 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:53:56,575 - __main__ - WARNING - Test 22 failed - missing keywords: ['发烧', '39', '处理', '孩子']
+2025-08-01 16:53:57,077 - __main__ - INFO - Testing Pattern 2 - Test #23: Emergency Symptoms
+2025-08-01 16:53:57,077 - __main__ - INFO - Query: 胸口疼痛呼吸困难
+2025-08-01 16:53:57,077 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:53:57,085 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:57,085 - __main__ - ERROR - Test 23 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:57,586 - __main__ - INFO - Testing Pattern 2 - Test #24: Medication Query
+2025-08-01 16:53:57,586 - __main__ - INFO - Query: 高血压能吃什么药？
+2025-08-01 16:53:57,587 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:53:57,589 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:53:57,589 - __main__ - INFO - Tools used: []
+2025-08-01 16:53:57,589 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:53:57,589 - __main__ - WARNING - Test 24 failed - missing keywords: ['高血压', '药', '医生']
+2025-08-01 16:53:58,090 - __main__ - INFO - Testing Pattern 2 - Test #25: Test Results
+2025-08-01 16:53:58,090 - __main__ - INFO - Query: 体检报告显示血糖偏高
+2025-08-01 16:53:58,090 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:53:58,095 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:58,095 - __main__ - ERROR - Test 25 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:58,596 - __main__ - INFO - Testing Pattern 2 - Test #26: Health Products
+2025-08-01 16:53:58,596 - __main__ - INFO - Query: 你们有什么保健品推荐吗？
+2025-08-01 16:53:58,596 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:53:58,598 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:53:58,598 - __main__ - INFO - Tools used: []
+2025-08-01 16:53:58,598 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:53:58,598 - __main__ - WARNING - Test 26 failed - missing keywords: ['保健品', '推荐', '健康']
+2025-08-01 16:53:59,099 - __main__ - INFO - Testing Pattern 2 - Test #27: Vitamins
+2025-08-01 16:53:59,099 - __main__ - INFO - Query: 我想买维生素D，有什么推荐？
+2025-08-01 16:53:59,099 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:53:59,102 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:59,102 - __main__ - ERROR - Test 27 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:53:59,603 - __main__ - INFO - Testing Pattern 2 - Test #28: Medical Equipment
+2025-08-01 16:53:59,603 - __main__ - INFO - Query: 家里老人需要血压计，推荐一款
+2025-08-01 16:53:59,603 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:53:59,605 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:53:59,605 - __main__ - INFO - Tools used: []
+2025-08-01 16:53:59,605 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:53:59,605 - __main__ - WARNING - Test 28 failed - missing keywords: ['血压计', '推荐']
+2025-08-01 16:54:00,107 - __main__ - INFO - Testing Pattern 2 - Test #29: Sleep Aid Products
+2025-08-01 16:54:00,107 - __main__ - INFO - Query: 有什么产品可以帮助睡眠？
+2025-08-01 16:54:00,107 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:54:00,109 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:54:00,109 - __main__ - ERROR - Test 29 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:54:00,611 - __main__ - INFO - Testing Pattern 2 - Test #30: Purchase Guidance
+2025-08-01 16:54:00,611 - __main__ - INFO - Query: 怎么购买这些产品？
+2025-08-01 16:54:00,611 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:54:00,613 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:54:00,613 - __main__ - INFO - Tools used: []
+2025-08-01 16:54:00,613 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:54:00,613 - __main__ - WARNING - Test 30 failed - missing keywords: ['购买', '小程序', '商城']
+2025-08-01 16:54:01,114 - __main__ - INFO - Testing Pattern 2 - Test #31: Store Personal Info
+2025-08-01 16:54:01,114 - __main__ - INFO - Query: 我叫李明，45岁，有高血压
+2025-08-01 16:54:01,114 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:54:01,118 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:54:01,118 - __main__ - ERROR - Test 31 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:54:01,619 - __main__ - INFO - Testing Pattern 2 - Test #32: Store Allergies
+2025-08-01 16:54:01,619 - __main__ - INFO - Query: 我对青霉素过敏
+2025-08-01 16:54:01,619 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:54:01,621 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:54:01,621 - __main__ - INFO - Tools used: []
+2025-08-01 16:54:01,621 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:54:01,621 - __main__ - WARNING - Test 32 failed - missing keywords: ['过敏', '记录', '注意']
+2025-08-01 16:54:02,122 - __main__ - INFO - Testing Pattern 2 - Test #33: Recall Info
+2025-08-01 16:54:02,122 - __main__ - INFO - Query: 你记得我的基本信息吗？
+2025-08-01 16:54:02,122 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:54:02,126 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:54:02,126 - __main__ - ERROR - Test 33 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:54:02,626 - __main__ - INFO - Testing Pattern 2 - Test #34: Medical History
+2025-08-01 16:54:02,626 - __main__ - INFO - Query: 我有什么过敏史？
+2025-08-01 16:54:02,626 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:54:02,629 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:54:02,629 - __main__ - INFO - Tools used: []
+2025-08-01 16:54:02,629 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:54:02,629 - __main__ - WARNING - Test 34 failed - missing keywords: ['青霉素', '过敏']
+2025-08-01 16:54:03,130 - __main__ - INFO - Testing Pattern 2 - Test #35: Family Member
+2025-08-01 16:54:03,130 - __main__ - INFO - Query: 我女儿5岁，经常感冒
+2025-08-01 16:54:03,130 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:54:03,134 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:54:03,134 - __main__ - ERROR - Test 35 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:54:03,634 - __main__ - INFO - Testing Pattern 2 - Test #36: Medication Tracking
+2025-08-01 16:54:03,635 - __main__ - INFO - Query: 我在吃阿司匹林和二甲双胍
+2025-08-01 16:54:03,635 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:54:03,637 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:54:03,637 - __main__ - INFO - Tools used: []
+2025-08-01 16:54:03,637 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:54:03,637 - __main__ - WARNING - Test 36 failed - missing keywords: ['记录', '药物']
+2025-08-01 16:54:04,137 - __main__ - INFO - Testing Pattern 2 - Test #37: Doctor Preference
+2025-08-01 16:54:04,137 - __main__ - INFO - Query: 我喜欢找李医生看病
+2025-08-01 16:54:04,137 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:54:04,140 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:54:04,140 - __main__ - ERROR - Test 37 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:54:04,641 - __main__ - INFO - Testing Pattern 2 - Test #38: Health Goals
+2025-08-01 16:54:04,641 - __main__ - INFO - Query: 我想减重10公斤
+2025-08-01 16:54:04,641 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:54:04,643 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:54:04,644 - __main__ - INFO - Tools used: []
+2025-08-01 16:54:04,644 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:54:04,644 - __main__ - WARNING - Test 38 failed - missing keywords: ['目标', '减重', '10公斤']
+2025-08-01 16:54:05,145 - __main__ - INFO - Testing Pattern 2 - Test #39: Insurance Info
+2025-08-01 16:54:05,145 - __main__ - INFO - Query: 我有平安保险的高端医疗险
+2025-08-01 16:54:05,145 - __main__ - INFO - Using non-streaming endpoint
+2025-08-01 16:54:05,148 - __main__ - ERROR - API Error: 500 - {
+  "error": "from_tools"
+}
+
+2025-08-01 16:54:05,148 - __main__ - ERROR - Test 39 error: API returned 500: {
+  "error": "from_tools"
+}
+
+2025-08-01 16:54:05,649 - __main__ - INFO - Testing Pattern 2 - Test #40: Complex Context
+2025-08-01 16:54:05,649 - __main__ - INFO - Query: 基于我的情况，需要做哪些检查？
+2025-08-01 16:54:05,649 - __main__ - INFO - Using streaming endpoint
+2025-08-01 16:54:05,651 - __main__ - INFO - ✅ Response completed in 0.00s
+2025-08-01 16:54:05,651 - __main__ - INFO - Tools used: []
+2025-08-01 16:54:05,651 - __main__ - INFO - Response length: 0 chars
+2025-08-01 16:54:05,651 - __main__ - WARNING - Test 40 failed - missing keywords: ['高血压', '检查', '建议']
+2025-08-01 16:54:06,152 - __main__ - INFO - 
+============================================================
+2025-08-01 16:54:06,152 - __main__ - INFO - MULTI-TURN TESTS
+2025-08-01 16:54:06,152 - __main__ - INFO - ============================================================
+2025-08-01 16:54:06,152 - __main__ - INFO - Testing Pattern 2 - Test #41_turn_1: Basic Greeting + Doctor Search - Turn 1
+2025-08-01 16:54:06,152 - __main__ - INFO - Query: 你好
+2025-08-01 16:54:06,152 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:06,655 - __main__ - INFO - Testing Pattern 2 - Test #41_turn_2: Basic Greeting + Doctor Search - Turn 2
+2025-08-01 16:54:06,655 - __main__ - INFO - Query: 我住在北京
+2025-08-01 16:54:06,655 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:07,156 - __main__ - INFO - Testing Pattern 2 - Test #41_turn_3: Basic Greeting + Doctor Search - Turn 3
+2025-08-01 16:54:07,156 - __main__ - INFO - Query: 帮我找个骨科医生
+2025-08-01 16:54:07,156 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:07,658 - __main__ - INFO - Testing Pattern 2 - Test #42_turn_1: Symptom Description + Recommendation - Turn 1
+2025-08-01 16:54:07,658 - __main__ - INFO - Query: 我最近头痛
+2025-08-01 16:54:07,658 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:08,159 - __main__ - INFO - Testing Pattern 2 - Test #42_turn_2: Symptom Description + Recommendation - Turn 2
+2025-08-01 16:54:08,159 - __main__ - INFO - Query: 已经3天了
+2025-08-01 16:54:08,159 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:08,661 - __main__ - INFO - Testing Pattern 2 - Test #42_turn_3: Symptom Description + Recommendation - Turn 3
+2025-08-01 16:54:08,661 - __main__ - INFO - Query: 还伴有恶心
+2025-08-01 16:54:08,661 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:09,162 - __main__ - INFO - Testing Pattern 2 - Test #43_turn_1: Appointment Booking Flow - Turn 1
+2025-08-01 16:54:09,162 - __main__ - INFO - Query: 我想看医生
+2025-08-01 16:54:09,162 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:09,663 - __main__ - INFO - Testing Pattern 2 - Test #43_turn_2: Appointment Booking Flow - Turn 2
+2025-08-01 16:54:09,664 - __main__ - INFO - Query: 骨科的
+2025-08-01 16:54:09,664 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:10,165 - __main__ - INFO - Testing Pattern 2 - Test #43_turn_3: Appointment Booking Flow - Turn 3
+2025-08-01 16:54:10,165 - __main__ - INFO - Query: 这周五下午可以吗
+2025-08-01 16:54:10,165 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:10,666 - __main__ - INFO - Testing Pattern 2 - Test #44_turn_1: Product Inquiry + Purchase - Turn 1
+2025-08-01 16:54:10,666 - __main__ - INFO - Query: 有什么助眠产品吗
+2025-08-01 16:54:10,666 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:11,168 - __main__ - INFO - Testing Pattern 2 - Test #44_turn_2: Product Inquiry + Purchase - Turn 2
+2025-08-01 16:54:11,168 - __main__ - INFO - Query: 价格怎么样
+2025-08-01 16:54:11,168 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:11,669 - __main__ - INFO - Testing Pattern 2 - Test #44_turn_3: Product Inquiry + Purchase - Turn 3
+2025-08-01 16:54:11,670 - __main__ - INFO - Query: 怎么购买
+2025-08-01 16:54:11,670 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:12,171 - __main__ - INFO - Testing Pattern 2 - Test #45_turn_1: Emergency Triage - Turn 1
+2025-08-01 16:54:12,171 - __main__ - INFO - Query: 我不太舒服
+2025-08-01 16:54:12,171 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:12,672 - __main__ - INFO - Testing Pattern 2 - Test #45_turn_2: Emergency Triage - Turn 2
+2025-08-01 16:54:12,672 - __main__ - INFO - Query: 胸口有点闷
+2025-08-01 16:54:12,672 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:13,172 - __main__ - INFO - Testing Pattern 2 - Test #45_turn_3: Emergency Triage - Turn 3
+2025-08-01 16:54:13,172 - __main__ - INFO - Query: 还有点喘不上气
+2025-08-01 16:54:13,172 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:13,674 - __main__ - INFO - Testing Pattern 2 - Test #46_turn_1: Diabetes Management - Turn 1
+2025-08-01 16:54:13,674 - __main__ - INFO - Query: 我有糖尿病
+2025-08-01 16:54:13,674 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:14,175 - __main__ - INFO - Testing Pattern 2 - Test #46_turn_2: Diabetes Management - Turn 2
+2025-08-01 16:54:14,176 - __main__ - INFO - Query: 血糖最近控制不好
+2025-08-01 16:54:14,176 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:14,677 - __main__ - INFO - Testing Pattern 2 - Test #46_turn_3: Diabetes Management - Turn 3
+2025-08-01 16:54:14,677 - __main__ - INFO - Query: 空腹血糖8.5
+2025-08-01 16:54:14,677 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:15,179 - __main__ - INFO - Testing Pattern 2 - Test #46_turn_4: Diabetes Management - Turn 4
+2025-08-01 16:54:15,179 - __main__ - INFO - Query: 需要调整药物吗
+2025-08-01 16:54:15,179 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:15,681 - __main__ - INFO - Testing Pattern 2 - Test #47_turn_1: Child Health Consultation - Turn 1
+2025-08-01 16:54:15,681 - __main__ - INFO - Query: 我孩子6岁
+2025-08-01 16:54:15,681 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:16,182 - __main__ - INFO - Testing Pattern 2 - Test #47_turn_2: Child Health Consultation - Turn 2
+2025-08-01 16:54:16,182 - __main__ - INFO - Query: 最近不爱吃饭
+2025-08-01 16:54:16,182 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:16,683 - __main__ - INFO - Testing Pattern 2 - Test #47_turn_3: Child Health Consultation - Turn 3
+2025-08-01 16:54:16,683 - __main__ - INFO - Query: 还经常说累
+2025-08-01 16:54:16,683 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:17,184 - __main__ - INFO - Testing Pattern 2 - Test #47_turn_4: Child Health Consultation - Turn 4
+2025-08-01 16:54:17,184 - __main__ - INFO - Query: 需要做什么检查
+2025-08-01 16:54:17,184 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:17,686 - __main__ - INFO - Testing Pattern 2 - Test #48_turn_1: Medication Interaction Check - Turn 1
+2025-08-01 16:54:17,686 - __main__ - INFO - Query: 我在吃降压药
+2025-08-01 16:54:17,686 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:18,187 - __main__ - INFO - Testing Pattern 2 - Test #48_turn_2: Medication Interaction Check - Turn 2
+2025-08-01 16:54:18,187 - __main__ - INFO - Query: 医生又开了抗生素
+2025-08-01 16:54:18,187 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:18,688 - __main__ - INFO - Testing Pattern 2 - Test #48_turn_3: Medication Interaction Check - Turn 3
+2025-08-01 16:54:18,688 - __main__ - INFO - Query: 这两种药能一起吃吗
+2025-08-01 16:54:18,688 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:19,189 - __main__ - INFO - Testing Pattern 2 - Test #49_turn_1: Post-Surgery Follow-up - Turn 1
+2025-08-01 16:54:19,189 - __main__ - INFO - Query: 我上周做了膝盖手术
+2025-08-01 16:54:19,189 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:19,690 - __main__ - INFO - Testing Pattern 2 - Test #49_turn_2: Post-Surgery Follow-up - Turn 2
+2025-08-01 16:54:19,691 - __main__ - INFO - Query: 现在还有点肿
+2025-08-01 16:54:19,691 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:20,192 - __main__ - INFO - Testing Pattern 2 - Test #49_turn_3: Post-Surgery Follow-up - Turn 3
+2025-08-01 16:54:20,192 - __main__ - INFO - Query: 这正常吗
+2025-08-01 16:54:20,192 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:20,693 - __main__ - INFO - Testing Pattern 2 - Test #50_turn_1: Health Check Planning - Turn 1
+2025-08-01 16:54:20,693 - __main__ - INFO - Query: 我想做个全面体检
+2025-08-01 16:54:20,693 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:21,195 - __main__ - INFO - Testing Pattern 2 - Test #50_turn_2: Health Check Planning - Turn 2
+2025-08-01 16:54:21,195 - __main__ - INFO - Query: 有什么套餐推荐
+2025-08-01 16:54:21,195 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:21,697 - __main__ - INFO - Testing Pattern 2 - Test #50_turn_3: Health Check Planning - Turn 3
+2025-08-01 16:54:21,697 - __main__ - INFO - Query: 大概多少钱
+2025-08-01 16:54:21,697 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:22,198 - __main__ - INFO - Testing Pattern 2 - Test #50_turn_4: Health Check Planning - Turn 4
+2025-08-01 16:54:22,198 - __main__ - INFO - Query: 需要预约吗
+2025-08-01 16:54:22,198 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:22,699 - __main__ - INFO - Testing Pattern 2 - Test #51_turn_1: Personal Info + Recommendation - Turn 1
+2025-08-01 16:54:22,699 - __main__ - INFO - Query: 我叫王芳，52岁
+2025-08-01 16:54:22,699 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:23,200 - __main__ - INFO - Testing Pattern 2 - Test #51_turn_2: Personal Info + Recommendation - Turn 2
+2025-08-01 16:54:23,201 - __main__ - INFO - Query: 有高血压和糖尿病
+2025-08-01 16:54:23,201 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:23,702 - __main__ - INFO - Testing Pattern 2 - Test #51_turn_3: Personal Info + Recommendation - Turn 3
+2025-08-01 16:54:23,702 - __main__ - INFO - Query: 推荐个适合我的医生
+2025-08-01 16:54:23,702 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:24,203 - __main__ - INFO - Testing Pattern 2 - Test #52_turn_1: Allergy Info + Product Check - Turn 1
+2025-08-01 16:54:24,203 - __main__ - INFO - Query: 我对花生过敏
+2025-08-01 16:54:24,204 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:24,705 - __main__ - INFO - Testing Pattern 2 - Test #52_turn_2: Allergy Info + Product Check - Turn 2
+2025-08-01 16:54:24,705 - __main__ - INFO - Query: 这个保健品含花生吗
+2025-08-01 16:54:24,706 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:25,207 - __main__ - INFO - Testing Pattern 2 - Test #53_turn_1: Location + Clinic Search - Turn 1
+2025-08-01 16:54:25,207 - __main__ - INFO - Query: 我住在浦东新区
+2025-08-01 16:54:25,207 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:25,708 - __main__ - INFO - Testing Pattern 2 - Test #53_turn_2: Location + Clinic Search - Turn 2
+2025-08-01 16:54:25,709 - __main__ - INFO - Query: 附近有诊所吗
+2025-08-01 16:54:25,709 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:26,210 - __main__ - INFO - Testing Pattern 2 - Test #54_turn_1: Previous Condition + Update - Turn 1
+2025-08-01 16:54:26,210 - __main__ - INFO - Query: 上次说的失眠问题
+2025-08-01 16:54:26,210 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:26,712 - __main__ - INFO - Testing Pattern 2 - Test #54_turn_2: Previous Condition + Update - Turn 2
+2025-08-01 16:54:26,712 - __main__ - INFO - Query: 按你的建议调整作息了
+2025-08-01 16:54:26,712 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:27,213 - __main__ - INFO - Testing Pattern 2 - Test #54_turn_3: Previous Condition + Update - Turn 3
+2025-08-01 16:54:27,213 - __main__ - INFO - Query: 现在好多了
+2025-08-01 16:54:27,213 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:27,714 - __main__ - INFO - Testing Pattern 2 - Test #55_turn_1: Family Health Management - Turn 1
+2025-08-01 16:54:27,715 - __main__ - INFO - Query: 我们全家都在你们这看病
+2025-08-01 16:54:27,715 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:28,216 - __main__ - INFO - Testing Pattern 2 - Test #55_turn_2: Family Health Management - Turn 2
+2025-08-01 16:54:28,216 - __main__ - INFO - Query: 我老公需要看心脏科
+2025-08-01 16:54:28,216 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:28,717 - __main__ - INFO - Testing Pattern 2 - Test #55_turn_3: Family Health Management - Turn 3
+2025-08-01 16:54:28,718 - __main__ - INFO - Query: 孩子要打疫苗
+2025-08-01 16:54:28,718 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:29,218 - __main__ - INFO - Testing Pattern 2 - Test #56_turn_1: Chronic Disease Management - Turn 1
+2025-08-01 16:54:29,218 - __main__ - INFO - Query: 我的高血压控制得怎么样
+2025-08-01 16:54:29,218 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:29,720 - __main__ - INFO - Testing Pattern 2 - Test #56_turn_2: Chronic Disease Management - Turn 2
+2025-08-01 16:54:29,720 - __main__ - INFO - Query: 上个月测的是150/95
+2025-08-01 16:54:29,720 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:30,221 - __main__ - INFO - Testing Pattern 2 - Test #56_turn_3: Chronic Disease Management - Turn 3
+2025-08-01 16:54:30,222 - __main__ - INFO - Query: 需要增加药量吗
+2025-08-01 16:54:30,222 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:30,723 - __main__ - INFO - Testing Pattern 2 - Test #56_turn_4: Chronic Disease Management - Turn 4
+2025-08-01 16:54:30,723 - __main__ - INFO - Query: 饮食上要注意什么
+2025-08-01 16:54:30,723 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:31,224 - __main__ - INFO - Testing Pattern 2 - Test #57_turn_1: Pregnancy Consultation - Turn 1
+2025-08-01 16:54:31,224 - __main__ - INFO - Query: 我怀孕3个月了
+2025-08-01 16:54:31,224 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:31,726 - __main__ - INFO - Testing Pattern 2 - Test #57_turn_2: Pregnancy Consultation - Turn 2
+2025-08-01 16:54:31,726 - __main__ - INFO - Query: 最近总是恶心
+2025-08-01 16:54:31,726 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:32,227 - __main__ - INFO - Testing Pattern 2 - Test #57_turn_3: Pregnancy Consultation - Turn 3
+2025-08-01 16:54:32,227 - __main__ - INFO - Query: 需要补充什么营养
+2025-08-01 16:54:32,227 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:32,729 - __main__ - INFO - Testing Pattern 2 - Test #57_turn_4: Pregnancy Consultation - Turn 4
+2025-08-01 16:54:32,729 - __main__ - INFO - Query: 下次产检什么时候
+2025-08-01 16:54:32,729 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:33,230 - __main__ - INFO - Testing Pattern 2 - Test #58_turn_1: Mental Health Support - Turn 1
+2025-08-01 16:54:33,230 - __main__ - INFO - Query: 最近压力很大
+2025-08-01 16:54:33,230 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:33,732 - __main__ - INFO - Testing Pattern 2 - Test #58_turn_2: Mental Health Support - Turn 2
+2025-08-01 16:54:33,732 - __main__ - INFO - Query: 晚上睡不好
+2025-08-01 16:54:33,732 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:34,233 - __main__ - INFO - Testing Pattern 2 - Test #58_turn_3: Mental Health Support - Turn 3
+2025-08-01 16:54:34,233 - __main__ - INFO - Query: 白天没精神
+2025-08-01 16:54:34,233 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:34,735 - __main__ - INFO - Testing Pattern 2 - Test #58_turn_4: Mental Health Support - Turn 4
+2025-08-01 16:54:34,735 - __main__ - INFO - Query: 需要看心理医生吗
+2025-08-01 16:54:34,735 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:35,235 - __main__ - INFO - Testing Pattern 2 - Test #59_turn_1: Vaccination Schedule - Turn 1
+2025-08-01 16:54:35,236 - __main__ - INFO - Query: 宝宝6个月大
+2025-08-01 16:54:35,236 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:35,737 - __main__ - INFO - Testing Pattern 2 - Test #59_turn_2: Vaccination Schedule - Turn 2
+2025-08-01 16:54:35,738 - __main__ - INFO - Query: 该打什么疫苗
+2025-08-01 16:54:35,738 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:36,240 - __main__ - INFO - Testing Pattern 2 - Test #59_turn_3: Vaccination Schedule - Turn 3
+2025-08-01 16:54:36,240 - __main__ - INFO - Query: 有什么注意事项
+2025-08-01 16:54:36,240 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:36,741 - __main__ - INFO - Testing Pattern 2 - Test #59_turn_4: Vaccination Schedule - Turn 4
+2025-08-01 16:54:36,741 - __main__ - INFO - Query: 下一针什么时候
+2025-08-01 16:54:36,741 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:37,243 - __main__ - INFO - Testing Pattern 2 - Test #60_turn_1: Elder Care Consultation - Turn 1
+2025-08-01 16:54:37,243 - __main__ - INFO - Query: 我父亲75岁
+2025-08-01 16:54:37,243 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:37,744 - __main__ - INFO - Testing Pattern 2 - Test #60_turn_2: Elder Care Consultation - Turn 2
+2025-08-01 16:54:37,744 - __main__ - INFO - Query: 最近记忆力下降
+2025-08-01 16:54:37,745 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:38,246 - __main__ - INFO - Testing Pattern 2 - Test #60_turn_3: Elder Care Consultation - Turn 3
+2025-08-01 16:54:38,246 - __main__ - INFO - Query: 有时候会忘事
+2025-08-01 16:54:38,246 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:38,747 - __main__ - INFO - Testing Pattern 2 - Test #60_turn_4: Elder Care Consultation - Turn 4
+2025-08-01 16:54:38,748 - __main__ - INFO - Query: 需要做什么检查
+2025-08-01 16:54:38,748 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:39,249 - __main__ - INFO - Testing Pattern 2 - Test #61_turn_1: Complete Health Journey - Turn 1
+2025-08-01 16:54:39,249 - __main__ - INFO - Query: 我想全面管理健康
+2025-08-01 16:54:39,249 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:39,750 - __main__ - INFO - Testing Pattern 2 - Test #61_turn_2: Complete Health Journey - Turn 2
+2025-08-01 16:54:39,750 - __main__ - INFO - Query: 先从体检开始吧
+2025-08-01 16:54:39,750 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:40,252 - __main__ - INFO - Testing Pattern 2 - Test #61_turn_3: Complete Health Journey - Turn 3
+2025-08-01 16:54:40,252 - __main__ - INFO - Query: 有高端体检套餐吗
+2025-08-01 16:54:40,252 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:40,753 - __main__ - INFO - Testing Pattern 2 - Test #61_turn_4: Complete Health Journey - Turn 4
+2025-08-01 16:54:40,753 - __main__ - INFO - Query: 包含哪些项目
+2025-08-01 16:54:40,753 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:41,255 - __main__ - INFO - Testing Pattern 2 - Test #61_turn_5: Complete Health Journey - Turn 5
+2025-08-01 16:54:41,255 - __main__ - INFO - Query: 可以这周安排吗
+2025-08-01 16:54:41,255 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:41,756 - __main__ - INFO - Testing Pattern 2 - Test #62_turn_1: Treatment Plan Discussion - Turn 1
+2025-08-01 16:54:41,756 - __main__ - INFO - Query: 医生建议我做手术
+2025-08-01 16:54:41,756 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:42,258 - __main__ - INFO - Testing Pattern 2 - Test #62_turn_2: Treatment Plan Discussion - Turn 2
+2025-08-01 16:54:42,258 - __main__ - INFO - Query: 我有点担心风险
+2025-08-01 16:54:42,258 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:42,759 - __main__ - INFO - Testing Pattern 2 - Test #62_turn_3: Treatment Plan Discussion - Turn 3
+2025-08-01 16:54:42,759 - __main__ - INFO - Query: 有其他治疗方案吗
+2025-08-01 16:54:42,759 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:43,260 - __main__ - INFO - Testing Pattern 2 - Test #62_turn_4: Treatment Plan Discussion - Turn 4
+2025-08-01 16:54:43,260 - __main__ - INFO - Query: 哪种效果更好
+2025-08-01 16:54:43,260 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:43,762 - __main__ - INFO - Testing Pattern 2 - Test #62_turn_5: Treatment Plan Discussion - Turn 5
+2025-08-01 16:54:43,762 - __main__ - INFO - Query: 我需要时间考虑
+2025-08-01 16:54:43,762 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:44,264 - __main__ - INFO - Testing Pattern 2 - Test #63_turn_1: Rehabilitation Progress - Turn 1
+2025-08-01 16:54:44,264 - __main__ - INFO - Query: 我在做康复训练
+2025-08-01 16:54:44,264 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:44,765 - __main__ - INFO - Testing Pattern 2 - Test #63_turn_2: Rehabilitation Progress - Turn 2
+2025-08-01 16:54:44,765 - __main__ - INFO - Query: 腿部力量恢复慢
+2025-08-01 16:54:44,765 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:45,266 - __main__ - INFO - Testing Pattern 2 - Test #63_turn_3: Rehabilitation Progress - Turn 3
+2025-08-01 16:54:45,266 - __main__ - INFO - Query: 有什么加强练习吗
+2025-08-01 16:54:45,266 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:45,767 - __main__ - INFO - Testing Pattern 2 - Test #63_turn_4: Rehabilitation Progress - Turn 4
+2025-08-01 16:54:45,767 - __main__ - INFO - Query: 多久能正常走路
+2025-08-01 16:54:45,767 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:46,269 - __main__ - INFO - Testing Pattern 2 - Test #64_turn_1: Lifestyle Modification - Turn 1
+2025-08-01 16:54:46,269 - __main__ - INFO - Query: 医生说我要改变生活方式
+2025-08-01 16:54:46,269 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:46,770 - __main__ - INFO - Testing Pattern 2 - Test #64_turn_2: Lifestyle Modification - Turn 2
+2025-08-01 16:54:46,770 - __main__ - INFO - Query: 具体怎么做呢
+2025-08-01 16:54:46,770 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:47,272 - __main__ - INFO - Testing Pattern 2 - Test #64_turn_3: Lifestyle Modification - Turn 3
+2025-08-01 16:54:47,272 - __main__ - INFO - Query: 饮食方面呢
+2025-08-01 16:54:47,272 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:47,773 - __main__ - INFO - Testing Pattern 2 - Test #64_turn_4: Lifestyle Modification - Turn 4
+2025-08-01 16:54:47,773 - __main__ - INFO - Query: 运动要注意什么
+2025-08-01 16:54:47,773 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:48,274 - __main__ - INFO - Testing Pattern 2 - Test #64_turn_5: Lifestyle Modification - Turn 5
+2025-08-01 16:54:48,274 - __main__ - INFO - Query: 能推荐营养师吗
+2025-08-01 16:54:48,274 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:48,775 - __main__ - INFO - Testing Pattern 2 - Test #65_turn_1: Insurance Coverage Check - Turn 1
+2025-08-01 16:54:48,775 - __main__ - INFO - Query: 我有医保
+2025-08-01 16:54:48,775 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:49,277 - __main__ - INFO - Testing Pattern 2 - Test #65_turn_2: Insurance Coverage Check - Turn 2
+2025-08-01 16:54:49,277 - __main__ - INFO - Query: 还有商业保险
+2025-08-01 16:54:49,277 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:49,778 - __main__ - INFO - Testing Pattern 2 - Test #65_turn_3: Insurance Coverage Check - Turn 3
+2025-08-01 16:54:49,778 - __main__ - INFO - Query: 看病能报销多少
+2025-08-01 16:54:49,778 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:50,280 - __main__ - INFO - Testing Pattern 2 - Test #65_turn_4: Insurance Coverage Check - Turn 4
+2025-08-01 16:54:50,280 - __main__ - INFO - Query: 需要什么手续
+2025-08-01 16:54:50,280 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:50,781 - __main__ - INFO - Testing Pattern 2 - Test #66_turn_1: Second Opinion Request - Turn 1
+2025-08-01 16:54:50,781 - __main__ - INFO - Query: 我想听听其他医生意见
+2025-08-01 16:54:50,781 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:51,283 - __main__ - INFO - Testing Pattern 2 - Test #66_turn_2: Second Opinion Request - Turn 2
+2025-08-01 16:54:51,283 - __main__ - INFO - Query: 之前诊断是胃炎
+2025-08-01 16:54:51,283 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:51,783 - __main__ - INFO - Testing Pattern 2 - Test #66_turn_3: Second Opinion Request - Turn 3
+2025-08-01 16:54:51,783 - __main__ - INFO - Query: 但吃药效果不好
+2025-08-01 16:54:51,783 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:52,285 - __main__ - INFO - Testing Pattern 2 - Test #66_turn_4: Second Opinion Request - Turn 4
+2025-08-01 16:54:52,285 - __main__ - INFO - Query: 能约其他专家吗
+2025-08-01 16:54:52,285 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:52,786 - __main__ - INFO - Testing Pattern 2 - Test #67_turn_1: Travel Health Prep - Turn 1
+2025-08-01 16:54:52,786 - __main__ - INFO - Query: 下个月要出国
+2025-08-01 16:54:52,786 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:53,287 - __main__ - INFO - Testing Pattern 2 - Test #67_turn_2: Travel Health Prep - Turn 2
+2025-08-01 16:54:53,288 - __main__ - INFO - Query: 去非洲
+2025-08-01 16:54:53,288 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:53,788 - __main__ - INFO - Testing Pattern 2 - Test #67_turn_3: Travel Health Prep - Turn 3
+2025-08-01 16:54:53,788 - __main__ - INFO - Query: 需要打什么疫苗
+2025-08-01 16:54:53,788 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:54,290 - __main__ - INFO - Testing Pattern 2 - Test #67_turn_4: Travel Health Prep - Turn 4
+2025-08-01 16:54:54,290 - __main__ - INFO - Query: 要准备什么药品
+2025-08-01 16:54:54,290 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:54,791 - __main__ - INFO - Testing Pattern 2 - Test #68_turn_1: Pain Management - Turn 1
+2025-08-01 16:54:54,791 - __main__ - INFO - Query: 我有慢性疼痛
+2025-08-01 16:54:54,791 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:55,292 - __main__ - INFO - Testing Pattern 2 - Test #68_turn_2: Pain Management - Turn 2
+2025-08-01 16:54:55,292 - __main__ - INFO - Query: 主要是腰部
+2025-08-01 16:54:55,292 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:55,794 - __main__ - INFO - Testing Pattern 2 - Test #68_turn_3: Pain Management - Turn 3
+2025-08-01 16:54:55,794 - __main__ - INFO - Query: 已经半年了
+2025-08-01 16:54:55,794 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:56,295 - __main__ - INFO - Testing Pattern 2 - Test #68_turn_4: Pain Management - Turn 4
+2025-08-01 16:54:56,295 - __main__ - INFO - Query: 止痛药效果有限
+2025-08-01 16:54:56,295 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:56,797 - __main__ - INFO - Testing Pattern 2 - Test #68_turn_5: Pain Management - Turn 5
+2025-08-01 16:54:56,797 - __main__ - INFO - Query: 有其他办法吗
+2025-08-01 16:54:56,797 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:57,298 - __main__ - INFO - Testing Pattern 2 - Test #69_turn_1: Preventive Care Plan - Turn 1
+2025-08-01 16:54:57,298 - __main__ - INFO - Query: 我想做预防保健
+2025-08-01 16:54:57,298 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:57,799 - __main__ - INFO - Testing Pattern 2 - Test #69_turn_2: Preventive Care Plan - Turn 2
+2025-08-01 16:54:57,799 - __main__ - INFO - Query: 家族有心脏病史
+2025-08-01 16:54:57,799 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:58,301 - __main__ - INFO - Testing Pattern 2 - Test #69_turn_3: Preventive Care Plan - Turn 3
+2025-08-01 16:54:58,301 - __main__ - INFO - Query: 应该注意什么
+2025-08-01 16:54:58,301 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:58,802 - __main__ - INFO - Testing Pattern 2 - Test #69_turn_4: Preventive Care Plan - Turn 4
+2025-08-01 16:54:58,802 - __main__ - INFO - Query: 多久检查一次
+2025-08-01 16:54:58,802 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:59,304 - __main__ - INFO - Testing Pattern 2 - Test #69_turn_5: Preventive Care Plan - Turn 5
+2025-08-01 16:54:59,304 - __main__ - INFO - Query: 生活上怎么预防
+2025-08-01 16:54:59,304 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:54:59,805 - __main__ - INFO - Testing Pattern 2 - Test #70_turn_1: Comprehensive Care Coordination - Turn 1
+2025-08-01 16:54:59,805 - __main__ - INFO - Query: 我需要看多个科室
+2025-08-01 16:54:59,805 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:55:00,306 - __main__ - INFO - Testing Pattern 2 - Test #70_turn_2: Comprehensive Care Coordination - Turn 2
+2025-08-01 16:55:00,307 - __main__ - INFO - Query: 内科、骨科和眼科
+2025-08-01 16:55:00,307 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:55:00,808 - __main__ - INFO - Testing Pattern 2 - Test #70_turn_3: Comprehensive Care Coordination - Turn 3
+2025-08-01 16:55:00,808 - __main__ - INFO - Query: 能统一安排吗
+2025-08-01 16:55:00,808 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:55:01,309 - __main__ - INFO - Testing Pattern 2 - Test #70_turn_4: Comprehensive Care Coordination - Turn 4
+2025-08-01 16:55:01,310 - __main__ - INFO - Query: 最好是同一天
+2025-08-01 16:55:01,310 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:55:01,811 - __main__ - INFO - Testing Pattern 2 - Test #70_turn_5: Comprehensive Care Coordination - Turn 5
+2025-08-01 16:55:01,811 - __main__ - INFO - Query: 费用大概多少
+2025-08-01 16:55:01,811 - __main__ - ERROR - Exception during test: not all arguments converted during string formatting
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_pattern2_70_cases.py", line 98, in test_pattern2_response_api
+    use_streaming = test_case.get('id', 0) % 2 == 0
+                    ~~~~~~~~~~~~~~~~~~~~~~~^~~
+TypeError: not all arguments converted during string formatting
+2025-08-01 16:55:02,313 - __main__ - INFO - 
+============================================================
+2025-08-01 16:55:02,313 - __main__ - INFO - FINAL SUMMARY
+2025-08-01 16:55:02,313 - __main__ - INFO - ============================================================
+2025-08-01 16:55:02,313 - __main__ - INFO - Total tests run: 70
+2025-08-01 16:55:02,313 - __main__ - INFO - Tests passed: 1
+2025-08-01 16:55:02,313 - __main__ - INFO - Pass rate: 1.4%
+2025-08-01 16:55:02,313 - __main__ - INFO - Log file: pattern2_test_20250801_165502.log

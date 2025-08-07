@@ -1,0 +1,55 @@
+INFO:     Started server process [37645]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+ERROR:    [Errno 48] error while attempting to bind on address ('0.0.0.0', 6002): address already in use
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+
+=== Test Management Dashboard ===
+ML Digit: 5
+Database: test5 (PostgreSQL port 5432)
+ML Server: localhost:5005
+Test Environment: localhost:6001
+
+Starting dashboard...
+Dashboard URL: http://localhost:6002
+
+Press Ctrl+C to stop
+
+Loading test data from /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+Loaded inventory: 847 tests in 22 categories
+Categories: ['appointment', 'framework', 'multi_turn', 'product', 'integration', 'api', 'medical', 'form_system', 'performance', 'memory', 'edge_case', 'identity', 'orchestrator', 'streaming', 'tools', 'validation', 'emergency', 'humansa_v2', 'humansa', 'multi_agent', 'startup', 'container']
+Loading converted tests from /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted
+  Loaded tests from form_manager_extended_tests.json into uncategorized
+  Loaded 4 tests from appointment
+  Loaded tests from multi_turn_context_flow.json into multi_turn
+  Loaded tests from multi_turn_state.json into multi_turn
+  Loaded 5 tests from identity
+  Loaded tests from edge_cases.json into edge_case
+Error loading /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/converted/multi_turn/MTN_003_appointment_flow.json: Expecting property name enclosed in double quotes: line 18 column 38 (char 435)
+  Loaded 6 tests from multi_turn
+  Loaded tests from multi_turn_framework.json into framework
+  Loaded 6 tests from integration
+  Loaded tests from medical_consultation.json into medical
+  Loaded tests from conversion_summary_agent3.json into uncategorized
+  Loaded 2 tests from emergency
+  Loaded 3 tests from product
+  Loaded 8 tests from streaming
+  Loaded tests from conversion_summary.json into uncategorized
+  Loaded tests from memory_context_tests.json into memory
+  Loaded tests from streaming_enhanced_tests.json into streaming
+  Loaded 6 tests from medical
+  Loaded 7 tests from api
+  Loaded tests from appointment.json into appointment
+  Loaded tests from pattern2_orchestrator_tests.json into orchestrator
+  Loaded tests from product.json into product
+  Loaded tests from performance_load.json into performance
+  Loaded 6 tests from humansa
+  Loaded tests from appointment_test_executor_tests.json into appointment
+  Loaded tests from comprehensive_detailed_tests.json into uncategorized
+  Loaded 8 tests from orchestrator
+  Loaded 1 tests from validation
+Total loaded: 457 tests across 20 categories
+Categories with tests: ['uncategorized(4)', 'appointment(105)', 'multi_turn(6)', 'identity(5)', 'edge_case(22)', 'framework(50)', 'integration(6)', 'medical(6)', 'emergency(2)', 'product(53)', 'streaming(9)', 'memory(1)', 'api(7)', 'orchestrator(8)', 'performance(25)', 'humansa(6)', 'validation(1)']
+Connected to database: test5
+Loaded 316 tests

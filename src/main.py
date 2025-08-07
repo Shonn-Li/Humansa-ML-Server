@@ -18,22 +18,52 @@ V1 ENDPOINTS:
 import io
 import warnings
 import os
-from decimal import Decimal
 import sys
 import json
 import logging
 import warnings
-import time
-import asyncio
+import asyncpg
 from quart import Quart, jsonify, request, Response
 from quart_cors import cors
 from dotenv import load_dotenv
+
+# Save any pre-existing critical environment variables from subprocess
+existing_db_host = os.getenv('DB_HOST')
+existing_db_port = os.getenv('DB_PORT')
+existing_db_user = os.getenv('DB_USER')
+existing_db_password = os.getenv('DB_PASSWORD')
+existing_db_name = os.getenv('DB_NAME')
 
 # Load environment variables
 # First load .env (shared configuration)
 load_dotenv()
 # Then load .env.local (local overrides)
 load_dotenv('.env.local', override=True)
+
+# Restore critical DB settings if they were set by subprocess (for multi-instance)
+if existing_db_host:
+    os.environ['DB_HOST'] = existing_db_host
+if existing_db_port:
+    os.environ['DB_PORT'] = existing_db_port
+if existing_db_user:
+    os.environ['DB_USER'] = existing_db_user
+if existing_db_password:
+    os.environ['DB_PASSWORD'] = existing_db_password
+if existing_db_name:
+    os.environ['DB_NAME'] = existing_db_name
+
+# Override with environment variables if they exist
+# This allows test environments to override .env settings
+if os.getenv('ENVIRONMENT') == 'test':
+    # Test environment overrides - use test database settings
+    # Only set if not already set by environment
+    # DB_PORT is now dynamically set by the instance manager for multi-instance support
+    if not os.getenv('DB_USER'):
+        os.environ['DB_USER'] = 'postgres'
+    if not os.getenv('DB_PASSWORD'):
+        os.environ['DB_PASSWORD'] = '12931'
+    if not os.getenv('DB_NAME'):
+        os.environ['DB_NAME'] = 'youwoai_test'
 
 # CRITICAL: Add current directory to Python path for imports to work
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -43,14 +73,6 @@ if current_dir not in sys.path:
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-class DecimalEncoder(json.JSONEncoder):
-    """Custom JSON encoder that handles Decimal types"""
-    def default(self, obj):
-        if isinstance(obj, Decimal):
-            # Convert Decimal to float for JSON serialization
-            return float(obj)
-        return super(DecimalEncoder, self).default(obj)
 
 # Reduce Azure logging verbosity - only show essential request info
 azure_loggers = [
@@ -172,11 +194,29 @@ def create_app():
     @app.route("/health", methods=["GET"])
     async def health():
         """Health check endpoint for ALB and Docker"""
+        # Get the actual port the server is running on
+        try:
+            digit = int(os.getenv('DIGIT', '0'))
+        except (ValueError, TypeError):
+            digit = 0
+            
+        if digit > 0:
+            # Multi-instance mode: port is 6010 + digit
+            actual_port = 6010 + digit
+        else:
+            # Normal mode: use ML_SERVER_PORT or default
+            try:
+                actual_port = int(os.getenv('ML_SERVER_PORT', str(5000 + digit)))
+            except (ValueError, TypeError):
+                actual_port = 5001
+        
         return jsonify({
             "status": "healthy",
             "service": "ml-server",
-            "port": int(os.getenv('ML_SERVER_PORT', '5001')),
-            "timestamp": str(__import__('datetime').datetime.now())
+            "port": actual_port,
+            "digit": digit,
+            "timestamp": str(__import__('datetime').datetime.now()),
+            "enhanced_logging": os.getenv('HUMANSA_ENHANCED_LOGGING', '').lower() == 'true'
         })
 
     # Ping endpoint for basic connectivity test
@@ -252,12 +292,12 @@ def register_chat_endpoints(app):
                                     truncated_chunk = truncate_dict(
                                         chunk, max_length=200)
                                     logger.info(
-                                        f"📦 Stream chunk {chunk_count}: {json.dumps(truncated_chunk, cls=DecimalEncoder)}")
+                                        f"📦 Stream chunk {chunk_count}: {json.dumps(truncated_chunk)}")
                                 elif chunk_count == 4:
                                     logger.info(
                                         f"📦 ... (logging first 3 chunks only, total so far: {chunk_count})")
 
-                                yield f"data: {json.dumps(chunk, cls=DecimalEncoder)}\n\n"
+                                yield f"data: {json.dumps(chunk)}\n\n"
 
                             logger.info(
                                 f"✅ Streaming complete: {chunk_count} chunks sent")
@@ -265,14 +305,14 @@ def register_chat_endpoints(app):
                         else:
                             # It's a dict response (likely an error)
                             logger.warning(f"⚠️ Got non-streaming response in streaming mode: {stream_response}")
-                            yield f"data: {json.dumps(stream_response, cls=DecimalEncoder)}\n\n"
+                            yield f"data: {json.dumps(stream_response)}\n\n"
                     except Exception as stream_error:
                         logger.error(f"❌ Streaming error: {stream_error}")
                         import traceback
                         traceback.print_exc()
                         error_chunk = {"error": str(
                             stream_error), "status": "error"}
-                        yield f"data: {json.dumps(error_chunk, cls=DecimalEncoder)}\n\n"
+                        yield f"data: {json.dumps(error_chunk)}\n\n"
 
                 return Response(generate_stream(), mimetype='text/event-stream')
             else:
@@ -350,8 +390,7 @@ def register_chat_endpoints(app):
 
             if request_data.get('stream'):
                 # Return streaming response
-                start_time = time.time()
-                logger.info(f"🌊 Starting multi-agent streaming response at {start_time:.2f}...")
+                logger.info("🌊 Starting multi-agent streaming response...")
 
                 async def generate_stream():
                     chunk_count = 0
@@ -364,35 +403,24 @@ def register_chat_endpoints(app):
                             # It's an async generator, iterate over it
                             async for chunk in stream_response:
                                 chunk_count += 1
-                                
-                                # Enhanced logging for debugging
-                                event_type = chunk.get('type', 'unknown')
-                                current_time = time.time() - start_time
-                                
                                 if chunk_count <= 3:  # Log first 3 chunks
                                     truncated_chunk = truncate_dict(
                                         chunk, max_length=200)
                                     logger.info(
-                                        f"📦 Multi-agent stream chunk {chunk_count}: {json.dumps(truncated_chunk, cls=DecimalEncoder)}")
+                                        f"📦 Multi-agent stream chunk {chunk_count}: {json.dumps(truncated_chunk)}")
                                 elif chunk_count == 4:
                                     logger.info(
                                         f"📦 ... (logging first 3 chunks only, total so far: {chunk_count})")
-                                
-                                # Log important events for debugging
-                                if event_type in ['response.completed', 'response.done', 'response.title_generated']:
-                                    logger.info(f"🎯 Event {event_type} sent at {current_time:.2f}s (chunk #{chunk_count})")
-                                
-                                yield f"data: {json.dumps(chunk, cls=DecimalEncoder)}\n\n"
 
-                            end_time = time.time()
+                                yield f"data: {json.dumps(chunk)}\n\n"
+
                             logger.info(
-                                f"✅ Multi-agent streaming complete: {chunk_count} chunks sent at {end_time:.2f}")
+                                f"✅ Multi-agent streaming complete: {chunk_count} chunks sent")
                             yield "data: [DONE]\n\n"
-                            logger.info(f"⏱️ After yielding [DONE] at {time.time():.2f}")
                         else:
                             # It's a dict response (likely an error)
                             logger.warning(f"⚠️ Got non-streaming response in multi-agent streaming mode: {stream_response}")
-                            yield f"data: {json.dumps(stream_response, cls=DecimalEncoder)}\n\n"
+                            yield f"data: {json.dumps(stream_response)}\n\n"
                     except Exception as stream_error:
                         logger.error(
                             f"❌ Multi-agent streaming error: {stream_error}")
@@ -400,11 +428,9 @@ def register_chat_endpoints(app):
                         traceback.print_exc()
                         error_chunk = {"error": str(
                             stream_error), "status": "error"}
-                        yield f"data: {json.dumps(error_chunk, cls=DecimalEncoder)}\n\n"
+                        yield f"data: {json.dumps(error_chunk)}\n\n"
 
-                response = Response(generate_stream(), mimetype='text/event-stream')
-                logger.info(f"⏱️ Multi-agent Response object created at {time.time():.2f}")
-                return response
+                return Response(generate_stream(), mimetype='text/event-stream')
             else:
                 # Return standard response
                 logger.info("📄 Starting multi-agent non-streaming response...")
@@ -452,102 +478,34 @@ def register_preserved_endpoints(app):
     """Register preserved endpoints that are still needed."""
 
     # Add catch-all for debugging missing endpoints
-    @app.route("/notes/create-embeddings", methods=["POST"])
-    async def create_embeddings():
-        """Create embeddings for specified notes - compatible with backend expectations"""
+    @app.route("/notes/create-embeddings", methods=["POST", "GET"])
+    async def create_embeddings_debug():
+        """Debug endpoint for create-embeddings requests"""
         try:
-            request_data = await request.get_json()
-            note_ids = request_data.get("note_ids", [])
-            
-            if not note_ids:
-                return jsonify({
-                    "status": "error",
-                    "message": "No note_ids provided",
-                    "results": []
-                }), 400
-            
-            logger.info(f"Creating embeddings for notes: {note_ids}")
-            
-            # Import the embedding manager
-            from chat.embedding.embedding_manager import embedding_manager
-            
-            results = []
-            succeeded = []
-            failed = []
-            
-            # Process each note
-            for note_id in note_ids:
-                try:
-                    # Create embedding for the note
-                    success = await embedding_manager.note_embedder.create_note_embedding(note_id)
-                    
-                    if success:
-                        results.append({"note_id": note_id, "status": "success"})
-                        succeeded.append(note_id)
-                        logger.info(f"Successfully created embedding for note {note_id}")
-                    else:
-                        results.append({"note_id": note_id, "status": "error", "message": "Failed to create embedding"})
-                        failed.append(note_id)
-                        logger.error(f"Failed to create embedding for note {note_id}")
-                        
-                except Exception as e:
-                    results.append({"note_id": note_id, "status": "error", "message": str(e)})
-                    failed.append(note_id)
-                    logger.error(f"Error creating embedding for note {note_id}: {e}")
-            
+            request_data = await request.get_json() if request.method == "POST" else None
+            logger.info(f"=== MISSING ENDPOINT REQUEST ===")
+            logger.info(f"Method: {request.method}")
+            logger.info(f"URL: {request.url}")
+            logger.info(f"Headers: {dict(request.headers)}")
+            logger.info(
+                f"Request Body: {json.dumps(request_data, indent=2) if request_data else 'No body'}")
+            logger.info(f"==============================")
+
             return jsonify({
-                "status": "success",
-                "results": results,
-                "summary": {
-                    "total": len(note_ids),
-                    "succeeded": len(succeeded),
-                    "failed": len(failed)
-                }
-            }), 200
-            
+                "error": "Endpoint not implemented in new modular system",
+                "status": "error",
+                "suggestion": "Use /admin/embedding/* endpoints instead",
+                "available_embedding_endpoints": [
+                    "/admin/embedding/notes",
+                    "/admin/embedding/conversations",
+                    "/admin/embedding/all",
+                    "/admin/embedding/status",
+                    "/v1/embeddings/url"
+                ]
+            }), 404
         except Exception as e:
-            logger.error(f"Error in create_embeddings endpoint: {e}")
-            return jsonify({"error": str(e), "status": "error"}), 500
-    
-    @app.route("/notes/embed-summary", methods=["POST"])
-    async def embed_summary():
-        """Embed only the AI summary for a note with deduplication"""
-        try:
-            request_data = await request.get_json()
-            note_id = request_data.get("note_id")
-            
-            if not note_id:
-                return jsonify({
-                    "status": "error",
-                    "message": "note_id is required"
-                }), 400
-            
-            logger.info(f"Creating summary embedding for note: {note_id}")
-            
-            # Import the embedding manager
-            from chat.embedding.embedding_manager import embedding_manager
-            
-            # Create summary embedding only
-            success = await embedding_manager.note_embedder.create_summary_embedding(note_id)
-            
-            if success:
-                logger.info(f"Successfully created/verified summary embedding for note {note_id}")
-                return jsonify({
-                    "status": "success",
-                    "note_id": note_id,
-                    "message": "Summary embedding created or already up-to-date"
-                }), 200
-            else:
-                logger.error(f"Failed to create summary embedding for note {note_id}")
-                return jsonify({
-                    "status": "error",
-                    "note_id": note_id,
-                    "message": "Failed to create summary embedding"
-                }), 500
-                
-        except Exception as e:
-            logger.error(f"Error in embed_summary endpoint: {e}")
-            return jsonify({"error": str(e), "status": "error"}), 500
+            logger.error(f"Error in debug endpoint: {e}")
+            return jsonify({"error": str(e)}), 500
 
     # Import link analyzer from new independent location
     try:
@@ -720,32 +678,6 @@ def register_embedding_endpoints(app):
     except ImportError as e:
         logger.error(f"❌ Document converter endpoints import failed: {e}")
 
-    # Conversation Title Generation Endpoints
-    try:
-        logger.info("🔄 Attempting to import conversation title endpoints...")
-        from chat.title.title_endpoints import (
-            generate_conversation_title_endpoint,
-            generate_conversation_titles_batch_endpoint,
-            migrate_conversation_titles_endpoint,
-            title_health_check_endpoint
-        )
-        logger.info("✅ Successfully imported title generation endpoints")
-        
-        # Register individual endpoints
-        app.route("/v1/conversation/title", methods=["POST"])(generate_conversation_title_endpoint)
-        app.route("/v1/conversation/titles/batch", methods=["POST"])(generate_conversation_titles_batch_endpoint)
-        app.route("/v1/conversation/titles/migrate", methods=["POST"])(migrate_conversation_titles_endpoint)
-        app.route("/v1/conversation/title/health", methods=["GET"])(title_health_check_endpoint)
-        
-        logger.info("✅ Conversation title endpoints registered successfully")
-        logger.info("   - /v1/conversation/title - Generate single title")
-        logger.info("   - /v1/conversation/titles/batch - Batch title generation")
-        logger.info("   - /v1/conversation/titles/migrate - Migrate all titles")
-        logger.info("   - /v1/conversation/title/health - Health check")
-        
-    except ImportError as e:
-        logger.error(f"❌ Conversation title endpoints import failed: {e}")
-
     # V1 Conversation Embedding Endpoint (called by backend)
     @app.route("/v1/embeddings/conversation", methods=["POST"])
     async def v1_conversation_embeddings():
@@ -758,81 +690,19 @@ def register_embedding_endpoints(app):
             if not conversation_id:
                 return jsonify({"error": "conversation_id is required"}), 400
 
-            # Check if this is an incremental update
-            incremental = request_data.get('incremental', False)
-            messages = request_data.get('messages', [])
-            last_section_id = request_data.get('last_section_id', None)
+            # Import the conversation embedder
+            # Create and run embedder
+            from chat.embedding.conversation_embedder import ConversationEmbedder
+            embedder = ConversationEmbedder()
+            result = await embedder.bulk_embed_conversations([conversation_id])
 
-            # Import the embedding operations and necessary modules
-            from chat.postgres.embedding_operations import EmbeddingDBOperations
-            from chat.embedding.text_processing import ConversationProcessor
-            from chat.embedding.embedding_provider_selector import EmbeddingProviderSelector
-            
-            if incremental and messages:
-                # For incremental updates, we need to embed only the new messages
-                logger.info(f"📝 Incremental embedding for conversation {conversation_id} with {len(messages)} new messages")
-                
-                # Initialize components
-                db = EmbeddingDBOperations()
-                processor = ConversationProcessor()
-                embedder = EmbeddingProviderSelector().get_embedding_client()
-                
-                # Process messages into chunks
-                chunks = processor.chunk_conversation_messages(messages)
-                
-                if chunks:
-                    # Create embeddings for chunks
-                    chunk_texts = [chunk['text'] for chunk in chunks]
-                    embeddings = await asyncio.to_thread(
-                        embedder.get_embeddings_with_retry,
-                        chunk_texts,
-                        max_retries=3,
-                        batch_size=50
-                    )
-                    
-                    # Prepare embeddings data
-                    embeddings_data = []
-                    for embedding, chunk in zip(embeddings, chunks):
-                        embeddings_data.append((
-                            embedding,
-                            chunk['text'],
-                            chunk['source'],
-                            chunk['metadata']
-                        ))
-                    
-                    # Save with incremental flag
-                    result = await asyncio.to_thread(
-                        db.save_conversation_embeddings,
-                        conversation_id,
-                        embeddings_data,
-                        incremental=True,
-                        last_section_id=last_section_id
-                    )
-                else:
-                    result = {"embedded_count": 0, "last_section_id": last_section_id}
-                
-                return jsonify({
-                    "status": "success",
-                    "conversation_id": conversation_id,
-                    "embedded_count": result.get("embedded_count", 0),
-                    "last_section_id": result.get("last_section_id", None),
-                    "incremental": True
-                })
-            else:
-                # For full embedding, use the existing ConversationEmbedder
-                logger.info(f"🔄 Full embedding for conversation {conversation_id}")
-                from chat.embedding.conversation_embedder import ConversationEmbedder
-                embedder = ConversationEmbedder()
-                result = await embedder.bulk_embed_conversations([conversation_id])
-
-                return jsonify({
-                    "status": "success",
-                    "conversation_id": conversation_id,
-                    "embedded": result.get("embedded_count", 0),
-                    "skipped": result.get("skipped", 0),
-                    "errors": result.get("errors", 0),
-                    "incremental": False
-                })
+            return jsonify({
+                "status": "success",
+                "conversation_id": conversation_id,
+                "embedded": result.get("embedded", 0),
+                "skipped": result.get("skipped", 0),
+                "errors": result.get("errors", 0)
+            })
 
         except Exception as e:
             logger.error(f"❌ Conversation embedding error: {e}")
@@ -922,6 +792,54 @@ def register_humansa_endpoints(app):
                 traceback.print_exc()
                 return jsonify({"error": str(e), "status": "error"}), 500
                 
+        # Register Humansa v2 endpoints
+        try:
+            from humansa.v2 import humansa_v2_bp, initialize_v2_system
+            app.register_blueprint(humansa_v2_bp)
+            
+            # Register Humansa v2 conversation API
+            from humansa.v2.api_conversation import humansa_v2_conversation_bp
+            app.register_blueprint(humansa_v2_conversation_bp)
+            logger.info("✅ Humansa V2 Conversation API endpoints registered")
+            
+            # Register Humansa v2 Responses API (OpenAI-style)
+            from humansa.v2.api_responses import humansa_v2_responses_bp
+            app.register_blueprint(humansa_v2_responses_bp)
+            logger.info("✅ Humansa V2 Responses API endpoints registered")
+            
+            # Register Humansa v2 Forms API
+            from humansa.v2.forms.form_api import forms_bp
+            app.register_blueprint(forms_bp)
+            logger.info("✅ Humansa V2 Forms API endpoints registered")
+            
+            # Register Mem0 API endpoints
+            from humansa.memory.api import mem0_bp
+            app.register_blueprint(mem0_bp)
+            logger.info("✅ Mem0 API endpoints registered")
+            
+            # Initialize Mem0 for Humansa on startup
+            @app.before_serving
+            async def init_mem0():
+                try:
+                    # Initialize Mem0 for Humansa
+                    try:
+                        from humansa.memory.mem0_manager import Mem0Manager
+                        mem0_manager = Mem0Manager.get_instance()
+                        if await mem0_manager.initialize():
+                            app.mem0_manager = mem0_manager
+                            logger.info("✅ Mem0 memory layer initialized for Humansa")
+                        else:
+                            logger.warning("⚠️ Mem0 initialization failed - memory features disabled")
+                    except Exception as mem0_error:
+                        logger.warning(f"⚠️ Mem0 not available: {mem0_error}")
+                        
+                except Exception as e:
+                    logger.error(f"❌ Failed to initialize Mem0: {e}")
+                    
+            logger.info("✅ Humansa v2 blueprint registered")
+        except ImportError as e:
+            logger.warning(f"⚠️ Humansa v2 not available: {e}")
+        
         logger.info("✅ Humansa endpoints registered successfully")
         
     except ImportError as e:
@@ -963,12 +881,95 @@ if not os.getenv('DEBUG_AZURE_WARNINGS'):
 # Create app instance
 app = create_app()
 
+# Create database pool for Humansa v2
+@app.before_serving
+async def create_db_pool():
+    """Create database connection pool for Humansa v2."""
+    try:
+        # Get database configuration from environment
+        is_test = os.getenv('ENVIRONMENT') == 'test'
+        db_host = os.getenv('DB_HOST', 'localhost')
+        db_port = int(os.getenv('DB_PORT', '5432'))
+        db_user = os.getenv('DB_USER', 'postgres')
+        db_password = os.getenv('DB_PASSWORD', '12931')
+        db_name = os.getenv('DB_NAME', 'youwoai_test' if is_test else 'youwoai')
+        
+        # Debug environment variables
+        logger.info(f"🔍 DB_HOST env var: {os.getenv('DB_HOST')} (default: localhost)")
+        logger.info(f"🔍 Raw DB_HOST: {db_host}")
+        
+        logger.info(f"🔄 Creating database pool: {db_user}@{db_host}:{db_port}/{db_name}")
+        logger.info(f"   Environment: {os.getenv('ENVIRONMENT', 'production')}")
+        
+        # Create the connection pool
+        app.db_pool = await asyncpg.create_pool(
+            host=db_host,
+            port=db_port,
+            user=db_user,
+            password=db_password,
+            database=db_name,
+            min_size=5,
+            max_size=20,
+            command_timeout=60
+        )
+        
+        logger.info("✅ Database pool created successfully")
+        
+        # Initialize Humansa v2 system now that db_pool is ready
+        # Check for Azure OpenAI key first, then fall back to OpenAI
+        azure_key = os.getenv('AZURE_OPENAI_API_KEY') or os.getenv('AZURE_INFERENCE_CREDENTIAL')
+        openai_key = os.getenv('OPENAI_API_KEY')
+        
+        if azure_key or openai_key:
+            try:
+                from humansa.v2.api import initialize_v2_system
+                use_subagent = os.getenv('HUMANSA_USE_SUBAGENT_ARCHITECTURE', '').lower() == 'true'
+                use_workflow = os.getenv('HUMANSA_USE_WORKFLOW_ORCHESTRATOR', '').lower() == 'true'
+                
+                await initialize_v2_system(
+                    app.db_pool, 
+                    use_subagent_architecture=use_subagent,
+                    use_workflow_orchestrator=use_workflow
+                )
+                
+                if use_workflow:
+                    arch_type = "AgentWorkflow (Streaming Reasoning)"
+                elif use_subagent:
+                    arch_type = "Sub-Agent Architecture"
+                else:
+                    arch_type = "Consolidated Tools"
+                    
+                logger.info(f"✅ Humansa v2 system initialized with {arch_type}")
+                
+                # Initialize Humansa v2 conversation API
+                # Temporarily disabled due to initialization issues
+                # from humansa.v2.api_conversation import initialize_v2_conversation_system
+                # await initialize_v2_conversation_system(app.db_pool, openai_key or azure_key)
+                # logger.info("✅ Humansa v2 conversation API initialized")
+                
+                # Initialize Humansa v2 Responses API
+                from humansa.v2.api_responses import initialize_v2_responses_system
+                await initialize_v2_responses_system(app.db_pool, openai_key or azure_key)
+                logger.info("✅ Humansa v2 Responses API initialized")
+            except Exception as v2_error:
+                logger.error(f"❌ Failed to initialize Humansa v2: {v2_error}")
+                import traceback
+                traceback.print_exc()
+        else:
+            logger.warning("⚠️ Humansa v2 system not initialized - missing Azure OpenAI or OpenAI API key")
+        
+    except Exception as e:
+        logger.error(f"❌ Failed to create database pool: {e}")
+        app.db_pool = None
+
 if __name__ == "__main__":
     # Get port from environment variable or command line argument
     import argparse
     parser = argparse.ArgumentParser(description='YouWoAI ML Server')
-    parser.add_argument('--port', type=int, default=int(os.getenv('ML_SERVER_PORT', '5001')),
-                        help='Port to run the server on (default: 5001 or ML_SERVER_PORT env var)')
+    digit = os.getenv('DIGIT', '0')
+    default_port = 5000 + int(digit)
+    parser.add_argument('--port', type=int, default=int(os.getenv('ML_SERVER_PORT', str(default_port))),
+                        help=f'Port to run the server on (default: {default_port} or ML_SERVER_PORT env var)')
     args = parser.parse_args()
     
     port = args.port
@@ -976,14 +977,38 @@ if __name__ == "__main__":
     logger.info("=== YouWoAI ML Server Starting ===")
     logger.info(f"Server will be available at: http://0.0.0.0:{port}")
     logger.info("")
-    logger.info("📋 V1 Endpoint Summary:")
+    logger.info("📋 Endpoint Summary:")
     logger.info("✅ CHAT ENDPOINTS:")
     logger.info(
         "   - /v1/chat/completions - Modular chat with citations & streaming")
     logger.info(
         "   - /v1/multi-agent/response - Multi-agent workflow")
     logger.info(
-        "   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (legacy)")
+        "   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)")
+    logger.info("")
+    logger.info("✅ HUMANSA V2 ENDPOINTS:")
+    logger.info(
+        "   - /v2/humansa/chat - Multi-agent medical consultation")
+    logger.info(
+        "   - /v2/humansa/appointment/search - Search available appointments")
+    logger.info(
+        "   - /v2/humansa/appointment/book - Book appointment slots")
+    logger.info(
+        "   - /v2/humansa/patient/profile - Manage patient profiles")
+    logger.info(
+        "   - /v2/humansa/conversation/history - Get conversation history")
+    logger.info("")
+    logger.info("✅ MEM0 MEMORY ENDPOINTS:")
+    logger.info(
+        "   - /v2/humansa/memory/add - Add conversation to memory")
+    logger.info(
+        "   - /v2/humansa/memory/search - Search user memories")
+    logger.info(
+        "   - /v2/humansa/memory/context/<user_id> - Get user context")
+    logger.info(
+        "   - /v2/humansa/memory/status - Check Mem0 status")
+    logger.info(
+        "   - /v2/humansa/memory/clear/<user_id> - Clear user memories")
     logger.info(
         "   - /humansa/response - Humansa conversations (used by backend)")
     logger.info(
@@ -998,11 +1023,6 @@ if __name__ == "__main__":
     logger.info("✅ EMBEDDING ENDPOINTS:")
     logger.info("   - /v1/embeddings/url/* - URL embedding operations")
     logger.info("   - /admin/embedding/* - Admin embedding controls")
-    logger.info("")
-    logger.info("✅ TITLE GENERATION ENDPOINTS:")
-    logger.info("   - /v1/conversation/title - Generate single title")
-    logger.info("   - /v1/conversation/titles/batch - Batch title generation")
-    logger.info("   - /v1/conversation/titles/migrate - Migrate all titles")
     logger.info("")
     logger.info("🔄 Migration Status:")
     logger.info("   - ✅ Chat system: Using modular implementation")

@@ -1,0 +1,76 @@
+{
+  "id": "APF_001",
+  "name": "Simple Complete Appointment Request",
+  "suite": "appointment",
+  "type": "single",
+  "priority": 5,
+  "tags": ["appointment", "form", "complete_request", "chinese"],
+  "config": {
+    "timeout": 30,
+    "retries": 0,
+    "parallel_safe": true,
+    "requirements": ["appointment_form_system", "humansa_v2"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_apf_001",
+      "profile": {}
+    },
+    "previous_turns": [],
+    "environment": {}
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Authorization": "Bearer test-api-key",
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "我想预约李明医生明天上午9点看头痛，我叫张三，电话13800138000",
+      "user_id": "test_user_apf_001"
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["预约信息", "您的预约信息如下", "确认", "请确认"],
+      "output_regex": ["form_[a-f0-9]{12}"],
+      "min_length": 100
+    },
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": ["appointment", "form", "creation"],
+      "tool_calls": ["create_appointment_form", "extract_appointment_info"]
+    },
+    "agents": {
+      "touched": ["FormAgent", "AppointmentAgent"],
+      "max_agents": 4
+    },
+    "context": {
+      "workflow": {
+        "state_changes": {
+          "form_status": "created",
+          "appointment_status": "pending_confirmation"
+        },
+        "events_emitted": ["form_created", "appointment_info_extracted"]
+      }
+    },
+    "server_logs": {
+      "contains": ["form created", "appointment request"],
+      "excludes": ["ERROR", "exception"],
+      "log_levels": {
+        "ERROR": "=0"
+      }
+    },
+    "performance": {
+      "response_time_max": 30,
+      "token_usage_max": 1500
+    }
+  },
+  "cleanup": {
+    "commands": [],
+    "reset_context": false
+  }
+}

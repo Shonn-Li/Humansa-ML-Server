@@ -1,0 +1,34 @@
+category: appointment
+expectations:
+  agents_touched:
+  - FormUpdater
+  emergency_flags: []
+  follow_up_actions: []
+  forbidden_patterns: []
+  keywords:
+  - 后天
+  - 下午3点
+  - 修改
+  - 更新
+  max_response_length: 5000
+  min_response_length: 50
+  required_tools:
+  - update_appointment_form
+  response_time_max: 30.0
+  thinking_flow_keywords: []
+id: apt_004_modify_appointment
+metadata:
+  expect_form_update: true
+  updated_fields:
+  - date
+  - time_slot
+name: Modify appointment time
+previous_turns:
+- content: 预约王医生明天上午10点看感冒，我叫赵六，电话13700137000
+  role: user
+- content: 预约信息已记录...
+  role: assistant
+priority: 1
+query: 改到后天下午3点
+tags: []
+user_context: {}

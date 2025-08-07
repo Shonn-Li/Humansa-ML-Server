@@ -1,0 +1,373 @@
+{
+  "timestamp": "20250726_221548",
+  "total_tests": 30,
+  "passed": 17,
+  "failed": 13,
+  "success_rate": 0.5666666666666667,
+  "category_stats": {
+    "Identity": {
+      "total": 5,
+      "passed": 0
+    },
+    "Doctor Search": {
+      "total": 5,
+      "passed": 4
+    },
+    "Appointment": {
+      "total": 5,
+      "passed": 1
+    },
+    "Clinic Services": {
+      "total": 5,
+      "passed": 5
+    },
+    "Medical": {
+      "total": 5,
+      "passed": 4
+    },
+    "Memory": {
+      "total": 5,
+      "passed": 3
+    }
+  },
+  "detailed_results": [
+    {
+      "id": 1,
+      "name": "Chinese Identity Query",
+      "category": "Identity",
+      "query": "你是谁？",
+      "success": false,
+      "response_time": 1.7299389839172363,
+      "missing_keywords": [
+        "诺亚新舟",
+        "小诺",
+        "健康医疗助理"
+      ],
+      "error": null
+    },
+    {
+      "id": 2,
+      "name": "English Identity Query",
+      "category": "Identity",
+      "query": "Who are you?",
+      "success": false,
+      "response_time": 0.980137825012207,
+      "missing_keywords": [
+        "Humansa"
+      ],
+      "error": null
+    },
+    {
+      "id": 3,
+      "name": "Chinese Greeting",
+      "category": "Identity",
+      "query": "你好",
+      "success": false,
+      "response_time": 1.198348045349121,
+      "missing_keywords": [
+        "小诺",
+        "帮助"
+      ],
+      "error": null
+    },
+    {
+      "id": 4,
+      "name": "Company Introduction",
+      "category": "Identity",
+      "query": "介绍一下诺亚新舟",
+      "success": false,
+      "response_time": 3.7932448387145996,
+      "missing_keywords": [
+        "以爱行舟",
+        "亲近相守",
+        "500多位",
+        "30+家"
+      ],
+      "error": null
+    },
+    {
+      "id": 5,
+      "name": "Service Capabilities",
+      "category": "Identity",
+      "query": "你能做什么？",
+      "success": false,
+      "response_time": 2.673959732055664,
+      "missing_keywords": [
+        "健康咨询",
+        "实时预约",
+        "检查项目",
+        "诊所导航",
+        "体检报告"
+      ],
+      "error": null
+    },
+    {
+      "id": 6,
+      "name": "Find Cardiologist",
+      "category": "Doctor Search",
+      "query": "我想找一个心脏科医生",
+      "success": true,
+      "response_time": 2.829141139984131,
+      "missing_keywords": [],
+      "error": null
+    },
+    {
+      "id": 7,
+      "name": "Find Doctors by City",
+      "category": "Doctor Search",
+      "query": "深圳有哪些医生？",
+      "success": true,
+      "response_time": 5.391577959060669,
+      "missing_keywords": [],
+      "error": null
+    },
+    {
+      "id": 8,
+      "name": "Specific Doctor Info",
+      "category": "Doctor Search",
+      "query": "张医生的信息",
+      "success": true,
+      "response_time": 3.2605950832366943,
+      "missing_keywords": [],
+      "error": null
+    },
+    {
+      "id": 9,
+      "name": "Doctor Availability",
+      "category": "Doctor Search",
+      "query": "李医生下周有空吗？",
+      "success": false,
+      "response_time": 2.407644271850586,
+      "missing_keywords": [
+        "预约"
+      ],
+      "error": null
+    },
+    {
+      "id": 10,
+      "name": "Multi-criteria Search",
+      "category": "Doctor Search",
+      "query": "北京的骨科医生，要有20年以上经验",
+      "success": true,
+      "response_time": 3.069124937057495,
+      "missing_keywords": [],
+      "error": null
+    },
+    {
+      "id": 11,
+      "name": "Complete Booking Request",
+      "category": "Appointment",
+      "query": "预约王医生，我叫李明，电话13800138000，想看下周二下午",
+      "success": false,
+      "response_time": 4.438878059387207,
+      "missing_keywords": [
+        "确认"
+      ],
+      "error": null
+    },
+    {
+      "id": 12,
+      "name": "Incomplete Booking",
+      "category": "Appointment",
+      "query": "帮我预约张医生",
+      "success": false,
+      "response_time": 2.973897933959961,
+      "missing_keywords": [
+        "姓名",
+        "电话"
+      ],
+      "error": null
+    },
+    {
+      "id": 13,
+      "name": "Follow-up Info",
+      "category": "Appointment",
+      "query": "我叫王芳，电话15900159000",
+      "success": true,
+      "response_time": 1.5062060356140137,
+      "missing_keywords": [],
+      "error": null
+    },
+    {
+      "id": 14,
+      "name": "Appointment Modification",
+      "category": "Appointment",
+      "query": "改一下我明天的预约，改到后天同一时间",
+      "success": false,
+      "response_time": 2.7240970134735107,
+      "missing_keywords": [
+        "修改"
+      ],
+      "error": null
+    },
+    {
+      "id": 15,
+      "name": "Appointment Cancellation",
+      "category": "Appointment",
+      "query": "取消我下周三的预约",
+      "success": false,
+      "response_time": 1.6619899272918701,
+      "missing_keywords": [
+        "政策"
+      ],
+      "error": null
+    },
+    {
+      "id": 16,
+      "name": "Clinic Locations",
+      "category": "Clinic Services",
+      "query": "广州有哪些诊所？",
+      "success": true,
+      "response_time": 2.7682690620422363,
+      "missing_keywords": [],
+      "error": null
+    },
+    {
+      "id": 17,
+      "name": "Service Availability",
+      "category": "Clinic Services",
+      "query": "深圳诊所提供什么服务？",
+      "success": true,
+      "response_time": 3.521834135055542,
+      "missing_keywords": [],
+      "error": null
+    },
+    {
+      "id": 18,
+      "name": "Service Pricing",
+      "category": "Clinic Services",
+      "query": "肝功能检查多少钱？",
+      "success": true,
+      "response_time": 2.9552199840545654,
+      "missing_keywords": [],
+      "error": null
+    },
+    {
+      "id": 19,
+      "name": "Price Comparison",
+      "category": "Clinic Services",
+      "query": "哪里的体检套餐最便宜？",
+      "success": true,
+      "response_time": 2.4297900199890137,
+      "missing_keywords": [],
+      "error": null
+    },
+    {
+      "id": 20,
+      "name": "Service Details",
+      "category": "Clinic Services",
+      "query": "核磁共振检查需要准备什么？",
+      "success": true,
+      "response_time": 4.386646032333374,
+      "missing_keywords": [],
+      "error": null
+    },
+    {
+      "id": 21,
+      "name": "Symptom Analysis",
+      "category": "Medical",
+      "query": "最近总是失眠，还头痛",
+      "success": true,
+      "response_time": 2.7110700607299805,
+      "missing_keywords": [],
+      "error": null
+    },
+    {
+      "id": 22,
+      "name": "Emergency Case",
+      "category": "Medical",
+      "query": "我现在胸痛很厉害，呼吸困难",
+      "success": true,
+      "response_time": 4.227027177810669,
+      "missing_keywords": [],
+      "error": null
+    },
+    {
+      "id": 23,
+      "name": "Medication Query",
+      "category": "Medical",
+      "query": "阿司匹林和华法林能一起吃吗？",
+      "success": true,
+      "response_time": 5.7633140087127686,
+      "missing_keywords": [],
+      "error": null
+    },
+    {
+      "id": 24,
+      "name": "Health Product",
+      "category": "Medical",
+      "query": "我想买保健品",
+      "success": false,
+      "response_time": 1.046055793762207,
+      "missing_keywords": [
+        "健康商城",
+        "小程序"
+      ],
+      "error": null
+    },
+    {
+      "id": 25,
+      "name": "Department Recommendation",
+      "category": "Medical",
+      "query": "头晕应该看什么科？",
+      "success": true,
+      "response_time": 2.6091997623443604,
+      "missing_keywords": [],
+      "error": null
+    },
+    {
+      "id": 26,
+      "name": "Store Personal Info",
+      "category": "Memory",
+      "query": "我叫张三，住在北京，今年45岁",
+      "success": false,
+      "response_time": 1.177717924118042,
+      "missing_keywords": [
+        "记录"
+      ],
+      "error": null
+    },
+    {
+      "id": 27,
+      "name": "Store Medical History",
+      "category": "Memory",
+      "query": "我对花生和海鲜过敏，有高血压，每天吃降压药",
+      "success": false,
+      "response_time": 2.320871114730835,
+      "missing_keywords": [
+        "记录"
+      ],
+      "error": null
+    },
+    {
+      "id": 28,
+      "name": "Recall Personal Info",
+      "category": "Memory",
+      "query": "你知道我的基本信息吗？",
+      "success": true,
+      "response_time": 1.6665897369384766,
+      "missing_keywords": [],
+      "error": null
+    },
+    {
+      "id": 29,
+      "name": "Recall Medical History",
+      "category": "Memory",
+      "query": "我有什么过敏史和慢性病？",
+      "success": true,
+      "response_time": 1.3906726837158203,
+      "missing_keywords": [],
+      "error": null
+    },
+    {
+      "id": 30,
+      "name": "Complex Memory Query",
+      "category": "Memory",
+      "query": "根据我的情况，推荐合适的医生",
+      "success": true,
+      "response_time": 2.745682954788208,
+      "missing_keywords": [],
+      "error": null
+    }
+  ]
+}

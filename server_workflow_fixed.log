@@ -1,0 +1,566 @@
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:🔄 Attempting to import document converter endpoints...
+INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
+INFO:chat.utils.document_converter:❌ docx2pdf not available
+INFO:chat.utils.document_converter:❌ pypandoc not available
+INFO:chat.utils.document_converter:❌ python-docx not available
+INFO:chat.utils.document_converter:❌ openpyxl not available
+INFO:chat.utils.document_converter:❌ reportlab not available
+INFO:__main__:✅ Successfully imported document converter blueprint
+INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:🔄 Registering Humansa endpoints...
+INFO:humansa.postgres.database:HumansaDatabase initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:__main__:✅ Humansa V2 Conversation API endpoints registered
+INFO:__main__:✅ Humansa V2 Responses API endpoints registered
+INFO:__main__:✅ Mem0 API endpoints registered
+INFO:__main__:✅ Humansa v2 blueprint registered
+INFO:__main__:✅ Humansa endpoints registered successfully
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:5001
+INFO:__main__:
+INFO:__main__:📋 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
+INFO:__main__:
+INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
+INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
+INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
+INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
+INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
+INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
+INFO:__main__:
+INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
+INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
+INFO:__main__:   - /v2/humansa/memory/search - Search user memories
+INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
+INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
+INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
+INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
+INFO:__main__:   - /o3-demo - O3 reasoning demo
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_prod' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
+INFO:__main__:✅ Mem0 memory layer initialized for Humansa
+INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
+INFO:__main__:   Environment: production
+INFO:__main__:✅ Database pool created successfully
+INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
+INFO:humansa.v2.api:🔥 Initializing HUMANSA V2 with AgentWorkflow (Streaming Reasoning)
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_workflow:✅ Initialized WorkflowOrchestrator with 5 sub-agents
+INFO:humansa.v2.api:Humansa v2 system initialized successfully
+INFO:__main__:✅ Humansa v2 system initialized with AgentWorkflow (Streaming Reasoning)
+INFO:humansa.v2.api_responses:✅ Using Mem0 for memory management
+INFO:humansa.v2.api_responses:✅ Memory tables initialized
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent_enhanced:Initialized Enhanced HumansaOrchestratorAgent with 6 agent tools
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ Initialized consolidated tools (7 core functions)
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ HumansaOrchestratorAgentConsolidated initialized with dynamic tool loading
+INFO:humansa.v2.api_responses:✅ Consolidated orchestrator initialized (7 tools with dynamic loading)
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_transparent:✅ Initialized transparent orchestrator with tool capture
+INFO:humansa.v2.orchestrator_agent_transparent:✅ HumansaOrchestratorAgentTransparent initialized
+INFO:humansa.v2.api_responses:✅ Transparent orchestrator initialized (captures tool calls)
+INFO:humansa.v2.api_responses:✅ Responses API orchestrators initialized successfully
+INFO:__main__:✅ Humansa v2 Responses API initialized
+[2025-07-31 23:46:33 -0700] [67772] [INFO] Running on http://0.0.0.0:5001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:5001 (CTRL + C to quit)
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/context_manager.py:148: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  conversation_id = f"conv_{datetime.utcnow().timestamp()}"
+<string>:6: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_prod_test_user
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': [{'id': 'bc2994ed-cd33-4fe4-94b5-c82a5cb70876', 'memory': 'User wants to cancel an appointment', 'hash': '52a4416048c041cf2ee7bf8bab172d66', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:21:31.410833', 'session_id': '74596890-c6ce-474e-8e3f-51785960cf41', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:21:37.263061-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'b701b7f3-5115-4f83-bf32-9e27d5b9b981', 'memory': 'User is interested in health supplements to improve immunity.', 'hash': 'b2b35db8f6bed206a9bb53518eaa4ca2', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:17:15.968600', 'session_id': 'b5088f6d-e211-4a9f-be3e-49f777c1477d', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:16:54.552364-07:00', 'updated_at': '2025-07-31T23:17:18.936728-07:00', 'user_id': 'humansa_prod_test_user'}, {'id': '09d3d334-cfe9-4a58-a1de-1a627d7443f0', 'memory': 'User is pregnant and inquiring about suitable health supplements for pregnancy.', 'hash': '0504f51dc621288f6498dc8c1bcfbc4b', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:18:16.555505', 'session_id': '170682d8-144a-421a-9ccb-f112d9e9f7f3', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:18:19.929938-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '74dc2b79-0021-4277-82d2-61f0ed60e517', 'memory': "User is looking for recommendations for children's calcium supplements", 'hash': '5d6e6b8ef39a927b8e0250f4488e42a8', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:18:36.777402', 'session_id': 'cf24b200-f45b-4abb-b423-e7f0821ff4cb', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:18:41.754332-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'c51de5c4-ecc0-4f5b-8f0b-9abd2c983f49', 'memory': 'User is interested in skincare product recommendations.', 'hash': '5c08285ffec2278722ff05c39a0c61e2', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:19:25.675562', 'session_id': '973df7e2-9cf0-4eec-946e-f635b436c5e0', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:19:31.423405-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '59678a04-bafd-406b-a239-dc09e2e003a8', 'memory': 'User is inquiring about dietary suggestions for eye fatigue.', 'hash': '3d0fc2e3689c0015d4c6e1fa99b402ea', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:20:03.737507', 'session_id': '29e3302c-b1b2-42aa-bdb0-d7e4c3d68793', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:20:11.599033-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'aed3c67e-a1ab-44ff-bc1d-c15394c5c4c3', 'memory': '想预约心内科医生', 'hash': 'cb634c57053dc8770f34281132faffb8', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:21:02.090040', 'session_id': '9457b0c3-78b6-4e8e-92f2-52d6109a5e73', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:21:08.915775-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '45a15c35-ebab-4905-a2e2-019cd488b10c', 'memory': '想查明天可以预约的医生', 'hash': 'd2c5dac093a31beddfca9ca9f9877210', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:21:19.232614', 'session_id': 'd5261ae5-cb63-4c1c-a64a-a3256c9fae10', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:21:25.000030-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '6e83da02-8158-488c-86e0-2218cf193452', 'memory': '用户想将预约改期到下周', 'hash': 'b22e9397f94d9da0cdf25b683e55940b', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:22:06.516368', 'session_id': '680ff20e-053c-47fb-994d-17ea4141a5b1', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:22:12.531229-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '227fa863-9cac-41e2-a75e-23236bccc3d7', 'memory': '询问儿科最早可以预约的时间', 'hash': 'd4ba1845314777457480cb63c72f63fc', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:22:25.364785', 'session_id': '89599b74-b2a0-4ab1-9624-16b238806a8d', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:22:31.584089-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'cc5e7416-ae80-42b8-bb95-5af9eebd7608', 'memory': 'User wants to schedule a health check-up', 'hash': '1f2f823ee9d14a18c1a3cbb394a0f8e0', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:22:51.143157', 'session_id': '17ede6f0-3489-4844-bb3f-2c62abb9039d', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:22:58.068685-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'bf3c5998-d2f2-40c8-92fe-63a497d91a9b', 'memory': '产检通常建议提前1-2周预约', 'hash': '3b0d47cc4c6c513d0da505971d207f54', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:23:23.228017', 'session_id': 'b0952bcb-ca0d-48a2-a750-e344d7152af9', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:23:30.310545-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'bbacfc64-65cf-450f-8e59-be0398a30073', 'memory': '请求预约中医科', 'hash': 'c44bb0606a27b460d748d7bb546ad322', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:23:52.143779', 'session_id': 'a1f92791-d1bd-46af-89b4-b890e90e80b6', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:23:58.805199-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'b4725c51-eedb-4f30-a3ac-5eea5e392cdb', 'memory': 'User has a headache and fever', 'hash': 'd0fab3c25bfb9ec2abf3aff384959d13', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:24:08.089642', 'session_id': 'e1a313c2-54a2-4ff8-ba5f-552d86534164', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:24:14.432121-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'a4ed0096-38c0-4395-8330-d1147497fbd1', 'memory': 'User is experiencing chest pain and difficulty breathing', 'hash': '6df32a02a61bd7dc2c86fc4baad3faf7', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:24:24.611445', 'session_id': '904c8009-5884-4062-9d4b-92af3e2bc891', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:24:32.670691-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '93596ce8-ef28-426b-b84e-5418ec40a54c', 'memory': 'User is seeking recommendations for health supplements to help with insomnia.', 'hash': '9b1982303cf1efb54868f70c1e6d1b00', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:24:56.262731', 'session_id': '3057518f-d747-48ef-abec-e97195c0522e', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:19:03.154923-07:00', 'updated_at': '2025-07-31T23:25:01.524785-07:00', 'user_id': 'humansa_prod_test_user'}, {'id': '676e7d07-6374-415f-bf25-e5400fcc0b95', 'memory': 'User has skin allergies that cause itching', 'hash': 'aecae8e7cba9ab1adc82e3f0ac89ef1b', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:25:42.615951', 'session_id': '20f815f7-17cd-49ff-bfe6-fcdbd743bd32', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:25:48.225272-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '1691a0af-c159-46c5-902a-e7b2d1003535', 'memory': 'User has red, swollen, and painful eyes.', 'hash': '28044bda3186b60aced19edb9b74e53e', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:25:58.753404', 'session_id': 'a6a32b31-b9b8-4a6a-a3d2-9fbd5e720320', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:26:04.113756-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'e02504da-541c-4841-8726-0dc808784d2c', 'memory': 'User experiences dizziness, nausea, and vomiting', 'hash': '666e321cb6daf4e2b4cf50b8261dbb62', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:26:19.100924', 'session_id': 'a8fa2530-06bf-4e62-aad5-e8cc6860eea8', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:26:24.544234-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'c62b80c7-2685-491d-9cdc-9d5723ef33ed', 'memory': '用户有严重过敏反应的情况', 'hash': '2b821592bc233909b5301ec99324f27a', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:27:32.819110', 'session_id': '15bef968-1a27-4cbf-889e-8537c7bc2bee', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:27:39.319576-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'f8b6f6b0-0586-4d5c-953a-270098c3046a', 'memory': 'User is interested in dietary advice for diabetes.', 'hash': '7bf0cee61cdc392ba587197b7dac295f', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:29:39.461345', 'session_id': '492cab20-b64a-4729-85d1-25918a66242a', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:29:46.243714-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '97b7f857-b81e-4baa-ac93-e13a44eee197', 'memory': 'User is interested in correct methods for weight loss', 'hash': '1021fecad628d6efc1511174caa1b739', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:30:05.407959', 'session_id': 'b788d0a5-eac2-4945-93ed-6ad7677d3b1b', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:19:58.078314-07:00', 'updated_at': '2025-07-31T23:30:12.937219-07:00', 'user_id': 'humansa_prod_test_user'}, {'id': '75f61fd5-adbc-477c-a2c1-c707cd527367', 'memory': 'User is preparing for pregnancy and is seeking advice on what to pay attention to during this process.', 'hash': 'cc6e4c21f506c3f8dac312a89168578f', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:30:53.831650', 'session_id': 'ac9101f3-1259-4dd6-b62b-b7694b5d49f5', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:30:59.441945-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '62d2d21f-d0a6-4912-96f6-8133e0d02354', 'memory': 'User is seeking postpartum recovery advice.', 'hash': 'aebf525e17ec3b8a632b5b8cc6068f10', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:31:14.802585', 'session_id': 'd96553b0-2ef7-4311-9376-4845e6d94781', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:31:22.977516-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '2d0b61f0-414d-417d-bd0b-f8e9bda657a7', 'memory': '提到儿童营养搭配', 'hash': '52124b4fd91749698ca002fb9eb143d8', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:31:36.827470', 'session_id': '4a38b62c-b536-482b-872e-e94d069d8eb6', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:31:42.346972-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '6484fd36-5566-46d8-883a-bebb5e08fd77', 'memory': '询问门诊是否可以使用医保', 'hash': '01dc0d9c3517f6137d424093f67bb4fd', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:32:16.513017', 'session_id': '8fa45a61-7730-436f-a290-fed79ed8fc55', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:32:23.586584-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}]}
+INFO:humansa.v2.orchestrator_workflow:Loaded user context for test_user
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:humansa.v2.response_agent:✅ Response processed: type=product, length=60
+ * Serving Quart app 'main'
+ * Debug mode: True
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:5001 (CTRL + C to quit)
+> Running step 796ea2f2-fbe6-4362-8753-68140f6536a4. Step input: 我想买维生素C
+[1;3;38;5;200mThought: The current language of the user is: Chinese. I need to use a tool to help me回答关于购买维生素C的问题。
+Action: call_productagent
+Action Input: {'query': '维生素C购买推荐'}
+[0m[1;3;34mObservation: [ProductAgent代理响应] 收到查询: 维生素C购买推荐
+
+这里应该是ProductAgent的实际响应。当前为演示模式。
+[0m> Running step 937aef2f-04a6-4812-b151-920c37d8d7f5. Step input: None
+[1;3;38;5;200mThought: I can answer without using any more tools. I'll use the user's language to answer
+Answer: 您想购买维生素C，可以选择药店、医院药房或大型电商平台（如京东、天猫、阿里健康等）进行购买。常见品牌有汤臣倍健、善存、21金维他等，您可以根据需求选择含量和剂型（片剂、泡腾片等）。购买时请认准正规渠道，注意查看产品成分及保质期。如需具体产品推荐或用法指导，也可以告诉我您的需求！
+[0m[2025-07-31 23:46:42 -0700] [67772] [INFO] 127.0.0.1:49235 POST /v2/humansa/chat 1.1 200 1210 3354686
+WARNING:asyncio:Executing <Task finished name='Task-15' coro=<ASGIHTTPConnection.handle_request() done, defined at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:106> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 3.332 seconds
+INFO:humansa.memory.mem0_manager:🔍 Getting context for memory_user_id: humansa_prod_test_user
+INFO:humansa.memory.mem0_manager:📚 Retrieved memories: {'results': [{'id': 'bc2994ed-cd33-4fe4-94b5-c82a5cb70876', 'memory': 'User wants to cancel an appointment', 'hash': '52a4416048c041cf2ee7bf8bab172d66', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:21:31.410833', 'session_id': '74596890-c6ce-474e-8e3f-51785960cf41', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:21:37.263061-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'b701b7f3-5115-4f83-bf32-9e27d5b9b981', 'memory': 'User is interested in health supplements to improve immunity.', 'hash': 'b2b35db8f6bed206a9bb53518eaa4ca2', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:17:15.968600', 'session_id': 'b5088f6d-e211-4a9f-be3e-49f777c1477d', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:16:54.552364-07:00', 'updated_at': '2025-07-31T23:17:18.936728-07:00', 'user_id': 'humansa_prod_test_user'}, {'id': '09d3d334-cfe9-4a58-a1de-1a627d7443f0', 'memory': 'User is pregnant and inquiring about suitable health supplements for pregnancy.', 'hash': '0504f51dc621288f6498dc8c1bcfbc4b', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:18:16.555505', 'session_id': '170682d8-144a-421a-9ccb-f112d9e9f7f3', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:18:19.929938-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '74dc2b79-0021-4277-82d2-61f0ed60e517', 'memory': "User is looking for recommendations for children's calcium supplements", 'hash': '5d6e6b8ef39a927b8e0250f4488e42a8', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:18:36.777402', 'session_id': 'cf24b200-f45b-4abb-b423-e7f0821ff4cb', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:18:41.754332-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'c51de5c4-ecc0-4f5b-8f0b-9abd2c983f49', 'memory': 'User is interested in skincare product recommendations.', 'hash': '5c08285ffec2278722ff05c39a0c61e2', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:19:25.675562', 'session_id': '973df7e2-9cf0-4eec-946e-f635b436c5e0', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:19:31.423405-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '59678a04-bafd-406b-a239-dc09e2e003a8', 'memory': 'User is inquiring about dietary suggestions for eye fatigue.', 'hash': '3d0fc2e3689c0015d4c6e1fa99b402ea', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:20:03.737507', 'session_id': '29e3302c-b1b2-42aa-bdb0-d7e4c3d68793', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:20:11.599033-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'aed3c67e-a1ab-44ff-bc1d-c15394c5c4c3', 'memory': '想预约心内科医生', 'hash': 'cb634c57053dc8770f34281132faffb8', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:21:02.090040', 'session_id': '9457b0c3-78b6-4e8e-92f2-52d6109a5e73', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:21:08.915775-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '45a15c35-ebab-4905-a2e2-019cd488b10c', 'memory': '想查明天可以预约的医生', 'hash': 'd2c5dac093a31beddfca9ca9f9877210', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:21:19.232614', 'session_id': 'd5261ae5-cb63-4c1c-a64a-a3256c9fae10', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:21:25.000030-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '6e83da02-8158-488c-86e0-2218cf193452', 'memory': '用户想将预约改期到下周', 'hash': 'b22e9397f94d9da0cdf25b683e55940b', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:22:06.516368', 'session_id': '680ff20e-053c-47fb-994d-17ea4141a5b1', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:22:12.531229-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '227fa863-9cac-41e2-a75e-23236bccc3d7', 'memory': '询问儿科最早可以预约的时间', 'hash': 'd4ba1845314777457480cb63c72f63fc', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:22:25.364785', 'session_id': '89599b74-b2a0-4ab1-9624-16b238806a8d', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:22:31.584089-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'cc5e7416-ae80-42b8-bb95-5af9eebd7608', 'memory': 'User wants to schedule a health check-up', 'hash': '1f2f823ee9d14a18c1a3cbb394a0f8e0', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:22:51.143157', 'session_id': '17ede6f0-3489-4844-bb3f-2c62abb9039d', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:22:58.068685-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'bf3c5998-d2f2-40c8-92fe-63a497d91a9b', 'memory': '产检通常建议提前1-2周预约', 'hash': '3b0d47cc4c6c513d0da505971d207f54', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:23:23.228017', 'session_id': 'b0952bcb-ca0d-48a2-a750-e344d7152af9', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:23:30.310545-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'bbacfc64-65cf-450f-8e59-be0398a30073', 'memory': '请求预约中医科', 'hash': 'c44bb0606a27b460d748d7bb546ad322', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:23:52.143779', 'session_id': 'a1f92791-d1bd-46af-89b4-b890e90e80b6', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:23:58.805199-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'b4725c51-eedb-4f30-a3ac-5eea5e392cdb', 'memory': 'User has a headache and fever', 'hash': 'd0fab3c25bfb9ec2abf3aff384959d13', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:24:08.089642', 'session_id': 'e1a313c2-54a2-4ff8-ba5f-552d86534164', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:24:14.432121-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'a4ed0096-38c0-4395-8330-d1147497fbd1', 'memory': 'User is experiencing chest pain and difficulty breathing', 'hash': '6df32a02a61bd7dc2c86fc4baad3faf7', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:24:24.611445', 'session_id': '904c8009-5884-4062-9d4b-92af3e2bc891', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:24:32.670691-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '93596ce8-ef28-426b-b84e-5418ec40a54c', 'memory': 'User is seeking recommendations for health supplements to help with insomnia.', 'hash': '9b1982303cf1efb54868f70c1e6d1b00', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:24:56.262731', 'session_id': '3057518f-d747-48ef-abec-e97195c0522e', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:19:03.154923-07:00', 'updated_at': '2025-07-31T23:25:01.524785-07:00', 'user_id': 'humansa_prod_test_user'}, {'id': '676e7d07-6374-415f-bf25-e5400fcc0b95', 'memory': 'User has skin allergies that cause itching', 'hash': 'aecae8e7cba9ab1adc82e3f0ac89ef1b', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:25:42.615951', 'session_id': '20f815f7-17cd-49ff-bfe6-fcdbd743bd32', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:25:48.225272-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '1691a0af-c159-46c5-902a-e7b2d1003535', 'memory': 'User has red, swollen, and painful eyes.', 'hash': '28044bda3186b60aced19edb9b74e53e', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:25:58.753404', 'session_id': 'a6a32b31-b9b8-4a6a-a3d2-9fbd5e720320', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:26:04.113756-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'e02504da-541c-4841-8726-0dc808784d2c', 'memory': 'User experiences dizziness, nausea, and vomiting', 'hash': '666e321cb6daf4e2b4cf50b8261dbb62', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:26:19.100924', 'session_id': 'a8fa2530-06bf-4e62-aad5-e8cc6860eea8', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:26:24.544234-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'c62b80c7-2685-491d-9cdc-9d5723ef33ed', 'memory': '用户有严重过敏反应的情况', 'hash': '2b821592bc233909b5301ec99324f27a', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:27:32.819110', 'session_id': '15bef968-1a27-4cbf-889e-8537c7bc2bee', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:27:39.319576-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': 'f8b6f6b0-0586-4d5c-953a-270098c3046a', 'memory': 'User is interested in dietary advice for diabetes.', 'hash': '7bf0cee61cdc392ba587197b7dac295f', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:29:39.461345', 'session_id': '492cab20-b64a-4729-85d1-25918a66242a', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:29:46.243714-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '97b7f857-b81e-4baa-ac93-e13a44eee197', 'memory': 'User is interested in correct methods for weight loss', 'hash': '1021fecad628d6efc1511174caa1b739', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:30:05.407959', 'session_id': 'b788d0a5-eac2-4945-93ed-6ad7677d3b1b', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:19:58.078314-07:00', 'updated_at': '2025-07-31T23:30:12.937219-07:00', 'user_id': 'humansa_prod_test_user'}, {'id': '75f61fd5-adbc-477c-a2c1-c707cd527367', 'memory': 'User is preparing for pregnancy and is seeking advice on what to pay attention to during this process.', 'hash': 'cc6e4c21f506c3f8dac312a89168578f', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:30:53.831650', 'session_id': 'ac9101f3-1259-4dd6-b62b-b7694b5d49f5', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:30:59.441945-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '62d2d21f-d0a6-4912-96f6-8133e0d02354', 'memory': 'User is seeking postpartum recovery advice.', 'hash': 'aebf525e17ec3b8a632b5b8cc6068f10', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:31:14.802585', 'session_id': 'd96553b0-2ef7-4311-9376-4845e6d94781', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:31:22.977516-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '2d0b61f0-414d-417d-bd0b-f8e9bda657a7', 'memory': '提到儿童营养搭配', 'hash': '52124b4fd91749698ca002fb9eb143d8', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:31:36.827470', 'session_id': '4a38b62c-b536-482b-872e-e94d069d8eb6', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:31:42.346972-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}, {'id': '6484fd36-5566-46d8-883a-bebb5e08fd77', 'memory': '询问门诊是否可以使用医保', 'hash': '01dc0d9c3517f6137d424093f67bb4fd', 'metadata': {'model': 'humansa-v2', 'source': 'humansa', 'timestamp': '2025-08-01T06:32:16.513017', 'session_id': '8fa45a61-7730-436f-a290-fed79ed8fc55', 'orchestrator': 'subagent', 'conversation_id': None}, 'created_at': '2025-07-31T23:32:23.586584-07:00', 'updated_at': None, 'user_id': 'humansa_prod_test_user'}]}
+INFO:humansa.v2.orchestrator_workflow:Loaded user context for test_user
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://youwoai-dev-resource.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-02-15-preview "HTTP/1.1 200 OK"
+WARNING:asyncio:Executing <Task pending name='Task-23' coro=<ASGIHTTPConnection.handle_request() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/asgi.py:117> wait_for=<Future pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:459> cb=[_wait.<locals>._on_completion() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:521] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:748> took 2.276 seconds
+INFO:humansa.v2.response_agent:✅ Response processed: type=product, length=60
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/orchestrator_workflow.py:287: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  current_time = datetime.utcnow().isoformat() + "Z"
+> Running step aefbf178-7f33-4499-bb17-8fa515dde4fe. Step input: 我想买维生素C
+[1;3;38;5;200mThought: The current language of the user is Chinese. I need to使用产品推荐相关工具帮助用户推荐维生素C产品。
+Action: call_productagent
+Action Input: {'query': '维生素C产品推荐'}
+[0m[1;3;34mObservation: [ProductAgent代理响应] 收到查询: 维生素C产品推荐
+
+这里应该是ProductAgent的实际响应。当前为演示模式。
+[0m> Running step 8b05dadf-4b8f-4122-acc9-06316cb05ca4. Step input: None
+[2025-07-31 23:46:51 -0700] [67772] [INFO] 127.0.0.1:49456 POST /v2/humansa/chat 1.1 200 - 3393145
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:125> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.135 seconds
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:125> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.121 seconds
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:125> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.120 seconds
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:125> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.121 seconds
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:125> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.227 seconds
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:125> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.148 seconds
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:125> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.156 seconds
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:125> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.344 seconds
+WARNING:asyncio:Executing <Task pending name='Task-2' coro=<observe_changes() running at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/utils.py:125> cb=[gather.<locals>._done_callback() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:820] created at /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/quart/app.py:873> took 0.121 seconds
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:🔄 Attempting to import document converter endpoints...
+INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
+INFO:chat.utils.document_converter:❌ docx2pdf not available
+INFO:chat.utils.document_converter:❌ pypandoc not available
+INFO:chat.utils.document_converter:❌ python-docx not available
+INFO:chat.utils.document_converter:❌ openpyxl not available
+INFO:chat.utils.document_converter:❌ reportlab not available
+INFO:__main__:✅ Successfully imported document converter blueprint
+INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:🔄 Registering Humansa endpoints...
+INFO:humansa.postgres.database:HumansaDatabase initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:__main__:✅ Humansa V2 Conversation API endpoints registered
+INFO:__main__:✅ Humansa V2 Responses API endpoints registered
+INFO:__main__:✅ Mem0 API endpoints registered
+INFO:__main__:✅ Humansa v2 blueprint registered
+INFO:__main__:✅ Humansa endpoints registered successfully
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:5001
+INFO:__main__:
+INFO:__main__:📋 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
+INFO:__main__:
+INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
+INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
+INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
+INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
+INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
+INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
+INFO:__main__:
+INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
+INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
+INFO:__main__:   - /v2/humansa/memory/search - Search user memories
+INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
+INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
+INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
+INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
+INFO:__main__:   - /o3-demo - O3 reasoning demo
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_prod' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
+INFO:__main__:✅ Mem0 memory layer initialized for Humansa
+INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
+INFO:__main__:   Environment: production
+INFO:__main__:✅ Database pool created successfully
+INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
+INFO:humansa.v2.api:🔥 Initializing HUMANSA V2 with AgentWorkflow (Streaming Reasoning)
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.agents.product_agent_staged:✅ Initialized ProductAgentStaged with 134 products
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_workflow:✅ Successfully instantiated 5 real sub-agents
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_workflow:✅ Initialized WorkflowOrchestrator with 5 sub-agents
+INFO:humansa.v2.api:Humansa v2 system initialized successfully
+INFO:__main__:✅ Humansa v2 system initialized with AgentWorkflow (Streaming Reasoning)
+INFO:humansa.v2.api_responses:✅ Using Mem0 for memory management
+INFO:humansa.v2.api_responses:✅ Memory tables initialized
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent_enhanced:Initialized Enhanced HumansaOrchestratorAgent with 6 agent tools
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ Initialized consolidated tools (7 core functions)
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/llama_index/core/agent/react/base.py:154: DeprecationWarning: Call to deprecated class ReActAgent. (ReActAgent has been rewritten and replaced by llama_index.core.agent.workflow.ReActAgent.
+
+This implementation will be removed in a v0.13.0 and the new implementation will be promoted to the `from llama_index.core.agent import ReActAgent` path.
+
+See the docs for more information: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return cls(
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/lib/python3.13/site-packages/deprecated/classic.py:184: DeprecationWarning: Call to deprecated class AgentRunner. (AgentRunner has been deprecated and is not maintained.
+
+This implementation will be removed in a v0.13.0.
+
+See the docs for more information on updated agent usage: https://docs.llamaindex.ai/en/stable/understanding/agent/)
+  return old_new1(cls, *args, **kwargs)
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ HumansaOrchestratorAgentConsolidated initialized with dynamic tool loading
+INFO:humansa.v2.api_responses:✅ Consolidated orchestrator initialized (7 tools with dynamic loading)
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_transparent:✅ Initialized transparent orchestrator with tool capture
+INFO:humansa.v2.orchestrator_agent_transparent:✅ HumansaOrchestratorAgentTransparent initialized
+INFO:humansa.v2.api_responses:✅ Transparent orchestrator initialized (captures tool calls)
+INFO:humansa.v2.api_responses:✅ Responses API orchestrators initialized successfully
+INFO:__main__:✅ Humansa v2 Responses API initialized
+[2025-08-01 13:34:57 -0700] [67772] [INFO] Running on http://0.0.0.0:5001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:5001 (CTRL + C to quit)
+ * Serving Quart app 'main'
+ * Debug mode: True
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:5001 (CTRL + C to quit)

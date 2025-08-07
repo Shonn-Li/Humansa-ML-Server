@@ -1,0 +1,1228 @@
+🚀 Starting HUMANSA V2 Sub-Agent Architecture Test Suite
+⚠️  Make sure the server is running with sub-agent architecture enabled!
+   Run: ./run_humansa_test_subagent.sh
+
+================================================================================
+HUMANSA V2 Sub-Agent Architecture Test Suite
+Time: 2025-07-31 23:16:38
+Testing 70 cases across 7 categories
+================================================================================
+
+
+📁 Testing Category: 产品推荐
+------------------------------------------------------------
+
+[1/10] Query: 我想买一些维生素C，有什么推荐吗？
+⏱️  Response Time: 15.84s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['维生素C', '推荐']
+✗ Keywords Missing: ['价格']
+🆔 Has Identity: ✓
+✅ PASSED
+Response Preview: 推荐您选择“汤臣倍健 维生素C咀嚼片”，这款产品适合需要增强免疫力、关注皮肤健康、饮食不均衡的人群。每瓶100片，售价¥59，购买两瓶有立减优惠，还可选择维生素C+E的组合套餐，性价比高。建议每日1-2片，随餐服用。购买时可点击[#小程序://诺亚新舟医疗/t5ZpOWu0UyRtEFl](#小程序://诺亚新舟医疗/t5ZpOWu0UyRtEFl)进入健康商城选购。
+
+如有慢性疾病、孕妇或儿童使...
+
+[2/10] Query: 有什么提高免疫力的保健品？
+⏱️  Response Time: 23.88s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['免疫力', '保健品', '推荐']
+✗ Keywords Missing: []
+🆔 Has Identity: ✓
+✅ PASSED
+Response Preview: 市面上提高免疫力的保健品有多种选择，常见推荐如下：
+
+1. 【汤臣倍健】多种维生素矿物质片——全面补充营养，提升免疫力，适合免疫力低下、易感冒、压力大的人群；
+2. 【修正】益生菌粉——调节肠道菌群，辅助提升免疫力，适合肠胃敏感、消化不良及老人、儿童（儿童需遵医嘱）；
+3. 【同仁堂】西洋参片——补气养阴，增强抗病能力，适合体质虚弱、经常熬夜、亚健康及免疫力低下人群。
+
+此外，还有提升免疫力健康组...
+
+[3/10] Query: 血压计哪个牌子好？
+⏱️  Response Time: 22.21s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['血压计', '品牌']
+✗ Keywords Missing: ['推荐']
+🆔 Has Identity: ✓
+✅ PASSED
+Response Preview: 市面上口碑较好、测量精准的血压计品牌主要有以下几款：
+
+1. 欧姆龙（Omron）：臂式电子血压计HEM-7136，精准度高，适合中老年人和高血压患者，操作简单，大屏显示，带语音播报。
+2. 逸思（Yuwell）：臂式家用电子血压计YE680A，智能加压，测量舒适，多组记忆，适合家庭多人使用，性价比高。
+3. 欧姆龙手腕式HEM-6161：体积小巧，便于携带，适合经常出差或外出的人士，操作简便，自...
+
+[4/10] Query: 老年人适合吃什么营养品？
+⏱️  Response Time: 19.97s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['老年人', '营养品', '适合']
+✗ Keywords Missing: []
+🆔 Has Identity: ✓
+✅ PASSED
+Response Preview: 老年人适合吃的营养品主要包括：
+
+1. 多种维生素矿物质片：补充全面营养，提升免疫力和体力，适合营养摄入不均衡、免疫力下降者。
+2. 氨糖软骨素钙片：增强骨骼和关节健康，预防关节僵硬和骨质疏松。
+3. 深海鱼油：富含Omega-3，有助于保护心脑血管健康，增强记忆力。
+4. 益生菌冻干粉：调理肠道菌群，促进消化吸收，预防便秘和腹泻。
+
+建议可根据自身需求选择基础营养套餐（多种维生素+鱼油）、骨关节...
+
+[5/10] Query: 孕妇可以吃什么保健品？
+⏱️  Response Time: 17.32s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['孕妇', '保健品']
+✗ Keywords Missing: ['安全']
+🆔 Has Identity: ✓
+✅ PASSED
+Response Preview: 孕妇适合补充以下几类保健品，有助于满足孕期特殊营养需求：
+
+1. 孕妇复合维生素矿物质片（如汤臣倍健）：补充多种维生素和矿物质（叶酸、铁、钙、锌等），有助于胎儿神经系统和骨骼发育。
+2. 孕妇专用DHA藻油软胶囊（如澳佳宝）：富含DHA，促进胎儿大脑和视力发育。
+3. 叶酸片（如斯利安）：预防胎儿神经管畸形，促进红细胞生成，预防孕期贫血。
+
+搭配推荐孕期营养组合套餐（复合维生素+DHA+叶酸），科...
+
+[6/10] Query: 儿童补钙产品推荐
+⏱️  Response Time: 21.33s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['儿童', '补钙', '产品']
+✗ Keywords Missing: []
+🆔 Has Identity: ✓
+✅ PASSED
+Response Preview: 儿童补钙推荐以下几款产品：
+
+1. 汤臣倍健 儿童钙咀嚼片：适合3-12岁儿童，帮助骨骼和牙齿健康，每瓶60片，优惠活动多。
+2. 迪巧 儿童维D钙咀嚼片：钙+维生素D双重补充，促进钙吸收，提高骨密度，适合3岁及以上儿童。
+3. 安琪纽特 儿童乳钙软胶囊：天然乳钙，易吸收，适合2-14岁儿童，尤其适合消化吸收能力较弱的宝宝。
+
+建议：
+- 选择含维生素D的钙补充剂，能帮助钙更好吸收；
+- 可搭配益...
+
+[7/10] Query: 失眠吃什么保健品好？
+⏱️  Response Time: 20.89s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['失眠', '保健品', '改善']
+✗ Keywords Missing: []
+🆔 Has Identity: ✓
+✅ PASSED
+Response Preview: 针对失眠，常见助眠保健品推荐如下：
+
+1. 褪黑素片：调节生物钟，缩短入睡时间，提高睡眠质量，适合作息不规律、轻度失眠者。建议睡前30分钟服用。
+2. 缬草提取物胶囊：放松神经，缓解焦虑，助于入睡，适合压力大、精神紧张人群。
+3. 西洋参片：补气养心，缓解因气虚导致的心悸、失眠，适合体虚多梦者。
+
+也可选择“褪黑素+缬草”组合套餐，效果更佳。目前商城有多种优惠活动。
+
+温馨提示：保健品不能替代药物...
+
+[8/10] Query: 护肤品有什么推荐？
+⏱️  Response Time: 27.76s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['护肤', '推荐', '产品']
+✗ Keywords Missing: []
+🆔 Has Identity: ✓
+✅ PASSED
+Response Preview: 为您推荐几款健康商城热销且高口碑的护肤品，适合不同肤质与需求：
+
+1. **诺亚甄选医美修护面膜**：舒缓修护、补水保湿、修护受损屏障，适合敏感肌、换季或医美术后修护。促销价158元/盒，买2送1。
+2. **瑞士HBN烟酰胺美白精华**：提亮肤色、淡化色斑，适合肤色暗沉、追求美白人群。限时优惠268元/瓶，满399元减50元。
+3. **修丽可AGE抗糖抗衰老精华**：抗老化、紧致提拉、淡化细纹...
+
+[9/10] Query: 减肥产品哪个效果好？
+⏱️  Response Time: 26.17s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['减肥', '产品', '效果']
+✗ Keywords Missing: []
+🆔 Has Identity: ✓
+✅ PASSED
+Response Preview: 市面上效果较好且安全的减肥产品推荐如下：
+
+1. **汤臣倍健左旋肉碱茶多酚片**：辅助脂肪分解，增强运动减脂效果，适合配合健身、日常减肥的成年人。会员价￥128/瓶，两瓶9折。
+2. **Swisse高纤维代餐奶昔**：高纤维饱腹感，减少热量摄入，营养均衡，适合忙碌上班族和需要健康代餐的人群。促销价￥169/盒，买2赠摇摇杯。
+3. **诺亚减脂健康管理套餐**：包含左旋肉碱、代餐奶昔和智能体脂...
+
+[10/10] Query: 眼睛疲劳吃什么好？
+⏱️  Response Time: 13.00s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['眼睛', '疲劳', '保健']
+✗ Keywords Missing: []
+🆔 Has Identity: ✓
+✅ PASSED
+Response Preview: 针对眼睛疲劳，推荐以下几类保健品，有助于缓解视疲劳、保护视力：
+
+1. **叶黄素酯软胶囊/咀嚼片**  
+   叶黄素有助于过滤蓝光、缓解视疲劳，适合长时间使用电脑、手机、阅读的人群。推荐“汤臣倍健叶黄素酯咀嚼片”，成人及青少年均可服用。
+
+2. **蓝莓提取物/越橘胶囊**  
+   蓝莓和越橘富含花青素，有助于改善眼部微循环、缓解眼疲劳。推荐“Swisse蓝莓越橘胶囊”。
+
+3. **复合护...
+
+📊 产品推荐 Summary: 10/10 passed
+
+📁 Testing Category: 预约挂号
+------------------------------------------------------------
+
+[1/10] Query: 我想预约心内科医生
+⏱️  Response Time: 56.83s
+🤖 Agent Used: appointment
+📝 Response Quality: excellent
+✓ Keywords Found: ['预约', '心内科', '医生']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 为您找到以下心内科医生孙浩在广州中山医院的可预约时间：
+
+1. 2025-08-01 10:00 - ￥120（门诊）
+2. 2025-08-01 10:30 - ￥120（门诊）
+3. 2025-08-01 11:00 - ￥120（门诊）
+4. 2025-08-01 11:30 - ￥120（门诊）
+5. 2025-08-01 14:30 - ￥120（门诊）
+6. 2025-08-01 15...
+
+[2/10] Query: 帮我查一下明天有哪些医生可以预约
+⏱️  Response Time: 15.57s
+🤖 Agent Used: appointment
+📝 Response Quality: excellent
+✓ Keywords Found: ['查询', '明天', '预约']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 很抱歉，当前暂时无法查询到明天心内科的可预约医生及号源信息。建议您稍后再试，或者如需预约其他日期或其他科室的医生，也可以随时告知，我会帮您继续查询。...
+
+[3/10] Query: 取消我的预约
+⏱️  Response Time: 11.76s
+🤖 Agent Used: appointment
+📝 Response Quality: excellent
+✓ Keywords Found: ['取消', '预约']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 很抱歉，我目前无法直接为您取消预约。建议您通过医院官方平台、电话或前往医院挂号窗口办理取消。如果需要查询您的预约信息或有其他就诊需求，也可以随时告诉我，我会尽力协助您！...
+
+[4/10] Query: 改期我的预约到下周
+⏱️  Response Time: 34.77s
+🤖 Agent Used: appointment
+📝 Response Quality: excellent
+✓ Keywords Found: ['改期', '预约', '下周']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 下周心内科孙浩医生可预约时段如下，请回复您想改期的序号（如“1”）：
+1. 2025-08-05 10:00 门诊  
+2. 2025-08-05 11:00 门诊  
+3. 2025-08-05 11:30 门诊  
+4. 2025-08-05 15:00 门诊  
+5. 2025-08-05 16:30 线上问诊  
+6. 2025-08-05 17:30 门诊  
+7. 2025-08-06...
+
+[5/10] Query: 儿科最早什么时候可以预约？
+⏱️  Response Time: 18.54s
+🤖 Agent Used: appointment
+📝 Response Quality: excellent
+✓ Keywords Found: ['儿科', '最早', '预约']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 儿科最早可预约的时间如下：
+1. 黄晓明医生（儿科）- 2025-08-01 09:00 - 北京协和医院 - ¥80（线上问诊）
+2. 李娜医生（儿科）- 2025-08-01 09:30 - 北京协和医院 - ¥80（门诊）
+
+请回复对应序号（如“1”或“2”），我可以为您预约。...
+
+[6/10] Query: 王医生明天有号吗？
+⏱️  Response Time: 7.91s
+🤖 Agent Used: appointment
+📝 Response Quality: excellent
+✓ Keywords Found: ['王医生', '明天', '号']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 很抱歉，王医生明天暂时没有可预约的号源。如需查询其他日期或其他医生的号源，请随时告知！...
+
+[7/10] Query: 我想做体检，怎么预约？
+⏱️  Response Time: 17.59s
+🤖 Agent Used: appointment
+📝 Response Quality: excellent
+✓ Keywords Found: ['体检', '预约', '流程']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 您可以按照以下流程预约体检：
+
+1. 选择体检医院或体检中心（如三甲医院、专业体检机构等）。
+2. 了解各类体检套餐，选择适合自己的项目。
+3. 通过医院或体检中心官网、官方微信、电话或现场进行预约，选择合适的日期和时间。
+4. 填写个人信息，提交预约申请。
+5. 等待收到预约确认信息（短信或电话）。
+6. 体检当天携带身份证、预约短信等材料，按时到体检中心签到、体检。
+7. 体检结束后，按机构要...
+
+[8/10] Query: 皮肤科专家门诊怎么挂？
+⏱️  Response Time: 12.85s
+🤖 Agent Used: appointment
+📝 Response Quality: excellent
+✓ Keywords Found: ['皮肤科', '专家', '挂号']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 皮肤科专家门诊挂号一般流程如下：
+
+1. 选择医院：确定您希望就诊的医院或皮肤专科医院。
+2. 查询医生排班：通过医院官网、官方App、微信公众号或第三方平台（如挂号网、微医等）查询皮肤科专家门诊的医生及出诊时间。
+3. 预约挂号：在上述平台选择专家和合适时间提交预约，填写个人信息并支付挂号费（有的平台支持线上支付）。
+4. 到院就诊：预约成功后，按预约时间携带身份证、医保卡、预约短信等材料，提前...
+
+[9/10] Query: 产检需要提前多久预约？
+⏱️  Response Time: 18.37s
+🤖 Agent Used: appointment
+📝 Response Quality: excellent
+✓ Keywords Found: ['产检', '提前', '预约']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 产检通常建议提前1-2周预约。如果您有特定的医生或时间需求，建议尽早预约，以确保能够安排到合适的时间段。部分热门医院或医生，号源紧张，建议提前2周以上预约。如需帮助查询具体医院或医生的产检号源，请随时告知！...
+
+[10/10] Query: 可以帮我预约中医科吗？
+⏱️  Response Time: 28.00s
+🤖 Agent Used: appointment
+📝 Response Quality: excellent
+✓ Keywords Found: ['预约', '中医科']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 为您查询到中医科郑雪医生在广州中山医院的多个可预约时段。请回复您想预约的时段序号（如“1”），我将为您完成预约。如需其他医生或时间，也可告知！...
+
+📊 预约挂号 Summary: 10/10 passed
+
+📁 Testing Category: 症状分析
+------------------------------------------------------------
+
+[1/10] Query: 我头痛发烧，是感冒了吗？
+⏱️  Response Time: 15.12s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['头痛', '发烧', '感冒']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 头痛和发烧确实是感冒的常见症状，但也可能由流感、病毒或细菌感染等其他疾病引起。如果症状较轻，多为普通感冒，可以多休息、多喝水，注意观察。如果发烧较高（超过38.5℃）、持续不退，或伴有剧烈头痛、呕吐、呼吸困难等症状，建议及时就医，排除其他疾病。请根据自身情况合理选择就医或自我管理，如有疑问随时咨询！...
+
+[2/10] Query: 胸口疼痛，呼吸困难
+⏱️  Response Time: 17.73s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['胸口', '疼痛', '呼吸困难', '120']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 您出现胸口疼痛和呼吸困难，可能是心脏、肺部等严重疾病的表现，具有危险性。请您立即停止剧烈活动，尽量平卧休息，并建议尽快前往医院急诊就诊。如果症状突然加重，出现剧烈胸痛、大汗、晕厥、脸色发青等情况，请立即拨打急救电话120。不要自行拖延或忽视这些症状，尽快就医是最安全的选择。祝您早日康复！...
+
+[3/10] Query: 最近总是失眠，怎么办？
+⏱️  Response Time: 28.50s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['失眠', '建议', '改善']
+✗ Keywords Missing: []
+🆔 Has Identity: ✓
+✅ PASSED
+Response Preview: 失眠可以先尝试规律作息、减少睡前使用电子产品、避免咖啡因等刺激物、营造安静舒适的睡眠环境，并适当进行放松训练。如果这些方法仍无法改善，您可以考虑辅助使用一些助眠保健品，如褪黑素片、缬草提取物、助眠片等，目前商城热销产品有【汤臣倍健褪黑素片】、【Swisse助眠片】以及【褪黑素+维生素B6组合套餐】等，均有助于调节生物钟、缓解紧张、提升睡眠质量。
+
+温馨提示：保健品不能替代药物治疗，如果失眠持续两周...
+
+[4/10] Query: 孩子发烧39度，需要去医院吗？
+⏱️  Response Time: 10.98s
+🤖 Agent Used: general
+📝 Response Quality: excellent
+✓ Keywords Found: ['孩子', '发烧', '39度', '医院']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 孩子发烧到39度，如果伴有精神萎靡、反应差、持续哭闹或嗜睡，或出现抽搐、呼吸急促、频繁呕吐、皮疹等情况，请立即带孩子去医院。如果只是单纯发烧但精神状态尚好，可以先在家物理降温、多喝水，并按医生指导使用退烧药。但如果高烧持续超过24小时不退，或体温反复很高，也建议及时就医。如有不确定，请尽早带孩子去医院评估。...
+
+[5/10] Query: 腹痛拉肚子，可能是什么原因？
+⏱️  Response Time: 10.40s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['腹痛', '拉肚子', '原因']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 腹痛和拉肚子的常见原因包括急性肠胃炎、食物中毒、肠道感染、消化不良等，也可能与饮食不洁、药物反应或压力有关。如果症状较轻，可以多喝水、注意休息，暂时避免油腻和刺激性食物。如果出现高热、剧烈腹痛、频繁呕吐、便血、脱水等严重症状，建议尽快就医检查，以排除更严重的疾病（如阑尾炎、肠梗阻等）。如症状持续不缓解，也建议及时到医院就诊。...
+
+[6/10] Query: 咳嗽有痰，吃什么药？
+⏱️  Response Time: 12.32s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['咳嗽', '有痰', '用药']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 咳嗽有痰时，常用的药物包括祛痰药（如氨溴索、溴己新、乙酰半胱氨酸），这些药物有助于稀释和排出痰液。中成药如川贝枇杷膏、急支糖浆也可以缓解症状。一般不建议强行使用止咳药（如右美沙芬），因为有痰时需要把痰咳出来。
+
+如伴有发热、胸痛、气促等严重症状，或症状持续不缓解，建议及时就医。在用药前请仔细阅读药品说明书或咨询医生，儿童、孕妇、老人及有基础疾病者更应谨慎用药。...
+
+[7/10] Query: 皮肤过敏很痒怎么办？
+⏱️  Response Time: 10.86s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['皮肤', '过敏', '痒']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 皮肤过敏发痒时，您可以采取以下措施缓解不适：
+
+1. **避免抓挠**：抓挠会加重皮肤损伤，容易引起感染。
+2. **冷敷止痒**：用冷毛巾敷于患处，可以暂时缓解瘙痒。
+3. **远离过敏原**：如已知过敏源（如某食物、化妆品、花粉等），请立即停止接触。
+4. **外用药膏**：可选用炉甘石洗剂、抗过敏止痒膏（如丁酸氢化可的松乳膏、皮炎平等）短期外用，缓解瘙痒。
+5. **口服抗过敏药**：如症状...
+
+[8/10] Query: 眼睛红肿疼痛
+⏱️  Response Time: 15.38s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['眼睛', '红肿', '疼痛']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 眼睛红肿疼痛常见于结膜炎、麦粒肿、角膜炎、异物入眼或过敏等。建议您避免揉眼、勤洗手、暂停佩戴隐形眼镜，不要自行随意点药。如伴有视力下降、分泌物增多、畏光、症状加重或持续不缓解，建议尽快到眼科就诊，由专业医生检查和治疗。祝您早日康复！...
+
+[9/10] Query: 关节疼痛是关节炎吗？
+⏱️  Response Time: 3.56s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['关节', '疼痛', '关节炎']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 关节疼痛确实可能是关节炎的表现，但也有其他原因可以导致关节疼痛，例如劳损、扭伤、风湿免疫疾病、痛风、骨质增生等。关节炎常见症状包括关节红肿、活动受限、晨僵等，具体原因需要结合您的年龄、疼痛持续时间、是否伴随肿胀、发热等症状综合判断。
+
+建议您：
+- 观察关节有无肿胀、发红、发热、变形等
+- 注意疼痛是持续性还是活动后加重
+- 如症状持续不缓解、影响日常生活或伴有明显肿胀、发热等，建议尽早就医，完善...
+
+[10/10] Query: 头晕恶心想吐
+⏱️  Response Time: 15.87s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['头晕', '恶心', '呕吐']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 您出现头晕、恶心、想吐，建议先坐下或平躺，避免摔倒，同时多休息、适量喝水，避免空腹。如果症状较轻，可以先观察自身状态。但如果您出现持续呕吐、剧烈头痛、视物模糊、发热、心慌胸闷、肢体无力等严重症状，或者症状反复不缓解，建议尽快就医，排查是否有脑供血不足、耳部疾病、消化系统疾病等其他可能。日常还要注意饮食清淡，避免劳累。如需进一步帮助，欢迎随时咨询。...
+
+📊 症状分析 Summary: 10/10 passed
+
+📁 Testing Category: 紧急情况
+------------------------------------------------------------
+
+[1/10] Query: 突然晕倒了怎么办
+⏱️  Response Time: 12.39s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['晕倒', '急救', '120']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 如果有人突然晕倒，请按以下步骤处理：
+
+1. 确保现场安全后再接近患者。
+2. 立即呼叫身边的人帮忙，并拨打急救电话120。
+3. 轻拍患者肩膀、大声呼喊，判断是否有意识。
+4. 检查呼吸：
+   - 有呼吸但无意识，将其侧卧，保持气道通畅，防止呕吐物误吸。
+   - 无呼吸或呼吸异常，立即进行心肺复苏（CPR），持续按压胸部，直到急救人员到来。
+5. 松开紧身衣物，保持空气流通。
+6. 观察并记...
+
+[2/10] Query: 心脏病发作的症状
+⏱️  Response Time: 7.65s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['心脏病', '症状', '急救']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 心脏病发作（急性心肌梗死）常见症状包括：
+
+1. **胸痛或胸闷**：多为压榨样、紧缩感、烧灼感，位于胸骨后或左胸部，可持续数分钟以上，休息或含服硝酸甘油不能完全缓解。
+2. **疼痛放射**：疼痛可放射至左肩、左臂、下颌、颈部、背部等部位。
+3. **呼吸困难**：感觉喘不上气，尤其活动或平卧时加重。
+4. **出汗**：常为冷汗、出汗较多。
+5. **恶心、呕吐**：部分患者伴有恶心、呕吐、腹...
+
+[3/10] Query: 中风的早期症状有哪些
+⏱️  Response Time: 6.56s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['中风', '症状', '识别']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 中风（脑卒中）早期常见症状如下，需高度警惕：
+
+1. **口角歪斜、面部不对称**  
+   突然出现一侧面部麻木或无力，笑时口角歪向一侧。
+
+2. **肢体无力或麻木**  
+   突然出现一侧（左或右）的手臂、腿无法抬起或活动不灵，或者感觉麻木。
+
+3. **言语不清或理解困难**  
+   突然说话含糊不清、无法表达，或听不懂别人的话。
+
+4. **视力障碍**  
+   突然出现一只或双眼...
+
+[4/10] Query: 烫伤了怎么处理
+⏱️  Response Time: 6.43s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['烫伤', '处理', '急救']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 烫伤后应立即采取以下正确的急救处理方法：
+
+1. **迅速冷却降温**  
+   用流动的冷水（自来水）冲洗烫伤部位15-30分钟，能有效减轻疼痛和防止伤情加重。也可用冷湿毛巾冷敷，不建议用冰块直接接触皮肤，以免冻伤。
+
+2. **脱离热源，轻柔脱去衣物**  
+   若衣物未粘连皮肤，可轻轻脱去覆盖烫伤部位的衣物；如已粘连，不要强行撕扯，以免加重损伤。
+
+3. **保护创面**  
+   用干净...
+
+[5/10] Query: 食物中毒怎么办
+⏱️  Response Time: 6.72s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['食物中毒', '处理', '急救']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 食物中毒时，应根据症状严重程度采取以下措施：
+
+**1. 立即停止进食可疑食物**  
+停止食用所有可疑变质或不洁食物，保留剩余食物以备检验。
+
+**2. 及时补充水分**  
+如出现呕吐、腹泻等症状，需多喝温开水或口服补液盐，预防脱水。
+
+**3. 促进毒物排出（仅限清醒、无明显呕吐的人）**  
+如果食入时间很短且症状轻，可以在医生指导下尝试催吐或导泻处理。但不要自行处理严重中毒。
+
+**4....
+
+[6/10] Query: 突发哮喘如何急救
+⏱️  Response Time: 5.85s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['哮喘', '急救', '处理']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 突发哮喘发作时，请按照以下步骤紧急处理：
+
+1. **立即停止活动，保持镇静**  
+   让患者端坐或半坐，放松上身，避免平卧。
+
+2. **迅速使用急救药物**  
+   - 立即吸入速效支气管扩张剂（如沙丁胺醇吸入气雾剂/雾化器），通常每次1-2喷，可按医生指导每隔20分钟重复一次，最多3次。
+   - 如有平时医生开具的急救药，按医嘱立即使用。
+
+3. **保持空气流通**  
+   打开...
+
+[7/10] Query: 癫痫发作时该怎么做
+⏱️  Response Time: 9.40s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['癫痫', '发作', '急救']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 癫痫发作时，正确的急救措施非常重要：
+
+**1. 保持镇静，保护患者安全**
+- 让患者平躺在安全的地方，移开周围尖锐、坚硬或易碎物品，防止受伤。
+- 可以在患者头部下方垫软物（如衣服），防止头部碰伤。
+
+**2. 不要强行按压或限制患者**
+- 不要用力按压患者肢体，防止骨折或关节损伤。
+
+**3. 切勿往口中塞东西**
+- 不要把手、勺子、筷子等物品塞进患者嘴里，以免造成窒息或牙齿损伤。
+- ...
+
+[8/10] Query: 严重过敏反应怎么办
+⏱️  Response Time: 15.77s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['过敏', '严重', '急救']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 严重过敏反应（如“过敏性休克”或“急性过敏反应”）是一种危及生命的紧急情况，需立即采取以下急救措施：
+
+**1. 立即拨打急救电话120！**
+- 这是最重要的步骤，请第一时间寻求医疗救援。
+
+**2. 让患者平卧，抬高双腿**
+- 有助于维持脑部血流。如果出现呼吸困难，可以半坐位，但不要站立或走动。
+
+**3. 迅速远离过敏原**
+- 如是药物、食物、昆虫叮咬等，立即去除相关物品。
+
+**4. ...
+
+[9/10] Query: 溺水急救步骤
+⏱️  Response Time: 9.98s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['溺水', '急救', '步骤']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 溺水时的急救步骤如下，请尽快实施，争取宝贵的救命时间：
+
+**1. 迅速将溺水者救上岸**
+- 保证自身安全，使用救生圈、绳索、竹竿等工具协助，避免直接下水造成二次危险。
+- 如确需下水，建议有救援经验者进行。
+
+**2. 清理口鼻异物，保持呼吸道畅通**
+- 将溺水者面朝上平放，解开衣物，清除口鼻泥沙、杂物、呕吐物。
+- 可侧头使口腔分泌物流出，防止误吸。
+
+**3. 判断意识和呼吸**
+- 轻...
+
+[10/10] Query: 骨折了怎么处理
+⏱️  Response Time: 8.11s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['骨折', '处理', '急救']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 骨折时的现场急救处理建议如下：
+
+**1. 保持镇静，避免移动伤者**
+- 让伤者安静休息，避免随意搬动或活动受伤部位，以防加重损伤。
+
+**2. 初步止血（如有出血）**
+- 用干净纱布、毛巾等压迫伤口止血，但不要用力过大影响血液循环。
+
+**3. 固定受伤部位**
+- 用夹板、木棍、硬纸板等将骨折部位上下两个关节一同固定，夹板与皮肤之间可垫软物（如毛巾、衣物）。
+- 固定时不要强行复位骨折端，...
+
+📊 紧急情况 Summary: 10/10 passed
+
+📁 Testing Category: 用药指导
+------------------------------------------------------------
+
+[1/10] Query: 阿司匹林有什么副作用？
+⏱️  Response Time: 8.19s
+🤖 Agent Used: medication
+📝 Response Quality: excellent
+✓ Keywords Found: ['阿司匹林', '副作用', '注意']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 阿司匹林是一种常用的解热镇痛和抗血小板药物，主要副作用有：
+
+1. **胃肠道不良反应**  
+   - 最常见，如胃痛、胃灼热、恶心、呕吐、腹胀、消化不良  
+   - 长期或大剂量服用可导致胃炎、胃溃疡、消化道出血（表现为黑便、呕血）
+
+2. **出血风险增加**  
+   - 因抑制血小板聚集，容易导致牙龈出血、鼻出血、皮下出血、月经量增多  
+   - 严重时可发生消化道、颅内等严重出血
+...
+
+[2/10] Query: 感冒药可以和退烧药一起吃吗？
+⏱️  Response Time: 9.75s
+🤖 Agent Used: medication
+📝 Response Quality: good
+✓ Keywords Found: ['感冒药', '退烧药']
+✗ Keywords Missing: ['同服']
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 一般情况下，感冒药和退烧药可以一起吃，但要注意如下几点：很多复方感冒药本身就含有退烧成分（如对乙酰氨基酚或布洛芬），如果再额外服用退烧药，可能导致同一种成分摄入过量，增加肝肾损伤等风险。建议用药前仔细查看药品成分说明，避免重复用药。如不确定，最好咨询医生或药师。如果出现不适，及时就医。...
+
+[3/10] Query: 高血压药什么时候吃最好？
+⏱️  Response Time: 6.23s
+🤖 Agent Used: medication
+📝 Response Quality: excellent
+✓ Keywords Found: ['高血压药', '服用时间', '最佳']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 高血压药的最佳服药时间需根据药物种类和医生的具体指导决定，但一般有以下几点原则：
+
+1. **多数常规降压药**  
+   很多降压药（如普利类、沙坦类、钙拮抗剂等）建议每天同一时间服用，通常在早晨起床后或早餐后，便于形成良好习惯，也便于一天内持续控制血压。
+
+2. **有些药物根据血压波动调整**  
+   对于夜间血压升高或“非杓型高血压”患者，部分药物可能建议在晚上服用，以更好控制夜间血压。...
+
+[4/10] Query: 抗生素要吃够疗程吗？
+⏱️  Response Time: 5.07s
+🤖 Agent Used: clinical
+📝 Response Quality: good
+✓ Keywords Found: ['抗生素', '疗程']
+✗ Keywords Missing: ['坚持']
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 是的，抗生素一般必须吃够医生指定的完整疗程，即使症状缓解或已经好转，也不要自行提前停药。主要原因如下：
+
+1. **彻底清除病原菌**  
+   提前停药可能导致体内的细菌没有被完全杀灭，残留细菌容易“卷土重来”，引发感染复发。
+
+2. **避免耐药菌产生**  
+   不规则服用、提前停药会增加细菌耐药的风险，今后治疗同类感染时可能效果变差。
+
+3. **减少并发症**  
+   不足疗程可能导...
+
+[5/10] Query: 糖尿病药物有哪些？
+⏱️  Response Time: 12.14s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['糖尿病', '药物', '种类']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 糖尿病药物主要分为口服降糖药和胰岛素类注射药物，常见种类如下：
+
+### 1. 口服降糖药
+- **双胍类**：如二甲双胍（美迪康、格华止）  
+  作用：减少肝糖输出，增加胰岛素敏感性，是2型糖尿病的首选基础药物。
+- **磺脲类**：如格列美脲、格列齐特、格列吡嗪  
+  作用：促进胰岛素分泌，适用于部分2型糖尿病患者。
+- **格列奈类**：如瑞格列奈、那格列奈  
+  作用：短效促胰岛素分...
+
+[6/10] Query: 止痛药会上瘾吗？
+⏱️  Response Time: 5.40s
+🤖 Agent Used: clinical
+📝 Response Quality: good
+✓ Keywords Found: ['止痛药', '上瘾']
+✗ Keywords Missing: ['安全']
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 止痛药是否会上瘾，取决于药物的种类：
+
+### 1. **阿片类止痛药**
+如吗啡、可待因、羟考酮、杜冷丁、芬太尼等，这类药物具有成瘾性。长期或大剂量使用，尤其是非医学监管下使用，容易产生依赖甚至成瘾。成瘾后，患者可能产生强烈的用药欲望，停药会出现戒断症状。
+
+### 2. **非阿片类止痛药**
+如对乙酰氨基酚（扑热息痛）、布洛芬、阿司匹林、吲哚美辛等，这类药物一般**不会成瘾**。但长期或过量...
+
+[7/10] Query: 中药和西药可以一起吃吗？
+⏱️  Response Time: 6.16s
+🤖 Agent Used: clinical
+📝 Response Quality: good
+✓ Keywords Found: ['中药', '西药']
+✗ Keywords Missing: ['同服']
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 中药和西药有些情况下可以一起吃，但需要注意以下几点：
+
+1. **药物相互作用**  
+   中药和西药可能会发生药效增强或减弱、副作用增加等相互作用。例如某些中药会影响西药的吸收、代谢或排泄，导致疗效变化或毒性增加。
+
+2. **服药时间要间隔**  
+   一般建议中药和西药间隔1-2小时服用，避免药物在胃肠道相互影响。
+
+3. **遵医嘱为主**  
+   某些疾病需要中西医联合治疗，但具体...
+
+[8/10] Query: 过期药物还能吃吗？
+⏱️  Response Time: 6.79s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['过期', '药物', '安全']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 过期药物一般**不建议再服用**。主要原因如下：
+
+1. **药效降低**  
+   药物过期后，活性成分可能分解，药效减弱或失效，无法达到治疗目的。
+
+2. **安全性下降**  
+   部分药物分解后会产生有害物质，服用后可能引起中毒或不良反应。例如阿司匹林过期后可分解为醋酸和水杨酸，刺激胃肠道。
+
+3. **外观性状变化**  
+   过期药物可能出现变色、异味、潮解、结块等，服用存在风险。...
+
+[9/10] Query: 儿童用药注意事项
+⏱️  Response Time: 7.37s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['儿童', '用药', '注意']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 儿童用药需要特别注意以下几点：
+
+1. **严格按剂量服用**  
+   - 儿童药物剂量通常按体重或年龄计算，切忌用成人剂量直接减半或随意加减。
+   - 使用专用量具（如滴管、量杯、针管）准确量取药量，避免用普通勺子。
+
+2. **选择儿童专用药物**  
+   - 优先选择适合儿童的剂型（如口服液、颗粒、咀嚼片、糖浆等），避免使用不适合儿童的药品。
+
+3. **遵医嘱用药**  
+   - ...
+
+[10/10] Query: 孕妇禁用哪些药物？
+⏱️  Response Time: 9.57s
+🤖 Agent Used: medication
+📝 Response Quality: excellent
+✓ Keywords Found: ['孕妇', '禁用', '药物']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 孕妇禁用或应慎用的药物较多，因某些药物可能对胎儿造成致畸、流产、发育异常等严重影响。常见孕妇禁用或慎用药物如下：
+
+---
+
+### 一、明确禁用的药物
+1. **抗生素类**
+   - 四环素类（如四环素、多西环素）：影响胎儿骨骼和牙齿发育，致牙齿发黄、骨骼发育不良。
+   - 喹诺酮类（如左氧氟沙星、环丙沙星）：影响胎儿软骨发育。
+   - 氯霉素：可致新生儿灰婴综合征。
+   - 甲硝唑（妊...
+
+📊 用药指导 Summary: 10/10 passed
+
+📁 Testing Category: 健康咨询
+------------------------------------------------------------
+
+[1/10] Query: 如何预防高血压？
+⏱️  Response Time: 8.87s
+🤖 Agent Used: clinical
+📝 Response Quality: good
+✓ Keywords Found: ['预防', '高血压']
+✗ Keywords Missing: ['方法']
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 预防高血压主要从健康生活方式入手，具体建议如下：
+
+### 1. 合理饮食
+- **少盐饮食**：每天食盐摄入量建议控制在5克以下，减少酱油、咸菜、腌制品等高盐食品。
+- **多吃蔬果**：多摄入新鲜蔬菜、水果和高钾食物（如香蕉、番茄、菠菜等）。
+- **合理膳食结构**：控制脂肪、胆固醇摄入，选择低脂、低胆固醇食物，多吃全谷类、豆类、鱼类和瘦肉。
+- **限制饮酒**：避免或减少饮酒，尤其是烈性...
+
+[2/10] Query: 糖尿病饮食注意什么？
+⏱️  Response Time: 16.28s
+🤖 Agent Used: medication
+📝 Response Quality: excellent
+✓ Keywords Found: ['糖尿病', '饮食', '注意']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 糖尿病患者在饮食上需要特别注意，以帮助控制血糖、预防并发症。建议如下：
+
+### 1. 控制总能量摄入
+- 结合体重、身高、活动量制定每日总热量，避免过量进食，达到或维持理想体重。
+
+### 2. 均衡膳食结构
+- **主食**：选择全谷物、杂粮、燕麦、荞麦等，减少精制米面，主食总量要适量。
+- **蛋白质**：适量摄入，优选瘦肉、鱼、豆制品、蛋、低脂奶等。
+- **脂肪**：以不饱和脂肪酸为主，...
+
+[3/10] Query: 怎样提高睡眠质量？
+⏱️  Response Time: 10.12s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['提高', '睡眠', '质量']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 提高睡眠质量可以从以下几个方面着手：
+
+### 1. 保持规律作息
+- 每天固定时间上床睡觉和起床，包括周末和假期，帮助身体建立生物钟。
+
+### 2. 营造良好睡眠环境
+- 卧室安静、黑暗、通风好，温度适宜（一般16-24℃）。
+- 选择舒适的床垫和枕头，床单清洁。
+- 睡前避免强光刺激，远离手机、电脑、电视等电子产品。
+
+### 3. 睡前放松身心
+- 可通过深呼吸、冥想、热水泡脚、听轻音乐等...
+
+[4/10] Query: 减肥的正确方法
+⏱️  Response Time: 15.57s
+🤖 Agent Used: medication
+📝 Response Quality: excellent
+✓ Keywords Found: ['减肥', '正确', '方法']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 减肥的正确方法应以科学、安全、可持续为原则，主要包括以下几个方面：
+
+### 1. 合理控制饮食
+- **减少总热量摄入**：建议每日摄入热量低于消耗热量，形成“热量缺口”。
+- **优化膳食结构**：多吃蔬菜、水果、全谷物、豆类，适量摄入瘦肉、鱼、蛋、奶，减少油炸、甜食、精制主食和高脂肪食品。
+- **定时定量进餐**：三餐规律，少吃零食和夜宵，避免暴饮暴食。
+- **细嚼慢咽**：增加饱腹感，...
+
+[5/10] Query: 如何增强免疫力？
+⏱️  Response Time: 11.63s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['增强', '免疫力', '方法']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 增强免疫力需要从日常生活多方面入手，科学方法包括：
+
+### 1. 均衡饮食
+- 多吃新鲜蔬菜水果，补充丰富的维生素和矿物质（如维生素C、D、锌、铁等）。
+- 适量摄入蛋白质（如瘦肉、鱼、蛋、奶、豆制品），为免疫细胞提供原料。
+- 多饮水，保持身体水分充足。
+- 少吃高盐、高糖、高脂肪及油炸、腌制、加工食品。
+
+### 2. 规律作息，保证充足睡眠
+- 每天保证7-9小时高质量睡眠，睡眠不足会降低...
+
+[6/10] Query: 办公室如何护眼？
+⏱️  Response Time: 7.85s
+🤖 Agent Used: product
+📝 Response Quality: good
+✓ Keywords Found: ['办公室', '护眼']
+✗ Keywords Missing: ['方法']
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 办公室护眼建议如下，有助于缓解视疲劳、预防干涩和近视加重：
+
+### 1. 遵循“20-20-20”法则
+- 每用眼20分钟，抬头眺望20英尺（约6米）以外的远处，持续20秒，让眼睛充分放松。
+
+### 2. 保持正确用眼距离与姿势
+- 电脑屏幕建议与眼睛距离50-70厘米，屏幕中心略低于视线10-20厘米。
+- 坐姿端正，避免躺着、趴着看电脑或手机。
+
+### 3. 调整屏幕亮度与对比度
+- 屏...
+
+[7/10] Query: 老年人如何补钙？
+⏱️  Response Time: 8.60s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['老年人', '补钙', '方法']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 老年人补钙的方法应科学、系统，主要包括以下几个方面：
+
+### 1. 饮食补钙为主
+- **多吃高钙食物**：如牛奶、酸奶、奶酪、豆腐、豆制品、芝麻、虾皮、小鱼干、深绿色蔬菜（如芥蓝、油菜等）。
+- **合理搭配膳食**：保证蛋白质摄入，如鱼、蛋、瘦肉，有助于钙的吸收和利用。
+- **多晒太阳**：日晒可促进体内维生素D合成，帮助钙吸收。建议每天上午或下午晒太阳15-30分钟。
+
+### 2. 必...
+
+[8/10] Query: 备孕需要注意什么？
+⏱️  Response Time: 16.41s
+🤖 Agent Used: product
+📝 Response Quality: good
+✓ Keywords Found: ['备孕', '注意']
+✗ Keywords Missing: ['准备']
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 备孕是一项系统工程，科学备孕有助于提高受孕率和未来宝宝健康。建议注意以下几点：
+
+### 1. 健康检查
+- **男女双方在备孕前进行体检**，包括血常规、肝肾功能、性激素、乙肝、梅毒、艾滋等传染病筛查，女性还可查甲状腺功能、妇科超声等。
+- 必要时查遗传病、地中海贫血等相关项目。
+
+### 2. 合理安排备孕时间
+- 女性最佳生育年龄为23-30岁，35岁以后生育风险增加。
+- 备孕前至少提前3...
+
+[9/10] Query: 产后恢复建议
+⏱️  Response Time: 23.06s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['产后', '恢复', '建议']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 产后恢复是妈妈身体和心理健康的重要阶段，科学的恢复能帮助身体尽快回到孕前状态，并预防多种产后问题。以下是产后恢复的主要建议：
+
+---
+
+### 1. 合理休息
+- **保证充足睡眠**：产后初期应多休息，抓住宝宝睡觉的时间补觉，避免过度劳累。
+- **避免剧烈运动和重体力劳动**，尤其剖宫产妈妈更应注意伤口恢复。
+
+### 2. 均衡营养
+- **多吃富含蛋白质、铁、钙、维生素的食物**：如瘦肉...
+
+[10/10] Query: 儿童营养搭配
+⏱️  Response Time: 18.85s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['儿童', '营养', '搭配']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 儿童营养搭配应遵循“多样、均衡、适量”的原则，以满足生长发育所需。科学的儿童营养搭配建议如下：
+
+---
+
+### 1. 谷类为主，粗细搭配
+- 主食以米饭、面条、玉米、杂粮、燕麦等轮换搭配，适当增加粗粮（如玉米、红薯、全麦面包），有助于膳食纤维摄入。
+
+### 2. 优质蛋白充足
+- 每天适量摄入动物性蛋白：瘦肉、鱼、虾、禽蛋、奶类。
+- 植物蛋白：豆腐、豆浆、豆类等。
+- 建议每日饮奶250-...
+
+📊 健康咨询 Summary: 10/10 passed
+
+📁 Testing Category: 保险政策
+------------------------------------------------------------
+
+[1/10] Query: 医保可以报销哪些项目？
+⏱️  Response Time: 11.92s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['医保', '报销', '项目']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 医保（医疗保险）报销的项目主要包括以下几大类，具体范围根据地区政策和医保类型（城镇职工、城乡居民等）可能略有不同，以下为常见可报销项目：
+
+---
+
+### 1. 门诊报销
+- 普通门诊诊查费（部分地区有起付线和限额）
+- 一般检查费、化验费、部分治疗费
+- 部分慢性病、特殊病门诊可享受报销（如高血压、糖尿病、肿瘤等）
+
+### 2. 住院报销
+- 住院期间的床位费、护理费
+- 医生诊查费、手术费...
+
+[2/10] Query: 商业保险和医保的区别
+⏱️  Response Time: 12.50s
+🤖 Agent Used: product
+📝 Response Quality: excellent
+✓ Keywords Found: ['商业保险', '医保', '区别']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 商业保险和医保（社会医疗保险）是两种不同的医疗保障方式，各有特点和适用范围。主要区别如下：
+
+---
+
+### 1. **性质不同**
+- **医保（社会医疗保险）**：国家政策性、强制性社会保障，由政府主导，覆盖全民或特定群体（如城镇职工、城乡居民等）。
+- **商业保险**：由商业保险公司经营，属于个人自愿购买的商业行为。
+
+### 2. **保障范围**
+- **医保**：以基本医疗保障为主...
+
+[3/10] Query: 门诊可以用医保吗？
+⏱️  Response Time: 15.34s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['门诊', '医保', '使用']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 可以，门诊在多数情况下是可以使用医保的，但具体政策和报销范围根据地区和医保类型（如职工医保、居民医保）有所不同。主要情况如下：
+
+---
+
+### 1. 普通门诊
+- **部分地区**设有普通门诊医保报销政策，涵盖诊查费、部分检查检验费、医保目录内药品等，但通常有起付线和封顶线，报销比例较低（如50%左右）。
+- 一些地区普通门诊仅限于社区卫生服务中心、基层医疗机构，三级大医院门诊可能不能报销，需...
+
+[4/10] Query: 异地就医怎么报销？
+⏱️  Response Time: 8.91s
+🤖 Agent Used: medication
+📝 Response Quality: excellent
+✓ Keywords Found: ['异地', '就医', '报销']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 异地就医报销需要满足一定条件并按相关流程办理，具体如下：
+
+---
+
+### 1. 异地就医备案
+- **长期异地居住、工作或外地长期生活人员**，需提前在参保地医保局或网上办理“异地就医备案”（如异地安置、异地工作、异地长期居住、转诊转院等）。
+- 可通过医保大厅、政务App（如“国家医保服务平台”）、社保网点等办理备案。
+
+### 2. 选择定点医院
+- 异地就医应选择已开通**异地直接结算*...
+
+[5/10] Query: 慢性病医保政策
+⏱️  Response Time: 14.96s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['慢性病', '医保', '政策']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 慢性病医保政策是指医保针对高血压、糖尿病、恶性肿瘤、慢性肾脏病等慢性疾病患者，给予门诊治疗费用专项报销的政策。具体内容因各地医保政策略有差异，以下为通用要点：
+
+---
+
+### 1. 适用病种
+- 常见纳入范围的慢性病有：高血压、糖尿病、冠心病、慢性肾功能不全、恶性肿瘤、脑卒中后遗症、哮喘、慢性肝炎、类风湿、帕金森、癫痫等。
+- 各地目录不同，具体需以当地医保部门公布为准。
+
+### 2. 申请...
+
+[6/10] Query: 大病医保怎么申请？
+⏱️  Response Time: 13.39s
+🤖 Agent Used: clinical
+📝 Response Quality: excellent
+✓ Keywords Found: ['大病', '医保', '申请']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 大病医保（即大病保险）是为减轻参保人在发生高额医疗费用时的经济负担，对基本医保报销后个人自付部分较高的费用再给予一定报销的制度。申请和使用流程如下：
+
+---
+
+### 1. **参保条件**
+- 需已参加城乡居民基本医疗保险或城镇职工基本医疗保险。
+- 大病医保不需单独缴费，已参保人员自动具有大病保险资格。
+
+### 2. **申请流程**
+- **无需个人主动申请**：一般只要在医保定点医疗机...
+
+[7/10] Query: 医保卡丢了怎么办？
+⏱️  Response Time: 7.93s
+🤖 Agent Used: general
+📝 Response Quality: excellent
+✓ Keywords Found: ['医保卡', '丢失', '补办']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 医保卡丢失后，请按以下步骤及时补办，以免影响医疗报销和购药：
+
+---
+
+### 1. 立即挂失  
+- 可通过“国家医保服务平台”App、当地医保局官方网站、社保自助终端、客服电话（如12333）等渠道进行医保卡挂失，防止他人冒用。
+
+### 2. 补办新卡  
+- **线下办理**：携带本人身份证（必要时还需户口本）、近期免冠照片（部分地区需），前往参保地医保中心、社保服务大厅或指定银行（如中...
+
+[8/10] Query: 住院报销比例是多少？
+⏱️  Response Time: 9.38s
+🤖 Agent Used: medication
+📝 Response Quality: excellent
+✓ Keywords Found: ['住院', '报销', '比例']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 住院医保报销比例因地区、医保类型（职工医保/居民医保）、医院级别、个人缴费年限等因素有所不同。一般参考如下：
+
+---
+
+### 1. **职工医保住院报销比例**
+- **一级医院**：约85%~95%
+- **二级医院**：约80%~90%
+- **三级医院**：约70%~85%
+- 退休人员报销比例稍高。
+- 超过起付线（一般几百元）后，按比例报销，未达起付线部分由个人承担。
+- 年度或单次...
+
+[9/10] Query: 体检能用医保吗？
+⏱️  Response Time: 7.89s
+🤖 Agent Used: appointment
+📝 Response Quality: good
+✓ Keywords Found: ['体检', '医保']
+✗ Keywords Missing: ['使用']
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 一般情况下，**常规健康体检不能用医保报销**。医保的主要用途是用于疾病的诊断和治疗，普通的健康查体（如公司/单位组织的年度体检、个人自费常规体检）属于非疾病医疗服务，**不在医保报销范围**之内。
+
+---
+
+### 特殊情况
+1. **特定人群的免费体检**  
+   - 部分地区对老年人、孕产妇、儿童、残疾人等特定人群提供免费基本公共卫生服务，相关体检费用由政府承担或部分可用医保基金支付，但...
+
+[10/10] Query: 医保定点医院有哪些？
+⏱️  Response Time: 7.88s
+🤖 Agent Used: general
+📝 Response Quality: excellent
+✓ Keywords Found: ['医保', '定点', '医院']
+✗ Keywords Missing: []
+🆔 Has Identity: ✗
+✅ PASSED
+Response Preview: 医保定点医院是指与医保部门签约，参保人可以持医保卡（或医保电子凭证）在此享受医保报销待遇的医疗机构。定点医院分为三级（三级医院、二级医院、一级医院/社区卫生服务中心）和部分专科医院、诊所等。
+
+**常见医保定点医院包括：**
+- 各大三甲（三级甲等）综合医院
+- 二级、一级综合医院
+- 社区卫生服务中心、乡镇卫生院
+- 部分专科医院（如妇幼保健院、中医院、肿瘤医院等）
+- 部分定点门诊部、诊所
+
+...
+
+📊 保险政策 Summary: 10/10 passed
+
+================================================================================
+FINAL TEST SUMMARY - Sub-Agent Architecture
+================================================================================
+
+📈 Overall Results:
+   Total Tests: 70
+   Passed: 70 (100.0%)
+   Failed: 0 (0.0%)
+
+📁 Results by Category:
+   产品推荐: 10/10 passed
+   预约挂号: 10/10 passed
+   症状分析: 10/10 passed
+   紧急情况: 10/10 passed
+   用药指导: 10/10 passed
+   健康咨询: 10/10 passed
+   保险政策: 10/10 passed
+
+🤖 Agent Usage Distribution:
+   product: 23 (32.9%)
+   appointment: 11 (15.7%)
+   clinical: 25 (35.7%)
+   medication: 8 (11.4%)
+   general: 3 (4.3%)
+   unknown: 0 (0.0%)
+
+⏱️  Performance:
+   Average Response Time: 14.06s
+   Min Response Time: 3.56s
+   Max Response Time: 56.83s
+
+🎉 TEST SUITE PASSED!
+Success Rate: 100.0%
+
+💾 Detailed results saved to test_results_subagent.json

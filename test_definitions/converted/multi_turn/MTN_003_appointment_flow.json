@@ -1,0 +1,176 @@
+{
+  "id": "MTN_003",
+  "name": "Multi-turn appointment booking flow test",
+  "suite": "multi_turn",
+  "type": "multi_turn",
+  "priority": 5,
+  "tags": ["multi_turn", "appointment", "form_completion"],
+  
+  "config": {
+    "timeout": 60,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["multi_agent", "form_system", "appointment_agent"]
+  },
+  
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_mtn_003",
+      "profile": {
+        "name": "王先生",
+        "age": 38,
+        "phone": "13912345678",
+        "language": "zh"
+      }
+    },
+    "previous_turns": [
+      {
+        "role": "user",
+        "content": "我想预约一个医生看看我的膝盖疼痛问题"
+      },
+      {
+        "role": "assistant",
+        "content": "好的王先生，我来帮您预约医生。膝盖疼痛建议看骨科医生。请问您希望预约哪位医生，什么时间比较方便？"
+      },
+      {
+        "role": "user",
+        "content": "我想预约张强医生，明天下午有时间吗？"
+      },
+      {
+        "role": "assistant",
+        "content": "让我为您查询张强医生明天下午的排班情况。张强医生明天下午2点到5点有门诊，目前3点和4点还有空位。您希望预约几点？"
+      }
+    ]
+  },
+  
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4-turbo",
+      "input": "3点比较合适，请帮我预约下午3点的",
+      "user_id": "test_user_mtn_003",
+      "conversation_history": [
+        {
+          "role": "user",
+          "content": "我想预约一个医生看看我的膝盖疼痛问题"
+        },
+        {
+          "role": "assistant",
+          "content": "好的王先生，我来帮您预约医生。膝盖疼痛建议看骨科医生。请问您希望预约哪位医生，什么时间比较方便？"
+        },
+        {
+          "role": "user",
+          "content": "我想预约张强医生，明天下午有时间吗？"
+        },
+        {
+          "role": "assistant",
+          "content": "让我为您查询张强医生明天下午的排班情况。张强医生明天下午2点到5点有门诊，目前3点和4点还有空位。您希望预约几点？"
+        }
+      ],
+      "metadata": {
+        "test_id": "MTN_003",
+        "test_name": "Multi-turn appointment booking flow test"
+      }
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": [
+        "王先生",
+        "张强医生",
+        "明天下午3点",
+        "预约成功",
+        "膝盖疼痛"
+      ],
+      "output_excludes": [
+        "错误",
+        "失败",
+        "预约失败"
+      ],
+      "min_length": 150,
+      "max_length": 1500
+    },
+    
+    "reasoning": {
+      "steps_min": 3,
+      "contains_keywords": [
+        "appointment_confirmation",
+        "time_slot_booking",
+        "doctor_zhang_qiang",
+        "knee_pain"
+      ],
+      "tool_calls": [
+        "book_appointment",
+        "create_appointment_form"
+      ]
+    },
+    
+    "agents": {
+      "touched": ["router_agent", "appointment_agent", "form_creator"],
+      "call_order": ["router_agent", "appointment_agent", "form_creator"],
+      "max_agents": 4
+    },
+    
+    "context": {
+      "mem0": {
+        "should_retrieve": [
+          "knee_pain_complaint",
+          "doctor_preference_zhang_qiang",
+          "time_preference_afternoon"
+        ],
+        "should_store": [
+          "appointment_booked",
+          "time_slot_3pm",
+          "appointment_confirmation"
+        ],
+        "memory_count": 5
+      },
+      "workflow": {
+        "state_changes": {
+          "appointment_status": "confirmed",
+          "form_completed": true
+        },
+        "events_emitted": [
+          "appointment.booked",
+          "form.completed"
+        ]
+      }
+    },
+    
+    "server_logs": {
+      "contains": [
+        "Appointment booking",
+        "Time slot confirmed",
+        "Form creation successful"
+      ],
+      "excludes": [
+        "ERROR",
+        "CRITICAL",
+        "Booking failed"
+      ],
+      "log_levels": {
+        "ERROR": "=0",
+        "WARNING": "<=1"
+      }
+    },
+    
+    "performance": {
+      "response_time_max": 20.0,
+      "memory_usage_max": "100MB",
+      "token_usage_max": 800
+    }
+  },
+  
+  "cleanup": {
+    "commands": [
+      "DELETE FROM appointments WHERE test_id = 'MTN_003'"
+    ],
+    "reset_context": true
+  }
+}

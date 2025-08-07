@@ -1,0 +1,854 @@
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python3
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:🔄 Attempting to import document converter endpoints...
+INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
+INFO:chat.utils.document_converter:❌ docx2pdf not available
+INFO:chat.utils.document_converter:❌ pypandoc not available
+INFO:chat.utils.document_converter:❌ python-docx not available
+INFO:chat.utils.document_converter:❌ openpyxl not available
+INFO:chat.utils.document_converter:❌ reportlab not available
+INFO:__main__:✅ Successfully imported document converter blueprint
+INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:🔄 Registering Humansa endpoints...
+INFO:humansa.postgres.database:HumansaDatabase initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:__main__:✅ Humansa V2 Conversation API endpoints registered
+INFO:__main__:✅ Humansa V2 Responses API endpoints registered
+INFO:__main__:✅ Mem0 API endpoints registered
+INFO:__main__:✅ Humansa v2 blueprint registered
+INFO:__main__:✅ Humansa endpoints registered successfully
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:6001
+INFO:__main__:
+INFO:__main__:📋 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
+INFO:__main__:
+INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
+INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
+INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
+INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
+INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
+INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
+INFO:__main__:
+INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
+INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
+INFO:__main__:   - /v2/humansa/memory/search - Search user memories
+INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
+INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
+INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
+INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
+INFO:__main__:   - /o3-demo - O3 reasoning demo
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
+INFO:__main__:✅ Mem0 memory layer initialized for Humansa
+INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
+INFO:__main__:   Environment: test
+INFO:__main__:✅ Database pool created successfully
+INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
+INFO:humansa.v2.api:Using Azure OpenAI for LLM
+INFO:humansa.v2.api:📦 Initializing HUMANSA V2 with Consolidated Tools
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince20: The `__fields__` attribute is deprecated, use `model_fields` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince20: The `__fields_set__` attribute is deprecated, use `model_fields_set` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince211: Accessing the 'model_computed_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince211: Accessing the 'model_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+  value = getter(object, key)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+INFO:humansa.v2.api:Humansa v2 system initialized successfully
+INFO:__main__:✅ Humansa v2 system initialized with Consolidated Tools
+INFO:humansa.v2.api_responses:✅ Using Mem0 for memory management
+INFO:humansa.v2.api_responses:✅ Memory tables initialized
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+INFO:humansa.v2.orchestrator_agent_enhanced:Initialized Enhanced HumansaOrchestratorAgent with 6 agent tools
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ Initialized consolidated tools (7 core functions)
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ HumansaOrchestratorAgentConsolidated initialized with dynamic tool loading
+INFO:humansa.v2.api_responses:✅ Consolidated orchestrator initialized (7 tools with dynamic loading)
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_transparent:✅ Initialized transparent orchestrator with tool capture
+INFO:humansa.v2.orchestrator_agent_transparent:✅ HumansaOrchestratorAgentTransparent initialized
+INFO:humansa.v2.api_responses:✅ Transparent orchestrator initialized (captures tool calls)
+ERROR:humansa.v2.api_responses:❌ Failed to initialize orchestrators: No module named 'humansa.v2.agents.clinical_agent'
+ERROR:__main__:❌ Failed to initialize Humansa v2: No module named 'humansa.v2.agents.clinical_agent'
+Traceback (most recent call last):
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/main.py", line 907, in create_db_pool
+    await initialize_v2_responses_system(app.db_pool, openai_key or azure_key)
+  File "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/api_responses.py", line 169, in initialize_v2_responses_system
+    from .agents.clinical_agent import ClinicalAgent
+ModuleNotFoundError: No module named 'humansa.v2.agents.clinical_agent'
+[2025-08-01 16:53:26 -0700] [85245] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:6001 (CTRL + C to quit)
+/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src/humansa/v2/api.py:501: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "timestamp": datetime.utcnow().isoformat(),
+ * Serving Quart app 'main'
+ * Debug mode: True
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:6001 (CTRL + C to quit)
+[2025-08-01 16:53:45 -0700] [85245] [INFO] 127.0.0.1:56299 GET /v2/humansa/health 1.1 200 201 2450
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 你是谁？...
+INFO:humansa.v2.orchestrator_agent_transparent:🆔 Detected identity question - returning HUMANSA identity directly
+INFO:humansa.v2.response_agent:✅ Response processed: type=identity, length=139
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_1_816b830e_1754092425 for user: test_user_1
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_1_816b830e_1754092425 (5 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_1_816b830e_1754092425 (164 tokens)
+INFO:humansa.v2.response_manager:Created response resp_bc7a05dd8e40_1754092425 for conversation conv_test_user_1_816b830e_1754092425
+[2025-08-01 16:53:45 -0700] [85245] [INFO] 127.0.0.1:56304 POST /v2/humansa/responses/create 1.1 200 1576 3419
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 介绍一下诺亚新舟...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:53:46 -0700] [85245] [INFO] 127.0.0.1:56304 POST /v2/humansa/responses/stream 1.1 200 - 2027
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 你能做什么？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:53:46 -0700] [85245] [INFO] 127.0.0.1:56314 POST /v2/humansa/responses/create 1.1 500 28 1307
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 诺亚新舟的口号是什么？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:53:47 -0700] [85245] [INFO] 127.0.0.1:56314 POST /v2/humansa/responses/stream 1.1 200 - 1383
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: Who are you?...
+INFO:humansa.v2.orchestrator_agent_transparent:🆔 Detected identity question - returning HUMANSA identity directly
+INFO:humansa.v2.response_agent:✅ Response processed: type=identity, length=139
+INFO:humansa.v2.conversation_manager:Created new conversation: conv_test_user_5_35f5197a_1754092428 for user: test_user_5
+INFO:humansa.v2.conversation_manager:Added user message to conversation conv_test_user_5_35f5197a_1754092428 (4 tokens)
+INFO:humansa.v2.conversation_manager:Added assistant message to conversation conv_test_user_5_35f5197a_1754092428 (164 tokens)
+INFO:humansa.v2.response_manager:Created response resp_01c6151de8fd_1754092428 for conversation conv_test_user_5_35f5197a_1754092428
+[2025-08-01 16:53:48 -0700] [85245] [INFO] 127.0.0.1:56327 POST /v2/humansa/responses/create 1.1 200 1566 1601
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 我想找一个心脏科医生...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:53:48 -0700] [85245] [INFO] 127.0.0.1:56327 POST /v2/humansa/responses/stream 1.1 200 - 1229
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 上海有哪些医生？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:53:49 -0700] [85245] [INFO] 127.0.0.1:56373 POST /v2/humansa/responses/create 1.1 500 28 1233
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 张医生在吗？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:53:49 -0700] [85245] [INFO] 127.0.0.1:56373 POST /v2/humansa/responses/stream 1.1 200 - 1801
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 哪个医生现在有号？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:53:50 -0700] [85245] [INFO] 127.0.0.1:56378 POST /v2/humansa/responses/create 1.1 500 28 1471
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 有神经内科的专家吗？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:53:50 -0700] [85245] [INFO] 127.0.0.1:56378 POST /v2/humansa/responses/stream 1.1 200 - 1519
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 我想预约明天上午的骨科...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:53:51 -0700] [85245] [INFO] 127.0.0.1:56384 POST /v2/humansa/responses/create 1.1 500 28 1228
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 查看下周的可预约时间...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:53:51 -0700] [85245] [INFO] 127.0.0.1:56384 POST /v2/humansa/responses/stream 1.1 200 - 1273
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 取消我的预约...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:53:52 -0700] [85245] [INFO] 127.0.0.1:56427 POST /v2/humansa/responses/create 1.1 500 28 1695
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 改约到下周三...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:53:52 -0700] [85245] [INFO] 127.0.0.1:56427 POST /v2/humansa/responses/stream 1.1 200 - 2473
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 能加急预约吗？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:53:53 -0700] [85245] [INFO] 127.0.0.1:56437 POST /v2/humansa/responses/create 1.1 500 28 1411
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 离我最近的诊所在哪？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:53:53 -0700] [85245] [INFO] 127.0.0.1:56437 POST /v2/humansa/responses/stream 1.1 200 - 1530
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 血常规多少钱？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:53:54 -0700] [85245] [INFO] 127.0.0.1:56476 POST /v2/humansa/responses/create 1.1 500 28 1392
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 体检套餐有哪些？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:53:54 -0700] [85245] [INFO] 127.0.0.1:56476 POST /v2/humansa/responses/stream 1.1 200 - 1386
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 诊所几点开门？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:53:55 -0700] [85245] [INFO] 127.0.0.1:56482 POST /v2/humansa/responses/create 1.1 500 28 1399
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 上海诊所的电话是多少？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'information_lookup', 'appointment_manager', 'medical_advisor']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:53:55 -0700] [85245] [INFO] 127.0.0.1:56482 POST /v2/humansa/responses/stream 1.1 200 - 1344
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 我最近总是失眠怎么办？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:53:56 -0700] [85245] [INFO] 127.0.0.1:56482 POST /v2/humansa/responses/create 1.1 500 28 1117
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 孩子发烧39度该怎么处理？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:53:56 -0700] [85245] [INFO] 127.0.0.1:56482 POST /v2/humansa/responses/stream 1.1 200 - 1431
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 胸口疼痛呼吸困难...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'medical_advisor', 'appointment_manager', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:53:57 -0700] [85245] [INFO] 127.0.0.1:56500 POST /v2/humansa/responses/create 1.1 500 28 1768
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 高血压能吃什么药？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:53:57 -0700] [85245] [INFO] 127.0.0.1:56500 POST /v2/humansa/responses/stream 1.1 200 - 1488
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 体检报告显示血糖偏高...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:53:58 -0700] [85245] [INFO] 127.0.0.1:56505 POST /v2/humansa/responses/create 1.1 500 28 1625
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 你们有什么保健品推荐吗？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'product_recommender', 'appointment_manager', 'medical_advisor']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:53:58 -0700] [85245] [INFO] 127.0.0.1:56505 POST /v2/humansa/responses/stream 1.1 200 - 1321
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 我想买维生素D，有什么推荐？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'product_recommender', 'appointment_manager', 'medical_advisor']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:53:59 -0700] [85245] [INFO] 127.0.0.1:56519 POST /v2/humansa/responses/create 1.1 500 28 1044
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 家里老人需要血压计，推荐一款...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'product_recommender', 'appointment_manager', 'medical_advisor']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:53:59 -0700] [85245] [INFO] 127.0.0.1:56519 POST /v2/humansa/responses/stream 1.1 200 - 1604
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 有什么产品可以帮助睡眠？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'product_recommender', 'appointment_manager', 'medical_advisor']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:54:00 -0700] [85245] [INFO] 127.0.0.1:56536 POST /v2/humansa/responses/create 1.1 500 28 1099
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 怎么购买这些产品？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'product_recommender', 'appointment_manager', 'medical_advisor']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:54:00 -0700] [85245] [INFO] 127.0.0.1:56536 POST /v2/humansa/responses/stream 1.1 200 - 1658
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 我叫李明，45岁，有高血压...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:54:01 -0700] [85245] [INFO] 127.0.0.1:56542 POST /v2/humansa/responses/create 1.1 500 28 1289
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 我对青霉素过敏...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:54:01 -0700] [85245] [INFO] 127.0.0.1:56542 POST /v2/humansa/responses/stream 1.1 200 - 1231
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 你记得我的基本信息吗？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:54:02 -0700] [85245] [INFO] 127.0.0.1:56565 POST /v2/humansa/responses/create 1.1 500 28 1327
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 我有什么过敏史？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:54:02 -0700] [85245] [INFO] 127.0.0.1:56565 POST /v2/humansa/responses/stream 1.1 200 - 1518
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 我女儿5岁，经常感冒...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:54:03 -0700] [85245] [INFO] 127.0.0.1:56579 POST /v2/humansa/responses/create 1.1 500 28 1538
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 我在吃阿司匹林和二甲双胍...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:54:03 -0700] [85245] [INFO] 127.0.0.1:56579 POST /v2/humansa/responses/stream 1.1 200 - 1519
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 我喜欢找李医生看病...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:54:04 -0700] [85245] [INFO] 127.0.0.1:56590 POST /v2/humansa/responses/create 1.1 500 28 1142
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 我想减重10公斤...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:54:04 -0700] [85245] [INFO] 127.0.0.1:56590 POST /v2/humansa/responses/stream 1.1 200 - 1275
+INFO:humansa.v2.api_responses:Processing response with 0 context messages (0 tokens)
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Processing query with transparency: 我有平安保险的高端医疗险...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'information_lookup', 'appointment_manager', 'medical_advisor']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error creating response: from_tools
+[2025-08-01 16:54:05 -0700] [85245] [INFO] 127.0.0.1:56602 POST /v2/humansa/responses/create 1.1 500 28 1509
+INFO:humansa.v2.orchestrator_agent_transparent:🌊 Streaming query with transparency: 基于我的情况，需要做哪些检查？...
+INFO:humansa.tools.consolidated_tools:🎯 Selected 5 tools for query: ['unified_search', 'conversation_memory', 'appointment_manager', 'medical_advisor', 'information_lookup']
+INFO:humansa.v2.orchestrator_agent_transparent:🎯 Selected 5 tools for query
+ERROR:humansa.v2.api_responses:Error in stream_response_generator: from_tools
+[2025-08-01 16:54:05 -0700] [85245] [INFO] 127.0.0.1:56602 POST /v2/humansa/responses/stream 1.1 200 - 1429
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python3
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:🔄 Attempting to import document converter endpoints...
+INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
+INFO:chat.utils.document_converter:❌ docx2pdf not available
+INFO:chat.utils.document_converter:❌ pypandoc not available
+INFO:chat.utils.document_converter:❌ python-docx not available
+INFO:chat.utils.document_converter:❌ openpyxl not available
+INFO:chat.utils.document_converter:❌ reportlab not available
+INFO:__main__:✅ Successfully imported document converter blueprint
+INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:🔄 Registering Humansa endpoints...
+INFO:humansa.postgres.database:HumansaDatabase initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:__main__:✅ Humansa V2 Conversation API endpoints registered
+INFO:__main__:✅ Humansa V2 Responses API endpoints registered
+INFO:__main__:✅ Mem0 API endpoints registered
+INFO:__main__:✅ Humansa v2 blueprint registered
+INFO:__main__:✅ Humansa endpoints registered successfully
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:6001
+INFO:__main__:
+INFO:__main__:📋 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
+INFO:__main__:
+INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
+INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
+INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
+INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
+INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
+INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
+INFO:__main__:
+INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
+INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
+INFO:__main__:   - /v2/humansa/memory/search - Search user memories
+INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
+INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
+INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
+INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
+INFO:__main__:   - /o3-demo - O3 reasoning demo
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
+INFO:__main__:✅ Mem0 memory layer initialized for Humansa
+INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
+INFO:__main__:   Environment: test
+INFO:__main__:✅ Database pool created successfully
+INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
+INFO:humansa.v2.api:Using Azure OpenAI for LLM
+INFO:humansa.v2.api:📦 Initializing HUMANSA V2 with Consolidated Tools
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince20: The `__fields__` attribute is deprecated, use `model_fields` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince20: The `__fields_set__` attribute is deprecated, use `model_fields_set` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince211: Accessing the 'model_computed_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince211: Accessing the 'model_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+  value = getter(object, key)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+INFO:humansa.v2.api:Humansa v2 system initialized successfully
+INFO:__main__:✅ Humansa v2 system initialized with Consolidated Tools
+INFO:humansa.v2.api_responses:✅ Using Mem0 for memory management
+INFO:humansa.v2.api_responses:✅ Memory tables initialized
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+INFO:humansa.v2.orchestrator_agent_enhanced:Initialized Enhanced HumansaOrchestratorAgent with 6 agent tools
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ Initialized consolidated tools (7 core functions)
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ HumansaOrchestratorAgentConsolidated initialized with dynamic tool loading
+INFO:humansa.v2.api_responses:✅ Consolidated orchestrator initialized (7 tools with dynamic loading)
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_transparent:✅ Initialized transparent orchestrator with tool capture
+INFO:humansa.v2.orchestrator_agent_transparent:✅ HumansaOrchestratorAgentTransparent initialized
+INFO:humansa.v2.api_responses:✅ Transparent orchestrator initialized (captures tool calls)
+INFO:humansa.v2.agents.product_agent:✅ Initialized ProductAgent with 134 products (staged loading)
+INFO:humansa.v2.api_responses:   ✓ ProductAgent initialized
+INFO:humansa.v2.api_responses:   ✓ GeneralMedicalAgent initialized
+WARNING:humansa.v2.api_responses:   ⚠ AppointmentAgent initialization failed: BaseHumansaAgent.__init__() got an unexpected keyword argument 'db_config'
+WARNING:humansa.v2.api_responses:   ⚠ ClinicalAgent initialization failed: name 'ClinicalAgent' is not defined
+INFO:humansa.v2.orchestrator_pattern2:✅ Initialized Pattern 2 Orchestrator with 5 agent tools
+INFO:humansa.v2.api_responses:✅ Pattern 2 orchestrator initialized with 2 agents (FunctionAgent pattern)
+INFO:humansa.v2.api_responses:✅ Responses API orchestrators initialized successfully
+INFO:__main__:✅ Humansa v2 Responses API initialized
+[2025-08-01 16:55:49 -0700] [85245] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:6001 (CTRL + C to quit)
+INFO:__main__:🐍 Python executable: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/youwo-ml-venv/bin/python3
+INFO:__main__:📁 Current working directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1
+INFO:__main__:📂 Script directory: /Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src
+INFO:__main__:🛤️  Python path (first 5): ['/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/src', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1', '/Users/shonnli/Non-icloudFile/YouWoAI/YouWoAI-ML-Server', '/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python313.zip']
+INFO:__main__:🔄 Registering embedding endpoints...
+INFO:__main__:🔄 Attempting to import URL embedding endpoints...
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-3.5-turbo
+INFO:chat.token.token_counter:Initialized token counter for gpt-3.5-turbo
+INFO:chat.token.token_counter:TokenCounter initialized for model: gpt-4
+INFO:chat.token.token_counter:Initialized token counter for gpt-4
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-small
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-small
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-3-large
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-3-large
+INFO:chat.token.token_counter:TokenCounter initialized for model: text-embedding-ada-002
+INFO:chat.token.token_counter:Initialized token counter for text-embedding-ada-002
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.note_embedder:NoteEmbedder initialized with independent modules
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.embedding.text_processing:Initialized TextProcessor with chunk_size=1024, overlap=100
+INFO:chat.embedding.text_processing:Initialized ConversationProcessor with max_tokens=1024
+INFO:chat.postgres.embedding_operations:EmbeddingDBOperations initialized
+INFO:chat.embedding.conversation_embedder:ConversationEmbedder initialized with independent modules
+WARNING:chat.postgres.url_embedding_operations:Azure Inference not available - image processing will be limited
+INFO:chat.postgres.url_embedding_operations:✅ python-pptx available for PowerPoint processing
+INFO:chat.embedding.embedding_provider_selector:=== Embedding Provider Initialization ===
+INFO:chat.embedding.embedding_provider_selector:ℹ️ Azure AI Inference embedding not configured (missing credentials)
+INFO:chat.token.text_truncator:TextTruncator initialized for text-embedding-3-small (limit: 6963 tokens)
+INFO:chat.embedding.openai_embeddings:Initialized OpenAI embedding client with model: text-embedding-3-small
+INFO:chat.embedding.embedding_provider_selector:✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)
+INFO:chat.embedding.embedding_provider_selector:📊 Available embedding providers: ['openai']
+INFO:chat.embedding.embedding_provider_selector:✅ Auto-selected embedding provider: openai
+INFO:chat.postgres.url_embedding_operations:URLEmbeddingOperations initialized
+INFO:chat.attachment.file_attachment_manager:FileAttachmentManager initialized
+INFO:__main__:✅ Successfully imported URL embedding endpoints
+INFO:__main__:✅ URL embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import admin embedding endpoints...
+INFO:__main__:✅ Successfully imported admin embedding endpoints
+INFO:__main__:✅ Admin embedding endpoints registered successfully
+INFO:__main__:🔄 Attempting to import file analyzer endpoints...
+INFO:__main__:✅ Successfully imported file analyzer blueprint
+INFO:__main__:✅ File analyzer endpoints registered successfully
+INFO:__main__:🔄 Attempting to import document converter endpoints...
+INFO:chat.utils.document_converter:❌ unoconv not available (install LibreOffice for best conversion quality)
+INFO:chat.utils.document_converter:❌ docx2pdf not available
+INFO:chat.utils.document_converter:❌ pypandoc not available
+INFO:chat.utils.document_converter:❌ python-docx not available
+INFO:chat.utils.document_converter:❌ openpyxl not available
+INFO:chat.utils.document_converter:❌ reportlab not available
+INFO:__main__:✅ Successfully imported document converter blueprint
+INFO:__main__:✅ Document converter endpoints registered successfully
+INFO:__main__:✅ Embedding endpoints registration completed
+INFO:__main__:🔄 Registering Humansa endpoints...
+INFO:humansa.postgres.database:HumansaDatabase initialized
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:__main__:✅ Humansa V2 Conversation API endpoints registered
+INFO:__main__:✅ Humansa V2 Responses API endpoints registered
+INFO:__main__:✅ Mem0 API endpoints registered
+INFO:__main__:✅ Humansa v2 blueprint registered
+INFO:__main__:✅ Humansa endpoints registered successfully
+INFO:__main__:=== YouWoAI ML Server Starting ===
+INFO:__main__:Server will be available at: http://0.0.0.0:6001
+INFO:__main__:
+INFO:__main__:📋 Endpoint Summary:
+INFO:__main__:✅ CHAT ENDPOINTS:
+INFO:__main__:   - /v1/chat/completions - Modular chat with citations & streaming
+INFO:__main__:   - /v1/multi-agent/response - Multi-agent workflow
+INFO:__main__:   - /v1-humansa/chat/completions - AI-Agent chat with tool calling (v1)
+INFO:__main__:
+INFO:__main__:✅ HUMANSA V2 ENDPOINTS:
+INFO:__main__:   - /v2/humansa/chat - Multi-agent medical consultation
+INFO:__main__:   - /v2/humansa/appointment/search - Search available appointments
+INFO:__main__:   - /v2/humansa/appointment/book - Book appointment slots
+INFO:__main__:   - /v2/humansa/patient/profile - Manage patient profiles
+INFO:__main__:   - /v2/humansa/conversation/history - Get conversation history
+INFO:__main__:
+INFO:__main__:✅ MEM0 MEMORY ENDPOINTS:
+INFO:__main__:   - /v2/humansa/memory/add - Add conversation to memory
+INFO:__main__:   - /v2/humansa/memory/search - Search user memories
+INFO:__main__:   - /v2/humansa/memory/context/<user_id> - Get user context
+INFO:__main__:   - /v2/humansa/memory/status - Check Mem0 status
+INFO:__main__:   - /v2/humansa/memory/clear/<user_id> - Clear user memories
+INFO:__main__:   - /humansa/response - Humansa conversations (used by backend)
+INFO:__main__:   - /o3-demo - O3 reasoning demo
+INFO:__main__:   - /v1/status - System status
+INFO:__main__:
+INFO:__main__:✅ PRESERVED ENDPOINTS:
+INFO:__main__:   - /analyze_link - Independent link analysis
+INFO:__main__:   - /note_text/<id> - Essential note operations
+INFO:__main__:   - /note_title/<id> - Essential note operations
+INFO:__main__:
+INFO:__main__:✅ EMBEDDING ENDPOINTS:
+INFO:__main__:   - /v1/embeddings/url/* - URL embedding operations
+INFO:__main__:   - /admin/embedding/* - Admin embedding controls
+INFO:__main__:
+INFO:__main__:🔄 Migration Status:
+INFO:__main__:   - ✅ Chat system: Using modular implementation
+INFO:__main__:   - ✅ Humansa AI-Agent: New AI-agent endpoint with tool calling
+INFO:__main__:   - ✅ Link analyzer: Independent module
+INFO:__main__:   - ✅ Embeddings: New modular architecture
+INFO:__main__:   - ✅ Citations: Streaming & non-streaming support
+INFO:__main__:
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.memory.mem0_manager:Initializing Mem0 memory layer...
+INFO:humansa.memory.mem0_manager:✅ Schema 'mem0_humansa_test' ready for Mem0
+INFO:humansa.memory.mem0_manager:✅ Mem0 initialized successfully
+INFO:__main__:✅ Mem0 memory layer initialized for Humansa
+INFO:__main__:🔄 Creating database pool: postgres@localhost:5454/test4
+INFO:__main__:   Environment: test
+INFO:__main__:✅ Database pool created successfully
+INFO:humansa.v2.api:Using Mem0 memory layer for Humansa v2
+INFO:humansa.v2.api:Using Azure OpenAI for LLM
+INFO:humansa.v2.api:📦 Initializing HUMANSA V2 with Consolidated Tools
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince20: The `__fields__` attribute is deprecated, use `model_fields` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince20: The `__fields_set__` attribute is deprecated, use `model_fields_set` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince211: Accessing the 'model_computed_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+  value = getter(object, key)
+/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/inspect.py:602: PydanticDeprecatedSince211: Accessing the 'model_fields' attribute on the instance is deprecated. Instead, you should access this attribute from the model class. Deprecated in Pydantic V2.11 to be removed in V3.0.
+  value = getter(object, key)
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+INFO:humansa.v2.api:Humansa v2 system initialized successfully
+INFO:__main__:✅ Humansa v2 system initialized with Consolidated Tools
+INFO:humansa.v2.api_responses:✅ Using Mem0 for memory management
+INFO:humansa.v2.api_responses:✅ Memory tables initialized
+INFO:humansa.tools.humansa_tools:✅ Database connection verified
+INFO:humansa.tools.humansa_tools:🟢 OpenAI LLM initialized for agentic tools
+INFO:chat.postgres.db_manager:PostgresManager initialized
+INFO:chat.websearch.web_search_processor:WebSearchProcessor initialized - Search enabled: True
+INFO:chat.websearch.web_search_processor:Web search cache table initialized
+INFO:humansa.tools.humansa_tools:✅ StreamingWebSearchTool initialized
+INFO:humansa.tools.humansa_tools:🛠️ HumansaAgenticToolManager initialized with structured schemas
+INFO:humansa.tools.humansa_tools:📊 CallbackManager configured for tool call observability
+INFO:humansa.v2.orchestrator_agent:✅ Real Humansa tools initialized for V2 orchestrator
+INFO:humansa.memory.mem0_manager:Configuring Mem0 with OpenAI - model: gpt-4o-mini
+INFO:humansa.tools.humansa_tools:✅ Added 5 appointment management tools
+INFO:humansa.tools.humansa_tools:✅ Created 16 LlamaIndex FunctionTools with Pydantic schemas
+INFO:humansa.v2.orchestrator_agent:🔧 Loading ALL 16 tools with GPT-4.1 (1M token context)
+INFO:humansa.v2.orchestrator_agent:✨ No more token limits! Using full tool set for better functionality
+INFO:humansa.v2.orchestrator_agent:Initialized HumansaOrchestratorAgent with 16 real database tools
+INFO:humansa.v2.orchestrator_agent_enhanced:Initialized Enhanced HumansaOrchestratorAgent with 6 agent tools
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ Initialized consolidated tools (7 core functions)
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_consolidated:✅ HumansaOrchestratorAgentConsolidated initialized with dynamic tool loading
+INFO:humansa.v2.api_responses:✅ Consolidated orchestrator initialized (7 tools with dynamic loading)
+INFO:humansa.tools.consolidated_tools:✅ Initialized ConsolidatedHumansaTools with 7 core functions
+INFO:humansa.tools.consolidated_tools:✅ Created 7 consolidated LlamaIndex tools
+INFO:humansa.v2.orchestrator_agent_transparent:✅ Initialized transparent orchestrator with tool capture
+INFO:humansa.v2.orchestrator_agent_transparent:✅ HumansaOrchestratorAgentTransparent initialized
+INFO:humansa.v2.api_responses:✅ Transparent orchestrator initialized (captures tool calls)
+INFO:humansa.v2.agents.product_agent:✅ Initialized ProductAgent with 134 products (staged loading)
+INFO:humansa.v2.api_responses:   ✓ ProductAgent initialized
+INFO:humansa.v2.api_responses:   ✓ GeneralMedicalAgent initialized
+WARNING:humansa.v2.api_responses:   ⚠ AppointmentAgent initialization failed: BaseHumansaAgent.__init__() got an unexpected keyword argument 'db_config'
+INFO:humansa.v2.api_responses:   ✓ DiagnosisAgent initialized
+INFO:humansa.v2.orchestrator_pattern2:✅ Initialized Pattern 2 Orchestrator with 5 agent tools
+INFO:humansa.v2.api_responses:✅ Pattern 2 orchestrator initialized with 4 agents (FunctionAgent pattern)
+INFO:humansa.v2.api_responses:✅ Responses API orchestrators initialized successfully
+INFO:__main__:✅ Humansa v2 Responses API initialized
+[2025-08-01 16:55:55 -0700] [85245] [INFO] Running on http://0.0.0.0:6001 (CTRL + C to quit)
+INFO:hypercorn.error:Running on http://0.0.0.0:6001 (CTRL + C to quit)
+ * Serving Quart app 'main'
+ * Debug mode: True
+ * Please use an ASGI server (e.g. Hypercorn) directly in production
+ * Running on http://0.0.0.0:6001 (CTRL + C to quit)

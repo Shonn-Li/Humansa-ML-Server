@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "success": true,
+    "response": "我是诺亚新舟健康医疗助理（小诺），您的AI健康管家。诺亚新舟以\"以爱行舟，亲近相守\"为口号，拥有500多位三甲主任级名医专家，在全国开设了30+家高端综合名医诊所。我可以为您提供健康咨询与分诊、实时预约、检查项目下单、诊所导航以及体检报告解读和慢病管理方案推荐等服务。有什么可以帮助您的吗？"
+  },
+  {
+    "id": 2,
+    "success": true,
+    "response": "I am Humansa Health Medical Assistant (Xiao Nuo), your AI health companion. \n\nHumansa (诺亚新舟) is a premium healthcare provider with the motto \"Sail with Love, Stay Close Together\". We have over 500 chief physicians from top tertiary hospitals and operate 30+ premium comprehensive clinics nationwide.\n\nI can assist you with:\n• Health consultations and symptom analysis\n• Real-time appointment booking\n• Medical examination arrangements\n• Clinic navigation and information\n• Health report interpretation\n\nHow may I help you today?"
+  },
+  {
+    "id": 3,
+    "success": true,
+    "response": "你好！我是诺亚新舟健康医疗助理（小诺），您的AI健康管家。\n\n很高兴为您服务！我可以帮助您：\n• 健康咨询与症状分析\n• 预约诺亚新舟诊所的医生\n• 解读体检报告\n• 推荐健康产品\n• 提供就医指导\n\n有什么可以帮助您的吗？"
+  },
+  {
+    "id": 5,
+    "success": true,
+    "response": "作为诺亚新舟健康医疗助理，我可以为您提供：\n\n1. 健康咨询与分诊：根据症状提供初步科室/检查建议\n2. 实时预约：查询医生余号，协助完成预约\n3. 检查项目下单：对比各诊所项目，跳转商城下单\n4. 诊所导航：提供地址、电话、营业时间、交通指引\n5. 体检报告解读：帮您解读检查结果\n6. 慢病管理：提供个性化健康管理方案\n\n需要我为您提供哪方面的服务呢？"
+  }
+]

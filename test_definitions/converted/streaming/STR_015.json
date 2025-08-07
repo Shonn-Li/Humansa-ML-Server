@@ -1,0 +1,44 @@
+{
+  "id": "STR_015",
+  "name": "Streaming Large Response Test",
+  "suite": "streaming",
+  "type": "single",
+  "priority": 4,
+  "tags": ["streaming", "large-response", "performance", "medical"],
+  "config": {
+    "timeout": 120,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["streaming_api", "large_response_handling"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_stream_015"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "请详细介绍中医的历史发展、基本理论、诊断方法、治疗原则和现代应用",
+      "user_id": "test_user_stream_015",
+      "stream": true,
+      "metadata": {
+        "test_id": "STREAM_015",
+        "test_name": "streaming_large_response"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["中医", "历史", "理论", "诊断", "治疗", "现代应用"],
+      "min_length": 1000
+    },
+    "performance": {
+      "response_time_max": 120
+    },
+    "custom_validators": ["validate_large_response_chunks", "validate_chunk_count"]
+  }
+}

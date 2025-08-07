@@ -1,0 +1,861 @@
+{
+  "timestamp": "20250730_094122",
+  "total_tests": 30,
+  "passed": 2,
+  "failed": 28,
+  "success_rate": 0.06666666666666667,
+  "enhanced_logging": true,
+  "results": [
+    {
+      "test_id": 1,
+      "test_name": "Basic Identity Query",
+      "passed": false,
+      "response_time": 2.036763906478882,
+      "response": " 我是你的智能医疗助手，可以帮助你查询医生、预约挂号、提供健康建议等医疗相关服务。如有需要，随时可以问我！",
+      "found_keywords": [],
+      "missing_keywords": [
+        "诺亚新舟",
+        "小诺",
+        "健康医疗助理",
+        "AI健康管家"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "tools_used": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 2,
+      "test_name": "Company Background",
+      "passed": false,
+      "response_time": 6.610444068908691,
+      "response": " 诺亚新舟广州诊所是一家位于广州市天河区体育西路789号的医疗机构，主要提供中医科、神经外科、骨科等专科服务。联系方式为电话：020-99999999，邮箱：info@humansa.com。如需进一步了解其服务内容、医生团队或预约信息，可以继续咨询。",
+      "found_keywords": [],
+      "missing_keywords": [
+        "以爱行舟",
+        "亲近相守",
+        "500多位",
+        "三甲主任级",
+        "名医专家",
+        "30+家",
+        "高端综合名医诊所"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [
+          {
+            "tool": "unknown",
+            "input": {}
+          },
+          {
+            "tool": "unknown",
+            "input": {}
+          }
+        ],
+        "tools_used": [
+          "unknown"
+        ],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 3,
+      "test_name": "Service Capabilities",
+      "passed": false,
+      "response_time": 2.444243907928467,
+      "response": " 我可以帮助你完成很多医疗相关的任务，比如：\n\n1. 症状初步分析与健康建议\n2. 推荐合适的科室或医生\n3. 查询医生、诊所、医院的信息（如营业时间、联系方式、地址等）\n4. 查询服务的价格、保险覆盖情况等\n5. 帮你预约、改期或取消医生预约\n6. 管理和记录你的就诊历史、偏好信息等\n7. 提供健康知识、用药建议等\n\n如果你有具体需求，可以直接告诉我！",
+      "found_keywords": [],
+      "missing_keywords": [
+        "健康咨询",
+        "实时预约",
+        "检查项目",
+        "诊所导航",
+        "体检报告"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "tools_used": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 4,
+      "test_name": "Brand Slogan",
+      "passed": false,
+      "response_time": 8.12236499786377,
+      "response": " 很抱歉，目前没有查到“诺亚新舟”的官方口号。如需进一步了解，建议直接联系其官方渠道：电话020-99999999或邮箱info@humansa.com。",
+      "found_keywords": [],
+      "missing_keywords": [
+        "以爱行舟",
+        "亲近相守"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [
+          {
+            "tool": "unknown",
+            "input": {}
+          },
+          {
+            "tool": "unknown",
+            "input": {}
+          },
+          {
+            "tool": "unknown",
+            "input": {}
+          }
+        ],
+        "tools_used": [
+          "unknown"
+        ],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 5,
+      "test_name": "English Identity Query",
+      "passed": false,
+      "response_time": 1.889206886291504,
+      "response": " I am an AI medical assistant designed to help you with healthcare questions, appointment management, and medical information. How can I assist you today?",
+      "found_keywords": [
+        "health",
+        "assistant",
+        "medical"
+      ],
+      "missing_keywords": [
+        "Humansa"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "tools_used": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 6,
+      "test_name": "Service Scope",
+      "passed": false,
+      "response_time": 3.509596109390259,
+      "response": " 目前平台上共有1位医生和1家诊所。如果您需要更详细的信息或有其他需求，欢迎随时告知！",
+      "found_keywords": [
+        "诊所"
+      ],
+      "missing_keywords": [
+        "500",
+        "三甲",
+        "30+"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [
+          {
+            "tool": "unknown",
+            "input": {}
+          },
+          {
+            "tool": "unknown",
+            "input": {}
+          }
+        ],
+        "tools_used": [
+          "unknown"
+        ],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 7,
+      "test_name": "Health Mall Reference",
+      "passed": false,
+      "response_time": 4.970883846282959,
+      "response": " 为您推荐了以下保健品：\n1. 综合维生素片（168元）：增强免疫力、补充营养，适合亚健康或营养不良人群。\n2. 褪黑素片（98元）：改善睡眠、调节生物钟，适合有失眠或时差困扰的人群。\n3. 电子血压计（299元，医疗器械）：监测血压、心率检测，适合高血压或心脏病患者。\n\n请问您有什么具体的健康需求或预算偏好吗？这样我可以为您推荐更合适的产品。",
+      "found_keywords": [],
+      "missing_keywords": [
+        "健康商城",
+        "诺亚新舟医疗",
+        "小程序"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [
+          {
+            "tool": "unknown",
+            "input": {}
+          }
+        ],
+        "tools_used": [
+          "unknown"
+        ],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 8,
+      "test_name": "Article Reference",
+      "passed": false,
+      "response_time": 5.891840934753418,
+      "response": " 很抱歉，目前没有找到最新的健康文章推荐。如果您有感兴趣的健康主题、疾病或生活方式方向，可以告诉我，我可以为您定向推荐相关的健康知识、医生建议或产品。",
+      "found_keywords": [],
+      "missing_keywords": [
+        "mp.weixin.qq.com",
+        "最新文章"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [
+          {
+            "tool": "unknown",
+            "input": {}
+          }
+        ],
+        "tools_used": [
+          "unknown"
+        ],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 9,
+      "test_name": "Emergency Response",
+      "passed": true,
+      "response_time": 3.1159000396728516,
+      "response": " 您现在的情况非常紧急，胸痛伴有呼吸困难可能是严重的心脏或肺部疾病。请您立即前往最近的急诊室，或立刻拨打120急救电话，不要自行等待或拖延！如果身边有人，请让他们协助您尽快就医。",
+      "found_keywords": [
+        "120",
+        "立即",
+        "急救"
+      ],
+      "missing_keywords": [],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [
+          {
+            "tool": "unknown",
+            "input": {}
+          }
+        ],
+        "tools_used": [
+          "unknown"
+        ],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 10,
+      "test_name": "Self-Owned Clinics Only",
+      "passed": false,
+      "response_time": 3.8528738021850586,
+      "response": " 为您推荐三家国内最知名的三甲医院，您可以根据所在城市选择：\n\n1. 北京协和医院（地址：北京市东城区帅府园1号，电话：010-69156114）\n2. 广州中山医院（地址：广州市越秀区中山二路106号，电话：020-87755766）\n3. 深圳市人民医院（地址：深圳市罗湖区东门北路1017号，电话：0755-25533018）\n\n这些医院都是全国顶尖的综合性医院，医疗水平高、设备先进。如果您有特定的城市或专科需求，也可以告诉我，我会为您进一步推荐。",
+      "found_keywords": [],
+      "missing_keywords": [
+        "诊所",
+        "诺亚新舟",
+        "预约"
+      ],
+      "found_not_expected": [
+        "三甲医院"
+      ],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [
+          {
+            "tool": "unknown",
+            "input": {}
+          }
+        ],
+        "tools_used": [
+          "unknown"
+        ],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 11,
+      "test_name": "Greeting - Hello",
+      "passed": false,
+      "response_time": 3.2130680084228516,
+      "response": " 你好！有什么可以帮您的吗？",
+      "found_keywords": [
+        "你好"
+      ],
+      "missing_keywords": [
+        "诺亚新舟",
+        "小诺",
+        "健康"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "tools_used": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 12,
+      "test_name": "Greeting - Hi",
+      "passed": false,
+      "response_time": 1.7235808372497559,
+      "response": " Hello! How can I help you today?",
+      "found_keywords": [],
+      "missing_keywords": [
+        "你好",
+        "诺亚新舟",
+        "小诺",
+        "健康"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "tools_used": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 13,
+      "test_name": "Booking Request",
+      "passed": false,
+      "response_time": 2.2061898708343506,
+      "response": " 请问您需要预约什么科室的医生？比如内科、外科、妇科等，或者您可以描述一下您的症状和所在城市，我会帮您快速匹配合适的医生并安排预约。",
+      "found_keywords": [
+        "预约",
+        "医生"
+      ],
+      "missing_keywords": [
+        "诊所",
+        "时间"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "tools_used": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 14,
+      "test_name": "Health Consultation",
+      "passed": false,
+      "response_time": 6.546827077865601,
+      "response": " 您好，针对最近总是失眠的情况，建议您预约神经内科门诊进行详细检查。失眠通常不是紧急情况，但如果持续时间较长或影响到日常生活，建议尽早就医。您可以尝试保持规律作息、减少咖啡因摄入、睡前放松等方法缓解。如果有压力、焦虑或伴随其他症状，也可以一并告知医生。需要预约相关科室可以随时告诉我。",
+      "found_keywords": [
+        "建议",
+        "医生"
+      ],
+      "missing_keywords": [
+        "睡眠",
+        "诊所"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [
+          {
+            "tool": "unknown",
+            "input": {}
+          }
+        ],
+        "tools_used": [
+          "unknown"
+        ],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 15,
+      "test_name": "Check-up Query",
+      "passed": false,
+      "response_time": 4.513247966766357,
+      "response": " 很抱歉，目前我们平台上没有找到体检服务或相关机构的信息。如果您有其他健康咨询或需要预约其他科室的服务，可以告诉我，我会尽力为您查询和安排。",
+      "found_keywords": [
+        "体检",
+        "预约"
+      ],
+      "missing_keywords": [
+        "检查",
+        "套餐"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [
+          {
+            "tool": "unknown",
+            "input": {}
+          },
+          {
+            "tool": "unknown",
+            "input": {}
+          }
+        ],
+        "tools_used": [
+          "unknown"
+        ],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 16,
+      "test_name": "Doctor Specialties",
+      "passed": false,
+      "response_time": 4.490675926208496,
+      "response": " 很抱歉，目前无法直接查询到具体有哪些科室的医生。如果您需要特定科室的医生信息，欢迎告知您关心的科室名称，我可以帮您进一步查找。",
+      "found_keywords": [],
+      "missing_keywords": [
+        "内科",
+        "外科",
+        "儿科",
+        "专科"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [
+          {
+            "tool": "unknown",
+            "input": {}
+          },
+          {
+            "tool": "unknown",
+            "input": {}
+          }
+        ],
+        "tools_used": [
+          "unknown"
+        ],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 17,
+      "test_name": "Location Query",
+      "passed": false,
+      "response_time": 2.6689391136169434,
+      "response": " 最近的诊所是“诺亚新舟广州诊所”，地址：广州市天河区体育西路789号，联系电话：020-99999999。该诊所提供中医科、神经外科、骨科等服务。如果需要更多信息或其他地区的诊所，请告知具体位置。",
+      "found_keywords": [
+        "诊所",
+        "地址",
+        "位置"
+      ],
+      "missing_keywords": [
+        "导航"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [
+          {
+            "tool": "unknown",
+            "input": {}
+          }
+        ],
+        "tools_used": [
+          "unknown"
+        ],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 18,
+      "test_name": "Insurance Query",
+      "passed": false,
+      "response_time": 2.668539047241211,
+      "response": " 我们支持基本医保和商业保险，部分项目可以使用医保，具体情况可以根据项目详细咨询。此外，也支持商业保险直付。如有需要，欢迎进一步咨询！",
+      "found_keywords": [
+        "医保",
+        "保险"
+      ],
+      "missing_keywords": [
+        "支付",
+        "费用"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [
+          {
+            "tool": "unknown",
+            "input": {}
+          }
+        ],
+        "tools_used": [
+          "unknown"
+        ],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 19,
+      "test_name": "Report Interpretation",
+      "passed": false,
+      "response_time": 1.4401180744171143,
+      "response": " 请将您的检查报告内容上传或复制粘贴到这里，我会帮您解读和分析。",
+      "found_keywords": [
+        "报告",
+        "解读"
+      ],
+      "missing_keywords": [
+        "医生",
+        "咨询"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "tools_used": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 20,
+      "test_name": "Follow-up Care",
+      "passed": true,
+      "response_time": 13.336928129196167,
+      "response": " 手术后需要注意以下几点：\n\n1. 遵医嘱服药：严格按照医生的建议服用抗生素、止痛药等，切勿自行增减药量。\n2. 保持伤口清洁干燥：定期更换敷料，避免伤口感染，不要用手触摸伤口。\n3. 观察异常症状：如出现发热、伤口红肿渗液、剧烈疼痛等，需及时就医。\n4. 合理休息：适当休息，避免过度劳累或剧烈运动，根据医生指导逐步恢复活动。\n5. 饮食调整：多吃易消化、高蛋白的食物，补充营养，避免辛辣刺激性食物。\n6. 按时复诊：按医生要求定期复查，及时处理术后问题。\n7. 特殊注意事项：如有放置引流管、导尿管等，需注意护理方法，遵医嘱处理。\n\n如果你有具体的手术类型或其他个人情况，可以告诉我，我会提供更详细的建议。",
+      "found_keywords": [
+        "术后",
+        "恢复",
+        "注意事项",
+        "复查"
+      ],
+      "missing_keywords": [],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "tools_used": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 21,
+      "test_name": "Memory Persistence - Allergy",
+      "passed": false,
+      "response_time": 2.818356990814209,
+      "response": " 您的档案中暂无过敏史记录。如果您有已知的过敏情况，可以告诉我，我帮您补充进档案。",
+      "found_keywords": [
+        "过敏"
+      ],
+      "missing_keywords": [
+        "花生"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [
+          {
+            "tool": "unknown",
+            "input": {}
+          }
+        ],
+        "tools_used": [
+          "unknown"
+        ],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 22,
+      "test_name": "Memory Persistence - Medical History",
+      "passed": false,
+      "response_time": 3.1867289543151855,
+      "response": " 请问您目前有没有什么不适的症状？或者您可以告诉我您的年龄、既往的健康状况（如慢性病、过敏等），这样我可以为您提供更有针对性的健康建议。如果只是一般的健康管理建议，我也可以为您总结一些常见的注意事项。请问您更关心哪方面？",
+      "found_keywords": [],
+      "missing_keywords": [
+        "高血压",
+        "降压药"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "tools_used": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 23,
+      "test_name": "Preference Learning - Appointment",
+      "passed": false,
+      "response_time": 1.486769199371338,
+      "response": " 您需要预约哪位医生或哪个科室？请提供您所在的城市，以及您方便的日期和时间段，这样我可以为您安排合适的预约。",
+      "found_keywords": [],
+      "missing_keywords": [
+        "周末",
+        "上午"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "tools_used": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 24,
+      "test_name": "Cross-Session Continuity",
+      "passed": false,
+      "response_time": 3.3480262756347656,
+      "response": " 您好，请问您的膝盖具体有哪些不适？比如：疼痛、肿胀、活动受限、还是有其他症状？症状持续了多久？严重程度如何？有无外伤史或既往膝关节疾病？这样我可以为您提供更合适的建议。",
+      "found_keywords": [
+        "膝盖",
+        "疼痛"
+      ],
+      "missing_keywords": [
+        "之前",
+        "上次"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "tools_used": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 25,
+      "test_name": "Family Member Tracking",
+      "passed": false,
+      "response_time": 12.482038021087646,
+      "response": " 可以为您推荐适合小孩的感冒药，但需要进一步了解以下信息：\n1. 小孩的年龄和体重是多少？\n2. 目前主要有哪些症状？（如发热、咳嗽、流鼻涕、咽喉痛等）\n3. 是否有药物过敏或慢性病史？\n4. 症状持续了多久？严重程度如何？\n\n请补充这些信息，我会根据具体情况为您推荐合适的药物或处理建议。",
+      "found_keywords": [],
+      "missing_keywords": [
+        "女儿",
+        "5岁",
+        "儿童"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [
+          {
+            "tool": "unknown",
+            "input": {}
+          }
+        ],
+        "tools_used": [
+          "unknown"
+        ],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 26,
+      "test_name": "Medication Tracking",
+      "passed": false,
+      "response_time": 5.93762993812561,
+      "response": " 请告诉我您现在正在服用的所有药物名称（包括中药或保健品），这样我可以帮您评估是否存在药物冲突的风险。如果有具体的服药剂量和频率也请一并告知。",
+      "found_keywords": [
+        "药物"
+      ],
+      "missing_keywords": [
+        "阿司匹林",
+        "二甲双胍"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "tools_used": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 27,
+      "test_name": "Doctor Preference",
+      "passed": false,
+      "response_time": 2.7281742095947266,
+      "response": " 请问您需要预约哪一科的医生？您的所在城市是哪里？另外，您期望的就诊时间是什么时候？如果有指定的医生或者诊所，也可以告诉我。",
+      "found_keywords": [],
+      "missing_keywords": [
+        "李医生",
+        "偏好"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "tools_used": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 28,
+      "test_name": "Health Goal Tracking",
+      "passed": false,
+      "response_time": 3.549994945526123,
+      "response": " 暂时没有查到您的健康目标或进展记录。如果您有具体的健康目标（如减重、锻炼、控制血糖等），请告诉我，我可以帮助您记录并跟踪进展！",
+      "found_keywords": [
+        "减重",
+        "目标"
+      ],
+      "missing_keywords": [
+        "10公斤"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [
+          {
+            "tool": "unknown",
+            "input": {}
+          }
+        ],
+        "tools_used": [
+          "unknown"
+        ],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 29,
+      "test_name": "Insurance Information",
+      "passed": false,
+      "response_time": 1.9611940383911133,
+      "response": " 您可以告诉我您要做的具体检查项目和您的保险公司名称吗？这样我可以帮您查询是否可以覆盖。",
+      "found_keywords": [
+        "保险"
+      ],
+      "missing_keywords": [
+        "平安",
+        "高端医疗险"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "tools_used": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 30,
+      "test_name": "Complex Context Recall",
+      "passed": false,
+      "response_time": 5.789775133132935,
+      "response": " 预防性检查的内容会根据您的年龄、性别、家族史和既往病史有所不同。一般建议包括：\n\n1. 基本体检：血压、身高、体重、视力、听力等。\n2. 血常规、尿常规检查。\n3. 血脂、血糖检测。\n4. 肝肾功能检查。\n5. 肿瘤筛查（如女性乳腺癌、宫颈癌筛查，男性前列腺癌筛查等）。\n6. 肺部、腹部影像学检查（如胸片、B超）。\n7. 结直肠癌筛查（50岁以上人群）。\n8. 骨密度检测（绝经后女性或老年人）。\n9. 乙肝、丙肝、艾滋病等传染病筛查（有相关风险人群）。\n\n如需个性化建议，请提供您的性别、年龄、既往病史等信息。",
+      "found_keywords": [
+        "家族",
+        "预防"
+      ],
+      "missing_keywords": [
+        "糖尿病",
+        "心脏"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "tools_used": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    }
+  ]
+}

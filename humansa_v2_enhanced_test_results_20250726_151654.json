@@ -1,0 +1,705 @@
+{
+  "timestamp": "20250726_151654",
+  "total_tests": 30,
+  "passed": 9,
+  "failed": 21,
+  "success_rate": 0.3,
+  "enhanced_logging": true,
+  "results": [
+    {
+      "test_id": 1,
+      "test_name": "Basic Identity Query",
+      "passed": true,
+      "response_time": 13.034473896026611,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: The user is asking about my identity. I should use the general_medical_agent to answer this question.\n🔧 **行动**: general_medical_agent\n📥 **输入参数**: {'query': '你是谁？'}\n📊 **观察结果**: 我是诺亚新舟健康医疗助理（小诺），您的AI健康管家。\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\n我是诺亚新舟健康医疗助理（小诺），您的AI健康管家。\n\n诺亚新舟以\"以爱行舟，亲近相守\"为口号，拥有500多位三甲主任级名医专家，在全国开设了30+家高端综合名医诊所。\n\n我可以为您提供以下服务：\n• 健康咨询与分诊：根据症状提供初步科室/检查建议\n• 实时预约：查询医生余号，协助完成预约\n• 检查项目下单：对比各诊所项目，跳转商城下单\n• 诊所导航：提供地址、电话、营业时间、交通指引\n• 体检报告解读和慢病管理方案推荐\n\n有什么可以帮助您的吗？\n",
+      "found_keywords": [
+        "诺亚新舟",
+        "小诺",
+        "健康医疗助理",
+        "AI健康管家"
+      ],
+      "missing_keywords": [],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 2,
+      "test_name": "Company Background",
+      "passed": false,
+      "response_time": 15.11247205734253,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: The current language of the user is: Chinese. I need to use a tool to help me answer the question.\n🔧 **行动**: general_medical_agent\n📥 **输入参数**: {'query': '介绍一下诺亚新舟'}\n📊 **观察结果**: 诺亚新舟（Humansa）- 以爱行舟，亲近相守\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\n诺亚新舟是一家专注于提供高端医疗健康服务的机构，我们拥有500多位三甲主任级名医专家，并在全国开设了30多家高端综合名医诊所。我们始终将客户的健康放在第一位，为注重高品质生活的家庭提供专业的医疗健康服务。您可以通过诺亚新舟医疗小程序进行实时预约，或者拨打我们的客服电话咨询最近的诊所。\n",
+      "found_keywords": [
+        "以爱行舟",
+        "亲近相守",
+        "500多位",
+        "三甲主任级",
+        "名医专家",
+        "高端综合名医诊所"
+      ],
+      "missing_keywords": [
+        "30+家"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 3,
+      "test_name": "Service Capabilities",
+      "passed": true,
+      "response_time": 13.535838842391968,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: The current language of the user is: Chinese. I need to use a tool to help me answer the question.\n🔧 **行动**: general_medical_agent\n📥 **输入参数**: {'query': '你能做什么？'}\n📊 **观察结果**: 作为诺亚新舟健康医疗助理，我可以为您提供：\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\n作为诺亚新舟健康医疗助理，我可以为您提供：\n\n1. 健康咨询与分诊：根据症状提供初步科室/检查建议\n2. 实时预约：查询医生余号，协助完成预约\n3. 检查项目下单：对比各诊所项目，跳转商城下单\n4. 诊所导航：提供地址、电话、营业时间、交通指引\n5. 体检报告解读：帮您解读检查结果\n6. 慢病管理：提供个性化健康管理方案\n\n需要我为您提供哪方面的服务呢？\n",
+      "found_keywords": [
+        "健康咨询",
+        "实时预约",
+        "检查项目",
+        "诊所导航",
+        "体检报告"
+      ],
+      "missing_keywords": [],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 4,
+      "test_name": "Brand Slogan",
+      "passed": true,
+      "response_time": 14.404314994812012,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n诺亚新舟的口号是\"以爱行舟，亲近相守\"。这代表了我们对每一位客户的关怀与陪伴，以及对提供优质医疗服务的执着。我们希望通过我们的服务，让每一个家庭都能享受到健康、快乐的生活。\n",
+      "found_keywords": [
+        "以爱行舟",
+        "亲近相守"
+      ],
+      "missing_keywords": [],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 5,
+      "test_name": "English Identity Query",
+      "passed": true,
+      "response_time": 9.352185010910034,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: The current language of the user is: English. I need to use a tool to help me answer the question.\n🔧 **行动**: general_medical_agent\n📥 **输入参数**: {'query': 'Who are you?'}\n📊 **观察结果**: I am Humansa Health Medical Assistant (Xiao Nuo), your AI health companion.\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\nI am Humansa Health Medical Assistant, your AI health companion. I'm part of Humansa, a premium healthcare provider. We have over 500 chief physicians from top tertiary hospitals and operate 30+ premium comprehensive clinics nationwide. I can assist you with health consultations, symptom analysis, real-time appointment booking, medical examination arrangements, clinic navigation and information, and health report interpretation. How may I assist you today?\n",
+      "found_keywords": [
+        "Humansa",
+        "health",
+        "assistant",
+        "medical"
+      ],
+      "missing_keywords": [],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 6,
+      "test_name": "Service Scope",
+      "passed": false,
+      "response_time": 4.4837729930877686,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n诺亚新舟拥有500多位来自三甲医院的主任级名医专家，我们在全国范围内开设了30多家高端综合名医诊所，为广大用户提供优质的医疗服务。\n",
+      "found_keywords": [
+        "500",
+        "三甲",
+        "诊所"
+      ],
+      "missing_keywords": [
+        "30+"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 7,
+      "test_name": "Health Mall Reference",
+      "passed": true,
+      "response_time": 16.478886127471924,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: The user is interested in buying health products. I can use the general_medical_agent tool to provide recommendations.\n🔧 **行动**: general_medical_agent\n📥 **输入参数**: {'query': '想买保健品'}\n📊 **观察结果**: 关于保健品和健康产品，建议您访问诺亚新舟健康商城：\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\n您可以访问诺亚新舟健康商城购买保健品和健康产品：#小程序://诺亚新舟医疗/t5ZpOWu0UyRtEFl。在商城中您可以找到经过专业医生推荐的各类保健品和功能性产品。如需个性化推荐，建议您先到诺亚新舟诊所咨询医生。\n",
+      "found_keywords": [
+        "健康商城",
+        "诺亚新舟医疗",
+        "小程序"
+      ],
+      "missing_keywords": [],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 8,
+      "test_name": "Article Reference",
+      "passed": true,
+      "response_time": 17.3742778301239,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: The current language of the user is: Chinese. I need to use a tool to help me answer the question.\n🔧 **行动**: general_medical_agent\n📥 **输入参数**: {'query': '有什么最新的健康文章推荐吗？'}\n📊 **观察结果**: 诺亚新舟最新健康文章推荐：\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\n诺亚新舟的最新健康文章可以在这个链接中找到：[最新文章](https://mp.weixin.qq.com/s/q6YEtpRd_-U5tWGrRMBOtw)。您也可以关注诺亚新舟的公众号，那里会有更多的健康资讯和专业的医疗知识。\n",
+      "found_keywords": [
+        "mp.weixin.qq.com",
+        "最新文章"
+      ],
+      "missing_keywords": [],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 9,
+      "test_name": "Emergency Response",
+      "passed": true,
+      "response_time": 19.491590976715088,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: The user is reporting severe chest pain and difficulty breathing, which are serious symptoms that require immediate attention. I should use the emergency_triage_agent tool to assess the situation and provide emergency guidance.\n🔧 **行动**: emergency_triage_agent\n📥 **输入参数**: {'situation': '现在胸痛很厉害，呼吸困难'}\n📊 **观察结果**: ⚠️ 紧急情况：根据您描述的症状，这是紧急医疗情况！请立即拨打120急救电话，或前往最近的医院急诊科。在等待救援时，请保持冷静，尽量保持呼吸通畅。\n\n💭 **思考**: The tool has identified this as an emergency situation and advised the user to call an ambulance or go to the nearest hospital emergency department. I should relay this information to the user.\n\n✅ **最终回答**:\n这是一种紧急的医疗状况！请您立即拨打120急救电话，或前往最近的医院急诊科。在等待救援时，请尽量保持冷静，保持呼吸通畅。\n",
+      "found_keywords": [
+        "120",
+        "立即",
+        "急救"
+      ],
+      "missing_keywords": [],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 10,
+      "test_name": "Self-Owned Clinics Only",
+      "passed": false,
+      "response_time": 14.673831939697266,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n推荐医院需要考虑到您的具体病症、地理位置和个人需求。诺亚新舟在全国范围内与多家三甲医院有合作，我们会根据您的情况推荐最适合您的医院。如果您需要紧急医疗服务，如胸痛或呼吸困难，建议您立即拨打120或前往最近的急诊科。如果您希望预约看医生或购买保健品，您可以通过诺亚新舟医疗小程序直接预约或购买。\n",
+      "found_keywords": [
+        "诺亚新舟",
+        "预约"
+      ],
+      "missing_keywords": [
+        "诊所"
+      ],
+      "found_not_expected": [
+        "三甲医院"
+      ],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 11,
+      "test_name": "Greeting - Hello",
+      "passed": true,
+      "response_time": 11.063869953155518,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: The user is greeting me. I can use the general_medical_agent tool to respond appropriately.\n🔧 **行动**: general_medical_agent\n📥 **输入参数**: {'query': '你好'}\n📊 **观察结果**: 你好！我是诺亚新舟健康医疗助理（小诺），您的AI健康管家。\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\n你好！我是诺亚新舟健康医疗助理（小诺），您的AI健康管家。很高兴为您服务！我可以帮助您：\n• 健康咨询与症状分析\n• 预约诺亚新舟诊所的医生\n• 解读体检报告\n• 推荐健康产品\n• 提供就医指导\n有什么可以帮助您的吗？\n",
+      "found_keywords": [
+        "你好",
+        "诺亚新舟",
+        "小诺",
+        "健康"
+      ],
+      "missing_keywords": [],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 12,
+      "test_name": "Greeting - Hi",
+      "passed": true,
+      "response_time": 11.070848941802979,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: The current language of the user is: English. I need to use a tool to help me answer the question.\n🔧 **行动**: general_medical_agent\n📥 **输入参数**: {'query': 'Hi'}\n📊 **观察结果**: 你好！我是诺亚新舟健康医疗助理（小诺），您的AI健康管家。\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\nHi! I'm Humansa Health Medical Assistant, your AI health companion. I'm glad to serve you! I can assist you with health consultations, symptom analysis, appointment booking with Humansa clinics, health report interpretation, health product recommendations, and medical guidance. How may I assist you today?\n",
+      "found_keywords": [
+        "你好",
+        "诺亚新舟",
+        "小诺",
+        "健康"
+      ],
+      "missing_keywords": [],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 13,
+      "test_name": "Booking Request",
+      "passed": false,
+      "response_time": 18.00980305671692,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: The current language of the user is: Chinese. I need to use a tool to help me answer the question.\n🔧 **行动**: appointment_agent\n📥 **输入参数**: {'request': '我想预约看医生'}\n📊 **观察结果**: 关于您的预约需求：\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\n您可以通过诺亚新舟医疗小程序进行实时预约，或者拨打我们的客服电话进行预约。为了帮助您更好地预约，请告诉我：\n- 您需要看哪个科室的医生？\n- 您偏好的就诊时间？\n- 您所在的城市？\n这样，我可以帮您找到最适合您的医生和预约时间。\n",
+      "found_keywords": [
+        "预约",
+        "时间",
+        "医生"
+      ],
+      "missing_keywords": [
+        "诊所"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 14,
+      "test_name": "Health Consultation",
+      "passed": false,
+      "response_time": 21.01262092590332,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: The user is experiencing insomnia and needs some general advice on how to manage it. I'll use the general_medical_agent tool to provide some general guidance.\n🔧 **行动**: general_medical_agent\n📥 **输入参数**: {'query': '失眠怎么办'}\n📊 **观察结果**: 关于您的健康咨询 '失眠怎么办'：建议保持良好的生活习惯，均衡饮食，适量运动。如有具体症状，请到我们的诺亚新舟诊所进行专业咨询。我们有500多位三甲主任级名医专家为您服务。\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\n持续的失眠可能是由多种因素引起的，比如压力、不良的生活习惯或底层的健康问题。改善失眠的一般建议包括保持良好的睡眠卫生，如定时睡觉和起床、限制日常咖啡因摄取、保持睡眠环境安静和黑暗，以及避免电子设备在睡前使用。适当的运动和均衡饮食也有助于改善睡眠。\n\n然而，如果您的失眠症状持续存在，影响到您的日常生活，建议您寻求专业的医疗帮助。我们的诺亚新舟诊所有500多位三甲主任级名医专家，他们可以为您提供专业的咨询和治疗。\n",
+      "found_keywords": [
+        "睡眠",
+        "建议",
+        "诊所"
+      ],
+      "missing_keywords": [
+        "医生"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 15,
+      "test_name": "Check-up Query",
+      "passed": false,
+      "response_time": 13.522543907165527,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n是的，诺亚新舟提供全方位的体检服务。我们有专业的医疗团队和先进的医疗设备，可以为您提供包括血液检测、尿液检测、便便检测、超声检查、心电图检查、胃镜检查、肠镜检查等全面的体检服务。您可以通过诺亚新舟医疗小程序或者拨打我们的客服电话进行预约。\n",
+      "found_keywords": [
+        "体检",
+        "检查",
+        "预约"
+      ],
+      "missing_keywords": [
+        "套餐"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 16,
+      "test_name": "Doctor Specialties",
+      "passed": false,
+      "response_time": 9.658344984054565,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n诺亚新舟拥有各科室的医生，包括但不限于以下科室：\n- 内科：如心血管内科、消化内科、呼吸内科、神经内科等\n- 外科：如普外科、神经外科、心胸外科等\n- 妇产科\n- 儿科\n- 皮肤科\n- 眼科\n- 耳鼻喉科\n- 口腔科\n- 中医科\n- 心理科\n\n如果您需要预约，请告诉我您的症状和需求，我将帮助您找到最适合您的医生。\n",
+      "found_keywords": [
+        "内科",
+        "外科",
+        "儿科"
+      ],
+      "missing_keywords": [
+        "专科"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 17,
+      "test_name": "Location Query",
+      "passed": false,
+      "response_time": 15.895437717437744,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n为了提供最准确的信息，我需要知道您当前的位置。诺亚新舟在全国有30多家诊所，我们会根据您的位置推荐最近的诺亚新舟诊所。您也可以拨打我们的客服电话或者通过诺亚新舟医疗小程序查询最近的诺亚新舟诊所。\n",
+      "found_keywords": [
+        "诊所",
+        "位置"
+      ],
+      "missing_keywords": [
+        "地址",
+        "导航"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 18,
+      "test_name": "Insurance Query",
+      "passed": false,
+      "response_time": 8.806589126586914,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n诺亚新舟的部分服务和产品可以接受医保支付，具体情况根据当地政策和诊所情况有所不同。建议您在预约服务或购买产品时，向我们的客服咨询具体的医保支付问题。请注意，所有医保支付都需要遵守相关政策和法规。如果您有任何疑问，我们的客服人员会很乐意为您解答。\n",
+      "found_keywords": [
+        "医保",
+        "支付"
+      ],
+      "missing_keywords": [
+        "保险",
+        "费用"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 19,
+      "test_name": "Report Interpretation",
+      "passed": false,
+      "response_time": 3.6936779022216797,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n当然可以，我会尽全力帮助您理解检查报告。但请注意，我提供的解读只能作为参考，不能替代医生的专业诊断。如果您愿意分享您的报告，我可以开始为您解读。\n",
+      "found_keywords": [
+        "报告",
+        "解读",
+        "医生"
+      ],
+      "missing_keywords": [
+        "咨询"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 20,
+      "test_name": "Follow-up Care",
+      "passed": false,
+      "response_time": 12.293246746063232,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n手术后的护理和注意事项可能会根据手术类型和个人状况有所不同。以下是一些通用的建议：\n\n1. 休息：手术后的恢复需要时间和足够的休息。确保您有充足的睡眠。\n2. 饮食：保持均衡的饮食，摄入足够的蛋白质和维生素有助于伤口愈合。\n3. 伤口护理：跟随医生或护士的指导，正确地清洁和护理手术伤口。\n4. 药物：按照医生的指示正确服用药物，包括止痛药和抗生素。\n5. 活动：避免剧烈的活动，但适当的轻度活动（如散步）可以帮助恢复。\n6. 随访：按照医生的计划进行随访检查，以确保恢复顺利。\n\n在具体的情况下，您的医生或护士会给您更详细和个性化的建议。如果您有任何疑问或不适，应立即联系医疗专业人士。\n",
+      "found_keywords": [
+        "术后",
+        "恢复",
+        "注意事项"
+      ],
+      "missing_keywords": [
+        "复查"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 21,
+      "test_name": "Memory Persistence - Allergy",
+      "passed": false,
+      "response_time": 7.470746040344238,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: The user's history mentions an allergy to penicillin.\n\n✅ **最终回答**:\n根据您的历史记录，您对青霉素有过敏反应。在接受任何医疗服务或药物治疗时，都应向医生或医疗专业人员提供这一信息。\n",
+      "found_keywords": [
+        "过敏"
+      ],
+      "missing_keywords": [
+        "花生"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 22,
+      "test_name": "Memory Persistence - Medical History",
+      "passed": false,
+      "response_time": 22.092230081558228,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: The current language of the user is: Chinese. I need to use a tool to help me answer the question.\n🔧 **行动**: general_medical_agent\n📥 **输入参数**: {'query': '对青霉素过敏'}\n📊 **观察结果**: 关于您的健康咨询 '对青霉素过敏'：建议保持良好的生活习惯，均衡饮食，适量运动。如有具体症状，请到我们的诺亚新舟诊所进行专业咨询。我们有500多位三甲主任级名医专家为您服务。\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\n您对青霉素过敏，这意味着您在接受任何药物治疗时都需要告知医生您的过敏史。如果您发现自己在接受含有青霉素的药物治疗后出现过敏反应，如皮疹、呼吸困难、头晕等，应立即停止使用并寻求医疗帮助。同时，保持良好的生活习惯，均衡饮食，适量运动也对您的健康有益。如有具体症状，建议您到诺亚新舟诊所进行专业咨询。我们有500多位三甲主任级名医专家为您服务。\n",
+      "found_keywords": [],
+      "missing_keywords": [
+        "高血压",
+        "降压药"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 23,
+      "test_name": "Preference Learning - Appointment",
+      "passed": false,
+      "response_time": 12.341592073440552,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n为了帮助您预约，我需要知道您希望预约的医生或科室，以及您的地理位置。这样我可以找到最适合您的医生和预约时间。您已经表示更喜欢在上午进行预约，我会在为您预约时考虑到这一点。您可以通过诺亚新舟医疗小程序进行预约，或者拨打我们的客服电话进行预约。\n",
+      "found_keywords": [
+        "上午"
+      ],
+      "missing_keywords": [
+        "周末"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 24,
+      "test_name": "Cross-Session Continuity",
+      "passed": false,
+      "response_time": 11.509016990661621,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: The current language of the user is: Chinese. I need to use a tool to help me answer the question.\n🔧 **行动**: diagnosis_agent\n📥 **输入参数**: {'symptoms': '膝盖疼痛'}\n📊 **观察结果**: 根据您描述的症状 '膝盖疼痛'：这可能需要专业医生的诊断。建议您预约我们诺亚新舟诊所的专家进行详细检查。我们有超过500位三甲主任级名医专家为您服务。\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\n根据您的描述，您的膝盖问题可能需要专业医生的诊断。建议您预约我们诺亚新舟诊所的专家进行详细检查。我们有超过500位三甲主任级名医专家为您服务。\n",
+      "found_keywords": [
+        "膝盖",
+        "疼痛"
+      ],
+      "missing_keywords": [
+        "之前",
+        "上次"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 25,
+      "test_name": "Family Member Tracking",
+      "passed": false,
+      "response_time": 13.289034843444824,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: The current language of the user is: Chinese. I need to use a tool to help me answer the question.\n🔧 **行动**: medication_agent\n📥 **输入参数**: {'query': '适合小孩的感冒药'}\n📊 **观察结果**: 关于您的用药咨询 '适合小孩的感冒药'：用药需要在医生指导下进行。请携带您的用药记录到诺亚新舟诊所，我们的专业医生会为您提供个性化的用药指导。\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\n在给小孩使用任何感冒药之前，都应该首先咨询医生。因为一些药物可能不适合儿童使用，而且用药剂量也需要根据儿童的年龄和体重来调整。如果您的孩子感觉不适，建议您带孩子到诺亚新舟诊所看医生。我们的专业医生会为您提供个性化的用药指导。\n",
+      "found_keywords": [
+        "儿童"
+      ],
+      "missing_keywords": [
+        "女儿",
+        "5岁"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 26,
+      "test_name": "Medication Tracking",
+      "passed": false,
+      "response_time": 18.927481174468994,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: The current language of the user is: Chinese. I need to use a tool to help me answer the question.\n🔧 **行动**: medication_agent\n📥 **输入参数**: {'query': '我现在吃的药会不会有冲突？'}\n📊 **观察结果**: 关于您的用药咨询 '我现在吃的药会不会有冲突？'：用药需要在医生指导下进行。请携带您的用药记录到诺亚新舟诊所，我们的专业医生会为您提供个性化的用药指导。\n\n💭 **思考**: I can answer without using any more tools. I'll use the user's language to answer\n\n✅ **最终回答**:\n用药是否会产生冲突取决于您正在使用的具体药物。请您携带您的用药记录到诺亚新舟诊所，我们的专业医生会为您提供个性化的用药指导。\n",
+      "found_keywords": [
+        "药物"
+      ],
+      "missing_keywords": [
+        "阿司匹林",
+        "二甲双胍"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 27,
+      "test_name": "Doctor Preference",
+      "passed": false,
+      "response_time": 10.61009931564331,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n为了帮助您预约，我需要知道您需要预约哪个科室的医生，以及您的具体位置。这样，我才能为您找到最适合您的医生和预约时间。您可以通过诺亚新舟医疗小程序预约，也可以拨打我们的客服电话进行预约。\n",
+      "found_keywords": [],
+      "missing_keywords": [
+        "李医生",
+        "偏好"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 28,
+      "test_name": "Health Goal Tracking",
+      "passed": false,
+      "response_time": 13.586501121520996,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n作为AI助手，我无法直接获取和处理您的健康数据。建议您定期进行健康检查，以了解您的健康状况和进展。您也可以到诺亚新舟诊所进行健康咨询，我们的专家会根据您的具体情况为您提供专业的健康建议。\n",
+      "found_keywords": [],
+      "missing_keywords": [
+        "减重",
+        "10公斤",
+        "目标"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 29,
+      "test_name": "Insurance Information",
+      "passed": false,
+      "response_time": 6.744585037231445,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n保险覆盖的范围取决于您的具体保险政策。建议您联系您的保险公司，以获取关于保险覆盖范围的详细信息。您也可以在预约服务或产品时，向我们的客服咨询具体的保险支付问题。\n",
+      "found_keywords": [
+        "保险"
+      ],
+      "missing_keywords": [
+        "平安",
+        "高端医疗险"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    },
+    {
+      "test_id": 30,
+      "test_name": "Complex Context Recall",
+      "passed": false,
+      "response_time": 18.885024070739746,
+      "response": "🤔 正在思考...\n\n\n💭 **思考**: (Implicit) I can answer without any more tools!\n\n✅ **最终回答**:\n预防性检查的类型和频率通常取决于您的年龄、性别、家族病史和生活方式。以下是一些常见的预防性检查：\n\n1. 血压检查：每两年进行一次，如果您的血压较高或有高血压风险，可能需要更频繁的检查。\n\n2. 胆固醇检查：根据您的年龄、健康状况和家族病史，您可能需要每五年进行一次。\n\n3. 糖尿病筛查：如果您的血压较高或有其他糖尿病风险因素，您可能需要进行筛查。\n\n4. 宫颈癌筛查：建议所有年龄在21-65岁之间的女性进行宫颈癌筛查。\n\n5. 乳腺癌筛查：建议年龄在50-74岁之间的女性每两年进行一次乳腺癌筛查。\n\n6. 结肠癌筛查：建议年龄在50-75岁之间的男性和女性进行结肠癌筛查。\n\n7. 眼科检查和牙科检查：每年至少一次。\n\n以上只是一些常见的预防性检查，具体的检查项目和频率还需要根据您的具体情况和医生的建议来确定。建议您定期到诺亚新舟诊所进行健康咨询和体检，我们的医生会根据您的健康状况为您提供个性化的检查建议。\n",
+      "found_keywords": [
+        "糖尿病",
+        "家族",
+        "预防"
+      ],
+      "missing_keywords": [
+        "心脏"
+      ],
+      "found_not_expected": [],
+      "error": null,
+      "debug_info": {
+        "agent_calls": [],
+        "tool_calls": [],
+        "thinking_steps": 0,
+        "mem0_events": 0,
+        "total_debug_events": 0
+      }
+    }
+  ]
+}

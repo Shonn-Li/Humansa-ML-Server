@@ -1,0 +1,47 @@
+{
+  "id": "ORC_107",
+  "name": "Pattern2 Non-Streaming Mode Test",
+  "suite": "orchestrator",
+  "type": "single",
+  "priority": 3,
+  "tags": ["pattern2", "orchestrator", "non-streaming", "immune"],
+  "config": {
+    "timeout": 30,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["pattern2_orchestrator"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_004"
+    }
+  },
+  "execution": {
+    "endpoint": "/humansa/pattern2/process",
+    "method": "POST",
+    "payload": {
+      "query": "推荐一些增强免疫力的产品",
+      "user_id": "test_user_004",
+      "stream": false
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["免疫力", "产品", "推荐"],
+      "min_length": 100
+    },
+    "agents": {
+      "touched": ["ProductAgent"],
+      "max_agents": 2
+    },
+    "context": {
+      "workflow": {
+        "final_state": {
+          "agents_used": ["ProductAgent"],
+          "workflow_completed": true
+        }
+      }
+    }
+  }
+}

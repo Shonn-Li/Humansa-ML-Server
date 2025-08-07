@@ -1,0 +1,142 @@
+{
+  "id": "INT_005",
+  "name": "Multi-turn conversation with memory integration test",
+  "suite": "integration",
+  "type": "multi_turn",
+  "priority": 5,
+  "tags": ["multi_turn", "memory", "context", "integration"],
+  
+  "config": {
+    "timeout": 45,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["multi_agent", "mem0", "context_persistence"]
+  },
+  
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_int_005",
+      "profile": {
+        "name": "张医生",
+        "age": 35,
+        "profession": "医生",
+        "language": "zh"
+      }
+    },
+    "previous_turns": [
+      {
+        "role": "user",
+        "content": "我叫张医生，今年35岁，是一名外科医生"
+      },
+      {
+        "role": "assistant",
+        "content": "您好张医生！很高兴认识您。作为一名外科医生，您在医疗健康方面有丰富的专业知识。请问今天有什么可以帮助您的吗？"
+      },
+      {
+        "role": "user",
+        "content": "我最近工作压力比较大，想了解一些缓解压力的保健品"
+      },
+      {
+        "role": "assistant",
+        "content": "张医生，我理解您作为外科医生工作压力很大。针对压力缓解，我推荐一些温和有效的保健品：\n1. 维生素B族复合物 - 有助于神经系统健康\n2. 镁元素补充剂 - 有助于肌肉放松和睡眠\n3. 洋甘菊茶或提取物 - 天然的放松剂\n\n您对哪种类型比较感兴趣呢？"
+      }
+    ]
+  },
+  
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "我对维生素B族比较感兴趣，你能推荐几个具体的品牌吗？",
+      "user_id": "test_user_int_005",
+      "conversation_history": [{"role": "user", "content": "\u6211\u53eb\u5f20\u533b\u751f\uff0c\u4eca\u5e7435\u5c81\uff0c\u662f\u4e00\u540d\u5916\u79d1\u533b\u751f"}, {"role": "assistant", "content": "\u60a8\u597d\u5f20\u533b\u751f\uff01\u5f88\u9ad8\u5174\u8ba4\u8bc6\u60a8\u3002\u4f5c\u4e3a\u4e00\u540d\u5916\u79d1\u533b\u751f\uff0c\u60a8\u5728\u533b\u7597\u5065\u5eb7\u65b9\u9762\u6709\u4e30\u5bcc\u7684\u4e13\u4e1a\u77e5\u8bc6\u3002\u8bf7\u95ee\u4eca\u5929\u6709\u4ec0\u4e48\u53ef\u4ee5\u5e2e\u52a9\u60a8\u7684\u5417\uff1f"}, {"role": "user", "content": "\u6211\u6700\u8fd1\u5de5\u4f5c\u538b\u529b\u6bd4\u8f83\u5927\uff0c\u60f3\u4e86\u89e3\u4e00\u4e9b\u7f13\u89e3\u538b\u529b\u7684\u4fdd\u5065\u54c1"}, {"role": "assistant", "content": "\u5f20\u533b\u751f\uff0c\u6211\u7406\u89e3\u60a8\u4f5c\u4e3a\u5916\u79d1\u533b\u751f\u5de5\u4f5c\u538b\u529b\u5f88\u5927\u3002\u9488\u5bf9\u538b\u529b\u7f13\u89e3\uff0c\u6211\u63a8\u8350\u4e00\u4e9b\u6e29\u548c\u6709\u6548\u7684\u4fdd\u5065\u54c1\uff1a\n1. \u7ef4\u751f\u7d20B\u65cf\u590d\u5408\u7269 - \u6709\u52a9\u4e8e\u795e\u7ecf\u7cfb\u7edf\u5065\u5eb7\n2. \u9541\u5143\u7d20\u8865\u5145\u5242 - \u6709\u52a9\u4e8e\u808c\u8089\u653e\u677e\u548c\u7761\u7720\n3. \u6d0b\u7518\u83ca\u8336\u6216\u63d0\u53d6\u7269 - \u5929\u7136\u7684\u653e\u677e\u5242\n\n\u60a8\u5bf9\u54ea\u79cd\u7c7b\u578b\u6bd4\u8f83\u611f\u5174\u8da3\u5462\uff1f"}],
+      "metadata": {
+        "test_id": "INT_005",
+        "test_name": "Multi-turn conversation with memory integration test"
+      }
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": [
+        "张医生",
+        "维生素B族",
+        "品牌",
+        "推荐"
+      ],
+      "output_excludes": [
+        "错误",
+        "失败"
+      ],
+      "min_length": 200,
+      "max_length": 2000
+    },
+    
+    "reasoning": {
+      "steps_min": 3,
+      "contains_keywords": [
+        "vitamin_b",
+        "brand_recommendation",
+        "context_awareness",
+        "doctor_profile"
+      ],
+      "tool_calls": [
+        "product_search",
+        "brand_filter"
+      ]
+    },
+    
+    "agents": {
+      "touched": ["router_agent", "rag_agent", "response_agent"],
+      "max_agents": 4
+    },
+    
+    "context": {
+      "mem0": {
+        "should_retrieve": [
+          "user_profession",
+          "stress_relief_interest",
+          "vitamin_b_preference"
+        ],
+        "should_store": [
+          "brand_inquiry",
+          "specific_product_interest"
+        ],
+        "memory_count": 3
+      }
+    },
+    
+    "server_logs": {
+      "contains": [
+        "Context retrieval",
+        "Memory integration",
+        "Brand recommendation"
+      ],
+      "excludes": [
+        "ERROR",
+        "CRITICAL",
+        "Context lost"
+      ],
+      "log_levels": {
+        "ERROR": "=0",
+        "WARNING": "<=1"
+      }
+    },
+    
+    "performance": {
+      "response_time_max": 20.0,
+      "memory_usage_max": "120MB",
+      "token_usage_max": 1000
+    }
+  },
+  
+  "cleanup": {
+    "reset_context": false
+  }
+}

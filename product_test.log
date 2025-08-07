@@ -1,0 +1,30 @@
+
+============================================================
+Testing: General product inquiry
+Query: 你们有什么保健品推荐吗？
+============================================================
+Status: 200
+Response:
+很抱歉，我们目前暂时没有符合条件的保健品产品推荐。建议您访问我们的健康商城查看更多选择。您可以通过这个链接访问：[健康商城](#小程序://诺亚新舟医疗/t5ZpOWu0UyRtEFl)。
+
+✅ SUCCESS: Product information found in response
+
+============================================================
+Testing: Vitamin recommendation
+Query: 我想买维生素D，有什么推荐？
+============================================================
+Status: 200
+Response:
+很抱歉，我们目前暂时没有找到符合条件的vitamin D产品，建议您访问我们的健康商城查看更多选择。您可以通过这个链接访问：[健康商城](#小程序://诺亚新舟医疗/t5ZpOWu0UyRtEFl)。
+
+✅ SUCCESS: Product information found in response
+
+============================================================
+Testing: Price range filter
+Query: 有500元以下的保健品吗？
+============================================================
+Status: 200
+Response:
+很抱歉，我们目前暂时没有找到符合条件的保健品产品，建议您访问我们的健康商城查看更多选择。您可以通过这个链接访问：[健康商城](#小程序://诺亚新舟医疗/t5ZpOWu0UyRtEFl)。
+
+✅ SUCCESS: Product information found in response

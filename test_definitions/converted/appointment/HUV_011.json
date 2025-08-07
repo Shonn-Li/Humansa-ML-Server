@@ -1,0 +1,85 @@
+{
+  "id": "HUV_011",
+  "name": "Book Appointment",
+  "suite": "appointment",
+  "type": "single",
+  "priority": 5,
+  "tags": ["appointment", "booking", "orthopedics", "chinese"],
+  "config": {
+    "timeout": 45,
+    "retries": 0,
+    "parallel_safe": true,
+    "requirements": ["humansa_v2", "pattern2", "appointment_system"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_011",
+      "profile": {}
+    },
+    "previous_turns": [],
+    "environment": {
+      "HUMANSA_USE_PATTERN2": "true"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "我想预约明天上午的骨科",
+      "user_id": "test_user_011",
+      "metadata": {
+        "test_id": "HUV_011",
+        "test_name": "Book Appointment",
+        "orchestrator": "pattern2"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["预约", "骨科", "明天"],
+      "min_length": 80
+    },
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": ["appointment", "booking", "schedule"],
+      "tool_calls": ["search_doctors", "check_availability", "create_appointment"]
+    },
+    "agents": {
+      "touched": ["FunctionAgent", "AppointmentAgent"],
+      "max_agents": 4
+    },
+    "context": {
+      "mem0": {
+        "should_store": ["appointment request", "department preference", "time preference"],
+        "memory_count": 2
+      },
+      "workflow": {
+        "state_changes": {
+          "appointment_status": "pending"
+        },
+        "events_emitted": ["appointment_requested"]
+      }
+    },
+    "server_logs": {
+      "contains": ["Pattern 2", "appointment", "booking"],
+      "excludes": ["ERROR", "exception"],
+      "log_levels": {
+        "ERROR": "=0"
+      }
+    },
+    "performance": {
+      "response_time_max": 45,
+      "token_usage_max": 1500,
+      "database_queries_max": 5
+    }
+  },
+  "cleanup": {
+    "commands": [],
+    "reset_context": false
+  }
+}

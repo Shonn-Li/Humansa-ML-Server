@@ -1,0 +1,36 @@
+{
+  "id": "SIM_005",
+  "name": "Simple Test Case 5",
+  "suite": "integration",
+  "type": "single",
+  "priority": 1,
+  "tags": ["simple", "test5"],
+  
+  "config": {
+    "timeout": 30,
+    "retries": 1,
+    "parallel_safe": true
+  },
+  
+  "execution": {
+    "endpoint": "/v1/chat/completions",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4.1",
+      "messages": [{"role": "user", "content": "This is test number 5. Please respond with 'Test 5 acknowledged'."}],
+      "user_id": 1000005,
+      "max_tokens": 50
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["Test", "5", "acknowledged"],
+      "min_length": 10
+    }
+  }
+}

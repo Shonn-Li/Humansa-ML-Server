@@ -76,7 +76,7 @@ class EmbeddingProviderSelector:
             logger.error(
                 f"❌ Azure AI Inference embedding initialization failed: {e}")
 
-        # OpenAI (Fallback Provider)
+        # OpenAI (Temporarily enabled for testing)
         try:
             from .openai_embeddings import OpenAIEmbeddingClient
 
@@ -95,7 +95,7 @@ class EmbeddingProviderSelector:
                     is_available=True
                 )
                 logger.info(
-                    "✅ OpenAI embedding provider initialized (FALLBACK)")
+                    "✅ OpenAI embedding provider initialized (TEMPORARY FOR TESTING)")
             else:
                 logger.info(
                     "ℹ️ OpenAI embedding not configured (missing API key)")
@@ -154,7 +154,7 @@ class EmbeddingProviderSelector:
         provider_mapping = {
             "azure_inference": EmbeddingProvider.AZURE_INFERENCE,
             "azure": EmbeddingProvider.AZURE_INFERENCE,
-            "openai": EmbeddingProvider.OPENAI,
+            "openai": EmbeddingProvider.OPENAI,  # Temporarily enabled for testing
         }
         return provider_mapping.get(provider_name.lower())
 

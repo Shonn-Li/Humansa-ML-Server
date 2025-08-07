@@ -1,0 +1,78 @@
+{
+  "id": "HUV_006",
+  "name": "Find Cardiologist",
+  "suite": "appointment",
+  "type": "single",
+  "priority": 4,
+  "tags": ["doctor_search", "cardiology", "specialist", "chinese"],
+  "config": {
+    "timeout": 30,
+    "retries": 0,
+    "parallel_safe": true,
+    "requirements": ["humansa_v2", "pattern2", "doctor_database"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_006",
+      "profile": {}
+    },
+    "previous_turns": [],
+    "environment": {
+      "HUMANSA_USE_PATTERN2": "true"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "我想找一个心脏科医生",
+      "user_id": "test_user_006",
+      "metadata": {
+        "test_id": "HUV_006",
+        "test_name": "Find Cardiologist",
+        "orchestrator": "pattern2"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["心", "科", "医生"],
+      "min_length": 100
+    },
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": ["doctor_search", "cardiology", "specialist"],
+      "tool_calls": ["search_doctors", "filter_by_specialty"]
+    },
+    "agents": {
+      "touched": ["FunctionAgent", "DoctorSearchAgent"],
+      "max_agents": 4
+    },
+    "context": {
+      "mem0": {
+        "should_store": ["doctor search", "cardiology specialty", "medical need"],
+        "memory_count": 2
+      }
+    },
+    "server_logs": {
+      "contains": ["Pattern 2", "doctor search", "cardiology"],
+      "excludes": ["ERROR", "exception"],
+      "log_levels": {
+        "ERROR": "=0"
+      }
+    },
+    "performance": {
+      "response_time_max": 30,
+      "token_usage_max": 1200
+    }
+  },
+  "cleanup": {
+    "commands": [],
+    "reset_context": false
+  }
+}

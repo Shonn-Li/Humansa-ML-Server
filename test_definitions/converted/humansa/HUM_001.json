@@ -1,0 +1,40 @@
+{
+  "id": "HUM_001",
+  "name": "Simple Math Query Test",
+  "suite": "appointment",
+  "type": "single",
+  "priority": 2,
+  "tags": ["humansa", "basic", "math", "no-tools"],
+  "config": {
+    "timeout": 30,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["multi_agent_endpoint_v2"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "10001"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/multi-agent/chat",
+    "method": "POST",
+    "payload": {
+      "model": "gpt-4.1-nano",
+      "messages": [{"role": "user", "content": "What is 2+2?"}],
+      "stream": true,
+      "user_id": 10001
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["4", "four"]
+    },
+    "agents": {
+      "not_touched": ["context_search", "file_search", "web_search", "code_interpreter"],
+      "max_agents": 1
+    },
+    "custom_validators": ["validate_no_tools_used", "validate_response_not_empty"]
+  }
+}

@@ -1,0 +1,31 @@
+category: integration
+expectations:
+  agents_touched:
+  - FormRetriever
+  emergency_flags: []
+  follow_up_actions: []
+  forbidden_patterns: []
+  keywords:
+  - 周医生
+  - 后天
+  - 吴九
+  max_response_length: 5000
+  min_response_length: 50
+  required_tools:
+  - get_form_status
+  response_time_max: 30.0
+  thinking_flow_keywords: []
+id: apt_010_form_persistence
+metadata:
+  expect_form_retrieval: true
+  test_persistence: true
+name: Form persists across API calls
+previous_turns:
+- content: 预约周医生后天检查，我叫吴九，电话13300133000
+  role: user
+- content: '预约信息已记录，表单ID: FORM-123...'
+  role: assistant
+priority: 1
+query: 查看我的预约表单
+tags: []
+user_context: {}

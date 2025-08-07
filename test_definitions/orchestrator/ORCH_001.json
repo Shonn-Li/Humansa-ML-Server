@@ -1,0 +1,69 @@
+{
+  "id": "ORC_001",
+  "name": "Workflow API Integration - Streaming Mode",
+  "suite": "orchestrator",
+  "type": "single",
+  "priority": 3,
+  "tags": ["workflow", "streaming", "integration", "reasoning"],
+  "config": {
+    "timeout": 60,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["server_running", "workflow_orchestrator_enabled"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_workflow",
+      "profile": {}
+    },
+    "environment": {
+      "use_workflow": "true"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/chat",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "user_id": "test_user_workflow",
+      "messages": [
+        {"role": "user", "content": "我想买一些维生素C，有什么推荐吗？"}
+      ],
+      "stream": true,
+      "debug": true,
+      "use_workflow": true
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "min_length": 100
+    },
+    "reasoning": {
+      "steps_min": 1,
+      "contains_keywords": ["维生素C", "推荐"],
+      "tool_calls": ["product_search", "recommendation"]
+    },
+    "agents": {
+      "touched": ["ProductAgent"],
+      "max_agents": 3
+    },
+    "context": {
+      "workflow": {
+        "events_emitted": ["response.created", "response.reasoning_text.delta", "response.output_item.added", "response.output_text.delta", "response.usage", "response.completed"]
+      }
+    },
+    "server_logs": {
+      "contains": ["WorkflowOrchestrator", "reasoning events"],
+      "excludes": ["ERROR", "CRITICAL"]
+    },
+    "performance": {
+      "response_time_max": 30.0
+    }
+  },
+  "cleanup": {
+    "reset_context": true
+  }
+}

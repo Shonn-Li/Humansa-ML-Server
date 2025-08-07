@@ -1,0 +1,68 @@
+{
+  "id": "ORC_006",
+  "name": "Pattern2 Orchestrator - Non-Streaming Mode",
+  "suite": "orchestrator",
+  "type": "single",
+  "priority": 3,
+  "tags": ["pattern2", "non_streaming", "immune_system"],
+  "config": {
+    "timeout": 45,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["azure_openai", "pattern2_orchestrator"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_004",
+      "profile": {}
+    },
+    "environment": {
+      "AZURE_OPENAI_DEPLOYMENT_NAME": "gpt-4",
+      "debug": "false"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/pattern2/process",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "query": "推荐一些增强免疫力的产品",
+      "user_id": "test_user_004",
+      "stream": false
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["免疫力", "产品", "推荐"],
+      "min_length": 100
+    },
+    "reasoning": {
+      "contains_keywords": ["免疫力", "产品"],
+      "tool_calls": ["ProductAgent.search"]
+    },
+    "agents": {
+      "touched": ["ProductAgent"],
+      "max_agents": 2
+    },
+    "context": {
+      "workflow": {
+        "final_state": {
+          "product_category": "immune_support"
+        }
+      }
+    },
+    "server_logs": {
+      "contains": ["Pattern 2", "non-streaming"],
+      "excludes": ["ERROR", "CRITICAL"]
+    },
+    "performance": {
+      "response_time_max": 25.0
+    }
+  },
+  "cleanup": {
+    "reset_context": true
+  }
+}

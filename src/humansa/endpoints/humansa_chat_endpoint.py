@@ -92,11 +92,31 @@ class HumansaChatEndpoint:
         # Initialize AGENTIC tool manager
         self.tool_manager = HumansaAgenticToolManager(db_config)
 
-        # Initialize AGENTIC agent
+        # Initialize memory manager (Mem0 if available)
+        self.memory_manager = None
+        try:
+            # Try to use Mem0 if available
+            from humansa.memory.mem0_manager import Mem0Manager
+            from humansa.v2.memory.mem0_integration import Mem0MemoryManagerAdapter
+            
+            mem0 = Mem0Manager.get_instance()
+            if mem0.initialized:
+                # Create a mock db_pool for compatibility
+                class MockDBPool:
+                    pass
+                self.memory_manager = Mem0MemoryManagerAdapter(MockDBPool(), mem0)
+                logger.info("✅ Mem0 memory manager initialized for V1")
+            else:
+                logger.info("ℹ️ Mem0 not available, continuing without memory")
+        except Exception as e:
+            logger.warning(f"Failed to initialize memory manager: {e}")
+
+        # Initialize AGENTIC agent with memory support
         self.agent = HumansaAgenticAgent(
             llm=self.tool_manager.llm,
             tools=self.tool_manager.get_llamaindex_tools(),
-            callback_manager=self.tool_manager.callback_manager
+            callback_manager=self.tool_manager.callback_manager,
+            memory_manager=self.memory_manager
         )
 
         logger.info("🤖 HumansaChatEndpoint initialized - FULLY AGENTIC")
@@ -375,29 +395,24 @@ class HumansaChatEndpoint:
         return enhanced_context
 
     async def _build_humansa_system_prompt(self, query: str, conversation_history: List[Dict] = None) -> str:
-        """使用智能LLM选择器分析查询并动态构建系统提示。"""
+        """Use streamlined v2 system prompt without tables."""
         try:
             logger.info(
-                f"🧠 Analyzing query for intelligent prompt selection: {query[:100]}...")
+                f"🧠 Building Humansa v2 system prompt for query: {query[:100]}...")
 
-            # Use intelligent prompt selector to select the best prompt template
-            prompt_decision = await intelligent_prompt_selector.select_prompt_template(
-                query, conversation_history
-            )
-
-            # Build prompt using selected template
-            system_prompt = build_intelligent_system_prompt(
-                prompt_decision.selected_prompt)
+            # Use v2 system prompt without tables
+            from ..prompts.humansa_system_prompt_v2 import get_humansa_system_prompt_v2
+            current_date = datetime.now().strftime('%Y-%m-%d')
+            system_prompt = get_humansa_system_prompt_v2(current_date)
 
             logger.info(
-                f"🎯 Built intelligent system prompt with template: {prompt_decision.selected_prompt}")
-            logger.info(f"🧠 Selection reasoning: {prompt_decision.reasoning}")
+                f"🎯 Built Humansa v2 system prompt")
             logger.info(f"📝 System prompt length: {len(system_prompt)} chars")
 
             return system_prompt
 
         except Exception as e:
-            logger.error(f"❌ Intelligent prompt selection failed: {e}")
+            logger.error(f"❌ V2 system prompt generation failed: {e}")
             # Fallback to full prompt
             from ..prompts.appointment_booking_prompt import get_full_humansa_system_prompt
             logger.warning("⚠️ Using fallback full system prompt")

@@ -1,0 +1,47 @@
+{
+  "id": "STR_010",
+  "name": "Basic Streaming Response Functionality Test",
+  "suite": "streaming",
+  "type": "single",
+  "priority": 4,
+  "tags": ["streaming", "basic", "functionality", "medical"],
+  "config": {
+    "timeout": 45,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["streaming_api", "responses_api"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_stream_010"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "请详细介绍中医的基本理论",
+      "user_id": "test_user_stream_010",
+      "stream": true,
+      "metadata": {
+        "test_id": "STREAM_010",
+        "test_name": "basic_streaming"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["中医", "理论"],
+      "min_length": 100
+    },
+    "reasoning": {
+      "contains_keywords": ["streaming", "chunks"]
+    },
+    "performance": {
+      "response_time_max": 45
+    },
+    "custom_validators": ["validate_streaming_chunks"]
+  }
+}

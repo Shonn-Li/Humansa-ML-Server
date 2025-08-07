@@ -1,0 +1,149 @@
+{
+  "timestamp": "2025-08-02T13:55:02.715993",
+  "summary": {
+    "total": 23,
+    "passed": 10,
+    "failed": 13,
+    "success_rate": 0.43478260869565216
+  },
+  "results": [
+    {
+      "test": "Test 1: Simple complete request",
+      "passed": false,
+      "details": "Form ID: 9a5b2d19-8fc5-476d-a267-7cf80804d88a, Has preview: True, Has confirmation: False",
+      "timestamp": "2025-08-02T13:53:01.348960"
+    },
+    {
+      "test": "Test 1: Simple complete request",
+      "passed": true,
+      "details": "Form ID: b9b487ef-6d5d-4d4d-a870-77194d52e830, Has preview: True, Has confirmation: True",
+      "timestamp": "2025-08-02T13:53:04.155358"
+    },
+    {
+      "test": "Test 2: Confirm appointment",
+      "passed": false,
+      "details": "No confirmation code found",
+      "timestamp": "2025-08-02T13:53:05.308042"
+    },
+    {
+      "test": "Test 3: Multi-turn missing doctor",
+      "passed": false,
+      "details": "Didn't ask for doctor selection",
+      "timestamp": "2025-08-02T13:53:07.243933"
+    },
+    {
+      "test": "Test 4: Progressive collection",
+      "passed": false,
+      "details": "Form created: True, All info captured: False",
+      "timestamp": "2025-08-02T13:53:33.501435"
+    },
+    {
+      "test": "Test 5: Modify appointment",
+      "passed": false,
+      "details": "Updated to tomorrow morning: False",
+      "timestamp": "2025-08-02T13:53:39.443616"
+    },
+    {
+      "test": "Test 6: Cancel appointment",
+      "passed": false,
+      "details": "Appointment cancelled successfully",
+      "timestamp": "2025-08-02T13:53:44.432887"
+    },
+    {
+      "test": "Test 7: Symptom-based suggestion",
+      "passed": false,
+      "details": "Suggested dermatology: False",
+      "timestamp": "2025-08-02T13:53:47.286123"
+    },
+    {
+      "test": "Test 8: Urgent symptom handling",
+      "passed": true,
+      "details": "Recognized urgency: True",
+      "timestamp": "2025-08-02T13:53:51.157386"
+    },
+    {
+      "test": "Test 9: Time slot variations",
+      "passed": true,
+      "details": "Parsed 5/5 time expressions correctly",
+      "timestamp": "2025-08-02T13:54:01.262648"
+    },
+    {
+      "test": "Test 10: Incomplete then abandon",
+      "passed": false,
+      "details": "System asks for information",
+      "timestamp": "2025-08-02T13:54:02.703830"
+    },
+    {
+      "test": "Test 11: Multiple symptoms",
+      "passed": true,
+      "details": "Captured all symptoms: True",
+      "timestamp": "2025-08-02T13:54:04.831232"
+    },
+    {
+      "test": "Test 12: Doctor not found",
+      "passed": false,
+      "details": "System handles invalid doctor name",
+      "timestamp": "2025-08-02T13:54:06.476428"
+    },
+    {
+      "test": "Test 13: Past date validation",
+      "passed": true,
+      "details": "System rejects past dates",
+      "timestamp": "2025-08-02T13:54:08.479539"
+    },
+    {
+      "test": "Test 14: Form persistence",
+      "passed": false,
+      "details": "Form persisted and updated: False",
+      "timestamp": "2025-08-02T13:54:20.514790"
+    },
+    {
+      "test": "Test 15: Chinese number parsing",
+      "passed": true,
+      "details": "Parsed Chinese time: True",
+      "timestamp": "2025-08-02T13:54:22.087733"
+    },
+    {
+      "test": "Test 16: Department booking",
+      "passed": true,
+      "details": "Handles department-based booking",
+      "timestamp": "2025-08-02T13:54:24.228205"
+    },
+    {
+      "test": "Test 17: Incomplete form validation",
+      "passed": false,
+      "details": "System prevents incomplete submission",
+      "timestamp": "2025-08-02T13:54:26.807792"
+    },
+    {
+      "test": "Test 18: Natural conversation",
+      "passed": false,
+      "details": "Natural flow worked: False",
+      "timestamp": "2025-08-02T13:54:47.255800"
+    },
+    {
+      "test": "Test 19: Multiple forms",
+      "passed": "63cf522b-79f3-4054-a0fe-4a262ebbf697",
+      "details": "Created 2 different forms: 63cf522b-79f3-4054-a0fe-4a262ebbf697",
+      "timestamp": "2025-08-02T13:54:52.499862"
+    },
+    {
+      "test": "Test 20: Empty confirm",
+      "passed": true,
+      "details": "Handles confirm without context",
+      "timestamp": "2025-08-02T13:54:54.597689"
+    },
+    {
+      "test": "Test 21: Tool usage tracking",
+      "passed": false,
+      "details": "Appointment tool called: False",
+      "timestamp": "2025-08-02T13:54:59.379699"
+    },
+    {
+      "test": "Test 22: Metadata includes form",
+      "passed": true,
+      "details": "Form in metadata: True, Form found: True",
+      "timestamp": "2025-08-02T13:55:02.714639"
+    }
+  ]
+}

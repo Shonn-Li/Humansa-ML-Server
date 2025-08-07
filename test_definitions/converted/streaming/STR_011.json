@@ -1,0 +1,48 @@
+{
+  "id": "STR_011",
+  "name": "Streaming With Reasoning Steps Test",
+  "suite": "streaming",
+  "type": "single",
+  "priority": 5,
+  "tags": ["streaming", "reasoning", "medical", "analysis"],
+  "config": {
+    "timeout": 60,
+    "retries": 1,
+    "parallel_safe": true,
+    "requirements": ["streaming_api", "reasoning_engine"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_stream_011"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "我头痛，请帮我分析可能的原因并推荐医生",
+      "user_id": "test_user_stream_011",
+      "stream": true,
+      "metadata": {
+        "test_id": "STREAM_011",
+        "test_name": "streaming_with_reasoning"
+      }
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["头痛", "原因", "医生", "推荐"]
+    },
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": ["reasoning", "analysis", "medical"]
+    },
+    "agents": {
+      "touched": ["GeneralMedicalAgent"],
+      "max_agents": 2
+    },
+    "custom_validators": ["validate_reasoning_chunks", "validate_output_chunks"]
+  }
+}

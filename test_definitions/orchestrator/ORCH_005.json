@@ -1,0 +1,71 @@
+{
+  "id": "ORC_005",
+  "name": "Pattern2 Orchestrator - Complex Multi-Agent Query",
+  "suite": "orchestrator",
+  "type": "single",
+  "priority": 4,
+  "tags": ["pattern2", "multi_agent", "medical_urgency", "product_recommendation"],
+  "config": {
+    "timeout": 90,
+    "retries": 1,
+    "parallel_safe": false,
+    "requirements": ["azure_openai", "pattern2_orchestrator"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_003",
+      "profile": {}
+    },
+    "environment": {
+      "AZURE_OPENAI_DEPLOYMENT_NAME": "gpt-4",
+      "debug": "true"
+    }
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/pattern2/process",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "query": "我头痛已经一周了，需要看医生吗？同时想买一些缓解头痛的保健品",
+      "user_id": "test_user_003",
+      "stream": true
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["头痛", "医生", "保健品", "建议"],
+      "min_length": 150
+    },
+    "reasoning": {
+      "steps_min": 3,
+      "contains_keywords": ["头痛", "一周", "医生", "保健品"],
+      "tool_calls": ["GeneralMedicalAgent.assess", "ProductAgent.recommend"]
+    },
+    "agents": {
+      "touched": ["GeneralMedicalAgent", "ProductAgent"],
+      "max_agents": 3
+    },
+    "context": {
+      "workflow": {
+        "state_changes": {
+          "medical_assessment": "completed",
+          "product_recommendations": "generated"
+        },
+        "events_emitted": ["response.reasoning", "response.usage", "response.output_item.added"]
+      }
+    },
+    "server_logs": {
+      "contains": ["multi-agent coordination", "reasoning chain", "workflow state"],
+      "excludes": ["ERROR", "CRITICAL"]
+    },
+    "performance": {
+      "response_time_max": 60.0
+    }
+  },
+  "cleanup": {
+    "reset_context": true
+  }
+}

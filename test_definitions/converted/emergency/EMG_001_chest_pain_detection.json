@@ -1,0 +1,120 @@
+{
+  "id": "EMG_001",
+  "name": "Chest pain emergency detection test",
+  "suite": "emergency",
+  "type": "single",
+  "priority": 5,
+  "tags": ["emergency", "chest_pain", "cardiac_emergency"],
+  
+  "config": {
+    "timeout": 15,
+    "retries": 2,
+    "parallel_safe": true,
+    "requirements": ["emergency_detection", "cardiac_protocols"]
+  },
+  
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_emg_001",
+      "profile": {
+        "name": "急诊患者",
+        "age": 55,
+        "gender": "male",
+        "language": "zh"
+      }
+    }
+  },
+  
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "我胸口剧烈疼痛，痛到左臂，大汗淋漓，感觉要晕倒了",
+      "user_id": "test_user_emg_001",
+      "metadata": {
+        "test_id": "EMG_001",
+        "test_name": "Chest pain emergency detection test"
+      }
+    }
+  },
+  
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": [
+        "紧急",
+        "急诊",
+        "120",
+        "立即",
+        "医院"
+      ],
+      "output_excludes": [
+        "不用担心",
+        "休息一下",
+        "明天看医生"
+      ],
+      "min_length": 80,
+      "max_length": 800
+    },
+    
+    "reasoning": {
+      "steps_min": 1,
+      "contains_keywords": [
+        "cardiac_emergency",
+        "myocardial_infarction",
+        "immediate_care",
+        "emergency_response"
+      ],
+      "tool_calls": [
+        "emergency_detection",
+        "cardiac_protocol"
+      ]
+    },
+    
+    "agents": {
+      "touched": ["emergency_agent"],
+      "max_agents": 2
+    },
+    
+    "context": {
+      "mem0": {
+        "should_store": [
+          "cardiac_emergency",
+          "immediate_medical_attention",
+          "emergency_symptoms"
+        ]
+      }
+    },
+    
+    "server_logs": {
+      "contains": [
+        "EMERGENCY DETECTED",
+        "Cardiac symptoms",
+        "Immediate response protocol"
+      ],
+      "excludes": [
+        "ERROR",
+        "CRITICAL",
+        "Non-emergency response"
+      ],
+      "log_levels": {
+        "ERROR": "=0",
+        "WARNING": "<=0"
+      }
+    },
+    
+    "performance": {
+      "response_time_max": 5.0,
+      "memory_usage_max": "40MB",
+      "token_usage_max": 300
+    }
+  },
+  
+  "cleanup": {
+    "reset_context": true
+  }
+}

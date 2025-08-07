@@ -1,0 +1,81 @@
+{
+  "id": "APF_002",
+  "name": "Confirm Appointment",
+  "suite": "appointment",
+  "type": "multi_turn",
+  "priority": 5,
+  "tags": ["appointment", "form", "confirmation", "multi_turn", "chinese"],
+  "config": {
+    "timeout": 60,
+    "retries": 0,
+    "parallel_safe": false,
+    "requirements": ["appointment_form_system", "humansa_v2", "conversation_context"]
+  },
+  "setup": {
+    "user_context": {
+      "user_id": "test_user_apf_002",
+      "profile": {}
+    },
+    "previous_turns": [
+      {
+        "role": "user",
+        "content": "我想预约李明医生明天上午9点看头痛，我叫张三，电话13800138000"
+      }
+    ],
+    "environment": {}
+  },
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "method": "POST",
+    "headers": {
+      "Authorization": "Bearer test-api-key",
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "model": "gpt-4.1",
+      "input": "确认",
+      "user_id": "test_user_apf_002",
+      "previous_response_id": "{{previous_response_id}}"
+    }
+  },
+  "expectations": {
+    "response": {
+      "status_code": 200,
+      "output_contains": ["成功"],
+      "output_regex": ["APT-\\d+"],
+      "min_length": 50
+    },
+    "reasoning": {
+      "steps_min": 2,
+      "contains_keywords": ["confirmation", "appointment", "success"],
+      "tool_calls": ["confirm_appointment", "generate_confirmation_code"]
+    },
+    "agents": {
+      "touched": ["FormAgent", "AppointmentAgent"],
+      "max_agents": 4
+    },
+    "context": {
+      "workflow": {
+        "state_changes": {
+          "appointment_status": "confirmed"
+        },
+        "events_emitted": ["appointment_confirmed", "confirmation_code_generated"]
+      }
+    },
+    "server_logs": {
+      "contains": ["appointment confirmed", "confirmation code"],
+      "excludes": ["ERROR", "exception"],
+      "log_levels": {
+        "ERROR": "=0"
+      }
+    },
+    "performance": {
+      "response_time_max": 30,
+      "token_usage_max": 1200
+    }
+  },
+  "cleanup": {
+    "commands": [],
+    "reset_context": true
+  }
+}
