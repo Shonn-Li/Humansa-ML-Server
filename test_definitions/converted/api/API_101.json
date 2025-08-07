@@ -1,7 +1,7 @@
 {
   "id": "API_101",
   "name": "Linear Medical Consultation Response Creation Test",
-  "suite": "api",
+  "suite": "integration",
   "type": "single",
   "priority": 4,
   "tags": ["api", "responses", "medical", "consultation", "linear"],

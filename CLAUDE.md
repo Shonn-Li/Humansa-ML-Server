@@ -1,229 +1,912 @@
-# CLAUDE.md
+# CLAUDE.md - YouWoAI ML Server
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides comprehensive guidance to Claude Code (claude.ai/code) when working with the YouWoAI ML Server codebase.
 
-## 🚨 CRITICAL MODEL REQUIREMENTS 🚨
+## Project Overview
 
-**DEFAULT MODEL MUST ALWAYS BE gpt-4.1**
+YouWoAI ML Server is the AI backbone of the YouWoAI platform, providing:
+- **Multi-Agent AI System**: Autonomous agents for different tasks (routing, RAG, web search, citations)
+- **Chat Completions**: OpenAI-compatible API with streaming support
+- **Embeddings System**: Note and conversation embeddings with pgvector
+- **Humansa AI-Agent**: Tool-calling AI agent system for specialized tasks
+- **Document Processing**: File analysis and conversion capabilities
 
-- ❌ NEVER use `gpt-4-turbo`, `gpt-4o`, `gpt-4-turbo-preview`, or any other model
-- ✅ ALWAYS use `gpt-4.1` as the default model in ALL contexts:
-  - Test configurations
-  - API requests
-  - Default parameters
-  - Test case definitions
-  - Fallback values
-- This is MANDATORY for proper Azure OpenAI inference integration
-- NO EXCEPTIONS to this rule
+## Key Points Summary
 
-## Development Commands
+1. **Two Main Endpoints with Different Formats**:
+   - `/v1/chat/completions` - Uses OpenAI Chat Completion API format (simple text responses)
+   - `/v1/multi-agent/response` - Uses OpenAI Response API format (structured output items)
+   - Multi-agent is the upgraded version with reasoning traces, web search results, and function calls
+
+2. **Test Environment**:
+   - Test Server: Port **5002** (NOT 5001 or 5200)
+   - Test Database: Port **5454** with database `youwoai_test`
+   - Complete isolated environment with pre-seeded test data
+
+3. **Agent Architecture**:
+   - All agents inherit from `BaseAgent` and are modular
+   - Agents share infrastructure modules but operate independently
+   - Router agent decides which agents to activate based on query analysis
+
+4. **Critical Practices**:
+   - ALWAYS activate virtual environment before any Python work
+   - ALWAYS update requirements.txt after pip install
+   - ALWAYS use port 5002 for testing
+
+## Architecture Overview
+
+The ML Server uses a modular architecture with two main systems:
+
+### 1. Main YouWoAI System (`src/chat/`)
+- **Multi-agent workflow** with specialized agents
+- **RAG (Retrieval-Augmented Generation)** with citations
+- **Embedding management** for notes and conversations
+- **Web search integration**
+- **Streaming response generation**
+
+### 2. Humansa AI-Agent System (`src/humansa/`)
+- **Tool-calling agents** for healthcare/appointment scenarios
+- **OpenAI function calling** integration
+- **Separate database schema** for Humansa-specific data
+
+## API Format Differences
+
+### 1. Chat Completions (`/v1/chat/completions`)
+- Uses **OpenAI Chat Completion API format**
+- Standard request/response structure
+- Supports streaming with SSE (Server-Sent Events)
+- Simple text-based responses with citations
+
+### 2. Multi-Agent Response (`/v1/multi-agent/response`)
+- Uses **OpenAI Response API format** with output items
+- Enhanced structured output with multiple item types
+- Supports reasoning traces, web search results, function calls
+- **Upgraded version** of chat completions with more capabilities
+- Each output item follows the envelope pattern: `added` → `streaming` → `done`
+
+## Critical Development Practices
+
+### 1. Virtual Environment (MANDATORY)
+
+**ALWAYS activate the virtual environment before ANY Python work:**
 
 ```bash
-# Activate virtual environment
+source youwo-ml-venv/bin/activate  # On Windows: youwo-ml-venv\Scripts\activate
+which python  # Verify activation - should show path inside youwo-ml-venv
+```
+
+**WARNING**: Running without venv will use system Python and cause import errors!
+
+### 2. Package Management (CRITICAL)
+
+When installing new packages:
+
+```bash
+# 1. ALWAYS activate venv first
 source youwo-ml-venv/bin/activate
 
-# Start the server
-python -m src.main
+# 2. Install package
+pip install <package>
 
-# Format code
-make format  # Uses black and isort
+# 3. IMMEDIATELY update requirements.txt
+pip freeze > requirements.txt
 
-# Run tests
-python test_enhanced_api.py
-python test_startup.py
-python test_doctor_tools.py  # For Humansa agent testing
-
-# Docker operations
-./cleanup-docker.sh  # Clean up Docker resources
-docker-compose -f docker-compose.local.yml up  # Local development
-
-# TEST ENVIRONMENT (CRITICAL - READ CAREFULLY!)
-#
-# ⚠️ UNIFIED TEST ENVIRONMENT - ACTUAL CONFIGURATION ⚠️
-# The ACTUAL running test environment (verified on 2025-08-01):
-#    - Container Name: youwoai_test_db (NOT humansa_test_postgres)
-#    - ML Server: Port 6001 (test instance) - ALL TESTS MUST RUN ON THIS PORT!
-#    - PostgreSQL: Port 5454 (Docker container)
-#    - Database: test4 (primary), youwoai_test (also available)
-#    - Password: 12931 (NOT 031203 from docker-compose.yml!)
-#    - User: postgres
-#
-# 🚨 IMPORTANT: NEVER run tests on port 5001 (production/dev server)!
-# All test scripts MUST use port 6001 for the test environment.
-#
-# 🚨 LAUNCHING TEST ENVIRONMENT:
-# The test server MUST be launched using test environment scripts, NOT main.py directly!
-# Use: ./run_HUMANSA_test_environment_v2_enhanced.sh
-# This script properly sets up:
-#   - Environment variables (ENVIRONMENT=test, ML_SERVER_PORT=6001)
-#   - Database connection to test database
-#   - Correct server startup with --port 6001 argument
-#
-# DO NOT use: python -m src.main (this will use port 5001)
-# DO use: python3 -m src.main --port 6001 (with proper env vars)
-#
-# 🚨 IMPORTANT DISCREPANCIES:
-# - docker-compose.yml shows password "031203" but actual is "12931"
-# - Some scripts expect port 5456 but actual is 5454
-# - Configuration is defined in: test_environment/unified_test_config.py
-#
-# To verify test database:
-# PGPASSWORD=12931 psql -h localhost -p 5454 -U postgres -d test4 -c "SELECT 1;"
-#
-# To check running container:
-# docker ps | grep youwoai_test_db
-#
-# Run tests with:
-# DIGIT=2 ./run_final_tests.sh  # Uses correct configuration (DIGIT=2 for new branch)
-
-# HUMANSA V2 Testing with Enhanced Logging
-./run_HUMANSA_test_environment_v2_enhanced.sh  # Run V2 tests with full process visibility
-./run_HUMANSA_v2_test_40_cases_enhanced.sh     # Run 40 comprehensive test cases
-
-# HUMANSA V2 Workflow Orchestrator (NEW - Streaming Reasoning)
-export HUMANSA_USE_WORKFLOW_ORCHESTRATOR=true  # Enable AgentWorkflow with reasoning visibility
-python -m src.main                              # Start server with workflow orchestrator
-python test_workflow_integration.py            # Test reasoning stream integration
-
-# HUMANSA V2 Pattern 2 Orchestrator (LlamaIndex FunctionAgent Pattern)
-export HUMANSA_USE_PATTERN2=true               # Enable Pattern 2 with FunctionAgent
-export HUMANSA_ENHANCED_LOGGING=true           # Enable detailed logging
-python -m src.main                             # Start server with Pattern 2
-# Pattern 2 provides:
-# - FunctionAgent as main orchestrator
-# - Sub-agents exposed as context-aware tools
-# - Shared LlamaIndex Context across all tool calls
-# - Full reasoning chain visibility in streaming
-# - Hybrid memory: LlamaIndex Context + UnifiedContext + Mem0
-
-# Test Management Dashboard
-# Comprehensive test execution and monitoring system with PostgreSQL persistence
-cd test_dashboard && ./launch_dashboard.sh  # Launch dashboard (Backend: 6002, Frontend: 3020)
-# Frontend: http://localhost:3020
-# Backend API: http://localhost:6002
-# API Docs: http://localhost:6002/docs
-# Integration Test: cd test_dashboard && ./test_integration.sh
-# See test_dashboard/DASHBOARD_LAUNCH_SUCCESS.md for launch verification
-# NOTE: Dashboard loads 465+ tests from 87 JSON files (some files contain multiple tests)
-# To manually trigger test discovery: curl -X POST http://localhost:6002/api/tests/discover
-#
-# Database Integration (PostgreSQL):
-# - Uses test1 database on localhost:5432 with password 12931
-# - Schema: test_management (auto-created on first launch)
-# - Tables: jobs, runs, results, test_definitions, test_suites, etc.
-# - Jobs and test results are persisted across restarts
-# - Test suites can be saved and reused
-# - Real-time job execution tracking with progress updates
-#
-# Required: SQLAlchemy and asyncpg (auto-installed by launch script)
-# Database environment variables:
-#   DB_HOST=localhost DB_PORT=5432 DB_USER=postgres DB_PASSWORD=12931 DB_NAME=test1
-#
-# ⚠️ IMPORTANT: Test Dashboard Documentation
-# - Comprehensive documentation is in DOC.md
-# - DOC.md contains architecture diagrams, API endpoints, and implementation details
-# - ALWAYS update DOC.md when making changes to the test dashboard
+# 4. Commit the updated requirements.txt
+git add requirements.txt
+git commit -m "chore: add <package> to requirements"
 ```
 
-## High-Level Architecture
+**CRITICAL**: Docker builds WILL FAIL if requirements.txt is outdated!
 
-This is the YouWoAI ML Server - an async web server providing OpenAI-compatible APIs with enhanced features.
+### 3. Port Configuration (DIGIT System)
 
-### Core Components
+The ML Server uses DIGIT-based port configuration:
 
-1. **Main Entry**: `src/main.py` - Quart application on port 5001
-2. **Multi-Agent System**: Located in `src/chat/agent/`
-   - Router Agent: Determines which agents to invoke
-   - RAG Agent: Retrieval-augmented generation
-   - Web Search Agent: External information retrieval
-   - Attachment Agent: File processing
-   - Citation Agent: Source attribution
-3. **Provider Abstraction**: `src/chat/provider/` - Unified interface for multiple LLMs
-4. **Humansa Medical Agent**: `src/humansa/` - Specialized healthcare AI with tool calling
-
-### Key API Endpoints
-
-- `/v1/chat/completions` - OpenAI-compatible chat (streaming + citations)
-- `/v1/multi-agent/response` - Multi-agent workflow endpoint
-- `/v1-humansa/chat/completions` - Medical AI with tool calling
-- `/analyze_link` - YouTube/Bilibili/web content analysis
-
-### Database
-
-PostgreSQL with pgvector extension for embeddings:
-- Connection via `src/chat/postgres/`
-- Stores user notes, embeddings, conversations
-- Test environment uses port 5454
-
-### Testing
-
-Comprehensive test environment with UNIFIED configuration:
-
-**Test Database (ACTUAL)**:
-- **Container**: youwoai_test_db (running on port 5454)
-- **Password**: 12931 (NOT 031203 as docker-compose suggests!)
-- **Databases**: test4 (primary), youwoai_test (secondary)
-- **Configuration**: See `test_environment/unified_test_config.py`
-
-**Test ML Server**:
-- **Port**: 6001 (dedicated test instance)
-- **Environment**: ENVIRONMENT=test
-
-**Important Notes**:
-- The actual password differs from docker-compose.yml
-- All test scripts should use unified_test_config.py
-- User IDs must be strings (e.g., "test_user_10001")
-
-To verify test environment:
 ```bash
-# Check if test database is running
-docker ps | grep youwoai_test_db
-
-# Test database connection
-PGPASSWORD=12931 psql -h localhost -p 5454 -U postgres -d test4 -c "SELECT 1;"
-
-# Run all tests with correct configuration
-./run_final_tests.sh
+# In .env.local
+DIGIT=5
+ML_SERVER_PORT=5005  # Port 500X where X is your DIGIT
+DB_ACTIVE_DATABASE=test5  # Database testX where X is your DIGIT
 ```
 
-### Important Patterns
+**IMPORTANT - Test Environment**:
+- **Test Server Port**: 5002 (NOT 5001 or 5200)
+- **Test Database Port**: 5454 (NOT production 5432)
+- **Test Database Name**: youwoai_test
+- **Test Database Password**: 031203
 
-1. **Streaming**: All chat endpoints support SSE streaming via `src/chat/streaming/`
-2. **Error Handling**: Consistent error responses with status codes
-3. **Token Management**: Count tokens before processing (`src/chat/token/`)
-4. **Async Operations**: Everything is async using Quart's async/await
-5. **Citation System**: Automatic citation generation with position tracking
+### 4. Logging Best Practices
 
-### Humansa V2 Enhanced Logging and Streaming
+**Configure logging levels to reduce noise:**
 
-The V2 system now supports enhanced logging and true streaming to show:
-- Complete thinking process of each agent (Thought → Action → Observation → Answer)
-- Which agents are called and their execution order
-- Each agent's reasoning and tool calls
-- Mem0 integration status and loaded memory data
-- Full untruncated responses
+```python
+import logging
 
-**Streaming Format**:
-When streaming is enabled (`"stream": true`), the response includes:
-- 🤔 正在思考... (Processing indicator)
-- 💭 **思考**: (Agent's reasoning process)
-- 🔧 **行动**: (Tool/agent being called)
-- 📊 **观察结果**: (Results from tool calls)
-- ✅ **最终回答**: (Final response to user)
+# Reduce Azure SDK verbosity
+azure_loggers = [
+    'azure.core.pipeline.policies.http_logging_policy',
+    'azure.ai.inference',
+    'azure.core.pipeline',
+    'azure.identity',
+    'azure.core'
+]
+for logger_name in azure_loggers:
+    azure_logger = logging.getLogger(logger_name)
+    azure_logger.setLevel(logging.WARNING)
 
-Enable enhanced logging:
-1. **Environment Variable**: `export HUMANSA_ENHANCED_LOGGING=true`
-2. **Request Parameter**: Include `"debug": true` in API requests
-3. **Test Script**: Use `./run_humansa_test_environment_v2_enhanced.sh`
+# Your module logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+```
 
-**Important**: The streaming implementation uses LlamaIndex's native `stream_chat` method which provides the complete ReAct reasoning chain, NOT fake streaming.
+## Comprehensive Directory Structure
 
-### Environment Variables
+```
+YouWoAI-ML-Server/
+├── src/
+│   ├── main.py                    # Entry point - serves both YouWoAI and Humansa systems
+│   ├── main_production.py         # Production-specific entry point
+│   │
+│   ├── chat/                      # Main YouWoAI AI System (Multi-Agent Architecture)
+│   │   ├── agent/                 # Multi-agent implementations
+│   │   │   ├── base.py           # Abstract base class for all agents
+│   │   │   ├── router_agent.py   # Analyzes queries and routes to appropriate agents
+│   │   │   ├── context_search_agent.py  # RAG search for notes/conversations (replaces rag_agent.py)
+│   │   │   ├── websearch_agent.py       # Web search via search engines
+│   │   │   ├── attachment_agent.py      # Process file attachments (PDFs, docs, images)
+│   │   │   ├── response_agent.py        # Generate final response with citations
+│   │   │   ├── citation_agent.py        # Citation generation and formatting
+│   │   │   ├── code_interpreter_agent.py # Execute Python code
+│   │   │   ├── python_tool_agent.py     # Python-specific tools
+│   │   │   └── agentic_rag_processor.py # Advanced RAG processing
+│   │   │
+│   │   ├── attachment/            # File attachment handling
+│   │   │   ├── file_attachment_manager.py # Central attachment processor
+│   │   │   ├── url_embeddings_v2.py      # URL content embedding
+│   │   │   └── README.md
+│   │   │
+│   │   ├── citation/              # Citation system
+│   │   │   ├── citation_engine.py        # Core citation logic
+│   │   │   ├── citation_position_tracker.py # Track citation positions
+│   │   │   └── streaming_citation_engine.py # Streaming citation support
+│   │   │
+│   │   ├── config/                # Configuration
+│   │   │   └── system_prompts.py # System prompts for different models
+│   │   │
+│   │   ├── embedding/             # Embedding management system
+│   │   │   ├── embedding_manager.py      # Central embedding coordinator
+│   │   │   ├── embedding_provider_selector.py # Provider abstraction (OpenAI/Azure)
+│   │   │   ├── note_embedder.py          # Note-specific embedding logic
+│   │   │   ├── conversation_embedder.py  # Conversation embedding logic
+│   │   │   ├── text_processing.py        # Text chunking and processing
+│   │   │   ├── openai_embeddings.py      # OpenAI embedding provider
+│   │   │   ├── azure_embeddings.py       # Azure embedding provider
+│   │   │   └── admin_embedding_endpoint.py # Admin controls
+│   │   │
+│   │   ├── endpoints/             # API endpoints
+│   │   │   ├── modular_chat_endpoint.py  # /v1/chat/completions handler
+│   │   │   ├── multi_agent_endpoint_v2.py # /v1/multi-agent/response handler
+│   │   │   ├── url_embeddings_endpoint.py # URL embedding endpoints
+│   │   │   ├── admin_embedding_endpoints.py # Admin embedding controls
+│   │   │   ├── conversation_title_endpoint.py # Title generation
+│   │   │   ├── file_analyzer_endpoint.py # File analysis API
+│   │   │   └── document_converter_endpoint.py # Document conversion API
+│   │   │
+│   │   ├── postgres/              # Database operations
+│   │   │   ├── db_manager.py     # Connection pooling and management
+│   │   │   ├── embedding_operations.py   # Embedding CRUD operations
+│   │   │   ├── conversation_operations.py # Conversation CRUD
+│   │   │   └── url_embedding_operations.py # URL embedding storage
+│   │   │
+│   │   ├── prompt/                # System prompts
+│   │   │   ├── youwoai-en.md    # English system prompt
+│   │   │   └── youwoai-zh.md    # Chinese system prompt
+│   │   │
+│   │   ├── provider/              # LLM providers
+│   │   │   ├── llm_provider.py   # Provider selection and management
+│   │   │   ├── o3_model_wrapper.py # O3 model integration
+│   │   │   ├── o3_direct_client.py # Direct O3 API client
+│   │   │   └── README.md
+│   │   │
+│   │   ├── query/                 # Query processing
+│   │   │   ├── query_transformer.py     # Query enhancement
+│   │   │   └── query_transformer_new.py # Enhanced query transformer
+│   │   │
+│   │   ├── rag/                   # RAG (Retrieval-Augmented Generation)
+│   │   │   └── rag_processor.py  # Core RAG processing logic
+│   │   │
+│   │   ├── router/                # Intelligent routing
+│   │   │   ├── intelligent_router.py    # Main router logic
+│   │   │   ├── intelligent_router_retriever.py
+│   │   │   └── intelligent_router_retriever_fixed.py
+│   │   │
+│   │   ├── search/                # Search functionality
+│   │   │   └── hybrid_search.py  # Hybrid search implementation
+│   │   │
+│   │   ├── streaming/             # Streaming infrastructure
+│   │   │   ├── streaming_response_generator.py # SSE streaming
+│   │   │   └── streaming_response_generator_new.py # Enhanced streaming
+│   │   │
+│   │   ├── title/                 # Title generation
+│   │   │   ├── title_generator.py # Core title generation
+│   │   │   ├── title_endpoints.py # Title API endpoints
+│   │   │   └── conversation_title_service.py # Title service logic
+│   │   │
+│   │   ├── token/                 # Token management
+│   │   │   ├── token_counter.py  # Count tokens for different models
+│   │   │   ├── text_truncator.py # Truncate text to fit token limits
+│   │   │   └── usage_examples.py
+│   │   │
+│   │   ├── utils/                 # Utilities
+│   │   │   ├── document_converter.py # Convert documents to text
+│   │   │   ├── reasoning_handler.py  # Handle reasoning traces
+│   │   │   └── think_block_parser.py # Parse thinking blocks
+│   │   │
+│   │   └── websearch/             # Web search
+│   │       └── web_search_processor.py # Web search implementation
+│   │
+│   ├── humansa/                   # Humansa AI-Agent System
+│   │   ├── agent/
+│   │   │   └── humansa_agent.py  # Main Humansa agent logic
+│   │   ├── endpoints/
+│   │   │   ├── humansa_chat_endpoint.py # /v1-humansa/chat/completions
+│   │   │   └── o3_demo_endpoint.py      # /o3-demo endpoint
+│   │   ├── openai/                # OpenAI integration
+│   │   │   ├── openai_integration.py    # Function calling support
+│   │   │   ├── openai_response_streaming_handler.py
+│   │   │   ├── tool_converter.py
+│   │   │   └── utils.py
+│   │   ├── postgres/
+│   │   │   └── database.py       # Humansa-specific DB operations
+│   │   ├── prompts/
+│   │   │   ├── humansa_system_prompt.py
+│   │   │   ├── humansa_react_system_header.py
+│   │   │   ├── appointment_booking_prompt.py
+│   │   │   └── intelligent_prompt_selector.py
+│   │   ├── streaming/
+│   │   │   └── comprehensive_response_streaming_handler_fixed.py
+│   │   ├── tools/
+│   │   │   ├── humansa_tools.py # Tool implementations
+│   │   │   └── enhanced_web_search.py
+│   │   └── README.md
+│   │
+│   ├── file_analyzer/             # File analysis utilities
+│   │   └── file_text_extractor.py
+│   │
+│   ├── link/                      # Link analysis
+│   │   └── link_analyzer.py      # Analyze URLs and extract content
+│   │
+│   └── utils/                     # Global utilities
+│       └── azure_session_manager.py
+│
+├── test/                          # Comprehensive Test Suite
+│   ├── core/                      # Core test infrastructure
+│   │   ├── test_server.py        # Test server (runs on port 5002)
+│   │   ├── validate.py           # Quick validation tests
+│   │   └── test_comprehensive_detailed.py # Full test suite
+│   │
+│   ├── multi_agent/               # Multi-agent specific tests
+│   │   ├── test_multi_agent_comprehensive.py # 30+ test scenarios
+│   │   ├── test_multi_agent_quick.py        # Critical tests only
+│   │   └── test_multi_agent.py              # Additional tests
+│   │
+│   ├── integration/               # Integration tests
+│   │   ├── test_context_search.py
+│   │   ├── test_direct_endpoint.py
+│   │   ├── test_environment_validation.py
+│   │   └── test_environment_working.py
+│   │
+│   ├── unit/                      # Unit tests
+│   │
+│   ├── utilities/                 # Test utilities
+│   │
+│   └── README.md                  # Test documentation
+│
+├── test_environment/              # Isolated Test Environment
+│   ├── docker-compose.yml        # PostgreSQL on port 5454
+│   ├── sql/                      # Database initialization
+│   │   ├── 01_extensions.sql    # pgvector and pg_trgm
+│   │   ├── 02_create_tables.sql # All table schemas
+│   │   ├── 03_test_data.sql     # Test users, notes, folders
+│   │   ├── 04_embeddings.sql    # 190 pre-generated embeddings
+│   │   └── 05_test_conversations.sql # Test conversations
+│   ├── scripts/
+│   │   ├── setup.sh             # One-command setup
+│   │   ├── export_embeddings.py # Export embeddings from prod
+│   │   └── verify_setup.py      # Verify test environment
+│   └── README.md
+│
+├── documentation/                 # Additional Documentation
+│   ├── STREAMING_OUTPUT_FORMAT_DOCUMENTATION.md # Comprehensive streaming spec
+│   ├── TEST_ENVIRONMENT.md
+│   ├── instruction.md
+│   └── agent/
+│       ├── YouWoAI_Multi_Agent_Modular_Flow_Diagram.md
+│       └── YouWoAI_Multi_Agent_Streaming_V2_Diagram.md
+│
+├── requirements.txt              # Python dependencies (CRITICAL - keep updated!)
+├── Dockerfile                    # Production container
+├── docker-compose.local.yml      # Local development
+├── test.sh                       # Test runner script
+└── youwo-ml-venv/               # Virtual environment (DO NOT COMMIT)
+```
 
-Required:
-- `OPENAI_API_KEY`
-- Database credentials (`DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`)
+## Complete API Endpoint Documentation
 
-Optional:
-- Additional LLM provider keys (`ANTHROPIC_API_KEY`, `DEEPSEEK_API_KEY`, etc.)
-- Web search keys (`SERPER_API_KEY`, `SERPAPI_API_KEY`)
+### Health & Status Endpoints
+
+```
+GET  /health                        # ALB/Docker health check
+GET  /ping                         # Basic connectivity test
+GET  /debug/info                   # Debug information
+```
+
+### Main YouWoAI Endpoints
+
+#### 1. Chat Completions (OpenAI Chat Completion Format)
+```
+POST /v1/chat/completions
+```
+**Purpose**: Standard OpenAI-compatible chat API with RAG and citations
+**Handler**: `modular_chat_endpoint.py`
+**Features**:
+- Streaming and non-streaming responses
+- RAG integration for user context
+- Citation generation
+- File attachment support
+
+**Request Format**:
+```json
+{
+  "messages": [{"role": "user", "content": "Hello"}],
+  "model": "gpt-4.1-nano",
+  "stream": false,
+  "user_id": 10001,
+  "attachments": [],
+  "enable_citations": true,
+  "temperature": 0.7,
+  "max_tokens": 1000
+}
+```
+
+#### 2. Multi-Agent Response (OpenAI Response API Format)
+```
+POST /v1/multi-agent/response
+```
+**Purpose**: Enhanced multi-agent workflow with structured output items
+**Handler**: `multi_agent_endpoint_v2.py`
+**Features**:
+- Autonomous agent collaboration
+- Structured output items (reasoning, web search, function calls)
+- Full streaming support with SSE
+- Output item envelope pattern: `added` → `streaming` → `done`
+
+**Request Format**:
+```json
+{
+  "messages": [{"role": "user", "content": "Search the web for AI news"}],
+  "model": "gpt-4.1-nano",
+  "stream": true,
+  "user_id": 10001,
+  "enable_citations": true,
+  "attachments": []
+}
+```
+
+**Streaming Events**:
+- `response.created`
+- `response.output_item.added`
+- `response.reasoning_text.delta`
+- `response.web_search_call.searching`
+- `response.output_text.delta`
+- `response.output_item.done`
+- `response.completed`
+
+#### 3. Embedding Management Endpoints
+
+```
+POST /v1/embeddings/conversation   # Embed conversations (incremental support)
+POST /v1/embeddings/url            # Create URL embeddings
+POST /v1/embeddings/url/check      # Check if URL is already embedded
+POST /v1/embeddings/url/search     # Search URL embeddings
+GET  /v1/embeddings/url/status     # Get URL embedding status
+
+POST /notes/create-embeddings      # Embed multiple notes
+POST /notes/embed-summary          # Embed note AI summaries only
+```
+
+#### 4. Admin Endpoints
+
+```
+POST /admin/embedding/notes        # Start embedding missing notes
+POST /admin/embedding/conversations # Start embedding missing conversations
+POST /admin/embedding/all          # Embed all missing content
+GET  /admin/embedding/status       # Check embedding progress
+POST /admin/embedding/stop         # Stop embedding process
+```
+
+#### 5. Utility Endpoints
+
+```
+POST /analyze_link                 # Analyze and extract link content
+GET  /note_text/<note_id>         # Get note text by ID
+GET  /note_title/<note_id>        # Get note title by ID
+```
+
+#### 6. Title Generation Endpoints
+
+```
+POST /v1/conversation/title        # Generate single conversation title
+POST /v1/conversation/titles/batch # Batch title generation
+POST /v1/conversation/titles/migrate # Migrate all titles
+GET  /v1/conversation/title/health # Title service health check
+```
+
+#### 7. File Processing Endpoints
+
+```
+POST /v1/file/analyze             # Analyze file content
+POST /v1/document/convert         # Convert documents to text
+```
+
+### Humansa AI-Agent Endpoints
+
+```
+POST /v1-humansa/chat/completions # Humansa chat with tool calling
+POST /humansa/response            # Backend proxy endpoint for Humansa
+POST /o3-demo                     # O3 reasoning demonstration
+```
+
+**Humansa Features**:
+- OpenAI function calling support
+- Healthcare/appointment-specific tools
+- Comprehensive streaming format
+- Separate database schema
+
+**Note**: Humansa system is being redesigned. Current tests are deprecated and a better implementation is coming soon.
+
+### Request/Response Format Differences
+
+#### Chat Completions Response (Simple):
+```json
+{
+  "id": "chatcmpl-abc123",
+  "object": "chat.completion",
+  "choices": [{
+    "message": {
+      "role": "assistant",
+      "content": "Here's my response..."
+    },
+    "finish_reason": "stop"
+  }],
+  "usage": {"prompt_tokens": 10, "completion_tokens": 20}
+}
+```
+
+#### Multi-Agent Response (Structured):
+```json
+{
+  "id": "resp-xyz789",
+  "object": "response",
+  "output_items": [
+    {
+      "id": "reasoning_123",
+      "type": "reasoning",
+      "content": [{"type": "reasoning_text", "text": "I need to search..."}]
+    },
+    {
+      "id": "search_456",
+      "type": "web_search_call",
+      "action": {"query": "AI news", "search_engine": "serper"},
+      "results": [...]
+    },
+    {
+      "id": "msg_789",
+      "type": "message",
+      "role": "assistant",
+      "content": [{"type": "output_text", "text": "Based on my search..."}]
+    }
+  ]
+}
+```
+
+## Testing Guidelines
+
+### 1. Complete Test Environment Setup
+
+The ML Server uses a **fully isolated test environment** with its own database:
+
+#### Test Infrastructure:
+- **Test Server Port**: 5002 (runs test version of main.py)
+- **Test Database**: PostgreSQL with pgvector on port 5454
+- **Database Name**: youwoai_test
+- **Test Data**: Pre-seeded with users, notes, embeddings, and conversations
+
+#### Starting the Test Environment:
+
+```bash
+# 1. Start the test database (Docker required)
+cd test_environment
+docker-compose up -d
+
+# 2. Verify database is running
+PGPASSWORD=031203 psql -h localhost -p 5454 -U postgres -d youwoai_test
+
+# 3. Start the test server (Terminal 1)
+python test/core/test_server.py  # Runs on port 5002
+
+# 4. Run tests (Terminal 2)
+python test/multi_agent/test_multi_agent_comprehensive.py
+```
+
+### 2. Test Database Content
+
+The test environment includes:
+- **3 Test Users**: IDs 10001-10003
+- **9 Test Notes**: Including ML papers, YouTube videos, documents
+- **190 Embeddings**: Pre-generated for testing RAG functionality
+- **9 Conversations**: Rich test conversations with proper titles
+- **2 Folders**: June-ML and Startup categories
+
+### 3. Running Different Test Suites
+
+```bash
+# Quick validation tests
+./test.sh         # Runs validate.py
+
+# Comprehensive test suite
+./test.sh full    # Runs test_comprehensive_detailed.py
+
+# Multi-agent specific tests
+python test/multi_agent/test_multi_agent_comprehensive.py  # 30+ test cases
+python test/multi_agent/test_multi_agent_quick.py         # Critical tests only
+```
+
+### 4. Model Selection for Testing
+
+**IMPORTANT - Model Usage:**
+- Use `gpt-4.1-nano` or O3 series for general testing
+- `gpt-4` is DEPRECATED - do NOT use
+- `gpt-4o-mini` is ONLY for image recognition tasks
+- Default test model: `gpt-4.1-nano`
+
+## Common Development Workflows
+
+### Adding a New Agent
+
+1. Create agent class in `src/chat/agent/`:
+```python
+from chat.agent.base import BaseAgent
+
+class MyAgent(BaseAgent):
+    async def process(self, query: str, context: Dict) -> Dict:
+        # Agent logic here
+        return {"status": "success", "data": {...}}
+```
+
+2. Register in multi-agent workflow (`multi_agent_endpoint_v2.py`)
+
+3. Add tests in `test/multi_agent/`
+
+### Adding a New Endpoint
+
+1. Create endpoint file in `src/chat/endpoints/`
+2. Register in `main.py` under appropriate function:
+   - `register_chat_endpoints()` for chat-related
+   - `register_embedding_endpoints()` for embeddings
+   - `register_humansa_endpoints()` for Humansa
+
+3. Update API documentation
+
+### Modifying Embeddings
+
+1. Work with files in `src/chat/embedding/`
+2. Use `EmbeddingProviderSelector` for provider abstraction
+3. Always handle incremental updates for conversations
+4. Test with `test_environment/` data
+
+## Environment Variables
+
+### Required in `.env.local`:
+```bash
+DIGIT=5                          # Your personal digit (0-9)
+ML_SERVER_PORT=5005              # Port 500X
+DB_ACTIVE_DATABASE=test5         # Database testX
+
+# Optional overrides
+OPENAI_API_KEY=sk-...            # If different from .env
+AZURE_OPENAI_ENDPOINT=...        # For Azure models
+```
+
+### Model Configuration:
+```bash
+# In .env (shared test configuration)
+OPENAI_API_KEY=sk-test-key
+ANTHROPIC_API_KEY=test-key
+GEMINI_API_KEY=test-key
+```
+
+## Debugging Tips
+
+### 1. Enable Detailed Logging
+```python
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+```
+
+### 2. Check Database Connection
+```bash
+# Verify your DIGIT database exists
+PGPASSWORD=password psql -h localhost -p 5432 -U postgres -d test5
+```
+
+### 3. Common Issues
+
+**Import Errors**: Always check venv is activated
+```bash
+which python  # Should show path inside youwo-ml-venv
+```
+
+**Port Conflicts**: Ensure correct DIGIT configuration
+```bash
+lsof -i :5005  # Check if port is in use
+```
+
+**Streaming Issues**: Check for proper async/await usage
+```python
+# Correct
+async for chunk in stream_generator():
+    yield f"data: {json.dumps(chunk)}\n\n"
+
+# Incorrect (missing async)
+for chunk in stream_generator():  # Will fail!
+    yield f"data: {json.dumps(chunk)}\n\n"
+```
+
+## Performance Optimization
+
+### 1. Embedding Batch Sizes
+```python
+# In embedding operations
+embeddings = await embedder.get_embeddings_with_retry(
+    texts,
+    max_retries=3,
+    batch_size=50  # Optimal for OpenAI
+)
+```
+
+### 2. Database Connection Pooling
+```python
+# Use connection pooling for PostgreSQL
+from chat.postgres.db_manager import get_db_connection
+
+# Connection is automatically pooled
+with get_db_connection() as conn:
+    # Your queries
+```
+
+### 3. Async Best Practices
+- Use `asyncio.gather()` for parallel operations
+- Avoid blocking operations in async functions
+- Use `asyncio.to_thread()` for CPU-bound tasks
+
+## Security Considerations
+
+1. **Never commit real API keys** - Use test keys in .env
+2. **Validate user inputs** - Especially user_id and context
+3. **Sanitize file uploads** - Check file types and sizes
+4. **Rate limiting** - Implement for production deployments
+
+## Agent Dependencies and Module Architecture
+
+### Agent Hierarchy
+
+All agents inherit from `BaseAgent` and are designed to be modular with minimal dependencies:
+
+```
+BaseAgent (abstract base class)
+├── RouterAgent - Decides which agents to activate
+├── ContextSearchAgent - RAG search (replaces old RAGAgent)
+├── WebSearchAgent - Web search functionality
+├── AttachmentAgent - File processing
+├── ResponseAgent - Response generation with citations
+├── CodeInterpreterAgent - Code execution
+└── PythonToolAgent - Python-specific tools
+```
+
+### Module Dependencies
+
+Each agent uses shared infrastructure modules:
+
+1. **Router Agent** (`router_agent.py`)
+   - Uses: `IntelligentRouter`, `QueryTransformer`, `LLMProviderSelector`
+   - Purpose: Analyzes queries and determines agent activation
+
+2. **Context Search Agent** (`context_search_agent.py`)
+   - Uses: `RAGProcessor`, `embedding_manager`
+   - Purpose: Searches notes and conversations
+
+3. **Web Search Agent** (`websearch_agent.py`)
+   - Uses: `WebSearchProcessor`
+   - Purpose: Performs web searches
+
+4. **Response Agent** (`response_agent.py`)
+   - Uses: `LLMProvider`, `CitationEngine`, `SystemPromptManager`
+   - Purpose: Generates final response with citations
+
+### Shared Infrastructure Modules
+
+These modules support multiple agents:
+
+- **`llm_provider.py`**: LLM model selection and management
+- **`embedding_manager.py`**: Embedding operations for notes/conversations
+- **`rag_processor.py`**: RAG search functionality
+- **`citation_engine.py`**: Citation generation and tracking
+- **`streaming_response_generator.py`**: SSE streaming support
+- **`query_transformer.py`**: Query enhancement and transformation
+- **`db_manager.py`**: Database connection pooling
+
+## Detailed File Usage Mapping
+
+### Core Entry Points
+
+1. **`src/main.py`**
+   - Main application entry point
+   - Registers all endpoints
+   - Configures Quart app with CORS
+   - Serves both YouWoAI and Humansa systems
+
+### Chat System (`src/chat/`)
+
+#### Endpoints
+- **`modular_chat_endpoint.py`**: OpenAI-compatible chat API
+- **`multi_agent_endpoint_v2.py`**: Multi-agent response API with output items
+- **`url_embeddings_endpoint.py`**: URL embedding operations
+- **`admin_embedding_endpoints.py`**: Admin embedding controls
+- **`conversation_title_endpoint.py`**: Title generation
+- **`file_analyzer_endpoint.py`**: File analysis
+- **`document_converter_endpoint.py`**: Document conversion
+
+#### Agents
+- **`base.py`**: Abstract base class for all agents
+- **`router_agent.py`**: Query routing logic
+- **`context_search_agent.py`**: RAG search implementation
+- **`websearch_agent.py`**: Web search implementation
+- **`attachment_agent.py`**: File attachment processing
+- **`response_agent.py`**: Response generation with citations
+- **`citation_agent.py`**: Citation-specific logic
+- **`code_interpreter_agent.py`**: Code execution capabilities
+
+#### Core Infrastructure
+- **`embedding/`**: Embedding generation and management
+  - `embedding_manager.py`: Central embedding coordinator
+  - `note_embedder.py`: Note-specific embeddings
+  - `conversation_embedder.py`: Conversation embeddings
+  - `embedding_provider_selector.py`: Provider abstraction
+
+- **`postgres/`**: Database operations
+  - `db_manager.py`: Connection pooling
+  - `embedding_operations.py`: Embedding CRUD
+  - `conversation_operations.py`: Conversation CRUD
+
+- **`provider/`**: LLM providers
+  - `llm_provider.py`: Provider selection and management
+  - `o3_model_wrapper.py`: O3 model integration
+
+- **`streaming/`**: Streaming infrastructure
+  - `streaming_response_generator.py`: SSE streaming
+  - `streaming_response_generator_new.py`: Enhanced streaming
+
+### Humansa System (`src/humansa/`)
+
+#### Endpoints
+- **`humansa_chat_endpoint.py`**: Humansa AI-agent chat
+- **`o3_demo_endpoint.py`**: O3 reasoning demonstration
+
+#### Core Components
+- **`humansa_agent.py`**: Main Humansa agent logic
+- **`humansa_tools.py`**: Tool implementations
+- **`openai_integration.py`**: OpenAI function calling
+- **`comprehensive_response_streaming_handler_fixed.py`**: Streaming handler
+
+### Humansa Multi-Agent System (V2)
+
+The Humansa system has evolved into a sophisticated multi-agent orchestration framework:
+
+#### Architecture
+- **Pattern 2 Orchestration** (`v2/orchestrator_pattern2.py`): LlamaIndex FunctionAgent pattern with sub-agents as tools
+- **Workflow State Management**: Maintains patient context, medical history, and agent coordination state
+- **Memory Integration**: Long-term memory via Mem0 for patient profiles and conversation continuity
+
+#### Specialized Agents (`v2/agents/`)
+- **Appointment Agent**: Books medical appointments, manages scheduling
+- **Diagnosis Agent**: Analyzes symptoms, provides assessments
+- **Medication Agent**: Drug information, interaction checks, prescription management
+- **Emergency Triage Agent**: Urgency assessment, emergency routing
+- **Product Agent**: Medical product recommendations and ordering
+- **General Medical Agent**: General health Q&A and guidance
+
+#### Key Features
+- **Transparent Reasoning**: Full visibility into agent decision-making process
+- **Tool Orchestration**: Coordinated tool execution across agents
+- **Context Persistence**: Maintains state across multi-turn conversations
+- **Error Resilience**: Graceful fallback strategies for failed operations
+
+For detailed documentation, see: `/documentation/ml-server/humansa-agent-system.md`
+
+## Test Dashboard System
+
+A comprehensive web-based testing framework for the ML Server:
+
+### Overview
+- **Purpose**: Centralized test execution, monitoring, and analysis
+- **Architecture**: FastAPI backend (port 6002) + React frontend
+- **Database**: Uses same PostgreSQL instance as ML server
+
+### Key Features
+
+#### Multi-Instance Support
+- **Instance Pool**: Manages ML server instances (ports 6001-6009)
+- **Parallel Execution**: Run tests concurrently across multiple instances
+- **Isolated Databases**: Each instance uses separate test database (test1-test9)
+- **Automatic Scaling**: Spins up/down instances based on workload
+
+#### Test Management
+- **JSON Test Definitions**: Standardized test format with expectations
+- **Test Suites**: Organized by functionality (appointment, medical, product, etc.)
+- **Real-time Monitoring**: WebSocket-based live updates
+- **Comprehensive Logging**: Captures ML server logs per test execution
+
+#### Results Analysis
+- **Hierarchical View**: Jobs → Runs → Suites → Tests → Logs
+- **Performance Metrics**: Response times, success rates, trends
+- **Export Capabilities**: PDF/CSV reports for sharing
+- **Failure Analysis**: Detailed error tracking and debugging
+
+### Usage
+```bash
+# Start dashboard
+cd test_dashboard
+./launch_dashboard.sh
+
+# Access UI
+http://localhost:6002
+
+# Start with multi-instance support
+./launch_multi_instance.sh
+```
+
+### Test Format Example
+```json
+{
+  "id": "TEST_001",
+  "name": "Test appointment booking",
+  "execution": {
+    "endpoint": "/v2/humansa/responses/create",
+    "payload": {"input": "Book appointment with Dr. Li"}
+  },
+  "expectations": {
+    "response": {
+      "output_contains": ["appointment", "Dr. Li"],
+      "status_code": 200
+    }
+  }
+}
+```
+
+For detailed documentation, see: `/documentation/ml-server/test-dashboard.md`
+
+## Important Notes
+
+1. **Two Systems, One Server**: Both YouWoAI and Humansa systems run on the same port
+2. **Test Environment**: Complete isolated environment with test database on port 5454
+3. **Test Server**: Always use port 5002 for testing, never 5001
+4. **Virtual Environment**: CRITICAL - Always activate before any Python work
+5. **Requirements.txt**: MUST be updated after ANY pip install
+6. **Streaming Formats**: 
+   - Chat completions: Simple SSE with text deltas
+   - Multi-agent: Complex output items with envelope pattern
+7. **Agent Independence**: Agents are modular but share infrastructure modules
+8. **Error Handling**: Always return proper error responses with status codes
+
+Remember: Good logging, proper async handling, and comprehensive testing make debugging much easier!

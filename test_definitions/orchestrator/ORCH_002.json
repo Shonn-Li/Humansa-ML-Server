@@ -1,5 +1,5 @@
 {
-  "id": "ORCH_002",
+  "id": "ORC_002",
   "name": "Workflow API Integration - Non-Streaming Mode",
   "suite": "orchestrator",
   "type": "single",
@@ -17,7 +17,7 @@
       "profile": {}
     },
     "environment": {
-      "use_workflow": true
+      "use_workflow": "true"
     }
   },
   "execution": {

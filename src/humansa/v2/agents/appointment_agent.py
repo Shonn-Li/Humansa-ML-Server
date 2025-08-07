@@ -4,6 +4,7 @@ from .base_agent import BaseHumansaAgent
 from llama_index.core.tools import FunctionTool
 import json
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -24,11 +25,11 @@ async def search_available_slots(
         
         # Database connection parameters
         db_config = {
-            'host': 'localhost',
-            'port': 5454,  # Test database port
-            'user': 'postgres',
-            'password': '12931',
-            'database': 'test4'
+            'host': os.getenv('DB_HOST', 'localhost'),
+            'port': int(os.getenv('DB_PORT', 5432)),
+            'user': os.getenv('DB_USER', 'postgres'),
+            'password': os.getenv('DB_PASSWORD', '12931'),
+            'database': os.getenv('DB_NAME', 'test4')
         }
         
         # Build query based on parameters
@@ -91,8 +92,8 @@ async def search_available_slots(
             s.consultation_fee,
             c.name as clinic_name
         FROM humansa_appointment_slots s
-        JOIN humansa_doctor d ON s.doctor_id = d.doctor_code
-        LEFT JOIN humansa_clinics c ON s.clinic_id = c.clinic_code
+        JOIN humansa_doctor d ON s.doctor_id = d.doctor_id
+        LEFT JOIN humansa_clinics c ON s.clinic_code = c.clinic_code
         WHERE {' AND '.join(query_conditions)}
         ORDER BY s.date, s.time
         LIMIT 20
@@ -280,11 +281,11 @@ async def finalize_booking(
         
         # Database connection parameters
         db_config = {
-            'host': 'localhost',
-            'port': 5454,
-            'user': 'postgres', 
-            'password': '12931',
-            'database': 'test4'
+            'host': os.getenv('DB_HOST', 'localhost'),
+            'port': int(os.getenv('DB_PORT', 5432)),
+            'user': os.getenv('DB_USER', 'postgres'), 
+            'password': os.getenv('DB_PASSWORD', '12931'),
+            'database': os.getenv('DB_NAME', 'test4')
         }
         
         conn = await asyncpg.connect(**db_config)
@@ -294,7 +295,7 @@ async def finalize_booking(
             SELECT s.*, d.name as doctor_name, d.specialty, c.name as clinic_name
             FROM humansa_appointment_slots s
             JOIN humansa_doctor d ON s.doctor_id = d.doctor_code
-            LEFT JOIN humansa_clinics c ON s.clinic_id = c.clinic_code
+            LEFT JOIN humansa_clinics c ON s.clinic_code = c.clinic_code
             WHERE s.slot_id = $1 AND s.is_available = true
             """
             

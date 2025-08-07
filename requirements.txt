@@ -52,7 +52,7 @@ python-pptx>=0.6.21
 
 # Document to PDF conversion libraries
 # Using LibreOffice through unoconv for best quality conversion
-unoconv>=0.10.0
+# unoconv>=0.10.0  # Commented out - not available for Python 3.13
 # Alternative lightweight conversions
 python-docx>=1.1.0  # For reading Word documents
 openpyxl>=3.1.0  # For reading Excel files

@@ -1,5 +1,5 @@
 {
-  "id": "ORCH_003",
+  "id": "ORC_003",
   "name": "Pattern2 Orchestrator - Context Sharing Test",
   "suite": "orchestrator",
   "type": "multi_turn",
@@ -21,7 +21,7 @@
     ],
     "environment": {
       "AZURE_OPENAI_DEPLOYMENT_NAME": "gpt-4",
-      "debug": true
+      "debug": "true"
     }
   },
   "execution": {

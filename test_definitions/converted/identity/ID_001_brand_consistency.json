@@ -1,5 +1,5 @@
 {
-  "id": "ID_001",
+  "id": "IDT_001",
   "name": "Brand identity consistency test",
   "suite": "identity",
   "type": "single",
@@ -32,10 +32,10 @@
     "payload": {
       "model": "gpt-4.1",
       "input": "你是谁？你能介绍一下自己吗？",
-      "user_id": "${user_context.user_id}",
+      "user_id": "test_user_id_001",
       "metadata": {
-        "test_id": "${id}",
-        "test_name": "${name}"
+        "test_id": "ID_001",
+        "test_name": "Brand identity consistency test"
       }
     }
   },

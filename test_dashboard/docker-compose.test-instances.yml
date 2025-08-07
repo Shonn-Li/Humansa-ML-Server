@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  # Test Instance 1 - Port 5061
+  test-db-1:
+    image: pgvector/pgvector:pg15
+    container_name: humansa_test_db_1
+    environment:
+      POSTGRES_USER: youwo
+      POSTGRES_PASSWORD: youwo123
+      POSTGRES_DB: youwoai
+    ports:
+      - "5061:5432"
+    volumes:
+      - test_db_1_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U youwo -d youwoai"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - test_network
+
+  # Test Instance 2 - Port 5062
+  test-db-2:
+    image: pgvector/pgvector:pg15
+    container_name: humansa_test_db_2
+    environment:
+      POSTGRES_USER: youwo
+      POSTGRES_PASSWORD: youwo123
+      POSTGRES_DB: youwoai
+    ports:
+      - "5062:5432"
+    volumes:
+      - test_db_2_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U youwo -d youwoai"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - test_network
+
+  # Test Instance 3 - Port 5063
+  test-db-3:
+    image: pgvector/pgvector:pg15
+    container_name: humansa_test_db_3
+    environment:
+      POSTGRES_USER: youwo
+      POSTGRES_PASSWORD: youwo123
+      POSTGRES_DB: youwoai
+    ports:
+      - "5063:5432"
+    volumes:
+      - test_db_3_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U youwo -d youwoai"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - test_network
+
+  # Test Instance 4 - Port 5064
+  test-db-4:
+    image: pgvector/pgvector:pg15
+    container_name: humansa_test_db_4
+    environment:
+      POSTGRES_USER: youwo
+      POSTGRES_PASSWORD: youwo123
+      POSTGRES_DB: youwoai
+    ports:
+      - "5064:5432"
+    volumes:
+      - test_db_4_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U youwo -d youwoai"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - test_network
+
+volumes:
+  test_db_1_data:
+  test_db_2_data:
+  test_db_3_data:
+  test_db_4_data:
+
+networks:
+  test_network:
+    driver: bridge

@@ -1,8 +1,60 @@
-youwo-ml-venv
-__pycache__
-*.pyc
-vector_store
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+youwo-ml-venv/
+*.egg-info/
+dist/
+build/
+vector_store/
 
-# Local environment variables
+# Node - IMPORTANT: Ignore ALL node_modules
+node_modules/
+**/node_modules/
+test_dashboard/frontend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn
+
+# Environment
 .env.local
 .env.*.local
+*.local
+
+# Logs
+*.log
+logs/
+*.log.*
+dashboard_launch.log
+ml_server_*.log
+backend.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Test Dashboard specific
+test_dashboard/frontend/build/
+test_dashboard/frontend/.next/
+test_dashboard/backend/__pycache__/
+test_dashboard/backend/*.log
+test_dashboard/*.log
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+*.tmp
+*.bak
+*.backup

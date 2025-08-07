@@ -804,18 +804,48 @@ async def get_test_result_logs(job_id: str, run_id: str, test_id: str):
         # Add test case details if available
         if log_rows:
             log_data = log_rows[0]
+            
+            # Parse server_logs to extract ML server logs
+            server_logs_json = log_data['server_logs']
+            ml_server_logs = []
+            if server_logs_json:
+                try:
+                    server_logs_data = json.loads(server_logs_json) if isinstance(server_logs_json, str) else server_logs_json
+                    # Extract ML server logs (with agent thinking)
+                    if 'ml_server_logs' in server_logs_data:
+                        ml_server_logs = server_logs_data['ml_server_logs']
+                    elif 'logs' in server_logs_data:
+                        ml_server_logs = server_logs_data['logs']
+                    elif isinstance(server_logs_data, list):
+                        ml_server_logs = server_logs_data
+                except:
+                    ml_server_logs = str(server_logs_json).split('\n') if server_logs_json else []
+            
             logs_data.update({
                 "request": log_data['request'],
                 "response": log_data['response'],
                 "server_logs": log_data['server_logs'],
+                "ml_server_logs": ml_server_logs,  # Add ML server logs explicitly
                 "context_snapshot": log_data['context_snapshot'],
                 "performance_metrics": log_data['performance_metrics'],
                 "validation_details": log_data['validation_details']
             })
         else:
             # For mock data, create some sample logs
+            mock_ml_logs = [
+                f"[SERVER] Starting ML server on port 6001",
+                f"[SERVER] Enhanced logging: ENABLED",
+                f"[TEST] {test_id} - Starting execution",
+                f"🤔 正在思考...",
+                f"💭 **思考**: 用户正在询问健康问题",
+                f"🔧 **行动**: 调用医疗咨询工具",
+                f"📊 **观察结果**: 获取到相关健康建议",
+                f"✅ **最终回答**: 基于您的症状，建议...",
+                f"[TEST] {test_id} - Completed"
+            ]
             logs_data.update({
                 "server_logs": f"Mock server logs for test {test_id}\n[INFO] Test started\n[INFO] Processing request\n[INFO] Test completed",
+                "ml_server_logs": mock_ml_logs,
                 "execution_logs": [
                     {
                         "timestamp": datetime.now().isoformat(),
@@ -851,6 +881,11 @@ async def get_test_result_logs(job_id: str, run_id: str, test_id: str):
             "run_id": run_id,
             "job_id": job_id,
             "server_logs": "Mock server logs (database not available)",
+            "ml_server_logs": [
+                "[SERVER] ML server running on port 6001",
+                f"[TEST] {test_id} - No database available",
+                "Mock ML server logs with agent thinking would appear here"
+            ],
             "execution_logs": [],
             "request": {},
             "response": {}

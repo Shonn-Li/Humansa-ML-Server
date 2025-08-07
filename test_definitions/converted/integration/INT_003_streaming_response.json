@@ -33,11 +33,11 @@
     "payload": {
       "model": "gpt-4.1",
       "input": "请详细介绍一下新冠疫苗的作用机制和注意事项",
-      "user_id": "${user_context.user_id}",
+      "user_id": "test_user_int_003",
       "stream": true,
       "metadata": {
-        "test_id": "${id}",
-        "test_name": "${name}"
+        "test_id": "INT_003",
+        "test_name": "Streaming response integration test"
       }
     }
   },

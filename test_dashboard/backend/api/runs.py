@@ -92,7 +92,7 @@ class RunProgress(BaseModel):
 class RunConfiguration(BaseModel):
     """Run execution configuration"""
     environment_id: int = 1
-    max_parallel_workers: int = Field(default=4, ge=1, le=20)
+    max_parallel_workers: int = Field(default=8, ge=1, le=20)
     timeout_per_test: int = Field(default=30, ge=5, le=300)
     retry_failed_tests: bool = True
     max_retries: int = Field(default=2, ge=0, le=5)

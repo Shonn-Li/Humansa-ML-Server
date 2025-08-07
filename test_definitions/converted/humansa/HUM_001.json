@@ -1,7 +1,7 @@
 {
   "id": "HUM_001",
   "name": "Simple Math Query Test",
-  "suite": "humansa",
+  "suite": "appointment",
   "type": "single",
   "priority": 2,
   "tags": ["humansa", "basic", "math", "no-tools"],

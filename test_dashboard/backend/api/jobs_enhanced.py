@@ -4,6 +4,11 @@ Enhanced Job Execution with Server Log Capture
 
 This module provides enhanced job execution functionality with full ML server log capture
 and proper response parsing for the test dashboard.
+
+Multi-Instance Support:
+- Each worker gets its own ML server instance with isolated database
+- Instance allocation managed by InstancePool
+- Separate log capture per instance
 """
 
 import json
@@ -17,6 +22,14 @@ from datetime import datetime, timedelta
 import httpx
 from pydantic import BaseModel
 import logging
+from concurrent.futures import ThreadPoolExecutor
+try:
+    import psutil
+except ImportError:
+    psutil = None
+
+# Import instance pool for multi-instance support
+from test_dashboard.backend.api.instances import instance_pool, InstancePool, MLServerInstance, InstanceStatus
 
 logger = logging.getLogger(__name__)
 
@@ -31,6 +44,9 @@ class TestCaseLog(BaseModel):
     response_data: Dict[str, Any]
     server_logs: List[str]
     error_message: Optional[str] = None
+    instance_digit: Optional[int] = None  # ML server instance used
+    ml_port: Optional[int] = None  # ML server port used
+    db_port: Optional[int] = None  # Database port used
 
 
 async def capture_ml_server_logs(log_capture_info: Dict[str, Any]) -> None:
@@ -157,7 +173,8 @@ async def execute_test_with_log_capture(
     test_case: Any,
     test_ref: Any,
     ml_server_url: str,
-    ml_server_logs: List[str]
+    ml_server_logs: List[str],
+    instance: Optional[MLServerInstance] = None
 ) -> TestCaseLog:
     """
     Execute a single test case with full log capture and response parsing
@@ -167,6 +184,7 @@ async def execute_test_with_log_capture(
         test_ref: Test reference with overrides
         ml_server_url: Base URL of ML server
         ml_server_logs: List to collect server logs
+        instance: Optional ML server instance (for multi-instance mode)
         
     Returns:
         TestCaseLog with complete execution details
@@ -352,7 +370,10 @@ async def execute_test_with_log_capture(
             request_data=test_payload,
             response_data=response_data,
             server_logs=ml_server_logs.copy(),
-            error_message="\n".join(validation_errors) if validation_errors else None
+            error_message="\n".join(validation_errors) if validation_errors else None,
+            instance_digit=instance.digit if instance else None,
+            ml_port=instance.ml_port if instance else None,
+            db_port=instance.db_port if instance else None
         )
         
     except httpx.HTTPError as e:
@@ -365,7 +386,10 @@ async def execute_test_with_log_capture(
             request_data=test_payload,
             response_data={"error": str(e), "type": "http_error"},
             server_logs=ml_server_logs.copy(),
-            error_message=f"HTTP Error: {str(e)}"
+            error_message=f"HTTP Error: {str(e)}",
+            instance_digit=instance.digit if instance else None,
+            ml_port=instance.ml_port if instance else None,
+            db_port=instance.db_port if instance else None
         )
     except Exception as e:
         ml_server_logs.append(f"\n[ERROR] Exception: {str(e)}")
@@ -377,7 +401,10 @@ async def execute_test_with_log_capture(
             request_data=test_payload,
             response_data={"error": str(e), "type": type(e).__name__},
             server_logs=ml_server_logs.copy(),
-            error_message=str(e)
+            error_message=str(e),
+            instance_digit=instance.digit if instance else None,
+            ml_port=instance.ml_port if instance else None,
+            db_port=instance.db_port if instance else None
         )
 
 
@@ -398,9 +425,52 @@ async def ensure_ml_server_running(ml_port: int, ml_server_logs: List[str]) -> D
         async with httpx.AsyncClient(timeout=5.0) as client:
             resp = await client.get(f"{ml_url}/health")
             if resp.status_code == 200:
-                logger.info(f"✅ ML server already running on port {ml_port}")
-                ml_server_logs.append(f"[SERVER] ML server already running on port {ml_port}")
-                return {"running": True, "process": None, "log_file_path": None}
+                # Check if server has enhanced logging enabled
+                health_data = resp.json() if resp.headers.get('content-type', '').startswith('application/json') else {}
+                enhanced_logging_enabled = health_data.get('enhanced_logging', False)
+                
+                if enhanced_logging_enabled:
+                    logger.info(f"✅ ML server already running on port {ml_port} with enhanced logging")
+                    ml_server_logs.append(f"[SERVER] ML server already running on port {ml_port} with enhanced logging")
+                    return {"running": True, "process": None, "log_file_path": None}
+                else:
+                    logger.warning(f"⚠️ ML server running on port {ml_port} but WITHOUT enhanced logging")
+                    ml_server_logs.append(f"[SERVER] ML server running but WITHOUT enhanced logging - restarting...")
+                    # Try to stop the existing server
+                    try:
+                        if psutil:
+                            # Find and kill the process using psutil
+                            for proc in psutil.process_iter(['pid', 'cmdline']):
+                                try:
+                                    cmdline = proc.info['cmdline']
+                                    if cmdline and 'src.main' in ' '.join(cmdline) and f'--port {ml_port}' in ' '.join(cmdline):
+                                        logger.info(f"Stopping ML server process {proc.info['pid']}")
+                                        proc.terminate()
+                                        proc.wait(timeout=5)
+                                        break
+                                except (psutil.NoSuchProcess, psutil.AccessDenied):
+                                    pass
+                        else:
+                            # Fallback to shell commands if psutil not available
+                            logger.warning("psutil not available, using shell commands to stop server")
+                            ml_server_logs.append("[SERVER] Warning: psutil not available, using shell commands")
+                            # Try lsof to find the process
+                            try:
+                                result = subprocess.run(
+                                    ["lsof", "-t", "-i", f"tcp:{ml_port}"],
+                                    capture_output=True,
+                                    text=True
+                                )
+                                if result.returncode == 0 and result.stdout.strip():
+                                    pid = result.stdout.strip()
+                                    subprocess.run(["kill", "-TERM", pid])
+                                    await asyncio.sleep(2)
+                                    logger.info(f"Stopped ML server process {pid}")
+                            except Exception as e:
+                                logger.warning(f"Failed to stop server using lsof: {e}")
+                    except Exception as e:
+                        logger.warning(f"Could not stop existing ML server: {e}")
+                        ml_server_logs.append(f"[SERVER] Warning: Could not stop existing server: {e}")
     except:
         logger.info(f"ML server not running on port {ml_port}, starting it...")
     
@@ -472,6 +542,478 @@ async def ensure_ml_server_running(ml_port: int, ml_server_logs: List[str]) -> D
         logger.error(f"Failed to start ML server: {e}")
         ml_server_logs.append(f"[SERVER] ERROR: Failed to start ML server: {e}")
         raise
+
+
+async def execute_test_worker(
+    worker_id: int,
+    test_queue: asyncio.Queue,
+    job: Any,
+    run_id: str,
+    run_data: Dict[str, Any],
+    shared_logs: Dict[int, List[str]],
+    config: Any
+) -> None:
+    """
+    Worker function that processes tests from queue with dedicated ML server instance
+    
+    Args:
+        worker_id: Worker identifier
+        test_queue: Queue of test references to process
+        job: Job object
+        run_id: Run identifier
+        run_data: Shared run data dictionary
+        shared_logs: Dictionary mapping worker_id to their logs
+        config: Job configuration
+    """
+    from test_dashboard.backend.core.config import settings
+    from test_dashboard.backend.core.database import execute_query, execute_update, is_database_available
+    from test_dashboard.backend.api.jobs import JobStatus
+    
+    # Allocate an instance for this worker
+    instance = await instance_pool.allocate_instance(f"worker_{worker_id}_job_{job.id}", worker_id)
+    if not instance:
+        logger.error(f"Worker {worker_id}: No available instance")
+        return
+    
+    # Initialize worker-specific logs
+    worker_logs = []
+    shared_logs[worker_id] = worker_logs
+    
+    try:
+        logger.info(f"🎯 Worker {worker_id} allocated instance {instance.digit} (ML port {instance.ml_port}, DB port {instance.db_port})")
+        worker_logs.append(f"[WORKER {worker_id}] Allocated instance {instance.digit}")
+        
+        # Set up log capture for this instance
+        log_capture_info = {
+            'log_list': worker_logs,
+            'process': instance.process,
+            'log_file_path': f"/tmp/ml_server_instance_{instance.digit}.log",
+            'start_time': datetime.now(),
+            'port': instance.ml_port
+        }
+        
+        # Start log capture task
+        log_capture_task = asyncio.create_task(capture_ml_server_logs(log_capture_info))
+        
+        ml_url = f"http://localhost:{instance.ml_port}"
+        
+        while True:
+            try:
+                # Get next test from queue (non-blocking with timeout)
+                test_ref = await asyncio.wait_for(test_queue.get(), timeout=1.0)
+            except asyncio.TimeoutError:
+                # No more tests
+                break
+            
+            if test_ref is None:
+                # Sentinel value to stop worker
+                break
+            
+            # Check if job was cancelled/paused
+            if job.status in [JobStatus.CANCELLED, JobStatus.PAUSED]:
+                await test_queue.put(test_ref)  # Put it back for potential resume
+                break
+            
+            # Execute test
+            test_start_time = datetime.now()
+            
+            # Update test as running
+            run_data["results"][test_ref.test_id] = {
+                "test_id": test_ref.test_id,
+                "status": "running",
+                "started_at": test_start_time.isoformat(),
+                "worker_id": worker_id,
+                "instance_digit": instance.digit
+            }
+            
+            # Get test definition
+            test_def = None
+            if is_database_available():
+                query = "SELECT * FROM test_management.test_definitions WHERE id = %(id)s"
+                rows = await execute_query(query, {'id': test_ref.test_id})
+                if rows:
+                    test_def = rows[0]
+            
+            if not test_def:
+                # Try to get from memory
+                from test_dashboard.backend.api.tests import test_definitions
+                test_def = test_definitions.get(test_ref.test_id)
+            
+            if not test_def:
+                # Test not found
+                logger.error(f"Worker {worker_id}: Test definition not found: {test_ref.test_id}")
+                test_log = TestCaseLog(
+                    test_case_id=test_ref.test_id,
+                    test_case_name=test_ref.test_id,
+                    status="failed",
+                    execution_time=0,
+                    request_data={},
+                    response_data={"error": "Test definition not found"},
+                    server_logs=worker_logs.copy(),
+                    error_message=f"Test definition not found: {test_ref.test_id}",
+                    instance_digit=instance.digit,
+                    ml_port=instance.ml_port,
+                    db_port=instance.db_port
+                )
+            else:
+                # Create test case object
+                if isinstance(test_def, dict):
+                    # Convert dict to object
+                    test_case = type('TestCase', (), {
+                        'id': test_def['id'],
+                        'name': test_def['name'],
+                        'suite': test_def.get('suite', 'unknown'),
+                        'type': test_def.get('type', 'single'),
+                        'config': type('Config', (), {
+                            'timeout': test_def.get('config', {}).get('timeout', 30)
+                        })(),
+                        'execution': type('Execution', (), {
+                            'endpoint': test_def.get('execution', {}).get('endpoint', '/v2/humansa/responses/create'),
+                            'method': test_def.get('execution', {}).get('method', 'POST'),
+                            'headers': test_def.get('execution', {}).get('headers', {'Content-Type': 'application/json'}),
+                            'payload': test_def.get('execution', {}).get('payload', {})
+                        })(),
+                        'expectations': type('Expectations', (), {
+                            'response': type('ResponseExpectations', (), {
+                                'status_code': test_def.get('expectations', {}).get('response', {}).get('status_code', 200),
+                                'output_contains': test_def.get('expectations', {}).get('response', {}).get('output_contains', []),
+                                'output_excludes': test_def.get('expectations', {}).get('response', {}).get('output_excludes', []),
+                                'min_length': test_def.get('expectations', {}).get('response', {}).get('min_length', 0)
+                            })()
+                        })(),
+                        'setup': test_def.get('setup', {})
+                    })()
+                else:
+                    test_case = test_def
+                
+                # Update payload with instance-specific database connection
+                if hasattr(test_case.execution.payload, 'update'):
+                    test_case.execution.payload.update({
+                        "db_port": instance.db_port,
+                        "instance_id": instance.digit
+                    })
+                
+                # Handle multi-turn tests
+                if test_case.type == 'multi_turn':
+                    setup = test_case.setup if hasattr(test_case, 'setup') else {}
+                    if isinstance(setup, dict):
+                        previous_turns = setup.get('previous_turns', [])
+                    else:
+                        previous_turns = getattr(setup, 'previous_turns', [])
+                    
+                    # Execute previous turns
+                    worker_logs.append(f"\n[MULTI-TURN] Setting up {len(previous_turns)} previous turns")
+                    previous_response_id = None
+                    
+                    for i, turn in enumerate(previous_turns):
+                        # Handle both dict and object access patterns
+                        if isinstance(turn, dict):
+                            role = turn.get('role')
+                            content = turn.get('content', '')
+                        else:
+                            role = getattr(turn, 'role', None)
+                            content = getattr(turn, 'content', '')
+                        
+                        if role == 'user':
+                            turn_payload = {
+                                "model": test_case.execution.payload.get("model", "gpt-4.1"),
+                                "input": content,
+                                "user_id": test_case.execution.payload.get("user_id", f"test_user_{test_ref.test_id}"),
+                                "metadata": {
+                                    "test_id": test_ref.test_id,
+                                    "turn": f"setup_{i+1}",
+                                    "instance_id": instance.digit
+                                },
+                                "db_port": instance.db_port
+                            }
+                            
+                            if previous_response_id:
+                                turn_payload["previous_response_id"] = previous_response_id
+                            
+                            try:
+                                async with httpx.AsyncClient(timeout=30.0) as client:
+                                    turn_response = await client.post(
+                                        f"{ml_url}{test_case.execution.endpoint}",
+                                        json=turn_payload
+                                    )
+                                    if turn_response.status_code == 200:
+                                        turn_data = turn_response.json()
+                                        # Extract response ID
+                                        if 'id' in turn_data:
+                                            previous_response_id = turn_data['id']
+                                        elif 'response_id' in turn_data:
+                                            previous_response_id = turn_data['response_id']
+                                        worker_logs.append(f"[MULTI-TURN] Turn {i+1} completed, response_id: {previous_response_id}")
+                                    else:
+                                        worker_logs.append(f"[MULTI-TURN] Turn {i+1} failed: {turn_response.status_code}")
+                            except Exception as e:
+                                worker_logs.append(f"[MULTI-TURN] Turn {i+1} error: {str(e)}")
+                    
+                    # Update payload with previous response ID
+                    if previous_response_id:
+                        test_case.execution.payload["previous_response_id"] = previous_response_id
+                
+                # Execute test with enhanced log capture
+                test_log = await execute_test_with_log_capture(
+                    test_case=test_case,
+                    test_ref=test_ref,
+                    ml_server_url=ml_url,
+                    ml_server_logs=worker_logs,
+                    instance=instance
+                )
+            
+            # Update run data with results
+            run_data["results"][test_ref.test_id] = {
+                "test_id": test_log.test_case_id,
+                "test_name": test_log.test_case_name,
+                "suite": test_case.suite if 'test_case' in locals() else 'unknown',
+                "status": "completed" if test_log.status == "passed" else "failed",
+                "started_at": test_start_time.isoformat(),
+                "completed_at": datetime.now().isoformat(),
+                "duration": test_log.execution_time,
+                "success": test_log.status == "passed",
+                "error": test_log.error_message,
+                "response": test_log.response_data,
+                "worker_id": worker_id,
+                "instance_digit": instance.digit,
+                "ml_port": instance.ml_port,
+                "db_port": instance.db_port
+            }
+            
+            # Update database if available
+            if is_database_available():
+                # Insert result
+                result_query = """
+                    INSERT INTO test_management.results
+                    (run_id, test_id, suite_name, test_name, status, started_at, completed_at, execution_time, error_message)
+                    VALUES (%(run_id)s, %(test_id)s, %(suite)s, %(test_name)s, %(status)s, %(started_at)s, %(completed_at)s, %(duration)s, %(error)s)
+                """
+                
+                await execute_update(result_query, {
+                    'run_id': run_id,
+                    'test_id': test_log.test_case_id,
+                    'suite': test_case.suite if 'test_case' in locals() else 'unknown',
+                    'test_name': test_log.test_case_name,
+                    'status': test_log.status,
+                    'started_at': test_start_time,
+                    'completed_at': datetime.now(),
+                    'duration': test_log.execution_time,
+                    'error': test_log.error_message
+                })
+                
+                # Store full test logs with instance info
+                logs_query = """
+                    INSERT INTO test_management.test_case_logs
+                    (result_id, request, response, server_logs, performance_metrics)
+                    VALUES (
+                        (SELECT id FROM test_management.results WHERE run_id = %(run_id)s AND test_id = %(test_id)s LIMIT 1),
+                        %(request)s, %(response)s, %(server_logs)s, %(performance_metrics)s
+                    )
+                """
+                
+                request_data = {
+                    "endpoint": test_case.execution.endpoint if 'test_case' in locals() else "unknown",
+                    "method": test_case.execution.method if 'test_case' in locals() else "POST",
+                    "headers": test_case.execution.headers if 'test_case' in locals() else {},
+                    "payload": test_log.request_data
+                }
+                
+                server_logs_data = {
+                    "logs": test_log.server_logs,
+                    "ml_server_logs": test_log.server_logs,
+                    "backend_logs": [],
+                    "log_count": len(test_log.server_logs),
+                    "ml_server_port": instance.ml_port,
+                    "db_port": instance.db_port,
+                    "instance_digit": instance.digit,
+                    "worker_id": worker_id,
+                    "captured_at": datetime.now().isoformat()
+                }
+                
+                performance_metrics = {
+                    "execution_time_seconds": test_log.execution_time,
+                    "test_status": test_log.status,
+                    "validation_passed": test_log.status == "passed",
+                    "worker_id": worker_id,
+                    "instance_digit": instance.digit
+                }
+                
+                await execute_update(logs_query, {
+                    'run_id': run_id,
+                    'test_id': test_log.test_case_id,
+                    'request': json.dumps(request_data),
+                    'response': json.dumps(test_log.response_data),
+                    'server_logs': json.dumps(server_logs_data),
+                    'performance_metrics': json.dumps(performance_metrics)
+                })
+            
+            # Update job stats
+            if test_log.status == "failed":
+                job.failed_tests = (job.failed_tests or 0) + 1
+            
+            # Update completed tests count
+            job.completed_tests = len([r for r in run_data["results"].values() if r.get("status") in ["completed", "failed"]])
+            job.updated_at = datetime.now()
+            
+            logger.info(f"Worker {worker_id}: Completed test {test_ref.test_id} - {test_log.status}")
+    
+    except Exception as e:
+        logger.error(f"Worker {worker_id} error: {e}", exc_info=True)
+        worker_logs.append(f"[WORKER {worker_id}] ERROR: {str(e)}")
+    
+    finally:
+        # Clean up
+        if 'log_capture_task' in locals() and not log_capture_task.done():
+            log_capture_task.cancel()
+            try:
+                await log_capture_task
+            except asyncio.CancelledError:
+                pass
+        
+        # Release instance back to pool
+        if instance:
+            await instance_pool.release_instance(instance.digit)
+            logger.info(f"🔄 Worker {worker_id} released instance {instance.digit}")
+
+
+async def execute_job_background_multi_instance(job_id: str, run_id: str, config: Any):
+    """Multi-instance background job execution with worker pool"""
+    from test_dashboard.backend.core.config import settings
+    from test_dashboard.backend.core.database import execute_query, execute_update, is_database_available
+    from test_dashboard.backend.api.jobs import get_job, jobs_storage, job_runs, JobStatus, job_service
+    
+    # Initialize shared data structures
+    shared_logs = {}  # Maps worker_id to their logs
+    
+    try:
+        # Get job from database or memory
+        job = await get_job(job_id)
+        
+        # Get or create run data
+        if run_id not in job_runs:
+            job_runs[run_id] = {
+                "job_id": job_id,
+                "run_id": run_id,
+                "started_at": datetime.now(),
+                "completed_at": None,
+                "status": "running",
+                "environment_id": config.environment_id,
+                "config": config.dict() if hasattr(config, 'dict') else config,
+                "results": {},
+                "dry_run": False
+            }
+        run_data = job_runs[run_id]
+        
+        # Start job
+        await job_service.update_job_status(job_id, run_id, "running")
+        logger.info(f"🏃 Starting multi-instance job execution for {job_id}/{run_id}")
+        
+        # Initialize instance pool if needed
+        if not instance_pool.instances:
+            num_workers = config.max_workers if hasattr(config, 'max_workers') else 8
+            await instance_pool.initialize(num_workers)
+        
+        # Determine number of workers based on available instances
+        available_instances = await instance_pool.get_status()
+        num_workers = min(
+            available_instances['available'],
+            config.max_workers if hasattr(config, 'max_workers') else 8,
+            len(job.tests)  # Don't create more workers than tests
+        )
+        
+        logger.info(f"Using {num_workers} workers with {available_instances['available']} available instances")
+        
+        # Create test queue
+        test_queue = asyncio.Queue()
+        for test_ref in job.tests:
+            await test_queue.put(test_ref)
+        
+        # Create worker tasks
+        workers = []
+        for worker_id in range(num_workers):
+            worker = asyncio.create_task(
+                execute_test_worker(
+                    worker_id=worker_id,
+                    test_queue=test_queue,
+                    job=job,
+                    run_id=run_id,
+                    run_data=run_data,
+                    shared_logs=shared_logs,
+                    config=config
+                )
+            )
+            workers.append(worker)
+        
+        # Wait for all workers to complete
+        await asyncio.gather(*workers, return_exceptions=True)
+        
+        # Consolidate logs from all workers
+        consolidated_logs = []
+        for worker_id in sorted(shared_logs.keys()):
+            consolidated_logs.extend(shared_logs[worker_id])
+        
+        # Complete job
+        if job.status != JobStatus.CANCELLED:
+            job.status = JobStatus.COMPLETED
+            job.completed_at = datetime.now()
+            job.updated_at = datetime.now()
+            job.total_tests = len(job.tests)
+            job.completed_tests = len([r for r in run_data["results"].values() if r.get("status") in ["completed", "failed"]])
+            run_data["status"] = "completed"
+            run_data["completed_at"] = datetime.now()
+            
+            # Update database
+            if is_database_available():
+                passed = len([r for r in run_data["results"].values() if r.get("success") == True])
+                failed = len([r for r in run_data["results"].values() if r.get("success") == False])
+                
+                await execute_update("""
+                    UPDATE test_management.runs
+                    SET status = %(status)s, completed_at = %(completed_at)s,
+                        total_tests = %(total)s, passed_tests = %(passed)s, failed_tests = %(failed)s
+                    WHERE id = %(run_id)s
+                """, {
+                    'status': 'completed',
+                    'completed_at': job.completed_at,
+                    'total': len(job.tests),
+                    'passed': passed,
+                    'failed': failed,
+                    'run_id': run_id
+                })
+        
+        jobs_storage[job_id] = job
+        await job_service.update_job_status(job_id, run_id, "completed")
+        logger.info(f"✅ Multi-instance job {job_id}/{run_id} completed successfully")
+        
+    except Exception as e:
+        logger.error(f"Multi-instance job execution failed: {e}", exc_info=True)
+        
+        if 'job' in locals():
+            job.status = JobStatus.FAILED
+            job.completed_at = datetime.now()
+            job.updated_at = datetime.now()
+            job.failed_tests = len(job.tests) if hasattr(job, 'tests') else 0
+            jobs_storage[job_id] = job
+        
+        if 'run_data' in locals():
+            run_data["status"] = "failed"
+            run_data["error"] = str(e)
+            run_data["completed_at"] = datetime.now()
+        
+        # Update database
+        if is_database_available():
+            await execute_update("""
+                UPDATE test_management.runs
+                SET status = %(status)s, completed_at = %(completed_at)s, error_message = %(error)s
+                WHERE id = %(run_id)s
+            """, {
+                'status': 'failed',
+                'completed_at': datetime.now(),
+                'error': str(e),
+                'run_id': run_id
+            })
+        
+        await job_service.update_job_status(job_id, run_id, "failed", error=str(e))
 
 
 async def execute_job_background_enhanced(job_id: str, run_id: str, config: Any):
@@ -624,10 +1166,18 @@ async def execute_job_background_enhanced(job_id: str, run_id: str, config: Any)
                     previous_response_id = None
                     
                     for i, turn in enumerate(previous_turns):
-                        if turn.get('role') == 'user':
+                        # Handle both dict and object access patterns
+                        if isinstance(turn, dict):
+                            role = turn.get('role')
+                            content = turn.get('content', '')
+                        else:
+                            role = getattr(turn, 'role', None)
+                            content = getattr(turn, 'content', '')
+                        
+                        if role == 'user':
                             turn_payload = {
                                 "model": test_case.execution.payload.get("model", "gpt-4.1"),
-                                "input": turn.get("content", ""),
+                                "input": content,
                                 "user_id": test_case.execution.payload.get("user_id", f"test_user_{test_ref.test_id}"),
                                 "metadata": {
                                     "test_id": test_ref.test_id,
@@ -722,7 +1272,9 @@ async def execute_job_background_enhanced(job_id: str, run_id: str, config: Any)
                 }
                 
                 server_logs_data = {
-                    "logs": test_log.server_logs,
+                    "logs": test_log.server_logs,  # ML server logs with agent thinking
+                    "ml_server_logs": test_log.server_logs,  # Explicitly labeled ML logs
+                    "backend_logs": [],  # Backend API logs (if any)
                     "log_count": len(test_log.server_logs),
                     "ml_server_port": ml_port,
                     "captured_at": datetime.now().isoformat()

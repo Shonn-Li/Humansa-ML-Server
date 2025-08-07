@@ -1,7 +1,7 @@
 {
   "id": "API_106",
   "name": "Response Cleanup Test",
-  "suite": "api",
+  "suite": "integration",
   "type": "single",
   "priority": 2,
   "tags": ["api", "responses", "cleanup", "maintenance"],

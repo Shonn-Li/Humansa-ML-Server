@@ -1,5 +1,5 @@
 {
-  "id": "ORCH_102",
+  "id": "ORC_102",
   "name": "Workflow Non-Streaming Mode Test",
   "suite": "orchestrator",
   "type": "single",

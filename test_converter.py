@@ -141,11 +141,11 @@ class TestConverter:
                     "Content-Type": "application/json"
                 },
                 "payload": {
-                    "model": "gpt-4-turbo",
-                    "user_id": "${user_context.user_id}",
+                    "model": "gpt-4.1",
+                    "user_id": f"test_user_{test_id.lower()}",
                     "metadata": {
-                        "test_id": "${id}",
-                        "test_name": "${name}"
+                        "test_id": test_id,
+                        "test_name": test_case.get("name", "Unnamed test")
                     }
                 }
             },

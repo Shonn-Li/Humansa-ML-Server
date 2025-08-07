@@ -1,5 +1,5 @@
 {
-  "id": "ORCH_006",
+  "id": "ORC_006",
   "name": "Pattern2 Orchestrator - Non-Streaming Mode",
   "suite": "orchestrator",
   "type": "single",
@@ -18,7 +18,7 @@
     },
     "environment": {
       "AZURE_OPENAI_DEPLOYMENT_NAME": "gpt-4",
-      "debug": false
+      "debug": "false"
     }
   },
   "execution": {

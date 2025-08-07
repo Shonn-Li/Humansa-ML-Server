@@ -1,0 +1,12 @@
+{
+  "multi_instance": {
+    "enabled": true,
+    "default_instances": 4,
+    "auto_start": true,
+    "max_workers_per_job": 4
+  },
+  "ml_server_port": 6001,
+  "ml_server_digit": 1,
+  "enable_enhanced_logging": true,
+  "auto_discover_tests": true
+}

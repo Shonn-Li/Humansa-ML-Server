@@ -106,7 +106,7 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
     
     # Initialize orchestrators
     try:
-        orchestrator = HumansaOrchestratorAgent(
+        globals()['orchestrator'] = HumansaOrchestratorAgent(
             llm=default_llm,
             memory_manager=memory_manager,
             debug=False,
@@ -120,7 +120,7 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
             }
         )
         
-        enhanced_orchestrator = HumansaOrchestratorAgentEnhanced(
+        globals()['enhanced_orchestrator'] = HumansaOrchestratorAgentEnhanced(
             llm=default_llm,
             memory_manager=memory_manager,
             debug=True,
@@ -129,7 +129,7 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
         
         # Initialize consolidated orchestrator if enabled
         if USE_CONSOLIDATED_TOOLS:
-            consolidated_orchestrator = HumansaOrchestratorAgentConsolidated(
+            globals()['consolidated_orchestrator'] = HumansaOrchestratorAgentConsolidated(
                 llm=default_llm,
                 memory_manager=memory_manager,
                 debug=False,
@@ -145,7 +145,7 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
             logger.info("✅ Consolidated orchestrator initialized (7 tools with dynamic loading)")
         
         # Initialize transparent orchestrator for proper response format
-        transparent_orchestrator = HumansaOrchestratorAgentTransparent(
+        globals()['transparent_orchestrator'] = HumansaOrchestratorAgentTransparent(
             llm=default_llm,
             memory_manager=memory_manager,
             debug=False,
@@ -217,7 +217,7 @@ async def initialize_v2_responses_system(db_pool, openai_api_key: str):
             }
             
             # Create Pattern 2 orchestrator (fixed version)
-            pattern2_orchestrator = create_pattern2_orchestrator_fixed(
+            globals()['pattern2_orchestrator'] = create_pattern2_orchestrator_fixed(
                 llm=default_llm,
                 agents=pattern2_agents,
                 memory_manager=memory_manager,

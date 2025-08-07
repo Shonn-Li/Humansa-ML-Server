@@ -1,5 +1,5 @@
 {
-  "id": "ORCH_005",
+  "id": "ORC_005",
   "name": "Pattern2 Orchestrator - Complex Multi-Agent Query",
   "suite": "orchestrator",
   "type": "single",
@@ -18,7 +18,7 @@
     },
     "environment": {
       "AZURE_OPENAI_DEPLOYMENT_NAME": "gpt-4",
-      "debug": true
+      "debug": "true"
     }
   },
   "execution": {

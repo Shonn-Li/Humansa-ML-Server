@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import InstanceControl from './components/InstanceControl';
 
 interface Test {
   id: string;
@@ -73,6 +74,7 @@ function App() {
   const [selectedTestResult, setSelectedTestResult] = useState<any>(null);
   const [testLogs, setTestLogs] = useState<any>(null);
   const [systemInfo, setSystemInfo] = useState<any>(null);
+  const [mlServerStatus, setMlServerStatus] = useState<{ running: boolean; enhanced_logging: boolean } | null>(null);
 
   // Fetch system information
   useEffect(() => {
@@ -95,12 +97,21 @@ function App() {
     Promise.all([
       fetch('http://localhost:6002/api/tests?limit=1000').then(res => res.json()),
       fetch('http://localhost:6002/api/jobs').then(res => res.json()).catch(() => []),
-      fetch('http://localhost:6002/system-info').then(res => res.json()).catch(() => null)
-    ]).then(([testsData, jobsData, sysInfo]) => {
+      fetch('http://localhost:6002/system-info').then(res => res.json()).catch(() => null),
+      fetch('http://localhost:6001/health').then(res => res.json()).catch(() => null)
+    ]).then(([testsData, jobsData, sysInfo, mlStatus]) => {
       console.log('Data fetched:', testsData.length, 'tests');
       setTests(testsData);
       setJobs(jobsData);
       setSystemInfo(sysInfo);
+      if (mlStatus) {
+        setMlServerStatus({
+          running: true,
+          enhanced_logging: mlStatus.enhanced_logging || false
+        });
+      } else {
+        setMlServerStatus({ running: false, enhanced_logging: false });
+      }
       setLoading(false);
     }).catch(err => {
       console.error('Failed to fetch data:', err);
@@ -166,6 +177,23 @@ function App() {
       }
     } catch (err) {
       console.error('Failed to fetch job details:', err);
+    }
+  };
+
+  const checkMlServerStatus = async () => {
+    try {
+      const response = await fetch('http://localhost:6001/health');
+      if (response.ok) {
+        const data = await response.json();
+        setMlServerStatus({
+          running: true,
+          enhanced_logging: data.enhanced_logging || false
+        });
+      } else {
+        setMlServerStatus({ running: false, enhanced_logging: false });
+      }
+    } catch (error) {
+      setMlServerStatus({ running: false, enhanced_logging: false });
     }
   };
 
@@ -394,6 +422,45 @@ function App() {
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif' }}>
+      {/* ML Server Status */}
+      <div style={{
+        backgroundColor: mlServerStatus?.running ? (mlServerStatus.enhanced_logging ? '#28a745' : '#ffc107') : '#dc3545',
+        color: 'white',
+        padding: '8px 20px',
+        fontSize: '14px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <span style={{ marginRight: '10px' }}>
+            {mlServerStatus?.running ? '🟢' : '🔴'}
+          </span>
+          <span>
+            ML Server: {mlServerStatus?.running ? 'Running' : 'Not Running'}
+            {mlServerStatus?.running && (
+              <span style={{ marginLeft: '10px' }}>
+                ({mlServerStatus.enhanced_logging ? '✅ Enhanced Logging' : '⚠️ Basic Logging'})
+              </span>
+            )}
+          </span>
+        </div>
+        <button
+          onClick={checkMlServerStatus}
+          style={{
+            backgroundColor: 'transparent',
+            border: '1px solid white',
+            color: 'white',
+            padding: '4px 12px',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontSize: '12px'
+          }}
+        >
+          Refresh Status
+        </button>
+      </div>
+
       {/* Navigation */}
       <div style={navStyle}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -606,6 +673,11 @@ function App() {
                 )}
               </div>
             )}
+            
+            {/* Multi-Instance Control Panel */}
+            <div style={{ marginTop: '30px' }}>
+              <InstanceControl />
+            </div>
           </div>
         )}
 
@@ -1833,30 +1905,44 @@ function App() {
                 <div style={{ marginBottom: '20px' }}>
                   <h3 style={{ fontSize: '18px', marginBottom: '10px' }}>Execution Logs</h3>
                   
-                  {/* Server Logs */}
-                  {testLogs.server_logs && (
+                  {/* ML Server Logs (Agent Thinking) */}
+                  {(testLogs.ml_server_logs || testLogs.server_logs) && (
                     <div style={{ marginBottom: '15px' }}>
-                      <h4 style={{ fontSize: '16px', marginBottom: '5px' }}>Server Logs</h4>
+                      <h4 style={{ fontSize: '16px', marginBottom: '5px', color: '#28a745' }}>
+                        🤖 ML Server Logs (Agent Thinking Process)
+                      </h4>
                       <pre style={{
                         backgroundColor: '#f8f9fa',
                         padding: '10px',
                         borderRadius: '4px',
                         overflow: 'auto',
-                        maxHeight: '300px',
+                        maxHeight: '400px',
                         fontSize: '12px',
                         fontFamily: 'monospace',
                         whiteSpace: 'pre-wrap',
-                        wordBreak: 'break-word'
+                        wordBreak: 'break-word',
+                        border: '1px solid #dee2e6'
                       }}>
                         {(() => {
                           try {
-                            // Parse server logs if it's a JSON string
+                            // First try to use ml_server_logs if available
+                            if (testLogs.ml_server_logs) {
+                              if (Array.isArray(testLogs.ml_server_logs)) {
+                                return testLogs.ml_server_logs.join('\n');
+                              } else {
+                                return testLogs.ml_server_logs;
+                              }
+                            }
+                            
+                            // Fallback to parsing server_logs
                             const logsData = typeof testLogs.server_logs === 'string' 
                               ? JSON.parse(testLogs.server_logs) 
                               : testLogs.server_logs;
                             
-                            // Extract logs array if present
-                            if (logsData.logs && Array.isArray(logsData.logs)) {
+                            // Extract ML logs from server_logs
+                            if (logsData.ml_server_logs && Array.isArray(logsData.ml_server_logs)) {
+                              return logsData.ml_server_logs.join('\n');
+                            } else if (logsData.logs && Array.isArray(logsData.logs)) {
                               return logsData.logs.join('\n');
                             } else if (Array.isArray(logsData)) {
                               return logsData.join('\n');
@@ -1866,9 +1952,29 @@ function App() {
                             }
                           } catch (e) {
                             // If parsing fails, return as-is
-                            return testLogs.server_logs;
+                            return testLogs.server_logs || 'No ML server logs available';
                           }
                         })()}
+                      </pre>
+                    </div>
+                  )}
+
+                  {/* Backend API Server Logs (if needed) */}
+                  {testLogs.backend_logs && testLogs.backend_logs.length > 0 && (
+                    <div style={{ marginBottom: '15px' }}>
+                      <h4 style={{ fontSize: '16px', marginBottom: '5px' }}>Backend API Server Logs</h4>
+                      <pre style={{
+                        backgroundColor: '#f8f9fa',
+                        padding: '10px',
+                        borderRadius: '4px',
+                        overflow: 'auto',
+                        maxHeight: '200px',
+                        fontSize: '12px',
+                        fontFamily: 'monospace',
+                        whiteSpace: 'pre-wrap',
+                        wordBreak: 'break-word'
+                      }}>
+                        {testLogs.backend_logs.join('\n')}
                       </pre>
                     </div>
                   )}

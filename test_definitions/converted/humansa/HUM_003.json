@@ -1,7 +1,7 @@
 {
   "id": "HUM_003",
   "name": "File Attachment PDF Analysis Test",
-  "suite": "humansa",
+  "suite": "appointment",
   "type": "single",
   "priority": 5,
   "tags": ["humansa", "file-attachment", "pdf", "citations", "research"],

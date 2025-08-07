@@ -1,5 +1,5 @@
 {
-  "id": "ORCH_108",
+  "id": "ORC_108",
   "name": "Pattern2 Error Handling Missing Agent Test",
   "suite": "orchestrator",
   "type": "single",

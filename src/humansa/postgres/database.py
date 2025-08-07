@@ -26,7 +26,7 @@ test_host = "127.0.0.1" if is_test else "localhost"
 
 DB_CONFIG = {
     "host": os.getenv("HUMANSA_DB_HOST", os.getenv("DB_HOST", test_host)),
-    "port": int(os.getenv("HUMANSA_DB_PORT", os.getenv("DB_PORT", 5454 if is_test else 5432))),
+    "port": int(os.getenv("HUMANSA_DB_PORT", os.getenv("DB_PORT", 5432))),
     "user": os.getenv("HUMANSA_DB_USER", os.getenv("DB_USER", "postgres" if is_test else "youwo")),
     "password": os.getenv("HUMANSA_DB_PASSWORD", os.getenv("DB_PASSWORD", "12931" if is_test else "youwo123")),
     "dbname": os.getenv("HUMANSA_DB_NAME", os.getenv("DB_NAME", "test4" if is_test else "youwoai")),
@@ -63,7 +63,7 @@ class HumansaDatabase:
                 with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                     # First try exact match
                     exact_query = """
-                        SELECT d.doctor_code, d.clinic_id, d.name, d.title, 
+                        SELECT d.doctor_code, d.clinic_code, d.name, d.title, 
                                d.specialty as expertise, d.qualifications as bio, d.consultation_fee as registration_fee,
                                c.name as clinic_name, c.address, c.phone
                         FROM humansa_doctor d
@@ -79,7 +79,7 @@ class HumansaDatabase:
 
                     # If no exact match, try fuzzy matching with ILIKE
                     fuzzy_query = """
-                        SELECT d.doctor_code, d.clinic_id, d.name, d.title, 
+                        SELECT d.doctor_code, d.clinic_code, d.name, d.title, 
                                d.specialty as expertise, d.qualifications as bio, d.consultation_fee as registration_fee,
                                c.name as clinic_name, c.address, c.phone
                         FROM humansa_doctor d
@@ -129,11 +129,11 @@ class HumansaDatabase:
                             search_date = date_str
 
                         query = """
-                            SELECT s.doctor_id, s.shift_date, s.start_time, s.end_time, 
+                            SELECT s.doctor_code, s.shift_date, s.start_time, s.end_time, 
                                    s.remaining_slots, s.clinic_code,
                                    d.name as doctor_name, c.name as clinic_name
                             FROM humansa_schedule s
-                            LEFT JOIN humansa_doctor d ON s.doctor_id = d.doctor_id
+                            LEFT JOIN humansa_doctor d ON s.doctor_code = d.doctor_code
                             LEFT JOIN humansa_clinics c ON s.clinic_code = c.clinic_code
                             WHERE d.name = %s AND s.shift_date = %s AND s.remaining_slots > 0
                             ORDER BY s.start_time
@@ -142,11 +142,11 @@ class HumansaDatabase:
                     else:
                         # Get all future availability for the doctor
                         query = """
-                            SELECT s.doctor_id, s.shift_date, s.start_time, s.end_time, 
+                            SELECT s.doctor_code, s.shift_date, s.start_time, s.end_time, 
                                    s.remaining_slots, s.clinic_code,
                                    d.name as doctor_name, c.name as clinic_name
                             FROM humansa_schedule s
-                            LEFT JOIN humansa_doctor d ON s.doctor_id = d.doctor_id
+                            LEFT JOIN humansa_doctor d ON s.doctor_code = d.doctor_code
                             LEFT JOIN humansa_clinics c ON s.clinic_code = c.clinic_code
                             WHERE d.name = %s AND s.shift_date >= CURRENT_DATE AND s.remaining_slots > 0
                             ORDER BY s.shift_date, s.start_time
@@ -309,7 +309,7 @@ class HumansaDatabase:
 
                     if conditions:
                         specific_query = f"""
-                            SELECT d.doctor_id, d.clinic_code, d.name, d.specialty, 
+                            SELECT d.doctor_code, d.clinic_code, d.name, d.specialty, 
                                    d.expertise, d.qualifications, d.consultation_fee,
                                    c.name as clinic_name, c.address, c.phone, c.city
                             FROM humansa_doctor d
@@ -325,7 +325,7 @@ class HumansaDatabase:
                     # If no specific results, get general fallback
                     if not results:
                         fallback_query = """
-                            SELECT d.doctor_id, d.clinic_code, d.name, d.specialty, 
+                            SELECT d.doctor_code, d.clinic_code, d.name, d.specialty, 
                                    d.expertise, d.qualifications, d.consultation_fee,
                                    c.name as clinic_name, c.address, c.phone, c.city
                             FROM humansa_doctor d
@@ -527,7 +527,7 @@ class HumansaDatabase:
 
                     query = f"""
                         SELECT DISTINCT c.clinic_code, c.name, c.address, c.phone,
-                               COUNT(DISTINCT d.doctor_id) as doctor_count,
+                               COUNT(DISTINCT d.doctor_code) as doctor_count,
                                STRING_AGG(DISTINCT d.specialty, ', ') as specialties
                         FROM humansa_clinics c
                         LEFT JOIN humansa_doctor d ON c.clinic_code = d.clinic_code
@@ -873,7 +873,7 @@ class HumansaDatabase:
                         SELECT s.*, d.name as doctor_name, c.name as clinic_name
                         FROM humansa_schedule s
                         JOIN humansa_doctor d ON s.doctor_code = d.doctor_code
-                        JOIN humansa_clinics c ON s.clinic_id = c.id
+                        JOIN humansa_clinics c ON s.clinic_code = c.clinic_code
                         WHERE s.doctor_code = %s 
                         AND s.shift_date = %s
                         AND s.start_time <= %s::time

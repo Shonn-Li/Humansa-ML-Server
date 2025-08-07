@@ -1,7 +1,7 @@
 {
   "id": "VAL_001",
   "name": "Input validation test",
-  "suite": "validation",
+  "suite": "edge_case",
   "type": "single",
   "priority": 3,
   "tags": ["validation", "input_sanitization", "security"],
@@ -32,10 +32,10 @@
     "payload": {
       "model": "gpt-4.1",
       "input": "<script>alert('test')</script> 我想了解健康产品",
-      "user_id": "${user_context.user_id}",
+      "user_id": "test_user_val_001",
       "metadata": {
-        "test_id": "${id}",
-        "test_name": "${name}"
+        "test_id": "VAL_001",
+        "test_name": "Input validation test"
       }
     }
   },

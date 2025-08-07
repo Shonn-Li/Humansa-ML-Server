@@ -84,14 +84,12 @@ class HumansaOrchestratorAgentConsolidated:
         
         # Create base agent with minimal tools (will be updated per query)
         base_tools = self._get_base_tools()
-        # Use new ReActAgent API (llama-index 0.13.0)
-        self.base_agent = ReActAgent(
-            name="HumansaV2ConsolidatedOrchestrator",
-            description="Consolidated orchestrator for HUMANSA V2 medical consultation system",
+        # Use new ReActAgent API with minimal parameters (current API)
+        # Note: 'name', 'description', and 'system_prompt' parameters are no longer supported in newer versions
+        self.base_agent = ReActAgent.from_tools(
             tools=base_tools,
             llm=self.llm,
             verbose=self.debug,
-            system_prompt=orchestrator_prompt,
             callback_manager=self.callback_manager
         )
         

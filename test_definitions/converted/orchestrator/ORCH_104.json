@@ -1,5 +1,5 @@
 {
-  "id": "ORCH_104",
+  "id": "ORC_104",
   "name": "Pattern2 Follow-up Context Persistence Test",
   "suite": "orchestrator",
   "type": "multi_turn",

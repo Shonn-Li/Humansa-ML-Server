@@ -47,11 +47,11 @@
     "payload": {
       "model": "gpt-4.1",
       "input": "9点吧，我叫张三，电话13800138000",
-      "user_id": "${user_context.user_id}",
-      "previous_response_id": "${previous_response.id}",
+      "user_id": "test_user_mtn_001",
+      "previous_response_id": "prev_resp_mtn_001",
       "metadata": {
-        "test_id": "${id}",
-        "test_name": "${name}"
+        "test_id": "MTN_001",
+        "test_name": "Progressive form filling over multiple turns"
       }
     }
   },
@@ -142,7 +142,7 @@
   
   "cleanup": {
     "commands": [
-      "DELETE FROM test_management.test_case_logs WHERE result_id = '${result.id}'"
+      "DELETE FROM test_management.test_case_logs WHERE result_id = 'result_mtn_001'"
     ],
     "reset_context": true
   }

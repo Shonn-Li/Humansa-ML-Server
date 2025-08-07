@@ -240,14 +240,19 @@ class HumansaOrchestratorAgentTransparent:
         else:
             selected_tools = []
         
-        # Create agent with selected tools
-        agent = ReActAgent.from_tools(
-            tools=selected_tools,
+        # Create agent with selected tools using new LlamaIndex API
+        # ReActAgent now requires a memory parameter
+        from llama_index.core.memory import ChatMemoryBuffer
+        
+        # Create a memory buffer for this agent
+        memory = ChatMemoryBuffer.from_defaults()
+        
+        agent = ReActAgent(
             llm=self.llm,
-            verbose=self.debug,
-            system_prompt=self.orchestrator_prompt,
+            tools=selected_tools,
+            memory=memory,
             callback_manager=self.callback_manager,
-            max_iterations=10
+            verbose=self.debug
         )
         return agent, selected_tools
     
@@ -305,11 +310,21 @@ class HumansaOrchestratorAgentTransparent:
         full_query = f"{context}当前查询：{query}" if context else query
         
         try:
-            # Process query
+            # Process query using the chat API
+            # Use asyncio.to_thread for sync chat method
+            import asyncio
             response = await asyncio.to_thread(agent.chat, full_query)
             
+            # Extract response text from AgentChatResponse
+            if hasattr(response, 'response'):
+                response_text = str(response.response)
+            elif hasattr(response, 'output'):
+                response_text = str(response.output)
+            else:
+                response_text = str(response)
+            
             # Build output array from captured steps
-            output_items = self._build_output_array(response)
+            output_items = self._build_output_array(response_text)
             
             # Extract tools used
             tools_used = list(set([
@@ -451,8 +466,23 @@ class HumansaOrchestratorAgentTransparent:
         full_query = f"{context}当前查询：{query}" if context else query
         
         try:
-            # Get streaming response
-            streaming_response = agent.stream_chat(full_query)
+            # Get response using run method (streaming not directly supported)
+            handler = agent.run(full_query)
+            response = await handler
+            
+            # Extract response text from WorkflowHandler result
+            if hasattr(response, 'response'):
+                response_text = str(response.response)
+            elif hasattr(response, 'output'):
+                response_text = str(response.output)
+            else:
+                response_text = str(response)
+            
+            # Clean the response text
+            response_text = self._clean_agent_response(response_text)
+            
+            # Create a fake streaming response from the result
+            streaming_response = self._create_streaming_response(response_text)
             
             output_index = 0
             current_text = ""
@@ -728,3 +758,22 @@ class HumansaOrchestratorAgentTransparent:
         
         # Rough estimation
         return (chinese_chars // 2) + (other_chars // 4)
+    
+    def _create_streaming_response(self, response_text: str):
+        """Create a fake streaming response from a complete text"""
+        class FakeStreamingResponse:
+            def __init__(self, text):
+                self.response_gen = self._chunk_text(text)
+            
+            def _chunk_text(self, text):
+                # Split text into reasonable chunks for streaming
+                words = text.split()
+                chunk_size = 5  # Stream 5 words at a time
+                
+                for i in range(0, len(words), chunk_size):
+                    chunk = ' '.join(words[i:i+chunk_size])
+                    if i + chunk_size < len(words):
+                        chunk += ' '  # Add space if not last chunk
+                    yield chunk
+        
+        return FakeStreamingResponse(response_text)

@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 is_test = os.getenv("ENVIRONMENT") == "test"
 DB_CONFIG = {
     "host": os.getenv("DB_HOST", "localhost"),
-    "port": int(os.getenv("DB_PORT", 5454 if is_test else 5432)),
+    "port": int(os.getenv("DB_PORT", 5432)),
     "user": os.getenv("DB_USER", os.getenv("DB_USERNAME", "postgres" if is_test else "youwo")),
     "password": os.getenv("DB_PASSWORD", "12931" if is_test else "youwo123"),
     "dbname": os.getenv("DB_NAME", os.getenv("DB_ACTIVE_DATABASE", "youwoai_test" if is_test else "youwoai")),

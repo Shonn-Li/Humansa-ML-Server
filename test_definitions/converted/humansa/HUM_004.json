@@ -1,7 +1,7 @@
 {
   "id": "HUM_004",
   "name": "Web Search Current Events Test",
-  "suite": "humansa",
+  "suite": "appointment",
   "type": "single",
   "priority": 4,
   "tags": ["humansa", "web-search", "current-events", "citations"],

@@ -1,7 +1,7 @@
 {
   "id": "API_103",
   "name": "Response Retrieval Test",
-  "suite": "api",
+  "suite": "integration",
   "type": "single",
   "priority": 3,
   "tags": ["api", "responses", "retrieval", "history"],
@@ -17,8 +17,12 @@
     }
   },
   "execution": {
-    "endpoint": "/v2/humansa/responses/${response_id}",
-    "method": "GET"
+    "endpoint": "/v2/humansa/responses/resp_api_103",
+    "method": "GET",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {}
   },
   "expectations": {
     "response": {

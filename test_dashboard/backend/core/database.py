@@ -177,9 +177,17 @@ async def execute_update(query: str, params: dict = None) -> Optional[str]:
                 # Replace %(name)s with $1, $2, etc
                 for i, name in enumerate(param_names, 1):
                     query = query.replace(f"%({name})s", f"${i}")
-                result = await conn.execute(query, *params.values())
+                
+                # Check if query has RETURNING clause
+                if 'RETURNING' in query.upper():
+                    result = await conn.fetchval(query, *params.values())
+                else:
+                    result = await conn.execute(query, *params.values())
             else:
-                result = await conn.execute(query)
+                if 'RETURNING' in query.upper():
+                    result = await conn.fetchval(query)
+                else:
+                    result = await conn.execute(query)
             return result
         finally:
             await conn.close()

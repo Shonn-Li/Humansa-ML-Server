@@ -69,11 +69,44 @@
     "payload": {
       "model": "gpt-4.1",
       "input": "是的，我更关心临床数据。另外，我刚才提到我是心内科医生，你还记得我的专业背景吗？",
-      "user_id": "${user_context.user_id}",
-      "conversation_history": "${setup.previous_turns}",
+      "user_id": "test_user_ctx_001",
+      "conversation_history": [
+        {
+          "role": "user",
+          "content": "你好，我是刘医生，专门从事心内科工作"
+        },
+        {
+          "role": "assistant",
+          "content": "您好刘医生！很荣幸为您服务。作为心内科专家，您在心血管疾病方面有丰富的经验。今天有什么可以帮助您的吗？"
+        },
+        {
+          "role": "user",
+          "content": "我想了解一些关于高血压患者的保健品推荐"
+        },
+        {
+          "role": "assistant",
+          "content": "刘医生，针对高血压患者的保健品，我推荐以下几类：1）欧米伽-3脂肪酸 2）辅酶Q10 3）镁元素补充剂 4）大蒜提取物。这些都有助于心血管健康。您希望了解哪一类的详细信息？"
+        },
+        {
+          "role": "user",
+          "content": "辅酶Q10比较感兴趣，能详细介绍一下吗？"
+        },
+        {
+          "role": "assistant",
+          "content": "当然！辅酶Q10对心血管健康非常有益：\n1. 作用机制：提高心肌细胞能量代谢，增强心肌收缩力\n2. 适用人群：高血压、心力衰竭、冠心病患者\n3. 推荐剂量：100-200mg/日\n4. 注意事项：与他汀类药物有协同作用\n\n作为心内科医生，您肯定了解其临床价值。有具体的产品品牌想了解吗？"
+        },
+        {
+          "role": "user",
+          "content": "有推荐的品牌吗？我主要关心质量和纯度"
+        },
+        {
+          "role": "assistant",
+          "content": "基于质量和纯度考虑，我推荐几个国际知名品牌：\n1. Nature Made - USP认证，纯度高\n2. Qunol - 水溶性配方，吸收好\n3. Doctor's Best - 医生推荐品牌\n4. Kirkland - 性价比高\n\n这些品牌都通过了第三方质量检测。作为心内科专家，您可能也希望了解临床研究数据支持最充分的品牌？"
+        }
+      ],
       "metadata": {
-        "test_id": "${id}",
-        "test_name": "${name}"
+        "test_id": "CTX_001",
+        "test_name": "Long conversation context persistence test"
       }
     }
   },

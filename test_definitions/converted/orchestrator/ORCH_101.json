@@ -1,5 +1,5 @@
 {
-  "id": "ORCH_101",
+  "id": "ORC_101",
   "name": "Workflow API Integration Streaming Test",
   "suite": "orchestrator",
   "type": "single",

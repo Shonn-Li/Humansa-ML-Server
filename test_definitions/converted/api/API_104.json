@@ -1,7 +1,7 @@
 {
   "id": "API_104",
   "name": "Streaming Response Continuation Test",
-  "suite": "api",
+  "suite": "integration",
   "type": "single",
   "priority": 4,
   "tags": ["api", "responses", "streaming", "continuation"],
@@ -17,7 +17,7 @@
     }
   },
   "execution": {
-    "endpoint": "/v2/humansa/responses/${previous_response_id}/stream",
+    "endpoint": "/v2/humansa/responses/prev_resp_api_104/stream",
     "method": "POST",
     "payload": {
       "input": "她还需要定期复查哪些项目？",

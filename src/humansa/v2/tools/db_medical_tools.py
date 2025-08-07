@@ -31,8 +31,8 @@ class DatabaseMedicalTools:
                 c.address as clinic_address,
                 c.phone as clinic_phone,
                 c.nearest_mrt
-            FROM humansa_doctors d
-            JOIN humansa_clinics c ON d.clinic_id = c.clinic_id
+            FROM humansa_doctor d
+            JOIN humansa_clinics c ON d.clinic_code = c.clinic_code
             WHERE d.is_active = true
         """
         
@@ -95,7 +95,7 @@ class DatabaseMedicalTools:
         results = []
         for row in rows:
             results.append({
-                "doctor_id": row['doctor_id'],
+                "doctor_id": row['doctor_code'],
                 "name": row['name'],
                 "specialty": row['specialty'],
                 "sub_specialty": row['sub_specialty'],
@@ -133,9 +133,9 @@ class DatabaseMedicalTools:
         async with self.db_pool.acquire() as conn:
             doctor = await conn.fetchrow("""
                 SELECT d.*, c.name as clinic_name
-                FROM humansa_doctors d
-                JOIN humansa_clinics c ON d.clinic_id = c.clinic_id
-                WHERE d.doctor_id = $1
+                FROM humansa_doctor d
+                JOIN humansa_clinics c ON d.clinic_code = c.clinic_code
+                WHERE d.doctor_code = $1
             """, doctor_id)
             
             if not doctor:
@@ -144,7 +144,7 @@ class DatabaseMedicalTools:
             # Get available slots
             slots = await conn.fetch("""
                 SELECT * FROM humansa_appointment_slots
-                WHERE doctor_id = $1
+                WHERE doctor_code = $1
                 AND date >= $2::date
                 AND date <= $3::date
                 AND is_available = true
@@ -214,8 +214,8 @@ class DatabaseMedicalTools:
                 slot = await conn.fetchrow("""
                     SELECT s.*, d.name as doctor_name, d.specialty, c.name as clinic_name
                     FROM humansa_appointment_slots s
-                    JOIN humansa_doctors d ON s.doctor_id = d.doctor_id
-                    JOIN humansa_clinics c ON d.clinic_id = c.clinic_id
+                    JOIN humansa_doctor d ON s.doctor_code = d.doctor_code
+                    JOIN humansa_clinics c ON d.clinic_code = c.clinic_code
                     WHERE s.slot_id = $1 AND s.is_available = true
                     FOR UPDATE
                 """, slot_id)
@@ -243,8 +243,8 @@ class DatabaseMedicalTools:
                     appointment_id,
                     slot_id,
                     user_id,
-                    slot['doctor_id'],
-                    slot['clinic_id'],
+                    slot['doctor_code'],
+                    slot['clinic_code'],
                     slot['date'],
                     slot['time'],
                     slot['consultation_type'],
@@ -284,8 +284,8 @@ class DatabaseMedicalTools:
                 c.address as clinic_address,
                 c.phone as clinic_phone
             FROM humansa_appointments a
-            JOIN humansa_doctors d ON a.doctor_id = d.doctor_id
-            JOIN humansa_clinics c ON a.clinic_id = c.clinic_id
+            JOIN humansa_doctor d ON a.doctor_code = d.doctor_code
+            JOIN humansa_clinics c ON a.clinic_code = c.clinic_code
             WHERE a.user_id = $1
         """
         
@@ -369,7 +369,7 @@ class DatabaseMedicalTools:
         query = """
             SELECT 
                 ms.service_code,
-                ms.service_name as name,
+                ms.name,
                 ms.service_type,
                 ms.department,
                 ms.description,
@@ -390,7 +390,7 @@ class DatabaseMedicalTools:
         
         if service_name:
             param_count += 1
-            conditions.append(f"LOWER(ms.service_name) LIKE LOWER(${param_count})")
+            conditions.append(f"LOWER(ms.name) LIKE LOWER(${param_count})")
             params.append(f"%{service_name}%")
             
         if specialty:
@@ -406,7 +406,7 @@ class DatabaseMedicalTools:
         if conditions:
             query += " AND " + " AND ".join(conditions)
             
-        query += " ORDER BY ms.service_name"
+        query += " ORDER BY ms.name"
         
         async with self.db_pool.acquire() as conn:
             # First try humansa_medical_service
@@ -489,9 +489,9 @@ class DatabaseMedicalTools:
     ) -> List[Dict[str, Any]]:
         """Get information about clinics."""
         query = """
-            SELECT c.*, COUNT(d.doctor_id) as doctor_count
+            SELECT c.*, COUNT(d.doctor_code) as doctor_count
             FROM humansa_clinics c
-            LEFT JOIN humansa_doctors d ON c.clinic_id = d.clinic_id
+            LEFT JOIN humansa_doctor d ON c.clinic_code = d.clinic_code
             WHERE 1=1
         """
         
@@ -512,7 +512,7 @@ class DatabaseMedicalTools:
         if conditions:
             query += " AND " + " AND ".join(conditions)
             
-        query += " GROUP BY c.clinic_id ORDER BY c.name"
+        query += " GROUP BY c.clinic_code ORDER BY c.name"
         
         async with self.db_pool.acquire() as conn:
             rows = await conn.fetch(query, *params)
@@ -520,7 +520,7 @@ class DatabaseMedicalTools:
         results = []
         for row in rows:
             results.append({
-                "clinic_id": row['clinic_id'],
+                "clinic_id": row['clinic_code'],
                 "name": row['name'],
                 "type": row['type'],
                 "region": row['region'],

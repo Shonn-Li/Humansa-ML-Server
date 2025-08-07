@@ -1,7 +1,7 @@
 {
   "id": "HUM_006",
   "name": "Multi-Agent Context and Attachment Test",
-  "suite": "humansa",
+  "suite": "appointment",
   "type": "single",
   "priority": 5,
   "tags": ["humansa", "multi-agent", "context-search", "file-search", "coordination"],

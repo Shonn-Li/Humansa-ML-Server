@@ -1,5 +1,5 @@
 {
-  "id": "ORCH_004",
+  "id": "ORC_004",
   "name": "Pattern2 Orchestrator - Patient Profile with Allergies",
   "suite": "orchestrator",
   "type": "single",
@@ -20,11 +20,11 @@
       }
     },
     "previous_turns": [
-      {"role": "system", "content": "Patient has peanut allergy"}
+      {"role": "user", "content": "Patient has peanut allergy"}
     ],
     "environment": {
       "AZURE_OPENAI_DEPLOYMENT_NAME": "gpt-4",
-      "debug": true
+      "debug": "true"
     }
   },
   "execution": {
@@ -37,7 +37,7 @@
       "query": "我对花生过敏，有什么适合我的营养补充品？",
       "user_id": "test_user_002",
       "messages": [
-        {"role": "system", "content": "Patient has peanut allergy"},
+        {"role": "user", "content": "Patient has peanut allergy"},
         {"role": "user", "content": "我对花生过敏，有什么适合我的营养补充品？"}
       ],
       "stream": true

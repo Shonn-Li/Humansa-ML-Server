@@ -27,19 +27,37 @@ from quart import Quart, jsonify, request, Response
 from quart_cors import cors
 from dotenv import load_dotenv
 
+# Save any pre-existing critical environment variables from subprocess
+existing_db_host = os.getenv('DB_HOST')
+existing_db_port = os.getenv('DB_PORT')
+existing_db_user = os.getenv('DB_USER')
+existing_db_password = os.getenv('DB_PASSWORD')
+existing_db_name = os.getenv('DB_NAME')
+
 # Load environment variables
 # First load .env (shared configuration)
 load_dotenv()
 # Then load .env.local (local overrides)
 load_dotenv('.env.local', override=True)
 
+# Restore critical DB settings if they were set by subprocess (for multi-instance)
+if existing_db_host:
+    os.environ['DB_HOST'] = existing_db_host
+if existing_db_port:
+    os.environ['DB_PORT'] = existing_db_port
+if existing_db_user:
+    os.environ['DB_USER'] = existing_db_user
+if existing_db_password:
+    os.environ['DB_PASSWORD'] = existing_db_password
+if existing_db_name:
+    os.environ['DB_NAME'] = existing_db_name
+
 # Override with environment variables if they exist
 # This allows test environments to override .env settings
 if os.getenv('ENVIRONMENT') == 'test':
     # Test environment overrides - use test database settings
     # Only set if not already set by environment
-    if not os.getenv('DB_PORT'):
-        os.environ['DB_PORT'] = '5454'
+    # DB_PORT is now dynamically set by the instance manager for multi-instance support
     if not os.getenv('DB_USER'):
         os.environ['DB_USER'] = 'postgres'
     if not os.getenv('DB_PASSWORD'):
@@ -176,11 +194,29 @@ def create_app():
     @app.route("/health", methods=["GET"])
     async def health():
         """Health check endpoint for ALB and Docker"""
+        # Get the actual port the server is running on
+        try:
+            digit = int(os.getenv('DIGIT', '0'))
+        except (ValueError, TypeError):
+            digit = 0
+            
+        if digit > 0:
+            # Multi-instance mode: port is 6010 + digit
+            actual_port = 6010 + digit
+        else:
+            # Normal mode: use ML_SERVER_PORT or default
+            try:
+                actual_port = int(os.getenv('ML_SERVER_PORT', str(5000 + digit)))
+            except (ValueError, TypeError):
+                actual_port = 5001
+        
         return jsonify({
             "status": "healthy",
             "service": "ml-server",
-            "port": int(os.getenv('ML_SERVER_PORT', str(5000 + int(os.getenv('DIGIT', '0'))))),
-            "timestamp": str(__import__('datetime').datetime.now())
+            "port": actual_port,
+            "digit": digit,
+            "timestamp": str(__import__('datetime').datetime.now()),
+            "enhanced_logging": os.getenv('HUMANSA_ENHANCED_LOGGING', '').lower() == 'true'
         })
 
     # Ping endpoint for basic connectivity test
@@ -853,10 +889,14 @@ async def create_db_pool():
         # Get database configuration from environment
         is_test = os.getenv('ENVIRONMENT') == 'test'
         db_host = os.getenv('DB_HOST', 'localhost')
-        db_port = int(os.getenv('DB_PORT', '5454' if is_test else '5432'))
+        db_port = int(os.getenv('DB_PORT', '5432'))
         db_user = os.getenv('DB_USER', 'postgres')
         db_password = os.getenv('DB_PASSWORD', '12931')
         db_name = os.getenv('DB_NAME', 'youwoai_test' if is_test else 'youwoai')
+        
+        # Debug environment variables
+        logger.info(f"🔍 DB_HOST env var: {os.getenv('DB_HOST')} (default: localhost)")
+        logger.info(f"🔍 Raw DB_HOST: {db_host}")
         
         logger.info(f"🔄 Creating database pool: {db_user}@{db_host}:{db_port}/{db_name}")
         logger.info(f"   Environment: {os.getenv('ENVIRONMENT', 'production')}")

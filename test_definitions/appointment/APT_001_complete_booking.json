@@ -34,10 +34,10 @@
     "payload": {
       "model": "gpt-4.1",
       "input": "我想预约李明医生明天上午9点看头痛，我叫张三，电话13800138000",
-      "user_id": "${user_context.user_id}",
+      "user_id": "test_user_apt_001",
       "metadata": {
-        "test_id": "${id}",
-        "test_name": "${name}"
+        "test_id": "APT_001",
+        "test_name": "Complete appointment booking with all information"
       }
     }
   },

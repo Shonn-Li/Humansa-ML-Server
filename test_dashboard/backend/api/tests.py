@@ -196,7 +196,12 @@ test_catalog: Dict[str, TestCatalogEntry] = {}
 test_definitions: Dict[str, TestDefinition] = {}
 
 # Load JSON schema for validation
-TEST_SCHEMA_PATH = "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions/test_schema.json"
+import os
+from pathlib import Path
+
+# Get the repository root (4 levels up from backend/api/)
+REPO_ROOT = Path(__file__).parent.parent.parent.parent
+TEST_SCHEMA_PATH = str(REPO_ROOT / "test_definitions" / "test_schema.json")
 test_schema = None
 
 def load_test_schema():
@@ -276,7 +281,7 @@ def validate_test_definition(test_data: Dict[str, Any]) -> TestValidationResult:
 async def discover_test_files(directory: str = None) -> List[str]:
     """Discover test definition files"""
     if not directory:
-        directory = "/Users/shonnli/Non-icloudFile/YouWoAI/Code_Copy/Copy-1/YouWoAI-ML-Server-1/test_definitions"
+        directory = str(REPO_ROOT / "test_definitions")
     
     test_files = []
     

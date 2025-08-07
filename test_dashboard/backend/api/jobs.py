@@ -57,13 +57,15 @@ class TestReference(BaseModel):
 class JobConfig(BaseModel):
     """Job execution configuration"""
     execution_mode: ExecutionMode = ExecutionMode.PARALLEL
-    max_parallel_workers: int = Field(default=4, ge=1, le=20)
+    max_parallel_workers: int = Field(default=8, ge=1, le=20)
     timeout_per_test: int = Field(default=30, ge=5, le=300)
     retry_failed_tests: bool = True
     max_retries: int = Field(default=2, ge=0, le=5)
     continue_on_failure: bool = True
     environment_id: Optional[int] = None
     tags: List[str] = []
+    use_multi_instance: Optional[bool] = Field(None, description="Use multi-instance ML servers for parallel execution (defaults to settings)")
+    max_workers: Optional[int] = Field(None, description="Alias for max_parallel_workers for multi-instance mode")
 
 
 class JobCreate(BaseModel):
@@ -706,8 +708,25 @@ async def execute_job(job_id: str, execution: JobExecution, background_tasks: Ba
     if not execution.dry_run:
         # Start execution in background
         if ENHANCED_EXECUTION_AVAILABLE:
-            from test_dashboard.backend.api.jobs_enhanced import execute_job_background_enhanced
-            background_tasks.add_task(execute_job_background_enhanced, job_id, run_id, config)
+            from test_dashboard.backend.api.jobs_enhanced import execute_job_background_enhanced, execute_job_background_multi_instance
+            from test_dashboard.backend.core.settings import settings_manager
+            
+            # Determine if multi-instance mode should be used
+            dashboard_settings = settings_manager.get()
+            use_multi_instance = config.use_multi_instance
+            
+            # If not explicitly set, use dashboard default
+            if use_multi_instance is None:
+                use_multi_instance = dashboard_settings.multi_instance.enabled
+            
+            # Use multi-instance mode if enabled
+            if use_multi_instance:
+                # Set max_workers from max_parallel_workers if not explicitly set
+                if config.max_workers is None:
+                    config.max_workers = config.max_parallel_workers
+                background_tasks.add_task(execute_job_background_multi_instance, job_id, run_id, config)
+            else:
+                background_tasks.add_task(execute_job_background_enhanced, job_id, run_id, config)
         else:
             background_tasks.add_task(execute_job_background, job_id, run_id, config)
     
@@ -785,8 +804,15 @@ async def resume_job(job_id: str, background_tasks: BackgroundTasks):
     
     # Resume execution
     if ENHANCED_EXECUTION_AVAILABLE:
-        from test_dashboard.backend.api.jobs_enhanced import execute_job_background_enhanced
-        background_tasks.add_task(execute_job_background_enhanced, job_id, job.run_id, job.config)
+        from test_dashboard.backend.api.jobs_enhanced import execute_job_background_enhanced, execute_job_background_multi_instance
+        # Use multi-instance mode if enabled
+        if hasattr(job.config, 'use_multi_instance') and job.config.use_multi_instance:
+            # Set max_workers from max_parallel_workers if not explicitly set
+            if hasattr(job.config, 'max_workers') and job.config.max_workers is None:
+                job.config.max_workers = job.config.max_parallel_workers
+            background_tasks.add_task(execute_job_background_multi_instance, job_id, job.run_id, job.config)
+        else:
+            background_tasks.add_task(execute_job_background_enhanced, job_id, job.run_id, job.config)
     else:
         background_tasks.add_task(execute_job_background, job_id, job.run_id, job.config)
     

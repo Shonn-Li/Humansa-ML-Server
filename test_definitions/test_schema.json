@@ -73,7 +73,7 @@
           "properties": {
             "user_id": {
               "type": "string",
-              "default": "test_user_${test_id}"
+              "default": "test_user_unknown"
             },
             "profile": {
               "type": "object",

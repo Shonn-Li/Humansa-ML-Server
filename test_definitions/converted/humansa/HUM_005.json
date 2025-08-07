@@ -1,7 +1,7 @@
 {
   "id": "HUM_005",
   "name": "Code Interpreter Fibonacci Test",
-  "suite": "humansa",
+  "suite": "appointment",
   "type": "single",
   "priority": 4,
   "tags": ["humansa", "code-interpreter", "fibonacci", "calculation"],

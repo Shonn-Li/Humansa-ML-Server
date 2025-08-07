@@ -13,7 +13,7 @@
   },
   "setup": {
     "user_context": {
-      "user_id": "test_user_stream_014_${session_id}"
+      "user_id": "test_user_stream_014_session_str_014"
     }
   },
   "execution": {
@@ -21,12 +21,12 @@
     "method": "POST",
     "payload": {
       "model": "gpt-4.1",
-      "input": "会话${session_id}: 请简单介绍一下针灸",
-      "user_id": "test_user_stream_014_${session_id}",
+      "input": "会话session_str_014: 请简单介绍一下针灸",
+      "user_id": "test_user_stream_014_session_str_014",
       "stream": true,
       "metadata": {
         "test_id": "STREAM_014",
-        "session_id": "${session_id}"
+        "session_id": "session_str_014"
       }
     }
   },

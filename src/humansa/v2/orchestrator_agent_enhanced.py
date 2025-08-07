@@ -162,14 +162,12 @@ class HumansaOrchestratorAgentEnhanced:
         # Use the REACT prompt which includes proper identity
         orchestrator_prompt = HUMANSA_REACT_PROMPT_V2.format(current_date=current_date)
         
-        # Create orchestrator agent using new API (llama-index 0.13.0)
-        self.orchestrator = ReActAgent(
-            name="HumansaV2EnhancedOrchestrator",
-            description="Enhanced orchestrator for HUMANSA V2 medical consultation system",
+        # Create orchestrator agent with minimal parameters (current API)
+        # Note: 'name', 'description', and 'system_prompt' parameters are no longer supported in newer versions
+        self.orchestrator = ReActAgent.from_tools(
             tools=self.tools,
             llm=self.llm,
             verbose=True,  # Always verbose for agent flow visibility
-            system_prompt=orchestrator_prompt,
             callback_manager=self.callback_manager
         )
         

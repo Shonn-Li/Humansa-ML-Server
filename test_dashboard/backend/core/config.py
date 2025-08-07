@@ -25,7 +25,7 @@ except ImportError:
                 'DB_NAME': 'test1',
                 'ML_SERVER_PORT': None,
                 'ML_SERVER_DIGIT': None,
-                'MAX_PARALLEL_WORKERS': 4,
+                'MAX_PARALLEL_WORKERS': 8,
                 'DEFAULT_TEST_TIMEOUT': 30,
                 'LOG_BUFFER_SIZE': 1000,
                 'TEST_DEFINITIONS_PATH': 'test_definitions',
@@ -69,7 +69,7 @@ class Settings(BaseSettings):
     ML_SERVER_DIGIT: Optional[int] = None
     
     # Test execution settings
-    MAX_PARALLEL_WORKERS: int = 4
+    MAX_PARALLEL_WORKERS: int = 8
     DEFAULT_TEST_TIMEOUT: int = 30
     LOG_BUFFER_SIZE: int = 1000
     

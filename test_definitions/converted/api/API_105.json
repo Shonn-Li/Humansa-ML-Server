@@ -1,7 +1,7 @@
 {
   "id": "API_105",
   "name": "Conversation Tree Retrieval Test",
-  "suite": "api",
+  "suite": "integration",
   "type": "single",
   "priority": 3,
   "tags": ["api", "responses", "conversation-tree", "branching"],
@@ -17,8 +17,12 @@
     }
   },
   "execution": {
-    "endpoint": "/v2/humansa/responses/conversations/${conversation_id}/tree",
-    "method": "GET"
+    "endpoint": "/v2/humansa/responses/conversations/conv_api_105/tree",
+    "method": "GET",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "payload": {}
   },
   "expectations": {
     "response": {

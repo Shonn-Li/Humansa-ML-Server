@@ -27,9 +27,11 @@ from test_dashboard.backend.api import (
     tests,
     runs,
     results,
-    export
+    export,
+    instances
 )
-from test_dashboard.backend.core.config import settings
+
+from test_dashboard.backend.core.config import settings as app_settings
 from test_dashboard.backend.core.database import init_db
 from test_dashboard.backend.core.websocket import ConnectionManager
 
@@ -39,6 +41,8 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+from test_dashboard.backend.api import settings
 
 
 @asynccontextmanager
@@ -57,10 +61,34 @@ async def lifespan(app: FastAPI):
     # Start background tasks
     app.state.tasks = []
     
+    # Initialize settings and instance pool based on configuration
+    from test_dashboard.backend.core.settings import settings_manager
+    from test_dashboard.backend.api.instances import instance_pool
+    
+    dashboard_settings = settings_manager.get()
+    
+    # Check if multi-instance mode is enabled
+    if dashboard_settings.multi_instance.enabled and dashboard_settings.multi_instance.auto_start:
+        num_instances = dashboard_settings.multi_instance.default_instances
+        logger.info(f"Multi-instance mode enabled. Initializing {num_instances} instances...")
+        try:
+            await instance_pool.initialize(num_instances)
+            logger.info("Multi-instance pool initialized successfully")
+        except Exception as e:
+            logger.error(f"Failed to initialize instance pool: {e}")
+    else:
+        logger.info("Multi-instance mode disabled or auto-start disabled")
+    
     yield
     
     # Shutdown
     logger.info("Shutting down Test Management Dashboard...")
+    
+    # Shutdown instance pool if initialized
+    from test_dashboard.backend.api.instances import instance_pool
+    if instance_pool.instances:
+        logger.info("Shutting down instance pool...")
+        await instance_pool.shutdown()
     
     # Cancel background tasks
     for task in app.state.tasks:
@@ -108,6 +136,8 @@ app.include_router(tests.router, prefix="/api/tests", tags=["tests"])
 app.include_router(runs.router, prefix="/api/runs", tags=["runs"])
 app.include_router(results.router, prefix="/api/results", tags=["results"])
 app.include_router(export.router, prefix="/api/export", tags=["export"])
+app.include_router(instances.router, prefix="/api/instances", tags=["instances"])
+app.include_router(settings.router, prefix="/api/settings", tags=["settings"])
 
 # Mount static files (for React build)
 if Path("test_dashboard/frontend/build").exists():
@@ -131,7 +161,7 @@ async def health_check():
     return {
         "status": "healthy",
         "service": "test-dashboard",
-        "port": settings.PORT
+        "port": app_settings.PORT
     }
 
 
@@ -144,39 +174,38 @@ async def get_system_info():
     environments = []
     if is_database_available():
         from test_dashboard.backend.core.database import execute_query
-        env_query = "SELECT name, digit, base_port, status FROM test_management.environments ORDER BY digit"
+        env_query = "SELECT name, config, is_active FROM test_management.environments ORDER BY name"
         env_rows = await execute_query(env_query, {})
         environments = [
             {
                 "name": row['name'],
-                "digit": row['digit'],
-                "port": row['base_port'] + row['digit'],
-                "status": row['status']
+                "config": row['config'],
+                "active": row['is_active']
             }
             for row in env_rows
         ]
     
     return {
         "dashboard": {
-            "backend_port": settings.PORT,
+            "backend_port": app_settings.PORT,
             "frontend_port": 3020,
-            "api_docs": f"http://localhost:{settings.PORT}/docs"
+            "api_docs": f"http://localhost:{app_settings.PORT}/docs"
         },
         "database": {
-            "host": settings.DB_HOST,
-            "port": settings.DB_PORT,
-            "database": settings.DB_NAME,
-            "user": settings.DB_USER,
-            "password": "*" * len(settings.DB_PASSWORD) if settings.DB_PASSWORD else "Not set",
+            "host": app_settings.DB_HOST,
+            "port": app_settings.DB_PORT,
+            "database": app_settings.DB_NAME,
+            "user": app_settings.DB_USER,
+            "password": "*" * len(app_settings.DB_PASSWORD) if app_settings.DB_PASSWORD else "Not set",
             "schema": "test_management",
             "available": is_database_available()
         },
         "test_environments": environments,
         "ml_server": {
             "base_port": 6000,
-            "digit": settings.ML_SERVER_DIGIT,
-            "test_port": 6000 + settings.ML_SERVER_DIGIT,
-            "description": f"ML Server runs on port {6000 + settings.ML_SERVER_DIGIT} (base_port + digit)"
+            "digit": app_settings.ML_SERVER_DIGIT,
+            "test_port": 6000 + app_settings.ML_SERVER_DIGIT,
+            "description": f"ML Server runs on port {6000 + app_settings.ML_SERVER_DIGIT} (base_port + digit)"
         }
     }
 
@@ -199,7 +228,7 @@ if __name__ == "__main__":
     uvicorn.run(
         "main:app",
         host="0.0.0.0",
-        port=settings.PORT,
-        reload=settings.DEBUG,
+        port=app_settings.PORT,
+        reload=app_settings.DEBUG,
         log_level="info"
     )
