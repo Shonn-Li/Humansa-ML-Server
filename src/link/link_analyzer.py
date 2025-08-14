@@ -296,6 +296,85 @@ def analyze_youtube_content(url: str, languages: Optional[List[str]] = None) -> 
             raise Exception(f"Failed to extract YouTube transcript: {str(e)}")
 
 
+def check_bilibili_public_subtitles(video_id: str) -> Dict[str, Any]:
+    """Check if Bilibili video has publicly accessible subtitles without authentication."""
+    try:
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            'Referer': 'https://www.bilibili.com/',
+            'Accept': 'application/json, text/plain, */*'
+        }
+        
+        # Get video info first
+        info_url = "https://api.bilibili.com/x/web-interface/view"
+        params = {'bvid': video_id} if video_id.startswith('BV') else {'aid': video_id[2:]}
+        
+        response = requests.get(info_url, params=params, headers=headers, timeout=10)
+        if response.status_code != 200:
+            return {'success': False, 'message': 'Failed to get video info'}
+            
+        data = response.json()
+        if data.get('code') != 0:
+            return {'success': False, 'message': data.get('message', 'Unknown error')}
+            
+        video_info = data['data']
+        cid = video_info.get('cid')
+        title = video_info.get('title', 'Unknown Title')
+        
+        if not cid:
+            return {'success': False, 'message': 'No CID found'}
+        
+        # Get player info with subtitle data
+        player_url = "https://api.bilibili.com/x/player/wbi/v2"
+        player_params = {'bvid': video_id, 'cid': cid} if video_id.startswith('BV') else {'aid': video_id[2:], 'cid': cid}
+        
+        response = requests.get(player_url, params=player_params, headers=headers, timeout=10)
+        if response.status_code != 200:
+            return {'success': False, 'message': 'Failed to get player info'}
+            
+        player_data = response.json()
+        if player_data.get('code') != 0:
+            return {'success': False, 'message': player_data.get('message', 'Unknown error')}
+            
+        # Check subtitle availability
+        subtitle_info = player_data['data'].get('subtitle', {})
+        subtitles = subtitle_info.get('subtitles', [])
+        need_login = player_data['data'].get('need_login_subtitle', False)
+        
+        if subtitles and not need_login:
+            # Public subtitles are available!
+            return {
+                'success': True,
+                'title': title,
+                'cid': cid,
+                'subtitles': subtitles,
+                'need_login': False,
+                'info': video_info
+            }
+        elif need_login:
+            return {
+                'success': False,
+                'title': title,
+                'cid': cid,
+                'need_login': True,
+                'message': 'Subtitles require authentication',
+                'info': video_info
+            }
+        else:
+            return {
+                'success': False,
+                'title': title,
+                'cid': cid,
+                'need_login': False,
+                'message': 'No subtitles available',
+                'info': video_info
+            }
+            
+    except Exception as e:
+        logger.warning(f"Error checking public subtitles: {str(e)}")
+        return {'success': False, 'message': f'Error checking subtitles: {str(e)}'}
+
+
 async def get_bilibili_subtitle_content(video_obj, video_id: str) -> Dict[str, Any]:
     """Get Bilibili subtitle content with proper async handling."""
     try:
@@ -391,7 +470,7 @@ async def get_bilibili_subtitle_content(video_obj, video_id: str) -> Dict[str, A
 
 
 def analyze_bilibili_content(url: str) -> List[Document]:
-    """Extract transcript with timestamps from Bilibili video."""
+    """Extract transcript with timestamps from Bilibili video using hybrid approach."""
     if not BILIBILI_API_AVAILABLE:
         error_msg = "Bilibili API is not available. Please install bilibili-api-python"
         document = Document(
@@ -409,8 +488,115 @@ def analyze_bilibili_content(url: str) -> List[Document]:
     if not video_id:
         raise ValueError(f"Could not extract video ID from URL: {url}")
 
+    # STEP 1: First try to get subtitles without authentication
+    logger.info(f"Checking for public subtitles for Bilibili video: {video_id}")
+    public_check = check_bilibili_public_subtitles(video_id)
+    
+    if public_check.get('success'):
+        # Public subtitles are available!
+        logger.info("Found public subtitles, fetching content...")
+        subtitles = public_check.get('subtitles', [])
+        if subtitles:
+            # Get the first available subtitle
+            subtitle = subtitles[0]
+            subtitle_url = subtitle.get('subtitle_url', '')
+            if subtitle_url:
+                if subtitle_url.startswith('//'):
+                    subtitle_url = 'https:' + subtitle_url
+                    
+                try:
+                    headers = {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                        'Referer': 'https://www.bilibili.com/',
+                        'Accept': 'application/json, text/plain, */*'
+                    }
+                    response = requests.get(subtitle_url, headers=headers, timeout=30)
+                    if response.status_code == 200:
+                        subtitle_data = response.json()
+                        body = subtitle_data.get('body', [])
+                        
+                        if body:
+                            # Format subtitle with timestamps
+                            formatted_segments = []
+                            formatted_content = []
+                            
+                            for entry in body:
+                                from_time = entry.get('from', 0)
+                                to_time = entry.get('to', 0)
+                                content = entry.get('content', '').strip()
+                                
+                                if content:
+                                    start_timestamp = format_timestamp(from_time)
+                                    end_timestamp = format_timestamp(to_time)
+                                    
+                                    formatted_segments.append({
+                                        'start_timestamp': start_timestamp,
+                                        'end_timestamp': end_timestamp,
+                                        'start_seconds': from_time,
+                                        'end_seconds': to_time,
+                                        'duration': to_time - from_time,
+                                        'text': content
+                                    })
+                                    
+                                    formatted_content.append(
+                                        f"[{start_timestamp} - {end_timestamp}] {content}")
+                            
+                            if formatted_content:
+                                full_content = '\n'.join(formatted_content)
+                                document = Document(
+                                    text=full_content,
+                                    metadata={
+                                        'video_id': video_id,
+                                        'platform': 'bilibili',
+                                        'language': subtitle.get('lan_doc', 'zh'),
+                                        'url': url,
+                                        'title': public_check.get('title', 'Unknown Title'),
+                                        'total_segments': len(formatted_segments),
+                                        'subtitle_available': True,
+                                        'format': 'timestamped_transcript',
+                                        'segments': formatted_segments,
+                                        'access_method': 'public',
+                                        'duration': public_check.get('info', {}).get('duration', 0),
+                                        'view_count': public_check.get('info', {}).get('stat', {}).get('view', 0)
+                                    }
+                                )
+                                logger.info("Successfully fetched public subtitles")
+                                return [document]
+                except Exception as e:
+                    logger.warning(f"Failed to fetch public subtitle content: {str(e)}")
+    
+    # STEP 2: Check if authentication is required
+    if public_check.get('need_login'):
+        logger.info("Subtitles require authentication, checking for SESSDATA...")
+        sessdata = os.getenv('BILIBILI_SESSDATA')
+        
+        if not sessdata:
+            # No authentication available, return informative message
+            document = Document(
+                text=f"This Bilibili video requires authentication to access subtitles.\n\n"
+                     f"Title: {public_check.get('title', 'Unknown Title')}\n"
+                     f"Video ID: {video_id}\n\n"
+                     f"To access subtitles for this video, please set the BILIBILI_SESSDATA environment variable.\n"
+                     f"You can get this by:\n"
+                     f"1. Logging into bilibili.com\n"
+                     f"2. Opening Developer Tools (F12)\n"
+                     f"3. Going to Application/Storage > Cookies\n"
+                     f"4. Copying the SESSDATA cookie value\n"
+                     f"5. Setting it as an environment variable",
+                metadata={
+                    'video_id': video_id,
+                    'platform': 'bilibili',
+                    'url': url,
+                    'title': public_check.get('title', 'Unknown Title'),
+                    'subtitle_available': False,
+                    'format': 'auth_required',
+                    'need_login': True
+                }
+            )
+            return [document]
+    
+    # STEP 3: Try authenticated access if SESSDATA is available
     try:
-        # Create credential if SESSDATA is available in environment
         credential = None
         sessdata = os.getenv('BILIBILI_SESSDATA')
         if sessdata:
@@ -502,6 +688,7 @@ def analyze_bilibili_content(url: str) -> List[Document]:
                 'subtitle_available': True,
                 'format': 'timestamped_transcript',
                 'segments': formatted_segments,
+                'access_method': 'authenticated' if sessdata else 'unknown',
                 'duration': result['info'].get('duration', 0),
                 'view_count': result['info'].get('stat', {}).get('view', 0)
             }
@@ -510,7 +697,24 @@ def analyze_bilibili_content(url: str) -> List[Document]:
         return [document]
 
     except Exception as e:
-        raise Exception(f"Failed to extract Bilibili content: {str(e)}")
+        # Final fallback - no subtitles could be retrieved
+        title = public_check.get('title', 'Unknown Title') if public_check else 'Unknown Title'
+        document = Document(
+            text=f"Failed to extract Bilibili subtitles.\n\n"
+                 f"Title: {title}\n"
+                 f"Video ID: {video_id}\n"
+                 f"Error: {str(e)}",
+            metadata={
+                'video_id': video_id,
+                'platform': 'bilibili',
+                'url': url,
+                'title': title,
+                'subtitle_available': False,
+                'format': 'error',
+                'error': str(e)
+            }
+        )
+        return [document]
 
 
 def analyze_web_content_simple(url: str) -> List[Document]:
