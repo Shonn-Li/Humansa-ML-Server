@@ -54,7 +54,7 @@ except ImportError:
     YOUTUBE_API_AVAILABLE = False
 
 try:
-    from bilibili_api import video, sync
+    from bilibili_api import video, sync, Credential
     BILIBILI_API_AVAILABLE = True
 except ImportError:
     BILIBILI_API_AVAILABLE = False
@@ -380,7 +380,9 @@ async def get_bilibili_subtitle_content(video_obj, video_id: str) -> Dict[str, A
         error_msg = str(e).lower()
         if "credential" in error_msg or "sessdata" in error_msg:
             raise Exception(
-                "Bilibili subtitle access requires authentication. Many videos have subtitles that are only accessible when logged in.")
+                "Bilibili subtitle access requires authentication. To access subtitles for this video, "
+                "please set BILIBILI_SESSDATA environment variable with a valid Bilibili session cookie. "
+                "You can get this by logging into bilibili.com and copying the SESSDATA cookie value.")
         elif "需要 cid" in str(e):
             raise Exception(
                 "Bilibili API requires video page information (cid) to access subtitles.")
@@ -408,12 +410,20 @@ def analyze_bilibili_content(url: str) -> List[Document]:
         raise ValueError(f"Could not extract video ID from URL: {url}")
 
     try:
+        # Create credential if SESSDATA is available in environment
+        credential = None
+        sessdata = os.getenv('BILIBILI_SESSDATA')
+        if sessdata:
+            # Create credential with SESSDATA for authenticated access
+            credential = Credential(sessdata=sessdata)
+            logger.info("Using Bilibili credential for authenticated access")
+        
         # Create video object
         if video_id.startswith('av'):
             aid = int(video_id[2:])
-            v = video.Video(aid=aid)
+            v = video.Video(aid=aid, credential=credential)
         else:
-            v = video.Video(bvid=video_id)
+            v = video.Video(bvid=video_id, credential=credential)
 
         # Get subtitle content with proper async handling
         try:
