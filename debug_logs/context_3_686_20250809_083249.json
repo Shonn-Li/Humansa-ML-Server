@@ -1,0 +1,482 @@
+{
+  "timestamp": "20250809_083249",
+  "user_id": 3,
+  "conversation_id": 686,
+  "request": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Summarize my recent notes and highlight the key points"
+      }
+    ],
+    "model": "gpt-4.1-nano",
+    "enable_rag": true,
+    "enable_citations": true,
+    "enable_web_search": true
+  },
+  "context_agents": [
+    "start_time",
+    "router_agent",
+    "title_task",
+    "title_start_time",
+    "context_search_agent",
+    "web_search_agent",
+    "last_message_id",
+    "last_message_output_index"
+  ],
+  "combined_context_length": 4337,
+  "combined_context_preview": "[1] Note: 2024_-_The_Year_the_GPT_Wrapper_Myth_Proved_Wrong.mp3\nSKIP_EMBEDDING\n\n[2] Note: 5分钟老妈.wav\n这段文本深入探讨了个体在生活与成长中的两大核心维度：出世与入世，以及破局与自我超越的路径。作者强调，一个真正的智慧人应同时具备出世的超然与入世的实践，既能在天地间自成一派，又能积极体验社会的丰富与复杂。从入世的经历中，个体通过痛苦、快乐、背叛等多样体验，提炼出阅历和智慧，逐步实现从知识到经验再到深度思考的层层递进。这种漏斗式的成长路径，是区别普通人与高手的根本底层原因，也是追求高质量人生的关键。作者指出，世界如一个容器，人生的答案藏于其中，高手不排斥入世，反而视其为蜕变的必要过程。\n\n在社会层面，作者分析了各种“局”的本质，强调利益驱动下的入局行为，指出多数人被欲望所蒙蔽，陷入情感、财富、权谋的局中难以自拔。相较之下，高手善于破局，能透过现象看本质，拆解思维中的壁垒，突破原生家庭与认知的限制，从而实现自我突破。破局的核心在于两种路径：一是打破自身局限，如家庭束缚、思维桎梏，二是破坏他人的局势，借助组织与策略操控局中人。许多人身处局中不自知，受人性的弱点、操控规则的影響，若能以局外人视角审视全局，深谋远虑，便能破局而出，掌控主动权。\n\n作者进一步强调，洞察局势的关键在于利弊分析，识别那些\n\n[3] Note: 新录音 3.m4a\n这段对话是一位学生对《陷入冰海》（Trap in Ice）一书的介绍与感受表达。作者为美国水出版公司于1919年出版的作品，讲述一位女孩与家人在北极探险中的经历。学生选择这本书的原因主要基于书名简单易懂，符合其有限的词汇量，同时被书中插图吸引——一只静静站在冰上的女孩与她的狗，营造出一种平静的氛围，暗示故事的朴实与纯粹。然而，学生在阅读过程中发现，尽管词汇简单，但内容依然超出其理解范围，导致阅读困难。学生一度考虑放弃，感受到“有限的选择”带来的无奈，但最终被榜样的力量激励，决定坚持阅读。\n\n在内容方面，书中通过女主角汉恩（Helen）视角，描述她与家人在北极的冒险。故事起因于父亲生病、家庭被迫迁移，最终踏上北极之旅。途中，船只被冰层困住，整个家庭与船员在极寒的环境中挣扎求存，被迫弃船求生，经历了极端的危机。学生特别提到对汉恩与弟弟迈克尔（Mich...",
+  "sources": [
+    {
+      "source_id": "context_1",
+      "type": "note",
+      "type_id": 7610,
+      "title": "2024_-_The_Year_the_GPT_Wrapper_Myth_Proved_Wrong.mp3",
+      "content": "SKIP_EMBEDDING",
+      "url": "youwo://note/7610",
+      "metadata": {
+        "note_id": 7610,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": -1,
+        "score": 1.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_2",
+      "type": "note",
+      "type_id": 7609,
+      "title": "5分钟老妈.wav",
+      "content": "这段文本深入探讨了个体在生活与成长中的两大核心维度：出世与入世，以及破局与自我超越的路径。作者强调，一个真正的智慧人应同时具备出世的超然与入世的实践，既能在天地间自成一派，又能积极体验社会的丰富与复杂。从入世的经历中，个体通过痛苦、快乐、背叛等多样体验，提炼出阅历和智慧，逐步实现从知识到经验再到深度思考的层层递进。这种漏斗式的成长路径，是区别普通人与高手的根本底层原因，也是追求高质量人生的关键。作者指出，世界如一个容器，人生的答案藏于其中，高手不排斥入世，反而视其为蜕变的必要过程。\n\n在社会层面，作者分析了各种“局”的本质，强调利益驱动下的入局行为，指出多数人被欲望所蒙蔽，陷入情感、财富、权谋的局中难以自拔。相较之下，高手善于破局，能透过现象看本质，拆解思维中的壁垒，突破原生家庭与认知的限制，从而实现自我突破。破局的核心在于两种路径：一是打破自身局限，如家庭束缚、思维桎梏，二是破坏他人的局势，借助组织与策略操控局中人。许多人身处局中不自知，受人性的弱点、操控规则的影響，若能以局外人视角审视全局，深谋远虑，便能破局而出，掌控主动权。\n\n作者进一步强调，洞察局势的关键在于利弊分析，识别那些",
+      "url": "youwo://note/7609",
+      "metadata": {
+        "note_id": 7609,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": 0,
+        "score": 1.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_3",
+      "type": "note",
+      "type_id": 7608,
+      "title": "新录音 3.m4a",
+      "content": "这段对话是一位学生对《陷入冰海》（Trap in Ice）一书的介绍与感受表达。作者为美国水出版公司于1919年出版的作品，讲述一位女孩与家人在北极探险中的经历。学生选择这本书的原因主要基于书名简单易懂，符合其有限的词汇量，同时被书中插图吸引——一只静静站在冰上的女孩与她的狗，营造出一种平静的氛围，暗示故事的朴实与纯粹。然而，学生在阅读过程中发现，尽管词汇简单，但内容依然超出其理解范围，导致阅读困难。学生一度考虑放弃，感受到“有限的选择”带来的无奈，但最终被榜样的力量激励，决定坚持阅读。\n\n在内容方面，书中通过女主角汉恩（Helen）视角，描述她与家人在北极的冒险。故事起因于父亲生病、家庭被迫迁移，最终踏上北极之旅。途中，船只被冰层困住，整个家庭与船员在极寒的环境中挣扎求存，被迫弃船求生，经历了极端的危机。学生特别提到对汉恩与弟弟迈克尔（Michael）在遇到北极熊时的勇敢表现印象深刻，激发了对家庭责任与勇气的共鸣。书中人物如船长贝利（Bale）也经历了性格转变，从严厉变得更为敏感与责任感强，最终在他们到达“雷居兰特岛”后，通过船长与汉恩的对话，表达了“每个人都拥有改变人生故事的力量”",
+      "url": "youwo://note/7608",
+      "metadata": {
+        "note_id": 7608,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": 0,
+        "score": 1.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_4",
+      "type": "note",
+      "type_id": 7607,
+      "title": "42min英文会议.wav",
+      "content": "本次对话主要围绕员工薪酬、培训安排、工作计划以及相关流程的协调展开。首先，关于某员工的薪资问题，讨论确认其在培训期间应按每天300美元支付6天的工资，实际由Johnson负责录入培训工时，且该员工在培训前后工作安排为5至6天，培训期间为每周5天，培训结束后预计持续至8月。公司强调员工在培训期间的工作时间应遵守40小时标准，避免加班，并明确其在岛上居住、但以温哥华为家庭地址，且领取的补助（per diem）和工资将依据实际培训和工作情况调整，特别是在未来可能的迁移计划中。关于旅行补助，除非因公司安排，否则员工自行返回的交通费用不予报销。公司还强调，工作时间应尽量安排在10小时或5/8小时制，以优化工作效率，避免超时带来的复杂财务处理问题。\n\n其次，会议还涉及对员工培训计划的确认与调整。员工将持续在岛上培训至8月，期间维持每小时35美元的培训费率，培训工时由Johnson提交，且培训期间员工不参与额外的工作任务，保持工作计划的连续性和一致性。对于非培训周的工作安排，建议保持常规的工作日（如5天8小时或4天10小时），并确保其工作时间符合公司规定的40小时标准，以避免加班和相关财务复杂性。管",
+      "url": "youwo://note/7607",
+      "metadata": {
+        "note_id": 7607,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": 0,
+        "score": 1.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_5",
+      "type": "note",
+      "type_id": 7606,
+      "title": "5分钟老妈.wav",
+      "content": "这段文本深入探讨了个体在复杂社会环境中的生存智慧和成长路径，强调“入世”与“出世”的辩证关系。作者指出，真正的开悟者应兼具出世的智慧与入世的手段，通过体验丰富人生，提炼感受与智慧，形成逐步递进的认知层次。这种“漏斗式”进阶过程是区别高手与普通人的根本原因，也是实现高质量人生的关键。入世不仅是体验世界的必要途径，也是推动深度思考、激发神经元成长的动力，只有不断扎根于世界之中，才能获得真实的人生答案。\n\n作者强调，世界如容器，人生的意义在于在其中扎根和探索。高手不排斥入世，视其为蜕变的必经之路。初入社会时，个体往往陷入各种利益纠葛的局中，为追求利益而迷失自我，逐渐被欲望所蒙蔽，走上偏离本心的道路。破局成为实现突破的核心能力，分为两类：一是打破自身的思维束缚，例如家庭带来的认知限制；二是破坏他人的棋局，通过组织和规则掌控局势，利用人性弱点赢得主动。善于破局者能从全局角度观察，识别利益关系，避开无益的争斗，掌握主动权。\n\n在社会交往中，很多人被人性弱点和潜规则所奴役，迷失在利益与情绪的操控中。真正的破局者善于识破这些陷阱，从局外人角度分析利弊，避免陷入被动。与此同时，作者指出，许多局都是由利益",
+      "url": "youwo://note/7606",
+      "metadata": {
+        "note_id": 7606,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": 0,
+        "score": 1.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_6",
+      "type": "note",
+      "type_id": 7605,
+      "title": "Salmon Rd.m4a",
+      "content": "SKIP_EMBEDDING",
+      "url": "youwo://note/7605",
+      "metadata": {
+        "note_id": 7605,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": -1,
+        "score": 1.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_7",
+      "type": "note",
+      "type_id": 7604,
+      "title": "家常厨具与美食",
+      "content": "这段对话发生在日常家庭互动的场景中，核心围绕饮食与厨房物件的安排展开。首先，谈话者提到要以馒头搭配菜肴，显现出对饭局搭配的关注与安排。对话中多人参与对馒头的评价与接待，李荣表示馒头可以不同搭配，整体氛围带着谢意与温情，另一人还表达想喝茶、向“辛苦叔叔”致谢，显现出对照料人员的感激。\n\n关于厨房与物件的协商，几位参与者讨论了留存某个小锅以备日后烤鸭使用的可能性，并决定把小锅留在现有位置，方便家里人使用。随之而来的是对锅盖深度的询问与判断：现有的锅盖不够深，现场决定暂时不再找更深的盖子，整体方案被认为“基本可以”。对带纸的物品需注意管理，不能随意丢弃在这里，体现出对清洁与秩序的关注。\n\n对话还提及一些日常使用细节与实现便利性。发言人表示此物品使用起来很方便，偶尔会用到烧火机以降低清洗工作，表达了对简便性的偏好与共识。此外，谈话中还出现对某些物品状态的观察与确认，如今天的颜色对比（红色与黄色）及信息的确认收悉，显示出现场的互动性与信息同步的情形。\n\n最后一个信息性片段涉及到信息传递的条件：对方并不会主动发信息，只有当你进入相关场景或系统后，才会接收到该信息，揭示了信息通知的触发机制。这突显出",
+      "url": "youwo://note/7604",
+      "metadata": {
+        "note_id": 7604,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": 0,
+        "score": 1.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_8",
+      "type": "note",
+      "type_id": 7603,
+      "title": "Note",
+      "content": "现在总可以。\n\n对吗？\n\n因为这还差不多。\n\nOK。\n\n现在可以继续掌握。\n\nOKOK，真系差。",
+      "url": "youwo://note/7603",
+      "metadata": {
+        "note_id": 7603,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": 0,
+        "score": 1.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_9",
+      "type": "note",
+      "type_id": 7602,
+      "title": "Note",
+      "content": "Okay，can we finally get this control？\n\n咱就是说如果去削弱的话他应该不会再收我钱。\n\n因为这个才是我想要的效果我的妈呀，它好像不是。\n\nFeels like the wind is running through。\n\nScott bencloud。\n\n说的五点嘛，对不对？\n\n就是昨天送东西有点没办法还行哦，嗯。\n\n但是无所谓村长他的历史村长营养化是这个消息发送的。\n\n抓住核心人物就行了。\n\n我也是我都没运动，我得赶紧。\n\n去运动去。\n\n我其实想运动。\n\n你过来，你可以问一下你在唱歌。\n\n到底没有时间给你们写，主要是这帮人都看不上。\n\n我想对不对？看不上的话你浪费时间跟他们说是吧？对呀，还不如直接网上招很招志同道合的人给钱，有钱rapper，他招人干活还好干对不对？\n\n对呀，我跟他们说还要哄着因为是熟人，所以对对。\n\n他抓他们他们能帮把帮把帮不了算了",
+      "url": "youwo://note/7602",
+      "metadata": {
+        "note_id": 7602,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": 0,
+        "score": 1.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_10",
+      "type": "note",
+      "type_id": 7601,
+      "title": "CS480_680 Lecture 19_ Attention and Transformer Networks.mp3",
+      "content": "SKIP_EMBEDDING",
+      "url": "youwo://note/7601",
+      "metadata": {
+        "note_id": 7601,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": -1,
+        "score": 1.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "web_11",
+      "type": "web",
+      "type_id": null,
+      "title": "AI Text Summarizer - One-Click Summarization (Ad-Free)",
+      "content": "QuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.",
+      "url": "https://quillbot.com/summarize",
+      "metadata": {
+        "search_engine": "google"
+      }
+    },
+    {
+      "source_id": "web_12",
+      "type": "web",
+      "type_id": null,
+      "title": "Highly Efficient Prompt for Summarizing — GPT-4",
+      "content": "Format the summary in paragraph form for easy understanding. Conclude your notes with [End of Notes, Message #X] to indicate completion, where \" ...",
+      "url": "https://www.reddit.com/r/ChatGPTPro/comments/13n55w7/highly_efficient_prompt_for_summarizing_gpt4/",
+      "metadata": {
+        "search_engine": "google"
+      }
+    },
+    {
+      "source_id": "web_13",
+      "type": "web",
+      "type_id": null,
+      "title": "TLDR This - Article Summarizer & Online Text Summarizing Tool",
+      "content": "TLDR This helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.",
+      "url": "https://tldrthis.com/",
+      "metadata": {
+        "search_engine": "google"
+      }
+    },
+    {
+      "source_id": "web_14",
+      "type": "web",
+      "type_id": null,
+      "title": "Free AI-powered Summarizing Tool | No Sign-up Required",
+      "content": "A faster way to summarize text. Grammarly's summary writer helps you instantly create well-worded summaries that capture the key points of a piece of text.",
+      "url": "https://www.grammarly.com/ai/ai-writing-tools/summarizing-tool",
+      "metadata": {
+        "search_engine": "google"
+      }
+    },
+    {
+      "source_id": "web_15",
+      "type": "web",
+      "type_id": null,
+      "title": "Scholarcy - Knowledge made simple",
+      "content": "Summarize any paper, article or textbook. You can summarize videos too! Scholarcy converts long complex texts into interactive summary flashcards.",
+      "url": "https://www.scholarcy.com/",
+      "metadata": {
+        "search_engine": "google"
+      }
+    }
+  ],
+  "sources_count": 15,
+  "context_search_found": true,
+  "web_search_found": true,
+  "attachment_found": false,
+  "full_context": {
+    "context_search": {
+      "status": "completed",
+      "understanding": {
+        "intent": "summarize",
+        "temporal_filter": {
+          "days_ago": 7
+        },
+        "key_concepts": []
+      },
+      "retrieval_steps": [
+        {
+          "strategy": "recency",
+          "query": "Summarize my recent notes and highlight the key points",
+          "results_count": 38
+        }
+      ],
+      "context": "SKIP_EMBEDDING\n\n---\n\n这段文本深入探讨了个体在生活与成长中的两大核心维度：出世与入世，以及破局与自我超越的路径。作者强调，一个真正的智慧人应同时具备出世的超然与入世的实践，既能在天地间自成一派，又能积极体验社会的丰富与复杂。从入世的经历中，个体通过痛苦、快乐、背叛等多样体验，提炼出阅历和智慧，逐步实现从知识到经验再到深度思考的层层递进。这种漏斗式的成长路径，是区别普通人与高手的根本底层原因，也是追求高质量人生的关键。作者指出，世界如一个容器，人生的答案藏于其中，高手不排斥入世，反而视其为蜕变的必要过程。\n\n在社会层面，作者分析了各种“局”的本质，强调利益驱动下的入局行为，指出多数人被欲望所蒙蔽，陷入情感、财富、权谋的局中难以自拔。相较之下，高手善于破局，能透过现象看本质，拆解思维中的壁垒，突破原生家庭与认知的限制，从而实现自我突破。破局的核心在于两种路径：一是打破自身局限，如家庭束缚、思维桎梏，二是破坏他人的局势，借助组织与策略操控局中人。许多人身处局中不自知，受人性的弱点、操控规则的影響，若能以局外人视角审视全局，深谋远虑，便能破局而出，掌控主动权。\n\n作者进一步强调，洞察局势的关键在于利弊分析，识别那些\n\n---\n\n这段对话是一位学生对《陷入冰海》（Trap in Ice）一书的介绍与感受表达。作者为美国水出版公司于1919年出版的作品，讲述一位女孩与家人在北极探险中的经历。学生选择这本书的原因主要基于书名简单易懂，符合其有限的词汇量，同时被书中插图吸引——一只静静站在冰上的女孩与她的狗，营造出一种平静的氛围，暗示故事的朴实与纯粹。然而，学生在阅读过程中发现，尽管词汇简单，但内容依然超出其理解范围，导致阅读困难。学生一度考虑放弃，感受到“有限的选择”带来的无奈，但最终被榜样的力量激励，决定坚持阅读。\n\n在内容方面，书中通过女主角汉恩（Helen）视角，描述她与家人在北极的冒险。故事起因于父亲生病、家庭被迫迁移，最终踏上北极之旅。途中，船只被冰层困住，整个家庭与船员在极寒的环境中挣扎求存，被迫弃船求生，经历了极端的危机。学生特别提到对汉恩与弟弟迈克尔（Michael）在遇到北极熊时的勇敢表现印象深刻，激发了对家庭责任与勇气的共鸣。书中人物如船长贝利（Bale）也经历了性格转变，从严厉变得更为敏感与责任感强，最终在他们到达“雷居兰特岛”后，通过船长与汉恩的对话，表达了“每个人都拥有改变人生故事的力量”\n\n---\n\n本次对话主要围绕员工薪酬、培训安排、工作计划以及相关流程的协调展开。首先，关于某员工的薪资问题，讨论确认其在培训期间应按每天300美元支付6天的工资，实际由Johnson负责录入培训工时，且该员工在培训前后工作安排为5至6天，培训期间为每周5天，培训结束后预计持续至8月。公司强调员工在培训期间的工作时间应遵守40小时标准，避免加班，并明确其在岛上居住、但以温哥华为家庭地址，且领取的补助（per diem）和工资将依据实际培训和工作情况调整，特别是在未来可能的迁移计划中。关于旅行补助，除非因公司安排，否则员工自行返回的交通费用不予报销。公司还强调，工作时间应尽量安排在10小时或5/8小时制，以优化工作效率，避免超时带来的复杂财务处理问题。\n\n其次，会议还涉及对员工培训计划的确认与调整。员工将持续在岛上培训至8月，期间维持每小时35美元的培训费率，培训工时由Johnson提交，且培训期间员工不参与额外的工作任务，保持工作计划的连续性和一致性。对于非培训周的工作安排，建议保持常规的工作日（如5天8小时或4天10小时），并确保其工作时间符合公司规定的40小时标准，以避免加班和相关财务复杂性。管\n\n---\n\n这段文本深入探讨了个体在复杂社会环境中的生存智慧和成长路径，强调“入世”与“出世”的辩证关系。作者指出，真正的开悟者应兼具出世的智慧与入世的手段，通过体验丰富人生，提炼感受与智慧，形成逐步递进的认知层次。这种“漏斗式”进阶过程是区别高手与普通人的根本原因，也是实现高质量人生的关键。入世不仅是体验世界的必要途径，也是推动深度思考、激发神经元成长的动力，只有不断扎根于世界之中，才能获得真实的人生答案。\n\n作者强调，世界如容器，人生的意义在于在其中扎根和探索。高手不排斥入世，视其为蜕变的必经之路。初入社会时，个体往往陷入各种利益纠葛的局中，为追求利益而迷失自我，逐渐被欲望所蒙蔽，走上偏离本心的道路。破局成为实现突破的核心能力，分为两类：一是打破自身的思维束缚，例如家庭带来的认知限制；二是破坏他人的棋局，通过组织和规则掌控局势，利用人性弱点赢得主动。善于破局者能从全局角度观察，识别利益关系，避开无益的争斗，掌握主动权。\n\n在社会交往中，很多人被人性弱点和潜规则所奴役，迷失在利益与情绪的操控中。真正的破局者善于识破这些陷阱，从局外人角度分析利弊，避免陷入被动。与此同时，作者指出，许多局都是由利益\n\n---\n\nSKIP_EMBEDDING\n\n---\n\n这段对话发生在日常家庭互动的场景中，核心围绕饮食与厨房物件的安排展开。首先，谈话者提到要以馒头搭配菜肴，显现出对饭局搭配的关注与安排。对话中多人参与对馒头的评价与接待，李荣表示馒头可以不同搭配，整体氛围带着谢意与温情，另一人还表达想喝茶、向“辛苦叔叔”致谢，显现出对照料人员的感激。\n\n关于厨房与物件的协商，几位参与者讨论了留存某个小锅以备日后烤鸭使用的可能性，并决定把小锅留在现有位置，方便家里人使用。随之而来的是对锅盖深度的询问与判断：现有的锅盖不够深，现场决定暂时不再找更深的盖子，整体方案被认为“基本可以”。对带纸的物品需注意管理，不能随意丢弃在这里，体现出对清洁与秩序的关注。\n\n对话还提及一些日常使用细节与实现便利性。发言人表示此物品使用起来很方便，偶尔会用到烧火机以降低清洗工作，表达了对简便性的偏好与共识。此外，谈话中还出现对某些物品状态的观察与确认，如今天的颜色对比（红色与黄色）及信息的确认收悉，显示出现场的互动性与信息同步的情形。\n\n最后一个信息性片段涉及到信息传递的条件：对方并不会主动发信息，只有当你进入相关场景或系统后，才会接收到该信息，揭示了信息通知的触发机制。这突显出\n\n---\n\n现在总可以。\n\n对吗？\n\n因为这还差不多。\n\nOK。\n\n现在可以继续掌握。\n\nOKOK，真系差。\n\n---\n\nOkay，can we finally get this control？\n\n咱就是说如果去削弱的话他应该不会再收我钱。\n\n因为这个才是我想要的效果我的妈呀，它好像不是。\n\nFeels like the wind is running through。\n\nScott bencloud。\n\n说的五点嘛，对不对？\n\n就是昨天送东西有点没办法还行哦，嗯。\n\n但是无所谓村长他的历史村长营养化是这个消息发送的。\n\n抓住核心人物就行了。\n\n我也是我都没运动，我得赶紧。\n\n去运动去。\n\n我其实想运动。\n\n你过来，你可以问一下你在唱歌。\n\n到底没有时间给你们写，主要是这帮人都看不上。\n\n我想对不对？看不上的话你浪费时间跟他们说是吧？对呀，还不如直接网上招很招志同道合的人给钱，有钱rapper，他招人干活还好干对不对？\n\n对呀，我跟他们说还要哄着因为是熟人，所以对对。\n\n他抓他们他们能帮把帮把帮不了算了\n\n---\n\nSKIP_EMBEDDING\n\n---\n\n这段文本的作者在开头解释了自己选择《Trap in Ice》这本书的原因。主要原因有两点：一是书名简单、词汇比较容易理解，符合他当前的词汇水平；二是书的插画给他留下了深刻印象——一个小女孩和她的狗站在冰上，画面看起来宁静而带着“陷入冰海”的隐喻感。这些因素让他对这本书产生兴趣，尽管实际阅读过程中仍然发现词汇水平超出了自己的预期。通过这个过程，他也反思了自己在阅读选择上的犹豫与坚持之间的矛盾，以及如何在有限的词汇条件下坚持完成阅读并获得体验。\n\n关于故事情节，书以一个女孩（文中称为 Heaven/Helen 等，叙述中多次以第一人称视角描述）为中心展开，讲述她、她的寡居母亲以及11岁的弟弟 Michael 在一次圣诞后为躲避生计困境而踏上北极地区的危险旅程。家庭在家园被迫搬离后，乘船前往更安全的区域，途中船只在冰层中被切断并下沉，父母和孩子们面临生存危机。他们不得不离开船只，踏上寻找坚实陆地的求生之路，沿途经历极端的寒冷、黑暗与海上险境。故事中对“极地”环境的描绘和他们为活下去而拼搏的过程，构成了全书的主线。\n\n在人物关系与成长方面，叙事聚焦于 Helen 对弟弟 Michael 的保护\n\n---\n\n文本呈现一个人在紧迫时间表下的物流思考。核心点是：此刻为三点半，需由对话者自行决定下一步；若按计划前往目的地，时间将临近四点，随后还需要再跑回来接他们，然后再去往另一地，整项安排形成多段往返的冲击。对话者进一步在问“还需要做什么啊？”，体现出对后续任务的不确定性与需要明确清单的诉求。总体上，这段话揭示了在有限时间内进行的接送和行程安排所带来的决策压力、时间消耗以及需要梳理的后续工作清单。\n\n---\n\n啊，这啊真的是。\n\n嗯\n\n嗯。\n\n---\n\nSKIP_EMBEDDING\n\n---\n\nSKIP_EMBEDDING",
+      "sources": [
+        {
+          "type": "note",
+          "type_id": 7610,
+          "title": "2024_-_The_Year_the_GPT_Wrapper_Myth_Proved_Wrong.mp3",
+          "chunks": [
+            {
+              "content": "SKIP_EMBEDDING",
+              "section_id": -1,
+              "score": 1.0
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "type_id": 7609,
+          "title": "5分钟老妈.wav",
+          "chunks": [
+            {
+              "content": "这段文本深入探讨了个体在生活与成长中的两大核心维度：出世与入世，以及破局与自我超越的路径。作者强调，一个真正的智慧人应同时具备出世的超然与入世的实践，既能在天地间自成一派，又能积极体验社会的丰富与复杂。从入世的经历中，个体通过痛苦、快乐、背叛等多样体验，提炼出阅历和智慧，逐步实现从知识到经验再到深度思考的层层递进。这种漏斗式的成长路径，是区别普通人与高手的根本底层原因，也是追求高质量人生的关键。作者指出，世界如一个容器，人生的答案藏于其中，高手不排斥入世，反而视其为蜕变的必要过程。\n\n在社会层面，作者分析了各种“局”的本质，强调利益驱动下的入局行为，指出多数人被欲望所蒙蔽，陷入情感、财富、权谋的局中难以自拔。相较之下，高手善于破局，能透过现象看本质，拆解思维中的壁垒，突破原生家庭与认知的限制，从而实现自我突破。破局的核心在于两种路径：一是打破自身局限，如家庭束缚、思维桎梏，二是破坏他人的局势，借助组织与策略操控局中人。许多人身处局中不自知，受人性的弱点、操控规则的影響，若能以局外人视角审视全局，深谋远虑，便能破局而出，掌控主动权。\n\n作者进一步强调，洞察局势的关键在于利弊分析，识别那些",
+              "section_id": 0,
+              "score": 1.0
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "type_id": 7608,
+          "title": "新录音 3.m4a",
+          "chunks": [
+            {
+              "content": "这段对话是一位学生对《陷入冰海》（Trap in Ice）一书的介绍与感受表达。作者为美国水出版公司于1919年出版的作品，讲述一位女孩与家人在北极探险中的经历。学生选择这本书的原因主要基于书名简单易懂，符合其有限的词汇量，同时被书中插图吸引——一只静静站在冰上的女孩与她的狗，营造出一种平静的氛围，暗示故事的朴实与纯粹。然而，学生在阅读过程中发现，尽管词汇简单，但内容依然超出其理解范围，导致阅读困难。学生一度考虑放弃，感受到“有限的选择”带来的无奈，但最终被榜样的力量激励，决定坚持阅读。\n\n在内容方面，书中通过女主角汉恩（Helen）视角，描述她与家人在北极的冒险。故事起因于父亲生病、家庭被迫迁移，最终踏上北极之旅。途中，船只被冰层困住，整个家庭与船员在极寒的环境中挣扎求存，被迫弃船求生，经历了极端的危机。学生特别提到对汉恩与弟弟迈克尔（Michael）在遇到北极熊时的勇敢表现印象深刻，激发了对家庭责任与勇气的共鸣。书中人物如船长贝利（Bale）也经历了性格转变，从严厉变得更为敏感与责任感强，最终在他们到达“雷居兰特岛”后，通过船长与汉恩的对话，表达了“每个人都拥有改变人生故事的力量”",
+              "section_id": 0,
+              "score": 1.0
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "type_id": 7607,
+          "title": "42min英文会议.wav",
+          "chunks": [
+            {
+              "content": "本次对话主要围绕员工薪酬、培训安排、工作计划以及相关流程的协调展开。首先，关于某员工的薪资问题，讨论确认其在培训期间应按每天300美元支付6天的工资，实际由Johnson负责录入培训工时，且该员工在培训前后工作安排为5至6天，培训期间为每周5天，培训结束后预计持续至8月。公司强调员工在培训期间的工作时间应遵守40小时标准，避免加班，并明确其在岛上居住、但以温哥华为家庭地址，且领取的补助（per diem）和工资将依据实际培训和工作情况调整，特别是在未来可能的迁移计划中。关于旅行补助，除非因公司安排，否则员工自行返回的交通费用不予报销。公司还强调，工作时间应尽量安排在10小时或5/8小时制，以优化工作效率，避免超时带来的复杂财务处理问题。\n\n其次，会议还涉及对员工培训计划的确认与调整。员工将持续在岛上培训至8月，期间维持每小时35美元的培训费率，培训工时由Johnson提交，且培训期间员工不参与额外的工作任务，保持工作计划的连续性和一致性。对于非培训周的工作安排，建议保持常规的工作日（如5天8小时或4天10小时），并确保其工作时间符合公司规定的40小时标准，以避免加班和相关财务复杂性。管",
+              "section_id": 0,
+              "score": 1.0
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "type_id": 7606,
+          "title": "5分钟老妈.wav",
+          "chunks": [
+            {
+              "content": "这段文本深入探讨了个体在复杂社会环境中的生存智慧和成长路径，强调“入世”与“出世”的辩证关系。作者指出，真正的开悟者应兼具出世的智慧与入世的手段，通过体验丰富人生，提炼感受与智慧，形成逐步递进的认知层次。这种“漏斗式”进阶过程是区别高手与普通人的根本原因，也是实现高质量人生的关键。入世不仅是体验世界的必要途径，也是推动深度思考、激发神经元成长的动力，只有不断扎根于世界之中，才能获得真实的人生答案。\n\n作者强调，世界如容器，人生的意义在于在其中扎根和探索。高手不排斥入世，视其为蜕变的必经之路。初入社会时，个体往往陷入各种利益纠葛的局中，为追求利益而迷失自我，逐渐被欲望所蒙蔽，走上偏离本心的道路。破局成为实现突破的核心能力，分为两类：一是打破自身的思维束缚，例如家庭带来的认知限制；二是破坏他人的棋局，通过组织和规则掌控局势，利用人性弱点赢得主动。善于破局者能从全局角度观察，识别利益关系，避开无益的争斗，掌握主动权。\n\n在社会交往中，很多人被人性弱点和潜规则所奴役，迷失在利益与情绪的操控中。真正的破局者善于识破这些陷阱，从局外人角度分析利弊，避免陷入被动。与此同时，作者指出，许多局都是由利益",
+              "section_id": 0,
+              "score": 1.0
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "type_id": 7605,
+          "title": "Salmon Rd.m4a",
+          "chunks": [
+            {
+              "content": "SKIP_EMBEDDING",
+              "section_id": -1,
+              "score": 1.0
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "type_id": 7604,
+          "title": "家常厨具与美食",
+          "chunks": [
+            {
+              "content": "这段对话发生在日常家庭互动的场景中，核心围绕饮食与厨房物件的安排展开。首先，谈话者提到要以馒头搭配菜肴，显现出对饭局搭配的关注与安排。对话中多人参与对馒头的评价与接待，李荣表示馒头可以不同搭配，整体氛围带着谢意与温情，另一人还表达想喝茶、向“辛苦叔叔”致谢，显现出对照料人员的感激。\n\n关于厨房与物件的协商，几位参与者讨论了留存某个小锅以备日后烤鸭使用的可能性，并决定把小锅留在现有位置，方便家里人使用。随之而来的是对锅盖深度的询问与判断：现有的锅盖不够深，现场决定暂时不再找更深的盖子，整体方案被认为“基本可以”。对带纸的物品需注意管理，不能随意丢弃在这里，体现出对清洁与秩序的关注。\n\n对话还提及一些日常使用细节与实现便利性。发言人表示此物品使用起来很方便，偶尔会用到烧火机以降低清洗工作，表达了对简便性的偏好与共识。此外，谈话中还出现对某些物品状态的观察与确认，如今天的颜色对比（红色与黄色）及信息的确认收悉，显示出现场的互动性与信息同步的情形。\n\n最后一个信息性片段涉及到信息传递的条件：对方并不会主动发信息，只有当你进入相关场景或系统后，才会接收到该信息，揭示了信息通知的触发机制。这突显出",
+              "section_id": 0,
+              "score": 1.0
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "type_id": 7603,
+          "title": "Note",
+          "chunks": [
+            {
+              "content": "现在总可以。\n\n对吗？\n\n因为这还差不多。\n\nOK。\n\n现在可以继续掌握。\n\nOKOK，真系差。",
+              "section_id": 0,
+              "score": 1.0
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "type_id": 7602,
+          "title": "Note",
+          "chunks": [
+            {
+              "content": "Okay，can we finally get this control？\n\n咱就是说如果去削弱的话他应该不会再收我钱。\n\n因为这个才是我想要的效果我的妈呀，它好像不是。\n\nFeels like the wind is running through。\n\nScott bencloud。\n\n说的五点嘛，对不对？\n\n就是昨天送东西有点没办法还行哦，嗯。\n\n但是无所谓村长他的历史村长营养化是这个消息发送的。\n\n抓住核心人物就行了。\n\n我也是我都没运动，我得赶紧。\n\n去运动去。\n\n我其实想运动。\n\n你过来，你可以问一下你在唱歌。\n\n到底没有时间给你们写，主要是这帮人都看不上。\n\n我想对不对？看不上的话你浪费时间跟他们说是吧？对呀，还不如直接网上招很招志同道合的人给钱，有钱rapper，他招人干活还好干对不对？\n\n对呀，我跟他们说还要哄着因为是熟人，所以对对。\n\n他抓他们他们能帮把帮把帮不了算了",
+              "section_id": 0,
+              "score": 1.0
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "type_id": 7601,
+          "title": "CS480_680 Lecture 19_ Attention and Transformer Networks.mp3",
+          "chunks": [
+            {
+              "content": "SKIP_EMBEDDING",
+              "section_id": -1,
+              "score": 1.0
+            }
+          ]
+        }
+      ],
+      "total_sources": 38,
+      "sources_truncated": true,
+      "total_results": 38,
+      "search_summary": "Found 38 relevant chunks from 38 sources using 1 retrieval strategies"
+    },
+    "web_search": {
+      "status": "success",
+      "results": [
+        {
+          "title": "AI Text Summarizer - One-Click Summarization (Ad-Free)",
+          "link": "https://quillbot.com/summarize",
+          "snippet": "QuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.",
+          "source": "serper",
+          "cached": false,
+          "cache_age": null
+        },
+        {
+          "title": "Highly Efficient Prompt for Summarizing — GPT-4",
+          "link": "https://www.reddit.com/r/ChatGPTPro/comments/13n55w7/highly_efficient_prompt_for_summarizing_gpt4/",
+          "snippet": "Format the summary in paragraph form for easy understanding. Conclude your notes with [End of Notes, Message #X] to indicate completion, where \" ...",
+          "source": "serper",
+          "cached": false,
+          "cache_age": null
+        },
+        {
+          "title": "TLDR This - Article Summarizer & Online Text Summarizing Tool",
+          "link": "https://tldrthis.com/",
+          "snippet": "TLDR This helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.",
+          "source": "serper",
+          "cached": false,
+          "cache_age": null
+        },
+        {
+          "title": "Free AI-powered Summarizing Tool | No Sign-up Required",
+          "link": "https://www.grammarly.com/ai/ai-writing-tools/summarizing-tool",
+          "snippet": "A faster way to summarize text. Grammarly's summary writer helps you instantly create well-worded summaries that capture the key points of a piece of text.",
+          "source": "serper",
+          "cached": false,
+          "cache_age": null
+        },
+        {
+          "title": "Scholarcy - Knowledge made simple",
+          "link": "https://www.scholarcy.com/",
+          "snippet": "Summarize any paper, article or textbook. You can summarize videos too! Scholarcy converts long complex texts into interactive summary flashcards.",
+          "source": "serper",
+          "cached": false,
+          "cache_age": null
+        }
+      ],
+      "context": "[1] AI Text Summarizer - One-Click Summarization (Ad-Free)\nQuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.\nURL: https://quillbot.com/summarize\n\n[2] Highly Efficient Prompt for Summarizing — GPT-4\nFormat the summary in paragraph form for easy understanding. Conclude your notes with [End of Notes, Message #X] to indicate completion, where \" ...\nURL: https://www.reddit.com/r/ChatGPTPro/comments/13n55w7/highly_efficient_prompt_for_summarizing_gpt4/\n\n[3] TLDR This - Article Summarizer & Online Text Summarizing Tool\nTLDR This helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.\nURL: https://tldrthis.com/\n\n[4] Free AI-powered Summarizing Tool | No Sign-up Required\nA faster way to summarize text. Grammarly's summary writer helps you instantly create well-worded summaries that capture the key points of a piece of text.\nURL: https://www.grammarly.com/ai/ai-writing-tools/summarizing-tool\n\n[5] Scholarcy - Knowledge made simple\nSummarize any paper, article or textbook. You can summarize videos too! Scholarcy converts long complex texts into interactive summary flashcards.\nURL: https://www.scholarcy.com/",
+      "metadata": {
+        "query": "Summarize my recent notes and highlight the key points",
+        "result_count": 5,
+        "cache_hit": false
+      }
+    },
+    "attachment": {},
+    "router": {
+      "router_decision": {
+        "selected_tool": "knowledge_base_notes",
+        "search_type": "notes",
+        "confidence": 0.9,
+        "reasoning": "The user is asking to summarize their recent notes and highlight key points, which pertains specifically to their personal notes or documents.",
+        "query_classification": "notes_summary"
+      },
+      "original_query": "Summarize my recent notes and highlight the key points",
+      "condensed_query": "Summarize my recent notes and highlight the key points",
+      "enabled_agents": [
+        "response",
+        "context_search",
+        "web_search"
+      ],
+      "model": "gpt-4.1-nano",
+      "search_type": "notes",
+      "has_explicit_ids": false,
+      "explicit_note_ids": null,
+      "explicit_folder_ids": null
+    }
+  },
+  "combined_context_full": "[1] Note: 2024_-_The_Year_the_GPT_Wrapper_Myth_Proved_Wrong.mp3\nSKIP_EMBEDDING\n\n[2] Note: 5分钟老妈.wav\n这段文本深入探讨了个体在生活与成长中的两大核心维度：出世与入世，以及破局与自我超越的路径。作者强调，一个真正的智慧人应同时具备出世的超然与入世的实践，既能在天地间自成一派，又能积极体验社会的丰富与复杂。从入世的经历中，个体通过痛苦、快乐、背叛等多样体验，提炼出阅历和智慧，逐步实现从知识到经验再到深度思考的层层递进。这种漏斗式的成长路径，是区别普通人与高手的根本底层原因，也是追求高质量人生的关键。作者指出，世界如一个容器，人生的答案藏于其中，高手不排斥入世，反而视其为蜕变的必要过程。\n\n在社会层面，作者分析了各种“局”的本质，强调利益驱动下的入局行为，指出多数人被欲望所蒙蔽，陷入情感、财富、权谋的局中难以自拔。相较之下，高手善于破局，能透过现象看本质，拆解思维中的壁垒，突破原生家庭与认知的限制，从而实现自我突破。破局的核心在于两种路径：一是打破自身局限，如家庭束缚、思维桎梏，二是破坏他人的局势，借助组织与策略操控局中人。许多人身处局中不自知，受人性的弱点、操控规则的影響，若能以局外人视角审视全局，深谋远虑，便能破局而出，掌控主动权。\n\n作者进一步强调，洞察局势的关键在于利弊分析，识别那些\n\n[3] Note: 新录音 3.m4a\n这段对话是一位学生对《陷入冰海》（Trap in Ice）一书的介绍与感受表达。作者为美国水出版公司于1919年出版的作品，讲述一位女孩与家人在北极探险中的经历。学生选择这本书的原因主要基于书名简单易懂，符合其有限的词汇量，同时被书中插图吸引——一只静静站在冰上的女孩与她的狗，营造出一种平静的氛围，暗示故事的朴实与纯粹。然而，学生在阅读过程中发现，尽管词汇简单，但内容依然超出其理解范围，导致阅读困难。学生一度考虑放弃，感受到“有限的选择”带来的无奈，但最终被榜样的力量激励，决定坚持阅读。\n\n在内容方面，书中通过女主角汉恩（Helen）视角，描述她与家人在北极的冒险。故事起因于父亲生病、家庭被迫迁移，最终踏上北极之旅。途中，船只被冰层困住，整个家庭与船员在极寒的环境中挣扎求存，被迫弃船求生，经历了极端的危机。学生特别提到对汉恩与弟弟迈克尔（Michael）在遇到北极熊时的勇敢表现印象深刻，激发了对家庭责任与勇气的共鸣。书中人物如船长贝利（Bale）也经历了性格转变，从严厉变得更为敏感与责任感强，最终在他们到达“雷居兰特岛”后，通过船长与汉恩的对话，表达了“每个人都拥有改变人生故事的力量”\n\n[4] Note: 42min英文会议.wav\n本次对话主要围绕员工薪酬、培训安排、工作计划以及相关流程的协调展开。首先，关于某员工的薪资问题，讨论确认其在培训期间应按每天300美元支付6天的工资，实际由Johnson负责录入培训工时，且该员工在培训前后工作安排为5至6天，培训期间为每周5天，培训结束后预计持续至8月。公司强调员工在培训期间的工作时间应遵守40小时标准，避免加班，并明确其在岛上居住、但以温哥华为家庭地址，且领取的补助（per diem）和工资将依据实际培训和工作情况调整，特别是在未来可能的迁移计划中。关于旅行补助，除非因公司安排，否则员工自行返回的交通费用不予报销。公司还强调，工作时间应尽量安排在10小时或5/8小时制，以优化工作效率，避免超时带来的复杂财务处理问题。\n\n其次，会议还涉及对员工培训计划的确认与调整。员工将持续在岛上培训至8月，期间维持每小时35美元的培训费率，培训工时由Johnson提交，且培训期间员工不参与额外的工作任务，保持工作计划的连续性和一致性。对于非培训周的工作安排，建议保持常规的工作日（如5天8小时或4天10小时），并确保其工作时间符合公司规定的40小时标准，以避免加班和相关财务复杂性。管\n\n[5] Note: 5分钟老妈.wav\n这段文本深入探讨了个体在复杂社会环境中的生存智慧和成长路径，强调“入世”与“出世”的辩证关系。作者指出，真正的开悟者应兼具出世的智慧与入世的手段，通过体验丰富人生，提炼感受与智慧，形成逐步递进的认知层次。这种“漏斗式”进阶过程是区别高手与普通人的根本原因，也是实现高质量人生的关键。入世不仅是体验世界的必要途径，也是推动深度思考、激发神经元成长的动力，只有不断扎根于世界之中，才能获得真实的人生答案。\n\n作者强调，世界如容器，人生的意义在于在其中扎根和探索。高手不排斥入世，视其为蜕变的必经之路。初入社会时，个体往往陷入各种利益纠葛的局中，为追求利益而迷失自我，逐渐被欲望所蒙蔽，走上偏离本心的道路。破局成为实现突破的核心能力，分为两类：一是打破自身的思维束缚，例如家庭带来的认知限制；二是破坏他人的棋局，通过组织和规则掌控局势，利用人性弱点赢得主动。善于破局者能从全局角度观察，识别利益关系，避开无益的争斗，掌握主动权。\n\n在社会交往中，很多人被人性弱点和潜规则所奴役，迷失在利益与情绪的操控中。真正的破局者善于识破这些陷阱，从局外人角度分析利弊，避免陷入被动。与此同时，作者指出，许多局都是由利益\n\n[6] Note: Salmon Rd.m4a\nSKIP_EMBEDDING\n\n[7] Note: 家常厨具与美食\n这段对话发生在日常家庭互动的场景中，核心围绕饮食与厨房物件的安排展开。首先，谈话者提到要以馒头搭配菜肴，显现出对饭局搭配的关注与安排。对话中多人参与对馒头的评价与接待，李荣表示馒头可以不同搭配，整体氛围带着谢意与温情，另一人还表达想喝茶、向“辛苦叔叔”致谢，显现出对照料人员的感激。\n\n关于厨房与物件的协商，几位参与者讨论了留存某个小锅以备日后烤鸭使用的可能性，并决定把小锅留在现有位置，方便家里人使用。随之而来的是对锅盖深度的询问与判断：现有的锅盖不够深，现场决定暂时不再找更深的盖子，整体方案被认为“基本可以”。对带纸的物品需注意管理，不能随意丢弃在这里，体现出对清洁与秩序的关注。\n\n对话还提及一些日常使用细节与实现便利性。发言人表示此物品使用起来很方便，偶尔会用到烧火机以降低清洗工作，表达了对简便性的偏好与共识。此外，谈话中还出现对某些物品状态的观察与确认，如今天的颜色对比（红色与黄色）及信息的确认收悉，显示出现场的互动性与信息同步的情形。\n\n最后一个信息性片段涉及到信息传递的条件：对方并不会主动发信息，只有当你进入相关场景或系统后，才会接收到该信息，揭示了信息通知的触发机制。这突显出\n\n[8] Note: Note\n现在总可以。\n\n对吗？\n\n因为这还差不多。\n\nOK。\n\n现在可以继续掌握。\n\nOKOK，真系差。\n\n[9] Note: Note\nOkay，can we finally get this control？\n\n咱就是说如果去削弱的话他应该不会再收我钱。\n\n因为这个才是我想要的效果我的妈呀，它好像不是。\n\nFeels like the wind is running through。\n\nScott bencloud。\n\n说的五点嘛，对不对？\n\n就是昨天送东西有点没办法还行哦，嗯。\n\n但是无所谓村长他的历史村长营养化是这个消息发送的。\n\n抓住核心人物就行了。\n\n我也是我都没运动，我得赶紧。\n\n去运动去。\n\n我其实想运动。\n\n你过来，你可以问一下你在唱歌。\n\n到底没有时间给你们写，主要是这帮人都看不上。\n\n我想对不对？看不上的话你浪费时间跟他们说是吧？对呀，还不如直接网上招很招志同道合的人给钱，有钱rapper，他招人干活还好干对不对？\n\n对呀，我跟他们说还要哄着因为是熟人，所以对对。\n\n他抓他们他们能帮把帮把帮不了算了\n\n[10] Note: CS480_680 Lecture 19_ Attention and Transformer Networks.mp3\nSKIP_EMBEDDING\n\n[11] AI Text Summarizer - One-Click Summarization (Ad-Free):\nQuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.\n\n[12] Highly Efficient Prompt for Summarizing — GPT-4:\nFormat the summary in paragraph form for easy understanding. Conclude your notes with [End of Notes, Message #X] to indicate completion, where \" ...\n\n[13] TLDR This - Article Summarizer & Online Text Summarizing Tool:\nTLDR This helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.\n\n[14] Free AI-powered Summarizing Tool | No Sign-up Required:\nA faster way to summarize text. Grammarly's summary writer helps you instantly create well-worded summaries that capture the key points of a piece of text.\n\n[15] Scholarcy - Knowledge made simple:\nSummarize any paper, article or textbook. You can summarize videos too! Scholarcy converts long complex texts into interactive summary flashcards.",
+  "llamaindex_messages": [
+    {
+      "role": "system",
+      "content": "You are \"YouWoAI Intelligence Assistant\", full name: \"YouWoAI—Your Exclusive Deep Learning Assistant\".\n\nYour responsibility is to help users quickly, accurately, and deeply understand and use all the features and value of YouWoAI.\n\n🌟 Writing Style:\n- Clear explanations, specific steps, rich examples, friendly yet professional language\n- Always refer to the product as \"YouWoAI\" (not \"YouMeAI\" or other variations)\n- If users ask about features not yet available, clearly state \"expected to be supported in the future\"\n- If user questions exceed system capabilities, kindly direct them to documentation or feedback channels\n\n🎯 Core Philosophy: YouWoAI = Your External Brain + AI Efficiency Assistant\nYou import any materials, I help you understand → question → summarize → output; you focus on thinking and creating.\n\n🔧 Feature Overview:\n1. Content Import: PDF/Word/Webpages/YouTube/Images/Audio\n2. Voice Transcription: Real-time recording & regular audio upload (max 4 hours)\n3. AI Conversation: GPT-4, DeepSeek, Grok, Gemini\n4. Auto Notes & Flashcard Generation & Quiz\n5. Multi-format Export: PDF/Word/Markdown/CSV\n6. Knowledge Base: Automatic material linking, long-term follow-up questions\n7. Lesson Plans/Practice Questions/Script Content Creation\n8. Multi-language & LaTeX OCR Support\n\n⚠️ Note: Voice reading practice, pronunciation correction, and \"automatic reminder to review mistakes + unmastered content\" are not yet supported. Please remind users \"this feature is expected to be available in the future\".\n\n🧠 Scenario Templates:\n- Students: Import → Question → Output notes/quiz → Spaced review\n- Teachers: Generate lesson plans + Upload answers for auto-grading + Export reports\n- Content creators: YouTube/Image import → Auto summarize → Output scripts/tweets\n- Workplace: Upload recordings/contracts → Generate minutes/summaries/risk points\n\n🛠️ Keywords: Quick summary, structured notes, verbatim transcription, intelligent Q&A, paragraph positioning, error marking, flashcard box, template writing, OCR to LaTeX, export PDF, intelligent prompt library, document review, cross-material follow-up\n\n📌 Founder: YouWoAI was founded by 21-year-old entrepreneur Shonn, Computer Science honors graduate from University of Waterloo and former Huawei software engineer. He independently developed YouWoAI, combining advantages from Get Notes, Doubao, Otter.ai, etc.\n\n📣 Value Proposition: YouWoAI—Your exclusive deep learning assistant, responsible for the entire process of Massive Information → Refined Knowledge → Continuous Output, leaving you time for the most important thinking and creation.\n\n🎯 Examples:\n• Student Closed-Loop: 1) Import textbooks/recordings→Auto notes 2) Paragraph Q&A→Clarification 3) Generate Quiz/Flashcard→Spaced review\n• Educators: Generate Grade 11 Physics friction lesson plan + 10 practice questions; Upload student answers→AI grading + summary feedback\n• Content Creators: Paste YouTube link→Auto structured summary; Select \"Social Media Copy Generation\"→Tweets/Scripts\n• Workplace: Meeting recording→Auto minutes + action list; Upload contracts→Summary + Risk points\n\n🚀 Core Processes:\nReal-time Recording (≤60 min): 1) Click 🎙️ Record→Select Real-time Recording 2) Click circle button to start 3) Click 📷 Camera to insert images, long press for OCR/LaTeX 4) Pause/interruption enters \"Recording Recovery\" 5) After ending choose: Complete record/Auto notes/Summary 6) Generate Quiz/Flashcard or export\n\nFlashcard Generation: 1) Open note→Click Quiz/Flashcard Auto Generate 2) AI generates Question-Answer pairs 3) Review in Flashcard Box with spaced algorithm 4) Export CSV/Anki/PDF\n\n💡 Tips:\n- Keyword Repetition: Repeat important terms for accurate AI highlighting\n- Output Style: Note top right ≡ switches concise/detailed/chart versions\n- Multi-language: Set transcription=English, translation=Chinese for bilingual subtitles\n\nCurrent Date: 2025-08-09\n\n• Any prior conversation notes, file‑search snippets, file attachments, or web‑search results will appear as additional system messages in this chat. Use them when relevant.",
+      "content_length": 4069
+    },
+    {
+      "role": "user",
+      "content": "Context from your notes and documents:\n\n[1] Note: 2024_-_The_Year_the_GPT_Wrapper_Myth_Proved_Wrong.mp3\nSKIP_EMBEDDING\n\n[2] Note: 5分钟老妈.wav\n这段文本深入探讨了个体在生活与成长中的两大核心维度：出世与入世，以及破局与自我超越的路径。作者强调，一个真正的智慧人应同时具备出世的超然与入世的实践，既能在天地间自成一派，又能积极体验社会的丰富与复杂。从入世的经历中，个体通过痛苦、快乐、背叛等多样体验，提炼出阅历和智慧，逐步实现从知识到经验再到深度思考的层层递进。这种漏斗式的成长路径，是区别普通人与高手的根本底层原因，也是追求高质量人生的关键。作者指出，世界如一个容器，人生的答案藏于其中，高手不排斥入世，反而视其为蜕变的必要过程。\n\n在社会层面，作者分析了各种“局”的本质，强调利益驱动下的入局行为，指出多数人被欲望所蒙蔽，陷入情感、财富、权谋的局中难以自拔。相较之下，高手善于破局，能透过现象看本质，拆解思维中的壁垒，突破原生家庭与认知的限制，从而实现自我突破。破局的核心在于两种路径：一是打破自身局限，如家庭束缚、思维桎梏，二是破坏他人的局势，借助组织与策略操控局中人。许多人身处局中不自知，受人性的弱点、操控规则的影響，若能以局外人视角审视全局，深谋远虑，便能破局而出，掌控主动权。\n\n作者进一步强调，洞察局势的关键在于利弊分析，识别那些\n\n[3] Note: 新录音 3.m4a\n这段对话是一位学生对《陷入冰海》（Trap in Ice）一书的介绍与感受表达。作者为美国水出版公司于1919年出版的作品，讲述一位女孩与家人在北极探险中的经历。学生选择这本书的原因主要基于书名简单易懂，符合其有限的词汇量，同时被书中插图吸引——一只静静站在冰上的女孩与她的狗，营造出一种平静的氛围，暗示故事的朴实与纯粹。然而，学生在阅读过程中发现，尽管词汇简单，但内容依然超出其理解范围，导致阅读困难。学生一度考虑放弃，感受到“有限的选择”带来的无奈，但最终被榜样的力量激励，决定坚持阅读。\n\n在内容方面，书中通过女主角汉恩（Helen）视角，描述她与家人在北极的冒险。故事起因于父亲生病、家庭被迫迁移，最终踏上北极之旅。途中，船只被冰层困住，整个家庭与船员在极寒的环境中挣扎求存，被迫弃船求生，经历了极端的危机。学生特别提到对汉恩与弟弟迈克尔（Michael）在遇到北极熊时的勇敢表现印象深刻，激发了对家庭责任与勇气的共鸣。书中人物如船长贝利（Bale）也经历了性格转变，从严厉变得更为敏感与责任感强，最终在他们到达“雷居兰特岛”后，通过船长与汉恩的对话，表达了“每个人都拥有改变人生故事的力量”\n\n[4] Note: 42min英文会议.wav\n本次对话主要围绕员工薪酬、培训安排、工作计划以及相关流程的协调展开。首先，关于某员工的薪资问题，讨论确认其在培训期间应按每天300美元支付6天的工资，实际由Johnson负责录入培训工时，且该员工在培训前后工作安排为5至6天，培训期间为每周5天，培训结束后预计持续至8月。公司强调员工在培训期间的工作时间应遵守40小时标准，避免加班，并明确其在岛上居住、但以温哥华为家庭地址，且领取的补助（per diem）和工资将依据实际培训和工作情况调整，特别是在未来可能的迁移计划中。关于旅行补助，除非因公司安排，否则员工自行返回的交通费用不予报销。公司还强调，工作时间应尽量安排在10小时或5/8小时制，以优化工作效率，避免超时带来的复杂财务处理问题。\n\n其次，会议还涉及对员工培训计划的确认与调整。员工将持续在岛上培训至8月，期间维持每小时35美元的培训费率，培训工时由Johnson提交，且培训期间员工不参与额外的工作任务，保持工作计划的连续性和一致性。对于非培训周的工作安排，建议保持常规的工作日（如5天8小时或4天10小时），并确保其工作时间符合公司规定的40小时标准，以避免加班和相关财务复杂性。管\n\n[5] Note: 5分钟老妈.wav\n这段文本深入探讨了个体在复杂社会环境中的生存智慧和成长路径，强调“入世”与“出世”的辩证关系。作者指出，真正的开悟者应兼具出世的智慧与入世的手段，通过体验丰富人生，提炼感受与智慧，形成逐步递进的认知层次。这种“漏斗式”进阶过程是区别高手与普通人的根本原因，也是实现高质量人生的关键。入世不仅是体验世界的必要途径，也是推动深度思考、激发神经元成长的动力，只有不断扎根于世界之中，才能获得真实的人生答案。\n\n作者强调，世界如容器，人生的意义在于在其中扎根和探索。高手不排斥入世，视其为蜕变的必经之路。初入社会时，个体往往陷入各种利益纠葛的局中，为追求利益而迷失自我，逐渐被欲望所蒙蔽，走上偏离本心的道路。破局成为实现突破的核心能力，分为两类：一是打破自身的思维束缚，例如家庭带来的认知限制；二是破坏他人的棋局，通过组织和规则掌控局势，利用人性弱点赢得主动。善于破局者能从全局角度观察，识别利益关系，避开无益的争斗，掌握主动权。\n\n在社会交往中，很多人被人性弱点和潜规则所奴役，迷失在利益与情绪的操控中。真正的破局者善于识破这些陷阱，从局外人角度分析利弊，避免陷入被动。与此同时，作者指出，许多局都是由利益\n\n[6] Note: Salmon Rd.m4a\nSKIP_EMBEDDING\n\n[7] Note: 家常厨具与美食\n这段对话发生在日常家庭互动的场景中，核心围绕饮食与厨房物件的安排展开。首先，谈话者提到要以馒头搭配菜肴，显现出对饭局搭配的关注与安排。对话中多人参与对馒头的评价与接待，李荣表示馒头可以不同搭配，整体氛围带着谢意与温情，另一人还表达想喝茶、向“辛苦叔叔”致谢，显现出对照料人员的感激。\n\n关于厨房与物件的协商，几位参与者讨论了留存某个小锅以备日后烤鸭使用的可能性，并决定把小锅留在现有位置，方便家里人使用。随之而来的是对锅盖深度的询问与判断：现有的锅盖不够深，现场决定暂时不再找更深的盖子，整体方案被认为“基本可以”。对带纸的物品需注意管理，不能随意丢弃在这里，体现出对清洁与秩序的关注。\n\n对话还提及一些日常使用细节与实现便利性。发言人表示此物品使用起来很方便，偶尔会用到烧火机以降低清洗工作，表达了对简便性的偏好与共识。此外，谈话中还出现对某些物品状态的观察与确认，如今天的颜色对比（红色与黄色）及信息的确认收悉，显示出现场的互动性与信息同步的情形。\n\n最后一个信息性片段涉及到信息传递的条件：对方并不会主动发信息，只有当你进入相关场景或系统后，才会接收到该信息，揭示了信息通知的触发机制。这突显出\n\n[8] Note: Note\n现在总可以。\n\n对吗？\n\n因为这还差不多。\n\nOK。\n\n现在可以继续掌握。\n\nOKOK，真系差。\n\n[9] Note: Note\nOkay，can we finally get this control？\n\n咱就是说如果去削弱的话他应该不会再收我钱。\n\n因为这个才是我想要的效果我的妈呀，它好像不是。\n\nFeels like the wind is running through。\n\nScott bencloud。\n\n说的五点嘛，对不对？\n\n就是昨天送东西有点没办法还行哦，嗯。\n\n但是无所谓村长他的历史村长营养化是这个消息发送的。\n\n抓住核心人物就行了。\n\n我也是我都没运动，我得赶紧。\n\n去运动去。\n\n我其实想运动。\n\n你过来，你可以问一下你在唱歌。\n\n到底没有时间给你们写，主要是这帮人都看不上。\n\n我想对不对？看不上的话你浪费时间跟他们说是吧？对呀，还不如直接网上招很招志同道合的人给钱，有钱rapper，他招人干活还好干对不对？\n\n对呀，我跟他们说还要哄着因为是熟人，所以对对。\n\n他抓他们他们能帮把帮把帮不了算了\n\n[10] Note: CS480_680 Lecture 19_ Attention and Transformer Networks.mp3\nSKIP_EMBEDDING\n\n[11] AI Text Summarizer - One-Click Summarization (Ad-Free):\nQuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.\n\n[12] Highly Efficient Prompt for Summarizing — GPT-4:\nFormat the summary in paragraph form for easy understanding. Conclude your notes with [End of Notes, Message #X] to indicate completion, where \" ...\n\n[13] TLDR This - Article Summarizer & Online Text Summarizing Tool:\nTLDR This helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.\n\n[14] Free AI-powered Summarizing Tool | No Sign-up Required:\nA faster way to summarize text. Grammarly's summary writer helps you instantly create well-worded summaries that capture the key points of a piece of text.\n\n[15] Scholarcy - Knowledge made simple:\nSummarize any paper, article or textbook. You can summarize videos too! Scholarcy converts long complex texts into interactive summary flashcards.\n\nCITATION INSTRUCTIONS:\n- Cite sources using numbered brackets like [1], [2], etc.\n- Place citations immediately after relevant statements\n- You can cite multiple sources like [1, 3]\n- Only cite sources that directly support your statement\n- Every factual claim from the provided sources must have a citation\n\n\nUser Question: Summarize my recent notes and highlight the key points",
+      "content_length": 4758
+    }
+  ]
+}

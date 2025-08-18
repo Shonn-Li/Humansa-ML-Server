@@ -237,6 +237,7 @@ class ModularChatEndpoint:
         model = request_data.get("model")
         temperature = request_data.get("temperature")
         max_tokens = request_data.get("max_tokens")
+        additional_context = request_data.get("additional_context")  # Recording/current note context
 
         # Validate required parameters
         if not user_id:
@@ -495,7 +496,7 @@ class ModularChatEndpoint:
                 if enable_citations and ((rag_context and rag_context.chunks) or (attachment_context and attachment_context.chunks) or (websearch_context and websearch_context.results)):
                     response_data = await self._generate_with_citations(rag_context, attachment_context, websearch_context, llm)
                 else:
-                    response_data = await self._generate_direct_response(rag_context, attachment_context, websearch_context, messages, llm)
+                    response_data = await self._generate_direct_response(rag_context, attachment_context, websearch_context, messages, llm, additional_context)
 
                 # Generate conversation title if requested
                 generated_title = None
@@ -563,9 +564,9 @@ class ModularChatEndpoint:
             logger.error(f"❌ Citation engine failed: {e}")
             logger.info("🔄 Falling back to direct response")
             # Fall back to direct response without citations
-            return await self._generate_direct_response(rag_context, attachment_context, websearch_context, None, llm)
+            return await self._generate_direct_response(rag_context, attachment_context, websearch_context, None, llm, None)
 
-    async def _generate_direct_response(self, rag_context, attachment_context, websearch_context, messages, llm) -> Dict[str, Any]:
+    async def _generate_direct_response(self, rag_context, attachment_context, websearch_context, messages, llm, additional_context=None) -> Dict[str, Any]:
         """Generate response with direct context injection"""
 
         has_context = False
@@ -573,6 +574,20 @@ class ModularChatEndpoint:
         query = None
 
         logger.info("🔧 === CONTEXT BUILDING STAGE ===")
+        
+        # Add additional context (recording/current note) FIRST
+        if additional_context:
+            context_type = additional_context.get("type", "current_note")
+            context_content = additional_context.get("content", "")
+            
+            if context_content:
+                has_context = True
+                if context_type == "recording_note":
+                    context_parts.insert(0, f"CURRENT RECORDING TRANSCRIPT:\n{context_content}")
+                    logger.info(f"📝 Added recording context: {len(context_content)} chars")
+                else:
+                    context_parts.insert(0, f"CURRENT NOTE CONTENT:\n{context_content}")
+                    logger.info(f"📝 Added current note context: {len(context_content)} chars")
 
         # Add RAG context
         if rag_context and rag_context.chunks:

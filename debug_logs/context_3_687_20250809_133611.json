@@ -1,0 +1,107 @@
+{
+  "timestamp": "20250809_133611",
+  "user_id": 3,
+  "conversation_id": 687,
+  "request": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "what did this talk about?"
+      }
+    ],
+    "model": "gpt-4.1-nano",
+    "enable_rag": true,
+    "enable_citations": true,
+    "enable_web_search": true
+  },
+  "context_agents": [
+    "start_time",
+    "router_agent",
+    "title_task",
+    "title_start_time",
+    "attachment_agent",
+    "last_message_id",
+    "last_message_output_index"
+  ],
+  "combined_context_length": 2078,
+  "combined_context_preview": "[1] Attachment Content:\n[ATTACHMENT] 3_5b5b62276c047b87d02036f3d3da09db.pdf - PDF document\nAMPLE OF\u0003TABLE \n1 ARTICLES\nNAME OF COMPANY\n(“The Company”)\nThe Company has as its articles the following articles.\nFULL NAME AND SIGNATURE OF EACH INCORPORATOR DATE SIGNED\nYYYY / MM / DD\nIncorporation Number:\nTable 1\n[am. B.C. Reg.s 315/2004, ss. 5 to 9; 186/2007.]\nArticles\nPart 1 — Interpretation\nDefinitions\n1.1 Without limiting Article 1.2, in these articles, unless the context requires otherwise:\n“adjourned meeting” means the meeting to which a meeting is adjourned under Article 8.6 or 8.10;\n“appropriate person” has the same meaning as in the Securities Transfer Act;\n“board” and “directors” mean the directors or sole director of the Company for the time being;\n“Business Corporations Act” means the Business Corporations Act , S.B.C. 2002, c.57, and includes its\nregulations;\n“Interpretation Act” means the Interpretation Act , R.S.B.C. 1996, c. 238;\n“protected purchaser” has the same meaning as i...",
+  "sources": [
+    {
+      "source_id": "attachment_2",
+      "type": "attachment",
+      "title": "Attachment: Agreement.pdf",
+      "content": "[ATTACHMENT] 3_5b5b62276c047b87d02036f3d3da09db.pdf - PDF document\nAMPLE OF\u0003TABLE \n1 ARTICLES\nNAME OF COMPANY\n(“The Company”)\nThe Company has as its articles the following articles.\nFULL NAME AND SIGNATURE OF EACH INCORPORATOR DATE SIGNED\nYYYY / MM / DD\nIncorporation Number:\nTable 1\n[am. B.C. Reg.s 315/2004, ss. 5 to 9; 186/2007.]\nArticles\nPart 1 — Interpretation\nDefinitions\n1.1 Without limiting Article 1.2, in these articles, unless the context requires otherwise:\n“adjourned meeting” means the ",
+      "url": "https://youwoai-file-storage.s3.us-west-1.amazonaws.com/3_5b5b62276c047b87d02036f3d3da09db.pdf",
+      "metadata": {
+        "filename": "Agreement.pdf",
+        "file_type": "pdf",
+        "file_id": "file_0"
+      }
+    }
+  ],
+  "sources_count": 1,
+  "context_search_found": false,
+  "web_search_found": false,
+  "attachment_found": true,
+  "full_context": {
+    "context_search": {},
+    "web_search": {},
+    "attachment": {
+      "status": "success",
+      "context": "[ATTACHMENT] 3_5b5b62276c047b87d02036f3d3da09db.pdf - PDF document\nAMPLE OF\u0003TABLE \n1 ARTICLES\nNAME OF COMPANY\n(“The Company”)\nThe Company has as its articles the following articles.\nFULL NAME AND SIGNATURE OF EACH INCORPORATOR DATE SIGNED\nYYYY / MM / DD\nIncorporation Number:\nTable 1\n[am. B.C. Reg.s 315/2004, ss. 5 to 9; 186/2007.]\nArticles\nPart 1 — Interpretation\nDefinitions\n1.1 Without limiting Article 1.2, in these articles, unless the context requires otherwise:\n“adjourned meeting” means the meeting to which a meeting is adjourned under Article 8.6 or 8.10;\n“appropriate person” has the same meaning as in the Securities Transfer Act;\n“board” and “directors” mean the directors or sole director of the Company for the time being;\n“Business Corporations Act” means the Business Corporations Act , S.B.C. 2002, c.57, and includes its\nregulations;\n“Interpretation Act” means the Interpretation Act , R.S.B.C. 1996, c. 238;\n“protected purchaser” has the same meaning as in the Securities Transfer Act;\n“trustee”, in relation to a shareholder, means the personal or other legal representative of the shareholder,\nand includes a trustee in bankruptcy of the shareholder.\nBusiness Corporations Act definitions apply\n1.2 The definitions in the Business Corporations Act  apply to these articles.\nInterpretation Act applies\n1.3 The Interpretation Act  applies to the interpretation of these articles as if these articles were an enactment.\nConflict in definitions\n1.4 If there is a conflict between a definition in the Business Corporations Act  and a definition or rule in the\nInterpretation Act  relating to a term used in these articles, the definition in the Business Corporations Act\nwill prevail in relation to the use of the term in these articles.\nConflict between articles and legislation\n1.5 If there is a conflict between these articles and the Business Corporations Act , the Business Corporations\nAct will prevail.\nSignature of Incorporator\nFull name of Incorporator\nSignature of Incorporator\nFull name of Incorporator\nYOUWOAI INC.\nXiang Li\n",
+      "sources": [
+        {
+          "file_id": "file_0",
+          "filename": "Agreement.pdf",
+          "url": "https://youwoai-file-storage.s3.us-west-1.amazonaws.com/3_5b5b62276c047b87d02036f3d3da09db.pdf",
+          "type": "file_attachment",
+          "file_type": "pdf",
+          "title": "Attachment: Agreement.pdf",
+          "content": "Content from Agreement.pdf"
+        }
+      ],
+      "metadata": {
+        "attachment_count": 1,
+        "context_length": 2054,
+        "file_types": [
+          "pdf"
+        ],
+        "chunk_count": 3,
+        "image_chunk_count": 0
+      }
+    },
+    "router": {
+      "router_decision": {
+        "selected_tool": "attachments",
+        "search_type": "attachments",
+        "confidence": 0.95,
+        "reasoning": "Attachments present in request",
+        "query_classification": "attachment_priority"
+      },
+      "original_query": "what did this talk about?",
+      "condensed_query": "what did this talk about?",
+      "enabled_agents": [
+        "response",
+        "attachment"
+      ],
+      "model": "gpt-4.1-nano",
+      "search_type": "attachments",
+      "has_explicit_ids": false,
+      "explicit_note_ids": null,
+      "explicit_folder_ids": null
+    }
+  },
+  "combined_context_full": "[1] Attachment Content:\n[ATTACHMENT] 3_5b5b62276c047b87d02036f3d3da09db.pdf - PDF document\nAMPLE OF\u0003TABLE \n1 ARTICLES\nNAME OF COMPANY\n(“The Company”)\nThe Company has as its articles the following articles.\nFULL NAME AND SIGNATURE OF EACH INCORPORATOR DATE SIGNED\nYYYY / MM / DD\nIncorporation Number:\nTable 1\n[am. B.C. Reg.s 315/2004, ss. 5 to 9; 186/2007.]\nArticles\nPart 1 — Interpretation\nDefinitions\n1.1 Without limiting Article 1.2, in these articles, unless the context requires otherwise:\n“adjourned meeting” means the meeting to which a meeting is adjourned under Article 8.6 or 8.10;\n“appropriate person” has the same meaning as in the Securities Transfer Act;\n“board” and “directors” mean the directors or sole director of the Company for the time being;\n“Business Corporations Act” means the Business Corporations Act , S.B.C. 2002, c.57, and includes its\nregulations;\n“Interpretation Act” means the Interpretation Act , R.S.B.C. 1996, c. 238;\n“protected purchaser” has the same meaning as in the Securities Transfer Act;\n“trustee”, in relation to a shareholder, means the personal or other legal representative of the shareholder,\nand includes a trustee in bankruptcy of the shareholder.\nBusiness Corporations Act definitions apply\n1.2 The definitions in the Business Corporations Act  apply to these articles.\nInterpretation Act applies\n1.3 The Interpretation Act  applies to the interpretation of these articles as if these articles were an enactment.\nConflict in definitions\n1.4 If there is a conflict between a definition in the Business Corporations Act  and a definition or rule in the\nInterpretation Act  relating to a term used in these articles, the definition in the Business Corporations Act\nwill prevail in relation to the use of the term in these articles.\nConflict between articles and legislation\n1.5 If there is a conflict between these articles and the Business Corporations Act , the Business Corporations\nAct will prevail.\nSignature of Incorporator\nFull name of Incorporator\nSignature of Incorporator\nFull name of Incorporator\nYOUWOAI INC.\nXiang Li\n",
+  "llamaindex_messages": [
+    {
+      "role": "system",
+      "content": "You are \"YouWoAI Intelligence Assistant\", full name: \"YouWoAI—Your Exclusive Deep Learning Assistant\".\n\nYour responsibility is to help users quickly, accurately, and deeply understand and use all the features and value of YouWoAI.\n\n🌟 Writing Style:\n- Clear explanations, specific steps, rich examples, friendly yet professional language\n- Always refer to the product as \"YouWoAI\" (not \"YouMeAI\" or other variations)\n- If users ask about features not yet available, clearly state \"expected to be supported in the future\"\n- If user questions exceed system capabilities, kindly direct them to documentation or feedback channels\n\n🎯 Core Philosophy: YouWoAI = Your External Brain + AI Efficiency Assistant\nYou import any materials, I help you understand → question → summarize → output; you focus on thinking and creating.\n\n🔧 Feature Overview:\n1. Content Import: PDF/Word/Webpages/YouTube/Images/Audio\n2. Voice Transcription: Real-time recording & regular audio upload (max 4 hours)\n3. AI Conversation: GPT-4, DeepSeek, Grok, Gemini\n4. Auto Notes & Flashcard Generation & Quiz\n5. Multi-format Export: PDF/Word/Markdown/CSV\n6. Knowledge Base: Automatic material linking, long-term follow-up questions\n7. Lesson Plans/Practice Questions/Script Content Creation\n8. Multi-language & LaTeX OCR Support\n\n⚠️ Note: Voice reading practice, pronunciation correction, and \"automatic reminder to review mistakes + unmastered content\" are not yet supported. Please remind users \"this feature is expected to be available in the future\".\n\n🧠 Scenario Templates:\n- Students: Import → Question → Output notes/quiz → Spaced review\n- Teachers: Generate lesson plans + Upload answers for auto-grading + Export reports\n- Content creators: YouTube/Image import → Auto summarize → Output scripts/tweets\n- Workplace: Upload recordings/contracts → Generate minutes/summaries/risk points\n\n🛠️ Keywords: Quick summary, structured notes, verbatim transcription, intelligent Q&A, paragraph positioning, error marking, flashcard box, template writing, OCR to LaTeX, export PDF, intelligent prompt library, document review, cross-material follow-up\n\n📌 Founder: YouWoAI was founded by 21-year-old entrepreneur Shonn, Computer Science honors graduate from University of Waterloo and former Huawei software engineer. He independently developed YouWoAI, combining advantages from Get Notes, Doubao, Otter.ai, etc.\n\n📣 Value Proposition: YouWoAI—Your exclusive deep learning assistant, responsible for the entire process of Massive Information → Refined Knowledge → Continuous Output, leaving you time for the most important thinking and creation.\n\n🎯 Examples:\n• Student Closed-Loop: 1) Import textbooks/recordings→Auto notes 2) Paragraph Q&A→Clarification 3) Generate Quiz/Flashcard→Spaced review\n• Educators: Generate Grade 11 Physics friction lesson plan + 10 practice questions; Upload student answers→AI grading + summary feedback\n• Content Creators: Paste YouTube link→Auto structured summary; Select \"Social Media Copy Generation\"→Tweets/Scripts\n• Workplace: Meeting recording→Auto minutes + action list; Upload contracts→Summary + Risk points\n\n🚀 Core Processes:\nReal-time Recording (≤60 min): 1) Click 🎙️ Record→Select Real-time Recording 2) Click circle button to start 3) Click 📷 Camera to insert images, long press for OCR/LaTeX 4) Pause/interruption enters \"Recording Recovery\" 5) After ending choose: Complete record/Auto notes/Summary 6) Generate Quiz/Flashcard or export\n\nFlashcard Generation: 1) Open note→Click Quiz/Flashcard Auto Generate 2) AI generates Question-Answer pairs 3) Review in Flashcard Box with spaced algorithm 4) Export CSV/Anki/PDF\n\n💡 Tips:\n- Keyword Repetition: Repeat important terms for accurate AI highlighting\n- Output Style: Note top right ≡ switches concise/detailed/chart versions\n- Multi-language: Set transcription=English, translation=Chinese for bilingual subtitles\n\nCurrent Date: 2025-08-09\n\n• Any prior conversation notes, file‑search snippets, file attachments, or web‑search results will appear as additional system messages in this chat. Use them when relevant.",
+      "content_length": 4069
+    },
+    {
+      "role": "user",
+      "content": "Context from your notes and documents:\n\n[1] Attachment Content:\n[ATTACHMENT] 3_5b5b62276c047b87d02036f3d3da09db.pdf - PDF document\nAMPLE OF\u0003TABLE \n1 ARTICLES\nNAME OF COMPANY\n(“The Company”)\nThe Company has as its articles the following articles.\nFULL NAME AND SIGNATURE OF EACH INCORPORATOR DATE SIGNED\nYYYY / MM / DD\nIncorporation Number:\nTable 1\n[am. B.C. Reg.s 315/2004, ss. 5 to 9; 186/2007.]\nArticles\nPart 1 — Interpretation\nDefinitions\n1.1 Without limiting Article 1.2, in these articles, unless the context requires otherwise:\n“adjourned meeting” means the meeting to which a meeting is adjourned under Article 8.6 or 8.10;\n“appropriate person” has the same meaning as in the Securities Transfer Act;\n“board” and “directors” mean the directors or sole director of the Company for the time being;\n“Business Corporations Act” means the Business Corporations Act , S.B.C. 2002, c.57, and includes its\nregulations;\n“Interpretation Act” means the Interpretation Act , R.S.B.C. 1996, c. 238;\n“protected purchaser” has the same meaning as in the Securities Transfer Act;\n“trustee”, in relation to a shareholder, means the personal or other legal representative of the shareholder,\nand includes a trustee in bankruptcy of the shareholder.\nBusiness Corporations Act definitions apply\n1.2 The definitions in the Business Corporations Act  apply to these articles.\nInterpretation Act applies\n1.3 The Interpretation Act  applies to the interpretation of these articles as if these articles were an enactment.\nConflict in definitions\n1.4 If there is a conflict between a definition in the Business Corporations Act  and a definition or rule in the\nInterpretation Act  relating to a term used in these articles, the definition in the Business Corporations Act\nwill prevail in relation to the use of the term in these articles.\nConflict between articles and legislation\n1.5 If there is a conflict between these articles and the Business Corporations Act , the Business Corporations\nAct will prevail.\nSignature of Incorporator\nFull name of Incorporator\nSignature of Incorporator\nFull name of Incorporator\nYOUWOAI INC.\nXiang Li\n\n\nCITATION INSTRUCTIONS:\n- Cite sources using numbered brackets like [1], [2], etc.\n- Place citations immediately after relevant statements\n- You can cite multiple sources like [1, 3]\n- Only cite sources that directly support your statement\n- Every factual claim from the provided sources must have a citation\n\n\nUser Question: what did this talk about?",
+      "content_length": 2470
+    }
+  ]
+}

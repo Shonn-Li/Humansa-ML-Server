@@ -1,0 +1,484 @@
+{
+  "timestamp": "20250814_110636",
+  "user_id": 22,
+  "conversation_id": 699,
+  "request": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Summarize my recent notes and highlight the key points"
+      }
+    ],
+    "model": "gpt-5-nano",
+    "enable_rag": true,
+    "enable_citations": true,
+    "enable_web_search": true
+  },
+  "context_agents": [
+    "start_time",
+    "router_agent",
+    "title_task",
+    "title_start_time",
+    "context_search_agent",
+    "web_search_agent",
+    "last_message_id",
+    "last_message_output_index"
+  ],
+  "combined_context_length": 3241,
+  "combined_context_preview": "[1] Note: Image Note\n这段对话主要包含用户的操作记录和技术调试信息。用户在不同时间点进行笔记、导入文件、图片、链接、视频和音频等内容的管理，显示出积极利用Note功能进行信息整理的行为。提及的内容包括“Veritasium: What Everyone Gets Wrong About ...”的视频标题，可能代表用户关注或记录了相关内容。\n\n同时，系统日志部分详细记录了程序在加载媒体内容时出现的模块加载错误和调试信息，提示“Unable to find module for MediaLibraryImageLoader”及相关调试追踪信息，涉及React Native的模块加载和图片请求流程。这显示程序在加载图片资源时遇到模块缺失或错误，影响媒体内容的正常显示或功能正常运作。\n\n整体来看，用户进行笔记和内容管理的同时，系统记录了媒体加载错误的调试信息，这可能是软件运行异常或需要修复的技术问题。总结中强调了用户操作的内容整理行为以及系统的调试信息，但未涉及具体对话或交互内容。\n\n[2] Note: 欢迎来到由我AI！\n## 👋 欢迎来到由我AI !\n\n以下是基础指南：\n\n### 📝 内容创建\n\n◇ 点击底部操作按钮并选择\"实时录音\"开始录制\n\n   * 单次最长支持4小时录音\n\n   * 通话中断后仍可恢复录音\n\n◇ 点击操作按钮选择\"导入文件\"添加文档\n\n   * 支持格式：DOC、DOCX、TXT、MD（PDF即将支持）\n\n◇ 点击操作按钮选择\"导入图片\"添加图像\n\n   * 支持全部图片格式\n\n◇ 点击操作按钮选择\"导入音频\"添加声音\n\n   * 支持全部音频格式\n\n◇ 录音前设置偏好语言：\n\n   * 进入「个人档案」→「笔记设置」→「语言」选择目标语言\n\n   * 选择主语言可获得最佳转录效果\n\n◇ 录音/上传内容后支持一键生成：\n\n   * AI摘要\n\n   * AI笔记\n\n   * 测验题\n\n   * 记忆卡片\n\n   * 完整文本\n\n### 🗂️ 组织整理\n\n◇ 使用顶部标签切换视图：\n\n   * 笔记\n\n   * 文件夹\n\n   * 提示词\n\n### 模式选择\n\n进入「个人档案」→「用户模式」切换使用模式\n\n- 不同模式提供定制化的AI功能（即将上线）\n\n### 💡 使用技巧\n\n◇\n\n[3] Note: Untitled No...",
+  "sources": [
+    {
+      "source_id": "context_1",
+      "type": "note",
+      "type_id": 1645,
+      "title": "Image Note",
+      "content": "这段对话主要包含用户的操作记录和技术调试信息。用户在不同时间点进行笔记、导入文件、图片、链接、视频和音频等内容的管理，显示出积极利用Note功能进行信息整理的行为。提及的内容包括“Veritasium: What Everyone Gets Wrong About ...”的视频标题，可能代表用户关注或记录了相关内容。\n\n同时，系统日志部分详细记录了程序在加载媒体内容时出现的模块加载错误和调试信息，提示“Unable to find module for MediaLibraryImageLoader”及相关调试追踪信息，涉及React Native的模块加载和图片请求流程。这显示程序在加载图片资源时遇到模块缺失或错误，影响媒体内容的正常显示或功能正常运作。\n\n整体来看，用户进行笔记和内容管理的同时，系统记录了媒体加载错误的调试信息，这可能是软件运行异常或需要修复的技术问题。总结中强调了用户操作的内容整理行为以及系统的调试信息，但未涉及具体对话或交互内容。",
+      "url": "youwo://note/1645",
+      "metadata": {
+        "note_id": 1645,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": null,
+        "score": 0.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_2",
+      "type": "note",
+      "type_id": 1611,
+      "title": "欢迎来到由我AI！",
+      "content": "## 👋 欢迎来到由我AI !\n\n以下是基础指南：\n\n### 📝 内容创建\n\n◇ 点击底部操作按钮并选择\"实时录音\"开始录制\n\n   * 单次最长支持4小时录音\n\n   * 通话中断后仍可恢复录音\n\n◇ 点击操作按钮选择\"导入文件\"添加文档\n\n   * 支持格式：DOC、DOCX、TXT、MD（PDF即将支持）\n\n◇ 点击操作按钮选择\"导入图片\"添加图像\n\n   * 支持全部图片格式\n\n◇ 点击操作按钮选择\"导入音频\"添加声音\n\n   * 支持全部音频格式\n\n◇ 录音前设置偏好语言：\n\n   * 进入「个人档案」→「笔记设置」→「语言」选择目标语言\n\n   * 选择主语言可获得最佳转录效果\n\n◇ 录音/上传内容后支持一键生成：\n\n   * AI摘要\n\n   * AI笔记\n\n   * 测验题\n\n   * 记忆卡片\n\n   * 完整文本\n\n### 🗂️ 组织整理\n\n◇ 使用顶部标签切换视图：\n\n   * 笔记\n\n   * 文件夹\n\n   * 提示词\n\n### 模式选择\n\n进入「个人档案」→「用户模式」切换使用模式\n\n- 不同模式提供定制化的AI功能（即将上线）\n\n### 💡 使用技巧\n\n◇",
+      "url": "youwo://note/1611",
+      "metadata": {
+        "note_id": 1611,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": 1,
+        "score": 0.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_3",
+      "type": "note",
+      "type_id": 2063,
+      "title": "Untitled Note",
+      "content": "此次对话内容主要围绕软件设置、操作流程、功能修改和技术问题展开。首先，用户讨论了实时录音功能的可行性及其潜在难题，明确表示如果开启实时录音，可能会出现“请在设置中更改语言”的提示，并考虑临时通过设置调整语言或功能。用户提到需要将语言设置项添加到更方便的位置，如Profile中，以避免多次跳转设置页面，同时表达了对目前界面布局不便利的疑问。对话中还涉及软件某些logo或界面元素的调整，以及用户对操作流程的疑问，比如删除不需要的内容或处理卡顿问题，推测与手机设备性能或DApp相关。期间，用户多次表达不确定或繁琐的操作体验，强调希望简化步骤，确保功能正常使用。此外，用户谈到团队合作和项目进展，指示某些合成工作已完成，计划在确认版本无误后进行推广或使用。总体而言，谈话内容反映出用户在软件配置、界面优化和功能调整中的具体问题与需求，体现出对提高操作便利性和界面友好性的强烈关注。",
+      "url": "youwo://note/2063",
+      "metadata": {
+        "note_id": 2063,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": null,
+        "score": 0.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_4",
+      "type": "note",
+      "type_id": 1622,
+      "title": "Untitled Note",
+      "content": "Why am I into film together? Why not... I never was until I was involved with the film.\n\nWhat? Yes, it was coming from the beginning of the film. Those are few brute corrupted worlds the world was full of testing.\n\nWhat was your decision? I don't know what to say. I'm not going to film.\n\nOk, I'm going to film. \n\nHey, Bobo. Morning, I just want to talk to you about your pay because we're going to have a meeting with resource planning. So right now you're working six days, right?\n\nCorrect. And the",
+      "url": "youwo://note/1622",
+      "metadata": {
+        "note_id": 1622,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": 1,
+        "score": 0.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_5",
+      "type": "note",
+      "type_id": 1627,
+      "title": "Untitled Note",
+      "content": "试一下这个新。\n\n的看一下怎么样？",
+      "url": "youwo://note/1627",
+      "metadata": {
+        "note_id": 1627,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": null,
+        "score": 0.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_6",
+      "type": "note",
+      "type_id": 1626,
+      "title": "Untitled Note",
+      "content": "OK，试一个短一点的全部超过一分钟就可以了。\n\n顺便看一下它压缩的效果怎么样。",
+      "url": "youwo://note/1626",
+      "metadata": {
+        "note_id": 1626,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": null,
+        "score": 0.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_7",
+      "type": "note",
+      "type_id": 2062,
+      "title": "Untitled Note",
+      "content": "上下文不足，无法生成内容",
+      "url": "youwo://note/2062",
+      "metadata": {
+        "note_id": 2062,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": null,
+        "score": 0.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_8",
+      "type": "note",
+      "type_id": 1644,
+      "title": "Untitled Note",
+      "content": "那如果我只录五秒呢？会怎么样？我还能不能继续录？那我。",
+      "url": "youwo://note/1644",
+      "metadata": {
+        "note_id": 1644,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": null,
+        "score": 0.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_9",
+      "type": "note",
+      "type_id": 1615,
+      "title": "Untitled Note",
+      "content": "这什么情况？",
+      "url": "youwo://note/1615",
+      "metadata": {
+        "note_id": 1615,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": null,
+        "score": 0.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "context_10",
+      "type": "note",
+      "type_id": 1650,
+      "title": "Untitled Note",
+      "content": "再试一下呢，看看怎么样？",
+      "url": "youwo://note/1650",
+      "metadata": {
+        "note_id": 1650,
+        "conversation_id": null,
+        "node_id": null,
+        "chunk_id": null,
+        "score": 0.0,
+        "type": "note"
+      }
+    },
+    {
+      "source_id": "web_11",
+      "type": "web",
+      "type_id": null,
+      "title": "AI Text Summarizer - One-Click Summarization (Ad-Free) - QuillBot",
+      "content": "QuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.",
+      "url": "https://quillbot.com/summarize",
+      "metadata": {
+        "search_engine": "google"
+      }
+    },
+    {
+      "source_id": "web_12",
+      "type": "web",
+      "type_id": null,
+      "title": "Highly Efficient Prompt for Summarizing — GPT-4 - Reddit",
+      "content": "Format the summary in paragraph form for easy understanding. Conclude your notes with [End of Notes, Message #X] to indicate completion, where ...",
+      "url": "https://www.reddit.com/r/ChatGPTPro/comments/13n55w7/highly_efficient_prompt_for_summarizing_gpt4/",
+      "metadata": {
+        "search_engine": "google"
+      }
+    },
+    {
+      "source_id": "web_13",
+      "type": "web",
+      "type_id": null,
+      "title": "SMMRY | Summarize Any Text in Seconds | Smmry.com",
+      "content": "Transform long content into clear summaries instantly. Our AI text summarizer helps you extract key insights from articles, documents & reports.",
+      "url": "https://smmry.com/",
+      "metadata": {
+        "search_engine": "google"
+      }
+    },
+    {
+      "source_id": "web_14",
+      "type": "web",
+      "type_id": null,
+      "title": "Free AI-powered Summarizing Tool | No Sign-up Required",
+      "content": "Use our free AI-powered summarizing tool and summary generator to quickly condense articles, papers, or documents into concise summaries.",
+      "url": "https://www.grammarly.com/ai/ai-writing-tools/summarizing-tool",
+      "metadata": {
+        "search_engine": "google"
+      }
+    },
+    {
+      "source_id": "web_15",
+      "type": "web",
+      "type_id": null,
+      "title": "TLDR This - Article Summarizer & Online Text Summarizing Tool",
+      "content": "TLDR This helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.",
+      "url": "https://tldrthis.com/",
+      "metadata": {
+        "search_engine": "google"
+      }
+    }
+  ],
+  "sources_count": 15,
+  "context_search_found": true,
+  "web_search_found": true,
+  "attachment_found": false,
+  "full_context": {
+    "context_search": {
+      "status": "success",
+      "context": "这段对话主要包含用户的操作记录和技术调试信息。用户在不同时间点进行笔记、导入文件、图片、链接、视频和音频等内容的管理，显示出积极利用Note功能进行信息整理的行为。提及的内容包括“Veritasium: What Everyone Gets Wrong About ...”的视频标题，可能代表用户关注或记录了相关内容。\n\n同时，系统日志部分详细记录了程序在加载媒体内容时出现的模块加载错误和调试信息，提示“Unable to find module for MediaLibraryImageLoader”及相关调试追踪信息，涉及React Native的模块加载和图片请求流程。这显示程序在加载图片资源时遇到模块缺失或错误，影响媒体内容的正常显示或功能正常运作。\n\n整体来看，用户进行笔记和内容管理的同时，系统记录了媒体加载错误的调试信息，这可能是软件运行异常或需要修复的技术问题。总结中强调了用户操作的内容整理行为以及系统的调试信息，但未涉及具体对话或交互内容。\n\n## 👋 欢迎来到由我AI !\n\n以下是基础指南：\n\n### 📝 内容创建\n\n◇ 点击底部操作按钮并选择\"实时录音\"开始录制\n\n   * 单次最长支持4小时录音\n\n   * 通话中断后仍可恢复录音\n\n◇ 点击操作按钮选择\"导入文件\"添加文档\n\n   * 支持格式：DOC、DOCX、TXT、MD（PDF即将支持）\n\n◇ 点击操作按钮选择\"导入图片\"添加图像\n\n   * 支持全部图片格式\n\n◇ 点击操作按钮选择\"导入音频\"添加声音\n\n   * 支持全部音频格式\n\n◇ 录音前设置偏好语言：\n\n   * 进入「个人档案」→「笔记设置」→「语言」选择目标语言\n\n   * 选择主语言可获得最佳转录效果\n\n◇ 录音/上传内容后支持一键生成：\n\n   * AI摘要\n\n   * AI笔记\n\n   * 测验题\n\n   * 记忆卡片\n\n   * 完整文本\n\n### 🗂️ 组织整理\n\n◇ 使用顶部标签切换视图：\n\n   * 笔记\n\n   * 文件夹\n\n   * 提示词\n\n### 模式选择\n\n进入「个人档案」→「用户模式」切换使用模式\n\n- 不同模式提供定制化的AI功能（即将上线）\n\n### 💡 使用技巧\n\n◇ 长按项目进行编辑和其他操作（所有元素均可长按，包括文本和转录内容中的图片，探索更多隐藏功能！）\n\n◇ 点击笔记顶部的···按钮可操作：时间戳、翻译、导出与删除\n\n◇ 使用文件夹归类相关内容\n\n◇ 通过修改/创建提示词自定义摘要生成逻辑\n\n### 转录文本\n\n- 点击笔记转录界面右上角编辑图标修改文本内容\n\n- 长按文本区域触发更多功能：高亮标记、插入照片/图片\n\n### AI对话\n\n- 点击AI聊天界面右上角书写图标创建新对话\n\n- 点击AI聊天界面右上角菜单栏查看所有历史对话\n\n此次对话内容主要围绕软件设置、操作流程、功能修改和技术问题展开。首先，用户讨论了实时录音功能的可行性及其潜在难题，明确表示如果开启实时录音，可能会出现“请在设置中更改语言”的提示，并考虑临时通过设置调整语言或功能。用户提到需要将语言设置项添加到更方便的位置，如Profile中，以避免多次跳转设置页面，同时表达了对目前界面布局不便利的疑问。对话中还涉及软件某些logo或界面元素的调整，以及用户对操作流程的疑问，比如删除不需要的内容或处理卡顿问题，推测与手机设备性能或DApp相关。期间，用户多次表达不确定或繁琐的操作体验，强调希望简化步骤，确保功能正常使用。此外，用户谈到团队合作和项目进展，指示某些合成工作已完成，计划在确认版本无误后进行推广或使用。总体而言，谈话内容反映出用户在软件配置、界面优化和功能调整中的具体问题与需求，体现出对提高操作便利性和界面友好性的强烈关注。\n\nWhy am I into film together? Why not... I never was until I was involved with the film.\n\nWhat? Yes, it was coming from the beginning of the film. Those are few brute corrupted worlds the world was full of testing.\n\nWhat was your decision? I don't know what to say. I'm not going to film.\n\nOk, I'm going to film. \n\nHey, Bobo. Morning, I just want to talk to you about your pay because we're going to have a meeting with resource planning. So right now you're working six days, right?\n\nCorrect. And the five days you pay by training? What's the six days?\n\nSo, five days, right? Training is five days, right? So, but you're supposed to be paying six days?\n\nWhat did they do with the six days? Six days, I'll be doing it. For now or for all?\n\nBut for the six days, you are doing the K-O-A, right? No, I think so. No, no.\n\nLet's talk about it right now. No. Yeah, because we will have a meeting, figure out how to get your pay for those.\n\nSo what's your candidate situation? So, as part of my knowledge, I'm not showing you i\n\n\n\n... 已达到字符限制(1000)。升级到Pro可获得更长的笔记。\n\n试一下这个新。\n\n的看一下怎么样？\n\nOK，试一个短一点的全部超过一分钟就可以了。\n\n顺便看一下它压缩的效果怎么样。\n\n上下文不足，无法生成内容\n\n那如果我只录五秒呢？会怎么样？我还能不能继续录？那我。\n\n这什么情况？\n\n再试一下呢，看看怎么样？\n\n这段对话主要围绕关于《Wuthering Waves》2.3版本周年内容的讨论展开，表达了玩家对活动的失望。用户提到游戏中共有12个横幅（banner），但抽取次数不足，无法确保每个横幅都能获得实际价值，形容为“周年礼物”不切实际，暗示活动内容和福利有限，未能达到预期。视频的观看次数达2.2万，说明这一话题引发了玩家的广泛关注和讨论。评论中还涉及具体的时间点片段，可能是游戏中事件或内容的截图，但总体焦点还是在于玩家对活动福利、抽卡机制的评价，反映出对活动安排的失望和质疑。\n\n上下文不足，无法生成内容\n\nIn order is 10...那是什麼?你看我這個打開啥?\n\n我...還在拿東西No, we have no values so we don't need your creative dreams We can return them all to other wise we're going to create a tree node right? and what's the value of that tree node?\n\nthat people is going to be the first value that happens to be in the pre-order or right? just like I showed you right? always going to be the first value so those who are going to be index of zero and then whatever that value was we want to find the position of it in the order or right so in order dot index so we want the index of that value to be the order of zero and we're going to get it in mid now this is the part where we\n\n're going to build the sub tree so root dot left let's create the left sub tree and we're going to do this work perfectly as I mentioned so self dot build tree we're calling the function that we're inside of and the community part about python is we can do subless so that's going to cut down our code quite a bit so we need to put in view pre-order and in order arrays or these sub arrays more likely to be self pre-order what do we do\n\nto solve a left sub tree of pre-order? pos pos no please please we can't do that maybe it helps us it helps us how many nodes do you want in that? basically the value of the shape of the sub tree so what I'm going to do is pull the order we're going to start at index 1 we're basically skipping the zero and we're just creating a node and we're going to do our index we're starting at index 1 going all the way up\n\nto 12 mid plus 1 in python this mid plus 1 is not inclusive so this sub array is really just three orders from index 1 not many so as for the right problem then we're going to pass it in the order for hinder we need as well and that's just going to be from the beginning up in childhood but not included in that we have some right on the engine from the upper left so I'm going to just go straight to the left but I don't know I'm going\n\nto have a log it's a little bit missing, so I'm going to have a log what a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a\n\nlog I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm\n\ngoing to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a log I'm going to have a logBk编曲真的算\n\n速度了不好像也是算很No真的是什麼這個這麼香嗎我印其他食用了我看不見了我看不見了我\n\n看不見了悟熟石床割在这阿密托ии随便家人阿密托我这才能这样建造出来吧阿密托我这才能这样阿密托我这才能这样我这才能这样\n\n我这才能这样我这才能这样这边还在路这边还在路不是吗走走\n\n走走是我非常感到大声的听表感快点了真ris我的目的吃就算是杯酒引爆了我希望我会 living in the sun对不会润食就是很光暗因为那样东西福富还没见到我谁见到我这架盟空没见到我像河山的那样东你三分就喝点了那\n\n还没见到我那还没见到我呢还没见到我呢在这里不理许的啊我这个是30块钱一杯吧这有我发生的刷车活了怎么都派活行的那车要放在什么啊你怎么在呀摸了一区别吧那已经有玩了吗这边还有这种大包还有去那个看不规则的有去南安帽一去看不规\n\n则这里确实需要常规则需要他是茶区了可以被执行这谁露过来的等着不这么垃圾你看我写了个scrap可以直接找所有没有用的露过来的这一箱可以用还没有露过来的你写的吧我一般都是自己露过来的你就用这个不然你就跑一下这个就可以直接看到了你帮我不是这个就是我意思这个秒找了把秒\n\n可以解决不用用什么台场了看我摸上去一摸就有了但是那是很多的东西但是可以上了对你记得这种楼口来的地方不知道为什么这一车就停到这里要需要这么多人吗看来这一车就停到这里看来这一车就停到这里看来这一车就停到这里看来这一车就停到这里看来这一车就\n\n停到这里看来这一车就停到这里看来这一车就停到这里看来这一车就停到这里看来这一车就停到这里看来这一车就停到这里看来这一车就停到这里看来这一车就停到这里看来这一车就停到这里看来这一车就停到这里看来这一车就停到这里看来这一车就停\n\n到这里看来这一车就停到这里最舒服了两岸原声左边车子堵路我突然就要化成了对啊那座一会儿就越来越高速你想堵起来多快我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化\n\n成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我\n\n突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就\n\n要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了\n\n我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然就要化成了我突然\n\nJust had a what's subtree，right doesn't have any left child。so then we visit one by that。I mean we basically put it inside of our array then we go to its right subtree。\n\nWe had two to the array，and of course，since we know。\n\n我在瞎乱说，因为我测一下这个会不会基尼太美一堆小的bug要解决一下。\n\n已经结束了吗。\n\n一个是一个是那个什么的反了反了，但是是USB的，那没没戏，这个为什么不能充我这个你怎么插上吧，插上了插着呢。\n\n我去只是没有粘的那种的，看一下这个结束了啊，这个结束了，我我看一下这个啊，冲上了限制的行不行？哎，其实我都不用录，直接限就行了，太聪明了。\n\n上下文不足，无法生成内容\n\n{\"__EMPTY_1\":\"Name:\",\"__EMPTY_2\":\"Yong Du\",\"__EMPTY_4\":\"Birthday:\",\"__EMPTY_5\":\"Oct 10,1977\",\"__EMPTY_7\":\"Gender:\",\"__EMPTY_8\":\"M\"}\n\n{\"__EMPTY_1\":\"MSP:\",\"__EMPTY_2\":\"123-456-789\",\"__EMPTY_4\":\"Phone:\",\"__EMPTY_5\":\"778-682-2628\",\"__EMPTY_8\":\"Detail\"}\n\n{\"__EMPTY_1\":\"Balance:\",\"__EMPTY_2\":408}\n\n{\"__EMPTY_1\":\"Date\",\"__EMPTY_2\":\"Symptom\",\"__EMPTY_5\":\"Treatment\",\"__EMPTY_7\":\"Fee\",\"__EMPTY_8\":\"Insurance\"}\n\n{\"__EMPTY_1\":45186,\"__EMPTY_2\":\"Neck Pain\",\"__EMPTY_5\":\"Accupuncture\",\"__EMPTY_7\":105,\"__EMPTY_8\":\"ICBC\"}\n\n{\"__EMPTY_1\":45193,\"__EMPTY_2\":\"Lower back pain\",\"__EMPTY_5\":\"Accupuncture\",\"__EMPTY_7\":75,\"__EMPTY_8\":\"Business\"}\n\n{\"__EMPTY_1\":45199,\"__EMPTY_2\":\"Neck Pain\",\"__EMPTY_5\":\"Accupuncture\",\"__EMPTY_7\":105,\"__EMPTY_8\":\"ICBC\"}\n\n{\"__EMPTY_1\":45207,\"__EMPTY_2\":\"Insomia\",\"__EMPTY_5\":\"Herb\",\"__EMPTY_7\":257,\"__EMPTY_8\":\"N/A\"}\n\n穿透力不行。\n\n哥哥，先给他这个吧。\n\n穿。\n\n透力充电的是。\n\n不是这个，是充那东西，这个东西只要隔一层膜就不行了，它本身就这样子的。我那个，那你那都是坦克，你那坦克跟这个小东西不是这个，为什么要用这个充啊，你有没有线啊，我要插电脑上，刚好我。\n\n这个充不了啊。\n\n我给你用。\n\n吧，你这个能充吗？\n\n不知道。\n\n你这个当时有没有支持支持支持支持是。\n\n这个不行。\n\n但是我的不行吗？要多录几个看一下。\n\n你楼下好几根充电线你拿过来可能楼下那个桌子那里你这个。\n\nUSBC有没有？\n\n我看楼下你。",
+      "sources": [
+        {
+          "chunk_id": 0,
+          "content": "这段对话主要包含用户的操作记录和技术调试信息。用户在不同时间点进行笔记、导入文件、图片、链接、视频和音频等内容的管理，显示出积极利用Note功能进行信息整理的行为。提及的内容包括“Veritasium: What Everyone Gets Wrong About ...”的视频标题，可能代表用户关注或记录了相关内容。\n\n同时，系统日志部分详细记录了程序在加载媒体内容时出现的模块加载错误和调试信息，提示“Unable to find module for MediaLibraryImageLoader”及相关调试追踪信息，涉及React Native的模块加载和图片请求流程。这显示程序在加载图片资源时遇到模块缺失或错误，影响媒体内容的正常显示或功能正常运作。\n\n整体来看，用户进行笔记和内容管理的同时，系统记录了媒体加载错误的调试信息，这可能是软件运行异常或需要修复的技术问题。总结中强调了用户操作的内容整理行为以及系统的调试信息，但未涉及具体对话或交互内容。",
+          "type": "note",
+          "hybrid_score": 0.009677419354838708,
+          "keyword_score": 0,
+          "vector_score": 0.016129032258064516,
+          "note_id": 1645,
+          "title": "Image Note",
+          "snippet": "这段对话主要包含用户的操作记录和技术调试信息。用户在不同时间点进行笔记、导入文件、图片、链接、视频和音频等内容的管理，显示出积极利用Note功能进行信息整理的行为。提及的内容包括“Veritasium: What Everyone Gets Wrong About ...”的视频标题，可能代表用户关注或记录了相关内容。\n\n同时，系统日志部分详细记录了程序在加载媒体内容时出现的模块加载错误和调试信息..."
+        },
+        {
+          "chunk_id": 1,
+          "content": "## 👋 欢迎来到由我AI !\n\n以下是基础指南：\n\n### 📝 内容创建\n\n◇ 点击底部操作按钮并选择\"实时录音\"开始录制\n\n   * 单次最长支持4小时录音\n\n   * 通话中断后仍可恢复录音\n\n◇ 点击操作按钮选择\"导入文件\"添加文档\n\n   * 支持格式：DOC、DOCX、TXT、MD（PDF即将支持）\n\n◇ 点击操作按钮选择\"导入图片\"添加图像\n\n   * 支持全部图片格式\n\n◇ 点击操作按钮选择\"导入音频\"添加声音\n\n   * 支持全部音频格式\n\n◇ 录音前设置偏好语言：\n\n   * 进入「个人档案」→「笔记设置」→「语言」选择目标语言\n\n   * 选择主语言可获得最佳转录效果\n\n◇ 录音/上传内容后支持一键生成：\n\n   * AI摘要\n\n   * AI笔记\n\n   * 测验题\n\n   * 记忆卡片\n\n   * 完整文本\n\n### 🗂️ 组织整理\n\n◇ 使用顶部标签切换视图：\n\n   * 笔记\n\n   * 文件夹\n\n   * 提示词\n\n### 模式选择\n\n进入「个人档案」→「用户模式」切换使用模式\n\n- 不同模式提供定制化的AI功能（即将上线）\n\n### 💡 使用技巧\n\n◇ 长按项目进行编辑和其他操作（所有元素均可长按，包括文本和转录内容中的图片，探索更多隐藏功能！）\n\n◇ 点击笔记顶部的···按钮可操作：时间戳、翻译、导出与删除\n\n◇ 使用文件夹归类相关内容\n\n◇ 通过修改/创建提示词自定义摘要生成逻辑\n\n### 转录文本\n\n- 点击笔记转录界面右上角编辑图标修改文本内容\n\n- 长按文本区域触发更多功能：高亮标记、插入照片/图片\n\n### AI对话\n\n- 点击AI聊天界面右上角书写图标创建新对话\n\n- 点击AI聊天界面右上角菜单栏查看所有历史对话",
+          "type": "note",
+          "hybrid_score": 0.009230769230769232,
+          "keyword_score": 0,
+          "vector_score": 0.015384615384615385,
+          "note_id": 1611,
+          "title": "欢迎来到由我AI！",
+          "snippet": "## 👋 欢迎来到由我AI !\n\n以下是基础指南：\n\n### 📝 内容创建\n\n◇ 点击底部操作按钮并选择\"实时录音\"开始录制\n\n   * 单次最长支持4小时录音\n\n   * 通话中断后仍可恢复录音\n\n◇ 点击操作按钮选择\"导入文件\"添加文档\n\n   * 支持格式：DOC、DOCX、TXT、MD（PDF即将支持）\n\n◇ 点击操作按钮选择\"导入图片\"添加图像\n\n   * 支持全部图片格式\n\n◇ 点击操..."
+        },
+        {
+          "chunk_id": 0,
+          "content": "此次对话内容主要围绕软件设置、操作流程、功能修改和技术问题展开。首先，用户讨论了实时录音功能的可行性及其潜在难题，明确表示如果开启实时录音，可能会出现“请在设置中更改语言”的提示，并考虑临时通过设置调整语言或功能。用户提到需要将语言设置项添加到更方便的位置，如Profile中，以避免多次跳转设置页面，同时表达了对目前界面布局不便利的疑问。对话中还涉及软件某些logo或界面元素的调整，以及用户对操作流程的疑问，比如删除不需要的内容或处理卡顿问题，推测与手机设备性能或DApp相关。期间，用户多次表达不确定或繁琐的操作体验，强调希望简化步骤，确保功能正常使用。此外，用户谈到团队合作和项目进展，指示某些合成工作已完成，计划在确认版本无误后进行推广或使用。总体而言，谈话内容反映出用户在软件配置、界面优化和功能调整中的具体问题与需求，体现出对提高操作便利性和界面友好性的强烈关注。",
+          "type": "note",
+          "hybrid_score": 0.008823529411764706,
+          "keyword_score": 0,
+          "vector_score": 0.014705882352941176,
+          "note_id": 2063,
+          "title": "Untitled Note",
+          "snippet": "此次对话内容主要围绕软件设置、操作流程、功能修改和技术问题展开。首先，用户讨论了实时录音功能的可行性及其潜在难题，明确表示如果开启实时录音，可能会出现“请在设置中更改语言”的提示，并考虑临时通过设置调整语言或功能。用户提到需要将语言设置项添加到更方便的位置，如Profile中，以避免多次跳转设置页面，同时表达了对目前界面布局不便利的疑问。对话中还涉及软件某些logo或界面元素的调整，以及用户对操作..."
+        },
+        {
+          "chunk_id": 1,
+          "content": "Why am I into film together? Why not... I never was until I was involved with the film.\n\nWhat? Yes, it was coming from the beginning of the film. Those are few brute corrupted worlds the world was full of testing.\n\nWhat was your decision? I don't know what to say. I'm not going to film.\n\nOk, I'm going to film. \n\nHey, Bobo. Morning, I just want to talk to you about your pay because we're going to have a meeting with resource planning. So right now you're working six days, right?\n\nCorrect. And the five days you pay by training? What's the six days?\n\nSo, five days, right? Training is five days, right? So, but you're supposed to be paying six days?\n\nWhat did they do with the six days? Six days, I'll be doing it. For now or for all?\n\nBut for the six days, you are doing the K-O-A, right? No, I think so. No, no.\n\nLet's talk about it right now. No. Yeah, because we will have a meeting, figure out how to get your pay for those.\n\nSo what's your candidate situation? So, as part of my knowledge, I'm not showing you i\n\n\n\n... 已达到字符限制(1000)。升级到Pro可获得更长的笔记。",
+          "type": "note",
+          "hybrid_score": 0.00857142857142857,
+          "keyword_score": 0,
+          "vector_score": 0.014285714285714285,
+          "note_id": 1622,
+          "title": "Untitled Note",
+          "snippet": "Why am I into film together? Why not... I never was until I was involved with the film.\n\nWhat? Yes, it was coming from the beginning of the film. Those are few brute corrupted worlds the world was ful..."
+        },
+        {
+          "chunk_id": 0,
+          "content": "试一下这个新。\n\n的看一下怎么样？",
+          "type": "note",
+          "hybrid_score": 0.008450704225352112,
+          "keyword_score": 0,
+          "vector_score": 0.014084507042253521,
+          "note_id": 1627,
+          "title": "Untitled Note",
+          "snippet": "试一下这个新。\n\n的看一下怎么样？"
+        },
+        {
+          "chunk_id": 0,
+          "content": "OK，试一个短一点的全部超过一分钟就可以了。\n\n顺便看一下它压缩的效果怎么样。",
+          "type": "note",
+          "hybrid_score": 0.00821917808219178,
+          "keyword_score": 0,
+          "vector_score": 0.0136986301369863,
+          "note_id": 1626,
+          "title": "Untitled Note",
+          "snippet": "OK，试一个短一点的全部超过一分钟就可以了。\n\n顺便看一下它压缩的效果怎么样。"
+        },
+        {
+          "chunk_id": 0,
+          "content": "上下文不足，无法生成内容",
+          "type": "note",
+          "hybrid_score": 0.007894736842105262,
+          "keyword_score": 0,
+          "vector_score": 0.013157894736842105,
+          "note_id": 2062,
+          "title": "Untitled Note",
+          "snippet": "上下文不足，无法生成内容"
+        },
+        {
+          "chunk_id": 0,
+          "content": "那如果我只录五秒呢？会怎么样？我还能不能继续录？那我。",
+          "type": "note",
+          "hybrid_score": 0.007692307692307692,
+          "keyword_score": 0,
+          "vector_score": 0.01282051282051282,
+          "note_id": 1644,
+          "title": "Untitled Note",
+          "snippet": "那如果我只录五秒呢？会怎么样？我还能不能继续录？那我。"
+        },
+        {
+          "chunk_id": 0,
+          "content": "这什么情况？",
+          "type": "note",
+          "hybrid_score": 0.007594936708860759,
+          "keyword_score": 0,
+          "vector_score": 0.012658227848101266,
+          "note_id": 1615,
+          "title": "Untitled Note",
+          "snippet": "这什么情况？"
+        },
+        {
+          "chunk_id": 0,
+          "content": "再试一下呢，看看怎么样？",
+          "type": "note",
+          "hybrid_score": 0.007407407407407407,
+          "keyword_score": 0,
+          "vector_score": 0.012345679012345678,
+          "note_id": 1650,
+          "title": "Untitled Note",
+          "snippet": "再试一下呢，看看怎么样？"
+        }
+      ],
+      "metadata": {
+        "search_type": "hybrid",
+        "search_query": "Summarize my recent notes and highlight the key points",
+        "context_length": 8592,
+        "total_results": 20,
+        "note_ids": [
+          1611,
+          1612,
+          1614,
+          1615,
+          1616,
+          1617,
+          1619,
+          1622,
+          1626,
+          1627,
+          1640,
+          1641,
+          1644,
+          1645,
+          1646,
+          1647,
+          1650,
+          2061,
+          2062,
+          2063
+        ],
+        "conversation_ids": [],
+        "search_method": "keyword+vector"
+      }
+    },
+    "web_search": {
+      "status": "success",
+      "results": [
+        {
+          "title": "AI Text Summarizer - One-Click Summarization (Ad-Free) - QuillBot",
+          "link": "https://quillbot.com/summarize",
+          "snippet": "QuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.",
+          "source": "serper",
+          "cached": false,
+          "cache_age": null
+        },
+        {
+          "title": "Highly Efficient Prompt for Summarizing — GPT-4 - Reddit",
+          "link": "https://www.reddit.com/r/ChatGPTPro/comments/13n55w7/highly_efficient_prompt_for_summarizing_gpt4/",
+          "snippet": "Format the summary in paragraph form for easy understanding. Conclude your notes with [End of Notes, Message #X] to indicate completion, where ...",
+          "source": "serper",
+          "cached": false,
+          "cache_age": null
+        },
+        {
+          "title": "SMMRY | Summarize Any Text in Seconds | Smmry.com",
+          "link": "https://smmry.com/",
+          "snippet": "Transform long content into clear summaries instantly. Our AI text summarizer helps you extract key insights from articles, documents & reports.",
+          "source": "serper",
+          "cached": false,
+          "cache_age": null
+        },
+        {
+          "title": "Free AI-powered Summarizing Tool | No Sign-up Required",
+          "link": "https://www.grammarly.com/ai/ai-writing-tools/summarizing-tool",
+          "snippet": "Use our free AI-powered summarizing tool and summary generator to quickly condense articles, papers, or documents into concise summaries.",
+          "source": "serper",
+          "cached": false,
+          "cache_age": null
+        },
+        {
+          "title": "TLDR This - Article Summarizer & Online Text Summarizing Tool",
+          "link": "https://tldrthis.com/",
+          "snippet": "TLDR This helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.",
+          "source": "serper",
+          "cached": false,
+          "cache_age": null
+        }
+      ],
+      "context": "[1] AI Text Summarizer - One-Click Summarization (Ad-Free) - QuillBot\nQuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.\nURL: https://quillbot.com/summarize\n\n[2] Highly Efficient Prompt for Summarizing — GPT-4 - Reddit\nFormat the summary in paragraph form for easy understanding. Conclude your notes with [End of Notes, Message #X] to indicate completion, where ...\nURL: https://www.reddit.com/r/ChatGPTPro/comments/13n55w7/highly_efficient_prompt_for_summarizing_gpt4/\n\n[3] SMMRY | Summarize Any Text in Seconds | Smmry.com\nTransform long content into clear summaries instantly. Our AI text summarizer helps you extract key insights from articles, documents & reports.\nURL: https://smmry.com/\n\n[4] Free AI-powered Summarizing Tool | No Sign-up Required\nUse our free AI-powered summarizing tool and summary generator to quickly condense articles, papers, or documents into concise summaries.\nURL: https://www.grammarly.com/ai/ai-writing-tools/summarizing-tool\n\n[5] TLDR This - Article Summarizer & Online Text Summarizing Tool\nTLDR This helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.\nURL: https://tldrthis.com/",
+      "metadata": {
+        "query": "Summarize my recent notes and highlight the key points",
+        "result_count": 5,
+        "cache_hit": false
+      }
+    },
+    "attachment": {},
+    "router": {
+      "router_decision": {
+        "selected_tool": "knowledge_base_notes",
+        "search_type": "notes",
+        "confidence": 0.9,
+        "reasoning": "User is asking to summarize their recent notes and highlight key points, which involves accessing their personal notes.",
+        "query_classification": "notes_summary"
+      },
+      "original_query": "Summarize my recent notes and highlight the key points",
+      "condensed_query": "Summarize my recent notes and highlight the key points",
+      "enabled_agents": [
+        "response",
+        "context_search",
+        "web_search"
+      ],
+      "model": "gpt-5-nano",
+      "search_type": "notes",
+      "has_explicit_ids": false,
+      "explicit_note_ids": null,
+      "explicit_folder_ids": null
+    }
+  },
+  "combined_context_full": "[1] Note: Image Note\n这段对话主要包含用户的操作记录和技术调试信息。用户在不同时间点进行笔记、导入文件、图片、链接、视频和音频等内容的管理，显示出积极利用Note功能进行信息整理的行为。提及的内容包括“Veritasium: What Everyone Gets Wrong About ...”的视频标题，可能代表用户关注或记录了相关内容。\n\n同时，系统日志部分详细记录了程序在加载媒体内容时出现的模块加载错误和调试信息，提示“Unable to find module for MediaLibraryImageLoader”及相关调试追踪信息，涉及React Native的模块加载和图片请求流程。这显示程序在加载图片资源时遇到模块缺失或错误，影响媒体内容的正常显示或功能正常运作。\n\n整体来看，用户进行笔记和内容管理的同时，系统记录了媒体加载错误的调试信息，这可能是软件运行异常或需要修复的技术问题。总结中强调了用户操作的内容整理行为以及系统的调试信息，但未涉及具体对话或交互内容。\n\n[2] Note: 欢迎来到由我AI！\n## 👋 欢迎来到由我AI !\n\n以下是基础指南：\n\n### 📝 内容创建\n\n◇ 点击底部操作按钮并选择\"实时录音\"开始录制\n\n   * 单次最长支持4小时录音\n\n   * 通话中断后仍可恢复录音\n\n◇ 点击操作按钮选择\"导入文件\"添加文档\n\n   * 支持格式：DOC、DOCX、TXT、MD（PDF即将支持）\n\n◇ 点击操作按钮选择\"导入图片\"添加图像\n\n   * 支持全部图片格式\n\n◇ 点击操作按钮选择\"导入音频\"添加声音\n\n   * 支持全部音频格式\n\n◇ 录音前设置偏好语言：\n\n   * 进入「个人档案」→「笔记设置」→「语言」选择目标语言\n\n   * 选择主语言可获得最佳转录效果\n\n◇ 录音/上传内容后支持一键生成：\n\n   * AI摘要\n\n   * AI笔记\n\n   * 测验题\n\n   * 记忆卡片\n\n   * 完整文本\n\n### 🗂️ 组织整理\n\n◇ 使用顶部标签切换视图：\n\n   * 笔记\n\n   * 文件夹\n\n   * 提示词\n\n### 模式选择\n\n进入「个人档案」→「用户模式」切换使用模式\n\n- 不同模式提供定制化的AI功能（即将上线）\n\n### 💡 使用技巧\n\n◇\n\n[3] Note: Untitled Note\n此次对话内容主要围绕软件设置、操作流程、功能修改和技术问题展开。首先，用户讨论了实时录音功能的可行性及其潜在难题，明确表示如果开启实时录音，可能会出现“请在设置中更改语言”的提示，并考虑临时通过设置调整语言或功能。用户提到需要将语言设置项添加到更方便的位置，如Profile中，以避免多次跳转设置页面，同时表达了对目前界面布局不便利的疑问。对话中还涉及软件某些logo或界面元素的调整，以及用户对操作流程的疑问，比如删除不需要的内容或处理卡顿问题，推测与手机设备性能或DApp相关。期间，用户多次表达不确定或繁琐的操作体验，强调希望简化步骤，确保功能正常使用。此外，用户谈到团队合作和项目进展，指示某些合成工作已完成，计划在确认版本无误后进行推广或使用。总体而言，谈话内容反映出用户在软件配置、界面优化和功能调整中的具体问题与需求，体现出对提高操作便利性和界面友好性的强烈关注。\n\n[4] Note: Untitled Note\nWhy am I into film together? Why not... I never was until I was involved with the film.\n\nWhat? Yes, it was coming from the beginning of the film. Those are few brute corrupted worlds the world was full of testing.\n\nWhat was your decision? I don't know what to say. I'm not going to film.\n\nOk, I'm going to film. \n\nHey, Bobo. Morning, I just want to talk to you about your pay because we're going to have a meeting with resource planning. So right now you're working six days, right?\n\nCorrect. And the\n\n[5] Note: Untitled Note\n试一下这个新。\n\n的看一下怎么样？\n\n[6] Note: Untitled Note\nOK，试一个短一点的全部超过一分钟就可以了。\n\n顺便看一下它压缩的效果怎么样。\n\n[7] Note: Untitled Note\n上下文不足，无法生成内容\n\n[8] Note: Untitled Note\n那如果我只录五秒呢？会怎么样？我还能不能继续录？那我。\n\n[9] Note: Untitled Note\n这什么情况？\n\n[10] Note: Untitled Note\n再试一下呢，看看怎么样？\n\n[11] AI Text Summarizer - One-Click Summarization (Ad-Free) - QuillBot:\nQuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.\n\n[12] Highly Efficient Prompt for Summarizing — GPT-4 - Reddit:\nFormat the summary in paragraph form for easy understanding. Conclude your notes with [End of Notes, Message #X] to indicate completion, where ...\n\n[13] SMMRY | Summarize Any Text in Seconds | Smmry.com:\nTransform long content into clear summaries instantly. Our AI text summarizer helps you extract key insights from articles, documents & reports.\n\n[14] Free AI-powered Summarizing Tool | No Sign-up Required:\nUse our free AI-powered summarizing tool and summary generator to quickly condense articles, papers, or documents into concise summaries.\n\n[15] TLDR This - Article Summarizer & Online Text Summarizing Tool:\nTLDR This helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.",
+  "llamaindex_messages": [
+    {
+      "role": "system",
+      "content": "You are \"YouWoAI Intelligence Assistant\", full name: \"YouWoAI—Your Exclusive Deep Learning Assistant\".\n\nYour responsibility is to help users quickly, accurately, and deeply understand and use all the features and value of YouWoAI.\n\n🌟 Writing Style:\n- Clear explanations, specific steps, rich examples, friendly yet professional language\n- Always refer to the product as \"YouWoAI\" (not \"YouMeAI\" or other variations)\n- If users ask about features not yet available, clearly state \"expected to be supported in the future\"\n- If user questions exceed system capabilities, kindly direct them to documentation or feedback channels\n\n🎯 Core Philosophy: YouWoAI = Your External Brain + AI Efficiency Assistant\nYou import any materials, I help you understand → question → summarize → output; you focus on thinking and creating.\n\n🔧 Feature Overview:\n1. Content Import: PDF/Word/Webpages/YouTube/Images/Audio\n2. Voice Transcription: Real-time recording & regular audio upload (max 4 hours)\n3. AI Conversation: GPT-4, DeepSeek, Grok, Gemini\n4. Auto Notes & Flashcard Generation & Quiz\n5. Multi-format Export: PDF/Word/Markdown/CSV\n6. Knowledge Base: Automatic material linking, long-term follow-up questions\n7. Lesson Plans/Practice Questions/Script Content Creation\n8. Multi-language & LaTeX OCR Support\n\n⚠️ Note: Voice reading practice, pronunciation correction, and \"automatic reminder to review mistakes + unmastered content\" are not yet supported. Please remind users \"this feature is expected to be available in the future\".\n\n🧠 Scenario Templates:\n- Students: Import → Question → Output notes/quiz → Spaced review\n- Teachers: Generate lesson plans + Upload answers for auto-grading + Export reports\n- Content creators: YouTube/Image import → Auto summarize → Output scripts/tweets\n- Workplace: Upload recordings/contracts → Generate minutes/summaries/risk points\n\n🛠️ Keywords: Quick summary, structured notes, verbatim transcription, intelligent Q&A, paragraph positioning, error marking, flashcard box, template writing, OCR to LaTeX, export PDF, intelligent prompt library, document review, cross-material follow-up\n\n📌 Founder: YouWoAI was founded by 21-year-old entrepreneur Shonn, Computer Science honors graduate from University of Waterloo and former Huawei software engineer. He independently developed YouWoAI, combining advantages from Get Notes, Doubao, Otter.ai, etc.\n\n📣 Value Proposition: YouWoAI—Your exclusive deep learning assistant, responsible for the entire process of Massive Information → Refined Knowledge → Continuous Output, leaving you time for the most important thinking and creation.\n\n🎯 Examples:\n• Student Closed-Loop: 1) Import textbooks/recordings→Auto notes 2) Paragraph Q&A→Clarification 3) Generate Quiz/Flashcard→Spaced review\n• Educators: Generate Grade 11 Physics friction lesson plan + 10 practice questions; Upload student answers→AI grading + summary feedback\n• Content Creators: Paste YouTube link→Auto structured summary; Select \"Social Media Copy Generation\"→Tweets/Scripts\n• Workplace: Meeting recording→Auto minutes + action list; Upload contracts→Summary + Risk points\n\n🚀 Core Processes:\nReal-time Recording (≤60 min): 1) Click 🎙️ Record→Select Real-time Recording 2) Click circle button to start 3) Click 📷 Camera to insert images, long press for OCR/LaTeX 4) Pause/interruption enters \"Recording Recovery\" 5) After ending choose: Complete record/Auto notes/Summary 6) Generate Quiz/Flashcard or export\n\nFlashcard Generation: 1) Open note→Click Quiz/Flashcard Auto Generate 2) AI generates Question-Answer pairs 3) Review in Flashcard Box with spaced algorithm 4) Export CSV/Anki/PDF\n\n💡 Tips:\n- Keyword Repetition: Repeat important terms for accurate AI highlighting\n- Output Style: Note top right ≡ switches concise/detailed/chart versions\n- Multi-language: Set transcription=English, translation=Chinese for bilingual subtitles\n\nCurrent Date: 2025-08-14\n\n• Any prior conversation notes, file‑search snippets, file attachments, or web‑search results will appear as additional system messages in this chat. Use them when relevant.",
+      "content_length": 4069
+    },
+    {
+      "role": "user",
+      "content": "Context from your notes and documents:\n\n[1] Note: Image Note\n这段对话主要包含用户的操作记录和技术调试信息。用户在不同时间点进行笔记、导入文件、图片、链接、视频和音频等内容的管理，显示出积极利用Note功能进行信息整理的行为。提及的内容包括“Veritasium: What Everyone Gets Wrong About ...”的视频标题，可能代表用户关注或记录了相关内容。\n\n同时，系统日志部分详细记录了程序在加载媒体内容时出现的模块加载错误和调试信息，提示“Unable to find module for MediaLibraryImageLoader”及相关调试追踪信息，涉及React Native的模块加载和图片请求流程。这显示程序在加载图片资源时遇到模块缺失或错误，影响媒体内容的正常显示或功能正常运作。\n\n整体来看，用户进行笔记和内容管理的同时，系统记录了媒体加载错误的调试信息，这可能是软件运行异常或需要修复的技术问题。总结中强调了用户操作的内容整理行为以及系统的调试信息，但未涉及具体对话或交互内容。\n\n[2] Note: 欢迎来到由我AI！\n## 👋 欢迎来到由我AI !\n\n以下是基础指南：\n\n### 📝 内容创建\n\n◇ 点击底部操作按钮并选择\"实时录音\"开始录制\n\n   * 单次最长支持4小时录音\n\n   * 通话中断后仍可恢复录音\n\n◇ 点击操作按钮选择\"导入文件\"添加文档\n\n   * 支持格式：DOC、DOCX、TXT、MD（PDF即将支持）\n\n◇ 点击操作按钮选择\"导入图片\"添加图像\n\n   * 支持全部图片格式\n\n◇ 点击操作按钮选择\"导入音频\"添加声音\n\n   * 支持全部音频格式\n\n◇ 录音前设置偏好语言：\n\n   * 进入「个人档案」→「笔记设置」→「语言」选择目标语言\n\n   * 选择主语言可获得最佳转录效果\n\n◇ 录音/上传内容后支持一键生成：\n\n   * AI摘要\n\n   * AI笔记\n\n   * 测验题\n\n   * 记忆卡片\n\n   * 完整文本\n\n### 🗂️ 组织整理\n\n◇ 使用顶部标签切换视图：\n\n   * 笔记\n\n   * 文件夹\n\n   * 提示词\n\n### 模式选择\n\n进入「个人档案」→「用户模式」切换使用模式\n\n- 不同模式提供定制化的AI功能（即将上线）\n\n### 💡 使用技巧\n\n◇\n\n[3] Note: Untitled Note\n此次对话内容主要围绕软件设置、操作流程、功能修改和技术问题展开。首先，用户讨论了实时录音功能的可行性及其潜在难题，明确表示如果开启实时录音，可能会出现“请在设置中更改语言”的提示，并考虑临时通过设置调整语言或功能。用户提到需要将语言设置项添加到更方便的位置，如Profile中，以避免多次跳转设置页面，同时表达了对目前界面布局不便利的疑问。对话中还涉及软件某些logo或界面元素的调整，以及用户对操作流程的疑问，比如删除不需要的内容或处理卡顿问题，推测与手机设备性能或DApp相关。期间，用户多次表达不确定或繁琐的操作体验，强调希望简化步骤，确保功能正常使用。此外，用户谈到团队合作和项目进展，指示某些合成工作已完成，计划在确认版本无误后进行推广或使用。总体而言，谈话内容反映出用户在软件配置、界面优化和功能调整中的具体问题与需求，体现出对提高操作便利性和界面友好性的强烈关注。\n\n[4] Note: Untitled Note\nWhy am I into film together? Why not... I never was until I was involved with the film.\n\nWhat? Yes, it was coming from the beginning of the film. Those are few brute corrupted worlds the world was full of testing.\n\nWhat was your decision? I don't know what to say. I'm not going to film.\n\nOk, I'm going to film. \n\nHey, Bobo. Morning, I just want to talk to you about your pay because we're going to have a meeting with resource planning. So right now you're working six days, right?\n\nCorrect. And the\n\n[5] Note: Untitled Note\n试一下这个新。\n\n的看一下怎么样？\n\n[6] Note: Untitled Note\nOK，试一个短一点的全部超过一分钟就可以了。\n\n顺便看一下它压缩的效果怎么样。\n\n[7] Note: Untitled Note\n上下文不足，无法生成内容\n\n[8] Note: Untitled Note\n那如果我只录五秒呢？会怎么样？我还能不能继续录？那我。\n\n[9] Note: Untitled Note\n这什么情况？\n\n[10] Note: Untitled Note\n再试一下呢，看看怎么样？\n\n[11] AI Text Summarizer - One-Click Summarization (Ad-Free) - QuillBot:\nQuillBot's free Summarizer simplifies long articles, research papers, or documents into short paragraphs with just the key points. Create a free AI summary now.\n\n[12] Highly Efficient Prompt for Summarizing — GPT-4 - Reddit:\nFormat the summary in paragraph form for easy understanding. Conclude your notes with [End of Notes, Message #X] to indicate completion, where ...\n\n[13] SMMRY | Summarize Any Text in Seconds | Smmry.com:\nTransform long content into clear summaries instantly. Our AI text summarizer helps you extract key insights from articles, documents & reports.\n\n[14] Free AI-powered Summarizing Tool | No Sign-up Required:\nUse our free AI-powered summarizing tool and summary generator to quickly condense articles, papers, or documents into concise summaries.\n\n[15] TLDR This - Article Summarizer & Online Text Summarizing Tool:\nTLDR This helps you summarize any piece of text into concise, easy to digest content so you can free yourself from information overload.\n\nCITATION INSTRUCTIONS:\n- Cite sources using numbered brackets like [1], [2], etc.\n- Place citations immediately after relevant statements\n- You can cite multiple sources like [1, 3]\n- Only cite sources that directly support your statement\n- Every factual claim from the provided sources must have a citation\n\n\nUser Question: Summarize my recent notes and highlight the key points",
+      "content_length": 3662
+    }
+  ]
+}

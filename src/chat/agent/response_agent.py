@@ -578,6 +578,22 @@ class ResponseAgent(BaseAgent):
         # Get the last user message
         last_user_message = request["messages"][-1]["content"] if request["messages"] else ""
         
+        # Handle additional context (recording/current note content)
+        additional_context = request.get("additional_context")
+        if additional_context:
+            context_type = additional_context.get("type", "current_note")
+            context_content = additional_context.get("content", "")
+            
+            if context_content:
+                # Add the additional context as a system message before the user's question
+                if context_type == "recording_note":
+                    context_message = f"Current recording transcript:\n\n{context_content}\n\n(The user is asking about the above recording content)"
+                else:
+                    context_message = f"Current note content:\n\n{context_content}\n\n(The user is asking about the above note content)"
+                
+                messages.append(ChatMessage(role="user", content=context_message))
+                logger.info(f"📝 Added additional context: {context_type} with {len(context_content)} chars")
+        
         # Construct enhanced user message with context
         if combined_context:
             # Build the user message with context
