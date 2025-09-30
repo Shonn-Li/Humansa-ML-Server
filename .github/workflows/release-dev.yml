@@ -1,0 +1,136 @@
+name: Build and Deploy Dev ML Server to AWS
+
+on:
+  push:
+    tags:
+      - "release-dev-*"
+    branches:
+      - dev
+
+permissions:
+  id-token: write
+  contents: read
+  packages: write
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get_version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_PAT || secrets.GITHUB_TOKEN }}
+
+      - name: Extract version number
+        id: get_version
+        run: |
+          echo "version=$(echo ${{ github.ref }} | sed -e 's|refs/tags/release-dev-||')" >> $GITHUB_ENV
+          echo "version=$(echo ${{ github.ref }} | sed -e 's|refs/tags/release-dev-||')" >> $GITHUB_OUTPUT
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: ghcr.io/shonn-li/youwoai-ml-server:dev-${{ env.version }}
+
+      - name: Pull the Docker image to verify permissions
+        run: |
+          docker pull ghcr.io/shonn-li/youwoai-ml-server:dev-${{ env.version }}
+          docker images
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install Ansible and AWS CLI dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ansible boto3
+          ansible-galaxy collection install community.aws --force
+          ansible-galaxy collection install amazon.aws --force
+          ansible-galaxy collection install community.docker --force
+
+      - name: Configure AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_DEPLOY_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_DEPLOY_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Set up AWS credentials for Ansible
+        run: |
+          mkdir -p ~/.aws
+          cat > ~/.aws/credentials << EOF
+          [default]
+          aws_access_key_id = ${{ secrets.AWS_DEPLOY_ACCESS_KEY }}
+          aws_secret_access_key = ${{ secrets.AWS_DEPLOY_SECRET_ACCESS_KEY }}
+          EOF
+          cat > ~/.aws/config << EOF
+          [default]
+          region = ${{ secrets.AWS_REGION }}
+          EOF
+
+      - name: Set Up SSH Key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > deploy_key.pem
+          chmod 600 deploy_key.pem
+
+      - name: Extract version number
+        id: get_version
+        run: echo "version=${{ needs.build-and-push.outputs.version }}" >> $GITHUB_ENV
+
+      - name: Persist tag to SSM
+        run: |
+          aws ssm put-parameter \
+            --name /youwoai/dev/ml_server_image_tag \
+            --type String --overwrite \
+            --value "dev-${{ env.version }}"
+
+      - name: Debug inventory
+        run: |
+          echo "Testing AWS EC2 inventory..."
+          ansible-inventory -i inventory_aws_ec2_dev.yml --list
+          echo ""
+          echo "Available hosts:"
+          ansible-inventory -i inventory_aws_ec2_dev.yml --graph
+
+      - name: Run Ansible Playbook
+        run: |
+          ansible-playbook -i inventory_aws_ec2_dev.yml dev-ml-playbook.yml --extra-vars "
+            aws_deploy_access_key=${{ secrets.AWS_DEPLOY_ACCESS_KEY }}
+            aws_deploy_secret_access_key=${{ secrets.AWS_DEPLOY_SECRET_ACCESS_KEY }}
+            ansible_ssh_private_key_file=deploy_key.pem
+            ansible_user=ec2-user
+            ghcr_username=${{ github.actor }}
+            ghcr_token=${{ secrets.GITHUB_TOKEN }}
+            ghcr_repository=shonn-li/youwoai-ml-server
+            image_tag=dev-${{ env.version }}
+            aws_region=${{ secrets.AWS_REGION }}
+            openai_api_key=${{ secrets.OPENAI_API_KEY }}
+            aws_access_key=${{ secrets.AWS_ACCESS_KEY }}
+            aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            webshare_proxy_password=${{ secrets.WEBSHARE_PROXY_PASSWORD }}
+            webshare_proxy_username=${{ secrets.WEBSHARE_PROXY_USERNAME }}
+            xai_api_key=${{ secrets.XAI_API_KEY }}
+            google_api_key=${{ secrets.GOOGLE_API_KEY }}
+            anthropic_api_key=${{ secrets.ANTHROPIC_API_KEY }}
+            deepseek_api_key=${{ secrets.DEEPSEEK_API_KEY }}
+            azure_inference_endpoint=${{ secrets.AZURE_INFERENCE_ENDPOINT }}
+            azure_inference_credential=${{ secrets.AZURE_INFERENCE_CREDENTIAL }}"  || [ $? -eq 2 ]
